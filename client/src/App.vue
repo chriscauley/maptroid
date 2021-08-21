@@ -4,15 +4,18 @@
       <div v-for="item in items" v-bind="item" :key="item.id" />
     </div>
     <open-seadragon :pixelated="true" :options="options" :style="style" :events="events" />
+    <html-overlay v-if="viewer" :viewer="viewer" />
   </div>
 </template>
 
 <script>
-import OpenSeadragon from 'openseadragon'
+import HtmlOverlay from '@/components/HtmlOverlay.vue'
 
 export default {
+  components: { HtmlOverlay },
   data() {
     return {
+      viewer: null,
       items: [
         {
           id: 'overlay-0',
@@ -31,10 +34,7 @@ export default {
           }
         },
         open: (event) => {
-          const viewer = event.eventSource
-          const { x, y } = viewer.world.getItemAt(0).getContentSize()
-          const location = new OpenSeadragon.Rect(0, 0, 1, 1)
-          viewer.addOverlay(this.$refs.overlay, location)
+          this.viewer = event.eventSource
         },
       },
       options: {
