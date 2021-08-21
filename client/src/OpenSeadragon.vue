@@ -12,6 +12,7 @@ export default {
       default: 'openseadradon-viewer'
     },
     options: Object,
+    events: Object,
     pixelated: Boolean
   },
 
@@ -22,7 +23,7 @@ export default {
   mounted() {
     const { ...options } = this.options
     options.id = this.id
-    window.jawn = this.viewer = OpenSeadragon(options)
+    window.jawn = this.viewer = new OpenSeadragon(options)
     if (this.pixelated) {
       this.viewer.addHandler('zoom', () => {
         const tiledImage = this.viewer.world.getItemAt(0);
@@ -30,6 +31,14 @@ export default {
         this.viewer.drawer.context.imageSmoothingEnabled = this.viewer.viewport.getZoom() < targetZoom
       })
     }
+    this.bindEvents()
   },
+
+  methods: {
+    bindEvents() {
+      const { events={}, viewer } = this
+      Object.entries(events).forEach(([key, handler]) => viewer.addHandler(key, handler))
+    }
+  }
 }
 </script>
