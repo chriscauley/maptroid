@@ -2,15 +2,22 @@
   <div class="html-overlay">
     <div :style="`--border-width: ${border_width}px`">
       <div class="html-overlay__select" v-bind="select_attrs" />
-      <div v-for="item in items" v-bind="item" :key="item.id" />
+      <div v-for="item in items" v-bind="item" :key="item.id">
+        <selected-item v-if="item.selected" />
+      </div>
+      <div v-bind="ui_attributes" />
     </div>
   </div>
 </template>
 
 <script>
 import OpenSeadragon from 'openseadragon'
+import SelectedItem from './SelectedItem.vue'
+
+const { Point, Rect } = OpenSeadragon
 
 export default {
+  components: { SelectedItem },
   props: {
     viewer: Object,
   },
@@ -19,19 +26,40 @@ export default {
     return { select_box, W: null, H: null, border_width: 2 }
   },
   computed: {
-    items() {
-      const items = [{ x: 100, y: 100, w: 100, h: 100 }]
+    ui_attributes() {
       const _percent = (v) => `${(100 * v) / this.W}%`
-      return items.map(({ id, x, y, w, h }) => {
+      const { selected_tool, pointer } = this.$store.viewer.state
+      if (selected_tool === 'item' && pointer) {
+        const { x, y } = pointer
         return {
-          id,
+          style: this._scale({
+            top: Math.floor(y) - 8,
+            left: Math.floor(x) - 8,
+            width: 16,
+            height: 16,
+          }),
+          class: 'hover-box',
+        }
+      }
+      return {}
+    },
+    items() {
+      const _percent = (v) => `${(100 * v) / this.W}%`
+      const items = this.$store.item.getItems()
+      const selected_id = this.$store.viewer.state.selected
+      return items.map(({ id, x, y, width, height }) => {
+        return {
+          id: `overlay-item-${id}`,
+          selected: selected_id === id,
+          onClick: () => this.$store.viewer.patch({ selected: id }),
+          class: 'item-box',
           style: {
-            left: _percent(x),
-            top: _percent(y),
-            width: _percent(w),
-            height: _percent(h),
-            border: 'var(--border-width) solid pink',
-            position: 'absolute',
+            ...this._scale({
+              left: x,
+              top: y,
+              width,
+              height,
+            }),
           },
         }
       })
@@ -41,15 +69,20 @@ export default {
     },
   },
   mounted() {
-    const location = new OpenSeadragon.Rect(0, 0, 1, 1)
+    const location = new Rect(0, 0, 1, 1)
     this.viewer.addOverlay(this.$el, location)
     const { x, y } = this.viewer.world.getItemAt(0).getContentSize()
     this.W = this.H = Math.max(x, y)
     this.viewer.addHandler('animation-finish', () => {
-      this.border_width = this.viewer.viewport.imageToViewportCoordinates(
-        new OpenSeadragon.Point(2, 2),
-      ).x
+      this.border_width = this.viewer.viewport.imageToViewportCoordinates(new Point(2, 2)).x
     })
+  },
+  methods: {
+    _scale(attrs) {
+      return Object.fromEntries(
+        Object.entries(attrs).map(([k, v]) => [k, `${(100 * v) / this.W}%`]),
+      )
+    },
   },
 }
 </script>

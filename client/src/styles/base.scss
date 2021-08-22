@@ -1,0 +1,30 @@
+@import "./sm.scss";
+
+.viewer-toolbar {
+  display: flex;
+  font-size: 2rem;
+  .fa {
+    font-size: 1.5rem;
+  }
+}
+
+.hover-box {
+  border: var(--border-width) solid white;
+  position: absolute;
+}
+
+.item-box {
+  border: var(--border-width) solid white;
+  cursor: pointer;
+  position: absolute;
+}
+
+.selected-item {
+  background: white;
+  border-radius: 0.25rem;
+  cursor: default;
+  padding: 0.5rem;
+  .fa-trash {
+    cursor: pointer;
+  }
+}

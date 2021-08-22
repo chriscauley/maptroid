@@ -4,15 +4,22 @@
       <div v-for="item in items" v-bind="item" :key="item.id" />
     </div>
     <open-seadragon :pixelated="true" :options="options" :style="style" :events="events" />
-    <html-overlay v-if="viewer" :viewer="viewer" />
+    <template v-if="viewer">
+      <html-overlay :viewer="viewer" />
+      <mouse-tracker :viewer="viewer" />
+      <toolbar />
+    </template>
+    <unrest-ui />
   </div>
 </template>
 
 <script>
 import HtmlOverlay from '@/components/HtmlOverlay.vue'
+import MouseTracker from '@/components/MouseTracker.vue'
+import Toolbar from '@/components/Toolbar.vue'
 
 export default {
-  components: { HtmlOverlay },
+  components: { HtmlOverlay, MouseTracker, Toolbar },
   data() {
     return {
       viewer: null,
@@ -24,15 +31,6 @@ export default {
       ],
       style: 'width: 100vw;height: 100vh;',
       events: {
-        'canvas-click': (event) => {
-          if (event.quick) {
-            const viewer = event.eventSource
-            const webPoint = event.position
-            const viewportPoint = viewer.viewport.pointFromPixel(webPoint)
-            const imagePoint = viewer.viewport.viewportToImageCoordinates(viewportPoint)
-            console.log(':)', webPoint.toString(), viewportPoint.toString(), imagePoint.toString())
-          }
-        },
         open: (event) => {
           this.viewer = event.eventSource
         },
@@ -40,7 +38,7 @@ export default {
       options: {
         tileSources: ['output/SuperMetroidMapZebes.dzi'],
         // tileSources: { type: 'image', url: 'SuperMetroidMapZebes.png' },
-        maxZoomPixelRatio: 4,
+        maxZoomPixelRatio: 8,
         showNavigator: true,
         showZoomControl: false,
         showHomeControl: false,
