@@ -12,27 +12,12 @@ const abilities = [
   'screw-attack',
 ]
 
-const packs = [
-  'missle',
-  'super-missle',
-  'power-bomb',
-  'energy-tank',
-  // 'energy2-tank',
-  'reserve-tank',
-]
+const packs = ['missle', 'super-missle', 'power-bomb', 'energy-tank', 'reserve-tank']
 
 const beams = ['charge-beam', 'ice-beam', 'wave-beam', 'spazer', 'plasma-beam']
 
-const bosses = [
-  'ridley',
-  'phantoon',
-  'kraid',
-  'draygon',
-  // 'mother-brain',
-]
+const misc = ['pedastool', 'energy2-tank']
 
-const tiles = ['pedastool']
+const all = [...abilities, ...packs, ...beams, ...misc]
 
-const all = [...bosses, ...abilities, ...packs, ...beams, ...tiles]
-
-export default { all, bosses, abilities, packs, beams, tiles }
+export default { all, abilities, packs, beams, misc }

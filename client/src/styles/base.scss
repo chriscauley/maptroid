@@ -108,3 +108,12 @@
     }
   }
 }
+
+.sprite-gallery {
+  font-size: 3rem;
+  .modal-content {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+}
