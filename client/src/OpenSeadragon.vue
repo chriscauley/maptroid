@@ -1,5 +1,5 @@
 <template>
-  <div :id="id"></div>
+  <div :id="id" class="osd-wrapper" />
 </template>
 
 <script>

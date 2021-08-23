@@ -1,8 +1,15 @@
 <template>
-  <div>
+  <div class="app-wrapper">
+    <app-nav />
     <router-view />
     <unrest-ui />
   </div>
 </template>
 
-<script></script>
+<script>
+import AppNav from '@/components/Nav.vue'
+
+export default {
+  components: { AppNav },
+}
+</script>

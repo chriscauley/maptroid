@@ -1,5 +1,5 @@
 <template>
-  <div class="modal -absolute sprite-gallery">
+  <div class="modal -relative sprite-gallery">
     <div class="modal-content">
       <template v-for="item in items" :key="item">
         <i :class="`sm-item ${item}`" :title="item" />

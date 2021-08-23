@@ -1,10 +1,7 @@
 <template>
-  <div>
-    <div ref="overlay">
-      <div v-for="item in items" v-bind="item" :key="item.id" />
-    </div>
+  <div class="flex-grow">
     <div class="viewer-wrapper">
-      <open-seadragon :pixelated="true" :options="options" :style="style" :events="events" />
+      <open-seadragon :pixelated="true" :options="options" :events="events" />
       <template v-if="viewer">
         <html-overlay :viewer="viewer" />
         <mouse-tracker :viewer="viewer" />
@@ -30,13 +27,6 @@ export default {
   data() {
     return {
       viewer: null,
-      items: [
-        {
-          id: 'overlay-0',
-          style: 'width: 1%; height: 1%; position: absolute; top: 1%; background: white',
-        },
-      ],
-      style: 'width: 100vw;height: 100vh;',
       events: {
         open: (event) => {
           this.viewer = event.eventSource
