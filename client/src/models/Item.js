@@ -1,13 +1,15 @@
 const abilities = [
-  'morph-ball',
-  'bomb',
-  'screw-attack',
-  'space-jump',
-  'high-jump',
-  'speed-booster',
-  'spring-ball',
   'varia-suit',
   'gravity-suit',
+  'x-ray',
+  'grappling-hook',
+  'morph-ball',
+  'bomb',
+  'spring-ball',
+  'high-jump',
+  'speed-booster',
+  'space-jump',
+  'screw-attack',
 ]
 
 const packs = [
@@ -19,18 +21,18 @@ const packs = [
   'reserve-tank',
 ]
 
-const beams = [
-  'charge-beam',
-  'spazer',
-  'wave-beam',
-  'ice-beam',
-  'plasma-beam',
-  'x-ray',
-  'grappling-hook',
+const beams = ['charge-beam', 'ice-beam', 'wave-beam', 'spazer', 'plasma-beam']
+
+const bosses = [
+  'ridley',
+  'phantoon',
+  'kraid',
+  'draygon',
+  // 'mother-brain',
 ]
 
 const tiles = ['pedastool']
 
-const all = [...abilities, ...packs, ...beams, ...tiles]
+const all = [...bosses, ...abilities, ...packs, ...beams, ...tiles]
 
-export default { all, abilities, packs, beams, tiles }
+export default { all, bosses, abilities, packs, beams, tiles }

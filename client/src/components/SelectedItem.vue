@@ -12,12 +12,17 @@
 
 <script>
 import Item from '@/models/Item'
+import Mousetrap from '@unrest/vue-mousetrap'
 
 export default {
+  mixins: [Mousetrap.Mixin],
   data() {
     return { item_types: Item.all }
   },
   computed: {
+    mousetrap() {
+      return { esc: this.close }
+    },
     item() {
       const id = this.$store.viewer.state.selected_item
       return this.$store.item.getOne(id)
@@ -29,6 +34,9 @@ export default {
     },
   },
   methods: {
+    close() {
+      this.$store.viewer.patch({ selected_item: null })
+    },
     changeType(type) {
       this.item.type = type
       this.$store.item.save(this.item)
@@ -36,7 +44,7 @@ export default {
     deleteItem(e) {
       if (e.ctrlKey) {
         this.$store.item.delete(this.item)
-        this.$store.viewer.patch({ selected_item: null })
+        this.close()
         return
       }
       const confirmDelete = () => {

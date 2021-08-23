@@ -4,8 +4,8 @@
   bottom: 0;
   display: flex;
   font-size: 2rem;
-  position: fixed;
   left: 0;
+  position: fixed;
   .fa {
     font-size: 1.5rem;
   }
@@ -68,9 +68,43 @@
 
 .viewer-panel {
   background: white;
-  inset: 0;
-  left: unset;
+  bottom: 0;
   overflow-y: scroll;
+  padding-bottom: 52px;
   position: absolute;
+  right: 0;
   width: 300px;
+  &.-tracker {
+    height: 200px;
+    font-size: 2rem;
+    padding: 1rem;
+    width: 430px;
+  }
+  &.-list {
+    top: 0;
+  }
+  .tracker__grid {
+    .tracker__row {
+      display: flex;
+      gap: 0.25rem;
+      margin-bottom: 0.5rem;
+      .sm-item {
+        position: relative;
+        filter: grayscale(1);
+        opacity: 0.5;
+        &.has {
+          filter: unset;
+          opacity: unset;
+        }
+        .flaire {
+          background: black;
+          bottom: 0;
+          color: white;
+          font-size: 0.4em;
+          position: absolute;
+          right: 0;
+        }
+      }
+    }
+  }
 }

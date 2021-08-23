@@ -12,6 +12,7 @@
     "@popperjs/core": "^2.9.3",
     "@unrest/tailwind": "^0.1.0",
     "@unrest/vue": "^0.2.0",
+    "@unrest/vue-mousetrap": "^0.0.6",
     "@unrest/vue-storage": "^0.0.9",
     "file-saver": "^2.0.5",
     "openseadragon": "^2.4.2",
