@@ -46,12 +46,12 @@ export default {
     items() {
       const _percent = (v) => `${(100 * v) / this.W}%`
       const items = this.$store.item.getItems()
-      const selected_id = this.$store.viewer.state.selected
+      const selected_id = this.$store.viewer.state.selected_item
       return items.map(({ id, x, y, width, height }) => {
         return {
           id: `overlay-item-${id}`,
           selected: selected_id === id,
-          onClick: () => this.$store.viewer.patch({ selected: id }),
+          onClick: () => this.$store.viewer.patch({ selected_item: id }),
           class: 'item-box',
           style: {
             ...this._scale({

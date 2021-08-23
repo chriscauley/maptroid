@@ -1,8 +1,11 @@
 @import "./sm.scss";
 
-.viewer-toolbar {
+.viewer-toolbar, .viewer-panel__buttons {
+  bottom: 0;
   display: flex;
   font-size: 2rem;
+  position: fixed;
+  left: 0;
   .fa {
     font-size: 1.5rem;
   }
@@ -27,4 +30,47 @@
   .fa-trash {
     cursor: pointer;
   }
+  &__picker {
+    display: flex;
+    font-size: 2rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    width: 16rem;
+    .sm-item {
+      cursor: pointer;
+      &.-selected {
+        outline: 3px solid black;
+      }
+    }
+  }
+}
+
+.viewer-panel__buttons {
+  left: unset;
+  right: 0;
+  .btn {
+    position: relative;
+    .flaire {
+      align-items: center;
+      background: red;
+      border-radius: 100%;
+      display: flex;
+      font-size: 0.5em;
+      height: 1.5em;
+      justify-content: center;
+      position: absolute;
+      right: 0;
+      top: 0;
+      width: 1.5em;
+    }
+  }
+}
+
+.viewer-panel {
+  background: white;
+  inset: 0;
+  left: unset;
+  overflow-y: scroll;
+  position: absolute;
+  width: 300px;
 }

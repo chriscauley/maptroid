@@ -33,6 +33,11 @@ export default {
           this.viewer.viewport.getZoom() < targetZoom
       })
     }
+
+    const viewport = this.viewer.viewport
+    viewport.centerSpringY.animationTime = 0.25
+    viewport.centerSpringX.animationTime = 0.25
+    viewport.zoomSpring.animationTime = 0.25
     this.bindEvents()
   },
 

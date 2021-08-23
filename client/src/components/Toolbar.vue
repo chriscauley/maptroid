@@ -1,9 +1,7 @@
 <template>
-  <div class="unrest-floating-actions">
-    <div class="viewer-toolbar">
-      <div v-for="tool in tools" :class="css.tool(tool)" @click="selectTool(tool)" :key="tool.name">
-        <i :class="tool.icon" />
-      </div>
+  <div class="viewer-toolbar">
+    <div v-for="tool in tools" :class="css.tool(tool)" @click="selectTool(tool)" :key="tool.name">
+      <i :class="tool.icon" />
     </div>
   </div>
 </template>
