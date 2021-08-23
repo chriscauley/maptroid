@@ -2,7 +2,7 @@
   <div v-if="open" class="viewer-panel">
     <div class="list-group">
       <div v-for="item in items" class="list-group-item" :key="item.id">
-        <span> {{ item.id }} - {{ item.kind || '???' }} </span>
+        <span> {{ item.id }} - {{ item.type || '???' }} </span>
         <i class="fa fa-search" @click="goto(item)" />
       </div>
     </div>

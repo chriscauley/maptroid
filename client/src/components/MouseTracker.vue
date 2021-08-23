@@ -49,7 +49,6 @@ export default {
         const { x, y } = pointer
         this.$store.item
           .save({
-            type: 'item',
             x: Math.floor(x - 8),
             y: Math.floor(y - 8),
             width: 16,

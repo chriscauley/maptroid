@@ -24,13 +24,13 @@ export default {
     },
     css() {
       return {
-        changeType: (item) => ['sm-item', item, { '-selected': this.item.kind === item }],
+        changeType: (item) => ['sm-item', item, { '-selected': this.item.type === item }],
       }
     },
   },
   methods: {
     changeType(type) {
-      this.item.kind = type
+      this.item.type = type
       this.$store.item.save(this.item)
     },
     deleteItem(e) {
