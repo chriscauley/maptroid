@@ -1,6 +1,18 @@
 <template>
   <unrest-popper class="selected-item" placement="right" offset="0,5">
     {{ item.id }}
+    <div>
+      x: {{ item.x % 16 }}
+      <i class="fa fa-plus" @click="delta({ x: 1 })" />
+      {{ ' ' }}
+      <i class="fa fa-minus" @click="delta({ x: -1 })" />
+    </div>
+    <div>
+      y: {{ item.y % 16 }}
+      <i class="fa fa-plus" @click="delta({ y: 1 })" />
+      {{ ' ' }}
+      <i class="fa fa-minus" @click="delta({ y: -1 })" />
+    </div>
     <i class="fa fa-trash" @click="deleteItem" />
     <div class="selected-item__picker">
       <div v-for="type in item_types" :key="type">
@@ -36,6 +48,11 @@ export default {
   methods: {
     close() {
       this.$store.viewer.patch({ selected_item: null })
+    },
+    delta({ x = 0, y = 0 }) {
+      this.item.x += x
+      this.item.y += y
+      this.$store.item.save(this.item)
     },
     changeType(type) {
       this.item.type = type

@@ -16,8 +16,8 @@ import css from '@unrest/css'
 export default {
   data() {
     const items = [
-      { to: '/', text: 'Interactive Map', },
-      { to: '/spritegallery/', text: 'Item Gallery', },
+      { to: '/', text: 'Interactive Map' },
+      { to: '/spritegallery/', text: 'Item Gallery' },
     ]
     return { css, items }
   },

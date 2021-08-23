@@ -6,6 +6,7 @@
         <selected-item v-if="item.selected" />
       </div>
       <div v-bind="ui_attributes" />
+      <div v-if="drag_box" v-bind="drag_box" />
     </div>
   </div>
 </template>
@@ -26,8 +27,23 @@ export default {
     return { select_box, W: null, H: null, border_width: 2 }
   },
   computed: {
+    drag_box() {
+      const { selected_tool } = this.$store.viewer.state
+      if (selected_tool !== 'boss') {
+        return {}
+      }
+      const { x, y, width, height } = this.$store.viewer.drag_bounds
+      return {
+        style: this._scale({
+          left: x,
+          top: y,
+          width,
+          height,
+        }),
+        class: 'osd__drag-box',
+      }
+    },
     ui_attributes() {
-      const _percent = (v) => `${(100 * v) / this.W}%`
       const { selected_tool, pointer } = this.$store.viewer.state
       if (selected_tool === 'item' && pointer) {
         const { x, y } = pointer
@@ -44,15 +60,14 @@ export default {
       return {}
     },
     items() {
-      const _percent = (v) => `${(100 * v) / this.W}%`
-      const items = this.$store.item.getItems()
+      const items = this.$store.item.getAll()
       const selected_id = this.$store.viewer.state.selected_item
-      return items.map(({ id, x, y, width, height }) => {
+      return items.map(({ id, x, y, width, height, ...item }) => {
         return {
           id: `overlay-item-${id}`,
           selected: selected_id === id,
           onClick: () => this.$store.viewer.patch({ selected_item: id }),
-          class: 'item-box',
+          class: `item-box class-${item.class}`,
           style: {
             ...this._scale({
               left: x,

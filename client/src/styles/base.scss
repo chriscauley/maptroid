@@ -129,3 +129,13 @@
     gap: 1rem;
   }
 }
+
+.osd {
+  &__mouse-tracker {
+    inset: 0;
+  }
+  &__drag-box {
+    border: var(--border-width) solid white;
+    position: absolute;
+  }
+}

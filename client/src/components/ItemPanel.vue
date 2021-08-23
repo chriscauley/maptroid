@@ -2,7 +2,10 @@
   <div v-if="open" :class="`viewer-panel -${open || 'closed'}`">
     <div class="list-group" v-if="open === 'list'">
       <div v-for="item in items" class="list-group-item" :key="item.id">
-        <span> {{ item.id }} - {{ item.type || '???' }} </span>
+        <span>
+          <span v-if="item.x % 16 || item.y % 16" class="btn btn-danger">!</span>
+          {{ item.id }} - {{ item.type || '???' }}
+        </span>
         <i class="fa fa-search" @click="goto(item)" />
       </div>
     </div>

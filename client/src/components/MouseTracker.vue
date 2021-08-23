@@ -1,5 +1,5 @@
 <template>
-  <div :style="style" />
+  <div v-show="show" class="osd__mouse-tracker" />
 </template>
 
 <script>
@@ -15,14 +15,10 @@ export default {
     return { drag_start: null }
   },
   computed: {
-    style() {
+    show() {
       const { selected_tool } = this.$store.viewer.state
-      const tools = ['item']
-      return {
-        position: 'absolute',
-        inset: 0,
-        display: tools.includes(selected_tool) ? 'block' : 'none',
-      }
+      const tools = ['item', 'boss']
+      return tools.includes(selected_tool)
     },
   },
   mounted() {
@@ -44,28 +40,43 @@ export default {
     },
     press(e) {
       const { selected_tool, pointer } = this.$store.viewer.state
-      window.$store = this.$store
       if (selected_tool === 'item') {
         const { x, y } = pointer
         this.$store.item
           .save({
+            class: item,
             x: Math.floor(x - 8),
             y: Math.floor(y - 8),
             width: 16,
             height: 16,
           })
-          .then(({ id }) => {
-            this.$store.viewer.patch({ editing: id })
-            this.$store.item.getItems()
-          })
+          .then(() => this.$store.item.getAll())
       } else {
-        this.$store.viewer.patch({ drag_start: this.eventToImagePoint(e) })
+        const p = this.eventToImagePoint(e)
+        this.$store.viewer.patch({ drag_start: p, drag_end: p })
       }
     },
     drag(e) {
       this.$store.viewer.patch({ drag_end: this.eventToImagePoint(e) })
     },
-    dragEnd() {},
+    dragEnd() {
+      const { selected_tool } = this.$store.viewer.state
+      if (['boss', 'room'].includes(selected_tool)) {
+        const { x, y, width, height } = this.$store.viewer.drag_bounds
+        this.$store.item
+          .save({
+            x,
+            y,
+            width,
+            height,
+            class: selected_tool,
+          })
+          .then(() => {
+            this.$store.item.getAll()
+            this.$store.viewer.patch({ drag_start: null, drag_end: null })
+          })
+      }
+    },
     move(e) {
       this.$store.viewer.patch({ pointer: this.eventToImagePoint(e) })
     },

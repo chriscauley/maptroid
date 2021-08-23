@@ -1,7 +1,6 @@
 $items: morph-ball bomb screw-attack missle super-missle energy-tank energy2-tank varia-suit space-jump power-bomb high-jump speed-booster pedastool reserve-tank x-ray spring-ball grappling-hook charge-beam spazer wave-beam ice-beam plasma-beam gravity-suit;
 
-.sm-item {
-  background: url("/sm/items.png");
+.sm-item, .sm-enemy {
   background-size: 1em auto;
   display: inline-block;
   height: 1em;
@@ -10,6 +9,7 @@ $items: morph-ball bomb screw-attack missle super-missle energy-tank energy2-tan
 }
 
 .sm-item {
+  background-image: url("/sm/items.png");
   @for $i from 0 to length($items) {
     $name: nth($items, $i + 1);
     &.#{$name} {
@@ -21,6 +21,6 @@ $items: morph-ball bomb screw-attack missle super-missle energy-tank energy2-tan
   }
 }
 
-.sm-item.boss {
+.sm-enemy.boss {
   background-image: url("/sm/boss.png");
 }
