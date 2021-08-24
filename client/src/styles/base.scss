@@ -159,4 +159,5 @@
 
 .selected-room {
   @apply absolute bottom-0 bg-white p-2 right-0;
+  max-width: 400px;
 }

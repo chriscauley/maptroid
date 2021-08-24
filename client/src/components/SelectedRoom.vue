@@ -14,10 +14,13 @@
 
 <script>
 import Area from '@/models/Area'
+import Mousetrap from '@unrest/vue-mousetrap'
 
 export default {
+  mixins: [Mousetrap.Mixin],
   data() {
-    return { saved: null, areas: Area.list }
+    const mousetrap = { esc: () => this.$store.viewer.unSelectRoom() }
+    return { saved: null, areas: Area.list, mousetrap }
   },
   computed: {
     room() {
