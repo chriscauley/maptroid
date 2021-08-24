@@ -1,5 +1,6 @@
 <template>
   <form class="selected-room" @submit.prevent="save">
+    #{{ room.id }}
     <input type="text" v-model="room.name" />
     <div>xys: {{ room.xys }}</div>
     <div>
