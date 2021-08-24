@@ -7,9 +7,9 @@ const migrations = { // eslint-disable-line
   moveEnergyRoom: (room_store) => {
     // this room is shifted in the image. Temporarily moving it
     const room = room_store.getOne(30)
-    room.xys = [[38 - 2/16, 38]]
+    room.xys = [[38 - 2 / 16, 38]]
     room_store.save(room)
-  }
+  },
 }
 
 export default () => {

@@ -106,7 +106,7 @@
     padding: 1rem;
     width: 430px;
   }
-  &.-list {
+  &.-list, &.-room {
     top: 0;
   }
   .tracker__grid {
@@ -132,6 +132,9 @@
         }
       }
     }
+  }
+  .list-group-item {
+    gap: 0.5rem;
   }
 }
 
