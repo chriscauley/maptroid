@@ -7,13 +7,21 @@
       </div>
     </div>
     <div class="list-group" v-else-if="open === 'room'">
-      <div v-for="room in rooms" class="list-group-item" :key="room.id">
-        <i :class="`sm-room -${room.area}`" />
-        <span class="flex-grow">
-          {{ room.name }}
-        </span>
-        <i class="fa fa-search" @click="gotoRoom(room)" />
-      </div>
+      <div class="list-group-item">All: {{ stats.screens.all }} / {{ stats.rooms.all }}</div>
+      <template v-for="area in areas" :key="area">
+        <div class="accordion__header" @click="toggle(area)">
+          {{ area }} {{ stats.screens[area] }} / {{ stats.rooms[area] }}
+        </div>
+        <template v-if="area === selected">
+          <div v-for="room in rooms" class="list-group-item" :key="room.id">
+            <i :class="`sm-room -${room.area}`" />
+            <span class="flex-grow">
+              {{ room.name }}
+            </span>
+            <i class="fa fa-search" @click="gotoRoom(room)" />
+          </div>
+        </template>
+      </template>
     </div>
     <div v-else class="tracker__grid">
       <div v-for="(row, i) in $store.item.getGrid()" class="tracker__row" :key="i">
@@ -41,6 +49,7 @@
 <script>
 import OpenSeadragon from 'openseadragon'
 
+import Area from '@/models/Area'
 import Room from '@/models/Room'
 
 export default {
@@ -50,6 +59,8 @@ export default {
   data() {
     return {
       open: 'tracker',
+      selected: null,
+      areas: Area.list,
       css: {
         btn: (name) => ['btn', name === this.open ? '-primary' : '-secondary'],
       },
@@ -61,6 +72,25 @@ export default {
     },
     rooms() {
       return this.$store.room.getAll()
+    },
+    stats() {
+      const stats = {
+        rooms: { all: 0 },
+        screens: { all: 0 },
+        groups: {},
+      }
+      this.rooms.forEach((room) => {
+        const { area } = room
+        if (!stats.groups[area]) {
+          stats.groups[area] = []
+        }
+        stats.rooms.all += 1
+        stats.screens.all += room.xys.length
+        stats.rooms[area] = (stats.rooms[area] || 0) + 1
+        stats.screens[area] = (stats.screens[area] || 0) + room.xys.length
+        stats.groups[area].push(room)
+      })
+      return stats
     },
   },
   methods: {
@@ -80,6 +110,9 @@ export default {
       const bounds = new OpenSeadragon.Rect(x - b, y - b, width + b * 4, height + b * 2)
       const { viewport } = this.viewer
       viewport.fitBounds(viewport.imageToViewportRectangle(bounds))
+    },
+    toggle(key) {
+      this.selected = this.selected === key ? null : key
     },
   },
 }

@@ -161,3 +161,9 @@
   @apply absolute bottom-0 bg-white p-2 right-0;
   max-width: 400px;
 }
+
+.accordion {
+  &__header {
+    @apply bg-gray-100 cursor-pointer px-4 py-2;
+  }
+}
