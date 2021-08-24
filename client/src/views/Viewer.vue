@@ -7,7 +7,8 @@
         <mouse-tracker :viewer="viewer" />
         <toolbar />
       </template>
-      <item-panel :viewer="viewer" />
+      <selected-room v-if="selected_room" />
+      <item-panel v-else :viewer="viewer" />
     </div>
     <unrest-ui />
   </div>
@@ -17,13 +18,14 @@
 import HtmlOverlay from '@/components/HtmlOverlay.vue'
 import ItemPanel from '@/components/ItemPanel.vue'
 import MouseTracker from '@/components/MouseTracker.vue'
+import SelectedRoom from '@/components/SelectedRoom.vue'
 import Toolbar from '@/components/Toolbar.vue'
 
 export default {
   __route: {
     path: '/',
   },
-  components: { HtmlOverlay, ItemPanel, MouseTracker, Toolbar },
+  components: { HtmlOverlay, ItemPanel, MouseTracker, SelectedRoom, Toolbar },
   data() {
     return {
       viewer: null,
@@ -49,6 +51,11 @@ export default {
         },
       },
     }
+  },
+  computed: {
+    selected_room() {
+      return this.$store.viewer.getSelectedRoom()
+    },
   },
 }
 </script>

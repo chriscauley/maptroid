@@ -7,6 +7,9 @@
       </div>
       <div v-bind="ui_attributes" />
       <div v-if="drag_box" v-bind="drag_box" />
+      <template v-for="room in rooms" :key="room.id">
+        <div v-for="block in room.blocks" v-bind="block" :key="block.id" />
+      </template>
     </div>
   </div>
 </template>
@@ -27,6 +30,24 @@ export default {
     return { select_box, W: null, H: null, border_width: 2 }
   },
   computed: {
+    rooms() {
+      const rooms = this.$store.room.getAll().slice()
+      const { draft_room } = this.$store.viewer.state
+      if (draft_room) {
+        rooms.push(draft_room)
+      }
+      return rooms.map((room) => ({
+        id: room.id,
+        blocks: this.makeRoom(room),
+      }))
+    },
+    selected_room_blocks() {
+      const selected_room = this.$store.viewer.getSelectedRoom()
+      if (!selected_room) {
+        return
+      }
+      return this.makeRoom(selected_room)
+    },
     drag_box() {
       const { selected_tool } = this.$store.viewer.state
       if (selected_tool !== 'boss') {
@@ -44,20 +65,16 @@ export default {
       }
     },
     ui_attributes() {
-      const { selected_tool, pointer } = this.$store.viewer.state
-      if (selected_tool === 'item' && pointer) {
-        const { x, y } = pointer
-        return {
-          style: this._scale({
-            top: Math.floor(y) - 8,
-            left: Math.floor(x) - 8,
-            width: 16,
-            height: 16,
-          }),
-          class: 'hover-box',
-        }
+      const { x, y, scale } = this.$store.viewer.getMousePoint()
+      return {
+        style: this._scale({
+          top: y * scale,
+          left: x * scale,
+          width: scale,
+          height: scale,
+        }),
+        class: 'hover-box',
       }
-      return {}
     },
     items() {
       const items = this.$store.item.getAll()
@@ -97,6 +114,38 @@ export default {
       return Object.fromEntries(
         Object.entries(attrs).map(([k, v]) => [k, `${(100 * v) / this.W}%`]),
       )
+    },
+    makeRoom(room) {
+      const scale = 256
+      const { area } = room
+      const xy2i = (xy) => xy[0] + xy[1] * 66
+      const _xys = {}
+      room.xys.forEach((xy) => {
+        _xys[xy2i(xy)] = true
+      })
+      return room.xys.map(([x, y]) => {
+        return {
+          id: `selected-room_${x}_${y}`,
+          title: `#${room.id} ${room.name}`,
+          class: [
+            `sm-room -absolute -${area}`,
+            {
+              br0: _xys[xy2i([x + 1, y])],
+              bl0: _xys[xy2i([x - 1, y])],
+              bb0: _xys[xy2i([x, y + 1])],
+              bt0: _xys[xy2i([x, y - 1])],
+              '-selected': room.id === this.$store.viewer.state.selected_room_id,
+            },
+          ],
+          onClick: () => this.$store.viewer.patch({ selected_room_id: room.id }),
+          style: this._scale({
+            left: x * scale,
+            top: y * scale,
+            width: scale,
+            height: scale,
+          }),
+        }
+      })
     },
   },
 }

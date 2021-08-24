@@ -1,6 +1,6 @@
-$items: morph-ball bomb screw-attack missle super-missle energy-tank energy2-tank varia-suit space-jump power-bomb high-jump speed-booster pedastool reserve-tank x-ray spring-ball grappling-hook charge-beam spazer wave-beam ice-beam plasma-beam gravity-suit;
+$items: morph-ball bomb screw-attack missile super-missile energy-tank energy2-tank varia-suit space-jump power-bomb high-jump speed-booster pedastool reserve-tank x-ray spring-ball grappling-hook charge-beam spazer wave-beam ice-beam plasma-beam gravity-suit;
 
-.sm-item, .sm-enemy {
+.sm-item, .sm-enemy, .sm-room {
   background-size: 1em auto;
   display: inline-block;
   height: 1em;
@@ -24,3 +24,49 @@ $items: morph-ball bomb screw-attack missle super-missle energy-tank energy2-tan
 .sm-enemy.boss {
   background-image: url("/sm/boss.png");
 }
+
+$zone-colors: (
+  "crateria": #d83890,
+  "brinstar": #017e13,
+  "wrecked-ship": #d1b102,
+  "maridia": #283888,
+  "norfair": #d42020,
+  "tourian": #991b8c,
+  "elevator": #000000,
+);
+
+@mixin room($name, $color) {
+  &.-#{$name} {
+    background: $color;
+    &.-selected {
+      /* background: linear-gradient(45deg, transparent 25%, $color 25%, $color 50%, transparent 50%, transparent 75%, $color 75%, $color 100%); */
+    }
+  }
+}
+
+.sm-room {
+  border: #a0f8f8 0.125em solid;
+  @each $name, $color in $zone-colors {
+    @include room($name, $color);
+  }
+  &.-absolute {
+    position: absolute;
+  }
+  &.-selected {
+    border-style: dashed;
+    border-width: 0.5em;
+  }
+  &.br0 {
+    border-right: 0;
+  }
+  &.bl0 {
+    border-left: 0;
+  }
+  &.bt0 {
+    border-top: 0;
+  }
+  &.bb0 {
+    border-bottom: 0;
+  }
+}
+

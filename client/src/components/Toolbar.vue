@@ -2,34 +2,60 @@
   <div class="viewer-toolbar">
     <div
       v-for="tool in tools"
-      :class="css.tool(tool)"
       :key="tool.name"
       :title="tool.name"
       @click="selectTool(tool)"
+      :class="css.tool(tool)"
     >
       <i :class="tool.icon" />
+      <div v-if="tool.children" class="viewer-toolbar__children">
+        <div
+          v-for="child in tool.children"
+          :key="child"
+          @click="child.click"
+          class="btn -secondary"
+        >
+          <i :class="child.class" />
+        </div>
+      </div>
     </div>
-    <div class="btn -light">{{ viewer_data }}</div>
+    <div class="btn -light" style="font-size: 16px;">{{ viewer_data }}</div>
   </div>
 </template>
 
 <script>
-const tools = [
-  { slug: null, name: 'Select', icon: 'fa fa-mouse-pointer' },
-  { slug: 'item', name: 'Item', icon: 'sm-item super-missle-alt' },
-  { slug: 'boss', name: 'Boss', icon: 'sm-enemy boss' },
-]
+import Area from '@/models/Area'
 
 export default {
-  data() {
-    return { tools }
-  },
   computed: {
     css() {
       const { selected_tool } = this.$store.viewer.state
       return {
-        tool: (tool) => ['btn', tool.slug === selected_tool ? '-primary' : '-secondary'],
+        tool: (tool) => [
+          'btn viewer-toolbar__tool',
+          tool.slug === selected_tool ? '-primary' : '-secondary',
+        ],
       }
+    },
+    tools() {
+      const { room_tool } = this.$store.viewer.state
+      const Room = {
+        slug: 'room',
+        name: 'Room',
+        icon: `sm-room -${room_tool}`,
+        children: Area.list.map((slug) => ({
+          slug,
+          class: `sm-room -${slug}`,
+          click: () => this.$store.viewer.patch({ room_tool: slug }),
+        })),
+      }
+
+      return [
+        { slug: null, name: 'Select', icon: 'fa fa-mouse-pointer' },
+        { slug: 'item', name: 'Item', icon: 'sm-item super-missile-alt' },
+        { slug: 'boss', name: 'Boss', icon: 'sm-enemy boss' },
+        Room,
+      ]
     },
     viewer_data() {
       const { pointer } = this.$store.viewer.state

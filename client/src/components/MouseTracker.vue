@@ -17,7 +17,7 @@ export default {
   computed: {
     show() {
       const { selected_tool } = this.$store.viewer.state
-      const tools = ['item', 'boss']
+      const tools = ['item', 'boss', 'room']
       return tools.includes(selected_tool)
     },
   },
@@ -51,6 +51,8 @@ export default {
             height: 16,
           })
           .then(() => this.$store.item.getAll())
+      } else if (selected_tool === 'room') {
+        this.$store.viewer.clickRoom()
       } else {
         const p = this.eventToImagePoint(e)
         this.$store.viewer.patch({ drag_start: p, drag_end: p })
@@ -61,7 +63,7 @@ export default {
     },
     dragEnd() {
       const { selected_tool } = this.$store.viewer.state
-      if (['boss', 'room'].includes(selected_tool)) {
+      if (['boss'].includes(selected_tool)) {
         const { x, y, width, height } = this.$store.viewer.drag_bounds
         this.$store.item
           .save({
