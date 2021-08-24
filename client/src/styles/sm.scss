@@ -68,5 +68,8 @@ $zone-colors: (
   &.bb0 {
     border-bottom: 0;
   }
+  &.-style-mini {
+    background: transparent;
+  }
 }
 

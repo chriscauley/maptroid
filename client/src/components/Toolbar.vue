@@ -19,6 +19,16 @@
         </div>
       </div>
     </div>
+    <div class="btn -light viewer-toolbar__tool">
+      <i class="fa fa-gear" />
+      <div class="viewer-toolbar__children -menu">
+        <select v-model="$store.viewer.state.map_style">
+          <option value="off">off</option>
+          <option value="mini">mini</option>
+          <option value="full">full</option>
+        </select>
+      </div>
+    </div>
     <div class="btn -light" style="font-size: 16px;">{{ viewer_data }}</div>
   </div>
 </template>

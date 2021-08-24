@@ -116,7 +116,17 @@ export default {
       )
     },
     makeRoom(room) {
-      const scale = 256
+      const { map_style } = this.$store.viewer.state
+      let scale = 256
+      let offset_x = 0
+      let offset_y = 0
+      if (map_style === 'mini') {
+        scale = 8
+        offset_x = 32.25
+        offset_y = 36
+      } else if (map_style === 'off') {
+        return []
+      }
       const { area } = room
       const xy2i = (xy) => xy[0] + xy[1] * 66
       const _xys = {}
@@ -128,7 +138,7 @@ export default {
           id: `selected-room_${x}_${y}`,
           title: `#${room.id} ${room.name}`,
           class: [
-            `sm-room -absolute -${area}`,
+            `sm-room -absolute -${area} -style-${map_style}`,
             {
               br0: _xys[xy2i([x + 1, y])],
               bl0: _xys[xy2i([x - 1, y])],
@@ -139,8 +149,8 @@ export default {
           ],
           onClick: () => this.$store.viewer.patch({ selected_room_id: room.id }),
           style: this._scale({
-            left: x * scale,
-            top: y * scale,
+            left: (x + offset_x) * scale,
+            top: (y + offset_y) * scale,
             width: scale,
             height: scale,
           }),

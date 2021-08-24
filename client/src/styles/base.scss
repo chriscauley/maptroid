@@ -34,6 +34,10 @@
   &__children {
     @apply absolute flex flex-col hidden left-0;
     bottom: 100%;
+    &.-menu {
+      @apply bg-white p-4;
+      font-size: 1rem;
+    }
   }
 }
 
