@@ -595,15 +595,15 @@
         37
       ]
     ],
-    "name": "warehouse zeela room",
+    "name": "warehouse zeela",
     "id": 29
   },
   "30": {
     "area": "brinstar",
     "xys": [
       [
-        38,
-        37
+        37.875,
+        38
       ]
     ],
     "name": "warehouse energy tank room",
