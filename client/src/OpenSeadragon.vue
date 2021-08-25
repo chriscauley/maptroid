@@ -24,15 +24,6 @@ export default {
     const { ...options } = this.options
     options.id = this.id
     window.jawn = this.viewer = new OpenSeadragon(options)
-    if (this.pixelated) {
-      this.viewer.addHandler('zoom', () => {
-        const tiledImage = this.viewer.world.getItemAt(0)
-        const targetZoom =
-          tiledImage.source.dimensions.x / this.viewer.viewport.getContainerSize().x
-        this.viewer.drawer.context.imageSmoothingEnabled =
-          this.viewer.viewport.getZoom() < targetZoom
-      })
-    }
 
     const viewport = this.viewer.viewport
     viewport.centerSpringY.animationTime = 0.25

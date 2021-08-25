@@ -48,7 +48,7 @@ $zone-colors: (
   "maridia": #283888,
   "norfair": #d42020,
   "tourian": #991b8c,
-  "elevator": #000000,
+  "void": #000000,
 );
 
 @mixin room($name, $color) {
@@ -64,6 +64,14 @@ $zone-colors: (
   border: #a0f8f8 0.125em solid;
   @each $name, $color in $zone-colors {
     @include room($name, $color);
+  }
+  &.-void {
+    border: 0;
+  }
+  &.-elevator {
+    background: black url("/sm/elevator.png");
+    border: 0;
+    background-size: 100% auto;
   }
   &.-absolute {
     position: absolute;
@@ -88,4 +96,3 @@ $zone-colors: (
     background: transparent;
   }
 }
-
