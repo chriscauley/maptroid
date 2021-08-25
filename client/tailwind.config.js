@@ -1,2 +1,9 @@
 // tailwind.config.js
-module.exports = {}
+const unrest = require('@unrest/tailwind/tailwind.config')
+
+module.exports = {
+  purge: { enabled: true },
+  theme: unrest.theme,
+  variants: {},
+  plugins: []
+}

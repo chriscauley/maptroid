@@ -35,7 +35,8 @@
     @apply absolute flex flex-col hidden left-0;
     bottom: 100%;
     &.-menu {
-      @apply bg-white p-4;
+      @apply p-4;
+      background: var(--bg);
       font-size: 1rem;
     }
   }
@@ -56,18 +57,14 @@
 }
 
 .selected-item {
-  background: white;
-  border-radius: 0.25rem;
+  @apply -bg-bg rounded p-2;
   cursor: default;
-  padding: 0.5rem;
   .fa-trash {
     cursor: pointer;
   }
   &__picker {
-    display: flex;
+    @apply flex flex-wrap gap-2;
     font-size: 2rem;
-    flex-wrap: wrap;
-    gap: 0.5rem;
     width: 16rem;
     .sm-item {
       cursor: pointer;
@@ -84,23 +81,18 @@
   .btn {
     position: relative;
     .flaire {
-      align-items: center;
+      @apply absolute flex items-center justify-center right-0 top-0;
       background: red;
       border-radius: 100%;
-      display: flex;
       font-size: 0.5em;
       height: 1.5em;
-      justify-content: center;
-      position: absolute;
-      right: 0;
-      top: 0;
       width: 1.5em;
     }
   }
 }
 
 .viewer-panel {
-  background: white;
+  background: var(--bg);
   bottom: 0;
   overflow-y: scroll;
   padding-bottom: 52px;
@@ -132,7 +124,6 @@
         .flaire {
           background: black;
           bottom: 0;
-          color: white;
           font-size: 0.4em;
           position: absolute;
           right: 0;
@@ -165,12 +156,15 @@
 }
 
 .selected-room {
-  @apply absolute bottom-0 bg-white p-2 right-0;
+  @apply absolute bottom-0 p-2 right-0;
+  background: var(--bg);
   max-width: 400px;
 }
 
 .accordion {
   &__header {
-    @apply bg-gray-100 cursor-pointer px-4 py-2;
+    @apply cursor-pointer px-4 py-2;
+    background: var(--bg-alt);
+    border-bottom: var(--bg) 1px solid;
   }
 }
