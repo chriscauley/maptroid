@@ -1,4 +1,5 @@
 @import "./sm.scss";
+@import "./z-index";
 
 .app-wrapper {
   display: flex;
@@ -54,6 +55,15 @@
   .-overzoomed & {
     outline: none;
   }
+  &.sm-boss, &.sm-map {
+    background: none;
+  }
+  &.sm-boss {
+    outline: 5px solid red;
+  }
+  &.sm-map {
+    outline: 5px solid #8F8;
+  }
 }
 
 .selected-item {
@@ -66,10 +76,10 @@
     @apply flex flex-wrap gap-2;
     font-size: 2rem;
     width: 16rem;
-    .sm-item {
+    .sm-item, .sm-map {
       cursor: pointer;
       &.-selected {
-        outline: 3px solid black;
+        outline: 3px solid var(--text-alt);
       }
     }
   }

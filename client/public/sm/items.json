@@ -6,7 +6,12 @@
     "width": 16,
     "height": 16,
     "id": 1,
-    "class": "item"
+    "class": "item",
+    "room_id": 116,
+    "map_xy": [
+      4688,
+      8560
+    ]
   },
   "2": {
     "type": "high-jump",
@@ -15,7 +20,12 @@
     "width": 16,
     "height": 16,
     "id": 2,
-    "class": "item"
+    "class": "item",
+    "room_id": 108,
+    "map_xy": [
+      8496,
+      11424
+    ]
   },
   "3": {
     "type": "ice-beam",
@@ -24,7 +34,12 @@
     "width": 16,
     "height": 16,
     "id": 3,
-    "class": "item"
+    "class": "item",
+    "room_id": 114,
+    "map_xy": [
+      8128,
+      10352
+    ]
   },
   "4": {
     "type": "grappling-hook",
@@ -33,7 +48,12 @@
     "width": 16,
     "height": 16,
     "id": 4,
-    "class": "item"
+    "class": "item",
+    "room_id": 95,
+    "map_xy": [
+      7488,
+      13936
+    ]
   },
   "5": {
     "type": "reserve-tank",
@@ -42,16 +62,26 @@
     "width": 16,
     "height": 16,
     "id": 5,
-    "class": "item"
+    "class": "item",
+    "room_id": 49,
+    "map_xy": [
+      11296,
+      10352
+    ]
   },
   "6": {
-    "type": "missle",
+    "type": "missile",
     "x": 9680,
     "y": 11408,
     "width": 16,
     "height": 16,
     "id": 6,
-    "class": "item"
+    "class": "item",
+    "room_id": 106,
+    "map_xy": [
+      9680,
+      11408
+    ]
   },
   "7": {
     "type": "energy-tank",
@@ -60,7 +90,12 @@
     "width": 16,
     "height": 16,
     "id": 7,
-    "class": "item"
+    "class": "item",
+    "room_id": 207,
+    "map_xy": [
+      10736,
+      7840
+    ]
   },
   "8": {
     "type": "reserve-tank",
@@ -69,25 +104,40 @@
     "width": 16,
     "height": 16,
     "id": 8,
-    "class": "item"
+    "class": "item",
+    "room_id": 184,
+    "map_xy": [
+      11248,
+      8256
+    ]
   },
   "9": {
-    "type": "missle",
+    "type": "missile",
     "x": 11104,
     "y": 8256,
     "width": 16,
     "height": 16,
     "id": 9,
-    "class": "item"
+    "class": "item",
+    "room_id": 184,
+    "map_xy": [
+      11104,
+      8256
+    ]
   },
   "10": {
-    "type": "missle",
+    "type": "missile",
     "x": 11824,
     "y": 8304,
     "width": 16,
     "height": 16,
     "id": 10,
-    "class": "item"
+    "class": "item",
+    "room_id": 181,
+    "map_xy": [
+      11824,
+      8304
+    ]
   },
   "11": {
     "type": "power-bomb",
@@ -96,7 +146,12 @@
     "width": 16,
     "height": 16,
     "id": 11,
-    "class": "item"
+    "class": "item",
+    "room_id": 181,
+    "map_xy": [
+      12176,
+      8448
+    ]
   },
   "12": {
     "type": "varia-suit",
@@ -105,16 +160,26 @@
     "width": 16,
     "height": 16,
     "id": 12,
-    "class": "item"
+    "class": "item",
+    "room_id": 37,
+    "map_xy": [
+      13424,
+      9616
+    ]
   },
   "13": {
-    "type": "missle",
+    "type": "missile",
     "x": 10976,
     "y": 9344,
     "width": 16,
     "height": 16,
     "id": 13,
-    "class": "item"
+    "class": "item",
+    "room_id": 31,
+    "map_xy": [
+      10976,
+      9344
+    ]
   },
   "14": {
     "type": "energy-tank",
@@ -123,34 +188,54 @@
     "width": 16,
     "height": 16,
     "id": 14,
-    "class": "item"
+    "class": "item",
+    "room_id": 30,
+    "map_xy": [
+      9776,
+      9792
+    ]
   },
   "15": {
-    "type": "missle",
+    "type": "missile",
     "x": 7184,
     "y": 10880,
     "width": 16,
     "height": 16,
     "id": 15,
-    "class": "item"
+    "class": "item",
+    "room_id": 111,
+    "map_xy": [
+      7184,
+      10880
+    ]
   },
   "16": {
-    "type": "super-missle",
+    "type": "super-missile",
     "x": 11600,
     "y": 13696,
     "width": 16,
     "height": 16,
     "id": 16,
-    "class": "item"
+    "class": "item",
+    "room_id": 75,
+    "map_xy": [
+      11600,
+      13696
+    ]
   },
   "17": {
-    "type": "missle",
+    "type": "missile",
     "x": 11472,
     "y": 13696,
     "width": 16,
     "height": 16,
     "id": 17,
-    "class": "item"
+    "class": "item",
+    "room_id": 75,
+    "map_xy": [
+      11472,
+      13696
+    ]
   },
   "18": {
     "type": "screw-attack",
@@ -159,7 +244,12 @@
     "width": 16,
     "height": 16,
     "id": 18,
-    "class": "item"
+    "class": "item",
+    "room_id": 76,
+    "map_xy": [
+      11952,
+      13952
+    ]
   },
   "19": {
     "type": "energy-tank",
@@ -168,7 +258,12 @@
     "width": 16,
     "height": 16,
     "id": 19,
-    "class": "item"
+    "class": "item",
+    "room_id": 67,
+    "map_xy": [
+      12512,
+      14256
+    ]
   },
   "20": {
     "type": "power-bomb",
@@ -177,7 +272,12 @@
     "width": 16,
     "height": 16,
     "id": 20,
-    "class": "item"
+    "class": "item",
+    "room_id": 62,
+    "map_xy": [
+      14960,
+      13440
+    ]
   },
   "21": {
     "type": "energy-tank",
@@ -186,7 +286,12 @@
     "width": 16,
     "height": 16,
     "id": 21,
-    "class": "item"
+    "class": "item",
+    "room_id": 57,
+    "map_xy": [
+      16288,
+      12560
+    ]
   },
   "22": {
     "type": "power-bomb",
@@ -195,25 +300,40 @@
     "width": 16,
     "height": 16,
     "id": 22,
-    "class": "item"
+    "class": "item",
+    "room_id": 58,
+    "map_xy": [
+      16320,
+      11392
+    ]
   },
   "23": {
-    "type": "missle",
+    "type": "missile",
     "x": 15792,
     "y": 11120,
     "width": 16,
     "height": 16,
     "id": 23,
-    "class": "item"
+    "class": "item",
+    "room_id": 56,
+    "map_xy": [
+      15792,
+      11120
+    ]
   },
   "24": {
-    "type": "missle",
+    "type": "missile",
     "x": 13552,
     "y": 10896,
     "width": 16,
     "height": 16,
     "id": 24,
-    "class": "item"
+    "class": "item",
+    "room_id": 51,
+    "map_xy": [
+      13552,
+      10896
+    ]
   },
   "25": {
     "type": "spazer",
@@ -222,7 +342,12 @@
     "width": 16,
     "height": 16,
     "id": 25,
-    "class": "item"
+    "class": "item",
+    "room_id": 22,
+    "map_xy": [
+      8624,
+      9104
+    ]
   },
   "26": {
     "type": "energy-tank",
@@ -231,43 +356,68 @@
     "width": 16,
     "height": 16,
     "id": 26,
-    "class": "item"
+    "class": "item",
+    "room_id": 107,
+    "map_xy": [
+      9072,
+      11136
+    ]
   },
   "27": {
-    "type": "missle",
+    "type": "missile",
     "x": 8848,
     "y": 11104,
     "width": 16,
     "height": 16,
     "id": 27,
-    "class": "item"
+    "class": "item",
+    "room_id": 107,
+    "map_xy": [
+      8848,
+      11104
+    ]
   },
   "28": {
-    "type": "missle",
+    "type": "missile",
     "x": 8752,
     "y": 13712,
     "width": 16,
     "height": 16,
     "id": 28,
-    "class": "item"
+    "class": "item",
+    "room_id": 94,
+    "map_xy": [
+      8752,
+      13712
+    ]
   },
   "29": {
-    "type": "missle",
+    "type": "missile",
     "x": 10432,
     "y": 13712,
     "width": 16,
     "height": 16,
     "id": 29,
-    "class": "item"
+    "class": "item",
+    "room_id": 93,
+    "map_xy": [
+      10432,
+      13712
+    ]
   },
   "30": {
-    "type": "missle",
+    "type": "missile",
     "x": 5952,
     "y": 7536,
     "width": 16,
     "height": 16,
     "id": 30,
-    "class": "item"
+    "class": "item",
+    "room_id": 122,
+    "map_xy": [
+      5952,
+      7536
+    ]
   },
   "31": {
     "type": "morph-ball",
@@ -276,7 +426,12 @@
     "width": 16,
     "height": 16,
     "id": 31,
-    "class": "item"
+    "class": "item",
+    "room_id": 120,
+    "map_xy": [
+      5200,
+      7312
+    ]
   },
   "32": {
     "type": "power-bomb",
@@ -285,7 +440,12 @@
     "width": 16,
     "height": 16,
     "id": 32,
-    "class": "item"
+    "class": "item",
+    "room_id": 120,
+    "map_xy": [
+      4736,
+      7328
+    ]
   },
   "33": {
     "type": "charge-beam",
@@ -294,7 +454,12 @@
     "width": 16,
     "height": 16,
     "id": 33,
-    "class": "item"
+    "class": "item",
+    "room_id": 218,
+    "map_xy": [
+      3152,
+      7520
+    ]
   },
   "34": {
     "type": "energy-tank",
@@ -303,16 +468,26 @@
     "width": 16,
     "height": 16,
     "id": 34,
-    "class": "item"
+    "class": "item",
+    "room_id": 225,
+    "map_xy": [
+      832,
+      8080
+    ]
   },
   "35": {
-    "type": "super-missle",
+    "type": "super-missile",
     "x": 112,
     "y": 7312,
     "width": 16,
     "height": 16,
     "id": 35,
-    "class": "item"
+    "class": "item",
+    "room_id": 232,
+    "map_xy": [
+      112,
+      7312
+    ]
   },
   "36": {
     "type": "energy-tank",
@@ -321,7 +496,12 @@
     "width": 16,
     "height": 16,
     "id": 36,
-    "class": "item"
+    "class": "item",
+    "room_id": 231,
+    "map_xy": [
+      336,
+      7312
+    ]
   },
   "37": {
     "type": "power-bomb",
@@ -330,7 +510,12 @@
     "width": 16,
     "height": 16,
     "id": 37,
-    "class": "item"
+    "class": "item",
+    "room_id": 227,
+    "map_xy": [
+      1984,
+      6560
+    ]
   },
   "38": {
     "type": "reserve-tank",
@@ -339,43 +524,68 @@
     "width": 16,
     "height": 16,
     "id": 38,
-    "class": "item"
+    "class": "item",
+    "room_id": 238,
+    "map_xy": [
+      2224,
+      5744
+    ]
   },
   "39": {
-    "type": "missle",
+    "type": "missile",
     "x": 2448,
     "y": 5744,
     "width": 16,
     "height": 16,
     "id": 39,
-    "class": "item"
+    "class": "item",
+    "room_id": 238,
+    "map_xy": [
+      2448,
+      5744
+    ]
   },
   "40": {
-    "type": "missle",
+    "type": "missile",
     "x": 2528,
     "y": 5744,
     "width": 16,
     "height": 16,
     "id": 40,
-    "class": "item"
+    "class": "item",
+    "room_id": 238,
+    "map_xy": [
+      2528,
+      5744
+    ]
   },
   "41": {
-    "type": "super-missle",
+    "type": "super-missile",
     "x": 1344,
     "y": 5472,
     "width": 16,
     "height": 16,
     "id": 41,
-    "class": "item"
+    "class": "item",
+    "room_id": 237,
+    "map_xy": [
+      1344,
+      5472
+    ]
   },
   "42": {
-    "type": "super-missle",
+    "type": "super-missile",
     "x": 5024,
     "y": 7024,
     "width": 16,
     "height": 16,
     "id": 42,
-    "class": "item"
+    "class": "item",
+    "room_id": 216,
+    "map_xy": [
+      5024,
+      7024
+    ]
   },
   "43": {
     "type": "energy-tank",
@@ -384,7 +594,12 @@
     "width": 16,
     "height": 16,
     "id": 43,
-    "class": "item"
+    "class": "item",
+    "room_id": 221,
+    "map_xy": [
+      4272,
+      6800
+    ]
   },
   "44": {
     "type": "power-bomb",
@@ -393,34 +608,54 @@
     "width": 16,
     "height": 16,
     "id": 44,
-    "class": "item"
+    "class": "item",
+    "room_id": 223,
+    "map_xy": [
+      2656,
+      6768
+    ]
   },
   "45": {
-    "type": "missle",
+    "type": "missile",
     "x": 3136,
     "y": 6432,
     "width": 16,
     "height": 16,
     "id": 45,
-    "class": "item"
+    "class": "item",
+    "room_id": 218,
+    "map_xy": [
+      3136,
+      6432
+    ]
   },
   "46": {
-    "type": "missle",
+    "type": "missile",
     "x": 3104,
     "y": 7280,
     "width": 16,
     "height": 16,
     "id": 46,
-    "class": "item"
+    "class": "item",
+    "room_id": 218,
+    "map_xy": [
+      3104,
+      7280
+    ]
   },
   "47": {
-    "type": "missle",
+    "type": "missile",
     "x": 7136,
     "y": 7312,
     "width": 16,
     "height": 16,
     "id": 47,
-    "class": "item"
+    "class": "item",
+    "room_id": 123,
+    "map_xy": [
+      7136,
+      7312
+    ]
   },
   "48": {
     "type": "energy-tank",
@@ -429,43 +664,68 @@
     "width": 16,
     "height": 16,
     "id": 48,
-    "class": "item"
+    "class": "item",
+    "room_id": 123,
+    "map_xy": [
+      6848,
+      7200
+    ]
   },
   "49": {
-    "type": "missle",
+    "type": "missile",
     "x": 6256,
     "y": 6800,
     "width": 16,
     "height": 16,
     "id": 49,
-    "class": "item"
+    "class": "item",
+    "room_id": 125,
+    "map_xy": [
+      6256,
+      6800
+    ]
   },
   "50": {
-    "type": "missle",
+    "type": "missile",
     "x": 6224,
     "y": 6848,
     "width": 16,
     "height": 16,
     "id": 50,
-    "class": "item"
+    "class": "item",
+    "room_id": 125,
+    "map_xy": [
+      6224,
+      6848
+    ]
   },
   "51": {
-    "type": "missle",
+    "type": "missile",
     "x": 8672,
     "y": 7760,
     "width": 16,
     "height": 16,
     "id": 51,
-    "class": "item"
+    "class": "item",
+    "room_id": 205,
+    "map_xy": [
+      8672,
+      7760
+    ]
   },
   "52": {
-    "type": "super-missle",
+    "type": "super-missile",
     "x": 8800,
     "y": 7552,
     "width": 16,
     "height": 16,
     "id": 52,
-    "class": "item"
+    "class": "item",
+    "room_id": 205,
+    "map_xy": [
+      8800,
+      7552
+    ]
   },
   "53": {
     "type": "power-bomb",
@@ -474,16 +734,26 @@
     "width": 16,
     "height": 16,
     "id": 53,
-    "class": "item"
+    "class": "item",
+    "room_id": 14,
+    "map_xy": [
+      7744,
+      7568
+    ]
   },
   "54": {
-    "type": "missle",
+    "type": "missile",
     "x": 7456,
     "y": 7552,
     "width": 16,
     "height": 16,
     "id": 54,
-    "class": "item"
+    "class": "item",
+    "room_id": 15,
+    "map_xy": [
+      7456,
+      7552
+    ]
   },
   "55": {
     "type": "power-bomb",
@@ -492,25 +762,40 @@
     "width": 16,
     "height": 16,
     "id": 55,
-    "class": "item"
+    "class": "item",
+    "room_id": 16,
+    "map_xy": [
+      7744,
+      6704
+    ]
   },
   "56": {
-    "type": "missle",
+    "type": "missile",
     "x": 9136,
     "y": 6256,
     "width": 16,
     "height": 16,
     "id": 56,
-    "class": "item"
+    "class": "item",
+    "room_id": 213,
+    "map_xy": [
+      9136,
+      6256
+    ]
   },
   "57": {
-    "type": "super-missle",
+    "type": "super-missile",
     "x": 9024,
     "y": 6240,
     "width": 16,
     "height": 16,
     "id": 57,
-    "class": "item"
+    "class": "item",
+    "room_id": 213,
+    "map_xy": [
+      9024,
+      6240
+    ]
   },
   "58": {
     "type": "energy-tank",
@@ -519,7 +804,12 @@
     "width": 16,
     "height": 16,
     "id": 58,
-    "class": "item"
+    "class": "item",
+    "room_id": 188,
+    "map_xy": [
+      13344,
+      6736
+    ]
   },
   "59": {
     "type": "space-jump",
@@ -528,16 +818,26 @@
     "width": 16,
     "height": 16,
     "id": 59,
-    "class": "item"
+    "class": "item",
+    "room_id": 199,
+    "map_xy": [
+      15680,
+      7296
+    ]
   },
   "60": {
-    "type": "missle",
+    "type": "missile",
     "x": 16832,
     "y": 6496,
     "width": 16,
     "height": 16,
     "id": 60,
-    "class": "item"
+    "class": "item",
+    "room_id": 197,
+    "map_xy": [
+      16832,
+      6496
+    ]
   },
   "61": {
     "type": "plasma-beam",
@@ -546,16 +846,26 @@
     "width": 16,
     "height": 16,
     "id": 61,
-    "class": "item"
+    "class": "item",
+    "room_id": 173,
+    "map_xy": [
+      13200,
+      5216
+    ]
   },
   "62": {
-    "type": "super-missle",
+    "type": "super-missile",
     "x": 13696,
     "y": 1936,
     "width": 16,
     "height": 16,
     "id": 62,
-    "class": "item"
+    "class": "item",
+    "room_id": 149,
+    "map_xy": [
+      13696,
+      1936
+    ]
   },
   "63": {
     "type": "energy-tank",
@@ -564,7 +874,12 @@
     "width": 16,
     "height": 16,
     "id": 63,
-    "class": "item"
+    "class": "item",
+    "room_id": 157,
+    "map_xy": [
+      12848,
+      864
+    ]
   },
   "64": {
     "type": "reserve-tank",
@@ -573,34 +888,54 @@
     "width": 16,
     "height": 16,
     "id": 64,
-    "class": "item"
+    "class": "item",
+    "room_id": 142,
+    "map_xy": [
+      12080,
+      432
+    ]
   },
   "65": {
-    "type": "missle",
+    "type": "missile",
     "x": 13776,
     "y": 128,
     "width": 16,
     "height": 16,
     "id": 65,
-    "class": "item"
+    "class": "item",
+    "room_id": 145,
+    "map_xy": [
+      13776,
+      128
+    ]
   },
   "66": {
-    "type": "missle",
+    "type": "missile",
     "x": 9664,
     "y": 48,
     "width": 16,
     "height": 16,
     "id": 66,
-    "class": "item"
+    "class": "item",
+    "room_id": 140,
+    "map_xy": [
+      9664,
+      48
+    ]
   },
   "67": {
-    "type": "missle",
+    "type": "missile",
     "x": 9232,
     "y": 752,
     "width": 16,
     "height": 16,
     "id": 67,
-    "class": "item"
+    "class": "item",
+    "room_id": 140,
+    "map_xy": [
+      9232,
+      752
+    ]
   },
   "68": {
     "type": "gravity-suit",
@@ -609,61 +944,96 @@
     "width": 16,
     "height": 16,
     "id": 68,
-    "class": "item"
+    "class": "item",
+    "room_id": 143,
+    "map_xy": [
+      10864,
+      912
+    ]
   },
   "69": {
-    "type": "missle",
+    "type": "missile",
     "x": 8928,
     "y": 1168,
     "width": 16,
     "height": 16,
     "id": 69,
-    "class": "item"
+    "class": "item",
+    "room_id": 6,
+    "map_xy": [
+      8928,
+      1168
+    ]
   },
   "70": {
-    "type": "missle",
+    "type": "missile",
     "x": 9248,
     "y": 1456,
     "width": 16,
     "height": 16,
     "id": 70,
-    "class": "item"
+    "class": "item",
+    "room_id": 140,
+    "map_xy": [
+      9248,
+      1456
+    ]
   },
   "71": {
-    "type": "missle",
+    "type": "missile",
     "x": 11296,
     "y": 1680,
     "width": 16,
     "height": 16,
     "id": 71,
-    "class": "item"
+    "class": "item",
+    "room_id": 146,
+    "map_xy": [
+      11296,
+      1680
+    ]
   },
   "72": {
-    "type": "super-missle",
+    "type": "super-missile",
     "x": 12064,
     "y": 1904,
     "width": 16,
     "height": 16,
     "id": 72,
-    "class": "item"
+    "class": "item",
+    "room_id": 148,
+    "map_xy": [
+      12064,
+      1904
+    ]
   },
   "73": {
-    "type": "missle",
+    "type": "missile",
     "x": 11712,
     "y": 864,
     "width": 16,
     "height": 16,
     "id": 73,
-    "class": "item"
+    "class": "item",
+    "room_id": 142,
+    "map_xy": [
+      11712,
+      864
+    ]
   },
   "74": {
-    "type": "missle",
+    "type": "missile",
     "x": 14208,
     "y": 11152,
     "width": 16,
     "height": 16,
     "id": 74,
-    "class": "item"
+    "class": "item",
+    "room_id": 55,
+    "map_xy": [
+      14208,
+      11152
+    ]
   },
   "75": {
     "type": "wave-beam",
@@ -672,16 +1042,26 @@
     "width": 16,
     "height": 16,
     "id": 75,
-    "class": "item"
+    "class": "item",
+    "room_id": 52,
+    "map_xy": [
+      14256,
+      10848
+    ]
   },
   "76": {
-    "type": "missle",
+    "type": "missile",
     "x": 16064,
     "y": 10288,
     "width": 16,
     "height": 16,
     "id": 76,
-    "class": "item"
+    "class": "item",
+    "room_id": 45,
+    "map_xy": [
+      16064,
+      10288
+    ]
   },
   "77": {
     "type": "speed-booster",
@@ -690,34 +1070,54 @@
     "width": 16,
     "height": 16,
     "id": 77,
-    "class": "item"
+    "class": "item",
+    "room_id": 46,
+    "map_xy": [
+      16304,
+      10336
+    ]
   },
   "78": {
-    "type": "missle",
+    "type": "missile",
     "x": 10944,
     "y": 8144,
     "width": 16,
     "height": 16,
     "id": 78,
-    "class": "item"
+    "class": "item",
+    "room_id": 207,
+    "map_xy": [
+      10944,
+      8144
+    ]
   },
   "79": {
-    "type": "missle",
+    "type": "missile",
     "x": 11200,
     "y": 6272,
     "width": 16,
     "height": 16,
     "id": 79,
-    "class": "item"
+    "class": "item",
+    "room_id": 211,
+    "map_xy": [
+      11200,
+      6272
+    ]
   },
   "80": {
-    "type": "missle",
+    "type": "missile",
     "x": 4560,
     "y": 7552,
     "width": 16,
     "height": 16,
     "id": 80,
-    "class": "item"
+    "class": "item",
+    "room_id": 119,
+    "map_xy": [
+      4560,
+      7552
+    ]
   },
   "81": {
     "type": "power-bomb",
@@ -726,7 +1126,12 @@
     "width": 16,
     "height": 16,
     "id": 81,
-    "class": "item"
+    "class": "item",
+    "room_id": 90,
+    "map_xy": [
+      9072,
+      12416
+    ]
   },
   "82": {
     "type": "energy-tank",
@@ -735,34 +1140,54 @@
     "width": 16,
     "height": 16,
     "id": 82,
-    "class": "item"
+    "class": "item",
+    "room_id": 88,
+    "map_xy": [
+      11728,
+      12384
+    ]
   },
   "83": {
-    "type": "missle",
+    "type": "missile",
     "x": 13936,
     "y": 12464,
     "width": 16,
     "height": 16,
     "id": 83,
-    "class": "item"
+    "class": "item",
+    "room_id": 70,
+    "map_xy": [
+      13936,
+      12464
+    ]
   },
   "84": {
-    "type": "missle",
+    "type": "missile",
     "x": 2336,
     "y": 944,
     "width": 16,
     "height": 16,
     "id": 84,
-    "class": "item"
+    "class": "item",
+    "room_id": 135,
+    "map_xy": [
+      2336,
+      944
+    ]
   },
   "85": {
-    "type": "missle",
+    "type": "missile",
     "x": 2512,
     "y": 944,
     "width": 16,
     "height": 16,
     "id": 85,
-    "class": "item"
+    "class": "item",
+    "room_id": 135,
+    "map_xy": [
+      2512,
+      944
+    ]
   },
   "86": {
     "type": "energy-tank",
@@ -771,7 +1196,12 @@
     "width": 16,
     "height": 16,
     "id": 86,
-    "class": "item"
+    "class": "item",
+    "room_id": 136,
+    "map_xy": [
+      3888,
+      640
+    ]
   },
   "87": {
     "type": "power-bomb",
@@ -780,7 +1210,12 @@
     "width": 16,
     "height": 16,
     "id": 87,
-    "class": "item"
+    "class": "item",
+    "room_id": 139,
+    "map_xy": [
+      8144,
+      368
+    ]
   },
   "88": {
     "type": "bomb",
@@ -789,70 +1224,110 @@
     "width": 16,
     "height": 16,
     "id": 88,
-    "class": "item"
+    "class": "item",
+    "room_id": 3,
+    "map_xy": [
+      6080,
+      1696
+    ]
   },
   "89": {
-    "type": "missle",
+    "type": "missile",
     "x": 3648,
     "y": 1904,
     "width": 16,
     "height": 16,
     "id": 89,
-    "class": "item"
+    "class": "item",
+    "room_id": 132,
+    "map_xy": [
+      3648,
+      1904
+    ]
   },
   "90": {
-    "type": "super-missle",
+    "type": "super-missile",
     "x": 5808,
     "y": 2448,
     "width": 16,
     "height": 16,
     "id": 90,
-    "class": "item"
+    "class": "item",
+    "room_id": 130,
+    "map_xy": [
+      5808,
+      2448
+    ]
   },
   "91": {
-    "type": "missle",
+    "type": "missile",
     "x": 11376,
     "y": 10416,
     "width": 16,
     "height": 16,
     "id": 91,
-    "class": "item"
+    "class": "item",
+    "room_id": 49,
+    "map_xy": [
+      11376,
+      10416
+    ]
   },
   "92": {
-    "type": "missle",
+    "type": "missile",
     "x": 12096,
     "y": 10400,
     "width": 16,
     "height": 16,
     "id": 92,
-    "class": "item"
+    "class": "item",
+    "room_id": 48,
+    "map_xy": [
+      12096,
+      10400
+    ]
   },
   "93": {
-    "type": "missle",
+    "type": "missile",
     "x": 12608,
     "y": 11200,
     "width": 16,
     "height": 16,
     "id": 93,
-    "class": "item"
+    "class": "item",
+    "room_id": 43,
+    "map_xy": [
+      12608,
+      11200
+    ]
   },
   "94": {
-    "type": "missle",
+    "type": "missile",
     "x": 12224,
     "y": 7056,
     "width": 16,
     "height": 16,
     "id": 94,
-    "class": "item"
+    "class": "item",
+    "room_id": 185,
+    "map_xy": [
+      12224,
+      7056
+    ]
   },
   "95": {
-    "type": "super-missle",
+    "type": "super-missile",
     "x": 12480,
     "y": 7040,
     "width": 16,
     "height": 16,
     "id": 95,
-    "class": "item"
+    "class": "item",
+    "room_id": 185,
+    "map_xy": [
+      12480,
+      7040
+    ]
   },
   "96": {
     "type": "spring-ball",
@@ -861,25 +1336,40 @@
     "width": 16,
     "height": 16,
     "id": 96,
-    "class": "item"
+    "class": "item",
+    "room_id": 180,
+    "map_xy": [
+      14464,
+      8800
+    ]
   },
   "97": {
-    "type": "missle",
+    "type": "missile",
     "x": 4688,
     "y": 4768,
     "width": 16,
     "height": 16,
     "id": 97,
-    "class": "item"
+    "class": "item",
+    "room_id": 128,
+    "map_xy": [
+      4688,
+      4768
+    ]
   },
   "98": {
-    "type": "missle",
+    "type": "missile",
     "x": 1584,
     "y": 5808,
     "width": 16,
     "height": 16,
     "id": 98,
-    "class": "item"
+    "class": "item",
+    "room_id": 237,
+    "map_xy": [
+      1584,
+      5808
+    ]
   },
   "99": {
     "x": 2672,
@@ -888,7 +1378,12 @@
     "height": 16,
     "id": 99,
     "type": "energy-tank",
-    "class": "item"
+    "class": "item",
+    "room_id": 134,
+    "map_xy": [
+      2672,
+      1696
+    ]
   },
   "100": {
     "x": 10784,
@@ -896,7 +1391,415 @@
     "width": 16,
     "height": 16,
     "id": 100,
-    "type": "missle",
-    "class": "item"
+    "type": "missile",
+    "class": "item",
+    "room_id": 41,
+    "map_xy": [
+      10784,
+      10944
+    ]
+  },
+  "101": {
+    "x": 12592,
+    "y": 14160,
+    "width": 80,
+    "height": 96,
+    "class": "boss",
+    "id": 101
+  },
+  "102": {
+    "x": 11664,
+    "y": 13888,
+    "width": 80,
+    "height": 96,
+    "class": "boss",
+    "id": 102
+  },
+  "103": {
+    "x": 2512,
+    "y": 3888,
+    "width": 96,
+    "height": 96,
+    "class": "boss",
+    "id": 103
+  },
+  "104": {
+    "x": 2144,
+    "y": 4688,
+    "width": 64,
+    "height": 64,
+    "class": "boss",
+    "id": 104
+  },
+  "105": {
+    "x": 5984,
+    "y": 1648,
+    "width": 80,
+    "height": 96,
+    "class": "boss",
+    "id": 105
+  },
+  "106": {
+    "x": 16000,
+    "y": 7184,
+    "width": 144,
+    "height": 144,
+    "class": "boss",
+    "id": 106
+  },
+  "107": {
+    "x": 12080,
+    "y": 6768,
+    "width": 128,
+    "height": 96,
+    "class": "boss",
+    "id": 107
+  },
+  "108": {
+    "x": 13136,
+    "y": 2352,
+    "width": 96,
+    "height": 128,
+    "class": "boss",
+    "id": 108
+  },
+  "109": {
+    "x": 10800,
+    "y": 12336,
+    "width": 160,
+    "height": 128,
+    "class": "boss",
+    "id": 109
+  },
+  "110": {
+    "x": 4416,
+    "y": 5376,
+    "width": 128,
+    "height": 144,
+    "class": "boss",
+    "id": 110
+  },
+  "111": {
+    "x": 13072,
+    "y": 9360,
+    "width": 192,
+    "height": 304,
+    "class": "boss",
+    "id": 111
+  },
+  "112": {
+    "class": "map",
+    "type": "save",
+    "x": 80,
+    "y": 7520,
+    "width": 32,
+    "height": 96,
+    "id": 112
+  },
+  "113": {
+    "class": "map",
+    "type": "missile",
+    "x": 48,
+    "y": 6544,
+    "width": 48,
+    "height": 48,
+    "id": 113
+  },
+  "114": {
+    "class": "map",
+    "type": "energy",
+    "x": 1072,
+    "y": 7824,
+    "width": 48,
+    "height": 48,
+    "id": 114
+  },
+  "115": {
+    "class": "map",
+    "type": "map",
+    "x": 48,
+    "y": 5776,
+    "width": 64,
+    "height": 48,
+    "id": 115
+  },
+  "116": {
+    "class": "map",
+    "type": "map",
+    "x": 5520,
+    "y": 1936,
+    "width": 64,
+    "height": 48,
+    "id": 116
+  },
+  "117": {
+    "class": "map",
+    "type": "map",
+    "x": 11568,
+    "y": 2448,
+    "width": 64,
+    "height": 48,
+    "id": 117
+  },
+  "118": {
+    "class": "map",
+    "type": "save",
+    "x": 12656,
+    "y": 1120,
+    "width": 32,
+    "height": 96,
+    "id": 118
+  },
+  "119": {
+    "class": "map",
+    "type": "save",
+    "x": 4208,
+    "y": 3168,
+    "width": 32,
+    "height": 96,
+    "id": 119
+  },
+  "120": {
+    "class": "map",
+    "type": "save",
+    "x": 2896,
+    "y": 4448,
+    "width": 32,
+    "height": 96,
+    "id": 120
+  },
+  "121": {
+    "class": "map",
+    "type": "save",
+    "x": 2640,
+    "y": 5728,
+    "width": 32,
+    "height": 96,
+    "id": 121
+  },
+  "122": {
+    "class": "map",
+    "type": "save",
+    "x": 8560,
+    "y": 6752,
+    "width": 32,
+    "height": 96,
+    "id": 122
+  },
+  "123": {
+    "class": "map",
+    "type": "save",
+    "x": 9072,
+    "y": 9568,
+    "width": 32,
+    "height": 96,
+    "id": 123
+  },
+  "124": {
+    "class": "map",
+    "type": "energy",
+    "x": 12144,
+    "y": 13712,
+    "width": 48,
+    "height": 48,
+    "id": 124
+  },
+  "125": {
+    "class": "map",
+    "type": "save",
+    "x": 15984,
+    "y": 12896,
+    "width": 32,
+    "height": 96,
+    "id": 125
+  },
+  "126": {
+    "class": "map",
+    "type": "save",
+    "x": 10864,
+    "y": 11872,
+    "width": 32,
+    "height": 96,
+    "id": 126
+  },
+  "127": {
+    "class": "map",
+    "type": "save",
+    "x": 11856,
+    "y": 12384,
+    "width": 32,
+    "height": 96,
+    "id": 127
+  },
+  "128": {
+    "class": "map",
+    "type": "energy",
+    "x": 11872,
+    "y": 12176,
+    "width": 48,
+    "height": 48,
+    "id": 128
+  },
+  "129": {
+    "class": "map",
+    "type": "save",
+    "x": 14960,
+    "y": 5728,
+    "width": 32,
+    "height": 96,
+    "id": 129
+  },
+  "130": {
+    "class": "map",
+    "type": "save",
+    "x": 16496,
+    "y": 6240,
+    "width": 32,
+    "height": 96,
+    "id": 130
+  },
+  "131": {
+    "class": "map",
+    "type": "energy",
+    "x": 16752,
+    "y": 6288,
+    "width": 48,
+    "height": 48,
+    "id": 131
+  },
+  "132": {
+    "class": "map",
+    "type": "missile",
+    "x": 15728,
+    "y": 6800,
+    "width": 48,
+    "height": 48,
+    "id": 132
+  },
+  "133": {
+    "class": "map",
+    "type": "save",
+    "x": 11376,
+    "y": 9312,
+    "width": 32,
+    "height": 96,
+    "id": 133
+  },
+  "134": {
+    "class": "map",
+    "type": "map",
+    "x": 12672,
+    "y": 9360,
+    "width": 48,
+    "height": 48,
+    "id": 134
+  },
+  "135": {
+    "class": "map",
+    "type": "energy",
+    "x": 12640,
+    "y": 9360,
+    "width": 48,
+    "height": 48,
+    "id": 135
+  },
+  "136": {
+    "class": "map",
+    "type": "save",
+    "x": 12112,
+    "y": 10592,
+    "width": 32,
+    "height": 96,
+    "id": 136
+  },
+  "137": {
+    "class": "map",
+    "type": "save",
+    "x": 9840,
+    "y": 12640,
+    "width": 32,
+    "height": 96,
+    "id": 137
+  },
+  "138": {
+    "class": "map",
+    "type": "energy",
+    "x": 6960,
+    "y": 9360,
+    "width": 48,
+    "height": 48,
+    "id": 138
+  },
+  "140": {
+    "class": "map",
+    "type": "ship",
+    "x": 6416,
+    "y": 1088,
+    "width": 208,
+    "height": 96,
+    "id": 140
+  },
+  "141": {
+    "class": "map",
+    "type": "save",
+    "x": 848,
+    "y": 5984,
+    "width": 32,
+    "height": 96,
+    "id": 141
+  },
+  "142": {
+    "class": "map",
+    "type": "energy",
+    "x": 1616,
+    "y": 4240,
+    "width": 48,
+    "height": 48,
+    "id": 142
+  },
+  "143": {
+    "class": "map",
+    "type": "map",
+    "x": 1648,
+    "y": 4240,
+    "width": 48,
+    "height": 48,
+    "id": 143
+  },
+  "144": {
+    "class": "map",
+    "type": "save",
+    "x": 4176,
+    "y": 1632,
+    "width": 32,
+    "height": 96,
+    "id": 144
+  },
+  "145": {
+    "class": "map",
+    "type": "save",
+    "x": 10832,
+    "y": 7520,
+    "width": 32,
+    "height": 96,
+    "id": 145
+  },
+  "146": {
+    "class": "map",
+    "type": "map",
+    "x": 9008,
+    "y": 10896,
+    "width": 64,
+    "height": 48,
+    "id": 146
+  },
+  "147": {
+    "class": "map",
+    "type": "map",
+    "x": 10384,
+    "y": 9104,
+    "width": 64,
+    "height": 48,
+    "id": 147
   }
 }

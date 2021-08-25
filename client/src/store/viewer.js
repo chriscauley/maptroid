@@ -6,6 +6,7 @@ export default ({ store }) => {
     room_tool: 'crateria',
     selected_room_id: null,
     map_style: 'full',
+    map_tool: 'save',
   })
   const getMousePoint = () => {
     const { selected_tool, pointer } = state

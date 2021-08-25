@@ -11,9 +11,10 @@
       <div v-if="tool.children" class="viewer-toolbar__children">
         <div
           v-for="child in tool.children"
-          :key="child"
+          :key="child.slug"
           @click="child.click"
-          class="btn -secondary"
+          :class="child.btn"
+          :title="child.slug"
         >
           <i :class="child.class" />
         </div>
@@ -35,6 +36,7 @@
 
 <script>
 import Area from '@/models/Area'
+import { bosses, map_markers } from '@/models'
 
 export default {
   computed: {
@@ -48,7 +50,7 @@ export default {
       }
     },
     tools() {
-      const { room_tool } = this.$store.viewer.state
+      const { room_tool, map_tool } = this.$store.viewer.state
       const Room = {
         slug: 'room',
         name: 'Room',
@@ -56,15 +58,27 @@ export default {
         children: Area.list.map((slug) => ({
           slug,
           class: `sm-room -${slug}`,
+          btn: ['btn', room_tool === slug ? '-primary' : '-secondary'],
           click: () => this.$store.viewer.patch({ room_tool: slug }),
         })),
       }
 
       return [
         { slug: null, name: 'Select', icon: 'fa fa-mouse-pointer' },
-        { slug: 'item', name: 'Item', icon: 'sm-item super-missile-alt' },
+        { slug: 'item', name: 'Item', icon: 'sm-item -super-missile-alt' },
         { slug: 'boss', name: 'Boss', icon: 'sm-map -boss' },
         Room,
+        {
+          slug: 'map',
+          name: 'Map',
+          icon: `sm-map -${map_tool}`,
+          children: map_markers.map((slug) => ({
+            slug,
+            class: `sm-map -${slug}`,
+            btn: ['btn', map_tool === slug ? '-primary' : '-secondary'],
+            click: () => this.$store.viewer.patch({ map_tool: slug }),
+          })),
+        }
       ]
     },
     viewer_data() {

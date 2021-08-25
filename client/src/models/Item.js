@@ -20,4 +20,6 @@ const misc = ['pedastool', 'energy2-tank']
 
 const all = [...abilities, ...packs, ...beams, ...misc]
 
+const schema = {}
+
 export default { all, abilities, packs, beams, misc }

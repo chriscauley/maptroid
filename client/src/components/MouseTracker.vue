@@ -24,7 +24,7 @@ export default {
     },
     show() {
       const { selected_tool } = this.$store.viewer.state
-      const tools = ['item', 'boss', 'room']
+      const tools = ['item', 'boss', 'map', 'room']
       return tools.includes(selected_tool)
     },
   },
@@ -71,14 +71,16 @@ export default {
     dragEnd() {
       const { selected_tool } = this.$store.viewer.state
       const { x, y, width, height } = this.$store.viewer.drag_bounds
-      if (width && height && ['boss'].includes(selected_tool)) {
+      if (width && height && ['boss', 'map'].includes(selected_tool)) {
+        const type = this.$store.viewer.state[selected_tool+'_tool']
         this.$store.item
           .save({
+            class: selected_tool,
+            type,
             x,
             y,
             width,
             height,
-            class: selected_tool,
           })
           .then(() => {
             this.$store.item.getAll()

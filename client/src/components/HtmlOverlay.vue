@@ -50,7 +50,7 @@ export default {
     },
     drag_box() {
       const { selected_tool } = this.$store.viewer.state
-      if (selected_tool !== 'boss') {
+      if (!['boss', 'map'].includes(selected_tool)) {
         return {}
       }
       const { x, y, width, height } = this.$store.viewer.drag_bounds
@@ -84,7 +84,7 @@ export default {
           id: `overlay-item-${id}`,
           selected: selected_id === id,
           onClick: () => this.$store.viewer.patch({ selected_item: id }),
-          class: `item-box -class-${item.class} sm-item ${item.type}`,
+          class: `item-box -class-${item.class} sm-${item.class} -${item.type}`,
           style: {
             ...this._scale({
               left: x,

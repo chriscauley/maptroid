@@ -16,7 +16,7 @@ export default () => {
     const rows = [Item.packs, Item.beams, Item.abilities].map((slugs) => {
       return slugs.map((slug) => ({
         slug,
-        class: ['sm-item', slug, { has: hist[slug] }],
+        class: [`sm-item -${slug}`, { has: hist[slug] }],
       }))
     })
     rows[0].forEach((cell) => {
@@ -30,7 +30,7 @@ export default () => {
   }
   window.exportData = item_store.exportData = () => {
     const data = {}
-    item_store.getItems().forEach((i) => (data[i.id] = i))
+    item_store.getAll().forEach((i) => (data[i.id] = i))
     downloadJson(data, 'items.json')
   }
 

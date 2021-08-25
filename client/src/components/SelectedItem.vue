@@ -1,10 +1,10 @@
 <template>
   <unrest-popper class="selected-item" placement="right" offset="0,5">
-    {{ item.id }}
+    {{ item.class }} #{{ item.id }}
     <i class="fa fa-trash" @click="deleteItem" />
     <div class="selected-item__picker">
       <div v-for="type in item_types" :key="type">
-        <span :class="css.changeType(type)" @click="changeType(type)" />
+        <span :class="css.type(type)" @click="changeType(type)" />
       </div>
     </div>
   </unrest-popper>
@@ -12,14 +12,21 @@
 
 <script>
 import Item from '@/models/Item'
+import { bosses, map_markers } from '@/models'
 import Mousetrap from '@unrest/vue-mousetrap'
+
+const types_by_class = {
+  item: Item.all,
+  boss: bosses,
+  map: map_markers
+}
 
 export default {
   mixins: [Mousetrap.Mixin],
-  data() {
-    return { item_types: Item.all }
-  },
   computed: {
+    item_types() {
+      return types_by_class[this.item.class]
+    },
     mousetrap() {
       return { esc: this.close }
     },
@@ -28,8 +35,9 @@ export default {
       return this.$store.item.getOne(id)
     },
     css() {
+      const { type, class: _class } = this.item
       return {
-        changeType: (item) => ['sm-item', item, { '-selected': this.item.type === item }],
+        type: (_type) => [`sm-${_class} -${_type}`, { '-selected': type === _type }],
       }
     },
   },

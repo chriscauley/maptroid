@@ -12,17 +12,17 @@ $items: morph-ball bomb screw-attack missile super-missile energy-tank energy2-t
   background-image: url("/sm/items.png");
   @for $i from 0 to length($items) {
     $name: nth($items, $i + 1);
-    &.#{$name} {
+    &.-#{$name} {
       background-position: 0 $i * 2 * -100%;
     }
-    &.#{$name}-alt {
+    &.-#{$name}-alt {
       background-position: 0 ($i * 2 + 1) * -100%;
     }
   }
 }
 
 .sm-map {
-  $icons: save map energy missile boss elevator ship;
+  $icons: save map energy missile boss elevator;
   background-image: url("/sm/map_icons.png");
   background-size: auto 100%;
   @for $i from 0 to length($icons) {
@@ -32,13 +32,9 @@ $items: morph-ball bomb screw-attack missile super-missile energy-tank energy2-t
     }
   }
   &.-ship {
+    background-position: right 0;
     width: 2em;
   }
-}
-
-.sm-item.-class-boss {
-  background: none;
-  outline: 5px solid red !important;
 }
 
 $zone-colors: (
