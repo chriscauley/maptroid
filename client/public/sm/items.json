@@ -1405,7 +1405,8 @@
     "width": 80,
     "height": 96,
     "class": "boss",
-    "id": 101
+    "id": 101,
+    "type": "ridley"
   },
   "102": {
     "x": 11664,
@@ -1413,15 +1414,8 @@
     "width": 80,
     "height": 96,
     "class": "boss",
-    "id": 102
-  },
-  "103": {
-    "x": 2512,
-    "y": 3888,
-    "width": 96,
-    "height": 96,
-    "class": "boss",
-    "id": 103
+    "id": 102,
+    "type": "gold-torizo"
   },
   "104": {
     "x": 2144,
@@ -1429,7 +1423,8 @@
     "width": 64,
     "height": 64,
     "class": "boss",
-    "id": 104
+    "id": 104,
+    "type": "mother-brain"
   },
   "105": {
     "x": 5984,
@@ -1437,7 +1432,8 @@
     "width": 80,
     "height": 96,
     "class": "boss",
-    "id": 105
+    "id": 105,
+    "type": "bomb-torizo"
   },
   "106": {
     "x": 16000,
@@ -1445,7 +1441,8 @@
     "width": 144,
     "height": 144,
     "class": "boss",
-    "id": 106
+    "id": 106,
+    "type": "draygon"
   },
   "107": {
     "x": 12080,
@@ -1453,7 +1450,8 @@
     "width": 128,
     "height": 96,
     "class": "boss",
-    "id": 107
+    "id": 107,
+    "type": "botwoon"
   },
   "108": {
     "x": 13136,
@@ -1461,7 +1459,8 @@
     "width": 96,
     "height": 128,
     "class": "boss",
-    "id": 108
+    "id": 108,
+    "type": "phantoon"
   },
   "109": {
     "x": 10800,
@@ -1469,7 +1468,8 @@
     "width": 160,
     "height": 128,
     "class": "boss",
-    "id": 109
+    "id": 109,
+    "type": "crocomire"
   },
   "110": {
     "x": 4416,
@@ -1477,7 +1477,8 @@
     "width": 128,
     "height": 144,
     "class": "boss",
-    "id": 110
+    "id": 110,
+    "type": "spore-spawn"
   },
   "111": {
     "x": 13072,
@@ -1485,7 +1486,8 @@
     "width": 192,
     "height": 304,
     "class": "boss",
-    "id": 111
+    "id": 111,
+    "type": "kraid"
   },
   "112": {
     "class": "map",
@@ -1801,5 +1803,4925 @@
     "width": 64,
     "height": 48,
     "id": 147
+  },
+  "148": {
+    "class": "map",
+    "type": "save",
+    "x": 9584,
+    "y": 11104,
+    "width": 32,
+    "height": 96,
+    "id": 148
+  },
+  "150": {
+    "class": "chozo",
+    "x": 3328,
+    "y": 3936,
+    "width": 80,
+    "height": 96,
+    "id": 150
+  },
+  "152": {
+    "class": "chozo",
+    "x": 6080,
+    "y": 1696,
+    "width": 48,
+    "height": 48,
+    "id": 152
+  },
+  "153": {
+    "class": "chozo",
+    "x": 3856,
+    "y": 640,
+    "width": 48,
+    "height": 48,
+    "id": 153
+  },
+  "154": {
+    "class": "chozo",
+    "x": 11936,
+    "y": 608,
+    "width": 64,
+    "height": 80,
+    "id": 154
+  },
+  "155": {
+    "class": "chozo",
+    "x": 11040,
+    "y": 880,
+    "width": 64,
+    "height": 80,
+    "id": 155
+  },
+  "156": {
+    "class": "chozo",
+    "x": 15648,
+    "y": 7296,
+    "width": 48,
+    "height": 48,
+    "id": 156
+  },
+  "157": {
+    "class": "chozo",
+    "x": 10528,
+    "y": 13168,
+    "width": 48,
+    "height": 80,
+    "id": 157
+  },
+  "158": {
+    "class": "chozo",
+    "x": 7456,
+    "y": 13936,
+    "width": 48,
+    "height": 48,
+    "id": 158
+  },
+  "159": {
+    "class": "chozo",
+    "x": 11952,
+    "y": 13952,
+    "width": 48,
+    "height": 48,
+    "id": 159
+  },
+  "160": {
+    "class": "chozo",
+    "x": 8464,
+    "y": 11424,
+    "width": 48,
+    "height": 48,
+    "id": 160
+  },
+  "161": {
+    "class": "chozo",
+    "x": 3120,
+    "y": 7520,
+    "width": 48,
+    "height": 48,
+    "id": 161
+  },
+  "162": {
+    "class": "chozo",
+    "x": 8624,
+    "y": 9104,
+    "width": 48,
+    "height": 48,
+    "id": 162
+  },
+  "163": {
+    "class": "chozo",
+    "x": 14464,
+    "y": 8800,
+    "width": 48,
+    "height": 48,
+    "id": 163
+  },
+  "164": {
+    "class": "chozo",
+    "x": 3616,
+    "y": 1904,
+    "width": 48,
+    "height": 48,
+    "id": 164
+  },
+  "165": {
+    "class": "chozo",
+    "x": 5920,
+    "y": 7536,
+    "width": 48,
+    "height": 48,
+    "id": 165
+  },
+  "166": {
+    "class": "chozo",
+    "x": 4656,
+    "y": 8560,
+    "width": 48,
+    "height": 48,
+    "id": 166
+  },
+  "167": {
+    "class": "chozo",
+    "x": 13200,
+    "y": 5216,
+    "width": 48,
+    "height": 48,
+    "id": 167
+  },
+  "168": {
+    "class": "chozo",
+    "x": 14256,
+    "y": 10848,
+    "width": 48,
+    "height": 48,
+    "id": 168
+  },
+  "169": {
+    "class": "chozo",
+    "x": 7712,
+    "y": 7568,
+    "width": 48,
+    "height": 48,
+    "id": 169
+  },
+  "170": {
+    "class": "chozo",
+    "x": 8128,
+    "y": 10352,
+    "width": 48,
+    "height": 48,
+    "id": 170
+  },
+  "171": {
+    "class": "chozo",
+    "x": 16304,
+    "y": 10336,
+    "width": 48,
+    "height": 48,
+    "id": 171
+  },
+  "173": {
+    "class": "door",
+    "type": "blue",
+    "x": 1248,
+    "y": 7776,
+    "width": 16,
+    "height": 64,
+    "id": 173
+  },
+  "174": {
+    "class": "door",
+    "type": "blue",
+    "x": 1296,
+    "y": 7776,
+    "width": 16,
+    "height": 64,
+    "id": 174
+  },
+  "175": {
+    "class": "door",
+    "type": "blue",
+    "x": 1504,
+    "y": 7520,
+    "width": 16,
+    "height": 64,
+    "id": 175
+  },
+  "176": {
+    "class": "door",
+    "type": "blue",
+    "x": 1552,
+    "y": 7520,
+    "width": 16,
+    "height": 64,
+    "id": 176
+  },
+  "177": {
+    "class": "door",
+    "type": "blue",
+    "x": 224,
+    "y": 7520,
+    "width": 16,
+    "height": 64,
+    "id": 177
+  },
+  "178": {
+    "class": "door",
+    "type": "blue",
+    "x": 272,
+    "y": 7520,
+    "width": 16,
+    "height": 64,
+    "id": 178
+  },
+  "179": {
+    "class": "door",
+    "type": "blue",
+    "x": 224,
+    "y": 7264,
+    "width": 16,
+    "height": 64,
+    "id": 179
+  },
+  "180": {
+    "class": "door",
+    "type": "green",
+    "x": 272,
+    "y": 7264,
+    "width": 16,
+    "height": 64,
+    "id": 180
+  },
+  "181": {
+    "class": "door",
+    "type": "blue",
+    "x": 736,
+    "y": 7264,
+    "width": 16,
+    "height": 64,
+    "id": 181
+  },
+  "182": {
+    "class": "door",
+    "type": "blue",
+    "x": 784,
+    "y": 7264,
+    "width": 16,
+    "height": 64,
+    "id": 182
+  },
+  "183": {
+    "class": "door",
+    "type": "blue",
+    "x": 992,
+    "y": 7264,
+    "width": 16,
+    "height": 64,
+    "id": 183
+  },
+  "184": {
+    "class": "door",
+    "type": "blue",
+    "x": 1040,
+    "y": 7264,
+    "width": 16,
+    "height": 64,
+    "id": 184
+  },
+  "185": {
+    "class": "door",
+    "type": "blue",
+    "x": 224,
+    "y": 6496,
+    "width": 16,
+    "height": 64,
+    "id": 185
+  },
+  "186": {
+    "class": "door",
+    "type": "blue",
+    "x": 272,
+    "y": 6496,
+    "width": 16,
+    "height": 64,
+    "id": 186
+  },
+  "187": {
+    "class": "door",
+    "type": "blue",
+    "x": 992,
+    "y": 6240,
+    "width": 16,
+    "height": 64,
+    "id": 187
+  },
+  "188": {
+    "class": "door",
+    "type": "blue",
+    "x": 1296,
+    "y": 6240,
+    "width": 16,
+    "height": 64,
+    "id": 188
+  },
+  "189": {
+    "class": "door",
+    "type": "blue",
+    "x": 1296,
+    "y": 6496,
+    "width": 16,
+    "height": 64,
+    "id": 189
+  },
+  "190": {
+    "class": "door",
+    "type": "red",
+    "x": 1040,
+    "y": 5984,
+    "width": 16,
+    "height": 64,
+    "id": 190
+  },
+  "191": {
+    "class": "door",
+    "type": "red",
+    "x": 1040,
+    "y": 6240,
+    "width": 16,
+    "height": 64,
+    "id": 191
+  },
+  "192": {
+    "class": "door",
+    "type": "red",
+    "x": 1248,
+    "y": 6240,
+    "width": 16,
+    "height": 64,
+    "id": 192
+  },
+  "193": {
+    "class": "door",
+    "type": "brown",
+    "x": 1248,
+    "y": 6496,
+    "width": 16,
+    "height": 64,
+    "id": 193
+  },
+  "194": {
+    "class": "door",
+    "type": "brown",
+    "x": 992,
+    "y": 5728,
+    "width": 16,
+    "height": 64,
+    "id": 194
+  },
+  "195": {
+    "class": "door",
+    "type": "blue",
+    "x": 224,
+    "y": 5728,
+    "width": 16,
+    "height": 64,
+    "id": 195
+  },
+  "196": {
+    "class": "door",
+    "type": "blue",
+    "x": 272,
+    "y": 5728,
+    "width": 16,
+    "height": 64,
+    "id": 196
+  },
+  "197": {
+    "class": "door",
+    "type": "blue",
+    "x": 992,
+    "y": 5984,
+    "width": 16,
+    "height": 64,
+    "id": 197
+  },
+  "198": {
+    "class": "door",
+    "type": "blue",
+    "x": 1296,
+    "y": 5728,
+    "width": 16,
+    "height": 64,
+    "id": 198
+  },
+  "199": {
+    "class": "door",
+    "type": "red",
+    "x": 1040,
+    "y": 5728,
+    "width": 16,
+    "height": 64,
+    "id": 199
+  },
+  "200": {
+    "class": "door",
+    "type": "red",
+    "x": 1248,
+    "y": 5728,
+    "width": 16,
+    "height": 64,
+    "id": 200
+  },
+  "201": {
+    "class": "door",
+    "type": "red",
+    "x": 2016,
+    "y": 5728,
+    "width": 16,
+    "height": 64,
+    "id": 201
+  },
+  "202": {
+    "class": "door",
+    "type": "blue",
+    "x": 2064,
+    "y": 5728,
+    "width": 16,
+    "height": 64,
+    "id": 202
+  },
+  "203": {
+    "class": "door",
+    "type": "blue",
+    "x": 3040,
+    "y": 6240,
+    "width": 16,
+    "height": 64,
+    "id": 203
+  },
+  "204": {
+    "class": "door",
+    "type": "blue",
+    "x": 3088,
+    "y": 6240,
+    "width": 16,
+    "height": 64,
+    "id": 204
+  },
+  "205": {
+    "class": "door",
+    "type": "blue",
+    "x": 2784,
+    "y": 5728,
+    "width": 16,
+    "height": 64,
+    "id": 205
+  },
+  "206": {
+    "class": "door",
+    "type": "blue",
+    "x": 2832,
+    "y": 5728,
+    "width": 16,
+    "height": 64,
+    "id": 206
+  },
+  "207": {
+    "class": "door",
+    "type": "red",
+    "x": 3552,
+    "y": 5728,
+    "width": 16,
+    "height": 64,
+    "id": 207
+  },
+  "208": {
+    "class": "door",
+    "type": "brown",
+    "x": 3600,
+    "y": 5728,
+    "width": 16,
+    "height": 64,
+    "id": 208
+  },
+  "209": {
+    "class": "door",
+    "type": "brown",
+    "x": 4448,
+    "y": 5680,
+    "width": 64,
+    "height": 16,
+    "id": 209
+  },
+  "210": {
+    "class": "door",
+    "type": "green",
+    "x": 4448,
+    "y": 5600,
+    "width": 64,
+    "height": 16,
+    "id": 210
+  },
+  "211": {
+    "class": "door",
+    "type": "blue",
+    "x": 4576,
+    "y": 4960,
+    "width": 16,
+    "height": 64,
+    "id": 211
+  },
+  "212": {
+    "class": "door",
+    "type": "blue",
+    "x": 4624,
+    "y": 4960,
+    "width": 16,
+    "height": 64,
+    "id": 212
+  },
+  "213": {
+    "class": "door",
+    "type": "blue",
+    "x": 4064,
+    "y": 4448,
+    "width": 16,
+    "height": 64,
+    "id": 213
+  },
+  "214": {
+    "class": "door",
+    "type": "blue",
+    "x": 4576,
+    "y": 4448,
+    "width": 16,
+    "height": 64,
+    "id": 214
+  },
+  "215": {
+    "class": "door",
+    "type": "blue",
+    "x": 5344,
+    "y": 4448,
+    "width": 16,
+    "height": 64,
+    "id": 215
+  },
+  "216": {
+    "class": "door",
+    "type": "blue",
+    "x": 5392,
+    "y": 4448,
+    "width": 16,
+    "height": 64,
+    "id": 216
+  },
+  "217": {
+    "class": "door",
+    "type": "brown",
+    "x": 4112,
+    "y": 4448,
+    "width": 16,
+    "height": 64,
+    "id": 217
+  },
+  "218": {
+    "class": "door",
+    "type": "brown",
+    "x": 4624,
+    "y": 4448,
+    "width": 16,
+    "height": 64,
+    "id": 218
+  },
+  "219": {
+    "class": "door",
+    "type": "orange",
+    "x": 4832,
+    "y": 4192,
+    "width": 16,
+    "height": 64,
+    "id": 219
+  },
+  "220": {
+    "class": "door",
+    "type": "blue",
+    "x": 4880,
+    "y": 4192,
+    "width": 16,
+    "height": 64,
+    "id": 220
+  },
+  "221": {
+    "class": "door",
+    "type": "blue",
+    "x": 4880,
+    "y": 2400,
+    "width": 16,
+    "height": 64,
+    "id": 221
+  },
+  "222": {
+    "class": "door",
+    "type": "brown",
+    "x": 4832,
+    "y": 2400,
+    "width": 16,
+    "height": 64,
+    "id": 222
+  },
+  "223": {
+    "class": "door",
+    "type": "blue",
+    "x": 4448,
+    "y": 2256,
+    "width": 64,
+    "height": 16,
+    "id": 223
+  },
+  "224": {
+    "class": "door",
+    "type": "blue",
+    "x": 4448,
+    "y": 2336,
+    "width": 64,
+    "height": 16,
+    "id": 224
+  },
+  "225": {
+    "class": "door",
+    "type": "blue",
+    "x": 3040,
+    "y": 6752,
+    "width": 16,
+    "height": 64,
+    "id": 225
+  },
+  "226": {
+    "class": "door",
+    "type": "blue",
+    "x": 3088,
+    "y": 6752,
+    "width": 16,
+    "height": 64,
+    "id": 226
+  },
+  "227": {
+    "class": "door",
+    "type": "blue",
+    "x": 3808,
+    "y": 7008,
+    "width": 16,
+    "height": 64,
+    "id": 227
+  },
+  "228": {
+    "class": "door",
+    "type": "blue",
+    "x": 4064,
+    "y": 6752,
+    "width": 16,
+    "height": 64,
+    "id": 228
+  },
+  "229": {
+    "class": "door",
+    "type": "blue",
+    "x": 4112,
+    "y": 6752,
+    "width": 16,
+    "height": 64,
+    "id": 229
+  },
+  "230": {
+    "class": "door",
+    "type": "brown",
+    "x": 3040,
+    "y": 6496,
+    "width": 16,
+    "height": 64,
+    "id": 230
+  },
+  "231": {
+    "class": "door",
+    "type": "brown",
+    "x": 3600,
+    "y": 6752,
+    "width": 16,
+    "height": 64,
+    "id": 231
+  },
+  "232": {
+    "class": "door",
+    "type": "orange",
+    "x": 3552,
+    "y": 6752,
+    "width": 16,
+    "height": 64,
+    "id": 232
+  },
+  "233": {
+    "class": "door",
+    "type": "green",
+    "x": 3552,
+    "y": 7264,
+    "width": 16,
+    "height": 64,
+    "id": 233
+  },
+  "234": {
+    "class": "door",
+    "type": "green",
+    "x": 3856,
+    "y": 7008,
+    "width": 16,
+    "height": 64,
+    "id": 234
+  },
+  "235": {
+    "class": "door",
+    "type": "blue",
+    "x": 3600,
+    "y": 7264,
+    "width": 16,
+    "height": 64,
+    "id": 235
+  },
+  "236": {
+    "class": "door",
+    "type": "orange",
+    "x": 4064,
+    "y": 7264,
+    "width": 16,
+    "height": 64,
+    "id": 236
+  },
+  "237": {
+    "class": "door",
+    "type": "brown",
+    "x": 4112,
+    "y": 7264,
+    "width": 16,
+    "height": 64,
+    "id": 237
+  },
+  "238": {
+    "class": "door",
+    "type": "blue",
+    "x": 4576,
+    "y": 7008,
+    "width": 16,
+    "height": 64,
+    "id": 238
+  },
+  "239": {
+    "class": "door",
+    "type": "blue",
+    "x": 4624,
+    "y": 7008,
+    "width": 16,
+    "height": 64,
+    "id": 239
+  },
+  "240": {
+    "class": "door",
+    "type": "blue",
+    "x": 6112,
+    "y": 7264,
+    "width": 16,
+    "height": 64,
+    "id": 240
+  },
+  "241": {
+    "class": "door",
+    "type": "blue",
+    "x": 6160,
+    "y": 7264,
+    "width": 16,
+    "height": 64,
+    "id": 241
+  },
+  "242": {
+    "class": "door",
+    "type": "blue",
+    "x": 6112,
+    "y": 7520,
+    "width": 16,
+    "height": 64,
+    "id": 242
+  },
+  "244": {
+    "class": "door",
+    "type": "blue",
+    "x": 6160,
+    "y": 7520,
+    "width": 16,
+    "height": 64,
+    "id": 244
+  },
+  "245": {
+    "class": "door",
+    "type": "red",
+    "x": 6368,
+    "y": 7264,
+    "width": 16,
+    "height": 64,
+    "id": 245
+  },
+  "246": {
+    "class": "door",
+    "type": "blue",
+    "x": 6416,
+    "y": 7264,
+    "width": 16,
+    "height": 64,
+    "id": 246
+  },
+  "247": {
+    "class": "door",
+    "type": "blue",
+    "x": 6368,
+    "y": 6752,
+    "width": 16,
+    "height": 64,
+    "id": 247
+  },
+  "248": {
+    "class": "door",
+    "type": "blue",
+    "x": 6416,
+    "y": 6752,
+    "width": 16,
+    "height": 64,
+    "id": 248
+  },
+  "250": {
+    "class": "door",
+    "type": "blue",
+    "x": 6880,
+    "y": 6752,
+    "width": 16,
+    "height": 64,
+    "id": 250
+  },
+  "251": {
+    "class": "door",
+    "type": "blue",
+    "x": 6928,
+    "y": 6752,
+    "width": 16,
+    "height": 64,
+    "id": 251
+  },
+  "252": {
+    "class": "door",
+    "type": "blue",
+    "x": 7392,
+    "y": 7008,
+    "width": 16,
+    "height": 64,
+    "id": 252
+  },
+  "253": {
+    "class": "door",
+    "type": "blue",
+    "x": 7440,
+    "y": 7008,
+    "width": 16,
+    "height": 64,
+    "id": 253
+  },
+  "254": {
+    "class": "door",
+    "type": "blue",
+    "x": 8160,
+    "y": 7008,
+    "width": 16,
+    "height": 64,
+    "id": 254
+  },
+  "255": {
+    "class": "door",
+    "type": "blue",
+    "x": 8160,
+    "y": 7520,
+    "width": 16,
+    "height": 64,
+    "id": 255
+  },
+  "256": {
+    "class": "door",
+    "type": "green",
+    "x": 8208,
+    "y": 7520,
+    "width": 16,
+    "height": 64,
+    "id": 256
+  },
+  "257": {
+    "class": "door",
+    "type": "orange",
+    "x": 8208,
+    "y": 7008,
+    "width": 16,
+    "height": 64,
+    "id": 257
+  },
+  "258": {
+    "class": "door",
+    "type": "blue",
+    "x": 8416,
+    "y": 6752,
+    "width": 16,
+    "height": 64,
+    "id": 258
+  },
+  "259": {
+    "class": "door",
+    "type": "blue",
+    "x": 8464,
+    "y": 6752,
+    "width": 16,
+    "height": 64,
+    "id": 259
+  },
+  "260": {
+    "class": "door",
+    "type": "blue",
+    "x": 8928,
+    "y": 7008,
+    "width": 16,
+    "height": 64,
+    "id": 260
+  },
+  "261": {
+    "class": "door",
+    "type": "blue",
+    "x": 8976,
+    "y": 7008,
+    "width": 16,
+    "height": 64,
+    "id": 261
+  },
+  "262": {
+    "class": "door",
+    "type": "blue",
+    "x": 8928,
+    "y": 6496,
+    "width": 16,
+    "height": 64,
+    "id": 262
+  },
+  "263": {
+    "class": "door",
+    "type": "blue",
+    "x": 8976,
+    "y": 6496,
+    "width": 16,
+    "height": 64,
+    "id": 263
+  },
+  "264": {
+    "class": "door",
+    "type": "blue",
+    "x": 9568,
+    "y": 6864,
+    "width": 64,
+    "height": 16,
+    "id": 264
+  },
+  "265": {
+    "class": "door",
+    "type": "blue",
+    "x": 9568,
+    "y": 6944,
+    "width": 64,
+    "height": 16,
+    "id": 265
+  },
+  "266": {
+    "class": "door",
+    "type": "blue",
+    "x": 9440,
+    "y": 5728,
+    "width": 16,
+    "height": 64,
+    "id": 266
+  },
+  "268": {
+    "class": "door",
+    "type": "blue",
+    "x": 9488,
+    "y": 5728,
+    "width": 16,
+    "height": 64,
+    "id": 268
+  },
+  "269": {
+    "class": "door",
+    "type": "blue",
+    "x": 10464,
+    "y": 5984,
+    "width": 16,
+    "height": 64,
+    "id": 269
+  },
+  "270": {
+    "class": "door",
+    "type": "blue",
+    "x": 10512,
+    "y": 5984,
+    "width": 16,
+    "height": 64,
+    "id": 270
+  },
+  "271": {
+    "class": "door",
+    "type": "blue",
+    "x": 10592,
+    "y": 6352,
+    "width": 64,
+    "height": 16,
+    "id": 271
+  },
+  "273": {
+    "class": "door",
+    "type": "blue",
+    "x": 10592,
+    "y": 6432,
+    "width": 64,
+    "height": 16,
+    "id": 273
+  },
+  "274": {
+    "class": "door",
+    "type": "blue",
+    "x": 10464,
+    "y": 7008,
+    "width": 16,
+    "height": 64,
+    "id": 274
+  },
+  "275": {
+    "class": "door",
+    "type": "blue",
+    "x": 10512,
+    "y": 7008,
+    "width": 16,
+    "height": 64,
+    "id": 275
+  },
+  "276": {
+    "class": "door",
+    "type": "blue",
+    "x": 10976,
+    "y": 7520,
+    "width": 16,
+    "height": 64,
+    "id": 276
+  },
+  "277": {
+    "class": "door",
+    "type": "blue",
+    "x": 11024,
+    "y": 7264,
+    "width": 16,
+    "height": 64,
+    "id": 277
+  },
+  "278": {
+    "class": "door",
+    "type": "blue",
+    "x": 11104,
+    "y": 6944,
+    "width": 64,
+    "height": 16,
+    "id": 278
+  },
+  "279": {
+    "class": "door",
+    "type": "blue",
+    "x": 11104,
+    "y": 6864,
+    "width": 64,
+    "height": 16,
+    "id": 279
+  },
+  "280": {
+    "class": "door",
+    "type": "green",
+    "x": 10976,
+    "y": 7264,
+    "width": 16,
+    "height": 64,
+    "id": 280
+  },
+  "281": {
+    "class": "door",
+    "type": "red",
+    "x": 11024,
+    "y": 7520,
+    "width": 16,
+    "height": 64,
+    "id": 281
+  },
+  "282": {
+    "class": "door",
+    "type": "blue",
+    "x": 12000,
+    "y": 6752,
+    "width": 16,
+    "height": 64,
+    "id": 282
+  },
+  "283": {
+    "class": "door",
+    "type": "blue",
+    "x": 12512,
+    "y": 6752,
+    "width": 16,
+    "height": 64,
+    "id": 283
+  },
+  "284": {
+    "class": "door",
+    "type": "blue",
+    "x": 12560,
+    "y": 6752,
+    "width": 16,
+    "height": 64,
+    "id": 284
+  },
+  "285": {
+    "class": "door",
+    "type": "blue",
+    "x": 12512,
+    "y": 6496,
+    "width": 16,
+    "height": 64,
+    "id": 285
+  },
+  "286": {
+    "class": "door",
+    "type": "blue",
+    "x": 12560,
+    "y": 6496,
+    "width": 16,
+    "height": 64,
+    "id": 286
+  },
+  "287": {
+    "class": "door",
+    "type": "brown",
+    "x": 12048,
+    "y": 6752,
+    "width": 16,
+    "height": 64,
+    "id": 287
+  },
+  "288": {
+    "class": "door",
+    "type": "brown",
+    "x": 12768,
+    "y": 6496,
+    "width": 16,
+    "height": 64,
+    "id": 288
+  },
+  "289": {
+    "class": "door",
+    "type": "blue",
+    "x": 12512,
+    "y": 5984,
+    "width": 16,
+    "height": 64,
+    "id": 289
+  },
+  "290": {
+    "class": "door",
+    "type": "blue",
+    "x": 12560,
+    "y": 5984,
+    "width": 16,
+    "height": 64,
+    "id": 290
+  },
+  "291": {
+    "class": "door",
+    "type": "blue",
+    "x": 12768,
+    "y": 5984,
+    "width": 16,
+    "height": 64,
+    "id": 291
+  },
+  "292": {
+    "class": "door",
+    "type": "blue",
+    "x": 12816,
+    "y": 5984,
+    "width": 16,
+    "height": 64,
+    "id": 292
+  },
+  "293": {
+    "class": "door",
+    "type": "blue",
+    "x": 13024,
+    "y": 6240,
+    "width": 16,
+    "height": 64,
+    "id": 293
+  },
+  "294": {
+    "class": "door",
+    "type": "blue",
+    "x": 13072,
+    "y": 6240,
+    "width": 16,
+    "height": 64,
+    "id": 294
+  },
+  "295": {
+    "class": "door",
+    "type": "blue",
+    "x": 12816,
+    "y": 6496,
+    "width": 16,
+    "height": 64,
+    "id": 295
+  },
+  "296": {
+    "class": "door",
+    "type": "blue",
+    "x": 12512,
+    "y": 4704,
+    "width": 16,
+    "height": 64,
+    "id": 296
+  },
+  "297": {
+    "class": "door",
+    "type": "blue",
+    "x": 12560,
+    "y": 4704,
+    "width": 16,
+    "height": 64,
+    "id": 297
+  },
+  "298": {
+    "class": "door",
+    "type": "blue",
+    "x": 12768,
+    "y": 4704,
+    "width": 16,
+    "height": 64,
+    "id": 298
+  },
+  "299": {
+    "class": "door",
+    "type": "blue",
+    "x": 12304,
+    "y": 5472,
+    "width": 16,
+    "height": 64,
+    "id": 299
+  },
+  "300": {
+    "class": "door",
+    "type": "brown",
+    "x": 12256,
+    "y": 5472,
+    "width": 16,
+    "height": 64,
+    "id": 300
+  },
+  "301": {
+    "class": "door",
+    "type": "brown",
+    "x": 12816,
+    "y": 4704,
+    "width": 16,
+    "height": 64,
+    "id": 301
+  },
+  "302": {
+    "class": "door",
+    "type": "blue",
+    "x": 14560,
+    "y": 5984,
+    "width": 16,
+    "height": 64,
+    "id": 302
+  },
+  "303": {
+    "class": "door",
+    "type": "blue",
+    "x": 14608,
+    "y": 5984,
+    "width": 16,
+    "height": 64,
+    "id": 303
+  },
+  "304": {
+    "class": "door",
+    "type": "blue",
+    "x": 14864,
+    "y": 5728,
+    "width": 16,
+    "height": 64,
+    "id": 304
+  },
+  "305": {
+    "class": "door",
+    "type": "blue",
+    "x": 14560,
+    "y": 6240,
+    "width": 16,
+    "height": 64,
+    "id": 305
+  },
+  "306": {
+    "class": "door",
+    "type": "blue",
+    "x": 14608,
+    "y": 6240,
+    "width": 16,
+    "height": 64,
+    "id": 306
+  },
+  "307": {
+    "class": "door",
+    "type": "red",
+    "x": 14816,
+    "y": 5728,
+    "width": 16,
+    "height": 64,
+    "id": 307
+  },
+  "308": {
+    "class": "door",
+    "type": "blue",
+    "x": 14304,
+    "y": 6496,
+    "width": 16,
+    "height": 64,
+    "id": 308
+  },
+  "309": {
+    "class": "door",
+    "type": "blue",
+    "x": 14304,
+    "y": 6752,
+    "width": 16,
+    "height": 64,
+    "id": 309
+  },
+  "310": {
+    "class": "door",
+    "type": "blue",
+    "x": 14352,
+    "y": 6752,
+    "width": 16,
+    "height": 64,
+    "id": 310
+  },
+  "311": {
+    "class": "door",
+    "type": "brown",
+    "x": 14352,
+    "y": 6496,
+    "width": 16,
+    "height": 64,
+    "id": 311
+  },
+  "312": {
+    "class": "door",
+    "type": "blue",
+    "x": 15584,
+    "y": 6752,
+    "width": 16,
+    "height": 64,
+    "id": 312
+  },
+  "313": {
+    "class": "door",
+    "type": "blue",
+    "x": 15632,
+    "y": 6752,
+    "width": 16,
+    "height": 64,
+    "id": 313
+  },
+  "314": {
+    "class": "door",
+    "type": "blue",
+    "x": 15840,
+    "y": 7264,
+    "width": 16,
+    "height": 64,
+    "id": 314
+  },
+  "315": {
+    "class": "door",
+    "type": "brown",
+    "x": 15888,
+    "y": 7264,
+    "width": 16,
+    "height": 64,
+    "id": 315
+  },
+  "316": {
+    "class": "door",
+    "type": "brown",
+    "x": 16352,
+    "y": 7008,
+    "width": 16,
+    "height": 64,
+    "id": 316
+  },
+  "317": {
+    "class": "door",
+    "type": "eye",
+    "x": 16400,
+    "y": 7008,
+    "width": 16,
+    "height": 64,
+    "id": 317
+  },
+  "319": {
+    "class": "door",
+    "type": "blue",
+    "x": 16400,
+    "y": 6240,
+    "width": 16,
+    "height": 64,
+    "id": 319
+  },
+  "320": {
+    "class": "door",
+    "type": "blue",
+    "x": 16608,
+    "y": 6240,
+    "width": 16,
+    "height": 64,
+    "id": 320
+  },
+  "321": {
+    "class": "door",
+    "type": "blue",
+    "x": 16656,
+    "y": 6240,
+    "width": 16,
+    "height": 64,
+    "id": 321
+  },
+  "322": {
+    "class": "door",
+    "type": "blue",
+    "x": 16400,
+    "y": 6496,
+    "width": 16,
+    "height": 64,
+    "id": 322
+  },
+  "323": {
+    "class": "door",
+    "type": "green",
+    "x": 16352,
+    "y": 6496,
+    "width": 16,
+    "height": 64,
+    "id": 323
+  },
+  "324": {
+    "class": "door",
+    "type": "red",
+    "x": 16352,
+    "y": 6240,
+    "width": 16,
+    "height": 64,
+    "id": 324
+  },
+  "325": {
+    "class": "door",
+    "type": "blue",
+    "x": 12512,
+    "y": 7264,
+    "width": 16,
+    "height": 64,
+    "id": 325
+  },
+  "326": {
+    "class": "door",
+    "type": "blue",
+    "x": 12560,
+    "y": 7264,
+    "width": 16,
+    "height": 64,
+    "id": 326
+  },
+  "327": {
+    "class": "door",
+    "type": "blue",
+    "x": 14048,
+    "y": 8544,
+    "width": 16,
+    "height": 64,
+    "id": 327
+  },
+  "328": {
+    "class": "door",
+    "type": "blue",
+    "x": 14096,
+    "y": 8544,
+    "width": 16,
+    "height": 64,
+    "id": 328
+  },
+  "329": {
+    "class": "door",
+    "type": "blue",
+    "x": 12512,
+    "y": 8800,
+    "width": 16,
+    "height": 64,
+    "id": 329
+  },
+  "330": {
+    "class": "door",
+    "type": "blue",
+    "x": 12560,
+    "y": 8800,
+    "width": 16,
+    "height": 64,
+    "id": 330
+  },
+  "331": {
+    "class": "door",
+    "type": "blue",
+    "x": 12768,
+    "y": 8800,
+    "width": 16,
+    "height": 64,
+    "id": 331
+  },
+  "332": {
+    "class": "door",
+    "type": "blue",
+    "x": 12816,
+    "y": 8800,
+    "width": 16,
+    "height": 64,
+    "id": 332
+  },
+  "333": {
+    "class": "door",
+    "type": "blue",
+    "x": 13024,
+    "y": 8544,
+    "width": 16,
+    "height": 64,
+    "id": 333
+  },
+  "334": {
+    "class": "door",
+    "type": "blue",
+    "x": 13072,
+    "y": 8544,
+    "width": 16,
+    "height": 64,
+    "id": 334
+  },
+  "335": {
+    "class": "door",
+    "type": "blue",
+    "x": 11488,
+    "y": 8800,
+    "width": 16,
+    "height": 64,
+    "id": 335
+  },
+  "336": {
+    "class": "door",
+    "type": "blue",
+    "x": 11536,
+    "y": 8800,
+    "width": 16,
+    "height": 64,
+    "id": 336
+  },
+  "337": {
+    "class": "door",
+    "type": "blue",
+    "x": 11744,
+    "y": 8800,
+    "width": 16,
+    "height": 64,
+    "id": 337
+  },
+  "338": {
+    "class": "door",
+    "type": "blue",
+    "x": 11792,
+    "y": 8800,
+    "width": 16,
+    "height": 64,
+    "id": 338
+  },
+  "339": {
+    "class": "door",
+    "type": "blue",
+    "x": 12304,
+    "y": 9568,
+    "width": 16,
+    "height": 64,
+    "id": 339
+  },
+  "340": {
+    "class": "door",
+    "type": "blue",
+    "x": 12560,
+    "y": 9312,
+    "width": 16,
+    "height": 64,
+    "id": 340
+  },
+  "341": {
+    "class": "door",
+    "type": "brown",
+    "x": 12256,
+    "y": 9568,
+    "width": 16,
+    "height": 64,
+    "id": 341
+  },
+  "342": {
+    "class": "door",
+    "type": "green",
+    "x": 12512,
+    "y": 9312,
+    "width": 16,
+    "height": 64,
+    "id": 342
+  },
+  "343": {
+    "class": "door",
+    "type": "eye",
+    "x": 12768,
+    "y": 9568,
+    "width": 16,
+    "height": 64,
+    "id": 343
+  },
+  "344": {
+    "class": "door",
+    "type": "brown",
+    "x": 12816,
+    "y": 9568,
+    "width": 16,
+    "height": 64,
+    "id": 344
+  },
+  "346": {
+    "class": "door",
+    "type": "brown",
+    "x": 13280,
+    "y": 9568,
+    "width": 16,
+    "height": 64,
+    "id": 346
+  },
+  "347": {
+    "class": "door",
+    "type": "blue",
+    "x": 13328,
+    "y": 9568,
+    "width": 16,
+    "height": 64,
+    "id": 347
+  },
+  "348": {
+    "class": "door",
+    "type": "blue",
+    "x": 7136,
+    "y": 9312,
+    "width": 16,
+    "height": 64,
+    "id": 348
+  },
+  "349": {
+    "class": "door",
+    "type": "blue",
+    "x": 7392,
+    "y": 9312,
+    "width": 16,
+    "height": 64,
+    "id": 349
+  },
+  "350": {
+    "class": "door",
+    "type": "blue",
+    "x": 7440,
+    "y": 9312,
+    "width": 16,
+    "height": 64,
+    "id": 350
+  },
+  "351": {
+    "class": "door",
+    "type": "green",
+    "x": 7184,
+    "y": 9312,
+    "width": 16,
+    "height": 64,
+    "id": 351
+  },
+  "352": {
+    "class": "door",
+    "type": "blue",
+    "x": 7904,
+    "y": 9312,
+    "width": 16,
+    "height": 64,
+    "id": 352
+  },
+  "353": {
+    "class": "door",
+    "type": "blue",
+    "x": 7952,
+    "y": 9312,
+    "width": 16,
+    "height": 64,
+    "id": 353
+  },
+  "354": {
+    "class": "door",
+    "type": "blue",
+    "x": 8416,
+    "y": 9312,
+    "width": 16,
+    "height": 64,
+    "id": 354
+  },
+  "355": {
+    "class": "door",
+    "type": "blue",
+    "x": 8464,
+    "y": 9312,
+    "width": 16,
+    "height": 64,
+    "id": 355
+  },
+  "356": {
+    "class": "door",
+    "type": "blue",
+    "x": 8672,
+    "y": 9312,
+    "width": 16,
+    "height": 64,
+    "id": 356
+  },
+  "357": {
+    "class": "door",
+    "type": "blue",
+    "x": 8464,
+    "y": 9056,
+    "width": 16,
+    "height": 64,
+    "id": 357
+  },
+  "358": {
+    "class": "door",
+    "type": "green",
+    "x": 8416,
+    "y": 9056,
+    "width": 16,
+    "height": 64,
+    "id": 358
+  },
+  "359": {
+    "class": "door",
+    "type": "blue",
+    "x": 8976,
+    "y": 9568,
+    "width": 16,
+    "height": 64,
+    "id": 359
+  },
+  "360": {
+    "class": "door",
+    "type": "red",
+    "x": 8928,
+    "y": 9568,
+    "width": 16,
+    "height": 64,
+    "id": 360
+  },
+  "361": {
+    "class": "door",
+    "type": "blue",
+    "x": 8976,
+    "y": 9312,
+    "width": 16,
+    "height": 64,
+    "id": 361
+  },
+  "362": {
+    "class": "door",
+    "type": "blue",
+    "x": 9184,
+    "y": 9312,
+    "width": 16,
+    "height": 64,
+    "id": 362
+  },
+  "363": {
+    "class": "door",
+    "type": "blue",
+    "x": 9232,
+    "y": 9312,
+    "width": 16,
+    "height": 64,
+    "id": 363
+  },
+  "364": {
+    "class": "door",
+    "type": "blue",
+    "x": 9952,
+    "y": 9312,
+    "width": 16,
+    "height": 64,
+    "id": 364
+  },
+  "365": {
+    "class": "door",
+    "type": "blue",
+    "x": 10000,
+    "y": 9312,
+    "width": 16,
+    "height": 64,
+    "id": 365
+  },
+  "366": {
+    "class": "door",
+    "type": "blue",
+    "x": 9952,
+    "y": 9056,
+    "width": 16,
+    "height": 64,
+    "id": 366
+  },
+  "367": {
+    "class": "door",
+    "type": "blue",
+    "x": 10000,
+    "y": 9056,
+    "width": 16,
+    "height": 64,
+    "id": 367
+  },
+  "368": {
+    "class": "door",
+    "type": "blue",
+    "x": 9952,
+    "y": 8800,
+    "width": 16,
+    "height": 64,
+    "id": 368
+  },
+  "369": {
+    "class": "door",
+    "type": "blue",
+    "x": 10256,
+    "y": 8800,
+    "width": 16,
+    "height": 64,
+    "id": 369
+  },
+  "370": {
+    "class": "door",
+    "type": "blue",
+    "x": 10256,
+    "y": 9056,
+    "width": 16,
+    "height": 64,
+    "id": 370
+  },
+  "371": {
+    "class": "door",
+    "type": "blue",
+    "x": 10464,
+    "y": 8800,
+    "width": 16,
+    "height": 64,
+    "id": 371
+  },
+  "372": {
+    "class": "door",
+    "type": "blue",
+    "x": 10512,
+    "y": 8800,
+    "width": 16,
+    "height": 64,
+    "id": 372
+  },
+  "373": {
+    "class": "door",
+    "type": "blue",
+    "x": 10256,
+    "y": 8544,
+    "width": 16,
+    "height": 64,
+    "id": 373
+  },
+  "374": {
+    "class": "door",
+    "type": "red",
+    "x": 10208,
+    "y": 8544,
+    "width": 16,
+    "height": 64,
+    "id": 374
+  },
+  "375": {
+    "class": "door",
+    "type": "red",
+    "x": 10208,
+    "y": 9056,
+    "width": 16,
+    "height": 64,
+    "id": 375
+  },
+  "376": {
+    "class": "door",
+    "type": "brown",
+    "x": 10000,
+    "y": 9568,
+    "width": 16,
+    "height": 64,
+    "id": 376
+  },
+  "377": {
+    "class": "door",
+    "type": "brown",
+    "x": 9920,
+    "y": 9824,
+    "width": 16,
+    "height": 64,
+    "id": 377
+  },
+  "378": {
+    "class": "door",
+    "type": "blue",
+    "x": 10336,
+    "y": 9408,
+    "width": 64,
+    "height": 16,
+    "id": 378
+  },
+  "379": {
+    "class": "door",
+    "type": "blue",
+    "x": 10336,
+    "y": 9520,
+    "width": 64,
+    "height": 16,
+    "id": 379
+  },
+  "380": {
+    "class": "door",
+    "type": "blue",
+    "x": 10720,
+    "y": 9568,
+    "width": 16,
+    "height": 64,
+    "id": 380
+  },
+  "381": {
+    "class": "door",
+    "type": "blue",
+    "x": 11232,
+    "y": 9312,
+    "width": 16,
+    "height": 64,
+    "id": 381
+  },
+  "382": {
+    "class": "door",
+    "type": "blue",
+    "x": 11280,
+    "y": 9312,
+    "width": 16,
+    "height": 64,
+    "id": 382
+  },
+  "383": {
+    "class": "door",
+    "type": "green",
+    "x": 11616,
+    "y": 5840,
+    "width": 64,
+    "height": 16,
+    "id": 383
+  },
+  "384": {
+    "class": "door",
+    "type": "green",
+    "x": 11616,
+    "y": 8480,
+    "width": 64,
+    "height": 16,
+    "id": 384
+  },
+  "385": {
+    "class": "door",
+    "type": "blue",
+    "x": 14688,
+    "y": 2592,
+    "width": 64,
+    "height": 16,
+    "id": 385
+  },
+  "386": {
+    "class": "door",
+    "type": "blue",
+    "x": 14816,
+    "y": 2400,
+    "width": 16,
+    "height": 64,
+    "id": 386
+  },
+  "387": {
+    "class": "door",
+    "type": "blue",
+    "x": 14864,
+    "y": 2400,
+    "width": 16,
+    "height": 64,
+    "id": 387
+  },
+  "388": {
+    "class": "door",
+    "type": "orange",
+    "x": 14688,
+    "y": 2512,
+    "width": 64,
+    "height": 16,
+    "id": 388
+  },
+  "389": {
+    "class": "door",
+    "type": "blue",
+    "x": 15712,
+    "y": 2000,
+    "width": 64,
+    "height": 16,
+    "id": 389
+  },
+  "390": {
+    "class": "door",
+    "type": "blue",
+    "x": 15712,
+    "y": 2080,
+    "width": 64,
+    "height": 16,
+    "id": 390
+  },
+  "391": {
+    "class": "door",
+    "type": "blue",
+    "x": 15584,
+    "y": 1120,
+    "width": 16,
+    "height": 64,
+    "id": 391
+  },
+  "392": {
+    "class": "door",
+    "type": "blue",
+    "x": 15632,
+    "y": 1120,
+    "width": 16,
+    "height": 64,
+    "id": 392
+  },
+  "393": {
+    "class": "door",
+    "type": "blue",
+    "x": 13024,
+    "y": 1376,
+    "width": 16,
+    "height": 64,
+    "id": 393
+  },
+  "394": {
+    "class": "door",
+    "type": "blue",
+    "x": 13072,
+    "y": 1376,
+    "width": 16,
+    "height": 64,
+    "id": 394
+  },
+  "395": {
+    "class": "door",
+    "type": "blue",
+    "x": 13536,
+    "y": 1376,
+    "width": 16,
+    "height": 64,
+    "id": 395
+  },
+  "396": {
+    "class": "door",
+    "type": "blue",
+    "x": 13584,
+    "y": 1376,
+    "width": 16,
+    "height": 64,
+    "id": 396
+  },
+  "397": {
+    "class": "door",
+    "type": "blue",
+    "x": 13792,
+    "y": 1120,
+    "width": 16,
+    "height": 64,
+    "id": 397
+  },
+  "398": {
+    "class": "door",
+    "type": "blue",
+    "x": 13840,
+    "y": 1120,
+    "width": 16,
+    "height": 64,
+    "id": 398
+  },
+  "399": {
+    "class": "door",
+    "type": "blue",
+    "x": 13536,
+    "y": 864,
+    "width": 16,
+    "height": 64,
+    "id": 399
+  },
+  "400": {
+    "class": "door",
+    "type": "red",
+    "x": 13584,
+    "y": 864,
+    "width": 16,
+    "height": 64,
+    "id": 400
+  },
+  "401": {
+    "class": "door",
+    "type": "eye",
+    "x": 13024,
+    "y": 2400,
+    "width": 16,
+    "height": 64,
+    "id": 401
+  },
+  "402": {
+    "class": "door",
+    "type": "blue",
+    "x": 13072,
+    "y": 2400,
+    "width": 16,
+    "height": 64,
+    "id": 402
+  },
+  "403": {
+    "class": "door",
+    "type": "blue",
+    "x": 12384,
+    "y": 2336,
+    "width": 64,
+    "height": 16,
+    "id": 403
+  },
+  "404": {
+    "class": "door",
+    "type": "green",
+    "x": 12384,
+    "y": 2256,
+    "width": 64,
+    "height": 16,
+    "id": 404
+  },
+  "405": {
+    "class": "door",
+    "type": "blue",
+    "x": 11744,
+    "y": 2400,
+    "width": 16,
+    "height": 64,
+    "id": 405
+  },
+  "406": {
+    "class": "door",
+    "type": "blue",
+    "x": 11792,
+    "y": 2400,
+    "width": 16,
+    "height": 64,
+    "id": 406
+  },
+  "408": {
+    "class": "door",
+    "type": "blue",
+    "x": 12256,
+    "y": 1888,
+    "width": 16,
+    "height": 64,
+    "id": 408
+  },
+  "409": {
+    "class": "door",
+    "type": "blue",
+    "x": 12768,
+    "y": 1888,
+    "width": 16,
+    "height": 64,
+    "id": 409
+  },
+  "410": {
+    "class": "door",
+    "type": "blue",
+    "x": 12816,
+    "y": 1888,
+    "width": 16,
+    "height": 64,
+    "id": 410
+  },
+  "411": {
+    "class": "door",
+    "type": "brown",
+    "x": 12304,
+    "y": 1888,
+    "width": 16,
+    "height": 64,
+    "id": 411
+  },
+  "412": {
+    "class": "door",
+    "type": "blue",
+    "x": 12256,
+    "y": 1120,
+    "width": 16,
+    "height": 64,
+    "id": 412
+  },
+  "413": {
+    "class": "door",
+    "type": "blue",
+    "x": 12304,
+    "y": 1120,
+    "width": 16,
+    "height": 64,
+    "id": 413
+  },
+  "414": {
+    "class": "door",
+    "type": "blue",
+    "x": 12512,
+    "y": 1120,
+    "width": 16,
+    "height": 64,
+    "id": 414
+  },
+  "415": {
+    "class": "door",
+    "type": "blue",
+    "x": 12560,
+    "y": 1120,
+    "width": 16,
+    "height": 64,
+    "id": 415
+  },
+  "416": {
+    "class": "door",
+    "type": "blue",
+    "x": 12560,
+    "y": 1376,
+    "width": 16,
+    "height": 64,
+    "id": 416
+  },
+  "417": {
+    "class": "door",
+    "type": "brown",
+    "x": 12512,
+    "y": 1376,
+    "width": 16,
+    "height": 64,
+    "id": 417
+  },
+  "418": {
+    "class": "door",
+    "type": "blue",
+    "x": 12384,
+    "y": 288,
+    "width": 64,
+    "height": 16,
+    "id": 418
+  },
+  "419": {
+    "class": "door",
+    "type": "blue",
+    "x": 12384,
+    "y": 224,
+    "width": 64,
+    "height": 16,
+    "id": 419
+  },
+  "420": {
+    "class": "door",
+    "type": "blue",
+    "x": 13072,
+    "y": 96,
+    "width": 16,
+    "height": 64,
+    "id": 420
+  },
+  "421": {
+    "class": "door",
+    "type": "brown",
+    "x": 13024,
+    "y": 96,
+    "width": 16,
+    "height": 64,
+    "id": 421
+  },
+  "422": {
+    "class": "door",
+    "type": "blue",
+    "x": 11232,
+    "y": 96,
+    "width": 16,
+    "height": 64,
+    "id": 422
+  },
+  "423": {
+    "class": "door",
+    "type": "blue",
+    "x": 11232,
+    "y": 352,
+    "width": 16,
+    "height": 64,
+    "id": 423
+  },
+  "424": {
+    "class": "door",
+    "type": "blue",
+    "x": 11280,
+    "y": 352,
+    "width": 16,
+    "height": 64,
+    "id": 424
+  },
+  "425": {
+    "class": "door",
+    "type": "brown",
+    "x": 11280,
+    "y": 96,
+    "width": 16,
+    "height": 64,
+    "id": 425
+  },
+  "426": {
+    "class": "door",
+    "type": "blue",
+    "x": 9952,
+    "y": 608,
+    "width": 16,
+    "height": 64,
+    "id": 426
+  },
+  "427": {
+    "class": "door",
+    "type": "blue",
+    "x": 10000,
+    "y": 608,
+    "width": 16,
+    "height": 64,
+    "id": 427
+  },
+  "428": {
+    "class": "door",
+    "type": "blue",
+    "x": 10464,
+    "y": 608,
+    "width": 16,
+    "height": 64,
+    "id": 428
+  },
+  "429": {
+    "class": "door",
+    "type": "blue",
+    "x": 10512,
+    "y": 608,
+    "width": 16,
+    "height": 64,
+    "id": 429
+  },
+  "430": {
+    "class": "door",
+    "type": "blue",
+    "x": 10720,
+    "y": 608,
+    "width": 16,
+    "height": 64,
+    "id": 430
+  },
+  "431": {
+    "class": "door",
+    "type": "blue",
+    "x": 10768,
+    "y": 864,
+    "width": 16,
+    "height": 64,
+    "id": 431
+  },
+  "432": {
+    "class": "door",
+    "type": "blue",
+    "x": 10976,
+    "y": 864,
+    "width": 16,
+    "height": 64,
+    "id": 432
+  },
+  "433": {
+    "class": "door",
+    "type": "blue",
+    "x": 11024,
+    "y": 864,
+    "width": 16,
+    "height": 64,
+    "id": 433
+  },
+  "434": {
+    "class": "door",
+    "type": "brown",
+    "x": 10768,
+    "y": 608,
+    "width": 16,
+    "height": 64,
+    "id": 434
+  },
+  "435": {
+    "class": "door",
+    "type": "brown",
+    "x": 10720,
+    "y": 864,
+    "width": 16,
+    "height": 64,
+    "id": 435
+  },
+  "436": {
+    "class": "door",
+    "type": "green",
+    "x": 11232,
+    "y": 1120,
+    "width": 16,
+    "height": 64,
+    "id": 436
+  },
+  "437": {
+    "class": "door",
+    "type": "blue",
+    "x": 11280,
+    "y": 1120,
+    "width": 16,
+    "height": 64,
+    "id": 437
+  },
+  "438": {
+    "class": "door",
+    "type": "orange",
+    "x": 8672,
+    "y": 1120,
+    "width": 16,
+    "height": 64,
+    "id": 438
+  },
+  "439": {
+    "class": "door",
+    "type": "blue",
+    "x": 8720,
+    "y": 1120,
+    "width": 16,
+    "height": 64,
+    "id": 439
+  },
+  "440": {
+    "class": "door",
+    "type": "blue",
+    "x": 9184,
+    "y": 1120,
+    "width": 16,
+    "height": 64,
+    "id": 440
+  },
+  "441": {
+    "class": "door",
+    "type": "blue",
+    "x": 9232,
+    "y": 1120,
+    "width": 16,
+    "height": 64,
+    "id": 441
+  },
+  "442": {
+    "class": "door",
+    "type": "orange",
+    "x": 8288,
+    "y": 1744,
+    "width": 64,
+    "height": 16,
+    "id": 442
+  },
+  "443": {
+    "class": "door",
+    "type": "blue",
+    "x": 8288,
+    "y": 1824,
+    "width": 64,
+    "height": 16,
+    "id": 443
+  },
+  "444": {
+    "class": "door",
+    "type": "green",
+    "x": 7648,
+    "y": 1120,
+    "width": 16,
+    "height": 64,
+    "id": 444
+  },
+  "445": {
+    "class": "door",
+    "type": "blue",
+    "x": 7952,
+    "y": 1120,
+    "width": 16,
+    "height": 64,
+    "id": 445
+  },
+  "446": {
+    "class": "door",
+    "type": "blue",
+    "x": 7696,
+    "y": 352,
+    "width": 16,
+    "height": 64,
+    "id": 446
+  },
+  "447": {
+    "class": "door",
+    "type": "orange",
+    "x": 7648,
+    "y": 352,
+    "width": 16,
+    "height": 64,
+    "id": 447
+  },
+  "448": {
+    "class": "door",
+    "type": "blue",
+    "x": 5344,
+    "y": 608,
+    "width": 16,
+    "height": 64,
+    "id": 448
+  },
+  "449": {
+    "class": "door",
+    "type": "blue",
+    "x": 5392,
+    "y": 608,
+    "width": 16,
+    "height": 64,
+    "id": 449
+  },
+  "450": {
+    "class": "door",
+    "type": "blue",
+    "x": 5344,
+    "y": 1120,
+    "width": 16,
+    "height": 64,
+    "id": 450
+  },
+  "451": {
+    "class": "door",
+    "type": "blue",
+    "x": 5392,
+    "y": 1120,
+    "width": 16,
+    "height": 64,
+    "id": 451
+  },
+  "452": {
+    "class": "door",
+    "type": "blue",
+    "x": 5088,
+    "y": 1632,
+    "width": 16,
+    "height": 64,
+    "id": 452
+  },
+  "453": {
+    "class": "door",
+    "type": "blue",
+    "x": 5136,
+    "y": 1632,
+    "width": 16,
+    "height": 64,
+    "id": 453
+  },
+  "454": {
+    "class": "door",
+    "type": "blue",
+    "x": 5344,
+    "y": 1888,
+    "width": 16,
+    "height": 64,
+    "id": 454
+  },
+  "455": {
+    "class": "door",
+    "type": "blue",
+    "x": 5392,
+    "y": 1888,
+    "width": 16,
+    "height": 64,
+    "id": 455
+  },
+  "456": {
+    "class": "door",
+    "type": "red",
+    "x": 5856,
+    "y": 1632,
+    "width": 16,
+    "height": 64,
+    "id": 456
+  },
+  "457": {
+    "class": "door",
+    "type": "brown",
+    "x": 5904,
+    "y": 1632,
+    "width": 16,
+    "height": 64,
+    "id": 457
+  },
+  "459": {
+    "class": "door",
+    "type": "blue",
+    "x": 4320,
+    "y": 1632,
+    "width": 16,
+    "height": 64,
+    "id": 459
+  },
+  "460": {
+    "class": "door",
+    "type": "blue",
+    "x": 4368,
+    "y": 1632,
+    "width": 16,
+    "height": 64,
+    "id": 460
+  },
+  "461": {
+    "class": "door",
+    "type": "blue",
+    "x": 4320,
+    "y": 1888,
+    "width": 16,
+    "height": 64,
+    "id": 461
+  },
+  "462": {
+    "class": "door",
+    "type": "blue",
+    "x": 4368,
+    "y": 1888,
+    "width": 16,
+    "height": 64,
+    "id": 462
+  },
+  "463": {
+    "class": "door",
+    "type": "blue",
+    "x": 4624,
+    "y": 1888,
+    "width": 16,
+    "height": 64,
+    "id": 463
+  },
+  "464": {
+    "class": "door",
+    "type": "red",
+    "x": 4576,
+    "y": 1888,
+    "width": 16,
+    "height": 64,
+    "id": 464
+  },
+  "465": {
+    "class": "door",
+    "type": "blue",
+    "x": 3808,
+    "y": 1888,
+    "width": 16,
+    "height": 64,
+    "id": 465
+  },
+  "466": {
+    "class": "door",
+    "type": "blue",
+    "x": 3856,
+    "y": 1888,
+    "width": 16,
+    "height": 64,
+    "id": 466
+  },
+  "467": {
+    "class": "door",
+    "type": "blue",
+    "x": 3808,
+    "y": 2144,
+    "width": 16,
+    "height": 64,
+    "id": 467
+  },
+  "468": {
+    "class": "door",
+    "type": "blue",
+    "x": 3856,
+    "y": 2144,
+    "width": 16,
+    "height": 64,
+    "id": 468
+  },
+  "469": {
+    "class": "door",
+    "type": "blue",
+    "x": 4064,
+    "y": 1120,
+    "width": 16,
+    "height": 64,
+    "id": 469
+  },
+  "470": {
+    "class": "door",
+    "type": "blue",
+    "x": 4112,
+    "y": 1120,
+    "width": 16,
+    "height": 64,
+    "id": 470
+  },
+  "471": {
+    "class": "door",
+    "type": "blue",
+    "x": 4064,
+    "y": 608,
+    "width": 16,
+    "height": 64,
+    "id": 471
+  },
+  "472": {
+    "class": "door",
+    "type": "blue",
+    "x": 4112,
+    "y": 608,
+    "width": 16,
+    "height": 64,
+    "id": 472
+  },
+  "473": {
+    "class": "door",
+    "type": "blue",
+    "x": 2528,
+    "y": 608,
+    "width": 16,
+    "height": 64,
+    "id": 473
+  },
+  "474": {
+    "class": "door",
+    "type": "blue",
+    "x": 2576,
+    "y": 608,
+    "width": 16,
+    "height": 64,
+    "id": 474
+  },
+  "475": {
+    "class": "door",
+    "type": "blue",
+    "x": 2528,
+    "y": 1632,
+    "width": 16,
+    "height": 64,
+    "id": 475
+  },
+  "476": {
+    "class": "door",
+    "type": "blue",
+    "x": 2576,
+    "y": 1632,
+    "width": 16,
+    "height": 64,
+    "id": 476
+  },
+  "477": {
+    "class": "door",
+    "type": "blue",
+    "x": 2272,
+    "y": 2144,
+    "width": 16,
+    "height": 64,
+    "id": 477
+  },
+  "478": {
+    "class": "door",
+    "type": "blue",
+    "x": 2320,
+    "y": 2144,
+    "width": 16,
+    "height": 64,
+    "id": 478
+  },
+  "479": {
+    "class": "door",
+    "type": "blue",
+    "x": 2576,
+    "y": 2144,
+    "width": 16,
+    "height": 64,
+    "id": 479
+  },
+  "480": {
+    "class": "door",
+    "type": "red",
+    "x": 2528,
+    "y": 2144,
+    "width": 16,
+    "height": 64,
+    "id": 480
+  },
+  "481": {
+    "class": "door",
+    "type": "blue",
+    "x": 1248,
+    "y": 2144,
+    "width": 16,
+    "height": 64,
+    "id": 481
+  },
+  "482": {
+    "class": "door",
+    "type": "blue",
+    "x": 1296,
+    "y": 2144,
+    "width": 16,
+    "height": 64,
+    "id": 482
+  },
+  "483": {
+    "class": "door",
+    "type": "blue",
+    "x": 3808,
+    "y": 3168,
+    "width": 16,
+    "height": 64,
+    "id": 483
+  },
+  "484": {
+    "class": "door",
+    "type": "blue",
+    "x": 3856,
+    "y": 3168,
+    "width": 16,
+    "height": 64,
+    "id": 484
+  },
+  "485": {
+    "class": "door",
+    "type": "blue",
+    "x": 4064,
+    "y": 3168,
+    "width": 16,
+    "height": 64,
+    "id": 485
+  },
+  "486": {
+    "class": "door",
+    "type": "blue",
+    "x": 4112,
+    "y": 3168,
+    "width": 16,
+    "height": 64,
+    "id": 486
+  },
+  "487": {
+    "class": "door",
+    "type": "blue",
+    "x": 3856,
+    "y": 3424,
+    "width": 16,
+    "height": 64,
+    "id": 487
+  },
+  "488": {
+    "class": "door",
+    "type": "brown",
+    "x": 3808,
+    "y": 3424,
+    "width": 16,
+    "height": 64,
+    "id": 488
+  },
+  "489": {
+    "class": "door",
+    "type": "brown",
+    "x": 2320,
+    "y": 3168,
+    "width": 16,
+    "height": 64,
+    "id": 489
+  },
+  "490": {
+    "class": "door",
+    "type": "brown",
+    "x": 2272,
+    "y": 3424,
+    "width": 16,
+    "height": 64,
+    "id": 490
+  },
+  "491": {
+    "class": "door",
+    "type": "blue",
+    "x": 2272,
+    "y": 3168,
+    "width": 16,
+    "height": 64,
+    "id": 491
+  },
+  "492": {
+    "class": "door",
+    "type": "blue",
+    "x": 2320,
+    "y": 3424,
+    "width": 16,
+    "height": 64,
+    "id": 492
+  },
+  "493": {
+    "class": "door",
+    "type": "blue",
+    "x": 3936,
+    "y": 3888,
+    "width": 64,
+    "height": 16,
+    "id": 493
+  },
+  "494": {
+    "class": "door",
+    "type": "blue",
+    "x": 3600,
+    "y": 3936,
+    "width": 16,
+    "height": 64,
+    "id": 494
+  },
+  "495": {
+    "class": "door",
+    "type": "brown",
+    "x": 3552,
+    "y": 3936,
+    "width": 16,
+    "height": 64,
+    "id": 495
+  },
+  "496": {
+    "class": "door",
+    "type": "brown",
+    "x": 3936,
+    "y": 3808,
+    "width": 64,
+    "height": 16,
+    "id": 496
+  },
+  "497": {
+    "class": "door",
+    "type": "brown",
+    "x": 3040,
+    "y": 3936,
+    "width": 16,
+    "height": 64,
+    "id": 497
+  },
+  "498": {
+    "class": "door",
+    "type": "brown",
+    "x": 3088,
+    "y": 3936,
+    "width": 16,
+    "height": 64,
+    "id": 498
+  },
+  "499": {
+    "class": "door",
+    "type": "blue",
+    "x": 1760,
+    "y": 4192,
+    "width": 16,
+    "height": 64,
+    "id": 499
+  },
+  "500": {
+    "class": "door",
+    "type": "blue",
+    "x": 1808,
+    "y": 4192,
+    "width": 16,
+    "height": 64,
+    "id": 500
+  },
+  "501": {
+    "class": "door",
+    "type": "blue",
+    "x": 2064,
+    "y": 4192,
+    "width": 16,
+    "height": 64,
+    "id": 501
+  },
+  "502": {
+    "class": "door",
+    "type": "red",
+    "x": 2016,
+    "y": 4192,
+    "width": 16,
+    "height": 64,
+    "id": 502
+  },
+  "503": {
+    "class": "door",
+    "type": "eye",
+    "x": 3040,
+    "y": 4192,
+    "width": 16,
+    "height": 64,
+    "id": 503
+  },
+  "504": {
+    "class": "door",
+    "type": "blue",
+    "x": 3040,
+    "y": 4448,
+    "width": 16,
+    "height": 64,
+    "id": 504
+  },
+  "505": {
+    "class": "door",
+    "type": "blue",
+    "x": 3088,
+    "y": 4448,
+    "width": 16,
+    "height": 64,
+    "id": 505
+  },
+  "506": {
+    "class": "door",
+    "type": "blue",
+    "x": 3088,
+    "y": 4192,
+    "width": 16,
+    "height": 64,
+    "id": 506
+  },
+  "507": {
+    "class": "door",
+    "type": "blue",
+    "x": 3040,
+    "y": 4704,
+    "width": 16,
+    "height": 64,
+    "id": 507
+  },
+  "508": {
+    "class": "door",
+    "type": "red",
+    "x": 3088,
+    "y": 4704,
+    "width": 16,
+    "height": 64,
+    "id": 508
+  },
+  "509": {
+    "class": "door",
+    "type": "blue",
+    "x": 1632,
+    "y": 4800,
+    "width": 64,
+    "height": 16,
+    "id": 509
+  },
+  "510": {
+    "class": "door",
+    "type": "blue",
+    "x": 1760,
+    "y": 5216,
+    "width": 16,
+    "height": 64,
+    "id": 510
+  },
+  "511": {
+    "class": "door",
+    "type": "brown",
+    "x": 1632,
+    "y": 4912,
+    "width": 64,
+    "height": 16,
+    "id": 511
+  },
+  "512": {
+    "class": "door",
+    "type": "brown",
+    "x": 1808,
+    "y": 5216,
+    "width": 16,
+    "height": 64,
+    "id": 512
+  },
+  "513": {
+    "class": "door",
+    "type": "brown",
+    "x": 3344,
+    "y": 4960,
+    "width": 16,
+    "height": 64,
+    "id": 513
+  },
+  "514": {
+    "class": "door",
+    "type": "blue",
+    "x": 3296,
+    "y": 4960,
+    "width": 16,
+    "height": 64,
+    "id": 514
+  },
+  "515": {
+    "class": "door",
+    "type": "blue",
+    "x": 9312,
+    "y": 7888,
+    "width": 64,
+    "height": 16,
+    "id": 515
+  },
+  "516": {
+    "class": "door",
+    "type": "blue",
+    "x": 9312,
+    "y": 7968,
+    "width": 64,
+    "height": 16,
+    "id": 516
+  },
+  "517": {
+    "class": "door",
+    "type": "blue",
+    "x": 10080,
+    "y": 7888,
+    "width": 64,
+    "height": 16,
+    "id": 517
+  },
+  "518": {
+    "class": "door",
+    "type": "blue",
+    "x": 10080,
+    "y": 7968,
+    "width": 64,
+    "height": 16,
+    "id": 518
+  },
+  "519": {
+    "class": "door",
+    "type": "blue",
+    "x": 9184,
+    "y": 8544,
+    "width": 16,
+    "height": 64,
+    "id": 519
+  },
+  "520": {
+    "class": "door",
+    "type": "blue",
+    "x": 9232,
+    "y": 8544,
+    "width": 16,
+    "height": 64,
+    "id": 520
+  },
+  "522": {
+    "class": "door",
+    "type": "blue",
+    "x": 8976,
+    "y": 8800,
+    "width": 16,
+    "height": 64,
+    "id": 522
+  },
+  "523": {
+    "class": "door",
+    "type": "blue",
+    "x": 8800,
+    "y": 8912,
+    "width": 64,
+    "height": 16,
+    "id": 523
+  },
+  "524": {
+    "class": "door",
+    "type": "blue",
+    "x": 8800,
+    "y": 8992,
+    "width": 64,
+    "height": 16,
+    "id": 524
+  },
+  "525": {
+    "class": "door",
+    "type": "red",
+    "x": 8928,
+    "y": 8800,
+    "width": 16,
+    "height": 64,
+    "id": 525
+  },
+  "526": {
+    "class": "door",
+    "type": "blue",
+    "x": 7392,
+    "y": 10848,
+    "width": 16,
+    "height": 64,
+    "id": 526
+  },
+  "527": {
+    "class": "door",
+    "type": "blue",
+    "x": 7440,
+    "y": 10848,
+    "width": 16,
+    "height": 64,
+    "id": 527
+  },
+  "528": {
+    "class": "door",
+    "type": "blue",
+    "x": 8160,
+    "y": 10080,
+    "width": 16,
+    "height": 64,
+    "id": 528
+  },
+  "529": {
+    "class": "door",
+    "type": "blue",
+    "x": 8208,
+    "y": 10080,
+    "width": 16,
+    "height": 64,
+    "id": 529
+  },
+  "530": {
+    "class": "door",
+    "type": "blue",
+    "x": 8208,
+    "y": 10592,
+    "width": 16,
+    "height": 64,
+    "id": 530
+  },
+  "531": {
+    "class": "door",
+    "type": "blue",
+    "x": 8160,
+    "y": 10592,
+    "width": 16,
+    "height": 64,
+    "id": 531
+  },
+  "532": {
+    "class": "door",
+    "type": "blue",
+    "x": 7696,
+    "y": 10592,
+    "width": 16,
+    "height": 64,
+    "id": 532
+  },
+  "533": {
+    "class": "door",
+    "type": "blue",
+    "x": 7648,
+    "y": 10592,
+    "width": 16,
+    "height": 64,
+    "id": 533
+  },
+  "534": {
+    "class": "door",
+    "type": "blue",
+    "x": 7648,
+    "y": 10080,
+    "width": 16,
+    "height": 64,
+    "id": 534
+  },
+  "535": {
+    "class": "door",
+    "type": "blue",
+    "x": 7696,
+    "y": 10080,
+    "width": 16,
+    "height": 64,
+    "id": 535
+  },
+  "536": {
+    "class": "door",
+    "type": "blue",
+    "x": 7904,
+    "y": 10336,
+    "width": 16,
+    "height": 64,
+    "id": 536
+  },
+  "537": {
+    "class": "door",
+    "type": "blue",
+    "x": 7952,
+    "y": 10336,
+    "width": 16,
+    "height": 64,
+    "id": 537
+  },
+  "538": {
+    "class": "door",
+    "type": "blue",
+    "x": 9184,
+    "y": 10592,
+    "width": 16,
+    "height": 64,
+    "id": 538
+  },
+  "539": {
+    "class": "door",
+    "type": "blue",
+    "x": 9184,
+    "y": 10848,
+    "width": 16,
+    "height": 64,
+    "id": 539
+  },
+  "540": {
+    "class": "door",
+    "type": "blue",
+    "x": 9440,
+    "y": 10592,
+    "width": 16,
+    "height": 64,
+    "id": 540
+  },
+  "541": {
+    "class": "door",
+    "type": "blue",
+    "x": 9488,
+    "y": 10592,
+    "width": 16,
+    "height": 64,
+    "id": 541
+  },
+  "542": {
+    "class": "door",
+    "type": "blue",
+    "x": 9440,
+    "y": 11104,
+    "width": 16,
+    "height": 64,
+    "id": 542
+  },
+  "543": {
+    "class": "door",
+    "type": "blue",
+    "x": 9488,
+    "y": 11104,
+    "width": 16,
+    "height": 64,
+    "id": 543
+  },
+  "544": {
+    "class": "door",
+    "type": "blue",
+    "x": 9696,
+    "y": 11104,
+    "width": 16,
+    "height": 64,
+    "id": 544
+  },
+  "545": {
+    "class": "door",
+    "type": "blue",
+    "x": 9744,
+    "y": 11104,
+    "width": 16,
+    "height": 64,
+    "id": 545
+  },
+  "546": {
+    "class": "door",
+    "type": "blue",
+    "x": 9440,
+    "y": 11360,
+    "width": 16,
+    "height": 64,
+    "id": 546
+  },
+  "547": {
+    "class": "door",
+    "type": "blue",
+    "x": 9488,
+    "y": 11360,
+    "width": 16,
+    "height": 64,
+    "id": 547
+  },
+  "548": {
+    "class": "door",
+    "type": "blue",
+    "x": 8672,
+    "y": 11360,
+    "width": 16,
+    "height": 64,
+    "id": 548
+  },
+  "549": {
+    "class": "door",
+    "type": "blue",
+    "x": 8720,
+    "y": 11360,
+    "width": 16,
+    "height": 64,
+    "id": 549
+  },
+  "550": {
+    "class": "door",
+    "type": "red",
+    "x": 9232,
+    "y": 11104,
+    "width": 16,
+    "height": 64,
+    "id": 550
+  },
+  "551": {
+    "class": "door",
+    "type": "brown",
+    "x": 9184,
+    "y": 11104,
+    "width": 16,
+    "height": 64,
+    "id": 551
+  },
+  "552": {
+    "class": "door",
+    "type": "green",
+    "x": 9232,
+    "y": 10592,
+    "width": 16,
+    "height": 64,
+    "id": 552
+  },
+  "553": {
+    "class": "door",
+    "type": "orange",
+    "x": 9232,
+    "y": 10848,
+    "width": 16,
+    "height": 64,
+    "id": 553
+  },
+  "554": {
+    "class": "door",
+    "type": "blue",
+    "x": 11744,
+    "y": 10336,
+    "width": 16,
+    "height": 64,
+    "id": 554
+  },
+  "555": {
+    "class": "door",
+    "type": "blue",
+    "x": 11792,
+    "y": 10336,
+    "width": 16,
+    "height": 64,
+    "id": 555
+  },
+  "556": {
+    "class": "door",
+    "type": "blue",
+    "x": 12256,
+    "y": 10336,
+    "width": 16,
+    "height": 64,
+    "id": 556
+  },
+  "557": {
+    "class": "door",
+    "type": "blue",
+    "x": 11024,
+    "y": 10848,
+    "width": 16,
+    "height": 64,
+    "id": 557
+  },
+  "558": {
+    "class": "door",
+    "type": "blue",
+    "x": 12256,
+    "y": 10592,
+    "width": 16,
+    "height": 64,
+    "id": 558
+  },
+  "559": {
+    "class": "door",
+    "type": "blue",
+    "x": 12304,
+    "y": 10592,
+    "width": 16,
+    "height": 64,
+    "id": 559
+  },
+  "560": {
+    "class": "door",
+    "type": "blue",
+    "x": 12816,
+    "y": 10336,
+    "width": 16,
+    "height": 64,
+    "id": 560
+  },
+  "561": {
+    "class": "door",
+    "type": "blue",
+    "x": 13024,
+    "y": 10080,
+    "width": 16,
+    "height": 64,
+    "id": 561
+  },
+  "562": {
+    "class": "door",
+    "type": "blue",
+    "x": 13072,
+    "y": 10080,
+    "width": 16,
+    "height": 64,
+    "id": 562
+  },
+  "563": {
+    "class": "door",
+    "type": "blue",
+    "x": 13072,
+    "y": 10848,
+    "width": 16,
+    "height": 64,
+    "id": 563
+  },
+  "564": {
+    "class": "door",
+    "type": "blue",
+    "x": 12816,
+    "y": 10592,
+    "width": 16,
+    "height": 64,
+    "id": 564
+  },
+  "565": {
+    "class": "door",
+    "type": "blue",
+    "x": 12768,
+    "y": 10592,
+    "width": 16,
+    "height": 64,
+    "id": 565
+  },
+  "566": {
+    "class": "door",
+    "type": "blue",
+    "x": 12256,
+    "y": 10848,
+    "width": 16,
+    "height": 64,
+    "id": 566
+  },
+  "567": {
+    "class": "door",
+    "type": "blue",
+    "x": 12304,
+    "y": 10848,
+    "width": 16,
+    "height": 64,
+    "id": 567
+  },
+  "568": {
+    "class": "door",
+    "type": "blue",
+    "x": 12256,
+    "y": 11104,
+    "width": 16,
+    "height": 64,
+    "id": 568
+  },
+  "569": {
+    "class": "door",
+    "type": "blue",
+    "x": 12304,
+    "y": 11104,
+    "width": 16,
+    "height": 64,
+    "id": 569
+  },
+  "570": {
+    "class": "door",
+    "type": "blue",
+    "x": 12384,
+    "y": 11216,
+    "width": 64,
+    "height": 16,
+    "id": 570
+  },
+  "571": {
+    "class": "door",
+    "type": "blue",
+    "x": 12384,
+    "y": 11296,
+    "width": 64,
+    "height": 16,
+    "id": 571
+  },
+  "572": {
+    "class": "door",
+    "type": "blue",
+    "x": 11792,
+    "y": 11104,
+    "width": 16,
+    "height": 64,
+    "id": 572
+  },
+  "573": {
+    "class": "door",
+    "type": "blue",
+    "x": 11744,
+    "y": 11104,
+    "width": 16,
+    "height": 64,
+    "id": 573
+  },
+  "574": {
+    "class": "door",
+    "type": "blue",
+    "x": 11744,
+    "y": 11360,
+    "width": 16,
+    "height": 64,
+    "id": 574
+  },
+  "575": {
+    "class": "door",
+    "type": "blue",
+    "x": 11792,
+    "y": 11360,
+    "width": 16,
+    "height": 64,
+    "id": 575
+  },
+  "576": {
+    "class": "door",
+    "type": "blue",
+    "x": 13024,
+    "y": 11104,
+    "width": 16,
+    "height": 64,
+    "id": 576
+  },
+  "577": {
+    "class": "door",
+    "type": "blue",
+    "x": 13072,
+    "y": 11104,
+    "width": 16,
+    "height": 64,
+    "id": 577
+  },
+  "578": {
+    "class": "door",
+    "type": "blue",
+    "x": 10256,
+    "y": 10592,
+    "width": 16,
+    "height": 64,
+    "id": 578
+  },
+  "579": {
+    "class": "door",
+    "type": "green",
+    "x": 10976,
+    "y": 10848,
+    "width": 16,
+    "height": 64,
+    "id": 579
+  },
+  "580": {
+    "class": "door",
+    "type": "green",
+    "x": 12304,
+    "y": 10336,
+    "width": 16,
+    "height": 64,
+    "id": 580
+  },
+  "581": {
+    "class": "door",
+    "type": "green",
+    "x": 12768,
+    "y": 10336,
+    "width": 16,
+    "height": 64,
+    "id": 581
+  },
+  "582": {
+    "class": "door",
+    "type": "red",
+    "x": 10208,
+    "y": 10592,
+    "width": 16,
+    "height": 64,
+    "id": 582
+  },
+  "583": {
+    "class": "door",
+    "type": "red",
+    "x": 13024,
+    "y": 10848,
+    "width": 16,
+    "height": 64,
+    "id": 583
+  },
+  "584": {
+    "class": "door",
+    "type": "red",
+    "x": 16096,
+    "y": 10336,
+    "width": 16,
+    "height": 64,
+    "id": 584
+  },
+  "585": {
+    "class": "door",
+    "type": "blue",
+    "x": 16144,
+    "y": 10336,
+    "width": 16,
+    "height": 64,
+    "id": 585
+  },
+  "586": {
+    "class": "door",
+    "type": "blue",
+    "x": 14304,
+    "y": 10592,
+    "width": 16,
+    "height": 64,
+    "id": 586
+  },
+  "587": {
+    "class": "door",
+    "type": "blue",
+    "x": 14352,
+    "y": 10592,
+    "width": 16,
+    "height": 64,
+    "id": 587
+  },
+  "588": {
+    "class": "door",
+    "type": "blue",
+    "x": 14096,
+    "y": 10848,
+    "width": 16,
+    "height": 64,
+    "id": 588
+  },
+  "589": {
+    "class": "door",
+    "type": "red",
+    "x": 14048,
+    "y": 10848,
+    "width": 16,
+    "height": 64,
+    "id": 589
+  },
+  "590": {
+    "class": "door",
+    "type": "blue",
+    "x": 15072,
+    "y": 11104,
+    "width": 16,
+    "height": 64,
+    "id": 590
+  },
+  "591": {
+    "class": "door",
+    "type": "blue",
+    "x": 15120,
+    "y": 11104,
+    "width": 16,
+    "height": 64,
+    "id": 591
+  },
+  "592": {
+    "class": "door",
+    "type": "blue",
+    "x": 15584,
+    "y": 11360,
+    "width": 16,
+    "height": 64,
+    "id": 592
+  },
+  "593": {
+    "class": "door",
+    "type": "blue",
+    "x": 15632,
+    "y": 11360,
+    "width": 16,
+    "height": 64,
+    "id": 593
+  },
+  "594": {
+    "class": "door",
+    "type": "blue",
+    "x": 16096,
+    "y": 11360,
+    "width": 16,
+    "height": 64,
+    "id": 594
+  },
+  "595": {
+    "class": "door",
+    "type": "blue",
+    "x": 16144,
+    "y": 11360,
+    "width": 16,
+    "height": 64,
+    "id": 595
+  },
+  "596": {
+    "class": "door",
+    "type": "blue",
+    "x": 16224,
+    "y": 11296,
+    "width": 64,
+    "height": 16,
+    "id": 596
+  },
+  "597": {
+    "class": "door",
+    "type": "blue",
+    "x": 16224,
+    "y": 11216,
+    "width": 64,
+    "height": 16,
+    "id": 597
+  },
+  "598": {
+    "class": "door",
+    "type": "blue",
+    "x": 15584,
+    "y": 12128,
+    "width": 16,
+    "height": 64,
+    "id": 598
+  },
+  "599": {
+    "class": "door",
+    "type": "blue",
+    "x": 15632,
+    "y": 12128,
+    "width": 16,
+    "height": 64,
+    "id": 599
+  },
+  "600": {
+    "class": "door",
+    "type": "blue",
+    "x": 15840,
+    "y": 12128,
+    "width": 16,
+    "height": 64,
+    "id": 600
+  },
+  "601": {
+    "class": "door",
+    "type": "blue",
+    "x": 15888,
+    "y": 12128,
+    "width": 16,
+    "height": 64,
+    "id": 601
+  },
+  "602": {
+    "class": "door",
+    "type": "blue",
+    "x": 15840,
+    "y": 12896,
+    "width": 16,
+    "height": 64,
+    "id": 602
+  },
+  "603": {
+    "class": "door",
+    "type": "blue",
+    "x": 15888,
+    "y": 12896,
+    "width": 16,
+    "height": 64,
+    "id": 603
+  },
+  "604": {
+    "class": "door",
+    "type": "blue",
+    "x": 16224,
+    "y": 13344,
+    "width": 64,
+    "height": 16,
+    "id": 604
+  },
+  "605": {
+    "class": "door",
+    "type": "orange",
+    "x": 16224,
+    "y": 13264,
+    "width": 64,
+    "height": 16,
+    "id": 605
+  },
+  "606": {
+    "class": "door",
+    "type": "blue",
+    "x": 7392,
+    "y": 11616,
+    "width": 16,
+    "height": 64,
+    "id": 606
+  },
+  "607": {
+    "class": "door",
+    "type": "blue",
+    "x": 7440,
+    "y": 11616,
+    "width": 16,
+    "height": 64,
+    "id": 607
+  },
+  "608": {
+    "class": "door",
+    "type": "blue",
+    "x": 10464,
+    "y": 11616,
+    "width": 16,
+    "height": 64,
+    "id": 608
+  },
+  "609": {
+    "class": "door",
+    "type": "blue",
+    "x": 10512,
+    "y": 11616,
+    "width": 16,
+    "height": 64,
+    "id": 609
+  },
+  "610": {
+    "class": "door",
+    "type": "blue",
+    "x": 10720,
+    "y": 11872,
+    "width": 16,
+    "height": 64,
+    "id": 610
+  },
+  "611": {
+    "class": "door",
+    "type": "blue",
+    "x": 10768,
+    "y": 11872,
+    "width": 16,
+    "height": 64,
+    "id": 611
+  },
+  "612": {
+    "class": "door",
+    "type": "blue",
+    "x": 10720,
+    "y": 12128,
+    "width": 16,
+    "height": 64,
+    "id": 612
+  },
+  "613": {
+    "class": "door",
+    "type": "blue",
+    "x": 10768,
+    "y": 12128,
+    "width": 16,
+    "height": 64,
+    "id": 613
+  },
+  "614": {
+    "class": "door",
+    "type": "green",
+    "x": 10592,
+    "y": 12240,
+    "width": 64,
+    "height": 16,
+    "id": 614
+  },
+  "615": {
+    "class": "door",
+    "type": "brown",
+    "x": 10592,
+    "y": 12320,
+    "width": 64,
+    "height": 16,
+    "id": 615
+  },
+  "616": {
+    "class": "door",
+    "type": "blue",
+    "x": 9312,
+    "y": 12752,
+    "width": 64,
+    "height": 16,
+    "id": 616
+  },
+  "617": {
+    "class": "door",
+    "type": "blue",
+    "x": 9312,
+    "y": 12832,
+    "width": 64,
+    "height": 16,
+    "id": 617
+  },
+  "618": {
+    "class": "door",
+    "type": "blue",
+    "x": 9184,
+    "y": 12384,
+    "width": 16,
+    "height": 64,
+    "id": 618
+  },
+  "619": {
+    "class": "door",
+    "type": "blue",
+    "x": 9696,
+    "y": 12384,
+    "width": 16,
+    "height": 64,
+    "id": 619
+  },
+  "620": {
+    "class": "door",
+    "type": "blue",
+    "x": 9744,
+    "y": 12384,
+    "width": 16,
+    "height": 64,
+    "id": 620
+  },
+  "621": {
+    "class": "door",
+    "type": "blue",
+    "x": 9696,
+    "y": 12640,
+    "width": 16,
+    "height": 64,
+    "id": 621
+  },
+  "622": {
+    "class": "door",
+    "type": "blue",
+    "x": 9744,
+    "y": 12640,
+    "width": 16,
+    "height": 64,
+    "id": 622
+  },
+  "623": {
+    "class": "door",
+    "type": "blue",
+    "x": 9184,
+    "y": 12896,
+    "width": 16,
+    "height": 64,
+    "id": 623
+  },
+  "624": {
+    "class": "door",
+    "type": "blue",
+    "x": 9232,
+    "y": 12896,
+    "width": 16,
+    "height": 64,
+    "id": 624
+  },
+  "625": {
+    "class": "door",
+    "type": "blue",
+    "x": 9488,
+    "y": 13664,
+    "width": 16,
+    "height": 64,
+    "id": 625
+  },
+  "626": {
+    "class": "door",
+    "type": "blue",
+    "x": 9312,
+    "y": 14032,
+    "width": 64,
+    "height": 16,
+    "id": 626
+  },
+  "627": {
+    "class": "door",
+    "type": "blue",
+    "x": 9312,
+    "y": 14112,
+    "width": 64,
+    "height": 16,
+    "id": 627
+  },
+  "628": {
+    "class": "door",
+    "type": "red",
+    "x": 9440,
+    "y": 13664,
+    "width": 16,
+    "height": 64,
+    "id": 628
+  },
+  "629": {
+    "class": "door",
+    "type": "blue",
+    "x": 7648,
+    "y": 13408,
+    "width": 16,
+    "height": 64,
+    "id": 629
+  },
+  "630": {
+    "class": "door",
+    "type": "blue",
+    "x": 7696,
+    "y": 13408,
+    "width": 16,
+    "height": 64,
+    "id": 630
+  },
+  "631": {
+    "class": "door",
+    "type": "blue",
+    "x": 7648,
+    "y": 13920,
+    "width": 16,
+    "height": 64,
+    "id": 631
+  },
+  "632": {
+    "class": "door",
+    "type": "blue",
+    "x": 7696,
+    "y": 13920,
+    "width": 16,
+    "height": 64,
+    "id": 632
+  },
+  "633": {
+    "class": "door",
+    "type": "blue",
+    "x": 8160,
+    "y": 13408,
+    "width": 16,
+    "height": 64,
+    "id": 633
+  },
+  "634": {
+    "class": "door",
+    "type": "blue",
+    "x": 8208,
+    "y": 13408,
+    "width": 16,
+    "height": 64,
+    "id": 634
+  },
+  "635": {
+    "class": "door",
+    "type": "blue",
+    "x": 8416,
+    "y": 12896,
+    "width": 16,
+    "height": 64,
+    "id": 635
+  },
+  "636": {
+    "class": "door",
+    "type": "blue",
+    "x": 8464,
+    "y": 12896,
+    "width": 16,
+    "height": 64,
+    "id": 636
+  },
+  "637": {
+    "class": "door",
+    "type": "blue",
+    "x": 10976,
+    "y": 13152,
+    "width": 16,
+    "height": 64,
+    "id": 637
+  },
+  "638": {
+    "class": "door",
+    "type": "blue",
+    "x": 11024,
+    "y": 13152,
+    "width": 16,
+    "height": 64,
+    "id": 638
+  },
+  "639": {
+    "class": "door",
+    "type": "blue",
+    "x": 11232,
+    "y": 13664,
+    "width": 16,
+    "height": 64,
+    "id": 639
+  },
+  "640": {
+    "class": "door",
+    "type": "blue",
+    "x": 11280,
+    "y": 13664,
+    "width": 16,
+    "height": 64,
+    "id": 640
+  },
+  "641": {
+    "class": "door",
+    "type": "blue",
+    "x": 11792,
+    "y": 13920,
+    "width": 16,
+    "height": 64,
+    "id": 641
+  },
+  "642": {
+    "class": "door",
+    "type": "blue",
+    "x": 12000,
+    "y": 13664,
+    "width": 16,
+    "height": 64,
+    "id": 642
+  },
+  "643": {
+    "class": "door",
+    "type": "blue",
+    "x": 12048,
+    "y": 13664,
+    "width": 16,
+    "height": 64,
+    "id": 643
+  },
+  "644": {
+    "class": "door",
+    "type": "brown",
+    "x": 11744,
+    "y": 13920,
+    "width": 16,
+    "height": 64,
+    "id": 644
+  },
+  "645": {
+    "class": "door",
+    "type": "blue",
+    "x": 12000,
+    "y": 13408,
+    "width": 16,
+    "height": 64,
+    "id": 645
+  },
+  "646": {
+    "class": "door",
+    "type": "blue",
+    "x": 12048,
+    "y": 13408,
+    "width": 16,
+    "height": 64,
+    "id": 646
+  },
+  "647": {
+    "class": "door",
+    "type": "blue",
+    "x": 13024,
+    "y": 13408,
+    "width": 16,
+    "height": 64,
+    "id": 647
+  },
+  "648": {
+    "class": "door",
+    "type": "blue",
+    "x": 13072,
+    "y": 13408,
+    "width": 16,
+    "height": 64,
+    "id": 648
+  },
+  "649": {
+    "class": "door",
+    "type": "blue",
+    "x": 13024,
+    "y": 13152,
+    "width": 16,
+    "height": 64,
+    "id": 649
+  },
+  "650": {
+    "class": "door",
+    "type": "blue",
+    "x": 13072,
+    "y": 13152,
+    "width": 16,
+    "height": 64,
+    "id": 650
+  },
+  "651": {
+    "class": "door",
+    "type": "blue",
+    "x": 13280,
+    "y": 13408,
+    "width": 16,
+    "height": 64,
+    "id": 651
+  },
+  "652": {
+    "class": "door",
+    "type": "blue",
+    "x": 13328,
+    "y": 13408,
+    "width": 16,
+    "height": 64,
+    "id": 652
+  },
+  "653": {
+    "class": "door",
+    "type": "blue",
+    "x": 12512,
+    "y": 14176,
+    "width": 16,
+    "height": 64,
+    "id": 653
+  },
+  "654": {
+    "class": "door",
+    "type": "blue",
+    "x": 13536,
+    "y": 13920,
+    "width": 16,
+    "height": 64,
+    "id": 654
+  },
+  "655": {
+    "class": "door",
+    "type": "blue",
+    "x": 13584,
+    "y": 13920,
+    "width": 16,
+    "height": 64,
+    "id": 655
+  },
+  "656": {
+    "class": "door",
+    "type": "eye",
+    "x": 12816,
+    "y": 13920,
+    "width": 16,
+    "height": 64,
+    "id": 656
+  },
+  "657": {
+    "class": "door",
+    "type": "brown",
+    "x": 12560,
+    "y": 14176,
+    "width": 16,
+    "height": 64,
+    "id": 657
+  },
+  "658": {
+    "class": "door",
+    "type": "brown",
+    "x": 12768,
+    "y": 13920,
+    "width": 16,
+    "height": 64,
+    "id": 658
+  },
+  "659": {
+    "class": "door",
+    "type": "brown",
+    "x": 14352,
+    "y": 13920,
+    "width": 16,
+    "height": 64,
+    "id": 659
+  },
+  "660": {
+    "class": "door",
+    "type": "blue",
+    "x": 14304,
+    "y": 13920,
+    "width": 16,
+    "height": 64,
+    "id": 660
+  },
+  "661": {
+    "class": "door",
+    "type": "blue",
+    "x": 15072,
+    "y": 13920,
+    "width": 16,
+    "height": 64,
+    "id": 661
+  },
+  "662": {
+    "class": "door",
+    "type": "green",
+    "x": 15120,
+    "y": 13920,
+    "width": 16,
+    "height": 64,
+    "id": 662
+  },
+  "663": {
+    "class": "door",
+    "type": "brown",
+    "x": 13328,
+    "y": 12896,
+    "width": 16,
+    "height": 64,
+    "id": 663
+  },
+  "664": {
+    "class": "door",
+    "type": "blue",
+    "x": 13280,
+    "y": 12896,
+    "width": 16,
+    "height": 64,
+    "id": 664
+  },
+  "665": {
+    "class": "door",
+    "type": "blue",
+    "x": 14304,
+    "y": 12128,
+    "width": 16,
+    "height": 64,
+    "id": 665
+  },
+  "666": {
+    "class": "door",
+    "type": "blue",
+    "x": 14352,
+    "y": 12128,
+    "width": 16,
+    "height": 64,
+    "id": 666
+  },
+  "667": {
+    "class": "door",
+    "type": "blue",
+    "x": 14560,
+    "y": 12384,
+    "width": 16,
+    "height": 64,
+    "id": 667
+  },
+  "668": {
+    "class": "door",
+    "type": "blue",
+    "x": 14304,
+    "y": 13408,
+    "width": 16,
+    "height": 64,
+    "id": 668
+  },
+  "669": {
+    "class": "door",
+    "type": "blue",
+    "x": 14352,
+    "y": 13408,
+    "width": 16,
+    "height": 64,
+    "id": 669
+  },
+  "670": {
+    "class": "door",
+    "type": "blue",
+    "x": 14608,
+    "y": 12384,
+    "width": 16,
+    "height": 64,
+    "id": 670
+  },
+  "671": {
+    "class": "door",
+    "type": "blue",
+    "x": 11616,
+    "y": 11984,
+    "width": 64,
+    "height": 16,
+    "id": 671
+  },
+  "672": {
+    "class": "door",
+    "type": "blue",
+    "x": 11616,
+    "y": 12064,
+    "width": 64,
+    "height": 16,
+    "id": 672
+  },
+  "673": {
+    "class": "door",
+    "type": "blue",
+    "x": 11744,
+    "y": 12128,
+    "width": 16,
+    "height": 64,
+    "id": 673
+  },
+  "674": {
+    "class": "door",
+    "type": "blue",
+    "x": 11792,
+    "y": 12128,
+    "width": 16,
+    "height": 64,
+    "id": 674
+  },
+  "675": {
+    "class": "door",
+    "type": "blue",
+    "x": 12000,
+    "y": 12128,
+    "width": 16,
+    "height": 64,
+    "id": 675
+  },
+  "676": {
+    "class": "door",
+    "type": "blue",
+    "x": 12048,
+    "y": 12128,
+    "width": 16,
+    "height": 64,
+    "id": 676
+  },
+  "677": {
+    "class": "door",
+    "type": "blue",
+    "x": 12000,
+    "y": 12384,
+    "width": 16,
+    "height": 64,
+    "id": 677
+  },
+  "678": {
+    "class": "door",
+    "type": "blue",
+    "x": 12048,
+    "y": 12384,
+    "width": 16,
+    "height": 64,
+    "id": 678
+  },
+  "679": {
+    "class": "door",
+    "type": "blue",
+    "x": 12256,
+    "y": 12384,
+    "width": 16,
+    "height": 64,
+    "id": 679
+  },
+  "680": {
+    "class": "door",
+    "type": "blue",
+    "x": 12304,
+    "y": 12384,
+    "width": 16,
+    "height": 64,
+    "id": 680
+  },
+  "681": {
+    "class": "door",
+    "type": "blue",
+    "x": 12512,
+    "y": 11872,
+    "width": 16,
+    "height": 64,
+    "id": 681
+  },
+  "682": {
+    "class": "door",
+    "type": "blue",
+    "x": 12560,
+    "y": 11872,
+    "width": 16,
+    "height": 64,
+    "id": 682
+  },
+  "683": {
+    "class": "door",
+    "type": "blue",
+    "x": 13024,
+    "y": 12128,
+    "width": 16,
+    "height": 64,
+    "id": 683
+  },
+  "684": {
+    "class": "door",
+    "type": "blue",
+    "x": 13072,
+    "y": 12128,
+    "width": 16,
+    "height": 64,
+    "id": 684
+  },
+  "685": {
+    "class": "door",
+    "type": "blue",
+    "x": 13280,
+    "y": 12384,
+    "width": 16,
+    "height": 64,
+    "id": 685
+  },
+  "686": {
+    "class": "door",
+    "type": "blue",
+    "x": 13280,
+    "y": 11872,
+    "width": 16,
+    "height": 64,
+    "id": 686
+  },
+  "687": {
+    "class": "door",
+    "type": "blue",
+    "x": 13328,
+    "y": 11872,
+    "width": 16,
+    "height": 64,
+    "id": 687
+  },
+  "688": {
+    "class": "door",
+    "type": "blue",
+    "x": 13536,
+    "y": 11872,
+    "width": 16,
+    "height": 64,
+    "id": 688
+  },
+  "689": {
+    "class": "door",
+    "type": "blue",
+    "x": 13584,
+    "y": 11872,
+    "width": 16,
+    "height": 64,
+    "id": 689
+  },
+  "690": {
+    "class": "door",
+    "type": "blue",
+    "x": 14048,
+    "y": 11360,
+    "width": 16,
+    "height": 64,
+    "id": 690
+  },
+  "691": {
+    "class": "door",
+    "type": "blue",
+    "x": 14096,
+    "y": 11360,
+    "width": 16,
+    "height": 64,
+    "id": 691
+  },
+  "692": {
+    "class": "door",
+    "type": "blue",
+    "x": 13024,
+    "y": 11360,
+    "width": 16,
+    "height": 64,
+    "id": 692
+  },
+  "693": {
+    "class": "door",
+    "type": "blue",
+    "x": 13072,
+    "y": 11360,
+    "width": 16,
+    "height": 64,
+    "id": 693
+  },
+  "694": {
+    "class": "door",
+    "type": "blue",
+    "x": 12512,
+    "y": 11616,
+    "width": 16,
+    "height": 64,
+    "id": 694
+  },
+  "695": {
+    "class": "door",
+    "type": "blue",
+    "x": 12560,
+    "y": 11616,
+    "width": 16,
+    "height": 64,
+    "id": 695
+  },
+  "696": {
+    "class": "door",
+    "type": "brown",
+    "x": 10768,
+    "y": 9568,
+    "width": 16,
+    "height": 64,
+    "id": 696
+  },
+  "697": {
+    "class": "door",
+    "type": "brown",
+    "x": 8160,
+    "y": 6496,
+    "width": 16,
+    "height": 64,
+    "id": 697
+  },
+  "698": {
+    "class": "door",
+    "type": "green",
+    "x": 8208,
+    "y": 6496,
+    "width": 16,
+    "height": 64,
+    "id": 698
+  },
+  "699": {
+    "class": "door",
+    "type": "red",
+    "x": 2576,
+    "y": 8032,
+    "width": 16,
+    "height": 64,
+    "id": 699
+  },
+  "700": {
+    "class": "door",
+    "type": "blue",
+    "x": 2528,
+    "y": 8032,
+    "width": 16,
+    "height": 64,
+    "id": 700
+  },
+  "701": {
+    "class": "door",
+    "type": "blue",
+    "x": 5600,
+    "y": 8032,
+    "width": 16,
+    "height": 64,
+    "id": 701
+  },
+  "702": {
+    "class": "door",
+    "type": "blue",
+    "x": 5648,
+    "y": 8032,
+    "width": 16,
+    "height": 64,
+    "id": 702
+  },
+  "703": {
+    "class": "door",
+    "type": "blue",
+    "x": 5088,
+    "y": 8544,
+    "width": 16,
+    "height": 64,
+    "id": 703
+  },
+  "704": {
+    "class": "door",
+    "type": "red",
+    "x": 5136,
+    "y": 8544,
+    "width": 16,
+    "height": 64,
+    "id": 704
+  },
+  "705": {
+    "class": "door",
+    "type": "green",
+    "x": 7136,
+    "y": 8032,
+    "width": 16,
+    "height": 64,
+    "id": 705
+  },
+  "706": {
+    "class": "door",
+    "type": "blue",
+    "x": 7184,
+    "y": 8032,
+    "width": 16,
+    "height": 64,
+    "id": 706
+  },
+  "707": {
+    "class": "door",
+    "type": "blue",
+    "x": 7136,
+    "y": 8544,
+    "width": 16,
+    "height": 64,
+    "id": 707
+  },
+  "708": {
+    "class": "door",
+    "type": "orange",
+    "x": 7184,
+    "y": 8544,
+    "width": 16,
+    "height": 64,
+    "id": 708
   }
 }
