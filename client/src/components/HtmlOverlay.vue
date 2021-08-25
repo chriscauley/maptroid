@@ -1,15 +1,15 @@
 <template>
   <div class="html-overlay">
     <div :style="`--border-width: ${border_width}px`">
+      <template v-for="room in rooms" :key="room.id">
+        <div v-for="block in room.blocks" v-bind="block" :key="block.id" />
+      </template>
       <div class="html-overlay__select" v-bind="select_attrs" />
       <div v-for="item in items" v-bind="item" :key="item.id">
         <selected-item v-if="item.selected" />
       </div>
-      <div v-bind="ui_attributes" />
       <div v-if="drag_box" v-bind="drag_box" />
-      <template v-for="room in rooms" :key="room.id">
-        <div v-for="block in room.blocks" v-bind="block" :key="block.id" />
-      </template>
+      <div v-else v-bind="ui_attributes" />
     </div>
   </div>
 </template>
@@ -84,7 +84,7 @@ export default {
           id: `overlay-item-${id}`,
           selected: selected_id === id,
           onClick: () => this.$store.viewer.patch({ selected_item: id }),
-          class: `item-box class-${item.class}`,
+          class: `item-box -class-${item.class} sm-item ${item.type}`,
           style: {
             ...this._scale({
               left: x,

@@ -1,6 +1,6 @@
 <template>
   <div class="flex-grow">
-    <div class="viewer-wrapper">
+    <div :class="css.wrapper">
       <open-seadragon :pixelated="true" :options="options" :events="events" />
       <template v-if="viewer">
         <html-overlay :viewer="viewer" />
@@ -29,9 +29,17 @@ export default {
   data() {
     return {
       viewer: null,
+      overzoomed: false,
       events: {
         open: (event) => {
           this.viewer = event.eventSource
+        },
+        zoom: (event) => {
+          const { world, viewport, drawer } = event.eventSource
+          const tiledImage = world.getItemAt(0)
+          const targetZoom = tiledImage.source.dimensions.x / viewport.getContainerSize().x
+          this.overzoomed = viewport.getZoom() > targetZoom
+          drawer.context.imageSmoothingEnabled = !this.overzoomed
         },
       },
       options: {
@@ -53,6 +61,11 @@ export default {
     }
   },
   computed: {
+    css() {
+      return {
+        wrapper: ['viewer-wrapper', { '-overzoomed': this.overzoomed }],
+      }
+    },
     selected_room() {
       return this.$store.viewer.getSelectedRoom()
     },

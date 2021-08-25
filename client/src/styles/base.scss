@@ -47,9 +47,12 @@
 }
 
 .item-box {
-  border: var(--border-width) solid white;
   cursor: pointer;
   position: absolute;
+  outline: 5px solid white;
+  .-overzoomed & {
+    outline: none;
+  }
 }
 
 .selected-item {

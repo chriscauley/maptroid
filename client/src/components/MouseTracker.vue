@@ -4,10 +4,12 @@
 
 <script>
 import OpenSeadragon from 'openseadragon'
+import Mousetrap from '@unrest/vue-mousetrap'
 
 const { MouseTracker, Point } = OpenSeadragon
 
 export default {
+  mixins: [Mousetrap.Mixin],
   props: {
     viewer: Object,
   },
@@ -15,6 +17,11 @@ export default {
     return { drag_start: null }
   },
   computed: {
+    mousetrap() {
+      return {
+        esc: () => this.$store.viewer.patch({ drag_start: null, drag_end: null }),
+      }
+    },
     show() {
       const { selected_tool } = this.$store.viewer.state
       const tools = ['item', 'boss', 'room']
@@ -63,8 +70,8 @@ export default {
     },
     dragEnd() {
       const { selected_tool } = this.$store.viewer.state
-      if (['boss'].includes(selected_tool)) {
-        const { x, y, width, height } = this.$store.viewer.drag_bounds
+      const { x, y, width, height } = this.$store.viewer.drag_bounds
+      if (width && height && ['boss'].includes(selected_tool)) {
         this.$store.item
           .save({
             x,
@@ -75,9 +82,9 @@ export default {
           })
           .then(() => {
             this.$store.item.getAll()
-            this.$store.viewer.patch({ drag_start: null, drag_end: null })
           })
       }
+      this.$store.viewer.patch({ drag_start: null, drag_end: null })
     },
     move(e) {
       this.$store.viewer.patch({ pointer: this.eventToImagePoint(e) })
