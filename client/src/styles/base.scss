@@ -55,11 +55,14 @@
   .-overzoomed & {
     outline: none;
   }
-  &.sm-boss, &.sm-map {
+  &.sm-boss, &.sm-map, &.sm-chozo {
     background: none;
   }
   &.sm-boss {
     outline: 5px solid red;
+  }
+  &.sm-chozo {
+    outline: 5px solid blue;
   }
   &.sm-map {
     outline: 5px solid #8F8;
@@ -76,11 +79,15 @@
     @apply flex flex-wrap gap-2;
     font-size: 2rem;
     width: 16rem;
-    .sm-item, .sm-map {
+    .sm-item, .sm-map, .sm-boss {
       cursor: pointer;
       &.-selected {
         outline: 3px solid var(--text-alt);
       }
+    }
+    &.-boss {
+      font-size: 1rem;
+      width: 300px;
     }
   }
 }
@@ -115,7 +122,7 @@
     padding: 1rem;
     width: 430px;
   }
-  &.-list, &.-room {
+  &.-item, &.-map, &.-boss, &.-room {
     top: 0;
   }
   .tracker__grid {

@@ -1,9 +1,9 @@
 <template>
   <div v-if="open" :class="`viewer-panel -${open || 'closed'}`">
-    <div class="list-group" v-if="open === 'list'">
-      <div v-for="item in items" class="list-group-item" :key="item.id">
+    <div class="list-group" v-if="'item|map|boss'.includes(open)">
+      <div v-for="item in itemsByClass[open]" class="list-group-item" :key="item.id">
         <span> {{ item.id }} - {{ item.type || '???' }} </span>
-        <i class="fa fa-search" @click="goto(item)" />
+        <i class="fa fa-search" @click="gotoItem(item)" />
       </div>
     </div>
     <div class="list-group" v-else-if="open === 'room'">
@@ -23,7 +23,7 @@
         </template>
       </template>
     </div>
-    <div v-else class="tracker__grid">
+    <div v-if="open === 'tracker'" class="tracker__grid">
       <div v-for="(row, i) in $store.item.getGrid()" class="tracker__row" :key="i">
         <div v-for="cell in row" :class="cell.class" :key="cell.slug">
           <div v-if="cell.count" class="flaire">{{ cell.count }}</div>
@@ -34,9 +34,17 @@
       <div :class="css.btn('tracker')" @click="open = 'tracker'">
         <i class="fa fa-check-square-o" />
       </div>
-      <div :class="css.btn('list')" @click="open = 'list'">
+      <div :class="css.btn('item')" @click="open = 'item'">
         <i class="fa fa-list" />
-        <div class="flaire">{{ items.length }}</div>
+        <div class="flaire">{{ itemsByClass.item.length }}</div>
+      </div>
+      <div :class="css.btn('map')" @click="open = 'map'">
+        <i class="sm-map -map" />
+        <div class="flaire">{{ itemsByClass.map.length }}</div>
+      </div>
+      <div :class="css.btn('boss')" @click="open = 'boss'">
+        <i class="sm-map -boss" />
+        <div class="flaire">{{ itemsByClass.boss.length }}</div>
       </div>
       <div :class="css.btn('room')" @click="open = 'room'">
         <i class="sm-room -brinstar" />
@@ -48,6 +56,7 @@
 
 <script>
 import OpenSeadragon from 'openseadragon'
+import { sortBy } from 'lodash'
 
 import Area from '@/models/Area'
 import Room from '@/models/Room'
@@ -67,8 +76,17 @@ export default {
     }
   },
   computed: {
-    items() {
-      return this.$store.item.getItems()
+    itemsByClass() {
+      const items = {
+        map: [],
+        boss: [],
+        item: [],
+        chozo: [],
+        door: [],
+      }
+      const _all = sortBy(this.$store.item.getAll(), 'type')
+      _all.forEach((i) => items[i.class].push(i))
+      return items
     },
     rooms() {
       return this.$store.room.getAll()
@@ -95,8 +113,8 @@ export default {
   },
   methods: {
     gotoItem(item) {
-      const { x, y } = item
-      this.goto(x, y, 16, 16)
+      const { x, y, width, height } = item
+      this.goto(x, y, width, height)
       this.viewer.addOnceHandler('animation-finish', () =>
         this.$store.viewer.patch({ selected_item: item.id }),
       )

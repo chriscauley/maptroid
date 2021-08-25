@@ -67,6 +67,7 @@ export default {
         { slug: null, name: 'Select', icon: 'fa fa-mouse-pointer' },
         { slug: 'item', name: 'Item', icon: 'sm-item -super-missile-alt' },
         { slug: 'boss', name: 'Boss', icon: 'sm-map -boss' },
+        { slug: 'chozo', name: 'Chozo', icon: 'sm-chozo' },
         Room,
         {
           slug: 'map',
@@ -78,7 +79,7 @@ export default {
             btn: ['btn', map_tool === slug ? '-primary' : '-secondary'],
             click: () => this.$store.viewer.patch({ map_tool: slug }),
           })),
-        }
+        },
       ]
     },
     viewer_data() {

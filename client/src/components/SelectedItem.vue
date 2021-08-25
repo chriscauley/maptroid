@@ -2,9 +2,11 @@
   <unrest-popper class="selected-item" placement="right" offset="0,5">
     {{ item.class }} #{{ item.id }}
     <i class="fa fa-trash" @click="deleteItem" />
-    <div class="selected-item__picker">
+    <div :class="`selected-item__picker -${item.class}`">
       <div v-for="type in item_types" :key="type">
-        <span :class="css.type(type)" @click="changeType(type)" />
+        <span :class="css.type(type)" @click="changeType(type)">
+          {{ item.class === 'boss' ? type : '' }}
+        </span>
       </div>
     </div>
   </unrest-popper>
@@ -18,7 +20,8 @@ import Mousetrap from '@unrest/vue-mousetrap'
 const types_by_class = {
   item: Item.all,
   boss: bosses,
-  map: map_markers
+  map: map_markers,
+  chozo: [],
 }
 
 export default {
