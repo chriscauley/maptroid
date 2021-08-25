@@ -1,6 +1,6 @@
 $items: morph-ball bomb screw-attack missile super-missile energy-tank energy2-tank varia-suit space-jump power-bomb high-jump speed-booster pedastool reserve-tank x-ray spring-ball grappling-hook charge-beam spazer wave-beam ice-beam plasma-beam gravity-suit;
 
-.sm-item, .sm-enemy, .sm-room {
+.sm-item, .sm-room, .sm-map {
   background-size: 100% auto;
   display: inline-block;
   height: 1em;
@@ -21,13 +21,24 @@ $items: morph-ball bomb screw-attack missile super-missile energy-tank energy2-t
   }
 }
 
+.sm-map {
+  $icons: save map energy missile boss elevator ship;
+  background-image: url("/sm/map_icons.png");
+  background-size: auto 100%;
+  @for $i from 0 to length($icons) {
+    $name: nth($icons, $i + 1);
+    &.-#{$name} {
+      background-position: $i * -100% 0;
+    }
+  }
+  &.-ship {
+    width: 2em;
+  }
+}
+
 .sm-item.-class-boss {
   background: none;
   outline: 5px solid red !important;
-}
-
-.sm-enemy.boss {
-  background-image: url("/sm/boss.png");
 }
 
 $zone-colors: (

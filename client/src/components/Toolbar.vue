@@ -63,7 +63,7 @@ export default {
       return [
         { slug: null, name: 'Select', icon: 'fa fa-mouse-pointer' },
         { slug: 'item', name: 'Item', icon: 'sm-item super-missile-alt' },
-        { slug: 'boss', name: 'Boss', icon: 'sm-enemy boss' },
+        { slug: 'boss', name: 'Boss', icon: 'sm-map -boss' },
         Room,
       ]
     },
