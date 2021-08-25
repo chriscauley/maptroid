@@ -36,7 +36,7 @@
 
 <script>
 import Area from '@/models/Area'
-import { bosses, map_markers } from '@/models'
+import { map_markers, doors } from '@/models'
 
 export default {
   computed: {
@@ -50,36 +50,14 @@ export default {
       }
     },
     tools() {
-      const { room_tool, map_tool } = this.$store.viewer.state
-      const Room = {
-        slug: 'room',
-        name: 'Room',
-        icon: `sm-room -${room_tool}`,
-        children: Area.list.map((slug) => ({
-          slug,
-          class: `sm-room -${slug}`,
-          btn: ['btn', room_tool === slug ? '-primary' : '-secondary'],
-          click: () => this.$store.viewer.patch({ room_tool: slug }),
-        })),
-      }
-
       return [
         { slug: null, name: 'Select', icon: 'fa fa-mouse-pointer' },
         { slug: 'item', name: 'Item', icon: 'sm-item -super-missile-alt' },
         { slug: 'boss', name: 'Boss', icon: 'sm-map -boss' },
         { slug: 'chozo', name: 'Chozo', icon: 'sm-chozo' },
-        Room,
-        {
-          slug: 'map',
-          name: 'Map',
-          icon: `sm-map -${map_tool}`,
-          children: map_markers.map((slug) => ({
-            slug,
-            class: `sm-map -${slug}`,
-            btn: ['btn', map_tool === slug ? '-primary' : '-secondary'],
-            click: () => this.$store.viewer.patch({ map_tool: slug }),
-          })),
-        },
+        this.makeTool('door', doors),
+        this.makeTool('room', Area.list),
+        this.makeTool('map', map_markers),
       ]
     },
     viewer_data() {
@@ -94,6 +72,20 @@ export default {
   methods: {
     selectTool(tool) {
       this.$store.viewer.patch({ selected_tool: tool.slug })
+    },
+    makeTool(slug, children) {
+      const selected_child = this.$store.viewer.state[slug + '_tool']
+      return {
+        slug,
+        name: slug[0].toUpperCase() + slug.slice(1),
+        icon: `sm-${slug} -${selected_child}`,
+        children: children?.map((child_slug) => ({
+          slug: child_slug,
+          class: `sm-${slug} -${child_slug}`,
+          btn: ['btn', selected_child === child_slug ? '-primary' : '-secondary'],
+          click: () => this.$store.viewer.patch({ [slug + '_tool']: child_slug }),
+        })),
+      }
     },
   },
 }

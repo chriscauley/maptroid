@@ -50,7 +50,7 @@ export default {
     },
     drag_box() {
       const { selected_tool } = this.$store.viewer.state
-      if (!['boss', 'map', 'chozo'].includes(selected_tool)) {
+      if (!['boss', 'door', 'map', 'chozo'].includes(selected_tool)) {
         return {}
       }
       const { x, y, width, height } = this.$store.viewer.drag_bounds

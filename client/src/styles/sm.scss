@@ -1,6 +1,6 @@
 $items: morph-ball bomb screw-attack missile super-missile energy-tank energy2-tank varia-suit space-jump power-bomb high-jump speed-booster pedastool reserve-tank x-ray spring-ball grappling-hook charge-beam spazer wave-beam ice-beam plasma-beam gravity-suit;
 
-.sm-item, .sm-room, .sm-map, .sm-chozo {
+.sm-item, .sm-room, .sm-map, .sm-chozo, .sm-door {
   background-size: 100% auto;
   display: inline-block;
   height: 1em;
@@ -40,6 +40,20 @@ $items: morph-ball bomb screw-attack missile super-missile energy-tank energy2-t
     width: 2em;
   }
 }
+
+.sm-door {
+  $colors: green blue orange red purple brown;
+  @for $i from 0 to length($colors) {
+    $name: nth($colors, $i + 1);
+    &.-#{$name} {
+      background: $name;
+    }
+  }
+  &.-eye {
+    background: gray;
+  }
+}
+
 
 $zone-colors: (
   "crateria": #d83890,

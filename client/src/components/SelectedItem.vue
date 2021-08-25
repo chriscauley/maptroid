@@ -14,7 +14,7 @@
 
 <script>
 import Item from '@/models/Item'
-import { bosses, map_markers } from '@/models'
+import { bosses, map_markers, doors } from '@/models'
 import Mousetrap from '@unrest/vue-mousetrap'
 
 const types_by_class = {
@@ -22,6 +22,7 @@ const types_by_class = {
   boss: bosses,
   map: map_markers,
   chozo: [],
+  door: doors,
 }
 
 export default {
