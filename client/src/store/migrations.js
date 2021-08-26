@@ -14,7 +14,7 @@ export default {
         console.error(item)
         throw `Unable to find room for item #${item.id} - ${item.name}`
       }
-      store.item.save(item)
     })
+    store.item.getAll().forEach(item => store.item.save(item))
   },
 }
