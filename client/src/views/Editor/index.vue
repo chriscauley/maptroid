@@ -15,15 +15,15 @@
 </template>
 
 <script>
-import HtmlOverlay from '@/components/HtmlOverlay.vue'
-import ItemPanel from '@/components/ItemPanel.vue'
-import MouseTracker from '@/components/MouseTracker.vue'
-import SelectedRoom from '@/components/SelectedRoom.vue'
-import Toolbar from '@/components/Toolbar.vue'
+import HtmlOverlay from './HtmlOverlay.vue'
+import ItemPanel from './ItemPanel.vue'
+import MouseTracker from './MouseTracker.vue'
+import SelectedRoom from './SelectedRoom.vue'
+import Toolbar from './Toolbar.vue'
 
 export default {
   __route: {
-    path: '/',
+    path: '/editor/',
   },
   components: { HtmlOverlay, ItemPanel, MouseTracker, SelectedRoom, Toolbar },
   data() {
@@ -43,7 +43,7 @@ export default {
         },
       },
       options: {
-        tileSources: ['output/SuperMetroidMapZebes.dzi'],
+        tileSources: ['/output/SuperMetroidMapZebes.dzi'],
         // tileSources: { type: 'image', url: 'SuperMetroidMapZebes.png' },
         maxZoomPixelRatio: 8,
         showNavigator: true,

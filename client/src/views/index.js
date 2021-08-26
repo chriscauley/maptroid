@@ -1,4 +1,4 @@
+import Editor from './Editor/index.vue'
 import SpriteGallery from './SpriteGallery.vue'
-import Viewer from './Viewer.vue'
 
-export default { SpriteGallery, Viewer }
+export default { Editor, SpriteGallery }
