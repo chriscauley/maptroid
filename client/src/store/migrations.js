@@ -35,18 +35,4 @@ export default {
       H: 56, // 14336px / 256
     })
   },
-  convertXyToWorldIndex(store) {
-    const world = store.world.getOne(1)
-    store.item.getAll().forEach((item) => {
-      item.world_index = world.geo.xy2index([Math.floor(item.x / 256), Math.floor(item.y / 256)])
-      item.room_index = world.room_geo.xy2index([(item.x % 256) / 16, (item.y % 256) / 16])
-      item.width = item.width / 16
-      item.height = item.height / 16
-      store.item.save(item)
-    })
-    store.room.getAll().forEach((room) => {
-      room.indexes = room.xys.map(world.geo.xy2index)
-      store.room.save(room)
-    })
-  },
 }

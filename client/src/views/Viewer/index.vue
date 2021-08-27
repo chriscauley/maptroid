@@ -24,8 +24,7 @@ export default {
     screens() {
       const out = []
       this.visible_xys.forEach((xy) => {
-        const index = this.world.geo.xy2index(xy)
-        if (this.current_room.indexes.includes(index)) {
+        if (this.current_room.containsXY(xy)) {
           return
         }
         out.push({ x: xy[0], y: xy[1], color: 'black' })
@@ -39,6 +38,11 @@ export default {
       out.push({ x: min_x, y: max_y, width, height: H - max_y, color: 'black' })
       out.push({ x: max_x, y: 0, width: W - max_x, height: H, color: 'black' })
       return out
+    },
+  },
+  methods: {
+    getViewerOptions() {
+      return { showNavigator: false }
     },
   },
 }

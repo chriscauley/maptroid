@@ -11,7 +11,6 @@
   "dependencies": {
     "@popperjs/core": "^2.9.3",
     "@unrest/css": "^0.0.7",
-    "@unrest/geo": "0.0.2",
     "@unrest/tailwind": "^0.1.0",
     "@unrest/vue": "^0.2.0",
     "@unrest/vue-mousetrap": "^0.0.6",

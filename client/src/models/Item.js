@@ -1,3 +1,6 @@
+import Model from './Model'
+import fields from './fields'
+
 const abilities = [
   'varia-suit',
   'gravity-suit',
@@ -20,21 +23,48 @@ const misc = ['pedastool', 'energy2-tank']
 
 const all = [...abilities, ...packs, ...beams, ...misc]
 
-export default {
+const schema = {
+  type: 'object',
+  properties: {
+    xys: fields.xy,
+    name: { type: 'string' },
+    type: { type: 'string' },
+    class: { type: 'string' },
+    width: { type: 'number' },
+    height: { type: 'number' },
+    world_xy: fields.xy,
+    screen_xy: fields.xy,
+    room_id: { type: 'number' },
+  },
+}
+
+class Item extends Model {
+  constructor(options) {
+    if (options.x) {
+      const { x, y } = options
+      options.world_xy = [Math.floor(x / 256), Math.floor(y / 256)]
+      options.screen_xy = [(x % 256) / 16, (y % 256) / 16]
+    }
+    super(options, schema)
+  }
+  getMapBounds() {
+    const [world_x, world_y] = this.world_xy
+    const [screen_x, screen_y] = this.screen_xy
+    return {
+      x: world_x * 256 + screen_x * 16,
+      y: world_y * 256 + screen_y * 16,
+      width: this.width * 16,
+      height: this.height * 16,
+    }
+  }
+}
+
+Object.assign(Item, {
   all,
   abilities,
   packs,
   beams,
   misc,
-  getMapBounds(item, world) {
-    const { world_index, room_index, width, height } = item
-    const [world_x, world_y] = world.geo.index2xy(world_index)
-    const [room_x, room_y] = world.room_geo.index2xy(room_index)
-    return {
-      x: world_x * 256 + room_x * 16,
-      y: world_y * 256 + room_y * 16,
-      width: width * 16,
-      height: height * 16,
-    }
-  },
-}
+})
+
+export default Item

@@ -1,13 +1,8 @@
-import { LocalStorage } from '@unrest/vue-storage'
-import downloadJson from '@/lib/downloadJson'
-// import items_json from '../../public/sm/items.json'
-
-import prepareItem from './prepareItem'
+import Store from './Store'
 import Item from '@/models/Item'
 
 export default () => {
-  const item_store = LocalStorage('item', { prepareItem })
-  item_store.getAll = () => item_store.getPage({ per_page: 1e9 })?.items || []
+  const item_store = Store('item', Item)
   item_store.getItems = () => item_store.getAll().filter((i) => i.class === 'item')
   item_store.getGrid = () => {
     const items = item_store.getItems()
@@ -28,11 +23,5 @@ export default () => {
     })
     return rows
   }
-  window.exportData = item_store.exportData = () => {
-    const data = {}
-    item_store.getAll().forEach((i) => (data[i.id] = i))
-    downloadJson(data, 'items.json')
-  }
-
   return item_store
 }

@@ -1,25 +1,39 @@
-const Room = {
-  getBounds(room, world) {
-    const max = {
-      x: 0,
-      y: 0,
-    }
-    const min = {
-      x: Infinity,
-      y: Infinity,
-    }
-    room.indexes.forEach((index) => {
-      const [x, y] = world.geo.index2xy(index)
-      max.x = Math.max(x, max.x)
-      min.x = Math.min(x, min.x)
-      max.y = Math.max(y, max.y)
-      min.y = Math.min(y, min.y)
-    })
-    return [min.x, min.y, max.x - min.x + 1, max.y - min.y + 1]
-  },
-  getMapBounds(room, world) {
-    return Room.getBounds(room, world).map((i) => i * 256)
+import Model from './Model'
+import fields from './fields'
+
+const schema = {
+  type: 'object',
+  properties: {
+    xys: fields.xy,
+    name: { type: 'string' },
+    area: { type: 'string' },
   },
 }
 
-export default Room
+export default class Room extends Model {
+  constructor(options) {
+    super(options, schema)
+    this.set()
+  }
+  set(obj = {}) {
+    Object.assign(this, obj)
+    this._key_map = {}
+    this._world_keys = this.xys.map((xy) => xy.toString())
+    this.xys.forEach((xy) => (this._key_map[xy] = true))
+  }
+  containsXY(xy) {
+    return this._key_map[xy]
+  }
+  getBounds() {
+    const xs = this.xys.map((xy) => xy[0])
+    const ys = this.xys.map((xy) => xy[1])
+    const x1 = Math.min(...xs)
+    const y1 = Math.min(...ys)
+    const x2 = Math.max(...xs)
+    const y2 = Math.max(...ys)
+    return [x1, y1, x2 - x1 + 1, y2 - y1 + 1]
+  }
+  getMapBounds() {
+    return this.getBounds().map((i) => i * 256)
+  }
+}

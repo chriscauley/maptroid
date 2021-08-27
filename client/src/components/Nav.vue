@@ -17,6 +17,8 @@ export default {
   data() {
     const items = [
       { to: '/', text: 'Interactive Map' },
+      { class: 'divider' },
+      { to: '/editor/', text: 'Editor' },
       { to: '/spritegallery/', text: 'Item Gallery' },
     ]
     return { css, items }

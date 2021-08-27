@@ -181,7 +181,7 @@
   &__screen-mask {
     @apply absolute;
     background: red; /* This should never appear! */
-    &-black {
+    &.-color-black {
       @apply bg-black;
     }
   }

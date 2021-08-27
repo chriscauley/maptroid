@@ -9,8 +9,6 @@
 <script>
 import OpenSeadragon from 'openseadragon'
 
-import Item from '@/models/Item'
-
 export default {
   props: {
     items: Array,
@@ -25,7 +23,7 @@ export default {
     item_blocks() {
       return this.items?.map((item) => {
         const { id, type, class: _class } = item
-        const { x, y, width, height } = Item.getMapBounds(item, this.world)
+        const { x, y, width, height } = item.getMapBounds()
         return {
           id: `overlay-item-${id}`,
           class: `html-overlay__item -class-${_class} sm-${_class} -${type}`,

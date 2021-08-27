@@ -1,8 +1,6 @@
 import { range } from 'lodash'
 import OpenSeadragon from 'openseadragon'
 
-import Room from '@/models/Room'
-
 export default {
   data() {
     return {
@@ -37,6 +35,7 @@ export default {
           clickToZoom: false,
           dblClickToZoom: false,
         },
+        ...this.getViewerOptions(),
       },
     }
   },
@@ -45,7 +44,7 @@ export default {
       return ['viewer-wrapper', { '-overzoomed': this.overzoomed }]
     },
     visible_xys() {
-      const [x, y, width, height] = Room.getBounds(this.current_room, this.world)
+      const [x, y, width, height] = this.current_room.getBounds()
       const out = []
       range(x, x + width).forEach((x) => range(y, height).forEach((y) => out.push([x, y])))
       return out
@@ -55,6 +54,9 @@ export default {
     },
   },
   methods: {
+    getViewerOptions() {
+      return {}
+    },
     gotoItem(item) {
       const { x, y, width, height } = item
       this.gotoBounds(x, y, width, height)
@@ -63,7 +65,7 @@ export default {
       )
     },
     gotoRoom(room) {
-      const [x, y, width, height] = Room.getMapBounds(room, this.world)
+      const [x, y, width, height] = room.getMapBounds()
       this.gotoBounds(x, y, width, height)
       this.current_room = room
     },

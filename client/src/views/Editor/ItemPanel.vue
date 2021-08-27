@@ -59,7 +59,6 @@ import OpenSeadragon from 'openseadragon'
 import { sortBy } from 'lodash'
 
 import Area from '@/models/Area'
-import Room from '@/models/Room'
 
 export default {
   props: {
@@ -123,7 +122,7 @@ export default {
       )
     },
     gotoRoom(room) {
-      const [x, y, width, height] = Room.getMapBounds(room)
+      const [x, y, width, height] = room.getMapBounds()
       this.goto(x, y, width, height)
     },
     goto(x, y, width, height) {
