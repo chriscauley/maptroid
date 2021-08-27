@@ -212,6 +212,13 @@
     eslint-plugin-vue "^7.0.0-0"
     prettier "^1.18.2"
 
+"@unrest/geo@0.0.2":
+  version "0.0.2"
+  resolved "https://registry.yarnpkg.com/@unrest/geo/-/geo-0.0.2.tgz#deadb2d08ec477573175938bac07a44f3b5752ec"
+  integrity sha512-/t77p0xwIqo7jOoRKmBaTcSUqFe2mok/aKvNLi4ZQKVF+Cd0mA0uoMQxz6MmOaBfil+HwbfHgbff0+Ok6fxy/w==
+  dependencies:
+    xorshift "^1.1.1"
+
 "@unrest/tailwind@^0.1.0":
   version "0.1.0"
   resolved "https://registry.yarnpkg.com/@unrest/tailwind/-/tailwind-0.1.0.tgz#a7c4e617e51a484088e9e2612ee39c9e42149f93"
@@ -1676,6 +1683,11 @@ minimist@^1.1.1, minimist@^1.2.0, minimist@^1.2.5:
   resolved "https://registry.yarnpkg.com/minimist/-/minimist-1.2.5.tgz#67d66014b66a6a8aaa0c083c5fd58df4e4e97602"
   integrity sha512-FM9nNUYrRBAELZQT3xeZQ7fmMOBg6nWNmJKTcgsJeaLstP/UODVpGsr5OhXhhXg6f+qtJ8uiZ+PUxkDWcgIXLw==
 
+mitt@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/mitt/-/mitt-3.0.0.tgz#69ef9bd5c80ff6f57473e8d89326d01c414be0bd"
+  integrity sha512-7dX2/10ITVyqh4aOSVI9gdape+t9l2/8QxHrFmUXu4EEUpdlxl6RudZUPZoc+zuY2hk1j7XxVroIVIan/pD/SQ==
+
 mkdirp@^0.5.1:
   version "0.5.5"
   resolved "https://registry.yarnpkg.com/mkdirp/-/mkdirp-0.5.5.tgz#d91cefd62d1436ca0f41620e251288d420099def"
@@ -2633,6 +2645,11 @@ write@1.0.3:
   integrity sha512-/lg70HAjtkUgWPVZhZcm+T4hkL8Zbtp1nFNOn3lRrxnlv50SRBv7cR7RqR+GMsd3hUXy9hWBo4CHTbFTcOYwig==
   dependencies:
     mkdirp "^0.5.1"
+
+xorshift@^1.1.1:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/xorshift/-/xorshift-1.2.0.tgz#30a4cdd8e9f8d09d959ed2a88c42a09c660e8148"
+  integrity sha512-iYgNnGyeeJ4t6U11NpA/QiKy+PXn5Aa3Azg5qkwIFz1tBLllQrjjsk9yzD7IAK0naNU4JxdeDgqW9ov4u/hc4g==
 
 xtend@^4.0.2:
   version "4.0.2"
