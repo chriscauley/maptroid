@@ -16,10 +16,10 @@ $items: morph-ball bomb screw-attack missile super-missile energy-tank energy2-t
   background-image: url("/sm/items.png");
   @for $i from 0 to length($items) {
     $name: nth($items, $i + 1);
-    &.-#{$name} {
+    &.-#{"" + $name} {
       background-position: 0 $i * 2 * -100%;
     }
-    &.-#{$name}-alt {
+    &.-#{"" + $name}-alt {
       background-position: 0 ($i * 2 + 1) * -100%;
     }
   }
@@ -31,7 +31,7 @@ $items: morph-ball bomb screw-attack missile super-missile energy-tank energy2-t
   background-size: auto 100%;
   @for $i from 0 to length($icons) {
     $name: nth($icons, $i + 1);
-    &.-#{$name} {
+    &.-#{"" + $name} {
       background-position: $i * -100% 0;
     }
   }
@@ -45,7 +45,7 @@ $items: morph-ball bomb screw-attack missile super-missile energy-tank energy2-t
   $colors: green blue orange red purple brown;
   @for $i from 0 to length($colors) {
     $name: nth($colors, $i + 1);
-    &.-#{$name} {
+    &.-#{"" + $name} {
       background: $name;
     }
   }
@@ -66,7 +66,7 @@ $zone-colors: (
 );
 
 @mixin room($name, $color) {
-  &.-#{$name} {
+  &.-#{"" + $name} {
     background: $color;
     &.-selected {
       /* background: linear-gradient(45deg, transparent 25%, $color 25%, $color 50%, transparent 50%, transparent 75%, $color 75%, $color 100%); */
