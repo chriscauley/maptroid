@@ -16,7 +16,12 @@
       ]
     ],
     "name": "flyway",
-    "id": 1
+    "id": 1,
+    "indexes": [
+      418,
+      417,
+      416
+    ]
   },
   "2": {
     "area": "crateria",
@@ -67,7 +72,20 @@
       ]
     ],
     "name": "parlor and alcatraz",
-    "id": 2
+    "id": 2,
+    "indexes": [
+      349,
+      415,
+      284,
+      283,
+      282,
+      281,
+      347,
+      479,
+      413,
+      545,
+      280
+    ]
   },
   "3": {
     "area": "crateria",
@@ -78,7 +96,10 @@
       ]
     ],
     "name": "bomb torizo",
-    "id": 3
+    "id": 3,
+    "indexes": [
+      419
+    ]
   },
   "4": {
     "area": "crateria",
@@ -89,7 +110,10 @@
       ]
     ],
     "name": "crateria map",
-    "id": 4
+    "id": 4,
+    "indexes": [
+      483
+    ]
   },
   "5": {
     "area": "crateria",
@@ -108,7 +132,12 @@
       ]
     ],
     "name": "pre-map flyway",
-    "id": 5
+    "id": 5,
+    "indexes": [
+      482,
+      481,
+      480
+    ]
   },
   "6": {
     "area": "crateria",
@@ -131,7 +160,13 @@
       ]
     ],
     "name": "the moat",
-    "id": 6
+    "id": 6,
+    "indexes": [
+      298,
+      299,
+      365,
+      364
+    ]
   },
   "7": {
     "area": "crateria",
@@ -142,7 +177,10 @@
       ]
     ],
     "name": "crateria tube",
-    "id": 7
+    "id": 7,
+    "indexes": [
+      294
+    ]
   },
   "8": {
     "area": "crateria",
@@ -169,7 +207,14 @@
       ]
     ],
     "name": "crateria kihunter",
-    "id": 8
+    "id": 8,
+    "indexes": [
+      297,
+      296,
+      295,
+      362,
+      428
+    ]
   },
   "9": {
     "area": "crateria",
@@ -180,7 +225,10 @@
       ]
     ],
     "name": "red brinstar elevator",
-    "id": 9
+    "id": 9,
+    "indexes": [
+      494
+    ]
   },
   "10": {
     "area": "elevator",
@@ -251,7 +299,25 @@
       ]
     ],
     "name": "red tower",
-    "id": 10
+    "id": 10,
+    "indexes": [
+      560,
+      692,
+      824,
+      626,
+      758,
+      890,
+      956,
+      1022,
+      1154,
+      1088,
+      1550,
+      1484,
+      1418,
+      1352,
+      1286,
+      1220
+    ]
   },
   "11": {
     "area": "brinstar",
@@ -282,7 +348,15 @@
       ]
     ],
     "name": "red tower",
-    "id": 11
+    "id": 11,
+    "indexes": [
+      1814,
+      1748,
+      1682,
+      1616,
+      1880,
+      1946
+    ]
   },
   "12": {
     "area": "brinstar",
@@ -293,7 +367,10 @@
       ]
     ],
     "name": "red tower save",
-    "id": 12
+    "id": 12,
+    "indexes": [
+      1749
+    ]
   },
   "13": {
     "area": "brinstar",
@@ -308,7 +385,11 @@
       ]
     ],
     "name": "red tower gate",
-    "id": 13
+    "id": 13,
+    "indexes": [
+      1683,
+      1684
+    ]
   },
   "14": {
     "area": "brinstar",
@@ -323,7 +404,11 @@
       ]
     ],
     "name": "first power bomb",
-    "id": 14
+    "id": 14,
+    "indexes": [
+      1945,
+      1944
+    ]
   },
   "15": {
     "area": "brinstar",
@@ -334,7 +419,10 @@
       ]
     ],
     "name": "first power bomb missles",
-    "id": 15
+    "id": 15,
+    "indexes": [
+      1943
+    ]
   },
   "16": {
     "area": "brinstar",
@@ -353,7 +441,12 @@
       ]
     ],
     "name": "second power bomb",
-    "id": 16
+    "id": 16,
+    "indexes": [
+      1681,
+      1680,
+      1746
+    ]
   },
   "17": {
     "area": "brinstar",
@@ -372,7 +465,12 @@
       ]
     ],
     "name": "hellway",
-    "id": 17
+    "id": 17,
+    "indexes": [
+      1813,
+      1812,
+      1811
+    ]
   },
   "18": {
     "area": "brinstar",
@@ -419,7 +517,19 @@
       ]
     ],
     "name": "red tower",
-    "id": 18
+    "id": 18,
+    "indexes": [
+      2404,
+      2338,
+      2272,
+      2206,
+      2140,
+      2074,
+      2008,
+      1942,
+      1876,
+      1810
+    ]
   },
   "19": {
     "area": "brinstar",
@@ -430,7 +540,10 @@
       ]
     ],
     "name": "sloaters refill",
-    "id": 19
+    "id": 19,
+    "indexes": [
+      2403
+    ]
   },
   "20": {
     "area": "brinstar",
@@ -445,7 +558,11 @@
       ]
     ],
     "name": "bat room",
-    "id": 20
+    "id": 20,
+    "indexes": [
+      2405,
+      2406
+    ]
   },
   "21": {
     "area": "brinstar",
@@ -468,7 +585,13 @@
       ]
     ],
     "name": "below spazer",
-    "id": 21
+    "id": 21,
+    "indexes": [
+      2408,
+      2407,
+      2341,
+      2342
+    ]
   },
   "22": {
     "area": "brinstar",
@@ -479,7 +602,10 @@
       ]
     ],
     "name": "spazer",
-    "id": 22
+    "id": 22,
+    "indexes": [
+      2343
+    ]
   },
   "23": {
     "area": "maridia",
@@ -490,7 +616,10 @@
       ]
     ],
     "name": "west tunnel",
-    "id": 23
+    "id": 23,
+    "indexes": [
+      2409
+    ]
   },
   "24": {
     "area": "maridia",
@@ -509,7 +638,12 @@
       ]
     ],
     "name": "glass tunnel",
-    "id": 24
+    "id": 24,
+    "indexes": [
+      2410,
+      2344,
+      2476
+    ]
   },
   "25": {
     "area": "maridia",
@@ -520,7 +654,10 @@
       ]
     ],
     "name": "glass tunnel save",
-    "id": 25
+    "id": 25,
+    "indexes": [
+      2477
+    ]
   },
   "26": {
     "area": "maridia",
@@ -547,7 +684,14 @@
       ]
     ],
     "name": "east tunnel",
-    "id": 26
+    "id": 26,
+    "indexes": [
+      2411,
+      2345,
+      2346,
+      2347,
+      2348
+    ]
   },
   "27": {
     "area": "brinstar",
@@ -558,7 +702,10 @@
       ]
     ],
     "name": "business center elevator",
-    "id": 27
+    "id": 27,
+    "indexes": [
+      2412
+    ]
   },
   "28": {
     "area": "brinstar",
@@ -577,7 +724,12 @@
       ]
     ],
     "name": "warehouse entrance",
-    "id": 28
+    "id": 28,
+    "indexes": [
+      2413,
+      2479,
+      2414
+    ]
   },
   "29": {
     "area": "brinstar",
@@ -596,7 +748,12 @@
       ]
     ],
     "name": "warehouse zeela",
-    "id": 29
+    "id": 29,
+    "indexes": [
+      2415,
+      2481,
+      2482
+    ]
   },
   "30": {
     "area": "brinstar",
@@ -607,7 +764,10 @@
       ]
     ],
     "name": "warehouse energy tank room",
-    "id": 30
+    "id": 30,
+    "indexes": [
+      2546
+    ]
   },
   "31": {
     "area": "brinstar",
@@ -634,7 +794,14 @@
       ]
     ],
     "name": "warehouse kihunter",
-    "id": 31
+    "id": 31,
+    "indexes": [
+      2416,
+      2417,
+      2418,
+      2419,
+      2483
+    ]
   },
   "32": {
     "area": "brinstar",
@@ -645,7 +812,10 @@
       ]
     ],
     "name": "warehouse save room",
-    "id": 32
+    "id": 32,
+    "indexes": [
+      2420
+    ]
   },
   "33": {
     "area": "brinstar",
@@ -676,7 +846,15 @@
       ]
     ],
     "name": "baby kraid",
-    "id": 33
+    "id": 33,
+    "indexes": [
+      2484,
+      2485,
+      2486,
+      2487,
+      2488,
+      2489
+    ]
   },
   "34": {
     "area": "brinstar",
@@ -695,7 +873,12 @@
       ]
     ],
     "name": "kraid eye",
-    "id": 34
+    "id": 34,
+    "indexes": [
+      2424,
+      2490,
+      2491
+    ]
   },
   "35": {
     "area": "brinstar",
@@ -706,7 +889,10 @@
       ]
     ],
     "name": "kraid recharge",
-    "id": 35
+    "id": 35,
+    "indexes": [
+      2425
+    ]
   },
   "36": {
     "area": "brinstar",
@@ -729,7 +915,13 @@
       ]
     ],
     "name": "kraid",
-    "id": 36
+    "id": 36,
+    "indexes": [
+      2426,
+      2427,
+      2493,
+      2492
+    ]
   },
   "37": {
     "area": "brinstar",
@@ -740,7 +932,10 @@
       ]
     ],
     "name": "varia suit",
-    "id": 37
+    "id": 37,
+    "indexes": [
+      2494
+    ]
   },
   "38": {
     "area": "elevator",
@@ -759,7 +954,12 @@
       ]
     ],
     "name": "business center",
-    "id": 38
+    "id": 38,
+    "indexes": [
+      2544,
+      2610,
+      2478
+    ]
   },
   "39": {
     "area": "norfair",
@@ -786,7 +986,14 @@
       ]
     ],
     "name": "business center",
-    "id": 39
+    "id": 39,
+    "indexes": [
+      2940,
+      2874,
+      2808,
+      2676,
+      2742
+    ]
   },
   "40": {
     "area": "norfair",
@@ -817,7 +1024,15 @@
       ]
     ],
     "name": "cathedral entrance",
-    "id": 40
+    "id": 40,
+    "indexes": [
+      2743,
+      2744,
+      2745,
+      2811,
+      2810,
+      2809
+    ]
   },
   "41": {
     "area": "norfair",
@@ -848,7 +1063,15 @@
       ]
     ],
     "name": "cathedral",
-    "id": 41
+    "id": 41,
+    "indexes": [
+      2748,
+      2747,
+      2746,
+      2812,
+      2813,
+      2814
+    ]
   },
   "42": {
     "area": "norfair",
@@ -875,7 +1098,14 @@
       ]
     ],
     "name": "rising tide",
-    "id": 42
+    "id": 42,
+    "indexes": [
+      2815,
+      2816,
+      2817,
+      2818,
+      2819
+    ]
   },
   "43": {
     "area": "norfair",
@@ -914,7 +1144,17 @@
       ]
     ],
     "name": "bubble mountain",
-    "id": 43
+    "id": 43,
+    "indexes": [
+      2688,
+      2689,
+      2755,
+      2754,
+      2820,
+      2821,
+      2887,
+      2886
+    ]
   },
   "44": {
     "area": "norfair",
@@ -929,7 +1169,11 @@
       ]
     ],
     "name": "bat cave",
-    "id": 44
+    "id": 44,
+    "indexes": [
+      2624,
+      2690
+    ]
   },
   "45": {
     "area": "norfair",
@@ -996,7 +1240,24 @@
       ]
     ],
     "name": "speed booster hall",
-    "id": 45
+    "id": 45,
+    "indexes": [
+      2625,
+      2626,
+      2627,
+      2628,
+      2694,
+      2629,
+      2695,
+      2630,
+      2696,
+      2697,
+      2699,
+      2698,
+      2700,
+      2701,
+      2702
+    ]
   },
   "46": {
     "area": "norfair",
@@ -1007,7 +1268,10 @@
       ]
     ],
     "name": "speed booster",
-    "id": 46
+    "id": 46,
+    "indexes": [
+      2703
+    ]
   },
   "47": {
     "area": "norfair",
@@ -1018,7 +1282,10 @@
       ]
     ],
     "name": "bubble mountain save",
-    "id": 47
+    "id": 47,
+    "indexes": [
+      2753
+    ]
   },
   "48": {
     "area": "norfair",
@@ -1033,7 +1300,11 @@
       ]
     ],
     "name": "green bubbles missle",
-    "id": 48
+    "id": 48,
+    "indexes": [
+      2687,
+      2686
+    ]
   },
   "49": {
     "area": "norfair",
@@ -1048,7 +1319,11 @@
       ]
     ],
     "name": "norfair reserve tank",
-    "id": 49
+    "id": 49,
+    "indexes": [
+      2684,
+      2685
+    ]
   },
   "50": {
     "area": "norfair",
@@ -1091,7 +1366,18 @@
       ]
     ],
     "name": "single chamber",
-    "id": 50
+    "id": 50,
+    "indexes": [
+      2759,
+      2758,
+      2757,
+      2756,
+      2888,
+      2822,
+      2954,
+      2760,
+      2761
+    ]
   },
   "51": {
     "area": "norfair",
@@ -1130,7 +1416,17 @@
       ]
     ],
     "name": "double chamber",
-    "id": 51
+    "id": 51,
+    "indexes": [
+      2826,
+      2825,
+      2824,
+      2823,
+      2889,
+      2890,
+      2891,
+      2892
+    ]
   },
   "52": {
     "area": "norfair",
@@ -1141,7 +1437,10 @@
       ]
     ],
     "name": "wave beam",
-    "id": 52
+    "id": 52,
+    "indexes": [
+      2827
+    ]
   },
   "53": {
     "area": "norfair",
@@ -1164,7 +1463,13 @@
       ]
     ],
     "name": "spikey platforms tunnel",
-    "id": 53
+    "id": 53,
+    "indexes": [
+      2955,
+      2956,
+      2957,
+      2958
+    ]
   },
   "54": {
     "area": "norfair",
@@ -1191,7 +1496,14 @@
       ]
     ],
     "name": "volcano room",
-    "id": 54
+    "id": 54,
+    "indexes": [
+      2959,
+      3025,
+      3091,
+      3090,
+      3089
+    ]
   },
   "55": {
     "area": "norfair",
@@ -1222,7 +1534,15 @@
       ]
     ],
     "name": "three musketeers",
-    "id": 55
+    "id": 55,
+    "indexes": [
+      2762,
+      2828,
+      2894,
+      2893,
+      2895,
+      2896
+    ]
   },
   "56": {
     "area": "norfair",
@@ -1257,7 +1577,16 @@
       ]
     ],
     "name": "lower norfair spring ball maze",
-    "id": 56
+    "id": 56,
+    "indexes": [
+      2901,
+      2900,
+      2899,
+      2898,
+      2897,
+      2963,
+      2964
+    ]
   },
   "57": {
     "area": "norfair",
@@ -1304,7 +1633,19 @@
       ]
     ],
     "name": "lower norfair fireflea room",
-    "id": 57
+    "id": 57,
+    "indexes": [
+      2965,
+      2966,
+      3032,
+      3098,
+      3164,
+      3165,
+      3231,
+      3297,
+      3296,
+      3230
+    ]
   },
   "58": {
     "area": "norfair",
@@ -1315,7 +1656,10 @@
       ]
     ],
     "name": "lower norfair escape power bomb",
-    "id": 58
+    "id": 58,
+    "indexes": [
+      2967
+    ]
   },
   "59": {
     "area": "norfair",
@@ -1350,7 +1694,16 @@
       ]
     ],
     "name": "red kihunter shaft",
-    "id": 59
+    "id": 59,
+    "indexes": [
+      3163,
+      3229,
+      3295,
+      3361,
+      3427,
+      3428,
+      3429
+    ]
   },
   "60": {
     "area": "norfair",
@@ -1361,7 +1714,10 @@
       ]
     ],
     "name": "red kihunter shaft save",
-    "id": 60
+    "id": 60,
+    "indexes": [
+      3362
+    ]
   },
   "61": {
     "area": "norfair",
@@ -1444,7 +1800,28 @@
       ]
     ],
     "name": "amphitheatre",
-    "id": 61
+    "id": 61,
+    "indexes": [
+      3160,
+      3161,
+      3162,
+      3228,
+      3227,
+      3226,
+      3225,
+      3291,
+      3292,
+      3293,
+      3294,
+      3360,
+      3426,
+      3425,
+      3424,
+      3423,
+      3357,
+      3358,
+      3359
+    ]
   },
   "62": {
     "area": "norfair",
@@ -1483,7 +1860,17 @@
       ]
     ],
     "name": "wasteland",
-    "id": 62
+    "id": 62,
+    "indexes": [
+      3495,
+      3494,
+      3493,
+      3492,
+      3491,
+      3490,
+      3557,
+      3623
+    ]
   },
   "63": {
     "area": "norfair",
@@ -1502,7 +1889,12 @@
       ]
     ],
     "name": "metal pirates",
-    "id": 63
+    "id": 63,
+    "indexes": [
+      3622,
+      3621,
+      3620
+    ]
   },
   "64": {
     "area": "norfair",
@@ -1521,7 +1913,12 @@
       ]
     ],
     "name": "plowerhouse",
-    "id": 64
+    "id": 64,
+    "indexes": [
+      3619,
+      3618,
+      3617
+    ]
   },
   "65": {
     "area": "norfair",
@@ -1540,7 +1937,12 @@
       ]
     ],
     "name": "lower norfair farming",
-    "id": 65
+    "id": 65,
+    "indexes": [
+      3616,
+      3615,
+      3614
+    ]
   },
   "66": {
     "area": "norfair",
@@ -1555,7 +1957,11 @@
       ]
     ],
     "name": "ridley",
-    "id": 66
+    "id": 66,
+    "indexes": [
+      3613,
+      3679
+    ]
   },
   "67": {
     "area": "norfair",
@@ -1566,7 +1972,10 @@
       ]
     ],
     "name": "ridley tank",
-    "id": 67
+    "id": 67,
+    "indexes": [
+      3678
+    ]
   },
   "68": {
     "area": "norfair",
@@ -1597,7 +2006,15 @@
       ]
     ],
     "name": "the worst room in the game",
-    "id": 68
+    "id": 68,
+    "indexes": [
+      3158,
+      3224,
+      3290,
+      3356,
+      3422,
+      3488
+    ]
   },
   "69": {
     "area": "norfair",
@@ -1620,7 +2037,13 @@
       ]
     ],
     "name": "pillar room",
-    "id": 69
+    "id": 69,
+    "indexes": [
+      3487,
+      3486,
+      3485,
+      3484
+    ]
   },
   "70": {
     "area": "norfair",
@@ -1659,7 +2082,17 @@
       ]
     ],
     "name": "mickey mouse",
-    "id": 70
+    "id": 70,
+    "indexes": [
+      3157,
+      3223,
+      3222,
+      3289,
+      3355,
+      3354,
+      3353,
+      3352
+    ]
   },
   "71": {
     "area": "norfair",
@@ -1678,7 +2111,12 @@
       ]
     ],
     "name": "fast pillars setup",
-    "id": 71
+    "id": 71,
+    "indexes": [
+      3351,
+      3417,
+      3483
+    ]
   },
   "72": {
     "area": "norfair",
@@ -1701,7 +2139,13 @@
       ]
     ],
     "name": "fast ripper room",
-    "id": 72
+    "id": 72,
+    "indexes": [
+      3482,
+      3481,
+      3480,
+      3479
+    ]
   },
   "73": {
     "area": "norfair",
@@ -1740,7 +2184,17 @@
       ]
     ],
     "name": "main hall",
-    "id": 73
+    "id": 73,
+    "indexes": [
+      3416,
+      3414,
+      3415,
+      3413,
+      3412,
+      3411,
+      3410,
+      3409
+    ]
   },
   "74": {
     "area": "norfair",
@@ -1775,7 +2229,16 @@
       ]
     ],
     "name": "acid statue",
-    "id": 74
+    "id": 74,
+    "indexes": [
+      3474,
+      3408,
+      3407,
+      3473,
+      3541,
+      3540,
+      3539
+    ]
   },
   "75": {
     "area": "norfair",
@@ -1798,7 +2261,13 @@
       ]
     ],
     "name": "golden torizo",
-    "id": 75
+    "id": 75,
+    "indexes": [
+      3542,
+      3543,
+      3609,
+      3608
+    ]
   },
   "76": {
     "area": "norfair",
@@ -1817,7 +2286,12 @@
       ]
     ],
     "name": "screw attack",
-    "id": 76
+    "id": 76,
+    "indexes": [
+      3478,
+      3544,
+      3610
+    ]
   },
   "77": {
     "area": "norfair",
@@ -1828,7 +2302,10 @@
       ]
     ],
     "name": "golden torizo energy recharge",
-    "id": 77
+    "id": 77,
+    "indexes": [
+      3545
+    ]
   },
   "78": {
     "area": "elevator",
@@ -1843,7 +2320,11 @@
       ]
     ],
     "name": "lower norfair",
-    "id": 78
+    "id": 78,
+    "indexes": [
+      3281,
+      3347
+    ]
   },
   "79": {
     "area": "norfair",
@@ -1854,7 +2335,10 @@
       ]
     ],
     "name": "lower norfair",
-    "id": 79
+    "id": 79,
+    "indexes": [
+      3215
+    ]
   },
   "80": {
     "area": "norfair",
@@ -1865,7 +2349,10 @@
       ]
     ],
     "name": "lower norfair elevator save room",
-    "id": 80
+    "id": 80,
+    "indexes": [
+      3214
+    ]
   },
   "81": {
     "area": "norfair",
@@ -1916,7 +2403,20 @@
       ]
     ],
     "name": "lava dive",
-    "id": 81
+    "id": 81,
+    "indexes": [
+      3219,
+      3285,
+      3284,
+      3350,
+      3349,
+      3348,
+      3282,
+      3283,
+      3217,
+      3216,
+      3218
+    ]
   },
   "82": {
     "area": "norfair",
@@ -1939,7 +2439,13 @@
       ]
     ],
     "name": "kronic boost",
-    "id": 82
+    "id": 82,
+    "indexes": [
+      3220,
+      3153,
+      3154,
+      3088
+    ]
   },
   "83": {
     "area": "norfair",
@@ -1962,7 +2468,13 @@
       ]
     ],
     "name": "spikey acid snakes tunnel",
-    "id": 83
+    "id": 83,
+    "indexes": [
+      3152,
+      3151,
+      3150,
+      3149
+    ]
   },
   "84": {
     "area": "norfair",
@@ -1973,7 +2485,10 @@
       ]
     ],
     "name": "nutella refill",
-    "id": 84
+    "id": 84,
+    "indexes": [
+      3148
+    ]
   },
   "85": {
     "area": "norfair",
@@ -1996,7 +2511,13 @@
       ]
     ],
     "name": "acid snakes tunnel",
-    "id": 85
+    "id": 85,
+    "indexes": [
+      3144,
+      3145,
+      3146,
+      3147
+    ]
   },
   "86": {
     "area": "norfair",
@@ -2075,7 +2596,27 @@
       ]
     ],
     "name": "crocomire speedway",
-    "id": 86
+    "id": 86,
+    "indexes": [
+      2999,
+      3000,
+      3001,
+      3002,
+      3003,
+      3069,
+      3070,
+      3071,
+      3137,
+      3136,
+      3138,
+      3139,
+      3140,
+      3141,
+      3142,
+      3011,
+      3077,
+      3143
+    ]
   },
   "87": {
     "area": "norfair",
@@ -2086,7 +2627,10 @@
       ]
     ],
     "name": "crocomire save",
-    "id": 87
+    "id": 87,
+    "indexes": [
+      3078
+    ]
   },
   "88": {
     "area": "norfair",
@@ -2125,7 +2669,17 @@
       ]
     ],
     "name": "crocomire",
-    "id": 88
+    "id": 88,
+    "indexes": [
+      3213,
+      3212,
+      3211,
+      3210,
+      3209,
+      3208,
+      3207,
+      3206
+    ]
   },
   "89": {
     "area": "norfair",
@@ -2148,7 +2702,13 @@
       ]
     ],
     "name": "post crocomire farming",
-    "id": 89
+    "id": 89,
+    "indexes": [
+      3205,
+      3204,
+      3270,
+      3271
+    ]
   },
   "90": {
     "area": "norfair",
@@ -2159,7 +2719,10 @@
       ]
     ],
     "name": "post crocomire power bomb",
-    "id": 90
+    "id": 90,
+    "indexes": [
+      3203
+    ]
   },
   "91": {
     "area": "norfair",
@@ -2170,7 +2733,10 @@
       ]
     ],
     "name": "post crocomire save",
-    "id": 91
+    "id": 91,
+    "indexes": [
+      3272
+    ]
   },
   "92": {
     "area": "norfair",
@@ -2197,7 +2763,14 @@
       ]
     ],
     "name": "post crocomire shaft",
-    "id": 92
+    "id": 92,
+    "indexes": [
+      3336,
+      3402,
+      3468,
+      3534,
+      3600
+    ]
   },
   "93": {
     "area": "norfair",
@@ -2220,7 +2793,13 @@
       ]
     ],
     "name": "post crocomire missile",
-    "id": 93
+    "id": 93,
+    "indexes": [
+      3535,
+      3536,
+      3537,
+      3538
+    ]
   },
   "94": {
     "area": "norfair",
@@ -2299,7 +2878,27 @@
       ]
     ],
     "name": "post crocomire jump",
-    "id": 94
+    "id": 94,
+    "indexes": [
+      3660,
+      3594,
+      3528,
+      3529,
+      3530,
+      3531,
+      3532,
+      3598,
+      3664,
+      3663,
+      3662,
+      3661,
+      3595,
+      3596,
+      3597,
+      3665,
+      3666,
+      3667
+    ]
   },
   "95": {
     "area": "norfair",
@@ -2318,7 +2917,12 @@
       ]
     ],
     "name": "grappling beam room",
-    "id": 95
+    "id": 95,
+    "indexes": [
+      3593,
+      3527,
+      3461
+    ]
   },
   "96": {
     "area": "norfair",
@@ -2333,7 +2937,11 @@
       ]
     ],
     "name": "grappling tutorial 1",
-    "id": 96
+    "id": 96,
+    "indexes": [
+      3463,
+      3462
+    ]
   },
   "97": {
     "area": "norfair",
@@ -2352,7 +2960,12 @@
       ]
     ],
     "name": "grappling tutorial 2",
-    "id": 97
+    "id": 97,
+    "indexes": [
+      3464,
+      3398,
+      3332
+    ]
   },
   "98": {
     "area": "norfair",
@@ -2383,7 +2996,15 @@
       ]
     ],
     "name": "grappling tutorial 3",
-    "id": 98
+    "id": 98,
+    "indexes": [
+      3401,
+      3400,
+      3399,
+      3333,
+      3334,
+      3335
+    ]
   },
   "99": {
     "area": "norfair",
@@ -2402,7 +3023,12 @@
       ]
     ],
     "name": "red pirate shaft",
-    "id": 99
+    "id": 99,
+    "indexes": [
+      2949,
+      3015,
+      3081
+    ]
   },
   "100": {
     "area": "norfair",
@@ -2425,7 +3051,13 @@
       ]
     ],
     "name": "upper norfair farming",
-    "id": 100
+    "id": 100,
+    "indexes": [
+      2951,
+      2950,
+      2884,
+      2885
+    ]
   },
   "101": {
     "area": "norfair",
@@ -2444,7 +3076,12 @@
       ]
     ],
     "name": "purple shaft",
-    "id": 101
+    "id": 101,
+    "indexes": [
+      2952,
+      3018,
+      3084
+    ]
   },
   "102": {
     "area": "norfair",
@@ -2455,7 +3092,10 @@
       ]
     ],
     "name": "purple farming",
-    "id": 102
+    "id": 102,
+    "indexes": [
+      3019
+    ]
   },
   "103": {
     "area": "norfair",
@@ -2474,7 +3114,12 @@
       ]
     ],
     "name": "magdollite tunnel",
-    "id": 103
+    "id": 103,
+    "indexes": [
+      3087,
+      3086,
+      3085
+    ]
   },
   "104": {
     "area": "norfair",
@@ -2513,7 +3158,17 @@
       ]
     ],
     "name": "frog speedway",
-    "id": 104
+    "id": 104,
+    "indexes": [
+      2883,
+      2882,
+      2881,
+      2880,
+      2879,
+      2878,
+      2877,
+      2876
+    ]
   },
   "105": {
     "area": "norfair",
@@ -2524,7 +3179,10 @@
       ]
     ],
     "name": "frog save",
-    "id": 105
+    "id": 105,
+    "indexes": [
+      2875
+    ]
   },
   "106": {
     "area": "norfair",
@@ -2563,7 +3221,17 @@
       ]
     ],
     "name": "crocomire escape",
-    "id": 106
+    "id": 106,
+    "indexes": [
+      2944,
+      2943,
+      2942,
+      2941,
+      3007,
+      3008,
+      3009,
+      3010
+    ]
   },
   "107": {
     "area": "norfair",
@@ -2582,7 +3250,12 @@
       ]
     ],
     "name": "high jump energy tank",
-    "id": 107
+    "id": 107,
+    "indexes": [
+      2873,
+      2872,
+      2938
+    ]
   },
   "108": {
     "area": "norfair",
@@ -2593,7 +3266,10 @@
       ]
     ],
     "name": "high jump boots",
-    "id": 108
+    "id": 108,
+    "indexes": [
+      2937
+    ]
   },
   "109": {
     "area": "norfair",
@@ -2604,7 +3280,10 @@
       ]
     ],
     "name": "norfair map",
-    "id": 109
+    "id": 109,
+    "indexes": [
+      2807
+    ]
   },
   "110": {
     "area": "norfair",
@@ -2651,7 +3330,19 @@
       ]
     ],
     "name": "ice beam gate",
-    "id": 110
+    "id": 110,
+    "indexes": [
+      2741,
+      2740,
+      2739,
+      2738,
+      2606,
+      2672,
+      2804,
+      2803,
+      2802,
+      2801
+    ]
   },
   "111": {
     "area": "norfair",
@@ -2674,7 +3365,13 @@
       ]
     ],
     "name": "crumble shaft",
-    "id": 111
+    "id": 111,
+    "indexes": [
+      2800,
+      2866,
+      2932,
+      2998
+    ]
   },
   "112": {
     "area": "norfair",
@@ -2689,7 +3386,11 @@
       ]
     ],
     "name": "ice beam acid",
-    "id": 112
+    "id": 112,
+    "indexes": [
+      2737,
+      2736
+    ]
   },
   "113": {
     "area": "norfair",
@@ -2712,7 +3413,13 @@
       ]
     ],
     "name": "ice beam snake",
-    "id": 113
+    "id": 113,
+    "indexes": [
+      2735,
+      2669,
+      2603,
+      2670
+    ]
   },
   "114": {
     "area": "norfair",
@@ -2723,7 +3430,10 @@
       ]
     ],
     "name": "ice beam",
-    "id": 114
+    "id": 114,
+    "indexes": [
+      2671
+    ]
   },
   "115": {
     "area": "norfair",
@@ -2738,7 +3448,11 @@
       ]
     ],
     "name": "ice beam tutorial",
-    "id": 115
+    "id": 115,
+    "indexes": [
+      2605,
+      2604
+    ]
   },
   "116": {
     "area": "brinstar",
@@ -2753,7 +3467,11 @@
       ]
     ],
     "name": "x-ray scope",
-    "id": 116
+    "id": 116,
+    "indexes": [
+      2196,
+      2197
+    ]
   },
   "117": {
     "area": "brinstar",
@@ -2808,7 +3526,21 @@
       ]
     ],
     "name": "red brinstar fireflea",
-    "id": 117
+    "id": 117,
+    "indexes": [
+      2205,
+      2204,
+      2203,
+      2202,
+      2201,
+      2200,
+      2199,
+      2198,
+      2264,
+      2265,
+      2268,
+      2269
+    ]
   },
   "118": {
     "area": "brinstar",
@@ -2839,7 +3571,15 @@
       ]
     ],
     "name": "noob bridge",
-    "id": 118
+    "id": 118,
+    "indexes": [
+      2073,
+      2072,
+      2071,
+      2070,
+      2069,
+      2068
+    ]
   },
   "119": {
     "area": "brinstar",
@@ -2902,7 +3642,23 @@
       ]
     ],
     "name": "green hill zone",
-    "id": 119
+    "id": 119,
+    "indexes": [
+      1862,
+      1863,
+      1928,
+      1929,
+      1930,
+      1996,
+      1931,
+      1997,
+      1998,
+      2064,
+      1999,
+      2065,
+      2066,
+      2067
+    ]
   },
   "120": {
     "area": "brinstar",
@@ -2941,7 +3697,17 @@
       ]
     ],
     "name": "morph ball room",
-    "id": 120
+    "id": 120,
+    "indexes": [
+      1871,
+      1870,
+      1869,
+      1868,
+      1867,
+      1866,
+      1865,
+      1864
+    ]
   },
   "121": {
     "area": "brinstar",
@@ -2956,7 +3722,11 @@
       ]
     ],
     "name": "construction zone",
-    "id": 121
+    "id": 121,
+    "indexes": [
+      1872,
+      1938
+    ]
   },
   "122": {
     "area": "brinstar",
@@ -2967,7 +3737,10 @@
       ]
     ],
     "name": "first missile",
-    "id": 122
+    "id": 122,
+    "indexes": [
+      1937
+    ]
   },
   "123": {
     "area": "brinstar",
@@ -2994,7 +3767,14 @@
       ]
     ],
     "name": "blue brinstar energy tank",
-    "id": 123
+    "id": 123,
+    "indexes": [
+      1873,
+      1874,
+      1875,
+      1743,
+      1809
+    ]
   },
   "124": {
     "area": "brinstar",
@@ -3009,7 +3789,11 @@
       ]
     ],
     "name": "blue brinstar boulder",
-    "id": 124
+    "id": 124,
+    "indexes": [
+      1742,
+      1741
+    ]
   },
   "125": {
     "area": "brinstar",
@@ -3020,7 +3804,10 @@
       ]
     ],
     "name": "blue brinstar double missile room",
-    "id": 125
+    "id": 125,
+    "indexes": [
+      1740
+    ]
   },
   "126": {
     "area": "elevator",
@@ -3067,7 +3854,19 @@
       ]
     ],
     "name": "first elevator",
-    "id": 126
+    "id": 126,
+    "indexes": [
+      1209,
+      1275,
+      1341,
+      1407,
+      1473,
+      1539,
+      1737,
+      1671,
+      1605,
+      1803
+    ]
   },
   "127": {
     "area": "crateria",
@@ -3078,7 +3877,10 @@
       ]
     ],
     "name": "first elevator",
-    "id": 127
+    "id": 127,
+    "indexes": [
+      1143
+    ]
   },
   "128": {
     "area": "crateria",
@@ -3101,7 +3903,13 @@
       ]
     ],
     "name": "pit room",
-    "id": 128
+    "id": 128,
+    "indexes": [
+      1142,
+      1141,
+      1140,
+      1206
+    ]
   },
   "129": {
     "area": "crateria",
@@ -3156,7 +3964,21 @@
       ]
     ],
     "name": "climb",
-    "id": 129
+    "id": 129,
+    "indexes": [
+      1074,
+      1139,
+      1138,
+      1073,
+      611,
+      612,
+      677,
+      743,
+      809,
+      875,
+      941,
+      1007
+    ]
   },
   "130": {
     "area": "crateria",
@@ -3219,7 +4041,23 @@
       ]
     ],
     "name": "crateria super room",
-    "id": 130
+    "id": 130,
+    "indexes": [
+      613,
+      614,
+      615,
+      616,
+      748,
+      682,
+      814,
+      880,
+      946,
+      1012,
+      1078,
+      1077,
+      1076,
+      1075
+    ]
   },
   "131": {
     "area": "crateria",
@@ -3234,7 +4072,11 @@
       ]
     ],
     "name": "final missile bombway",
-    "id": 131
+    "id": 131,
+    "indexes": [
+      478,
+      477
+    ]
   },
   "132": {
     "area": "crateria",
@@ -3245,7 +4087,10 @@
       ]
     ],
     "name": "the final missile",
-    "id": 132
+    "id": 132,
+    "indexes": [
+      476
+    ]
   },
   "133": {
     "area": "crateria",
@@ -3256,7 +4101,10 @@
       ]
     ],
     "name": "crateria save",
-    "id": 133
+    "id": 133,
+    "indexes": [
+      412
+    ]
   },
   "134": {
     "area": "crateria",
@@ -3303,7 +4151,19 @@
       ]
     ],
     "name": "terminator",
-    "id": 134
+    "id": 134,
+    "indexes": [
+      406,
+      407,
+      341,
+      408,
+      342,
+      343,
+      277,
+      278,
+      344,
+      279
+    ]
   },
   "135": {
     "area": "crateria",
@@ -3338,7 +4198,16 @@
       ]
     ],
     "name": "green pirates shaft",
-    "id": 135
+    "id": 135,
+    "indexes": [
+      537,
+      471,
+      405,
+      339,
+      273,
+      207,
+      141
+    ]
   },
   "136": {
     "area": "crateria",
@@ -3369,7 +4238,15 @@
       ]
     ],
     "name": "gauntlet energy tank",
-    "id": 136
+    "id": 136,
+    "indexes": [
+      142,
+      143,
+      144,
+      145,
+      147,
+      146
+    ]
   },
   "137": {
     "area": "crateria",
@@ -3396,7 +4273,14 @@
       ]
     ],
     "name": "gauntlet entrance",
-    "id": 137
+    "id": 137,
+    "indexes": [
+      152,
+      151,
+      149,
+      150,
+      148
+    ]
   },
   "138": {
     "area": "crateria",
@@ -3559,7 +4443,48 @@
       ]
     ],
     "name": "landing site",
-    "id": 138
+    "id": 138,
+    "indexes": [
+      293,
+      227,
+      161,
+      95,
+      28,
+      29,
+      27,
+      26,
+      25,
+      24,
+      89,
+      155,
+      154,
+      153,
+      285,
+      286,
+      287,
+      221,
+      23,
+      291,
+      292,
+      290,
+      289,
+      288,
+      222,
+      223,
+      224,
+      225,
+      226,
+      160,
+      159,
+      158,
+      157,
+      156,
+      90,
+      91,
+      92,
+      93,
+      94
+    ]
   },
   "139": {
     "area": "crateria",
@@ -3574,7 +4499,11 @@
       ]
     ],
     "name": "crateria power bomb",
-    "id": 139
+    "id": 139,
+    "indexes": [
+      96,
+      97
+    ]
   },
   "140": {
     "area": "crateria",
@@ -3749,7 +4678,51 @@
       ]
     ],
     "name": "west ocean",
-    "id": 140
+    "id": 140,
+    "indexes": [
+      366,
+      367,
+      368,
+      369,
+      370,
+      372,
+      371,
+      373,
+      307,
+      305,
+      306,
+      304,
+      303,
+      301,
+      302,
+      300,
+      234,
+      239,
+      238,
+      237,
+      236,
+      235,
+      169,
+      170,
+      105,
+      104,
+      103,
+      102,
+      168,
+      36,
+      37,
+      38,
+      43,
+      42,
+      41,
+      40,
+      39,
+      106,
+      107,
+      108,
+      109,
+      173
+    ]
   },
   "141": {
     "area": "crateria",
@@ -3764,7 +4737,11 @@
       ]
     ],
     "name": "bowling alley path",
-    "id": 141
+    "id": 141,
+    "indexes": [
+      171,
+      172
+    ]
   },
   "142": {
     "area": "wrecked-ship",
@@ -3831,7 +4808,24 @@
       ]
     ],
     "name": "bowling alley",
-    "id": 142
+    "id": 142,
+    "indexes": [
+      174,
+      175,
+      176,
+      177,
+      178,
+      241,
+      242,
+      243,
+      244,
+      245,
+      179,
+      113,
+      112,
+      111,
+      110
+    ]
   },
   "143": {
     "area": "wrecked-ship",
@@ -3842,7 +4836,10 @@
       ]
     ],
     "name": "gravity suit",
-    "id": 143
+    "id": 143,
+    "indexes": [
+      240
+    ]
   },
   "144": {
     "area": "wrecked-ship",
@@ -3877,7 +4874,16 @@
       ]
     ],
     "name": "attic",
-    "id": 144
+    "id": 144,
+    "indexes": [
+      50,
+      49,
+      48,
+      47,
+      46,
+      45,
+      44
+    ]
   },
   "145": {
     "area": "wrecked-ship",
@@ -3896,7 +4902,12 @@
       ]
     ],
     "name": "assembly line",
-    "id": 145
+    "id": 145,
+    "indexes": [
+      53,
+      52,
+      51
+    ]
   },
   "146": {
     "area": "wrecked-ship",
@@ -3955,7 +4966,22 @@
       ]
     ],
     "name": "wrecked ship main shaft",
-    "id": 146
+    "id": 146,
+    "indexes": [
+      114,
+      180,
+      246,
+      312,
+      378,
+      444,
+      510,
+      576,
+      511,
+      443,
+      442,
+      441,
+      440
+    ]
   },
   "147": {
     "area": "wrecked-ship",
@@ -3978,7 +5004,13 @@
       ]
     ],
     "name": "wrecked ship entrance",
-    "id": 147
+    "id": 147,
+    "indexes": [
+      311,
+      310,
+      309,
+      308
+    ]
   },
   "148": {
     "area": "wrecked-ship",
@@ -3989,7 +5021,10 @@
       ]
     ],
     "name": "wrecked ship west super",
-    "id": 148
+    "id": 148,
+    "indexes": [
+      509
+    ]
   },
   "149": {
     "area": "wrecked-ship",
@@ -4012,7 +5047,13 @@
       ]
     ],
     "name": "wrecked ship east super",
-    "id": 149
+    "id": 149,
+    "indexes": [
+      512,
+      513,
+      514,
+      515
+    ]
   },
   "150": {
     "area": "wrecked-ship",
@@ -4023,7 +5064,10 @@
       ]
     ],
     "name": "wrecked ship map",
-    "id": 150
+    "id": 150,
+    "indexes": [
+      639
+    ]
   },
   "151": {
     "area": "wrecked-ship",
@@ -4050,7 +5094,14 @@
       ]
     ],
     "name": "basement",
-    "id": 151
+    "id": 151,
+    "indexes": [
+      644,
+      643,
+      641,
+      642,
+      640
+    ]
   },
   "152": {
     "area": "wrecked-ship",
@@ -4061,7 +5112,10 @@
       ]
     ],
     "name": "phantoon's",
-    "id": 152
+    "id": 152,
+    "indexes": [
+      645
+    ]
   },
   "153": {
     "area": "wrecked-ship",
@@ -4072,7 +5126,10 @@
       ]
     ],
     "name": "wrecked ship save",
-    "id": 153
+    "id": 153,
+    "indexes": [
+      313
+    ]
   },
   "154": {
     "area": "wrecked-ship",
@@ -4087,7 +5144,11 @@
       ]
     ],
     "name": "sponge bath",
-    "id": 154
+    "id": 154,
+    "indexes": [
+      380,
+      379
+    ]
   },
   "155": {
     "area": "wrecked-ship",
@@ -4102,7 +5163,11 @@
       ]
     ],
     "name": "spikey death",
-    "id": 155
+    "id": 155,
+    "indexes": [
+      382,
+      381
+    ]
   },
   "156": {
     "area": "wrecked-ship",
@@ -4121,7 +5186,12 @@
       ]
     ],
     "name": "electric death",
-    "id": 156
+    "id": 156,
+    "indexes": [
+      383,
+      317,
+      251
+    ]
   },
   "157": {
     "area": "wrecked-ship",
@@ -4152,7 +5222,15 @@
       ]
     ],
     "name": "wrecked ship energy tank",
-    "id": 157
+    "id": 157,
+    "indexes": [
+      250,
+      249,
+      248,
+      314,
+      315,
+      316
+    ]
   },
   "158": {
     "area": "crateria",
@@ -4215,7 +5293,23 @@
       ]
     ],
     "name": "east ocean",
-    "id": 158
+    "id": 158,
+    "indexes": [
+      324,
+      323,
+      322,
+      321,
+      320,
+      319,
+      318,
+      384,
+      385,
+      386,
+      387,
+      388,
+      389,
+      390
+    ]
   },
   "159": {
     "area": "crateria",
@@ -4238,7 +5332,13 @@
       ]
     ],
     "name": "forgotten highway kago",
-    "id": 159
+    "id": 159,
+    "indexes": [
+      325,
+      391,
+      457,
+      523
+    ]
   },
   "160": {
     "area": "crateria",
@@ -4277,7 +5377,17 @@
       ]
     ],
     "name": "crab maze",
-    "id": 160
+    "id": 160,
+    "indexes": [
+      589,
+      655,
+      654,
+      588,
+      587,
+      586,
+      652,
+      653
+    ]
   },
   "161": {
     "area": "crateria",
@@ -4288,7 +5398,10 @@
       ]
     ],
     "name": "forgotten highway elbow",
-    "id": 161
+    "id": 161,
+    "indexes": [
+      651
+    ]
   },
   "162": {
     "area": "crateria",
@@ -4299,7 +5412,10 @@
       ]
     ],
     "name": "forgotten highway elevator",
-    "id": 162
+    "id": 162,
+    "indexes": [
+      717
+    ]
   },
   "163": {
     "area": "elevator",
@@ -4342,7 +5458,18 @@
       ]
     ],
     "name": "forgotten highway",
-    "id": 163
+    "id": 163,
+    "indexes": [
+      783,
+      849,
+      981,
+      915,
+      1047,
+      1113,
+      1179,
+      1245,
+      1311
+    ]
   },
   "164": {
     "area": "maridia",
@@ -4365,7 +5492,13 @@
       ]
     ],
     "name": "maridia elevator",
-    "id": 164
+    "id": 164,
+    "indexes": [
+      1377,
+      1443,
+      1509,
+      1575
+    ]
   },
   "165": {
     "area": "maridia",
@@ -4376,7 +5509,10 @@
       ]
     ],
     "name": "forgotten highway save",
-    "id": 165
+    "id": 165,
+    "indexes": [
+      1510
+    ]
   },
   "166": {
     "area": "maridia",
@@ -4411,7 +5547,16 @@
       ]
     ],
     "name": "thread the needle",
-    "id": 166
+    "id": 166,
+    "indexes": [
+      1574,
+      1573,
+      1572,
+      1571,
+      1570,
+      1569,
+      1568
+    ]
   },
   "167": {
     "area": "maridia",
@@ -4422,7 +5567,10 @@
       ]
     ],
     "name": "bug sand hole",
-    "id": 167
+    "id": 167,
+    "indexes": [
+      1567
+    ]
   },
   "168": {
     "area": "maridia",
@@ -4433,7 +5581,10 @@
       ]
     ],
     "name": "plasma beach quicksand",
-    "id": 168
+    "id": 168,
+    "indexes": [
+      1633
+    ]
   },
   "169": {
     "area": "maridia",
@@ -4444,7 +5595,10 @@
       ]
     ],
     "name": "butterfly",
-    "id": 169
+    "id": 169,
+    "indexes": [
+      1699
+    ]
   },
   "170": {
     "area": "maridia",
@@ -4519,7 +5673,26 @@
       ]
     ],
     "name": "plasma spark",
-    "id": 170
+    "id": 170,
+    "indexes": [
+      1698,
+      1697,
+      1696,
+      1630,
+      1632,
+      1631,
+      1565,
+      1566,
+      1500,
+      1499,
+      1433,
+      1367,
+      1366,
+      1432,
+      1498,
+      1564,
+      1497
+    ]
   },
   "171": {
     "area": "maridia",
@@ -4542,7 +5715,13 @@
       ]
     ],
     "name": "kassiuz",
-    "id": 171
+    "id": 171,
+    "indexes": [
+      1236,
+      1302,
+      1368,
+      1434
+    ]
   },
   "172": {
     "area": "maridia",
@@ -4553,7 +5732,10 @@
       ]
     ],
     "name": "plasma tutorial",
-    "id": 172
+    "id": 172,
+    "indexes": [
+      1237
+    ]
   },
   "173": {
     "area": "maridia",
@@ -4584,7 +5766,15 @@
       ]
     ],
     "name": "plasma",
-    "id": 173
+    "id": 173,
+    "indexes": [
+      1238,
+      1239,
+      1371,
+      1305,
+      1304,
+      1370
+    ]
   },
   "174": {
     "area": "elevator",
@@ -4611,7 +5801,14 @@
       ]
     ],
     "name": "the toilet",
-    "id": 174
+    "id": 174,
+    "indexes": [
+      2025,
+      2091,
+      1695,
+      1629,
+      1563
+    ]
   },
   "175": {
     "area": "maridia",
@@ -4630,7 +5827,12 @@
       ]
     ],
     "name": "oasis",
-    "id": 175
+    "id": 175,
+    "indexes": [
+      2157,
+      2223,
+      2289
+    ]
   },
   "176": {
     "area": "maridia",
@@ -4653,7 +5855,13 @@
       ]
     ],
     "name": "west sand hall",
-    "id": 176
+    "id": 176,
+    "indexes": [
+      2288,
+      2287,
+      2286,
+      2285
+    ]
   },
   "177": {
     "area": "maridia",
@@ -4672,7 +5880,12 @@
       ]
     ],
     "name": "east sand hall",
-    "id": 177
+    "id": 177,
+    "indexes": [
+      2292,
+      2291,
+      2290
+    ]
   },
   "178": {
     "area": "maridia",
@@ -4711,7 +5924,17 @@
       ]
     ],
     "name": "pants",
-    "id": 178
+    "id": 178,
+    "indexes": [
+      2293,
+      2228,
+      2294,
+      2227,
+      2161,
+      2162,
+      2096,
+      2095
+    ]
   },
   "179": {
     "area": "maridia",
@@ -4734,7 +5957,13 @@
       ]
     ],
     "name": "shaktool",
-    "id": 179
+    "id": 179,
+    "indexes": [
+      2232,
+      2231,
+      2230,
+      2229
+    ]
   },
   "180": {
     "area": "maridia",
@@ -4753,7 +5982,12 @@
       ]
     ],
     "name": "springball",
-    "id": 180
+    "id": 180,
+    "indexes": [
+      2233,
+      2299,
+      2300
+    ]
   },
   "181": {
     "area": "maridia",
@@ -4776,7 +6010,13 @@
       ]
     ],
     "name": "east sand hole",
-    "id": 181
+    "id": 181,
+    "indexes": [
+      2158,
+      2159,
+      2225,
+      2224
+    ]
   },
   "182": {
     "area": "maridia",
@@ -4791,7 +6031,11 @@
       ]
     ],
     "name": "east aqueduct quicksand",
-    "id": 182
+    "id": 182,
+    "indexes": [
+      2026,
+      2092
+    ]
   },
   "183": {
     "area": "maridia",
@@ -4806,7 +6050,11 @@
       ]
     ],
     "name": "west aqueduct quicksand",
-    "id": 183
+    "id": 183,
+    "indexes": [
+      2024,
+      2090
+    ]
   },
   "184": {
     "area": "maridia",
@@ -4829,7 +6077,13 @@
       ]
     ],
     "name": "west sand hole",
-    "id": 184
+    "id": 184,
+    "indexes": [
+      2156,
+      2155,
+      2221,
+      2222
+    ]
   },
   "185": {
     "area": "maridia",
@@ -4908,7 +6162,27 @@
       ]
     ],
     "name": "aqueduct",
-    "id": 185
+    "id": 185,
+    "indexes": [
+      1830,
+      1829,
+      1828,
+      1827,
+      1826,
+      1825,
+      1891,
+      1892,
+      1893,
+      1894,
+      1895,
+      1896,
+      1962,
+      1961,
+      1960,
+      1959,
+      1958,
+      1957
+    ]
   },
   "186": {
     "area": "maridia",
@@ -4931,7 +6205,13 @@
       ]
     ],
     "name": "below botwoon energy tank",
-    "id": 186
+    "id": 186,
+    "indexes": [
+      1900,
+      1899,
+      1898,
+      1897
+    ]
   },
   "187": {
     "area": "maridia",
@@ -4946,7 +6226,11 @@
       ]
     ],
     "name": "botwoon quicksand",
-    "id": 187
+    "id": 187,
+    "indexes": [
+      1834,
+      1833
+    ]
   },
   "188": {
     "area": "maridia",
@@ -4981,7 +6265,16 @@
       ]
     ],
     "name": "botwoon energy tank",
-    "id": 188
+    "id": 188,
+    "indexes": [
+      1771,
+      1770,
+      1769,
+      1768,
+      1766,
+      1767,
+      1765
+    ]
   },
   "189": {
     "area": "maridia",
@@ -4996,7 +6289,11 @@
       ]
     ],
     "name": "botwoon's",
-    "id": 189
+    "id": 189,
+    "indexes": [
+      1764,
+      1763
+    ]
   },
   "190": {
     "area": "maridia",
@@ -5019,7 +6316,13 @@
       ]
     ],
     "name": "botwoon hallway",
-    "id": 190
+    "id": 190,
+    "indexes": [
+      1762,
+      1761,
+      1760,
+      1759
+    ]
   },
   "191": {
     "area": "maridia",
@@ -5054,7 +6357,16 @@
       ]
     ],
     "name": "halfie climb",
-    "id": 191
+    "id": 191,
+    "indexes": [
+      1776,
+      1775,
+      1774,
+      1773,
+      1772,
+      1706,
+      1640
+    ]
   },
   "192": {
     "area": "maridia",
@@ -5065,7 +6377,10 @@
       ]
     ],
     "name": "maridia missile refill",
-    "id": 192
+    "id": 192,
+    "indexes": [
+      1777
+    ]
   },
   "193": {
     "area": "maridia",
@@ -5112,7 +6427,19 @@
       ]
     ],
     "name": "east cactus alley",
-    "id": 193
+    "id": 193,
+    "indexes": [
+      1639,
+      1638,
+      1637,
+      1636,
+      1635,
+      1701,
+      1702,
+      1703,
+      1704,
+      1705
+    ]
   },
   "194": {
     "area": "maridia",
@@ -5175,7 +6502,23 @@
       ]
     ],
     "name": "coloseum",
-    "id": 194
+    "id": 194,
+    "indexes": [
+      1647,
+      1713,
+      1712,
+      1646,
+      1711,
+      1645,
+      1644,
+      1710,
+      1709,
+      1643,
+      1642,
+      1708,
+      1707,
+      1641
+    ]
   },
   "195": {
     "area": "maridia",
@@ -5186,7 +6529,10 @@
       ]
     ],
     "name": "draygon save",
-    "id": 195
+    "id": 195,
+    "indexes": [
+      1648
+    ]
   },
   "196": {
     "area": "maridia",
@@ -5197,7 +6543,10 @@
       ]
     ],
     "name": "maridia health refill",
-    "id": 196
+    "id": 196,
+    "indexes": [
+      1649
+    ]
   },
   "197": {
     "area": "maridia",
@@ -5228,7 +6577,15 @@
       ]
     ],
     "name": "the precious",
-    "id": 197
+    "id": 197,
+    "indexes": [
+      1714,
+      1715,
+      1780,
+      1846,
+      1781,
+      1847
+    ]
   },
   "198": {
     "area": "maridia",
@@ -5251,7 +6608,13 @@
       ]
     ],
     "name": "draygon's",
-    "id": 198
+    "id": 198,
+    "indexes": [
+      1845,
+      1844,
+      1910,
+      1911
+    ]
   },
   "199": {
     "area": "maridia",
@@ -5262,7 +6625,10 @@
       ]
     ],
     "name": "space jump",
-    "id": 199
+    "id": 199,
+    "indexes": [
+      1909
+    ]
   },
   "200": {
     "area": "maridia",
@@ -5277,7 +6643,11 @@
       ]
     ],
     "name": "west cactus alley",
-    "id": 200
+    "id": 200,
+    "indexes": [
+      1634,
+      1700
+    ]
   },
   "201": {
     "area": "maridia",
@@ -5288,7 +6658,10 @@
       ]
     ],
     "name": "west sand hall tunnel",
-    "id": 201
+    "id": 201,
+    "indexes": [
+      2284
+    ]
   },
   "202": {
     "area": "maridia",
@@ -5299,7 +6672,10 @@
       ]
     ],
     "name": "maridia map",
-    "id": 202
+    "id": 202,
+    "indexes": [
+      2350
+    ]
   },
   "203": {
     "area": "maridia",
@@ -5314,7 +6690,11 @@
       ]
     ],
     "name": "crab hole",
-    "id": 203
+    "id": 203,
+    "indexes": [
+      2349,
+      2283
+    ]
   },
   "204": {
     "area": "maridia",
@@ -5337,7 +6717,13 @@
       ]
     ],
     "name": "crab tunnel",
-    "id": 204
+    "id": 204,
+    "indexes": [
+      2282,
+      2281,
+      2280,
+      2279
+    ]
   },
   "205": {
     "area": "maridia",
@@ -5416,7 +6802,27 @@
       ]
     ],
     "name": "main street",
-    "id": 205
+    "id": 205,
+    "indexes": [
+      2278,
+      2277,
+      2145,
+      2211,
+      2212,
+      2213,
+      2080,
+      2146,
+      2014,
+      1948,
+      1949,
+      1816,
+      1815,
+      1882,
+      1881,
+      1947,
+      2013,
+      2079
+    ]
   },
   "206": {
     "area": "maridia",
@@ -5471,7 +6877,21 @@
       ]
     ],
     "name": "fish tank",
-    "id": 206
+    "id": 206,
+    "indexes": [
+      2217,
+      2216,
+      2215,
+      2214,
+      2148,
+      2082,
+      2084,
+      2083,
+      2149,
+      2151,
+      2150,
+      2085
+    ]
   },
   "207": {
     "area": "maridia",
@@ -5514,7 +6934,18 @@
       ]
     ],
     "name": "mama turtle",
-    "id": 207
+    "id": 207,
+    "indexes": [
+      2218,
+      2219,
+      2220,
+      2154,
+      2153,
+      2087,
+      2088,
+      2022,
+      2021
+    ]
   },
   "208": {
     "area": "maridia",
@@ -5601,7 +7032,29 @@
       ]
     ],
     "name": "mt. everest",
-    "id": 208
+    "id": 208,
+    "indexes": [
+      2019,
+      2018,
+      2017,
+      2016,
+      1950,
+      1884,
+      1883,
+      1818,
+      1817,
+      1819,
+      1820,
+      1821,
+      1822,
+      1888,
+      1887,
+      1886,
+      1885,
+      1951,
+      1952,
+      1953
+    ]
   },
   "209": {
     "area": "maridia",
@@ -5636,7 +7089,16 @@
       ]
     ],
     "name": "crab shaft",
-    "id": 209
+    "id": 209,
+    "indexes": [
+      1691,
+      1757,
+      1823,
+      1889,
+      1890,
+      1758,
+      1824
+    ]
   },
   "210": {
     "area": "maridia",
@@ -5647,7 +7109,10 @@
       ]
     ],
     "name": "aqueduct save",
-    "id": 210
+    "id": 210,
+    "indexes": [
+      1956
+    ]
   },
   "211": {
     "area": "maridia",
@@ -5698,7 +7163,20 @@
       ]
     ],
     "name": "pseudo plasma spark",
-    "id": 211
+    "id": 211,
+    "indexes": [
+      1627,
+      1626,
+      1625,
+      1559,
+      1493,
+      1494,
+      1495,
+      1496,
+      1562,
+      1561,
+      1560
+    ]
   },
   "212": {
     "area": "maridia",
@@ -5725,7 +7203,14 @@
       ]
     ],
     "name": "northwest maridia bug",
-    "id": 212
+    "id": 212,
+    "indexes": [
+      1558,
+      1557,
+      1556,
+      1489,
+      1555
+    ]
   },
   "213": {
     "area": "maridia",
@@ -5748,7 +7233,13 @@
       ]
     ],
     "name": "watering hole",
-    "id": 213
+    "id": 213,
+    "indexes": [
+      1488,
+      1619,
+      1553,
+      1487
+    ]
   },
   "214": {
     "area": "maridia",
@@ -5771,7 +7262,13 @@
       ]
     ],
     "name": "red fish room",
-    "id": 214
+    "id": 214,
+    "indexes": [
+      1685,
+      1686,
+      1687,
+      1753
+    ]
   },
   "215": {
     "area": "brinstar",
@@ -5790,7 +7287,12 @@
       ]
     ],
     "name": "spore spawn",
-    "id": 215
+    "id": 215,
+    "indexes": [
+      1403,
+      1337,
+      1271
+    ]
   },
   "216": {
     "area": "brinstar",
@@ -5841,7 +7343,20 @@
       ]
     ],
     "name": "spore spawn super",
-    "id": 216
+    "id": 216,
+    "indexes": [
+      1272,
+      1273,
+      1339,
+      1471,
+      1405,
+      1603,
+      1537,
+      1735,
+      1669,
+      1801,
+      1800
+    ]
   },
   "217": {
     "area": "brinstar",
@@ -5860,7 +7375,12 @@
       ]
     ],
     "name": "spore spawn farming",
-    "id": 217
+    "id": 217,
+    "indexes": [
+      1799,
+      1797,
+      1798
+    ]
   },
   "218": {
     "area": "brinstar",
@@ -5951,7 +7471,30 @@
       ]
     ],
     "name": "big pink",
-    "id": 218
+    "id": 218,
+    "indexes": [
+      1796,
+      1795,
+      1861,
+      1860,
+      1926,
+      1794,
+      1728,
+      1729,
+      1663,
+      1662,
+      1596,
+      1597,
+      1531,
+      1530,
+      1464,
+      1465,
+      1463,
+      1925,
+      1924,
+      1990,
+      2056
+    ]
   },
   "219": {
     "area": "brinstar",
@@ -5962,7 +7505,10 @@
       ]
     ],
     "name": "big pink save",
-    "id": 219
+    "id": 219,
+    "indexes": [
+      1462
+    ]
   },
   "220": {
     "area": "brinstar",
@@ -5985,7 +7531,13 @@
       ]
     ],
     "name": "pink brinstar hopper",
-    "id": 220
+    "id": 220,
+    "indexes": [
+      1730,
+      1731,
+      1665,
+      1664
+    ]
   },
   "221": {
     "area": "brinstar",
@@ -5996,7 +7548,10 @@
       ]
     ],
     "name": "hoptank",
-    "id": 221
+    "id": 221,
+    "indexes": [
+      1732
+    ]
   },
   "222": {
     "area": "brinstar",
@@ -6019,7 +7574,13 @@
       ]
     ],
     "name": "spore spawn kihunter",
-    "id": 222
+    "id": 222,
+    "indexes": [
+      1469,
+      1468,
+      1467,
+      1466
+    ]
   },
   "223": {
     "area": "brinstar",
@@ -6042,7 +7603,13 @@
       ]
     ],
     "name": "pink brinstar power bomb",
-    "id": 223
+    "id": 223,
+    "indexes": [
+      1661,
+      1660,
+      1726,
+      1727
+    ]
   },
   "224": {
     "area": "brinstar",
@@ -6117,7 +7684,26 @@
       ]
     ],
     "name": "dachora",
-    "id": 224
+    "id": 224,
+    "indexes": [
+      1589,
+      1590,
+      1592,
+      1591,
+      1593,
+      1594,
+      1595,
+      1659,
+      1725,
+      1791,
+      1857,
+      1923,
+      1989,
+      1988,
+      1987,
+      1986,
+      1985
+    ]
   },
   "225": {
     "area": "brinstar",
@@ -6152,7 +7738,16 @@
       ]
     ],
     "name": "waterway energy tank",
-    "id": 225
+    "id": 225,
+    "indexes": [
+      2055,
+      2054,
+      2051,
+      2052,
+      2053,
+      2049,
+      2050
+    ]
   },
   "226": {
     "area": "brinstar",
@@ -6163,7 +7758,10 @@
       ]
     ],
     "name": "dachora energy charge",
-    "id": 226
+    "id": 226,
+    "indexes": [
+      1984
+    ]
   },
   "227": {
     "area": "brinstar",
@@ -6238,7 +7836,26 @@
       ]
     ],
     "name": "green brinstar main shaft",
-    "id": 227
+    "id": 227,
+    "indexes": [
+      1324,
+      1390,
+      1456,
+      1522,
+      1588,
+      1654,
+      1720,
+      1786,
+      1852,
+      1655,
+      1656,
+      1657,
+      1722,
+      1788,
+      1854,
+      1920,
+      1853
+    ]
   },
   "228": {
     "area": "brinstar",
@@ -6265,7 +7882,14 @@
       ]
     ],
     "name": "green brinstar fireflea",
-    "id": 228
+    "id": 228,
+    "indexes": [
+      1587,
+      1586,
+      1585,
+      1651,
+      1652
+    ]
   },
   "229": {
     "area": "brinstar",
@@ -6276,7 +7900,10 @@
       ]
     ],
     "name": "green brinstar missile station",
-    "id": 229
+    "id": 229,
+    "indexes": [
+      1650
+    ]
   },
   "230": {
     "area": "brinstar",
@@ -6287,7 +7914,10 @@
       ]
     ],
     "name": "green brinstar beetom",
-    "id": 230
+    "id": 230,
+    "indexes": [
+      1851
+    ]
   },
   "231": {
     "area": "brinstar",
@@ -6322,7 +7952,16 @@
       ]
     ],
     "name": "etecoon energy tank",
-    "id": 231
+    "id": 231,
+    "indexes": [
+      1919,
+      1918,
+      1917,
+      1916,
+      1849,
+      1915,
+      1850
+    ]
   },
   "232": {
     "area": "brinstar",
@@ -6333,7 +7972,10 @@
       ]
     ],
     "name": "etecoon super",
-    "id": 232
+    "id": 232,
+    "indexes": [
+      1848
+    ]
   },
   "233": {
     "area": "brinstar",
@@ -6344,7 +7986,10 @@
       ]
     ],
     "name": "etecoon save",
-    "id": 233
+    "id": 233,
+    "indexes": [
+      1914
+    ]
   },
   "234": {
     "area": "brinstar",
@@ -6355,7 +8000,10 @@
       ]
     ],
     "name": "green brinstar save",
-    "id": 234
+    "id": 234,
+    "indexes": [
+      1521
+    ]
   },
   "235": {
     "area": "brinstar",
@@ -6366,7 +8014,10 @@
       ]
     ],
     "name": "brinstar map",
-    "id": 235
+    "id": 235,
+    "indexes": [
+      1452
+    ]
   },
   "236": {
     "area": "brinstar",
@@ -6385,7 +8036,12 @@
       ]
     ],
     "name": "brinstar pre-map",
-    "id": 236
+    "id": 236,
+    "indexes": [
+      1455,
+      1454,
+      1453
+    ]
   },
   "237": {
     "area": "brinstar",
@@ -6416,7 +8072,15 @@
       ]
     ],
     "name": "early supers",
-    "id": 237
+    "id": 237,
+    "indexes": [
+      1459,
+      1393,
+      1392,
+      1391,
+      1457,
+      1458
+    ]
   },
   "238": {
     "area": "brinstar",
@@ -6431,7 +8095,11 @@
       ]
     ],
     "name": "brinstar reserve tank",
-    "id": 238
+    "id": 238,
+    "indexes": [
+      1460,
+      1461
+    ]
   },
   "239": {
     "area": "elevator",
@@ -6482,7 +8150,20 @@
       ]
     ],
     "name": "green brinstar",
-    "id": 239
+    "id": 239,
+    "indexes": [
+      598,
+      664,
+      730,
+      796,
+      928,
+      862,
+      994,
+      1060,
+      1126,
+      1192,
+      1258
+    ]
   },
   "240": {
     "area": "crateria",
@@ -6493,7 +8174,10 @@
       ]
     ],
     "name": "green brinstar elevator",
-    "id": 240
+    "id": 240,
+    "indexes": [
+      532
+    ]
   },
   "241": {
     "area": "crateria",
@@ -6516,7 +8200,13 @@
       ]
     ],
     "name": "lower mushrooms",
-    "id": 241
+    "id": 241,
+    "indexes": [
+      536,
+      535,
+      534,
+      533
+    ]
   },
   "242": {
     "area": "crateria",
@@ -6543,7 +8233,14 @@
       ]
     ],
     "name": "statues hallway",
-    "id": 242
+    "id": 242,
+    "indexes": [
+      538,
+      539,
+      540,
+      542,
+      541
+    ]
   },
   "243": {
     "area": "crateria",
@@ -6558,7 +8255,11 @@
       ]
     ],
     "name": "statues room",
-    "id": 243
+    "id": 243,
+    "indexes": [
+      543,
+      609
+    ]
   },
   "244": {
     "area": "elevator",
@@ -6569,7 +8270,10 @@
       ]
     ],
     "name": "statues",
-    "id": 244
+    "id": 244,
+    "indexes": [
+      675
+    ]
   },
   "245": {
     "area": "tourian",
@@ -6584,7 +8288,11 @@
       ]
     ],
     "name": "tourian first",
-    "id": 245
+    "id": 245,
+    "indexes": [
+      741,
+      807
+    ]
   },
   "246": {
     "area": "tourian",
@@ -6595,7 +8303,10 @@
       ]
     ],
     "name": "upper tourian save",
-    "id": 246
+    "id": 246,
+    "indexes": [
+      808
+    ]
   },
   "247": {
     "area": "tourian",
@@ -6626,7 +8337,15 @@
       ]
     ],
     "name": "metroid room 1",
-    "id": 247
+    "id": 247,
+    "indexes": [
+      806,
+      805,
+      804,
+      803,
+      802,
+      801
+    ]
   },
   "248": {
     "area": "tourian",
@@ -6641,7 +8360,11 @@
       ]
     ],
     "name": "metroid room 2",
-    "id": 248
+    "id": 248,
+    "indexes": [
+      800,
+      866
+    ]
   },
   "249": {
     "area": "tourian",
@@ -6672,7 +8395,15 @@
       ]
     ],
     "name": "metroid room 3",
-    "id": 249
+    "id": 249,
+    "indexes": [
+      867,
+      868,
+      869,
+      870,
+      871,
+      872
+    ]
   },
   "250": {
     "area": "tourian",
@@ -6687,7 +8418,11 @@
       ]
     ],
     "name": "metroid room 4",
-    "id": 250
+    "id": 250,
+    "indexes": [
+      873,
+      939
+    ]
   },
   "251": {
     "area": "tourian",
@@ -6702,7 +8437,11 @@
       ]
     ],
     "name": "blue hopper",
-    "id": 251
+    "id": 251,
+    "indexes": [
+      1005,
+      1004
+    ]
   },
   "252": {
     "area": "tourian",
@@ -6717,7 +8456,11 @@
       ]
     ],
     "name": "dust torizo",
-    "id": 252
+    "id": 252,
+    "indexes": [
+      1003,
+      1002
+    ]
   },
   "253": {
     "area": "tourian",
@@ -6740,7 +8483,13 @@
       ]
     ],
     "name": "big boy",
-    "id": 253
+    "id": 253,
+    "indexes": [
+      1001,
+      1000,
+      999,
+      998
+    ]
   },
   "254": {
     "area": "tourian",
@@ -6755,7 +8504,11 @@
       ]
     ],
     "name": "seaweed",
-    "id": 254
+    "id": 254,
+    "indexes": [
+      997,
+      1063
+    ]
   },
   "255": {
     "area": "tourian",
@@ -6766,7 +8519,10 @@
       ]
     ],
     "name": "tourian recharge",
-    "id": 255
+    "id": 255,
+    "indexes": [
+      1062
+    ]
   },
   "256": {
     "area": "tourian",
@@ -6789,7 +8545,13 @@
       ]
     ],
     "name": "tourian eye door",
-    "id": 256
+    "id": 256,
+    "indexes": [
+      1067,
+      1066,
+      1065,
+      1064
+    ]
   },
   "257": {
     "area": "tourian",
@@ -6808,7 +8570,12 @@
       ]
     ],
     "name": "rinka shaft",
-    "id": 257
+    "id": 257,
+    "indexes": [
+      1068,
+      1134,
+      1200
+    ]
   },
   "258": {
     "area": "tourian",
@@ -6819,7 +8586,10 @@
       ]
     ],
     "name": "lower tourian save",
-    "id": 258
+    "id": 258,
+    "indexes": [
+      1133
+    ]
   },
   "259": {
     "area": "tourian",
@@ -6842,7 +8612,13 @@
       ]
     ],
     "name": "mother brain",
-    "id": 259
+    "id": 259,
+    "indexes": [
+      1199,
+      1198,
+      1197,
+      1196
+    ]
   },
   "260": {
     "area": "tourian",
@@ -6857,7 +8633,11 @@
       ]
     ],
     "name": "tourian escape room 1",
-    "id": 260
+    "id": 260,
+    "indexes": [
+      1195,
+      1194
+    ]
   },
   "261": {
     "area": "tourian",
@@ -6872,7 +8652,11 @@
       ]
     ],
     "name": "tourian escape room 2",
-    "id": 261
+    "id": 261,
+    "indexes": [
+      1260,
+      1326
+    ]
   },
   "262": {
     "area": "tourian",
@@ -6927,7 +8711,21 @@
       ]
     ],
     "name": "tourian escape room 3",
-    "id": 262
+    "id": 262,
+    "indexes": [
+      1261,
+      1262,
+      1263,
+      1264,
+      1265,
+      1266,
+      1332,
+      1331,
+      1330,
+      1329,
+      1328,
+      1327
+    ]
   },
   "263": {
     "area": "tourian",
@@ -7006,7 +8804,27 @@
       ]
     ],
     "name": "tourian escape room 4",
-    "id": 263
+    "id": 263,
+    "indexes": [
+      1069,
+      1070,
+      1071,
+      1137,
+      1136,
+      1135,
+      1201,
+      1202,
+      1203,
+      1269,
+      1335,
+      1401,
+      1400,
+      1334,
+      1268,
+      1267,
+      1333,
+      1399
+    ]
   },
   "264": {
     "area": "void",
@@ -7173,6 +8991,48 @@
       ]
     ],
     "name": "void",
-    "id": 264
+    "id": 264,
+    "indexes": [
+      1008,
+      1072,
+      1207,
+      1011,
+      681,
+      678,
+      1490,
+      1554,
+      1620,
+      1431,
+      3159,
+      3659,
+      3592,
+      2234,
+      2366,
+      2226,
+      2691,
+      2692,
+      2693,
+      1130,
+      1129,
+      577,
+      206,
+      208,
+      247,
+      439,
+      508,
+      167,
+      1437,
+      1831,
+      1628,
+      2089,
+      3477,
+      3476,
+      3612,
+      3676,
+      3288,
+      2480,
+      2545,
+      1618
+    ]
   }
 }
