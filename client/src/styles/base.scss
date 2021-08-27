@@ -172,6 +172,21 @@
   }
 }
 
+
+.html-overlay {
+  &__item {
+    @apply absolute cursor-pointer;
+    outline: 5px solid white;
+  }
+  &__screen-mask {
+    @apply absolute;
+    background: red; /* This should never appear! */
+    &-black {
+      @apply bg-black;
+    }
+  }
+}
+
 .selected-room {
   @apply absolute bottom-0 p-2 right-0;
   background: var(--bg);

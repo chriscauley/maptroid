@@ -1,11 +1,18 @@
+import { range } from 'lodash'
+import OpenSeadragon from 'openseadragon'
+
+import Room from '@/models/Room'
+
 export default {
   data() {
     return {
       viewer: null,
       overzoomed: false,
+      current_room: null,
       events: {
         open: (event) => {
           this.viewer = event.eventSource
+          this.onViewerDone?.()
         },
         zoom: (event) => {
           const { world, viewport, drawer } = event.eventSource
@@ -36,6 +43,35 @@ export default {
   computed: {
     viewer_class() {
       return ['viewer-wrapper', { '-overzoomed': this.overzoomed }]
+    },
+    visible_xys() {
+      const [x, y, width, height] = Room.getBounds(this.current_room, this.world)
+      const out = []
+      range(x, x + width).forEach((x) => range(y, height).forEach((y) => out.push([x, y])))
+      return out
+    },
+    visible_items() {
+      return this.world.cache.items_by_room_id[this.current_room.id]
+    },
+  },
+  methods: {
+    gotoItem(item) {
+      const { x, y, width, height } = item
+      this.gotoBounds(x, y, width, height)
+      this.viewer.addOnceHandler('animation-finish', () =>
+        this.$store.viewer.patch({ selected_item: item.id }),
+      )
+    },
+    gotoRoom(room) {
+      const [x, y, width, height] = Room.getMapBounds(room, this.world)
+      this.gotoBounds(x, y, width, height)
+      this.current_room = room
+    },
+    gotoBounds(x, y, width, height) {
+      const b = 192
+      const bounds = new OpenSeadragon.Rect(x - b, y - b, width + b * 4, height + b * 2)
+      const { viewport } = this.viewer
+      viewport.fitBounds(viewport.imageToViewportRectangle(bounds))
     },
   },
 }

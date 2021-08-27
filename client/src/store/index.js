@@ -1,16 +1,19 @@
 import item from './item'
 import room from './room'
 import viewer from './viewer'
-import migrations from './migrations' // eslint-disable =-line
+import world from './world'
+
+import _migrations from './migrations'
 
 const store = {}
-const modules = { item, room, viewer }
+const modules = { item, room, viewer, world }
 
 Object.entries(modules).forEach(([name, module]) => {
   store[name] = module({ store })
 })
 
 // migrations.locateItems(store)
+// migrations.convertXyToWorldIndex(store)
 
 export default {
   install(app) {

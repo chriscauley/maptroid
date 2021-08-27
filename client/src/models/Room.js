@@ -1,5 +1,5 @@
 const Room = {
-  getBounds(room) {
+  getBounds(room, world) {
     const max = {
       x: 0,
       y: 0,
@@ -8,7 +8,8 @@ const Room = {
       x: Infinity,
       y: Infinity,
     }
-    room.xys.forEach(([x, y]) => {
+    room.indexes.forEach((index) => {
+      const [x, y] = world.geo.index2xy(index)
       max.x = Math.max(x, max.x)
       min.x = Math.min(x, min.x)
       max.y = Math.max(y, max.y)
@@ -16,8 +17,8 @@ const Room = {
     })
     return [min.x, min.y, max.x - min.x + 1, max.y - min.y + 1]
   },
-  getMapBounds(room) {
-    return Room.getBounds(room).map((i) => i * 256)
+  getMapBounds(room, world) {
+    return Room.getBounds(room, world).map((i) => i * 256)
   },
 }
 
