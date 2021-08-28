@@ -48,27 +48,6 @@
   position: absolute;
 }
 
-.item-box {
-  cursor: pointer;
-  position: absolute;
-  outline: 5px solid white;
-  .-overzoomed & {
-    outline: none;
-  }
-  &.sm-boss, &.sm-map, &.sm-chozo {
-    background: none;
-  }
-  &.sm-boss {
-    outline: 5px solid red;
-  }
-  &.sm-chozo {
-    outline: 5px solid blue;
-  }
-  &.sm-map {
-    outline: 5px solid #8F8;
-  }
-}
-
 .selected-item {
   @apply -bg-bg rounded p-2;
   cursor: default;
@@ -186,6 +165,30 @@
     }
   }
 }
+
+.map-editor .html-overlay__item {
+  cursor: pointer;
+  position: absolute;
+  outline: 5px solid white;
+  &.sm-boss, &.sm-map, &.sm-chozo {
+    background: none;
+  }
+  &.sm-boss {
+    outline: 5px solid red;
+  }
+  &.sm-chozo {
+    outline: 5px solid blue;
+  }
+  &.sm-map {
+    outline: 5px solid #8F8;
+  }
+}
+
+.map-editor.-overzoomed .html-overlay__item {
+  outline: none;
+}
+
+
 
 .selected-room {
   @apply absolute bottom-0 p-2 right-0;

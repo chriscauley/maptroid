@@ -65,9 +65,6 @@ export default {
     viewer: Object,
   },
   data() {
-    if (true) {
-      throw 'Item Panel needs to be updated with ViewerMixin for goto functions'
-    }
     return {
       open: 'tracker',
       selected: null,

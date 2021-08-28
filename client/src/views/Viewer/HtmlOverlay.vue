@@ -37,8 +37,8 @@ export default {
       })
     },
     screen_blocks() {
-      return this.screens.map(({ x, y, width = 1, height = 1, color }) => ({
-        class: `html-overlay__screen-mask -color-${color}`,
+      return this.screens.map(({ x, y, width = 1, height = 1, cls }) => ({
+        class: `html-overlay__screen-mask ${cls}`,
         style: this._scale({ left: x, top: y, width, height }, 256),
       }))
     },

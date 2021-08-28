@@ -13,7 +13,6 @@ Object.entries(modules).forEach(([name, module]) => {
 })
 
 // migrations.locateItems(store)
-// migrations.convertXyToWorldIndex(store)
 
 export default {
   install(app) {

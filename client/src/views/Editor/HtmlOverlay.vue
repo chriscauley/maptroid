@@ -1,3 +1,4 @@
+<!-- TODO this file is no longer used. Delete it after editor is repaired -->
 <template>
   <div class="html-overlay">
     <div :style="`--border-width: ${border_width}px`">

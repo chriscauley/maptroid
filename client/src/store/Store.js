@@ -19,7 +19,7 @@ export default (name, Model, initial) => {
   window['_download' + name[0].toUpperCase() + name.slice(1)] = store.downloadJson = () => {
     const data = {}
     store.getAll().forEach((i) => (data[i.id] = i))
-    downloadJson(data, name + 'json')
+    downloadJson(data, name + '.json')
   }
 
   return store
