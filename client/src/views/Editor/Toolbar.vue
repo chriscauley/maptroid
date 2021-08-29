@@ -30,7 +30,7 @@
         </select>
       </div>
     </div>
-    <div class="btn -light" style="font-size: 16px;">{{ viewer_data }}</div>
+    <div class="viewer-toolbar__debug">{{ viewer_data }}</div>
   </div>
 </template>
 

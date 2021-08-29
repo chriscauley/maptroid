@@ -21,14 +21,13 @@ class World extends Model {
     Object.assign(this, { on, off, MITT_EVENTS })
   }
   populate({ items, rooms }) {
-    const cache = (this.cache = {
-      items,
-      rooms,
+    const cache = {
       room_by_id: {},
       room_by_xy: {},
       items_by_xy: {},
       items_by_room_id: {},
-    })
+    }
+    Object.assign(this, { items, rooms, cache })
     rooms.forEach((room) => {
       room.world = this
       room.xys.forEach((xy) => {
@@ -67,7 +66,7 @@ class World extends Model {
       xys: {},
       actions: [],
     }
-    this.goto(this.cache.items.find((i) => i.type === 'ship').world_xy)
+    this.goto(this.items.find((i) => i.type === 'ship').world_xy)
   }
 
   goto(xy) {

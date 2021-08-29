@@ -41,6 +41,11 @@
       font-size: 1rem;
     }
   }
+  &__debug {
+    @apply absolute -bg-bg p-2;
+    bottom: 100%;
+    font-size: 1rem;
+  }
 }
 
 .hover-box {
