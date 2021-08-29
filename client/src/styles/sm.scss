@@ -68,6 +68,7 @@ $zone-colors: (
 @mixin room($name, $color) {
   &.-#{"" + $name} {
     background: $color;
+    fill: $color;
     &.-selected {
       /* background: linear-gradient(45deg, transparent 25%, $color 25%, $color 50%, transparent 50%, transparent 75%, $color 75%, $color 100%); */
     }
@@ -76,6 +77,8 @@ $zone-colors: (
 
 .sm-room {
   border: #a0f8f8 0.125em solid;
+  stroke: #a0f8f8;
+  stroke-width: 0.0001;
   @each $name, $color in $zone-colors {
     @include room($name, $color);
   }

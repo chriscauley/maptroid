@@ -3,6 +3,7 @@ import { reactive } from 'vue'
 export default ({ store }) => {
   const state = reactive({
     selected_tool: null,
+    door_tool: 'blue',
     room_tool: 'crateria',
     selected_room_id: null,
     map_style: 'full',

@@ -1,7 +1,7 @@
 <template>
   <div class="osd-html__overlay">
     <template v-for="(blocks, i) in block_groups" :key="i">
-      <div v-for="block in blocks" v-bind="block" :key="block.id" />
+      <div v-for="block in blocks" v-bind="block.attrs" :key="block.attrs.id" />
     </template>
   </div>
 </template>
@@ -22,28 +22,37 @@ export default {
   computed: {
     item_blocks() {
       return this.items?.map((item) => {
-        const { id, type, class: _class } = item
+        const { id, type, class: _class, onClick } = item
         const { x, y, width, height } = item.getMapBounds()
         return {
-          id: `overlay-item-${id}`,
-          class: `html-overlay__item -class-${_class} sm-${_class} -${type}`,
-          style: this._scale({
-            left: x,
-            top: y,
-            width,
-            height,
-          }),
+          item,
+          attrs: {
+            id: `overlay-item-${id}`,
+            class: `html-overlay__item -class-${_class} sm-${_class} -${type}`,
+            style: this._scale({ x, y, width, height }),
+            onClick,
+          },
         }
       })
     },
     screen_blocks() {
-      return this.screens.map(({ x, y, width = 1, height = 1, cls }) => ({
-        class: `html-overlay__screen-mask ${cls}`,
-        style: this._scale({ left: x, top: y, width, height }, 256),
-      }))
+      return this.screens.map(({ x, y, width = 1, height = 1, ...item }) => {
+        // there's a slight issue with cracks showing between elements
+        // add 0.5% to width/height to stop it
+        width *= 1.005
+        height *= 1.005
+        return {
+          item,
+          attrs: {
+            class: ['html-overlay__screen-mask', item.class],
+            style: this._scale({ x, y, width, height }, 256),
+            onClick: item.onClick,
+          },
+        }
+      })
     },
     block_groups() {
-      return [this.item_blocks, this.screen_blocks]
+      return [this.screen_blocks, this.item_blocks]
     },
   },
   mounted() {
@@ -57,7 +66,15 @@ export default {
   methods: {
     _scale(attrs, scale = 1) {
       return Object.fromEntries(
-        Object.entries(attrs).map(([k, v]) => [k, `${(100 * v * scale) / this.W}%`]),
+        Object.entries(attrs).map(([k, v]) => {
+          if (k === 'x') {
+            k = 'left'
+          }
+          if (k === 'y') {
+            k = 'top'
+          }
+          return [k, `${(100 * v * scale) / this.W}%`]
+        }),
       )
     },
   },

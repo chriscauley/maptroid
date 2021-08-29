@@ -1,3 +1,17 @@
-.selected-item {
+.selected-room,
+.selected-item,
+.viewer-panel,
+.viewer-toolbar,
+.html-overlay__item,
+.html-overlay__screen-mask {
   z-index: 1;
+}
+
+.osd__mouse-tracker {
+  z-index: 2;
+}
+
+.html-overlay__screen-mask.-void {
+  z-index: 0;
+  background: red !important;
 }

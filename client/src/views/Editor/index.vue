@@ -61,6 +61,7 @@ export default {
           title: `#${room.id} ${room.name}`,
           x,
           y,
+          onClick: () => this.$store.viewer.patch({ selected_room_id: room.id }),
           class: [
             `sm-room -absolute -${area} -style-${map_style}`,
             {
@@ -71,7 +72,6 @@ export default {
               '-selected': room.id === this.$store.viewer.state.selected_room_id,
             },
           ],
-          onClick: () => this.$store.viewer.patch({ selected_room_id: room.id }),
         }
       })
     },
