@@ -1,0 +1,11839 @@
+{
+  "1": {
+    "type": "x-ray",
+    "width": 1,
+    "height": 1,
+    "id": 1,
+    "class": "item",
+    "room_id": 116,
+    "room_index": 117,
+    "world_xy": [
+      18,
+      33
+    ],
+    "screen_xy": [
+      5,
+      7
+    ]
+  },
+  "2": {
+    "type": "high-jump",
+    "width": 1,
+    "height": 1,
+    "id": 2,
+    "class": "item",
+    "room_id": 108,
+    "room_index": 163,
+    "world_xy": [
+      33,
+      44
+    ],
+    "screen_xy": [
+      3,
+      10
+    ]
+  },
+  "3": {
+    "type": "ice-beam",
+    "width": 1,
+    "height": 1,
+    "id": 3,
+    "class": "item",
+    "room_id": 114,
+    "room_index": 124,
+    "world_xy": [
+      31,
+      40
+    ],
+    "screen_xy": [
+      12,
+      7
+    ]
+  },
+  "4": {
+    "type": "grappling-hook",
+    "width": 1,
+    "height": 1,
+    "id": 4,
+    "class": "item",
+    "room_id": 95,
+    "room_index": 116,
+    "world_xy": [
+      29,
+      54
+    ],
+    "screen_xy": [
+      4,
+      7
+    ]
+  },
+  "5": {
+    "type": "reserve-tank",
+    "width": 1,
+    "height": 1,
+    "id": 5,
+    "class": "item",
+    "room_id": 49,
+    "room_index": 114,
+    "world_xy": [
+      44,
+      40
+    ],
+    "screen_xy": [
+      2,
+      7
+    ]
+  },
+  "6": {
+    "type": "missile",
+    "width": 1,
+    "height": 1,
+    "id": 6,
+    "class": "item",
+    "room_id": 106,
+    "room_index": 157,
+    "world_xy": [
+      37,
+      44
+    ],
+    "screen_xy": [
+      13,
+      9
+    ]
+  },
+  "7": {
+    "type": "energy-tank",
+    "width": 1,
+    "height": 1,
+    "id": 7,
+    "class": "item",
+    "room_id": 207,
+    "room_index": 175,
+    "world_xy": [
+      41,
+      30
+    ],
+    "screen_xy": [
+      15,
+      10
+    ]
+  },
+  "8": {
+    "type": "reserve-tank",
+    "width": 1,
+    "height": 1,
+    "id": 8,
+    "class": "item",
+    "room_id": 184,
+    "room_index": 79,
+    "world_xy": [
+      43,
+      32
+    ],
+    "screen_xy": [
+      15,
+      4
+    ]
+  },
+  "9": {
+    "type": "missile",
+    "width": 1,
+    "height": 1,
+    "id": 9,
+    "class": "item",
+    "room_id": 184,
+    "room_index": 70,
+    "world_xy": [
+      43,
+      32
+    ],
+    "screen_xy": [
+      6,
+      4
+    ]
+  },
+  "10": {
+    "type": "missile",
+    "width": 1,
+    "height": 1,
+    "id": 10,
+    "class": "item",
+    "room_id": 181,
+    "room_index": 115,
+    "world_xy": [
+      46,
+      32
+    ],
+    "screen_xy": [
+      3,
+      7
+    ]
+  },
+  "11": {
+    "type": "power-bomb",
+    "width": 1,
+    "height": 1,
+    "id": 11,
+    "class": "item",
+    "room_id": 181,
+    "room_index": 9,
+    "world_xy": [
+      47,
+      33
+    ],
+    "screen_xy": [
+      9,
+      0
+    ]
+  },
+  "12": {
+    "type": "varia-suit",
+    "width": 1,
+    "height": 1,
+    "id": 12,
+    "class": "item",
+    "room_id": 37,
+    "room_index": 151,
+    "world_xy": [
+      52,
+      37
+    ],
+    "screen_xy": [
+      7,
+      9
+    ]
+  },
+  "13": {
+    "type": "missile",
+    "width": 1,
+    "height": 1,
+    "id": 13,
+    "class": "item",
+    "room_id": 31,
+    "room_index": 142,
+    "world_xy": [
+      42,
+      36
+    ],
+    "screen_xy": [
+      14,
+      8
+    ]
+  },
+  "14": {
+    "type": "energy-tank",
+    "width": 1,
+    "height": 1,
+    "id": 14,
+    "class": "item",
+    "room_id": 30,
+    "room_index": 67,
+    "world_xy": [
+      38,
+      38
+    ],
+    "screen_xy": [
+      3,
+      4
+    ]
+  },
+  "15": {
+    "type": "missile",
+    "width": 1,
+    "height": 1,
+    "id": 15,
+    "class": "item",
+    "room_id": 111,
+    "room_index": 129,
+    "world_xy": [
+      28,
+      42
+    ],
+    "screen_xy": [
+      1,
+      8
+    ]
+  },
+  "16": {
+    "type": "super-missile",
+    "width": 1,
+    "height": 1,
+    "id": 16,
+    "class": "item",
+    "room_id": 75,
+    "room_index": 133,
+    "world_xy": [
+      45,
+      53
+    ],
+    "screen_xy": [
+      5,
+      8
+    ]
+  },
+  "17": {
+    "type": "missile",
+    "width": 1,
+    "height": 1,
+    "id": 17,
+    "class": "item",
+    "room_id": 75,
+    "room_index": 141,
+    "world_xy": [
+      44,
+      53
+    ],
+    "screen_xy": [
+      13,
+      8
+    ]
+  },
+  "18": {
+    "type": "screw-attack",
+    "width": 1,
+    "height": 1,
+    "id": 18,
+    "class": "item",
+    "room_id": 76,
+    "room_index": 139,
+    "world_xy": [
+      46,
+      54
+    ],
+    "screen_xy": [
+      11,
+      8
+    ]
+  },
+  "19": {
+    "type": "energy-tank",
+    "width": 1,
+    "height": 1,
+    "id": 19,
+    "class": "item",
+    "room_id": 67,
+    "room_index": 190,
+    "world_xy": [
+      48,
+      55
+    ],
+    "screen_xy": [
+      14,
+      11
+    ]
+  },
+  "20": {
+    "type": "power-bomb",
+    "width": 1,
+    "height": 1,
+    "id": 20,
+    "class": "item",
+    "room_id": 62,
+    "room_index": 135,
+    "world_xy": [
+      58,
+      52
+    ],
+    "screen_xy": [
+      7,
+      8
+    ]
+  },
+  "21": {
+    "type": "energy-tank",
+    "width": 1,
+    "height": 1,
+    "id": 21,
+    "class": "item",
+    "room_id": 57,
+    "room_index": 26,
+    "world_xy": [
+      63,
+      49
+    ],
+    "screen_xy": [
+      10,
+      1
+    ]
+  },
+  "22": {
+    "type": "power-bomb",
+    "width": 1,
+    "height": 1,
+    "id": 22,
+    "class": "item",
+    "room_id": 58,
+    "room_index": 140,
+    "world_xy": [
+      63,
+      44
+    ],
+    "screen_xy": [
+      12,
+      8
+    ]
+  },
+  "23": {
+    "type": "missile",
+    "width": 1,
+    "height": 1,
+    "id": 23,
+    "class": "item",
+    "room_id": 56,
+    "room_index": 123,
+    "world_xy": [
+      61,
+      43
+    ],
+    "screen_xy": [
+      11,
+      7
+    ]
+  },
+  "24": {
+    "type": "missile",
+    "width": 1,
+    "height": 1,
+    "id": 24,
+    "class": "item",
+    "room_id": 51,
+    "room_index": 159,
+    "world_xy": [
+      52,
+      42
+    ],
+    "screen_xy": [
+      15,
+      9
+    ]
+  },
+  "25": {
+    "type": "spazer",
+    "width": 1,
+    "height": 1,
+    "id": 25,
+    "class": "item",
+    "room_id": 22,
+    "room_index": 155,
+    "world_xy": [
+      33,
+      35
+    ],
+    "screen_xy": [
+      11,
+      9
+    ]
+  },
+  "26": {
+    "type": "energy-tank",
+    "width": 1,
+    "height": 1,
+    "id": 26,
+    "class": "item",
+    "room_id": 107,
+    "room_index": 135,
+    "world_xy": [
+      35,
+      43
+    ],
+    "screen_xy": [
+      7,
+      8
+    ]
+  },
+  "27": {
+    "type": "missile",
+    "width": 1,
+    "height": 1,
+    "id": 27,
+    "class": "item",
+    "room_id": 107,
+    "room_index": 105,
+    "world_xy": [
+      34,
+      43
+    ],
+    "screen_xy": [
+      9,
+      6
+    ]
+  },
+  "28": {
+    "type": "missile",
+    "width": 1,
+    "height": 1,
+    "id": 28,
+    "class": "item",
+    "room_id": 94,
+    "room_index": 147,
+    "world_xy": [
+      34,
+      53
+    ],
+    "screen_xy": [
+      3,
+      9
+    ]
+  },
+  "29": {
+    "type": "missile",
+    "width": 1,
+    "height": 1,
+    "id": 29,
+    "class": "item",
+    "room_id": 93,
+    "room_index": 156,
+    "world_xy": [
+      40,
+      53
+    ],
+    "screen_xy": [
+      12,
+      9
+    ]
+  },
+  "30": {
+    "type": "missile",
+    "width": 1,
+    "height": 1,
+    "id": 30,
+    "class": "item",
+    "room_id": 122,
+    "room_index": 116,
+    "world_xy": [
+      23,
+      29
+    ],
+    "screen_xy": [
+      4,
+      7
+    ]
+  },
+  "31": {
+    "type": "morph-ball",
+    "width": 1,
+    "height": 1,
+    "id": 31,
+    "class": "item",
+    "room_id": 120,
+    "room_index": 149,
+    "world_xy": [
+      20,
+      28
+    ],
+    "screen_xy": [
+      5,
+      9
+    ]
+  },
+  "32": {
+    "type": "power-bomb",
+    "width": 1,
+    "height": 1,
+    "id": 32,
+    "class": "item",
+    "room_id": 120,
+    "room_index": 168,
+    "world_xy": [
+      18,
+      28
+    ],
+    "screen_xy": [
+      8,
+      10
+    ]
+  },
+  "33": {
+    "type": "charge-beam",
+    "width": 1,
+    "height": 1,
+    "id": 33,
+    "class": "item",
+    "room_id": 218,
+    "room_index": 101,
+    "world_xy": [
+      12,
+      29
+    ],
+    "screen_xy": [
+      5,
+      6
+    ]
+  },
+  "34": {
+    "type": "energy-tank",
+    "width": 1,
+    "height": 1,
+    "id": 34,
+    "class": "item",
+    "room_id": 225,
+    "room_index": 148,
+    "world_xy": [
+      3,
+      31
+    ],
+    "screen_xy": [
+      4,
+      9
+    ]
+  },
+  "35": {
+    "type": "super-missile",
+    "width": 1,
+    "height": 1,
+    "id": 35,
+    "class": "item",
+    "room_id": 232,
+    "room_index": 151,
+    "world_xy": [
+      0,
+      28
+    ],
+    "screen_xy": [
+      7,
+      9
+    ]
+  },
+  "36": {
+    "type": "energy-tank",
+    "width": 1,
+    "height": 1,
+    "id": 36,
+    "class": "item",
+    "room_id": 231,
+    "room_index": 149,
+    "world_xy": [
+      1,
+      28
+    ],
+    "screen_xy": [
+      5,
+      9
+    ]
+  },
+  "37": {
+    "type": "power-bomb",
+    "width": 1,
+    "height": 1,
+    "id": 37,
+    "class": "item",
+    "room_id": 227,
+    "room_index": 172,
+    "world_xy": [
+      7,
+      25
+    ],
+    "screen_xy": [
+      12,
+      10
+    ]
+  },
+  "38": {
+    "type": "reserve-tank",
+    "width": 1,
+    "height": 1,
+    "id": 38,
+    "class": "item",
+    "room_id": 238,
+    "room_index": 123,
+    "world_xy": [
+      8,
+      22
+    ],
+    "screen_xy": [
+      11,
+      7
+    ]
+  },
+  "39": {
+    "type": "missile",
+    "width": 1,
+    "height": 1,
+    "id": 39,
+    "class": "item",
+    "room_id": 238,
+    "room_index": 121,
+    "world_xy": [
+      9,
+      22
+    ],
+    "screen_xy": [
+      9,
+      7
+    ]
+  },
+  "40": {
+    "type": "missile",
+    "width": 1,
+    "height": 1,
+    "id": 40,
+    "class": "item",
+    "room_id": 238,
+    "room_index": 126,
+    "world_xy": [
+      9,
+      22
+    ],
+    "screen_xy": [
+      14,
+      7
+    ]
+  },
+  "41": {
+    "type": "super-missile",
+    "width": 1,
+    "height": 1,
+    "id": 41,
+    "class": "item",
+    "room_id": 237,
+    "room_index": 100,
+    "world_xy": [
+      5,
+      21
+    ],
+    "screen_xy": [
+      4,
+      6
+    ]
+  },
+  "42": {
+    "type": "super-missile",
+    "width": 1,
+    "height": 1,
+    "id": 42,
+    "class": "item",
+    "room_id": 216,
+    "room_index": 122,
+    "world_xy": [
+      19,
+      27
+    ],
+    "screen_xy": [
+      10,
+      7
+    ]
+  },
+  "43": {
+    "type": "energy-tank",
+    "width": 1,
+    "height": 1,
+    "id": 43,
+    "class": "item",
+    "room_id": 221,
+    "room_index": 155,
+    "world_xy": [
+      16,
+      26
+    ],
+    "screen_xy": [
+      11,
+      9
+    ]
+  },
+  "44": {
+    "type": "power-bomb",
+    "width": 1,
+    "height": 1,
+    "id": 44,
+    "class": "item",
+    "room_id": 223,
+    "room_index": 118,
+    "world_xy": [
+      10,
+      26
+    ],
+    "screen_xy": [
+      6,
+      7
+    ]
+  },
+  "45": {
+    "type": "missile",
+    "width": 1,
+    "height": 1,
+    "id": 45,
+    "class": "item",
+    "room_id": 218,
+    "room_index": 36,
+    "world_xy": [
+      12,
+      25
+    ],
+    "screen_xy": [
+      4,
+      2
+    ]
+  },
+  "46": {
+    "type": "missile",
+    "width": 1,
+    "height": 1,
+    "id": 46,
+    "class": "item",
+    "room_id": 218,
+    "room_index": 114,
+    "world_xy": [
+      12,
+      28
+    ],
+    "screen_xy": [
+      2,
+      7
+    ]
+  },
+  "47": {
+    "type": "missile",
+    "width": 1,
+    "height": 1,
+    "id": 47,
+    "class": "item",
+    "room_id": 123,
+    "room_index": 158,
+    "world_xy": [
+      27,
+      28
+    ],
+    "screen_xy": [
+      14,
+      9
+    ]
+  },
+  "48": {
+    "type": "energy-tank",
+    "width": 1,
+    "height": 1,
+    "id": 48,
+    "class": "item",
+    "room_id": 123,
+    "room_index": 44,
+    "world_xy": [
+      26,
+      28
+    ],
+    "screen_xy": [
+      12,
+      2
+    ]
+  },
+  "49": {
+    "type": "missile",
+    "width": 1,
+    "height": 1,
+    "id": 49,
+    "class": "item",
+    "room_id": 125,
+    "room_index": 151,
+    "world_xy": [
+      24,
+      26
+    ],
+    "screen_xy": [
+      7,
+      9
+    ]
+  },
+  "50": {
+    "type": "missile",
+    "width": 1,
+    "height": 1,
+    "id": 50,
+    "class": "item",
+    "room_id": 125,
+    "room_index": 197,
+    "world_xy": [
+      24,
+      26
+    ],
+    "screen_xy": [
+      5,
+      12
+    ]
+  },
+  "51": {
+    "type": "missile",
+    "width": 1,
+    "height": 1,
+    "id": 51,
+    "class": "item",
+    "room_id": 205,
+    "room_index": 94,
+    "world_xy": [
+      33,
+      30
+    ],
+    "screen_xy": [
+      14,
+      5
+    ]
+  },
+  "52": {
+    "type": "super-missile",
+    "width": 1,
+    "height": 1,
+    "id": 52,
+    "class": "item",
+    "room_id": 205,
+    "room_index": 134,
+    "world_xy": [
+      34,
+      29
+    ],
+    "screen_xy": [
+      6,
+      8
+    ]
+  },
+  "53": {
+    "type": "power-bomb",
+    "width": 1,
+    "height": 1,
+    "id": 53,
+    "class": "item",
+    "room_id": 14,
+    "room_index": 148,
+    "world_xy": [
+      30,
+      29
+    ],
+    "screen_xy": [
+      4,
+      9
+    ]
+  },
+  "54": {
+    "type": "missile",
+    "width": 1,
+    "height": 1,
+    "id": 54,
+    "class": "item",
+    "room_id": 15,
+    "room_index": 130,
+    "world_xy": [
+      29,
+      29
+    ],
+    "screen_xy": [
+      2,
+      8
+    ]
+  },
+  "55": {
+    "type": "power-bomb",
+    "width": 1,
+    "height": 1,
+    "id": 55,
+    "class": "item",
+    "room_id": 16,
+    "room_index": 52,
+    "world_xy": [
+      30,
+      26
+    ],
+    "screen_xy": [
+      4,
+      3
+    ]
+  },
+  "56": {
+    "type": "missile",
+    "width": 1,
+    "height": 1,
+    "id": 56,
+    "class": "item",
+    "room_id": 213,
+    "room_index": 123,
+    "world_xy": [
+      35,
+      24
+    ],
+    "screen_xy": [
+      11,
+      7
+    ]
+  },
+  "57": {
+    "type": "super-missile",
+    "width": 1,
+    "height": 1,
+    "id": 57,
+    "class": "item",
+    "room_id": 213,
+    "room_index": 100,
+    "world_xy": [
+      35,
+      24
+    ],
+    "screen_xy": [
+      4,
+      6
+    ]
+  },
+  "58": {
+    "type": "energy-tank",
+    "width": 1,
+    "height": 1,
+    "id": 58,
+    "class": "item",
+    "room_id": 188,
+    "room_index": 82,
+    "world_xy": [
+      52,
+      26
+    ],
+    "screen_xy": [
+      2,
+      5
+    ]
+  },
+  "59": {
+    "type": "space-jump",
+    "width": 1,
+    "height": 1,
+    "id": 59,
+    "class": "item",
+    "room_id": 199,
+    "room_index": 132,
+    "world_xy": [
+      61,
+      28
+    ],
+    "screen_xy": [
+      4,
+      8
+    ]
+  },
+  "60": {
+    "type": "missile",
+    "width": 1,
+    "height": 1,
+    "id": 60,
+    "class": "item",
+    "room_id": 197,
+    "room_index": 108,
+    "world_xy": [
+      65,
+      25
+    ],
+    "screen_xy": [
+      12,
+      6
+    ]
+  },
+  "61": {
+    "type": "plasma-beam",
+    "width": 1,
+    "height": 1,
+    "id": 61,
+    "class": "item",
+    "room_id": 173,
+    "room_index": 105,
+    "world_xy": [
+      51,
+      20
+    ],
+    "screen_xy": [
+      9,
+      6
+    ]
+  },
+  "62": {
+    "type": "super-missile",
+    "width": 1,
+    "height": 1,
+    "id": 62,
+    "class": "item",
+    "room_id": 149,
+    "room_index": 152,
+    "world_xy": [
+      53,
+      7
+    ],
+    "screen_xy": [
+      8,
+      9
+    ]
+  },
+  "63": {
+    "type": "energy-tank",
+    "width": 1,
+    "height": 1,
+    "id": 63,
+    "class": "item",
+    "room_id": 157,
+    "room_index": 99,
+    "world_xy": [
+      50,
+      3
+    ],
+    "screen_xy": [
+      3,
+      6
+    ]
+  },
+  "64": {
+    "type": "reserve-tank",
+    "width": 1,
+    "height": 1,
+    "id": 64,
+    "class": "item",
+    "room_id": 142,
+    "room_index": 179,
+    "world_xy": [
+      47,
+      1
+    ],
+    "screen_xy": [
+      3,
+      11
+    ]
+  },
+  "65": {
+    "type": "missile",
+    "width": 1,
+    "height": 1,
+    "id": 65,
+    "class": "item",
+    "room_id": 145,
+    "room_index": 141,
+    "world_xy": [
+      53,
+      0
+    ],
+    "screen_xy": [
+      13,
+      8
+    ]
+  },
+  "66": {
+    "type": "missile",
+    "width": 1,
+    "height": 1,
+    "id": 66,
+    "class": "item",
+    "room_id": 140,
+    "room_index": 60,
+    "world_xy": [
+      37,
+      0
+    ],
+    "screen_xy": [
+      12,
+      3
+    ]
+  },
+  "67": {
+    "type": "missile",
+    "width": 1,
+    "height": 1,
+    "id": 67,
+    "class": "item",
+    "room_id": 140,
+    "room_index": 241,
+    "world_xy": [
+      36,
+      2
+    ],
+    "screen_xy": [
+      1,
+      15
+    ]
+  },
+  "68": {
+    "type": "gravity-suit",
+    "width": 1,
+    "height": 1,
+    "id": 68,
+    "class": "item",
+    "room_id": 143,
+    "room_index": 151,
+    "world_xy": [
+      42,
+      3
+    ],
+    "screen_xy": [
+      7,
+      9
+    ]
+  },
+  "69": {
+    "type": "missile",
+    "width": 1,
+    "height": 1,
+    "id": 69,
+    "class": "item",
+    "room_id": 6,
+    "room_index": 158,
+    "world_xy": [
+      34,
+      4
+    ],
+    "screen_xy": [
+      14,
+      9
+    ]
+  },
+  "70": {
+    "type": "missile",
+    "width": 1,
+    "height": 1,
+    "id": 70,
+    "class": "item",
+    "room_id": 140,
+    "room_index": 178,
+    "world_xy": [
+      36,
+      5
+    ],
+    "screen_xy": [
+      2,
+      11
+    ]
+  },
+  "71": {
+    "type": "missile",
+    "width": 1,
+    "height": 1,
+    "id": 71,
+    "class": "item",
+    "room_id": 146,
+    "room_index": 146,
+    "world_xy": [
+      44,
+      6
+    ],
+    "screen_xy": [
+      2,
+      9
+    ]
+  },
+  "72": {
+    "type": "super-missile",
+    "width": 1,
+    "height": 1,
+    "id": 72,
+    "class": "item",
+    "room_id": 148,
+    "room_index": 114,
+    "world_xy": [
+      47,
+      7
+    ],
+    "screen_xy": [
+      2,
+      7
+    ]
+  },
+  "73": {
+    "type": "missile",
+    "width": 1,
+    "height": 1,
+    "id": 73,
+    "class": "item",
+    "room_id": 142,
+    "room_index": 108,
+    "world_xy": [
+      45,
+      3
+    ],
+    "screen_xy": [
+      12,
+      6
+    ]
+  },
+  "74": {
+    "type": "missile",
+    "width": 1,
+    "height": 1,
+    "id": 74,
+    "class": "item",
+    "room_id": 55,
+    "room_index": 152,
+    "world_xy": [
+      55,
+      43
+    ],
+    "screen_xy": [
+      8,
+      9
+    ]
+  },
+  "75": {
+    "type": "wave-beam",
+    "width": 1,
+    "height": 1,
+    "id": 75,
+    "class": "item",
+    "room_id": 52,
+    "room_index": 107,
+    "world_xy": [
+      55,
+      42
+    ],
+    "screen_xy": [
+      11,
+      6
+    ]
+  },
+  "76": {
+    "type": "missile",
+    "width": 1,
+    "height": 1,
+    "id": 76,
+    "class": "item",
+    "room_id": 45,
+    "room_index": 60,
+    "world_xy": [
+      62,
+      40
+    ],
+    "screen_xy": [
+      12,
+      3
+    ]
+  },
+  "77": {
+    "type": "speed-booster",
+    "width": 1,
+    "height": 1,
+    "id": 77,
+    "class": "item",
+    "room_id": 46,
+    "room_index": 107,
+    "world_xy": [
+      63,
+      40
+    ],
+    "screen_xy": [
+      11,
+      6
+    ]
+  },
+  "78": {
+    "type": "missile",
+    "width": 1,
+    "height": 1,
+    "id": 78,
+    "class": "item",
+    "room_id": 207,
+    "room_index": 220,
+    "world_xy": [
+      42,
+      31
+    ],
+    "screen_xy": [
+      12,
+      13
+    ]
+  },
+  "79": {
+    "type": "missile",
+    "width": 1,
+    "height": 1,
+    "id": 79,
+    "class": "item",
+    "room_id": 211,
+    "room_index": 140,
+    "world_xy": [
+      43,
+      24
+    ],
+    "screen_xy": [
+      12,
+      8
+    ]
+  },
+  "80": {
+    "type": "missile",
+    "width": 1,
+    "height": 1,
+    "id": 80,
+    "class": "item",
+    "room_id": 119,
+    "room_index": 141,
+    "world_xy": [
+      17,
+      29
+    ],
+    "screen_xy": [
+      13,
+      8
+    ]
+  },
+  "81": {
+    "type": "power-bomb",
+    "width": 1,
+    "height": 1,
+    "id": 81,
+    "class": "item",
+    "room_id": 90,
+    "room_index": 135,
+    "world_xy": [
+      35,
+      48
+    ],
+    "screen_xy": [
+      7,
+      8
+    ]
+  },
+  "82": {
+    "type": "energy-tank",
+    "width": 1,
+    "height": 1,
+    "id": 82,
+    "class": "item",
+    "room_id": 88,
+    "room_index": 109,
+    "world_xy": [
+      45,
+      48
+    ],
+    "screen_xy": [
+      13,
+      6
+    ]
+  },
+  "83": {
+    "type": "missile",
+    "width": 1,
+    "height": 1,
+    "id": 83,
+    "class": "item",
+    "room_id": 70,
+    "room_index": 183,
+    "world_xy": [
+      54,
+      48
+    ],
+    "screen_xy": [
+      7,
+      11
+    ]
+  },
+  "84": {
+    "type": "missile",
+    "width": 1,
+    "height": 1,
+    "id": 84,
+    "class": "item",
+    "room_id": 135,
+    "room_index": 178,
+    "world_xy": [
+      9,
+      3
+    ],
+    "screen_xy": [
+      2,
+      11
+    ]
+  },
+  "85": {
+    "type": "missile",
+    "width": 1,
+    "height": 1,
+    "id": 85,
+    "class": "item",
+    "room_id": 135,
+    "room_index": 189,
+    "world_xy": [
+      9,
+      3
+    ],
+    "screen_xy": [
+      13,
+      11
+    ]
+  },
+  "86": {
+    "type": "energy-tank",
+    "width": 1,
+    "height": 1,
+    "id": 86,
+    "class": "item",
+    "room_id": 136,
+    "room_index": 131,
+    "world_xy": [
+      15,
+      2
+    ],
+    "screen_xy": [
+      3,
+      8
+    ]
+  },
+  "87": {
+    "type": "power-bomb",
+    "width": 1,
+    "height": 1,
+    "id": 87,
+    "class": "item",
+    "room_id": 139,
+    "room_index": 125,
+    "world_xy": [
+      31,
+      1
+    ],
+    "screen_xy": [
+      13,
+      7
+    ]
+  },
+  "88": {
+    "type": "bomb",
+    "width": 1,
+    "height": 1,
+    "id": 88,
+    "class": "item",
+    "room_id": 3,
+    "room_index": 172,
+    "world_xy": [
+      23,
+      6
+    ],
+    "screen_xy": [
+      12,
+      10
+    ]
+  },
+  "89": {
+    "type": "missile",
+    "width": 1,
+    "height": 1,
+    "id": 89,
+    "class": "item",
+    "room_id": 132,
+    "room_index": 116,
+    "world_xy": [
+      14,
+      7
+    ],
+    "screen_xy": [
+      4,
+      7
+    ]
+  },
+  "90": {
+    "type": "super-missile",
+    "width": 1,
+    "height": 1,
+    "id": 90,
+    "class": "item",
+    "room_id": 130,
+    "room_index": 155,
+    "world_xy": [
+      22,
+      9
+    ],
+    "screen_xy": [
+      11,
+      9
+    ]
+  },
+  "91": {
+    "type": "missile",
+    "width": 1,
+    "height": 1,
+    "id": 91,
+    "class": "item",
+    "room_id": 49,
+    "room_index": 183,
+    "world_xy": [
+      44,
+      40
+    ],
+    "screen_xy": [
+      7,
+      11
+    ]
+  },
+  "92": {
+    "type": "missile",
+    "width": 1,
+    "height": 1,
+    "id": 92,
+    "class": "item",
+    "room_id": 48,
+    "room_index": 164,
+    "world_xy": [
+      47,
+      40
+    ],
+    "screen_xy": [
+      4,
+      10
+    ]
+  },
+  "93": {
+    "type": "missile",
+    "width": 1,
+    "height": 1,
+    "id": 93,
+    "class": "item",
+    "room_id": 43,
+    "room_index": 196,
+    "world_xy": [
+      49,
+      43
+    ],
+    "screen_xy": [
+      4,
+      12
+    ]
+  },
+  "94": {
+    "type": "missile",
+    "width": 1,
+    "height": 1,
+    "id": 94,
+    "class": "item",
+    "room_id": 185,
+    "room_index": 156,
+    "world_xy": [
+      47,
+      27
+    ],
+    "screen_xy": [
+      12,
+      9
+    ]
+  },
+  "95": {
+    "type": "super-missile",
+    "width": 1,
+    "height": 1,
+    "id": 95,
+    "class": "item",
+    "room_id": 185,
+    "room_index": 140,
+    "world_xy": [
+      48,
+      27
+    ],
+    "screen_xy": [
+      12,
+      8
+    ]
+  },
+  "96": {
+    "type": "spring-ball",
+    "width": 1,
+    "height": 1,
+    "id": 96,
+    "class": "item",
+    "room_id": 180,
+    "room_index": 104,
+    "world_xy": [
+      56,
+      34
+    ],
+    "screen_xy": [
+      8,
+      6
+    ]
+  },
+  "97": {
+    "type": "missile",
+    "width": 1,
+    "height": 1,
+    "id": 97,
+    "class": "item",
+    "room_id": 128,
+    "room_index": 165,
+    "world_xy": [
+      18,
+      18
+    ],
+    "screen_xy": [
+      5,
+      10
+    ]
+  },
+  "98": {
+    "type": "missile",
+    "width": 1,
+    "height": 1,
+    "id": 98,
+    "class": "item",
+    "room_id": 237,
+    "room_index": 179,
+    "world_xy": [
+      6,
+      22
+    ],
+    "screen_xy": [
+      3,
+      11
+    ]
+  },
+  "99": {
+    "width": 1,
+    "height": 1,
+    "id": 99,
+    "type": "energy-tank",
+    "class": "item",
+    "room_id": 134,
+    "room_index": 167,
+    "world_xy": [
+      10,
+      6
+    ],
+    "screen_xy": [
+      7,
+      10
+    ]
+  },
+  "100": {
+    "width": 1,
+    "height": 1,
+    "id": 100,
+    "type": "missile",
+    "class": "item",
+    "room_id": 41,
+    "room_index": 194,
+    "world_xy": [
+      42,
+      42
+    ],
+    "screen_xy": [
+      2,
+      12
+    ]
+  },
+  "101": {
+    "width": 5,
+    "height": 6,
+    "class": "boss",
+    "id": 101,
+    "type": "ridley",
+    "room_id": 66,
+    "room_index": 83,
+    "world_xy": [
+      49,
+      55
+    ],
+    "screen_xy": [
+      3,
+      5
+    ]
+  },
+  "102": {
+    "width": 5,
+    "height": 6,
+    "class": "boss",
+    "id": 102,
+    "type": "gold-torizo",
+    "room_id": 75,
+    "room_index": 73,
+    "world_xy": [
+      45,
+      54
+    ],
+    "screen_xy": [
+      9,
+      4
+    ]
+  },
+  "104": {
+    "width": 4,
+    "height": 4,
+    "class": "boss",
+    "id": 104,
+    "type": "mother-brain",
+    "room_id": 259,
+    "room_index": 86,
+    "world_xy": [
+      8,
+      18
+    ],
+    "screen_xy": [
+      6,
+      5
+    ]
+  },
+  "105": {
+    "width": 5,
+    "height": 6,
+    "class": "boss",
+    "id": 105,
+    "type": "bomb-torizo",
+    "room_id": 3,
+    "room_index": 118,
+    "world_xy": [
+      23,
+      6
+    ],
+    "screen_xy": [
+      6,
+      7
+    ]
+  },
+  "106": {
+    "width": 9,
+    "height": 9,
+    "class": "boss",
+    "id": 106,
+    "type": "draygon",
+    "room_id": 198,
+    "room_index": 24,
+    "world_xy": [
+      62,
+      28
+    ],
+    "screen_xy": [
+      8,
+      1
+    ]
+  },
+  "107": {
+    "width": 8,
+    "height": 6,
+    "class": "boss",
+    "id": 107,
+    "type": "botwoon",
+    "room_id": 189,
+    "room_index": 115,
+    "world_xy": [
+      47,
+      26
+    ],
+    "screen_xy": [
+      3,
+      7
+    ]
+  },
+  "108": {
+    "width": 6,
+    "height": 8,
+    "class": "boss",
+    "id": 108,
+    "type": "phantoon",
+    "room_id": 152,
+    "room_index": 53,
+    "world_xy": [
+      51,
+      9
+    ],
+    "screen_xy": [
+      5,
+      3
+    ]
+  },
+  "109": {
+    "width": 10,
+    "height": 8,
+    "class": "boss",
+    "id": 109,
+    "type": "crocomire",
+    "room_id": 88,
+    "room_index": 51,
+    "world_xy": [
+      42,
+      48
+    ],
+    "screen_xy": [
+      3,
+      3
+    ]
+  },
+  "110": {
+    "width": 8,
+    "height": 9,
+    "class": "boss",
+    "id": 110,
+    "type": "spore-spawn",
+    "room_id": 215,
+    "room_index": 4,
+    "world_xy": [
+      17,
+      21
+    ],
+    "screen_xy": [
+      4,
+      0
+    ]
+  },
+  "111": {
+    "width": 12,
+    "height": 19,
+    "class": "boss",
+    "id": 111,
+    "type": "kraid",
+    "room_id": 36,
+    "room_index": 145,
+    "world_xy": [
+      51,
+      36
+    ],
+    "screen_xy": [
+      1,
+      9
+    ]
+  },
+  "112": {
+    "class": "map",
+    "type": "save",
+    "width": 2,
+    "height": 6,
+    "id": 112,
+    "room_id": 233,
+    "room_index": 101,
+    "world_xy": [
+      0,
+      29
+    ],
+    "screen_xy": [
+      5,
+      6
+    ]
+  },
+  "113": {
+    "class": "map",
+    "type": "missile",
+    "width": 3,
+    "height": 3,
+    "id": 113,
+    "room_id": 229,
+    "room_index": 147,
+    "world_xy": [
+      0,
+      25
+    ],
+    "screen_xy": [
+      3,
+      9
+    ]
+  },
+  "114": {
+    "class": "map",
+    "type": "energy",
+    "width": 3,
+    "height": 3,
+    "id": 114,
+    "room_id": 226,
+    "room_index": 147,
+    "world_xy": [
+      4,
+      30
+    ],
+    "screen_xy": [
+      3,
+      9
+    ]
+  },
+  "115": {
+    "class": "map",
+    "type": "map",
+    "width": 4,
+    "height": 3,
+    "id": 115,
+    "room_id": 235,
+    "room_index": 147,
+    "world_xy": [
+      0,
+      22
+    ],
+    "screen_xy": [
+      3,
+      9
+    ]
+  },
+  "116": {
+    "class": "map",
+    "type": "map",
+    "width": 4,
+    "height": 3,
+    "id": 116,
+    "room_id": 4,
+    "room_index": 153,
+    "world_xy": [
+      21,
+      7
+    ],
+    "screen_xy": [
+      9,
+      9
+    ]
+  },
+  "117": {
+    "class": "map",
+    "type": "map",
+    "width": 4,
+    "height": 3,
+    "id": 117,
+    "room_id": 150,
+    "room_index": 147,
+    "world_xy": [
+      45,
+      9
+    ],
+    "screen_xy": [
+      3,
+      9
+    ]
+  },
+  "118": {
+    "class": "map",
+    "type": "save",
+    "width": 2,
+    "height": 6,
+    "id": 118,
+    "room_id": 153,
+    "room_index": 103,
+    "world_xy": [
+      49,
+      4
+    ],
+    "screen_xy": [
+      7,
+      6
+    ]
+  },
+  "119": {
+    "class": "map",
+    "type": "save",
+    "width": 2,
+    "height": 6,
+    "id": 119,
+    "room_id": 246,
+    "room_index": 103,
+    "world_xy": [
+      16,
+      12
+    ],
+    "screen_xy": [
+      7,
+      6
+    ]
+  },
+  "120": {
+    "class": "map",
+    "type": "save",
+    "width": 2,
+    "height": 6,
+    "id": 120,
+    "room_id": 258,
+    "room_index": 101,
+    "world_xy": [
+      11,
+      17
+    ],
+    "screen_xy": [
+      5,
+      6
+    ]
+  },
+  "121": {
+    "class": "map",
+    "type": "save",
+    "width": 2,
+    "height": 6,
+    "id": 121,
+    "room_id": 219,
+    "room_index": 101,
+    "world_xy": [
+      10,
+      22
+    ],
+    "screen_xy": [
+      5,
+      6
+    ]
+  },
+  "122": {
+    "class": "map",
+    "type": "save",
+    "width": 2,
+    "height": 6,
+    "id": 122,
+    "room_id": 12,
+    "room_index": 103,
+    "world_xy": [
+      33,
+      26
+    ],
+    "screen_xy": [
+      7,
+      6
+    ]
+  },
+  "123": {
+    "class": "map",
+    "type": "save",
+    "width": 2,
+    "height": 6,
+    "id": 123,
+    "room_id": 25,
+    "room_index": 103,
+    "world_xy": [
+      35,
+      37
+    ],
+    "screen_xy": [
+      7,
+      6
+    ]
+  },
+  "124": {
+    "class": "map",
+    "type": "energy",
+    "width": 3,
+    "height": 3,
+    "id": 124,
+    "room_id": 77,
+    "room_index": 151,
+    "world_xy": [
+      47,
+      53
+    ],
+    "screen_xy": [
+      7,
+      9
+    ]
+  },
+  "125": {
+    "class": "map",
+    "type": "save",
+    "width": 2,
+    "height": 6,
+    "id": 125,
+    "room_id": 60,
+    "room_index": 103,
+    "world_xy": [
+      62,
+      50
+    ],
+    "screen_xy": [
+      7,
+      6
+    ]
+  },
+  "126": {
+    "class": "map",
+    "type": "save",
+    "width": 2,
+    "height": 6,
+    "id": 126,
+    "room_id": 87,
+    "room_index": 103,
+    "world_xy": [
+      42,
+      46
+    ],
+    "screen_xy": [
+      7,
+      6
+    ]
+  },
+  "127": {
+    "class": "map",
+    "type": "save",
+    "width": 2,
+    "height": 6,
+    "id": 127,
+    "room_id": 80,
+    "room_index": 101,
+    "world_xy": [
+      46,
+      48
+    ],
+    "screen_xy": [
+      5,
+      6
+    ]
+  },
+  "128": {
+    "class": "map",
+    "type": "energy",
+    "width": 3,
+    "height": 3,
+    "id": 128,
+    "room_id": 84,
+    "room_index": 150,
+    "world_xy": [
+      46,
+      47
+    ],
+    "screen_xy": [
+      6,
+      9
+    ]
+  },
+  "129": {
+    "class": "map",
+    "type": "save",
+    "width": 2,
+    "height": 6,
+    "id": 129,
+    "room_id": 165,
+    "room_index": 103,
+    "world_xy": [
+      58,
+      22
+    ],
+    "screen_xy": [
+      7,
+      6
+    ]
+  },
+  "130": {
+    "class": "map",
+    "type": "save",
+    "width": 2,
+    "height": 6,
+    "id": 130,
+    "room_id": 195,
+    "room_index": 103,
+    "world_xy": [
+      64,
+      24
+    ],
+    "screen_xy": [
+      7,
+      6
+    ]
+  },
+  "131": {
+    "class": "map",
+    "type": "energy",
+    "width": 3,
+    "height": 3,
+    "id": 131,
+    "room_id": 196,
+    "room_index": 151,
+    "world_xy": [
+      65,
+      24
+    ],
+    "screen_xy": [
+      7,
+      9
+    ]
+  },
+  "132": {
+    "class": "map",
+    "type": "missile",
+    "width": 3,
+    "height": 3,
+    "id": 132,
+    "room_id": 192,
+    "room_index": 151,
+    "world_xy": [
+      61,
+      26
+    ],
+    "screen_xy": [
+      7,
+      9
+    ]
+  },
+  "133": {
+    "class": "map",
+    "type": "save",
+    "width": 2,
+    "height": 6,
+    "id": 133,
+    "room_id": 32,
+    "room_index": 103,
+    "world_xy": [
+      44,
+      36
+    ],
+    "screen_xy": [
+      7,
+      6
+    ]
+  },
+  "134": {
+    "class": "map",
+    "type": "map",
+    "width": 3,
+    "height": 3,
+    "id": 134,
+    "room_id": 35,
+    "room_index": 152,
+    "world_xy": [
+      49,
+      36
+    ],
+    "screen_xy": [
+      8,
+      9
+    ]
+  },
+  "135": {
+    "class": "map",
+    "type": "energy",
+    "width": 3,
+    "height": 3,
+    "id": 135,
+    "room_id": 35,
+    "room_index": 150,
+    "world_xy": [
+      49,
+      36
+    ],
+    "screen_xy": [
+      6,
+      9
+    ]
+  },
+  "136": {
+    "class": "map",
+    "type": "save",
+    "width": 2,
+    "height": 6,
+    "id": 136,
+    "room_id": 47,
+    "room_index": 101,
+    "world_xy": [
+      47,
+      41
+    ],
+    "screen_xy": [
+      5,
+      6
+    ]
+  },
+  "137": {
+    "class": "map",
+    "type": "save",
+    "width": 2,
+    "height": 6,
+    "id": 137,
+    "room_id": 91,
+    "room_index": 103,
+    "world_xy": [
+      38,
+      49
+    ],
+    "screen_xy": [
+      7,
+      6
+    ]
+  },
+  "138": {
+    "class": "map",
+    "type": "energy",
+    "width": 3,
+    "height": 3,
+    "id": 138,
+    "room_id": 19,
+    "room_index": 147,
+    "world_xy": [
+      27,
+      36
+    ],
+    "screen_xy": [
+      3,
+      9
+    ]
+  },
+  "140": {
+    "class": "map",
+    "type": "ship",
+    "width": 13,
+    "height": 6,
+    "id": 140,
+    "room_id": 138,
+    "room_index": 65,
+    "world_xy": [
+      25,
+      4
+    ],
+    "screen_xy": [
+      1,
+      4
+    ]
+  },
+  "141": {
+    "class": "map",
+    "type": "save",
+    "width": 2,
+    "height": 6,
+    "id": 141,
+    "room_id": 234,
+    "room_index": 101,
+    "world_xy": [
+      3,
+      23
+    ],
+    "screen_xy": [
+      5,
+      6
+    ]
+  },
+  "142": {
+    "class": "map",
+    "type": "energy",
+    "width": 3,
+    "height": 3,
+    "id": 142,
+    "room_id": 255,
+    "room_index": 149,
+    "world_xy": [
+      6,
+      16
+    ],
+    "screen_xy": [
+      5,
+      9
+    ]
+  },
+  "143": {
+    "class": "map",
+    "type": "map",
+    "width": 3,
+    "height": 3,
+    "id": 143,
+    "room_id": 255,
+    "room_index": 151,
+    "world_xy": [
+      6,
+      16
+    ],
+    "screen_xy": [
+      7,
+      9
+    ]
+  },
+  "144": {
+    "class": "map",
+    "type": "save",
+    "width": 2,
+    "height": 6,
+    "id": 144,
+    "room_id": 133,
+    "room_index": 101,
+    "world_xy": [
+      16,
+      6
+    ],
+    "screen_xy": [
+      5,
+      6
+    ]
+  },
+  "145": {
+    "class": "map",
+    "type": "save",
+    "width": 2,
+    "height": 6,
+    "id": 145,
+    "room_id": 210,
+    "room_index": 101,
+    "world_xy": [
+      42,
+      29
+    ],
+    "screen_xy": [
+      5,
+      6
+    ]
+  },
+  "146": {
+    "class": "map",
+    "type": "map",
+    "width": 4,
+    "height": 3,
+    "id": 146,
+    "room_id": 109,
+    "room_index": 147,
+    "world_xy": [
+      35,
+      42
+    ],
+    "screen_xy": [
+      3,
+      9
+    ]
+  },
+  "147": {
+    "class": "map",
+    "type": "map",
+    "width": 4,
+    "height": 3,
+    "id": 147,
+    "room_id": 202,
+    "room_index": 153,
+    "world_xy": [
+      40,
+      35
+    ],
+    "screen_xy": [
+      9,
+      9
+    ]
+  },
+  "148": {
+    "class": "map",
+    "type": "save",
+    "width": 2,
+    "height": 6,
+    "id": 148,
+    "room_id": 105,
+    "room_index": 103,
+    "world_xy": [
+      37,
+      43
+    ],
+    "screen_xy": [
+      7,
+      6
+    ]
+  },
+  "150": {
+    "class": "chozo",
+    "width": 5,
+    "height": 6,
+    "id": 150,
+    "room_id": 252,
+    "room_index": 96,
+    "world_xy": [
+      13,
+      15
+    ],
+    "screen_xy": [
+      0,
+      6
+    ]
+  },
+  "152": {
+    "class": "chozo",
+    "width": 3,
+    "height": 3,
+    "id": 152,
+    "room_id": 3,
+    "room_index": 172,
+    "world_xy": [
+      23,
+      6
+    ],
+    "screen_xy": [
+      12,
+      10
+    ]
+  },
+  "153": {
+    "class": "chozo",
+    "width": 3,
+    "height": 3,
+    "id": 153,
+    "room_id": 136,
+    "room_index": 129,
+    "world_xy": [
+      15,
+      2
+    ],
+    "screen_xy": [
+      1,
+      8
+    ]
+  },
+  "154": {
+    "class": "chozo",
+    "width": 4,
+    "height": 5,
+    "id": 154,
+    "room_id": 142,
+    "room_index": 106,
+    "world_xy": [
+      46,
+      2
+    ],
+    "screen_xy": [
+      10,
+      6
+    ]
+  },
+  "155": {
+    "class": "chozo",
+    "width": 4,
+    "height": 5,
+    "id": 155,
+    "room_id": 142,
+    "room_index": 114,
+    "world_xy": [
+      43,
+      3
+    ],
+    "screen_xy": [
+      2,
+      7
+    ]
+  },
+  "156": {
+    "class": "chozo",
+    "width": 3,
+    "height": 3,
+    "id": 156,
+    "room_id": 199,
+    "room_index": 130,
+    "world_xy": [
+      61,
+      28
+    ],
+    "screen_xy": [
+      2,
+      8
+    ]
+  },
+  "157": {
+    "class": "chozo",
+    "width": 3,
+    "height": 5,
+    "id": 157,
+    "room_id": 74,
+    "room_index": 114,
+    "world_xy": [
+      41,
+      51
+    ],
+    "screen_xy": [
+      2,
+      7
+    ]
+  },
+  "158": {
+    "class": "chozo",
+    "width": 3,
+    "height": 3,
+    "id": 158,
+    "room_id": 95,
+    "room_index": 114,
+    "world_xy": [
+      29,
+      54
+    ],
+    "screen_xy": [
+      2,
+      7
+    ]
+  },
+  "159": {
+    "class": "chozo",
+    "width": 3,
+    "height": 3,
+    "id": 159,
+    "room_id": 76,
+    "room_index": 139,
+    "world_xy": [
+      46,
+      54
+    ],
+    "screen_xy": [
+      11,
+      8
+    ]
+  },
+  "160": {
+    "class": "chozo",
+    "width": 3,
+    "height": 3,
+    "id": 160,
+    "room_id": 108,
+    "room_index": 161,
+    "world_xy": [
+      33,
+      44
+    ],
+    "screen_xy": [
+      1,
+      10
+    ]
+  },
+  "161": {
+    "class": "chozo",
+    "width": 3,
+    "height": 3,
+    "id": 161,
+    "room_id": 218,
+    "room_index": 99,
+    "world_xy": [
+      12,
+      29
+    ],
+    "screen_xy": [
+      3,
+      6
+    ]
+  },
+  "162": {
+    "class": "chozo",
+    "width": 3,
+    "height": 3,
+    "id": 162,
+    "room_id": 22,
+    "room_index": 155,
+    "world_xy": [
+      33,
+      35
+    ],
+    "screen_xy": [
+      11,
+      9
+    ]
+  },
+  "163": {
+    "class": "chozo",
+    "width": 3,
+    "height": 3,
+    "id": 163,
+    "room_id": 180,
+    "room_index": 104,
+    "world_xy": [
+      56,
+      34
+    ],
+    "screen_xy": [
+      8,
+      6
+    ]
+  },
+  "164": {
+    "class": "chozo",
+    "width": 3,
+    "height": 3,
+    "id": 164,
+    "room_id": 132,
+    "room_index": 114,
+    "world_xy": [
+      14,
+      7
+    ],
+    "screen_xy": [
+      2,
+      7
+    ]
+  },
+  "165": {
+    "class": "chozo",
+    "width": 3,
+    "height": 3,
+    "id": 165,
+    "room_id": 122,
+    "room_index": 114,
+    "world_xy": [
+      23,
+      29
+    ],
+    "screen_xy": [
+      2,
+      7
+    ]
+  },
+  "166": {
+    "class": "chozo",
+    "width": 3,
+    "height": 3,
+    "id": 166,
+    "room_id": 116,
+    "room_index": 115,
+    "world_xy": [
+      18,
+      33
+    ],
+    "screen_xy": [
+      3,
+      7
+    ]
+  },
+  "167": {
+    "class": "chozo",
+    "width": 3,
+    "height": 3,
+    "id": 167,
+    "room_id": 173,
+    "room_index": 105,
+    "world_xy": [
+      51,
+      20
+    ],
+    "screen_xy": [
+      9,
+      6
+    ]
+  },
+  "168": {
+    "class": "chozo",
+    "width": 3,
+    "height": 3,
+    "id": 168,
+    "room_id": 52,
+    "room_index": 107,
+    "world_xy": [
+      55,
+      42
+    ],
+    "screen_xy": [
+      11,
+      6
+    ]
+  },
+  "169": {
+    "class": "chozo",
+    "width": 3,
+    "height": 3,
+    "id": 169,
+    "room_id": 14,
+    "room_index": 146,
+    "world_xy": [
+      30,
+      29
+    ],
+    "screen_xy": [
+      2,
+      9
+    ]
+  },
+  "170": {
+    "class": "chozo",
+    "width": 3,
+    "height": 3,
+    "id": 170,
+    "room_id": 114,
+    "room_index": 124,
+    "world_xy": [
+      31,
+      40
+    ],
+    "screen_xy": [
+      12,
+      7
+    ]
+  },
+  "171": {
+    "class": "chozo",
+    "width": 3,
+    "height": 3,
+    "id": 171,
+    "room_id": 46,
+    "room_index": 107,
+    "world_xy": [
+      63,
+      40
+    ],
+    "screen_xy": [
+      11,
+      6
+    ]
+  },
+  "173": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 173,
+    "room_id": 226,
+    "room_index": 110,
+    "world_xy": [
+      4,
+      30
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "174": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 174,
+    "room_id": 224,
+    "room_index": 97,
+    "world_xy": [
+      5,
+      30
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "175": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 175,
+    "room_id": 231,
+    "room_index": 110,
+    "world_xy": [
+      5,
+      29
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "176": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 176,
+    "room_id": 227,
+    "room_index": 97,
+    "world_xy": [
+      6,
+      29
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "177": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 177,
+    "room_id": 233,
+    "room_index": 110,
+    "world_xy": [
+      0,
+      29
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "178": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 178,
+    "room_id": 231,
+    "room_index": 97,
+    "world_xy": [
+      1,
+      29
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "179": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 179,
+    "room_id": 232,
+    "room_index": 110,
+    "world_xy": [
+      0,
+      28
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "180": {
+    "class": "door",
+    "type": "green",
+    "width": 1,
+    "height": 4,
+    "id": 180,
+    "room_id": 231,
+    "room_index": 97,
+    "world_xy": [
+      1,
+      28
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "181": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 181,
+    "room_id": 231,
+    "room_index": 110,
+    "world_xy": [
+      2,
+      28
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "182": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 182,
+    "room_id": 230,
+    "room_index": 97,
+    "world_xy": [
+      3,
+      28
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "183": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 183,
+    "room_id": 230,
+    "room_index": 110,
+    "world_xy": [
+      3,
+      28
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "184": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 184,
+    "room_id": 227,
+    "room_index": 97,
+    "world_xy": [
+      4,
+      28
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "185": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 185,
+    "room_id": 229,
+    "room_index": 110,
+    "world_xy": [
+      0,
+      25
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "186": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 186,
+    "room_id": 228,
+    "room_index": 97,
+    "world_xy": [
+      1,
+      25
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "187": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 187,
+    "room_id": 228,
+    "room_index": 110,
+    "world_xy": [
+      3,
+      24
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "188": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 188,
+    "room_id": 224,
+    "room_index": 97,
+    "world_xy": [
+      5,
+      24
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "189": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 189,
+    "room_id": 227,
+    "room_index": 97,
+    "world_xy": [
+      5,
+      25
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "190": {
+    "class": "door",
+    "type": "red",
+    "width": 1,
+    "height": 4,
+    "id": 190,
+    "room_id": 227,
+    "room_index": 97,
+    "world_xy": [
+      4,
+      23
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "191": {
+    "class": "door",
+    "type": "red",
+    "width": 1,
+    "height": 4,
+    "id": 191,
+    "room_id": 227,
+    "room_index": 97,
+    "world_xy": [
+      4,
+      24
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "192": {
+    "class": "door",
+    "type": "red",
+    "width": 1,
+    "height": 4,
+    "id": 192,
+    "room_id": 227,
+    "room_index": 110,
+    "world_xy": [
+      4,
+      24
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "193": {
+    "class": "door",
+    "type": "brown",
+    "width": 1,
+    "height": 4,
+    "id": 193,
+    "room_id": 227,
+    "room_index": 110,
+    "world_xy": [
+      4,
+      25
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "194": {
+    "class": "door",
+    "type": "brown",
+    "width": 1,
+    "height": 4,
+    "id": 194,
+    "room_id": 236,
+    "room_index": 110,
+    "world_xy": [
+      3,
+      22
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "195": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 195,
+    "room_id": 235,
+    "room_index": 110,
+    "world_xy": [
+      0,
+      22
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "196": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 196,
+    "room_id": 236,
+    "room_index": 97,
+    "world_xy": [
+      1,
+      22
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "197": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 197,
+    "room_id": 234,
+    "room_index": 110,
+    "world_xy": [
+      3,
+      23
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "198": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 198,
+    "room_id": 237,
+    "room_index": 97,
+    "world_xy": [
+      5,
+      22
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "199": {
+    "class": "door",
+    "type": "red",
+    "width": 1,
+    "height": 4,
+    "id": 199,
+    "room_id": 227,
+    "room_index": 97,
+    "world_xy": [
+      4,
+      22
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "200": {
+    "class": "door",
+    "type": "red",
+    "width": 1,
+    "height": 4,
+    "id": 200,
+    "room_id": 227,
+    "room_index": 110,
+    "world_xy": [
+      4,
+      22
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "201": {
+    "class": "door",
+    "type": "red",
+    "width": 1,
+    "height": 4,
+    "id": 201,
+    "room_id": 237,
+    "room_index": 110,
+    "world_xy": [
+      7,
+      22
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "202": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 202,
+    "room_id": 238,
+    "room_index": 97,
+    "world_xy": [
+      8,
+      22
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "203": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 203,
+    "room_id": 224,
+    "room_index": 110,
+    "world_xy": [
+      11,
+      24
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "204": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 204,
+    "room_id": 218,
+    "room_index": 97,
+    "world_xy": [
+      12,
+      24
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "205": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 205,
+    "room_id": 219,
+    "room_index": 110,
+    "world_xy": [
+      10,
+      22
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "206": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 206,
+    "room_id": 218,
+    "room_index": 97,
+    "world_xy": [
+      11,
+      22
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "207": {
+    "class": "door",
+    "type": "red",
+    "width": 1,
+    "height": 4,
+    "id": 207,
+    "room_id": 218,
+    "room_index": 110,
+    "world_xy": [
+      13,
+      22
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "208": {
+    "class": "door",
+    "type": "brown",
+    "width": 1,
+    "height": 4,
+    "id": 208,
+    "room_id": 222,
+    "room_index": 97,
+    "world_xy": [
+      14,
+      22
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "209": {
+    "class": "door",
+    "type": "brown",
+    "width": 4,
+    "height": 1,
+    "id": 209,
+    "room_id": 222,
+    "room_index": 54,
+    "world_xy": [
+      17,
+      22
+    ],
+    "screen_xy": [
+      6,
+      3
+    ]
+  },
+  "210": {
+    "class": "door",
+    "type": "green",
+    "width": 4,
+    "height": 1,
+    "id": 210,
+    "room_id": 215,
+    "room_index": 230,
+    "world_xy": [
+      17,
+      21
+    ],
+    "screen_xy": [
+      6,
+      14
+    ]
+  },
+  "211": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 211,
+    "room_id": 215,
+    "room_index": 110,
+    "world_xy": [
+      17,
+      19
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "212": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 212,
+    "room_id": 216,
+    "room_index": 97,
+    "world_xy": [
+      18,
+      19
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "213": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 213,
+    "room_id": 263,
+    "room_index": 110,
+    "world_xy": [
+      15,
+      17
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "214": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 214,
+    "room_id": 129,
+    "room_index": 110,
+    "world_xy": [
+      17,
+      17
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "215": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 215,
+    "room_id": 128,
+    "room_index": 110,
+    "world_xy": [
+      20,
+      17
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "216": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 216,
+    "room_id": 127,
+    "room_index": 97,
+    "world_xy": [
+      21,
+      17
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "217": {
+    "class": "door",
+    "type": "brown",
+    "width": 1,
+    "height": 4,
+    "id": 217,
+    "room_id": 129,
+    "room_index": 97,
+    "world_xy": [
+      16,
+      17
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "218": {
+    "class": "door",
+    "type": "brown",
+    "width": 1,
+    "height": 4,
+    "id": 218,
+    "room_id": 128,
+    "room_index": 97,
+    "world_xy": [
+      18,
+      17
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "219": {
+    "class": "door",
+    "type": "orange",
+    "width": 1,
+    "height": 4,
+    "id": 219,
+    "room_id": 129,
+    "room_index": 110,
+    "world_xy": [
+      18,
+      16
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "220": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 220,
+    "room_id": 130,
+    "room_index": 97,
+    "world_xy": [
+      19,
+      16
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "221": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 221,
+    "room_id": 130,
+    "room_index": 97,
+    "world_xy": [
+      19,
+      9
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "222": {
+    "class": "door",
+    "type": "brown",
+    "width": 1,
+    "height": 4,
+    "id": 222,
+    "room_id": 129,
+    "room_index": 110,
+    "world_xy": [
+      18,
+      9
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "223": {
+    "class": "door",
+    "type": "blue",
+    "width": 4,
+    "height": 1,
+    "id": 223,
+    "room_id": 2,
+    "room_index": 214,
+    "world_xy": [
+      17,
+      8
+    ],
+    "screen_xy": [
+      6,
+      13
+    ]
+  },
+  "224": {
+    "class": "door",
+    "type": "blue",
+    "width": 4,
+    "height": 1,
+    "id": 224,
+    "room_id": 129,
+    "room_index": 38,
+    "world_xy": [
+      17,
+      9
+    ],
+    "screen_xy": [
+      6,
+      2
+    ]
+  },
+  "225": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 225,
+    "room_id": 223,
+    "room_index": 110,
+    "world_xy": [
+      11,
+      26
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "226": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 226,
+    "room_id": 218,
+    "room_index": 97,
+    "world_xy": [
+      12,
+      26
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "227": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 227,
+    "room_id": 218,
+    "room_index": 110,
+    "world_xy": [
+      14,
+      27
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "228": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 228,
+    "room_id": 220,
+    "room_index": 110,
+    "world_xy": [
+      15,
+      26
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "229": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 229,
+    "room_id": 221,
+    "room_index": 97,
+    "world_xy": [
+      16,
+      26
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "230": {
+    "class": "door",
+    "type": "brown",
+    "width": 1,
+    "height": 4,
+    "id": 230,
+    "room_id": 223,
+    "room_index": 110,
+    "world_xy": [
+      11,
+      25
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "231": {
+    "class": "door",
+    "type": "brown",
+    "width": 1,
+    "height": 4,
+    "id": 231,
+    "room_id": 220,
+    "room_index": 97,
+    "world_xy": [
+      14,
+      26
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "232": {
+    "class": "door",
+    "type": "orange",
+    "width": 1,
+    "height": 4,
+    "id": 232,
+    "room_id": 218,
+    "room_index": 110,
+    "world_xy": [
+      13,
+      26
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "233": {
+    "class": "door",
+    "type": "green",
+    "width": 1,
+    "height": 4,
+    "id": 233,
+    "room_id": 218,
+    "room_index": 110,
+    "world_xy": [
+      13,
+      28
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "234": {
+    "class": "door",
+    "type": "green",
+    "width": 1,
+    "height": 4,
+    "id": 234,
+    "room_id": 217,
+    "room_index": 97,
+    "world_xy": [
+      15,
+      27
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "235": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 235,
+    "room_id": 119,
+    "room_index": 97,
+    "world_xy": [
+      14,
+      28
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "236": {
+    "class": "door",
+    "type": "orange",
+    "width": 1,
+    "height": 4,
+    "id": 236,
+    "room_id": 119,
+    "room_index": 110,
+    "world_xy": [
+      15,
+      28
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "237": {
+    "class": "door",
+    "type": "brown",
+    "width": 1,
+    "height": 4,
+    "id": 237,
+    "room_id": 120,
+    "room_index": 97,
+    "world_xy": [
+      16,
+      28
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "238": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 238,
+    "room_id": 217,
+    "room_index": 110,
+    "world_xy": [
+      17,
+      27
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "239": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 239,
+    "room_id": 216,
+    "room_index": 97,
+    "world_xy": [
+      18,
+      27
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "240": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 240,
+    "room_id": 120,
+    "room_index": 110,
+    "world_xy": [
+      23,
+      28
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "241": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 241,
+    "room_id": 121,
+    "room_index": 97,
+    "world_xy": [
+      24,
+      28
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "242": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 242,
+    "room_id": 122,
+    "room_index": 110,
+    "world_xy": [
+      23,
+      29
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "244": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 244,
+    "room_id": 121,
+    "room_index": 97,
+    "world_xy": [
+      24,
+      29
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "245": {
+    "class": "door",
+    "type": "red",
+    "width": 1,
+    "height": 4,
+    "id": 245,
+    "room_id": 121,
+    "room_index": 110,
+    "world_xy": [
+      24,
+      28
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "246": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 246,
+    "room_id": 123,
+    "room_index": 97,
+    "world_xy": [
+      25,
+      28
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "247": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 247,
+    "room_id": 125,
+    "room_index": 110,
+    "world_xy": [
+      24,
+      26
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "248": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 248,
+    "room_id": 124,
+    "room_index": 97,
+    "world_xy": [
+      25,
+      26
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "250": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 250,
+    "room_id": 124,
+    "room_index": 110,
+    "world_xy": [
+      26,
+      26
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "251": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 251,
+    "room_id": 123,
+    "room_index": 97,
+    "world_xy": [
+      27,
+      26
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "252": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 252,
+    "room_id": 18,
+    "room_index": 110,
+    "world_xy": [
+      28,
+      27
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "253": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 253,
+    "room_id": 17,
+    "room_index": 97,
+    "world_xy": [
+      29,
+      27
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "254": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 254,
+    "room_id": 17,
+    "room_index": 110,
+    "world_xy": [
+      31,
+      27
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "255": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 255,
+    "room_id": 14,
+    "room_index": 110,
+    "world_xy": [
+      31,
+      29
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "256": {
+    "class": "door",
+    "type": "green",
+    "width": 1,
+    "height": 4,
+    "id": 256,
+    "room_id": 11,
+    "room_index": 97,
+    "world_xy": [
+      32,
+      29
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "257": {
+    "class": "door",
+    "type": "orange",
+    "width": 1,
+    "height": 4,
+    "id": 257,
+    "room_id": 11,
+    "room_index": 97,
+    "world_xy": [
+      32,
+      27
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "258": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 258,
+    "room_id": 11,
+    "room_index": 110,
+    "world_xy": [
+      32,
+      26
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "259": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 259,
+    "room_id": 12,
+    "room_index": 97,
+    "world_xy": [
+      33,
+      26
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "260": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 260,
+    "room_id": 205,
+    "room_index": 110,
+    "world_xy": [
+      34,
+      27
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "261": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 261,
+    "room_id": 208,
+    "room_index": 97,
+    "world_xy": [
+      35,
+      27
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "262": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 262,
+    "room_id": 13,
+    "room_index": 110,
+    "world_xy": [
+      34,
+      25
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "263": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 263,
+    "room_id": 214,
+    "room_index": 97,
+    "world_xy": [
+      35,
+      25
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "264": {
+    "class": "door",
+    "type": "blue",
+    "width": 4,
+    "height": 1,
+    "id": 264,
+    "room_id": 214,
+    "room_index": 214,
+    "world_xy": [
+      37,
+      26
+    ],
+    "screen_xy": [
+      6,
+      13
+    ]
+  },
+  "265": {
+    "class": "door",
+    "type": "blue",
+    "width": 4,
+    "height": 1,
+    "id": 265,
+    "room_id": 208,
+    "room_index": 38,
+    "world_xy": [
+      37,
+      27
+    ],
+    "screen_xy": [
+      6,
+      2
+    ]
+  },
+  "266": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 266,
+    "room_id": 213,
+    "room_index": 110,
+    "world_xy": [
+      36,
+      22
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "268": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 268,
+    "room_id": 212,
+    "room_index": 97,
+    "world_xy": [
+      37,
+      22
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "269": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 269,
+    "room_id": 212,
+    "room_index": 110,
+    "world_xy": [
+      40,
+      23
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "270": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 270,
+    "room_id": 211,
+    "room_index": 97,
+    "world_xy": [
+      41,
+      23
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "271": {
+    "class": "door",
+    "type": "blue",
+    "width": 4,
+    "height": 1,
+    "id": 271,
+    "room_id": 211,
+    "room_index": 214,
+    "world_xy": [
+      41,
+      24
+    ],
+    "screen_xy": [
+      6,
+      13
+    ]
+  },
+  "273": {
+    "class": "door",
+    "type": "blue",
+    "width": 4,
+    "height": 1,
+    "id": 273,
+    "room_id": 209,
+    "room_index": 38,
+    "world_xy": [
+      41,
+      25
+    ],
+    "screen_xy": [
+      6,
+      2
+    ]
+  },
+  "274": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 274,
+    "room_id": 208,
+    "room_index": 110,
+    "world_xy": [
+      40,
+      27
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "275": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 275,
+    "room_id": 209,
+    "room_index": 97,
+    "world_xy": [
+      41,
+      27
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "276": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 276,
+    "room_id": 210,
+    "room_index": 110,
+    "world_xy": [
+      42,
+      29
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "277": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 277,
+    "room_id": 185,
+    "room_index": 97,
+    "world_xy": [
+      43,
+      28
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "278": {
+    "class": "door",
+    "type": "blue",
+    "width": 4,
+    "height": 1,
+    "id": 278,
+    "room_id": 185,
+    "room_index": 38,
+    "world_xy": [
+      43,
+      27
+    ],
+    "screen_xy": [
+      6,
+      2
+    ]
+  },
+  "279": {
+    "class": "door",
+    "type": "blue",
+    "width": 4,
+    "height": 1,
+    "id": 279,
+    "room_id": 190,
+    "room_index": 214,
+    "world_xy": [
+      43,
+      26
+    ],
+    "screen_xy": [
+      6,
+      13
+    ]
+  },
+  "280": {
+    "class": "door",
+    "type": "green",
+    "width": 1,
+    "height": 4,
+    "id": 280,
+    "room_id": 209,
+    "room_index": 110,
+    "world_xy": [
+      42,
+      28
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "281": {
+    "class": "door",
+    "type": "red",
+    "width": 1,
+    "height": 4,
+    "id": 281,
+    "room_id": 185,
+    "room_index": 97,
+    "world_xy": [
+      43,
+      29
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "282": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 282,
+    "room_id": 190,
+    "room_index": 110,
+    "world_xy": [
+      46,
+      26
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "283": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 283,
+    "room_id": 189,
+    "room_index": 110,
+    "world_xy": [
+      48,
+      26
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "284": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 284,
+    "room_id": 188,
+    "room_index": 97,
+    "world_xy": [
+      49,
+      26
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "285": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 285,
+    "room_id": 170,
+    "room_index": 110,
+    "world_xy": [
+      48,
+      25
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "286": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 286,
+    "room_id": 169,
+    "room_index": 97,
+    "world_xy": [
+      49,
+      25
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "287": {
+    "class": "door",
+    "type": "brown",
+    "width": 1,
+    "height": 4,
+    "id": 287,
+    "room_id": 189,
+    "room_index": 97,
+    "world_xy": [
+      47,
+      26
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "288": {
+    "class": "door",
+    "type": "brown",
+    "width": 1,
+    "height": 4,
+    "id": 288,
+    "room_id": 169,
+    "room_index": 110,
+    "world_xy": [
+      49,
+      25
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "289": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 289,
+    "room_id": 170,
+    "room_index": 110,
+    "world_xy": [
+      48,
+      23
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "290": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 290,
+    "room_id": 167,
+    "room_index": 97,
+    "world_xy": [
+      49,
+      23
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "291": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 291,
+    "room_id": 167,
+    "room_index": 110,
+    "world_xy": [
+      49,
+      23
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "292": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 292,
+    "room_id": 166,
+    "room_index": 97,
+    "world_xy": [
+      50,
+      23
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "293": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 293,
+    "room_id": 200,
+    "room_index": 110,
+    "world_xy": [
+      50,
+      24
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "294": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 294,
+    "room_id": 193,
+    "room_index": 97,
+    "world_xy": [
+      51,
+      24
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "295": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 295,
+    "room_id": 200,
+    "room_index": 97,
+    "world_xy": [
+      50,
+      25
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "296": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 296,
+    "room_id": 171,
+    "room_index": 110,
+    "world_xy": [
+      48,
+      18
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "297": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 297,
+    "room_id": 172,
+    "room_index": 97,
+    "world_xy": [
+      49,
+      18
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "298": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 298,
+    "room_id": 172,
+    "room_index": 110,
+    "world_xy": [
+      49,
+      18
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "299": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 299,
+    "room_id": 171,
+    "room_index": 97,
+    "world_xy": [
+      48,
+      21
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "300": {
+    "class": "door",
+    "type": "brown",
+    "width": 1,
+    "height": 4,
+    "id": 300,
+    "room_id": 170,
+    "room_index": 110,
+    "world_xy": [
+      47,
+      21
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "301": {
+    "class": "door",
+    "type": "brown",
+    "width": 1,
+    "height": 4,
+    "id": 301,
+    "room_id": 173,
+    "room_index": 97,
+    "world_xy": [
+      50,
+      18
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "302": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 302,
+    "room_id": 166,
+    "room_index": 110,
+    "world_xy": [
+      56,
+      23
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "303": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 303,
+    "room_id": 164,
+    "room_index": 97,
+    "world_xy": [
+      57,
+      23
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "304": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 304,
+    "room_id": 165,
+    "room_index": 97,
+    "world_xy": [
+      58,
+      22
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "305": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 305,
+    "room_id": 191,
+    "room_index": 110,
+    "world_xy": [
+      56,
+      24
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "306": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 306,
+    "room_id": 194,
+    "room_index": 97,
+    "world_xy": [
+      57,
+      24
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "307": {
+    "class": "door",
+    "type": "red",
+    "width": 1,
+    "height": 4,
+    "id": 307,
+    "room_id": 164,
+    "room_index": 110,
+    "world_xy": [
+      57,
+      22
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "308": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 308,
+    "room_id": 193,
+    "room_index": 110,
+    "world_xy": [
+      55,
+      25
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "309": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 309,
+    "room_id": 188,
+    "room_index": 110,
+    "world_xy": [
+      55,
+      26
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "310": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 310,
+    "room_id": 191,
+    "room_index": 97,
+    "world_xy": [
+      56,
+      26
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "311": {
+    "class": "door",
+    "type": "brown",
+    "width": 1,
+    "height": 4,
+    "id": 311,
+    "room_id": 191,
+    "room_index": 97,
+    "world_xy": [
+      56,
+      25
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "312": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 312,
+    "room_id": 191,
+    "room_index": 110,
+    "world_xy": [
+      60,
+      26
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "313": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 313,
+    "room_id": 192,
+    "room_index": 97,
+    "world_xy": [
+      61,
+      26
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "314": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 314,
+    "room_id": 199,
+    "room_index": 110,
+    "world_xy": [
+      61,
+      28
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "315": {
+    "class": "door",
+    "type": "brown",
+    "width": 1,
+    "height": 4,
+    "id": 315,
+    "room_id": 198,
+    "room_index": 97,
+    "world_xy": [
+      62,
+      28
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "316": {
+    "class": "door",
+    "type": "brown",
+    "width": 1,
+    "height": 4,
+    "id": 316,
+    "room_id": 198,
+    "room_index": 110,
+    "world_xy": [
+      63,
+      27
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "317": {
+    "class": "door",
+    "type": "eye",
+    "width": 1,
+    "height": 4,
+    "id": 317,
+    "room_id": 197,
+    "room_index": 97,
+    "world_xy": [
+      64,
+      27
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "319": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 319,
+    "room_id": 195,
+    "room_index": 97,
+    "world_xy": [
+      64,
+      24
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "320": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 320,
+    "room_id": 195,
+    "room_index": 110,
+    "world_xy": [
+      64,
+      24
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "321": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 321,
+    "room_id": 196,
+    "room_index": 97,
+    "world_xy": [
+      65,
+      24
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "322": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 322,
+    "room_id": 197,
+    "room_index": 97,
+    "world_xy": [
+      64,
+      25
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "323": {
+    "class": "door",
+    "type": "green",
+    "width": 1,
+    "height": 4,
+    "id": 323,
+    "room_id": 194,
+    "room_index": 110,
+    "world_xy": [
+      63,
+      25
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "324": {
+    "class": "door",
+    "type": "red",
+    "width": 1,
+    "height": 4,
+    "id": 324,
+    "room_id": 194,
+    "room_index": 110,
+    "world_xy": [
+      63,
+      24
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "325": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 325,
+    "room_id": 185,
+    "room_index": 110,
+    "world_xy": [
+      48,
+      28
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "326": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 326,
+    "room_id": 186,
+    "room_index": 97,
+    "world_xy": [
+      49,
+      28
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "327": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 327,
+    "room_id": 179,
+    "room_index": 110,
+    "world_xy": [
+      54,
+      33
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "328": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 328,
+    "room_id": 180,
+    "room_index": 97,
+    "world_xy": [
+      55,
+      33
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "329": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 329,
+    "room_id": 177,
+    "room_index": 110,
+    "world_xy": [
+      48,
+      34
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "330": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 330,
+    "room_id": 178,
+    "room_index": 97,
+    "world_xy": [
+      49,
+      34
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "331": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 331,
+    "room_id": 178,
+    "room_index": 110,
+    "world_xy": [
+      49,
+      34
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "332": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 332,
+    "room_id": 178,
+    "room_index": 97,
+    "world_xy": [
+      50,
+      34
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "333": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 333,
+    "room_id": 178,
+    "room_index": 110,
+    "world_xy": [
+      50,
+      33
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "334": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 334,
+    "room_id": 179,
+    "room_index": 97,
+    "world_xy": [
+      51,
+      33
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "335": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 335,
+    "room_id": 176,
+    "room_index": 110,
+    "world_xy": [
+      44,
+      34
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "336": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 336,
+    "room_id": 175,
+    "room_index": 97,
+    "world_xy": [
+      45,
+      34
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "337": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 337,
+    "room_id": 175,
+    "room_index": 110,
+    "world_xy": [
+      45,
+      34
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "338": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 338,
+    "room_id": 177,
+    "room_index": 97,
+    "world_xy": [
+      46,
+      34
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "339": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 339,
+    "room_id": 34,
+    "room_index": 97,
+    "world_xy": [
+      48,
+      37
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "340": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 340,
+    "room_id": 35,
+    "room_index": 97,
+    "world_xy": [
+      49,
+      36
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "341": {
+    "class": "door",
+    "type": "brown",
+    "width": 1,
+    "height": 4,
+    "id": 341,
+    "room_id": 33,
+    "room_index": 110,
+    "world_xy": [
+      47,
+      37
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "342": {
+    "class": "door",
+    "type": "green",
+    "width": 1,
+    "height": 4,
+    "id": 342,
+    "room_id": 34,
+    "room_index": 110,
+    "world_xy": [
+      48,
+      36
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "343": {
+    "class": "door",
+    "type": "eye",
+    "width": 1,
+    "height": 4,
+    "id": 343,
+    "room_id": 34,
+    "room_index": 110,
+    "world_xy": [
+      49,
+      37
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "344": {
+    "class": "door",
+    "type": "brown",
+    "width": 1,
+    "height": 4,
+    "id": 344,
+    "room_id": 36,
+    "room_index": 97,
+    "world_xy": [
+      50,
+      37
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "346": {
+    "class": "door",
+    "type": "brown",
+    "width": 1,
+    "height": 4,
+    "id": 346,
+    "room_id": 36,
+    "room_index": 110,
+    "world_xy": [
+      51,
+      37
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "347": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 347,
+    "room_id": 37,
+    "room_index": 97,
+    "world_xy": [
+      52,
+      37
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "348": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 348,
+    "room_id": 19,
+    "room_index": 110,
+    "world_xy": [
+      27,
+      36
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "349": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 349,
+    "room_id": 18,
+    "room_index": 110,
+    "world_xy": [
+      28,
+      36
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "350": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 350,
+    "room_id": 20,
+    "room_index": 97,
+    "world_xy": [
+      29,
+      36
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "351": {
+    "class": "door",
+    "type": "green",
+    "width": 1,
+    "height": 4,
+    "id": 351,
+    "room_id": 18,
+    "room_index": 97,
+    "world_xy": [
+      28,
+      36
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "352": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 352,
+    "room_id": 20,
+    "room_index": 110,
+    "world_xy": [
+      30,
+      36
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "353": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 353,
+    "room_id": 21,
+    "room_index": 97,
+    "world_xy": [
+      31,
+      36
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "354": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 354,
+    "room_id": 21,
+    "room_index": 110,
+    "world_xy": [
+      32,
+      36
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "355": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 355,
+    "room_id": 23,
+    "room_index": 97,
+    "world_xy": [
+      33,
+      36
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "356": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 356,
+    "room_id": 23,
+    "room_index": 110,
+    "world_xy": [
+      33,
+      36
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "357": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 357,
+    "room_id": 22,
+    "room_index": 97,
+    "world_xy": [
+      33,
+      35
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "358": {
+    "class": "door",
+    "type": "green",
+    "width": 1,
+    "height": 4,
+    "id": 358,
+    "room_id": 21,
+    "room_index": 110,
+    "world_xy": [
+      32,
+      35
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "359": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 359,
+    "room_id": 25,
+    "room_index": 97,
+    "world_xy": [
+      35,
+      37
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "360": {
+    "class": "door",
+    "type": "red",
+    "width": 1,
+    "height": 4,
+    "id": 360,
+    "room_id": 24,
+    "room_index": 110,
+    "world_xy": [
+      34,
+      37
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "361": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 361,
+    "room_id": 26,
+    "room_index": 97,
+    "world_xy": [
+      35,
+      36
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "362": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 362,
+    "room_id": 26,
+    "room_index": 110,
+    "world_xy": [
+      35,
+      36
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "363": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 363,
+    "room_id": 27,
+    "room_index": 97,
+    "world_xy": [
+      36,
+      36
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "364": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 364,
+    "room_id": 28,
+    "room_index": 110,
+    "world_xy": [
+      38,
+      36
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "365": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 365,
+    "room_id": 29,
+    "room_index": 97,
+    "world_xy": [
+      39,
+      36
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "366": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 366,
+    "room_id": 26,
+    "room_index": 110,
+    "world_xy": [
+      38,
+      35
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "367": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 367,
+    "room_id": 203,
+    "room_index": 97,
+    "world_xy": [
+      39,
+      35
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "368": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 368,
+    "room_id": 204,
+    "room_index": 110,
+    "world_xy": [
+      38,
+      34
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "369": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 369,
+    "room_id": 201,
+    "room_index": 97,
+    "world_xy": [
+      40,
+      34
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "370": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 370,
+    "room_id": 202,
+    "room_index": 97,
+    "world_xy": [
+      40,
+      35
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "371": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 371,
+    "room_id": 201,
+    "room_index": 110,
+    "world_xy": [
+      40,
+      34
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "372": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 372,
+    "room_id": 176,
+    "room_index": 97,
+    "world_xy": [
+      41,
+      34
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "373": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 373,
+    "room_id": 207,
+    "room_index": 97,
+    "world_xy": [
+      40,
+      33
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "374": {
+    "class": "door",
+    "type": "red",
+    "width": 1,
+    "height": 4,
+    "id": 374,
+    "room_id": 206,
+    "room_index": 110,
+    "world_xy": [
+      39,
+      33
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "375": {
+    "class": "door",
+    "type": "red",
+    "width": 1,
+    "height": 4,
+    "id": 375,
+    "room_id": 203,
+    "room_index": 110,
+    "world_xy": [
+      39,
+      35
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "376": {
+    "class": "door",
+    "type": "brown",
+    "width": 1,
+    "height": 4,
+    "id": 376,
+    "room_id": 29,
+    "room_index": 97,
+    "world_xy": [
+      39,
+      37
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "377": {
+    "class": "door",
+    "type": "brown",
+    "width": 1,
+    "height": 4,
+    "id": 377,
+    "room_id": 30,
+    "room_index": 108,
+    "world_xy": [
+      38,
+      38
+    ],
+    "screen_xy": [
+      12,
+      6
+    ]
+  },
+  "378": {
+    "class": "door",
+    "type": "blue",
+    "width": 4,
+    "height": 1,
+    "id": 378,
+    "room_id": 31,
+    "room_index": 198,
+    "world_xy": [
+      40,
+      36
+    ],
+    "screen_xy": [
+      6,
+      12
+    ]
+  },
+  "379": {
+    "class": "door",
+    "type": "blue",
+    "width": 4,
+    "height": 1,
+    "id": 379,
+    "room_id": 29,
+    "room_index": 54,
+    "world_xy": [
+      40,
+      37
+    ],
+    "screen_xy": [
+      6,
+      3
+    ]
+  },
+  "380": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 380,
+    "room_id": 31,
+    "room_index": 110,
+    "world_xy": [
+      41,
+      37
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "381": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 381,
+    "room_id": 31,
+    "room_index": 110,
+    "world_xy": [
+      43,
+      36
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "382": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 382,
+    "room_id": 32,
+    "room_index": 97,
+    "world_xy": [
+      44,
+      36
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "383": {
+    "class": "door",
+    "type": "green",
+    "width": 4,
+    "height": 1,
+    "id": 383,
+    "room_id": 170,
+    "room_index": 214,
+    "world_xy": [
+      45,
+      22
+    ],
+    "screen_xy": [
+      6,
+      13
+    ]
+  },
+  "384": {
+    "class": "door",
+    "type": "green",
+    "width": 4,
+    "height": 1,
+    "id": 384,
+    "room_id": 175,
+    "room_index": 38,
+    "world_xy": [
+      45,
+      33
+    ],
+    "screen_xy": [
+      6,
+      2
+    ]
+  },
+  "385": {
+    "class": "door",
+    "type": "blue",
+    "width": 4,
+    "height": 1,
+    "id": 385,
+    "room_id": 162,
+    "room_index": 38,
+    "world_xy": [
+      57,
+      10
+    ],
+    "screen_xy": [
+      6,
+      2
+    ]
+  },
+  "386": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 386,
+    "room_id": 161,
+    "room_index": 110,
+    "world_xy": [
+      57,
+      9
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "387": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 387,
+    "room_id": 160,
+    "room_index": 97,
+    "world_xy": [
+      58,
+      9
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "388": {
+    "class": "door",
+    "type": "orange",
+    "width": 4,
+    "height": 1,
+    "id": 388,
+    "room_id": 161,
+    "room_index": 214,
+    "world_xy": [
+      57,
+      9
+    ],
+    "screen_xy": [
+      6,
+      13
+    ]
+  },
+  "389": {
+    "class": "door",
+    "type": "blue",
+    "width": 4,
+    "height": 1,
+    "id": 389,
+    "room_id": 159,
+    "room_index": 214,
+    "world_xy": [
+      61,
+      7
+    ],
+    "screen_xy": [
+      6,
+      13
+    ]
+  },
+  "390": {
+    "class": "door",
+    "type": "blue",
+    "width": 4,
+    "height": 1,
+    "id": 390,
+    "room_id": 160,
+    "room_index": 38,
+    "world_xy": [
+      61,
+      8
+    ],
+    "screen_xy": [
+      6,
+      2
+    ]
+  },
+  "391": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 391,
+    "room_id": 158,
+    "room_index": 110,
+    "world_xy": [
+      60,
+      4
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "392": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 392,
+    "room_id": 159,
+    "room_index": 97,
+    "world_xy": [
+      61,
+      4
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "393": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 393,
+    "room_id": 154,
+    "room_index": 110,
+    "world_xy": [
+      50,
+      5
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "394": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 394,
+    "room_id": 155,
+    "room_index": 97,
+    "world_xy": [
+      51,
+      5
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "395": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 395,
+    "room_id": 155,
+    "room_index": 110,
+    "world_xy": [
+      52,
+      5
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "396": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 396,
+    "room_id": 156,
+    "room_index": 97,
+    "world_xy": [
+      53,
+      5
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "397": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 397,
+    "room_id": 156,
+    "room_index": 110,
+    "world_xy": [
+      53,
+      4
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "398": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 398,
+    "room_id": 158,
+    "room_index": 97,
+    "world_xy": [
+      54,
+      4
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "399": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 399,
+    "room_id": 157,
+    "room_index": 110,
+    "world_xy": [
+      52,
+      3
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "400": {
+    "class": "door",
+    "type": "red",
+    "width": 1,
+    "height": 4,
+    "id": 400,
+    "room_id": 156,
+    "room_index": 97,
+    "world_xy": [
+      53,
+      3
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "401": {
+    "class": "door",
+    "type": "eye",
+    "width": 1,
+    "height": 4,
+    "id": 401,
+    "room_id": 151,
+    "room_index": 110,
+    "world_xy": [
+      50,
+      9
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "402": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 402,
+    "room_id": 152,
+    "room_index": 97,
+    "world_xy": [
+      51,
+      9
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "403": {
+    "class": "door",
+    "type": "blue",
+    "width": 4,
+    "height": 1,
+    "id": 403,
+    "room_id": 151,
+    "room_index": 38,
+    "world_xy": [
+      48,
+      9
+    ],
+    "screen_xy": [
+      6,
+      2
+    ]
+  },
+  "404": {
+    "class": "door",
+    "type": "green",
+    "width": 4,
+    "height": 1,
+    "id": 404,
+    "room_id": 146,
+    "room_index": 214,
+    "world_xy": [
+      48,
+      8
+    ],
+    "screen_xy": [
+      6,
+      13
+    ]
+  },
+  "405": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 405,
+    "room_id": 150,
+    "room_index": 110,
+    "world_xy": [
+      45,
+      9
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "406": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 406,
+    "room_id": 151,
+    "room_index": 97,
+    "world_xy": [
+      46,
+      9
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "408": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 408,
+    "room_id": 148,
+    "room_index": 110,
+    "world_xy": [
+      47,
+      7
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "409": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 409,
+    "room_id": 146,
+    "room_index": 110,
+    "world_xy": [
+      49,
+      7
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "410": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 410,
+    "room_id": 149,
+    "room_index": 97,
+    "world_xy": [
+      50,
+      7
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "411": {
+    "class": "door",
+    "type": "brown",
+    "width": 1,
+    "height": 4,
+    "id": 411,
+    "room_id": 146,
+    "room_index": 97,
+    "world_xy": [
+      48,
+      7
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "412": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 412,
+    "room_id": 147,
+    "room_index": 110,
+    "world_xy": [
+      47,
+      4
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "413": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 413,
+    "room_id": 146,
+    "room_index": 97,
+    "world_xy": [
+      48,
+      4
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "414": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 414,
+    "room_id": 146,
+    "room_index": 110,
+    "world_xy": [
+      48,
+      4
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "415": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 415,
+    "room_id": 153,
+    "room_index": 97,
+    "world_xy": [
+      49,
+      4
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "416": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 416,
+    "room_id": 154,
+    "room_index": 97,
+    "world_xy": [
+      49,
+      5
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "417": {
+    "class": "door",
+    "type": "brown",
+    "width": 1,
+    "height": 4,
+    "id": 417,
+    "room_id": 146,
+    "room_index": 110,
+    "world_xy": [
+      48,
+      5
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "418": {
+    "class": "door",
+    "type": "blue",
+    "width": 4,
+    "height": 1,
+    "id": 418,
+    "room_id": 146,
+    "room_index": 38,
+    "world_xy": [
+      48,
+      1
+    ],
+    "screen_xy": [
+      6,
+      2
+    ]
+  },
+  "419": {
+    "class": "door",
+    "type": "blue",
+    "width": 4,
+    "height": 1,
+    "id": 419,
+    "room_id": 144,
+    "room_index": 230,
+    "world_xy": [
+      48,
+      0
+    ],
+    "screen_xy": [
+      6,
+      14
+    ]
+  },
+  "420": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 420,
+    "room_id": 145,
+    "room_index": 97,
+    "world_xy": [
+      51,
+      0
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "421": {
+    "class": "door",
+    "type": "brown",
+    "width": 1,
+    "height": 4,
+    "id": 421,
+    "room_id": 144,
+    "room_index": 110,
+    "world_xy": [
+      50,
+      0
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "422": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 422,
+    "room_id": 140,
+    "room_index": 110,
+    "world_xy": [
+      43,
+      0
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "423": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 423,
+    "room_id": 140,
+    "room_index": 110,
+    "world_xy": [
+      43,
+      1
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "424": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 424,
+    "room_id": 142,
+    "room_index": 97,
+    "world_xy": [
+      44,
+      1
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "425": {
+    "class": "door",
+    "type": "brown",
+    "width": 1,
+    "height": 4,
+    "id": 425,
+    "room_id": 144,
+    "room_index": 97,
+    "world_xy": [
+      44,
+      0
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "426": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 426,
+    "room_id": 140,
+    "room_index": 110,
+    "world_xy": [
+      38,
+      2
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "427": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 427,
+    "room_id": 141,
+    "room_index": 97,
+    "world_xy": [
+      39,
+      2
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "428": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 428,
+    "room_id": 141,
+    "room_index": 110,
+    "world_xy": [
+      40,
+      2
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "429": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 429,
+    "room_id": 140,
+    "room_index": 97,
+    "world_xy": [
+      41,
+      2
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "430": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 430,
+    "room_id": 140,
+    "room_index": 110,
+    "world_xy": [
+      41,
+      2
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "431": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 431,
+    "room_id": 143,
+    "room_index": 97,
+    "world_xy": [
+      42,
+      3
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "432": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 432,
+    "room_id": 143,
+    "room_index": 110,
+    "world_xy": [
+      42,
+      3
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "433": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 433,
+    "room_id": 142,
+    "room_index": 97,
+    "world_xy": [
+      43,
+      3
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "434": {
+    "class": "door",
+    "type": "brown",
+    "width": 1,
+    "height": 4,
+    "id": 434,
+    "room_id": 142,
+    "room_index": 97,
+    "world_xy": [
+      42,
+      2
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "435": {
+    "class": "door",
+    "type": "brown",
+    "width": 1,
+    "height": 4,
+    "id": 435,
+    "room_id": 140,
+    "room_index": 110,
+    "world_xy": [
+      41,
+      3
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "436": {
+    "class": "door",
+    "type": "green",
+    "width": 1,
+    "height": 4,
+    "id": 436,
+    "room_id": 140,
+    "room_index": 110,
+    "world_xy": [
+      43,
+      4
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "437": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 437,
+    "room_id": 147,
+    "room_index": 97,
+    "world_xy": [
+      44,
+      4
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "438": {
+    "class": "door",
+    "type": "orange",
+    "width": 1,
+    "height": 4,
+    "id": 438,
+    "room_id": 8,
+    "room_index": 110,
+    "world_xy": [
+      33,
+      4
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "439": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 439,
+    "room_id": 6,
+    "room_index": 97,
+    "world_xy": [
+      34,
+      4
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "440": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 440,
+    "room_id": 6,
+    "room_index": 110,
+    "world_xy": [
+      35,
+      4
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "441": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 441,
+    "room_id": 140,
+    "room_index": 97,
+    "world_xy": [
+      36,
+      4
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "442": {
+    "class": "door",
+    "type": "orange",
+    "width": 4,
+    "height": 1,
+    "id": 442,
+    "room_id": 8,
+    "room_index": 214,
+    "world_xy": [
+      32,
+      6
+    ],
+    "screen_xy": [
+      6,
+      13
+    ]
+  },
+  "443": {
+    "class": "door",
+    "type": "blue",
+    "width": 4,
+    "height": 1,
+    "id": 443,
+    "room_id": 9,
+    "room_index": 38,
+    "world_xy": [
+      32,
+      7
+    ],
+    "screen_xy": [
+      6,
+      2
+    ]
+  },
+  "444": {
+    "class": "door",
+    "type": "green",
+    "width": 1,
+    "height": 4,
+    "id": 444,
+    "room_id": 138,
+    "room_index": 110,
+    "world_xy": [
+      29,
+      4
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "445": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 445,
+    "room_id": 8,
+    "room_index": 97,
+    "world_xy": [
+      31,
+      4
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "446": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 446,
+    "room_id": 139,
+    "room_index": 97,
+    "world_xy": [
+      30,
+      1
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "447": {
+    "class": "door",
+    "type": "orange",
+    "width": 1,
+    "height": 4,
+    "id": 447,
+    "room_id": 138,
+    "room_index": 110,
+    "world_xy": [
+      29,
+      1
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "448": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 448,
+    "room_id": 137,
+    "room_index": 110,
+    "world_xy": [
+      20,
+      2
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "449": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 449,
+    "room_id": 138,
+    "room_index": 97,
+    "world_xy": [
+      21,
+      2
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "450": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 450,
+    "room_id": 2,
+    "room_index": 110,
+    "world_xy": [
+      20,
+      4
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "451": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 451,
+    "room_id": 138,
+    "room_index": 97,
+    "world_xy": [
+      21,
+      4
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "452": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 452,
+    "room_id": 2,
+    "room_index": 110,
+    "world_xy": [
+      19,
+      6
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "453": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 453,
+    "room_id": 1,
+    "room_index": 97,
+    "world_xy": [
+      20,
+      6
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "454": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 454,
+    "room_id": 5,
+    "room_index": 110,
+    "world_xy": [
+      20,
+      7
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "455": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 455,
+    "room_id": 4,
+    "room_index": 97,
+    "world_xy": [
+      21,
+      7
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "456": {
+    "class": "door",
+    "type": "red",
+    "width": 1,
+    "height": 4,
+    "id": 456,
+    "room_id": 1,
+    "room_index": 110,
+    "world_xy": [
+      22,
+      6
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "457": {
+    "class": "door",
+    "type": "brown",
+    "width": 1,
+    "height": 4,
+    "id": 457,
+    "room_id": 3,
+    "room_index": 97,
+    "world_xy": [
+      23,
+      6
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "459": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 459,
+    "room_id": 133,
+    "room_index": 110,
+    "world_xy": [
+      16,
+      6
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "460": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 460,
+    "room_id": 2,
+    "room_index": 97,
+    "world_xy": [
+      17,
+      6
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "461": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 461,
+    "room_id": 131,
+    "room_index": 110,
+    "world_xy": [
+      16,
+      7
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "462": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 462,
+    "room_id": 2,
+    "room_index": 97,
+    "world_xy": [
+      17,
+      7
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "463": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 463,
+    "room_id": 5,
+    "room_index": 97,
+    "world_xy": [
+      18,
+      7
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "464": {
+    "class": "door",
+    "type": "red",
+    "width": 1,
+    "height": 4,
+    "id": 464,
+    "room_id": 2,
+    "room_index": 110,
+    "world_xy": [
+      17,
+      7
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "465": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 465,
+    "room_id": 132,
+    "room_index": 110,
+    "world_xy": [
+      14,
+      7
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "466": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 466,
+    "room_id": 131,
+    "room_index": 97,
+    "world_xy": [
+      15,
+      7
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "467": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 467,
+    "room_id": 242,
+    "room_index": 110,
+    "world_xy": [
+      14,
+      8
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "468": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 468,
+    "room_id": 243,
+    "room_index": 97,
+    "world_xy": [
+      15,
+      8
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "469": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 469,
+    "room_id": 134,
+    "room_index": 110,
+    "world_xy": [
+      15,
+      4
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "470": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 470,
+    "room_id": 2,
+    "room_index": 97,
+    "world_xy": [
+      16,
+      4
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "471": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 471,
+    "room_id": 136,
+    "room_index": 110,
+    "world_xy": [
+      15,
+      2
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "472": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 472,
+    "room_id": 137,
+    "room_index": 97,
+    "world_xy": [
+      16,
+      2
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "473": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 473,
+    "room_id": 135,
+    "room_index": 110,
+    "world_xy": [
+      9,
+      2
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "474": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 474,
+    "room_id": 136,
+    "room_index": 97,
+    "world_xy": [
+      10,
+      2
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "475": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 475,
+    "room_id": 135,
+    "room_index": 110,
+    "world_xy": [
+      9,
+      6
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "476": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 476,
+    "room_id": 134,
+    "room_index": 97,
+    "world_xy": [
+      10,
+      6
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "477": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 477,
+    "room_id": 241,
+    "room_index": 110,
+    "world_xy": [
+      8,
+      8
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "478": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 478,
+    "room_id": 135,
+    "room_index": 97,
+    "world_xy": [
+      9,
+      8
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "479": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 479,
+    "room_id": 242,
+    "room_index": 97,
+    "world_xy": [
+      10,
+      8
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "480": {
+    "class": "door",
+    "type": "red",
+    "width": 1,
+    "height": 4,
+    "id": 480,
+    "room_id": 135,
+    "room_index": 110,
+    "world_xy": [
+      9,
+      8
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "481": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 481,
+    "room_id": 240,
+    "room_index": 110,
+    "world_xy": [
+      4,
+      8
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "482": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 482,
+    "room_id": 241,
+    "room_index": 97,
+    "world_xy": [
+      5,
+      8
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "483": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 483,
+    "room_id": 247,
+    "room_index": 110,
+    "world_xy": [
+      14,
+      12
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "484": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 484,
+    "room_id": 245,
+    "room_index": 97,
+    "world_xy": [
+      15,
+      12
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "485": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 485,
+    "room_id": 245,
+    "room_index": 110,
+    "world_xy": [
+      15,
+      12
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "486": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 486,
+    "room_id": 246,
+    "room_index": 97,
+    "world_xy": [
+      16,
+      12
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "487": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 487,
+    "room_id": 250,
+    "room_index": 97,
+    "world_xy": [
+      15,
+      13
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "488": {
+    "class": "door",
+    "type": "brown",
+    "width": 1,
+    "height": 4,
+    "id": 488,
+    "room_id": 249,
+    "room_index": 110,
+    "world_xy": [
+      14,
+      13
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "489": {
+    "class": "door",
+    "type": "brown",
+    "width": 1,
+    "height": 4,
+    "id": 489,
+    "room_id": 247,
+    "room_index": 97,
+    "world_xy": [
+      9,
+      12
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "490": {
+    "class": "door",
+    "type": "brown",
+    "width": 1,
+    "height": 4,
+    "id": 490,
+    "room_id": 248,
+    "room_index": 110,
+    "world_xy": [
+      8,
+      13
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "491": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 491,
+    "room_id": 248,
+    "room_index": 110,
+    "world_xy": [
+      8,
+      12
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "492": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 492,
+    "room_id": 249,
+    "room_index": 97,
+    "world_xy": [
+      9,
+      13
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "493": {
+    "class": "door",
+    "type": "blue",
+    "width": 4,
+    "height": 1,
+    "id": 493,
+    "room_id": 251,
+    "room_index": 54,
+    "world_xy": [
+      15,
+      15
+    ],
+    "screen_xy": [
+      6,
+      3
+    ]
+  },
+  "494": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 494,
+    "room_id": 251,
+    "room_index": 97,
+    "world_xy": [
+      14,
+      15
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "495": {
+    "class": "door",
+    "type": "brown",
+    "width": 1,
+    "height": 4,
+    "id": 495,
+    "room_id": 252,
+    "room_index": 110,
+    "world_xy": [
+      13,
+      15
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "496": {
+    "class": "door",
+    "type": "brown",
+    "width": 4,
+    "height": 1,
+    "id": 496,
+    "room_id": 250,
+    "room_index": 230,
+    "world_xy": [
+      15,
+      14
+    ],
+    "screen_xy": [
+      6,
+      14
+    ]
+  },
+  "497": {
+    "class": "door",
+    "type": "brown",
+    "width": 1,
+    "height": 4,
+    "id": 497,
+    "room_id": 253,
+    "room_index": 110,
+    "world_xy": [
+      11,
+      15
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "498": {
+    "class": "door",
+    "type": "brown",
+    "width": 1,
+    "height": 4,
+    "id": 498,
+    "room_id": 252,
+    "room_index": 97,
+    "world_xy": [
+      12,
+      15
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "499": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 499,
+    "room_id": 255,
+    "room_index": 110,
+    "world_xy": [
+      6,
+      16
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "500": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 500,
+    "room_id": 254,
+    "room_index": 97,
+    "world_xy": [
+      7,
+      16
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "501": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 501,
+    "room_id": 256,
+    "room_index": 97,
+    "world_xy": [
+      8,
+      16
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "502": {
+    "class": "door",
+    "type": "red",
+    "width": 1,
+    "height": 4,
+    "id": 502,
+    "room_id": 254,
+    "room_index": 110,
+    "world_xy": [
+      7,
+      16
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "503": {
+    "class": "door",
+    "type": "eye",
+    "width": 1,
+    "height": 4,
+    "id": 503,
+    "room_id": 256,
+    "room_index": 110,
+    "world_xy": [
+      11,
+      16
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "504": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 504,
+    "room_id": 258,
+    "room_index": 110,
+    "world_xy": [
+      11,
+      17
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "505": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 505,
+    "room_id": 257,
+    "room_index": 97,
+    "world_xy": [
+      12,
+      17
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "506": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 506,
+    "room_id": 257,
+    "room_index": 97,
+    "world_xy": [
+      12,
+      16
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "507": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 507,
+    "room_id": 259,
+    "room_index": 110,
+    "world_xy": [
+      11,
+      18
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "508": {
+    "class": "door",
+    "type": "red",
+    "width": 1,
+    "height": 4,
+    "id": 508,
+    "room_id": 257,
+    "room_index": 97,
+    "world_xy": [
+      12,
+      18
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "509": {
+    "class": "door",
+    "type": "blue",
+    "width": 4,
+    "height": 1,
+    "id": 509,
+    "room_id": 260,
+    "room_index": 198,
+    "world_xy": [
+      6,
+      18
+    ],
+    "screen_xy": [
+      6,
+      12
+    ]
+  },
+  "510": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 510,
+    "room_id": 261,
+    "room_index": 110,
+    "world_xy": [
+      6,
+      20
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "511": {
+    "class": "door",
+    "type": "brown",
+    "width": 4,
+    "height": 1,
+    "id": 511,
+    "room_id": 261,
+    "room_index": 54,
+    "world_xy": [
+      6,
+      19
+    ],
+    "screen_xy": [
+      6,
+      3
+    ]
+  },
+  "512": {
+    "class": "door",
+    "type": "brown",
+    "width": 1,
+    "height": 4,
+    "id": 512,
+    "room_id": 262,
+    "room_index": 97,
+    "world_xy": [
+      7,
+      20
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "513": {
+    "class": "door",
+    "type": "brown",
+    "width": 1,
+    "height": 4,
+    "id": 513,
+    "room_id": 263,
+    "room_index": 97,
+    "world_xy": [
+      13,
+      19
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "514": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 514,
+    "room_id": 262,
+    "room_index": 110,
+    "world_xy": [
+      12,
+      19
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "515": {
+    "class": "door",
+    "type": "blue",
+    "width": 4,
+    "height": 1,
+    "id": 515,
+    "room_id": 208,
+    "room_index": 214,
+    "world_xy": [
+      36,
+      30
+    ],
+    "screen_xy": [
+      6,
+      13
+    ]
+  },
+  "516": {
+    "class": "door",
+    "type": "blue",
+    "width": 4,
+    "height": 1,
+    "id": 516,
+    "room_id": 206,
+    "room_index": 38,
+    "world_xy": [
+      36,
+      31
+    ],
+    "screen_xy": [
+      6,
+      2
+    ]
+  },
+  "517": {
+    "class": "door",
+    "type": "blue",
+    "width": 4,
+    "height": 1,
+    "id": 517,
+    "room_id": 208,
+    "room_index": 214,
+    "world_xy": [
+      39,
+      30
+    ],
+    "screen_xy": [
+      6,
+      13
+    ]
+  },
+  "518": {
+    "class": "door",
+    "type": "blue",
+    "width": 4,
+    "height": 1,
+    "id": 518,
+    "room_id": 206,
+    "room_index": 38,
+    "world_xy": [
+      39,
+      31
+    ],
+    "screen_xy": [
+      6,
+      2
+    ]
+  },
+  "519": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 519,
+    "room_id": 205,
+    "room_index": 110,
+    "world_xy": [
+      35,
+      33
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "520": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 520,
+    "room_id": 206,
+    "room_index": 97,
+    "world_xy": [
+      36,
+      33
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "522": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 522,
+    "room_id": 204,
+    "room_index": 97,
+    "world_xy": [
+      35,
+      34
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "523": {
+    "class": "door",
+    "type": "blue",
+    "width": 4,
+    "height": 1,
+    "id": 523,
+    "room_id": 205,
+    "room_index": 214,
+    "world_xy": [
+      34,
+      34
+    ],
+    "screen_xy": [
+      6,
+      13
+    ]
+  },
+  "524": {
+    "class": "door",
+    "type": "blue",
+    "width": 4,
+    "height": 1,
+    "id": 524,
+    "room_id": 24,
+    "room_index": 38,
+    "world_xy": [
+      34,
+      35
+    ],
+    "screen_xy": [
+      6,
+      2
+    ]
+  },
+  "525": {
+    "class": "door",
+    "type": "red",
+    "width": 1,
+    "height": 4,
+    "id": 525,
+    "room_id": 205,
+    "room_index": 110,
+    "world_xy": [
+      34,
+      34
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "526": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 526,
+    "room_id": 111,
+    "room_index": 110,
+    "world_xy": [
+      28,
+      42
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "527": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 527,
+    "room_id": 110,
+    "room_index": 97,
+    "world_xy": [
+      29,
+      42
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "528": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 528,
+    "room_id": 115,
+    "room_index": 110,
+    "world_xy": [
+      31,
+      39
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "529": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 529,
+    "room_id": 110,
+    "room_index": 97,
+    "world_xy": [
+      32,
+      39
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "530": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 530,
+    "room_id": 110,
+    "room_index": 97,
+    "world_xy": [
+      32,
+      41
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "531": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 531,
+    "room_id": 112,
+    "room_index": 110,
+    "world_xy": [
+      31,
+      41
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "532": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 532,
+    "room_id": 112,
+    "room_index": 97,
+    "world_xy": [
+      30,
+      41
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "533": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 533,
+    "room_id": 113,
+    "room_index": 110,
+    "world_xy": [
+      29,
+      41
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "534": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 534,
+    "room_id": 113,
+    "room_index": 110,
+    "world_xy": [
+      29,
+      39
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "535": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 535,
+    "room_id": 115,
+    "room_index": 97,
+    "world_xy": [
+      30,
+      39
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "536": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 536,
+    "room_id": 113,
+    "room_index": 110,
+    "world_xy": [
+      30,
+      40
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "537": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 537,
+    "room_id": 114,
+    "room_index": 97,
+    "world_xy": [
+      31,
+      40
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "538": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 538,
+    "room_id": 110,
+    "room_index": 110,
+    "world_xy": [
+      35,
+      41
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "539": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 539,
+    "room_id": 109,
+    "room_index": 110,
+    "world_xy": [
+      35,
+      42
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "540": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 540,
+    "room_id": 39,
+    "room_index": 110,
+    "world_xy": [
+      36,
+      41
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "541": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 541,
+    "room_id": 40,
+    "room_index": 97,
+    "world_xy": [
+      37,
+      41
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "542": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 542,
+    "room_id": 39,
+    "room_index": 110,
+    "world_xy": [
+      36,
+      43
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "543": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 543,
+    "room_id": 105,
+    "room_index": 97,
+    "world_xy": [
+      37,
+      43
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "544": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 544,
+    "room_id": 105,
+    "room_index": 110,
+    "world_xy": [
+      37,
+      43
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "545": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 545,
+    "room_id": 104,
+    "room_index": 97,
+    "world_xy": [
+      38,
+      43
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "546": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 546,
+    "room_id": 39,
+    "room_index": 110,
+    "world_xy": [
+      36,
+      44
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "547": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 547,
+    "room_id": 106,
+    "room_index": 97,
+    "world_xy": [
+      37,
+      44
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "548": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 548,
+    "room_id": 108,
+    "room_index": 110,
+    "world_xy": [
+      33,
+      44
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "549": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 549,
+    "room_id": 107,
+    "room_index": 97,
+    "world_xy": [
+      34,
+      44
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "550": {
+    "class": "door",
+    "type": "red",
+    "width": 1,
+    "height": 4,
+    "id": 550,
+    "room_id": 39,
+    "room_index": 97,
+    "world_xy": [
+      36,
+      43
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "551": {
+    "class": "door",
+    "type": "brown",
+    "width": 1,
+    "height": 4,
+    "id": 551,
+    "room_id": 107,
+    "room_index": 110,
+    "world_xy": [
+      35,
+      43
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "552": {
+    "class": "door",
+    "type": "green",
+    "width": 1,
+    "height": 4,
+    "id": 552,
+    "room_id": 39,
+    "room_index": 97,
+    "world_xy": [
+      36,
+      41
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "553": {
+    "class": "door",
+    "type": "orange",
+    "width": 1,
+    "height": 4,
+    "id": 553,
+    "room_id": 39,
+    "room_index": 97,
+    "world_xy": [
+      36,
+      42
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "554": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 554,
+    "room_id": 49,
+    "room_index": 110,
+    "world_xy": [
+      45,
+      40
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "555": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 555,
+    "room_id": 48,
+    "room_index": 97,
+    "world_xy": [
+      46,
+      40
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "556": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 556,
+    "room_id": 48,
+    "room_index": 110,
+    "world_xy": [
+      47,
+      40
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "557": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 557,
+    "room_id": 42,
+    "room_index": 97,
+    "world_xy": [
+      43,
+      42
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "558": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 558,
+    "room_id": 47,
+    "room_index": 110,
+    "world_xy": [
+      47,
+      41
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "559": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 559,
+    "room_id": 43,
+    "room_index": 97,
+    "world_xy": [
+      48,
+      41
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "560": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 560,
+    "room_id": 44,
+    "room_index": 97,
+    "world_xy": [
+      50,
+      40
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "561": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 561,
+    "room_id": 44,
+    "room_index": 110,
+    "world_xy": [
+      50,
+      39
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "562": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 562,
+    "room_id": 45,
+    "room_index": 97,
+    "world_xy": [
+      51,
+      39
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "563": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 563,
+    "room_id": 51,
+    "room_index": 97,
+    "world_xy": [
+      51,
+      42
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "564": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 564,
+    "room_id": 50,
+    "room_index": 97,
+    "world_xy": [
+      50,
+      41
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "565": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 565,
+    "room_id": 43,
+    "room_index": 110,
+    "world_xy": [
+      49,
+      41
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "566": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 566,
+    "room_id": 42,
+    "room_index": 110,
+    "world_xy": [
+      47,
+      42
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "567": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 567,
+    "room_id": 43,
+    "room_index": 97,
+    "world_xy": [
+      48,
+      42
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "568": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 568,
+    "room_id": 100,
+    "room_index": 110,
+    "world_xy": [
+      47,
+      43
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "569": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 569,
+    "room_id": 43,
+    "room_index": 97,
+    "world_xy": [
+      48,
+      43
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "570": {
+    "class": "door",
+    "type": "blue",
+    "width": 4,
+    "height": 1,
+    "id": 570,
+    "room_id": 43,
+    "room_index": 214,
+    "world_xy": [
+      48,
+      43
+    ],
+    "screen_xy": [
+      6,
+      13
+    ]
+  },
+  "571": {
+    "class": "door",
+    "type": "blue",
+    "width": 4,
+    "height": 1,
+    "id": 571,
+    "room_id": 101,
+    "room_index": 38,
+    "world_xy": [
+      48,
+      44
+    ],
+    "screen_xy": [
+      6,
+      2
+    ]
+  },
+  "572": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 572,
+    "room_id": 100,
+    "room_index": 97,
+    "world_xy": [
+      46,
+      43
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "573": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 573,
+    "room_id": 104,
+    "room_index": 110,
+    "world_xy": [
+      45,
+      43
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "574": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 574,
+    "room_id": 99,
+    "room_index": 110,
+    "world_xy": [
+      45,
+      44
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "575": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 575,
+    "room_id": 100,
+    "room_index": 97,
+    "world_xy": [
+      46,
+      44
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "576": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 576,
+    "room_id": 50,
+    "room_index": 110,
+    "world_xy": [
+      50,
+      43
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "577": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 577,
+    "room_id": 51,
+    "room_index": 97,
+    "world_xy": [
+      51,
+      43
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "578": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 578,
+    "room_id": 41,
+    "room_index": 97,
+    "world_xy": [
+      40,
+      41
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "579": {
+    "class": "door",
+    "type": "green",
+    "width": 1,
+    "height": 4,
+    "id": 579,
+    "room_id": 41,
+    "room_index": 110,
+    "world_xy": [
+      42,
+      42
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "580": {
+    "class": "door",
+    "type": "green",
+    "width": 1,
+    "height": 4,
+    "id": 580,
+    "room_id": 43,
+    "room_index": 97,
+    "world_xy": [
+      48,
+      40
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "581": {
+    "class": "door",
+    "type": "green",
+    "width": 1,
+    "height": 4,
+    "id": 581,
+    "room_id": 43,
+    "room_index": 110,
+    "world_xy": [
+      49,
+      40
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "582": {
+    "class": "door",
+    "type": "red",
+    "width": 1,
+    "height": 4,
+    "id": 582,
+    "room_id": 40,
+    "room_index": 110,
+    "world_xy": [
+      39,
+      41
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "583": {
+    "class": "door",
+    "type": "red",
+    "width": 1,
+    "height": 4,
+    "id": 583,
+    "room_id": 50,
+    "room_index": 110,
+    "world_xy": [
+      50,
+      42
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "584": {
+    "class": "door",
+    "type": "red",
+    "width": 1,
+    "height": 4,
+    "id": 584,
+    "room_id": 45,
+    "room_index": 110,
+    "world_xy": [
+      62,
+      40
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "585": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 585,
+    "room_id": 46,
+    "room_index": 97,
+    "world_xy": [
+      63,
+      40
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "586": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 586,
+    "room_id": 50,
+    "room_index": 110,
+    "world_xy": [
+      55,
+      41
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "587": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 587,
+    "room_id": 55,
+    "room_index": 97,
+    "world_xy": [
+      56,
+      41
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "588": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 588,
+    "room_id": 52,
+    "room_index": 97,
+    "world_xy": [
+      55,
+      42
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "589": {
+    "class": "door",
+    "type": "red",
+    "width": 1,
+    "height": 4,
+    "id": 589,
+    "room_id": 51,
+    "room_index": 110,
+    "world_xy": [
+      54,
+      42
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "590": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 590,
+    "room_id": 55,
+    "room_index": 110,
+    "world_xy": [
+      58,
+      43
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "591": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 591,
+    "room_id": 56,
+    "room_index": 97,
+    "world_xy": [
+      59,
+      43
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "592": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 592,
+    "room_id": 56,
+    "room_index": 110,
+    "world_xy": [
+      60,
+      44
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "593": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 593,
+    "room_id": 57,
+    "room_index": 97,
+    "world_xy": [
+      61,
+      44
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "594": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 594,
+    "room_id": 57,
+    "room_index": 110,
+    "world_xy": [
+      62,
+      44
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "595": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 595,
+    "room_id": 58,
+    "room_index": 97,
+    "world_xy": [
+      63,
+      44
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "596": {
+    "class": "door",
+    "type": "blue",
+    "width": 4,
+    "height": 1,
+    "id": 596,
+    "room_id": 58,
+    "room_index": 38,
+    "world_xy": [
+      63,
+      44
+    ],
+    "screen_xy": [
+      6,
+      2
+    ]
+  },
+  "597": {
+    "class": "door",
+    "type": "blue",
+    "width": 4,
+    "height": 1,
+    "id": 597,
+    "room_id": 56,
+    "room_index": 214,
+    "world_xy": [
+      63,
+      43
+    ],
+    "screen_xy": [
+      6,
+      13
+    ]
+  },
+  "598": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 598,
+    "room_id": 61,
+    "room_index": 110,
+    "world_xy": [
+      60,
+      47
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "599": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 599,
+    "room_id": 59,
+    "room_index": 97,
+    "world_xy": [
+      61,
+      47
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "600": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 600,
+    "room_id": 59,
+    "room_index": 110,
+    "world_xy": [
+      61,
+      47
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "601": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 601,
+    "room_id": 57,
+    "room_index": 97,
+    "world_xy": [
+      62,
+      47
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "602": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 602,
+    "room_id": 59,
+    "room_index": 110,
+    "world_xy": [
+      61,
+      50
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "603": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 603,
+    "room_id": 60,
+    "room_index": 97,
+    "world_xy": [
+      62,
+      50
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "604": {
+    "class": "door",
+    "type": "blue",
+    "width": 4,
+    "height": 1,
+    "id": 604,
+    "room_id": 62,
+    "room_index": 38,
+    "world_xy": [
+      63,
+      52
+    ],
+    "screen_xy": [
+      6,
+      2
+    ]
+  },
+  "605": {
+    "class": "door",
+    "type": "orange",
+    "width": 4,
+    "height": 1,
+    "id": 605,
+    "room_id": 59,
+    "room_index": 214,
+    "world_xy": [
+      63,
+      51
+    ],
+    "screen_xy": [
+      6,
+      13
+    ]
+  },
+  "606": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 606,
+    "room_id": 111,
+    "room_index": 110,
+    "world_xy": [
+      28,
+      45
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "607": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 607,
+    "room_id": 86,
+    "room_index": 97,
+    "world_xy": [
+      29,
+      45
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "608": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 608,
+    "room_id": 106,
+    "room_index": 110,
+    "world_xy": [
+      40,
+      45
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "609": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 609,
+    "room_id": 86,
+    "room_index": 97,
+    "world_xy": [
+      41,
+      45
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "610": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 610,
+    "room_id": 86,
+    "room_index": 110,
+    "world_xy": [
+      41,
+      46
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "611": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 611,
+    "room_id": 87,
+    "room_index": 97,
+    "world_xy": [
+      42,
+      46
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "612": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 612,
+    "room_id": 86,
+    "room_index": 110,
+    "world_xy": [
+      41,
+      47
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "613": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 613,
+    "room_id": 85,
+    "room_index": 97,
+    "world_xy": [
+      42,
+      47
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "614": {
+    "class": "door",
+    "type": "green",
+    "width": 4,
+    "height": 1,
+    "id": 614,
+    "room_id": 86,
+    "room_index": 214,
+    "world_xy": [
+      41,
+      47
+    ],
+    "screen_xy": [
+      6,
+      13
+    ]
+  },
+  "615": {
+    "class": "door",
+    "type": "brown",
+    "width": 4,
+    "height": 1,
+    "id": 615,
+    "room_id": 88,
+    "room_index": 38,
+    "world_xy": [
+      41,
+      48
+    ],
+    "screen_xy": [
+      6,
+      2
+    ]
+  },
+  "616": {
+    "class": "door",
+    "type": "blue",
+    "width": 4,
+    "height": 1,
+    "id": 616,
+    "room_id": 89,
+    "room_index": 214,
+    "world_xy": [
+      36,
+      49
+    ],
+    "screen_xy": [
+      6,
+      13
+    ]
+  },
+  "617": {
+    "class": "door",
+    "type": "blue",
+    "width": 4,
+    "height": 1,
+    "id": 617,
+    "room_id": 92,
+    "room_index": 38,
+    "world_xy": [
+      36,
+      50
+    ],
+    "screen_xy": [
+      6,
+      2
+    ]
+  },
+  "618": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 618,
+    "room_id": 90,
+    "room_index": 110,
+    "world_xy": [
+      35,
+      48
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "619": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 619,
+    "room_id": 89,
+    "room_index": 110,
+    "world_xy": [
+      37,
+      48
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "620": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 620,
+    "room_id": 88,
+    "room_index": 97,
+    "world_xy": [
+      38,
+      48
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "621": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 621,
+    "room_id": 89,
+    "room_index": 110,
+    "world_xy": [
+      37,
+      49
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "622": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 622,
+    "room_id": 91,
+    "room_index": 97,
+    "world_xy": [
+      38,
+      49
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "623": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 623,
+    "room_id": 98,
+    "room_index": 110,
+    "world_xy": [
+      35,
+      50
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "624": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 624,
+    "room_id": 92,
+    "room_index": 97,
+    "world_xy": [
+      36,
+      50
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "625": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 625,
+    "room_id": 93,
+    "room_index": 97,
+    "world_xy": [
+      37,
+      53
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "626": {
+    "class": "door",
+    "type": "blue",
+    "width": 4,
+    "height": 1,
+    "id": 626,
+    "room_id": 92,
+    "room_index": 214,
+    "world_xy": [
+      36,
+      54
+    ],
+    "screen_xy": [
+      6,
+      13
+    ]
+  },
+  "627": {
+    "class": "door",
+    "type": "blue",
+    "width": 4,
+    "height": 1,
+    "id": 627,
+    "room_id": 94,
+    "room_index": 38,
+    "world_xy": [
+      36,
+      55
+    ],
+    "screen_xy": [
+      6,
+      2
+    ]
+  },
+  "628": {
+    "class": "door",
+    "type": "red",
+    "width": 1,
+    "height": 4,
+    "id": 628,
+    "room_id": 92,
+    "room_index": 110,
+    "world_xy": [
+      36,
+      53
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "629": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 629,
+    "room_id": 95,
+    "room_index": 110,
+    "world_xy": [
+      29,
+      52
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "630": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 630,
+    "room_id": 96,
+    "room_index": 97,
+    "world_xy": [
+      30,
+      52
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "631": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 631,
+    "room_id": 95,
+    "room_index": 110,
+    "world_xy": [
+      29,
+      54
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "632": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 632,
+    "room_id": 94,
+    "room_index": 97,
+    "world_xy": [
+      30,
+      54
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "633": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 633,
+    "room_id": 96,
+    "room_index": 110,
+    "world_xy": [
+      31,
+      52
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "634": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 634,
+    "room_id": 97,
+    "room_index": 97,
+    "world_xy": [
+      32,
+      52
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "635": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 635,
+    "room_id": 97,
+    "room_index": 110,
+    "world_xy": [
+      32,
+      50
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "636": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 636,
+    "room_id": 98,
+    "room_index": 97,
+    "world_xy": [
+      33,
+      50
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "637": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 637,
+    "room_id": 74,
+    "room_index": 110,
+    "world_xy": [
+      42,
+      51
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "638": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 638,
+    "room_id": 73,
+    "room_index": 97,
+    "world_xy": [
+      43,
+      51
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "639": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 639,
+    "room_id": 74,
+    "room_index": 110,
+    "world_xy": [
+      43,
+      53
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "640": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 640,
+    "room_id": 75,
+    "room_index": 97,
+    "world_xy": [
+      44,
+      53
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "641": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 641,
+    "room_id": 76,
+    "room_index": 97,
+    "world_xy": [
+      46,
+      54
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "642": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 642,
+    "room_id": 76,
+    "room_index": 110,
+    "world_xy": [
+      46,
+      53
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "643": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 643,
+    "room_id": 77,
+    "room_index": 97,
+    "world_xy": [
+      47,
+      53
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "644": {
+    "class": "door",
+    "type": "brown",
+    "width": 1,
+    "height": 4,
+    "id": 644,
+    "room_id": 75,
+    "room_index": 110,
+    "world_xy": [
+      45,
+      54
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "645": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 645,
+    "room_id": 76,
+    "room_index": 110,
+    "world_xy": [
+      46,
+      52
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "646": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 646,
+    "room_id": 72,
+    "room_index": 97,
+    "world_xy": [
+      47,
+      52
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "647": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 647,
+    "room_id": 72,
+    "room_index": 110,
+    "world_xy": [
+      50,
+      52
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "648": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 648,
+    "room_id": 71,
+    "room_index": 97,
+    "world_xy": [
+      51,
+      52
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "649": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 649,
+    "room_id": 73,
+    "room_index": 110,
+    "world_xy": [
+      50,
+      51
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "650": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 650,
+    "room_id": 71,
+    "room_index": 97,
+    "world_xy": [
+      51,
+      51
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "651": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 651,
+    "room_id": 71,
+    "room_index": 110,
+    "world_xy": [
+      51,
+      52
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "652": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 652,
+    "room_id": 69,
+    "room_index": 97,
+    "world_xy": [
+      52,
+      52
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "653": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 653,
+    "room_id": 67,
+    "room_index": 110,
+    "world_xy": [
+      48,
+      55
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "654": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 654,
+    "room_id": 65,
+    "room_index": 110,
+    "world_xy": [
+      52,
+      54
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "655": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 655,
+    "room_id": 64,
+    "room_index": 97,
+    "world_xy": [
+      53,
+      54
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "656": {
+    "class": "door",
+    "type": "eye",
+    "width": 1,
+    "height": 4,
+    "id": 656,
+    "room_id": 65,
+    "room_index": 97,
+    "world_xy": [
+      50,
+      54
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "657": {
+    "class": "door",
+    "type": "brown",
+    "width": 1,
+    "height": 4,
+    "id": 657,
+    "room_id": 66,
+    "room_index": 97,
+    "world_xy": [
+      49,
+      55
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "658": {
+    "class": "door",
+    "type": "brown",
+    "width": 1,
+    "height": 4,
+    "id": 658,
+    "room_id": 66,
+    "room_index": 110,
+    "world_xy": [
+      49,
+      54
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "659": {
+    "class": "door",
+    "type": "brown",
+    "width": 1,
+    "height": 4,
+    "id": 659,
+    "room_id": 63,
+    "room_index": 97,
+    "world_xy": [
+      56,
+      54
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "660": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 660,
+    "room_id": 64,
+    "room_index": 110,
+    "world_xy": [
+      55,
+      54
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "661": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 661,
+    "room_id": 63,
+    "room_index": 110,
+    "world_xy": [
+      58,
+      54
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "662": {
+    "class": "door",
+    "type": "green",
+    "width": 1,
+    "height": 4,
+    "id": 662,
+    "room_id": 62,
+    "room_index": 97,
+    "world_xy": [
+      59,
+      54
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "663": {
+    "class": "door",
+    "type": "brown",
+    "width": 1,
+    "height": 4,
+    "id": 663,
+    "room_id": 70,
+    "room_index": 97,
+    "world_xy": [
+      52,
+      50
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "664": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 664,
+    "room_id": 71,
+    "room_index": 110,
+    "world_xy": [
+      51,
+      50
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "665": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 665,
+    "room_id": 70,
+    "room_index": 110,
+    "world_xy": [
+      55,
+      47
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "666": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 666,
+    "room_id": 68,
+    "room_index": 97,
+    "world_xy": [
+      56,
+      47
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "667": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 667,
+    "room_id": 68,
+    "room_index": 110,
+    "world_xy": [
+      56,
+      48
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "668": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 668,
+    "room_id": 69,
+    "room_index": 110,
+    "world_xy": [
+      55,
+      52
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "669": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 669,
+    "room_id": 68,
+    "room_index": 97,
+    "world_xy": [
+      56,
+      52
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "670": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 670,
+    "room_id": 61,
+    "room_index": 97,
+    "world_xy": [
+      57,
+      48
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "671": {
+    "class": "door",
+    "type": "blue",
+    "width": 4,
+    "height": 1,
+    "id": 671,
+    "room_id": 99,
+    "room_index": 214,
+    "world_xy": [
+      45,
+      46
+    ],
+    "screen_xy": [
+      6,
+      13
+    ]
+  },
+  "672": {
+    "class": "door",
+    "type": "blue",
+    "width": 4,
+    "height": 1,
+    "id": 672,
+    "room_id": 85,
+    "room_index": 38,
+    "world_xy": [
+      45,
+      47
+    ],
+    "screen_xy": [
+      6,
+      2
+    ]
+  },
+  "673": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 673,
+    "room_id": 85,
+    "room_index": 110,
+    "world_xy": [
+      45,
+      47
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "674": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 674,
+    "room_id": 84,
+    "room_index": 97,
+    "world_xy": [
+      46,
+      47
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "675": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 675,
+    "room_id": 84,
+    "room_index": 110,
+    "world_xy": [
+      46,
+      47
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "676": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 676,
+    "room_id": 83,
+    "room_index": 97,
+    "world_xy": [
+      47,
+      47
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "677": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 677,
+    "room_id": 80,
+    "room_index": 110,
+    "world_xy": [
+      46,
+      48
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "678": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 678,
+    "room_id": 79,
+    "room_index": 97,
+    "world_xy": [
+      47,
+      48
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "679": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 679,
+    "room_id": 79,
+    "room_index": 110,
+    "world_xy": [
+      47,
+      48
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "680": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 680,
+    "room_id": 81,
+    "room_index": 97,
+    "world_xy": [
+      48,
+      48
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "681": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 681,
+    "room_id": 101,
+    "room_index": 110,
+    "world_xy": [
+      48,
+      46
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "682": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 682,
+    "room_id": 103,
+    "room_index": 97,
+    "world_xy": [
+      49,
+      46
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "683": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 683,
+    "room_id": 83,
+    "room_index": 110,
+    "world_xy": [
+      50,
+      47
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "684": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 684,
+    "room_id": 82,
+    "room_index": 97,
+    "world_xy": [
+      51,
+      47
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "685": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 685,
+    "room_id": 81,
+    "room_index": 110,
+    "world_xy": [
+      51,
+      48
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "686": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 686,
+    "room_id": 103,
+    "room_index": 110,
+    "world_xy": [
+      51,
+      46
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "687": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 687,
+    "room_id": 82,
+    "room_index": 97,
+    "world_xy": [
+      52,
+      46
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "688": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 688,
+    "room_id": 82,
+    "room_index": 110,
+    "world_xy": [
+      52,
+      46
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "689": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 689,
+    "room_id": 54,
+    "room_index": 97,
+    "world_xy": [
+      53,
+      46
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "690": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 690,
+    "room_id": 53,
+    "room_index": 110,
+    "world_xy": [
+      54,
+      44
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "691": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 691,
+    "room_id": 54,
+    "room_index": 97,
+    "world_xy": [
+      55,
+      44
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "692": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 692,
+    "room_id": 50,
+    "room_index": 110,
+    "world_xy": [
+      50,
+      44
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "693": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 693,
+    "room_id": 53,
+    "room_index": 97,
+    "world_xy": [
+      51,
+      44
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "694": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 694,
+    "room_id": 101,
+    "room_index": 110,
+    "world_xy": [
+      48,
+      45
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "695": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 695,
+    "room_id": 102,
+    "room_index": 97,
+    "world_xy": [
+      49,
+      45
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "696": {
+    "class": "door",
+    "type": "brown",
+    "width": 1,
+    "height": 4,
+    "id": 696,
+    "room_id": 33,
+    "room_index": 97,
+    "world_xy": [
+      42,
+      37
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "697": {
+    "class": "door",
+    "type": "brown",
+    "width": 1,
+    "height": 4,
+    "id": 697,
+    "room_id": 16,
+    "room_index": 110,
+    "world_xy": [
+      31,
+      25
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "698": {
+    "class": "door",
+    "type": "green",
+    "width": 1,
+    "height": 4,
+    "id": 698,
+    "room_id": 11,
+    "room_index": 97,
+    "world_xy": [
+      32,
+      25
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "699": {
+    "class": "door",
+    "type": "red",
+    "width": 1,
+    "height": 4,
+    "id": 699,
+    "room_id": 218,
+    "room_index": 97,
+    "world_xy": [
+      10,
+      31
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "700": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 700,
+    "room_id": 225,
+    "room_index": 110,
+    "world_xy": [
+      9,
+      31
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "701": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 701,
+    "room_id": 119,
+    "room_index": 110,
+    "world_xy": [
+      21,
+      31
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "702": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 702,
+    "room_id": 118,
+    "room_index": 97,
+    "world_xy": [
+      22,
+      31
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "703": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 703,
+    "room_id": 116,
+    "room_index": 110,
+    "world_xy": [
+      19,
+      33
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "704": {
+    "class": "door",
+    "type": "red",
+    "width": 1,
+    "height": 4,
+    "id": 704,
+    "room_id": 117,
+    "room_index": 97,
+    "world_xy": [
+      20,
+      33
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "705": {
+    "class": "door",
+    "type": "green",
+    "width": 1,
+    "height": 4,
+    "id": 705,
+    "room_id": 118,
+    "room_index": 110,
+    "world_xy": [
+      27,
+      31
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "706": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 706,
+    "room_id": 18,
+    "room_index": 97,
+    "world_xy": [
+      28,
+      31
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "707": {
+    "class": "door",
+    "type": "blue",
+    "width": 1,
+    "height": 4,
+    "id": 707,
+    "room_id": 117,
+    "room_index": 110,
+    "world_xy": [
+      27,
+      33
+    ],
+    "screen_xy": [
+      14,
+      6
+    ]
+  },
+  "708": {
+    "class": "door",
+    "type": "orange",
+    "width": 1,
+    "height": 4,
+    "id": 708,
+    "room_id": 18,
+    "room_index": 97,
+    "world_xy": [
+      28,
+      33
+    ],
+    "screen_xy": [
+      1,
+      6
+    ]
+  },
+  "709": {
+    "class": "item",
+    "world_xy": [
+      7,
+      41
+    ],
+    "screen_xy": [
+      7,
+      13
+    ],
+    "width": 1,
+    "height": 1,
+    "type": "varia-suit",
+    "id": 709
+  },
+  "710": {
+    "class": "item",
+    "world_xy": [
+      12,
+      42
+    ],
+    "screen_xy": [
+      6,
+      5
+    ],
+    "width": 1,
+    "height": 1,
+    "type": "missile",
+    "id": 710
+  },
+  "711": {
+    "class": "item",
+    "world_xy": [
+      12,
+      42
+    ],
+    "screen_xy": [
+      0,
+      14
+    ],
+    "width": 1,
+    "height": 1,
+    "type": "missile",
+    "id": 711
+  },
+  "712": {
+    "class": "item",
+    "world_xy": [
+      10,
+      42
+    ],
+    "screen_xy": [
+      14,
+      13
+    ],
+    "width": 1,
+    "height": 1,
+    "type": "missile",
+    "id": 712
+  }
+}
