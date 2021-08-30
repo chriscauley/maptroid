@@ -8,6 +8,7 @@ export default ({ store }) => {
     selected_room_id: null,
     map_style: 'full',
     map_tool: 'save',
+    rando: null,
   })
   const getMousePoint = () => {
     const { selected_tool, pointer } = state
@@ -46,6 +47,9 @@ export default ({ store }) => {
       } else {
         room.xys.push([x, y])
       }
+
+      // TODO for some reason HtmlOverlay does not react to room.xys.push
+      state.rando = Math.random()
     },
     unSelectRoom() {
       delete state.selected_room_id
