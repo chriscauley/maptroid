@@ -1,4 +1,4 @@
 import Store from './Store'
-import World from '@/models/World'
+import initial from '@/../public/sm/world.json'
 
-export default () => Store('world', World)
+export default () => Store('world', initial)

@@ -14,7 +14,7 @@ Object.entries(modules).forEach(([name, module]) => {
 
 // _migrations.locateItems(store)
 // _migrations.migrateItems(store)
-
+window._store = store
 export default {
   install(app) {
     app.config.globalProperties.$store = store

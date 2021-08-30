@@ -1,8 +1,9 @@
 import Store from './Store'
 import Item from '@/models/Item'
+import initial from '@/../public/sm/item.json'
 
 export default () => {
-  const item_store = Store('item', Item)
+  const item_store = Store('item', initial)
   item_store.getItems = () => item_store.getAll().filter((i) => i.class === 'item')
   item_store.getGrid = () => {
     const items = item_store.getItems()

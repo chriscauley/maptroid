@@ -44,10 +44,10 @@ class Game {
       _add(cache.items_by_type, item.type, item)
       cache.items_by_xy[item.world_xy].push(item)
       const room = cache.room_by_id[item.room_id]
-      if (!room || !Room.containsXY(room, item.world_xy)) {
+      if (room && !Room.containsXY(room, item.world_xy)) {
         console.warn('item:', item)
         console.warn('room:', room)
-        throw 'Room xy and item world_xy does not match'
+        throw 'Room xy and item world_xy does not match!!'
       }
     })
 

@@ -9,7 +9,7 @@ const prepareItem = ({ ...item }, getNextId) => {
   return item
 }
 
-export default (name, Model, initial) => {
+export default (name, initial) => {
   const store = LocalStorage(name, { prepareItem, initial })
 
   store.getAll = () => store.getPage({ per_page: 1e9 })?.items || []
