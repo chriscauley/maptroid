@@ -2,12 +2,8 @@
   <div :class="[viewer_class, 'map-editor']">
     <open-seadragon :pixelated="true" :options="options" :events="events" />
     <template v-if="viewer">
-      <html-overlay
-        :viewer="viewer"
-        :screens="screens"
-        :items="items"
-        :visible_rooms="visible_rooms"
-      />
+      <html-overlay :viewer="viewer" :screens="screens" :items="items" @click-item="clickItem" />
+      <selected-item :viewer="viewer" v-if="selected_item" :key="selected_item" />
       <mouse-tracker :viewer="viewer" />
       <toolbar />
     </template>
@@ -19,6 +15,7 @@
 <script>
 import ItemPanel from './ItemPanel.vue'
 import MouseTracker from './MouseTracker.vue'
+import SelectedItem from './SelectedItem.vue'
 import SelectedRoom from './SelectedRoom.vue'
 import Toolbar from './Toolbar.vue'
 import HtmlOverlay from '../Viewer/HtmlOverlay.vue'
@@ -30,9 +27,12 @@ export default {
   __route: {
     path: '/editor/',
   },
-  components: { HtmlOverlay, ItemPanel, MouseTracker, SelectedRoom, Toolbar },
+  components: { HtmlOverlay, ItemPanel, MouseTracker, SelectedItem, SelectedRoom, Toolbar },
   mixins: [ViewerMixin],
   computed: {
+    selected_item() {
+      return this.$store.viewer.state.selected_item
+    },
     items() {
       return this.$store.item.getAll()
     },
@@ -52,8 +52,10 @@ export default {
       })
       return out
     },
-    visible_rooms() {
-      return this.$store.room.getAll()
+  },
+  methods: {
+    clickItem(item) {
+      this.$store.viewer.patch({ selected_item: item.id })
     },
   },
 }

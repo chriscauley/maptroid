@@ -36,6 +36,7 @@
 
 <script>
 import Area from '@/models/Area'
+import Item from '@/models/Item'
 import { map_markers, doors } from '@/models'
 
 export default {
@@ -43,16 +44,21 @@ export default {
     css() {
       const { selected_tool } = this.$store.viewer.state
       return {
-        tool: (tool) => [
-          'btn viewer-toolbar__tool',
-          tool.slug === selected_tool ? '-primary' : '-secondary',
-        ],
+        tool: (tool) => {
+          let selected = tool.slug === selected_tool
+          if (tool.selected !== undefined) {
+            selected = selected && tool.selected
+          }
+          return `btn viewer-toolbar__tool ${selected ? '-primary' : '-secondary'}`
+        },
       }
     },
     tools() {
       return [
         { slug: null, name: 'Select', icon: 'fa fa-mouse-pointer' },
-        { slug: 'item', name: 'Item', icon: 'sm-item -super-missile-alt' },
+        this.makeTool('item', Item.packs),
+        this.makeTool('item', Item.abilities),
+        this.makeTool('item', Item.beams),
         { slug: 'boss', name: 'Boss', icon: 'sm-map -boss' },
         { slug: 'chozo', name: 'Chozo', icon: 'sm-chozo' },
         this.makeTool('door', doors),
@@ -71,14 +77,19 @@ export default {
   },
   methods: {
     selectTool(tool) {
-      this.$store.viewer.patch({ selected_tool: tool.slug })
+      this.$store.viewer.patch({ selected_tool: tool.slug, ...tool.extra_state })
     },
     makeTool(slug, children) {
       const selected_child = this.$store.viewer.state[slug + '_tool']
+      const { selected_tool } = this.$store.viewer.state
+      const selected = slug === selected_tool && children.includes(selected_child)
+      const active_child = selected ? selected_child : children[0]
       return {
         slug,
+        selected,
+        extra_state: { [slug + '_tool']: active_child },
         name: slug[0].toUpperCase() + slug.slice(1),
-        icon: `sm-${slug} -${selected_child}`,
+        icon: `sm-${slug} -${active_child}`,
         children: children?.map((child_slug) => ({
           slug: child_slug,
           class: `sm-${slug} -${child_slug}`,

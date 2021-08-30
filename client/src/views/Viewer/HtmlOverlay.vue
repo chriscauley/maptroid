@@ -3,6 +3,7 @@
     <template v-for="(blocks, i) in block_groups" :key="i">
       <div v-for="block in blocks" v-bind="block.attrs" :key="block.attrs.id" />
     </template>
+    <div v-bind="ui_box" />
   </div>
 </template>
 
@@ -17,13 +18,26 @@ export default {
     viewer: Object,
     world: Object,
   },
+  emits: ['click-item'],
   data() {
     return { W: 1, H: 1 }
   },
   computed: {
+    ui_box() {
+      const { x, y, width, height } = this.$store.viewer.pointer
+      return {
+        style: this._scale({
+          left: x,
+          top: y,
+          width,
+          height,
+        }),
+        class: 'osd__drag-box',
+      }
+    },
     item_blocks() {
       return this.items?.map((item) => {
-        const { id, type, class: _class, onClick } = item
+        const { id, type, class: _class } = item
         const { x, y, width, height } = Item.getMapBounds(item, this.world)
         return {
           item,
@@ -31,7 +45,7 @@ export default {
             id: `overlay-item-${id}`,
             class: `html-overlay__item -class-${_class} sm-${_class} -${type}`,
             style: this._scale({ x, y, width, height }),
-            onClick,
+            onClick: () => this.$emit('click-item', item),
           },
         }
       })

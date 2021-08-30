@@ -44,7 +44,7 @@ export default {
       delete item.y
       delete item.map_xy
       delete item.world_index
+      console.warn('TODO save items after migration')
     })
-    console.warn('TODO save items after migration')
   },
 }

@@ -13,7 +13,7 @@ Object.entries(modules).forEach(([name, module]) => {
 })
 
 // _migrations.locateItems(store)
-_migrations.migrateItems(store)
+// _migrations.migrateItems(store)
 
 export default {
   install(app) {

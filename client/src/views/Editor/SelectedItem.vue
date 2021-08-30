@@ -1,5 +1,5 @@
 <template>
-  <unrest-popper class="selected-item" placement="right" offset="0,5">
+  <unrest-popper class="selected-item" placement="right" offset="0,5" :target="target">
     {{ item.class }} #{{ item.id }}
     <i class="fa fa-trash" @click="deleteItem" />
     <div :class="`selected-item__picker -${item.class}`">
@@ -43,6 +43,9 @@ export default {
       return {
         type: (_type) => [`sm-${_class} -${_type}`, { '-selected': type === _type }],
       }
+    },
+    target() {
+      return document.getElementById('overlay-item-' + this.item.id)
     },
   },
   methods: {

@@ -5,10 +5,13 @@ export default ({ store }) => {
     selected_tool: null,
     door_tool: 'blue',
     room_tool: 'crateria',
+    item_tool: 'missile',
+    selected_item: null,
     selected_room_id: null,
     map_style: 'full',
     map_tool: 'save',
     rando: null,
+    zoom: 1,
   })
   const getMousePoint = () => {
     const { selected_tool, pointer } = state
@@ -55,13 +58,15 @@ export default ({ store }) => {
       delete state.selected_room_id
       delete state.draft_room
     },
-    get drag_bounds() {
+    get pointer() {
       const start = state.drag_start || state.pointer
       if (!start) {
         return {}
       }
-      const end = state.drag_end || { x: start.x + 16, y: start.y + 16 }
-      const [x1, y1, x2, y2] = [start.x, start.y, end.x, end.y].map((i) => 16 * Math.floor(i / 16))
+      const end = state.drag_end || { x: start.x, y: start.y }
+      const [x1, y1, x2, y2] = [start.x, start.y, end.x + 16, end.y + 16].map(
+        (i) => 16 * Math.floor(i / 16),
+      )
 
       const x = Math.min(x1, x2)
       const y = Math.min(y1, y2)

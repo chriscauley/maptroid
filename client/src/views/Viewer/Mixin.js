@@ -12,6 +12,9 @@ export default {
       events: {
         open: (event) => {
           this.viewer = event.eventSource
+          const p = new OpenSeadragon.Point(2, 2)
+          const width = this.viewer.viewport.imageToViewportCoordinates(p).x
+          document.body.style.setProperty('--border-width', width + 'px')
           this.onViewerDone?.()
         },
         zoom: (event) => {
@@ -20,6 +23,7 @@ export default {
           const targetZoom = tiledImage.source.dimensions.x / viewport.getContainerSize().x
           this.overzoomed = viewport.getZoom() > targetZoom
           drawer.context.imageSmoothingEnabled = !this.overzoomed
+          this.$store.viewer.patch({ zoom: viewport.getZoom() })
         },
       },
       options: {

@@ -29,11 +29,11 @@
   &__tool {
     @apply relative;
     &:hover .viewer-toolbar__children {
-      @apply block;
+      @apply flex;
     }
   }
   &__children {
-    @apply absolute flex flex-col hidden left-0;
+    @apply absolute flex-col hidden left-0;
     bottom: 100%;
     &.-menu {
       @apply p-4;
