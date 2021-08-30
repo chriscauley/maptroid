@@ -13,6 +13,7 @@
 import HtmlOverlay from './HtmlOverlay.vue'
 import ViewerMixin from './Mixin'
 import WorldMixin from './WorldMixin'
+import Room from '@/models/Room'
 
 export default {
   __route: {
@@ -24,7 +25,7 @@ export default {
     screens() {
       const out = []
       this.visible_xys.forEach((xy) => {
-        if (this.current_room.containsXY(xy)) {
+        if (Room.containsXY(this.current_room, xy)) {
           return
         }
         out.push({ x: xy[0], y: xy[1], css: '-color-black' })
@@ -43,6 +44,11 @@ export default {
   methods: {
     getViewerOptions() {
       return { showNavigator: false }
+    },
+    onGameLoad() {
+      // TODO use wordl.start_xy instead of item.type === 'ship'
+      const ship = this.game.getItemsByType('ship')?.[0]
+      this.current_room = this.game.getRoomByXY(ship.world_xy)
     },
   },
 }

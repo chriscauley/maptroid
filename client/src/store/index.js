@@ -12,7 +12,8 @@ Object.entries(modules).forEach(([name, module]) => {
   store[name] = module({ store })
 })
 
-// migrations.locateItems(store)
+// _migrations.locateItems(store)
+_migrations.migrateItems(store)
 
 export default {
   install(app) {

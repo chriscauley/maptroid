@@ -10,10 +10,7 @@ const prepareItem = ({ ...item }, getNextId) => {
 }
 
 export default (name, Model, initial) => {
-  const fromServer = (data) => new Model(data)
-  const toServer = (data) => (data.toJson ? data.toJson() : data)
-
-  const store = LocalStorage(name, { prepareItem, fromServer, toServer, initial })
+  const store = LocalStorage(name, { prepareItem, initial })
 
   store.getAll = () => store.getPage({ per_page: 1e9 })?.items || []
   window['_download' + name[0].toUpperCase() + name.slice(1)] = store.downloadJson = () => {

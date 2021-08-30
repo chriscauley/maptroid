@@ -1,6 +1,8 @@
+import Game from '@/models/Game'
+
 export default {
   data() {
-    return { world: null }
+    return { game: null, world: null }
   },
   mounted() {
     Promise.all([
@@ -9,10 +11,16 @@ export default {
       this.$store.room.getAll(),
     ]).then(([world, items, rooms]) => {
       this.world = world
-      world.MITT_EVENTS.forEach((event) => {
-        this[event] && world.on(event, this[event])
-      })
-      this.onViewerDone = () => world.populate({ items, rooms })
+      this.game = new Game()
+      this.game.populate({ world, items, rooms })
+      this.onGameLoad()
+      // world.MITT_EVENTS.forEach((event) => {
+      //   this[event] && world.on(event, this[event])
+      // })
+      // this.onViewerDone = () => world.populate({ items, rooms })
     })
+  },
+  onGameLoad() {
+    console.warn('Component does not define on game load')
   },
 }

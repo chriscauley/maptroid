@@ -35,4 +35,16 @@ export default {
       H: 56, // 14336px / 256
     })
   },
+  migrateItems(store) {
+    store.item.getAll().forEach((item) => {
+      const { x, y } = item
+      item.world_xy = [Math.floor(x / 256), Math.floor(y / 256)]
+      item.screen_xy = [(x % 256) / 16, (y % 256) / 16]
+      delete item.x
+      delete item.y
+      delete item.map_xy
+      delete item.world_index
+    })
+    console.warn('TODO save items after migration')
+  },
 }

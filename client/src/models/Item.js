@@ -1,4 +1,3 @@
-import Model from './Model'
 import fields from './fields'
 
 const abilities = [
@@ -23,11 +22,9 @@ const misc = ['pedastool', 'energy2-tank']
 
 const all = [...abilities, ...packs, ...beams, ...misc]
 
-const schema = {
+const _schema = {
   type: 'object',
   properties: {
-    xys: fields.xy,
-    name: { type: 'string' },
     type: { type: 'string' },
     class: { type: 'string' },
     width: { type: 'number' },
@@ -38,33 +35,22 @@ const schema = {
   },
 }
 
-class Item extends Model {
-  constructor(options) {
-    if (options.x) {
-      const { x, y } = options
-      options.world_xy = [Math.floor(x / 256), Math.floor(y / 256)]
-      options.screen_xy = [(x % 256) / 16, (y % 256) / 16]
-    }
-    super(options, schema)
-  }
-  getMapBounds() {
-    const [world_x, world_y] = this.world_xy
-    const [screen_x, screen_y] = this.screen_xy
+export default {
+  _schema,
+  getMapBounds(item, _world) {
+    // TODO 256 and 16 should be on world, not constants
+    const [world_x, world_y] = item.world_xy
+    const [screen_x, screen_y] = item.screen_xy
     return {
       x: world_x * 256 + screen_x * 16,
       y: world_y * 256 + screen_y * 16,
-      width: this.width * 16,
-      height: this.height * 16,
+      width: item.width * 16,
+      height: item.height * 16,
     }
-  }
-}
-
-Object.assign(Item, {
+  },
   all,
   abilities,
   packs,
   beams,
   misc,
-})
-
-export default Item
+}

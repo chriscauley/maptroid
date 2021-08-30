@@ -8,6 +8,7 @@
 
 <script>
 import OpenSeadragon from 'openseadragon'
+import Item from '@/models/Item'
 
 export default {
   props: {
@@ -23,7 +24,7 @@ export default {
     item_blocks() {
       return this.items?.map((item) => {
         const { id, type, class: _class, onClick } = item
-        const { x, y, width, height } = item.getMapBounds()
+        const { x, y, width, height } = Item.getMapBounds(item, this.world)
         return {
           item,
           attrs: {

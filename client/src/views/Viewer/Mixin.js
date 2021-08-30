@@ -1,6 +1,8 @@
 import { range } from 'lodash'
 import OpenSeadragon from 'openseadragon'
 
+import Room from '@/models/Room'
+
 export default {
   data() {
     return {
@@ -44,13 +46,13 @@ export default {
       return ['viewer-wrapper', { '-overzoomed': this.overzoomed }]
     },
     visible_xys() {
-      const [x, y, width, height] = this.current_room.getBounds()
+      const [x, y, width, height] = Room.getBounds(this.current_room)
       const out = []
       range(x, x + width).forEach((x) => range(y, height).forEach((y) => out.push([x, y])))
       return out
     },
     visible_items() {
-      return this.world.cache.items_by_room_id[this.current_room.id]
+      return this.game.getItemsByRoomId(this.current_room.id)
     },
   },
   methods: {
