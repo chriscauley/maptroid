@@ -17,10 +17,10 @@
 import Mousetrap from '@unrest/vue-mousetrap'
 
 export default {
+  mixins: [Mousetrap.Mixin],
   props: {
     world: Object,
   },
-  mixins: [Mousetrap.Mixin],
   data() {
     const { zones } = this.world
     const mousetrap = { esc: () => this.$store.viewer.unSelectRoom() }
@@ -36,6 +36,7 @@ export default {
   },
   methods: {
     save() {
+      this.room.world_id = this.room.world_id || this.world.id
       this.$store.room.save(this.room)
       this.$ui.toast(`Room saved: ${this.room.name}`)
       this.$store.viewer.unSelectRoom()

@@ -9,11 +9,11 @@
         :items="items"
         @click-item="clickItem"
       />
-      <selected-item v-if="selected_item" :key="selected_item" :viewer="viewer" :world="world" />
+      <selected-item v-if="selected_item" :key="selected_item" :viewer="viewer" />
       <mouse-tracker :viewer="viewer" :world="world" />
       <toolbar :world="world" />
     </template>
-    <selected-room v-if="$store.viewer.getSelectedRoom()" _scale="_scale" />
+    <selected-room v-if="$store.viewer.getSelectedRoom()" _scale="_scale" :world="world" />
     <item-panel v-else :viewer="viewer" :world="world" />
   </div>
 </template>

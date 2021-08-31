@@ -56,7 +56,7 @@ export default {
         const data = this.makeItem({ x, y, class: 'item', type: item_tool })
         this.$store.item.save(data).then(this.refetchItems)
       } else if (selected_tool === 'room') {
-        this.$store.viewer.clickRoom()
+        this.$store.viewer.clickRoom(this.world.map_screen_size)
       } else {
         const p = this.eventToImagePoint(e)
         this.$store.viewer.patch({ drag_start: p, drag_end: p })

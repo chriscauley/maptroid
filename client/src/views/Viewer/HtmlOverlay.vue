@@ -26,7 +26,10 @@ export default {
   },
   computed: {
     ui_box() {
-      const { x, y, width, height } = this.$store.viewer.getPointer(this.world.map_item_size)
+      const { map_item_size, map_screen_size } = this.world
+      const { selected_tool } = this.$store.viewer.state
+      const scale = selected_tool === 'room' ? map_screen_size : map_item_size
+      const { x, y, width, height } = this.$store.viewer.getPointer(scale)
       return {
         style: this._scale({ x, y, width, height }),
         class: 'osd__drag-box',

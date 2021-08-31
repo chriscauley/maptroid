@@ -41,7 +41,9 @@ export default ({ store }) => {
     patch: (new_state) => Object.assign(state, new_state),
     clickRoom: (scale) => {
       const { room_tool } = state
-      const { x, y } = getPointer(scale)
+      let { x, y } = getPointer(scale)
+      x = x / scale
+      y = y / scale
       let room = getSelectedRoom()
       if (!room) {
         room = state.draft_room = {

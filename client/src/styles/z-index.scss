@@ -1,6 +1,4 @@
 .viewer-toolbar__children,
-.selected-room,
-.selected-item,
 .html-overlay__item,
 .html-overlay__screen-mask {
   z-index: 1;
@@ -11,7 +9,9 @@
 }
 
 .viewer-panel,
-.viewer-toolbar {
+.viewer-toolbar,
+.selected-room,
+.selected-item, {
   z-index: 3
 }
 
