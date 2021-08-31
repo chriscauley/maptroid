@@ -1,6 +1,5 @@
 {
   "1": {
-    "area": "crateria",
     "xys": [
       [
         22,
@@ -22,10 +21,10 @@
       417,
       416
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "crateria"
   },
   "2": {
-    "area": "crateria",
     "xys": [
       [
         19,
@@ -87,10 +86,10 @@
       545,
       280
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "crateria"
   },
   "3": {
-    "area": "crateria",
     "xys": [
       [
         23,
@@ -102,10 +101,10 @@
     "indexes": [
       419
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "crateria"
   },
   "4": {
-    "area": "crateria",
     "xys": [
       [
         21,
@@ -117,10 +116,10 @@
     "indexes": [
       483
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "crateria"
   },
   "5": {
-    "area": "crateria",
     "xys": [
       [
         20,
@@ -142,10 +141,10 @@
       481,
       480
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "crateria"
   },
   "6": {
-    "area": "crateria",
     "xys": [
       [
         34,
@@ -172,10 +171,10 @@
       365,
       364
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "crateria"
   },
   "7": {
-    "area": "crateria",
     "xys": [
       [
         30,
@@ -187,10 +186,10 @@
     "indexes": [
       294
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "crateria"
   },
   "8": {
-    "area": "crateria",
     "xys": [
       [
         33,
@@ -222,10 +221,10 @@
       362,
       428
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "crateria"
   },
   "9": {
-    "area": "crateria",
     "xys": [
       [
         32,
@@ -237,10 +236,10 @@
     "indexes": [
       494
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "crateria"
   },
   "10": {
-    "area": "elevator",
     "xys": [
       [
         32,
@@ -327,10 +326,10 @@
       1286,
       1220
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "elevator"
   },
   "11": {
-    "area": "brinstar",
     "xys": [
       [
         32,
@@ -367,10 +366,10 @@
       1880,
       1946
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "brinstar"
   },
   "12": {
-    "area": "brinstar",
     "xys": [
       [
         33,
@@ -382,10 +381,10 @@
     "indexes": [
       1749
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "brinstar"
   },
   "13": {
-    "area": "brinstar",
     "xys": [
       [
         33,
@@ -402,10 +401,10 @@
       1683,
       1684
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "brinstar"
   },
   "14": {
-    "area": "brinstar",
     "xys": [
       [
         31,
@@ -422,10 +421,10 @@
       1945,
       1944
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "brinstar"
   },
   "15": {
-    "area": "brinstar",
     "xys": [
       [
         29,
@@ -437,10 +436,10 @@
     "indexes": [
       1943
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "brinstar"
   },
   "16": {
-    "area": "brinstar",
     "xys": [
       [
         31,
@@ -462,10 +461,10 @@
       1680,
       1746
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "brinstar"
   },
   "17": {
-    "area": "brinstar",
     "xys": [
       [
         31,
@@ -487,10 +486,10 @@
       1812,
       1811
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "brinstar"
   },
   "18": {
-    "area": "brinstar",
     "xys": [
       [
         28,
@@ -547,10 +546,10 @@
       1876,
       1810
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "brinstar"
   },
   "19": {
-    "area": "brinstar",
     "xys": [
       [
         27,
@@ -562,10 +561,10 @@
     "indexes": [
       2403
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "brinstar"
   },
   "20": {
-    "area": "brinstar",
     "xys": [
       [
         29,
@@ -582,10 +581,10 @@
       2405,
       2406
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "brinstar"
   },
   "21": {
-    "area": "brinstar",
     "xys": [
       [
         32,
@@ -612,10 +611,10 @@
       2341,
       2342
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "brinstar"
   },
   "22": {
-    "area": "brinstar",
     "xys": [
       [
         33,
@@ -627,10 +626,10 @@
     "indexes": [
       2343
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "brinstar"
   },
   "23": {
-    "area": "maridia",
     "xys": [
       [
         33,
@@ -642,10 +641,10 @@
     "indexes": [
       2409
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "maridia"
   },
   "24": {
-    "area": "maridia",
     "xys": [
       [
         34,
@@ -667,10 +666,10 @@
       2344,
       2476
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "maridia"
   },
   "25": {
-    "area": "maridia",
     "xys": [
       [
         35,
@@ -682,10 +681,10 @@
     "indexes": [
       2477
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "maridia"
   },
   "26": {
-    "area": "maridia",
     "xys": [
       [
         35,
@@ -717,10 +716,10 @@
       2347,
       2348
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "maridia"
   },
   "27": {
-    "area": "brinstar",
     "xys": [
       [
         36,
@@ -732,10 +731,10 @@
     "indexes": [
       2412
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "brinstar"
   },
   "28": {
-    "area": "brinstar",
     "xys": [
       [
         37,
@@ -757,10 +756,10 @@
       2479,
       2414
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "brinstar"
   },
   "29": {
-    "area": "brinstar",
     "xys": [
       [
         39,
@@ -782,10 +781,10 @@
       2481,
       2482
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "brinstar"
   },
   "30": {
-    "area": "brinstar",
     "xys": [
       [
         38,
@@ -797,10 +796,10 @@
     "indexes": [
       2546
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "brinstar"
   },
   "31": {
-    "area": "brinstar",
     "xys": [
       [
         40,
@@ -832,10 +831,10 @@
       2419,
       2483
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "brinstar"
   },
   "32": {
-    "area": "brinstar",
     "xys": [
       [
         44,
@@ -847,10 +846,10 @@
     "indexes": [
       2420
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "brinstar"
   },
   "33": {
-    "area": "brinstar",
     "xys": [
       [
         42,
@@ -887,10 +886,10 @@
       2488,
       2489
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "brinstar"
   },
   "34": {
-    "area": "brinstar",
     "xys": [
       [
         48,
@@ -912,10 +911,10 @@
       2490,
       2491
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "brinstar"
   },
   "35": {
-    "area": "brinstar",
     "xys": [
       [
         49,
@@ -927,10 +926,10 @@
     "indexes": [
       2425
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "brinstar"
   },
   "36": {
-    "area": "brinstar",
     "xys": [
       [
         50,
@@ -957,10 +956,10 @@
       2493,
       2492
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "brinstar"
   },
   "37": {
-    "area": "brinstar",
     "xys": [
       [
         52,
@@ -972,10 +971,10 @@
     "indexes": [
       2494
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "brinstar"
   },
   "38": {
-    "area": "elevator",
     "xys": [
       [
         36,
@@ -997,10 +996,10 @@
       2610,
       2478
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "elevator"
   },
   "39": {
-    "area": "norfair",
     "xys": [
       [
         36,
@@ -1032,10 +1031,10 @@
       2676,
       2742
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "norfair"
   },
   "40": {
-    "area": "norfair",
     "xys": [
       [
         37,
@@ -1072,10 +1071,10 @@
       2810,
       2809
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "norfair"
   },
   "41": {
-    "area": "norfair",
     "xys": [
       [
         42,
@@ -1112,10 +1111,10 @@
       2813,
       2814
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "norfair"
   },
   "42": {
-    "area": "norfair",
     "xys": [
       [
         43,
@@ -1147,10 +1146,10 @@
       2818,
       2819
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "norfair"
   },
   "43": {
-    "area": "norfair",
     "xys": [
       [
         48,
@@ -1197,10 +1196,10 @@
       2887,
       2886
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "norfair"
   },
   "44": {
-    "area": "norfair",
     "xys": [
       [
         50,
@@ -1217,10 +1216,10 @@
       2624,
       2690
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "norfair"
   },
   "45": {
-    "area": "norfair",
     "xys": [
       [
         51,
@@ -1302,10 +1301,10 @@
       2701,
       2702
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "norfair"
   },
   "46": {
-    "area": "norfair",
     "xys": [
       [
         63,
@@ -1317,10 +1316,10 @@
     "indexes": [
       2703
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "norfair"
   },
   "47": {
-    "area": "norfair",
     "xys": [
       [
         47,
@@ -1332,10 +1331,10 @@
     "indexes": [
       2753
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "norfair"
   },
   "48": {
-    "area": "norfair",
     "xys": [
       [
         47,
@@ -1352,10 +1351,10 @@
       2687,
       2686
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "norfair"
   },
   "49": {
-    "area": "norfair",
     "xys": [
       [
         44,
@@ -1372,10 +1371,10 @@
       2684,
       2685
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "norfair"
   },
   "50": {
-    "area": "norfair",
     "xys": [
       [
         53,
@@ -1427,10 +1426,10 @@
       2760,
       2761
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "norfair"
   },
   "51": {
-    "area": "norfair",
     "xys": [
       [
         54,
@@ -1477,10 +1476,10 @@
       2891,
       2892
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "norfair"
   },
   "52": {
-    "area": "norfair",
     "xys": [
       [
         55,
@@ -1492,10 +1491,10 @@
     "indexes": [
       2827
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "norfair"
   },
   "53": {
-    "area": "norfair",
     "xys": [
       [
         51,
@@ -1522,10 +1521,10 @@
       2957,
       2958
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "norfair"
   },
   "54": {
-    "area": "norfair",
     "xys": [
       [
         55,
@@ -1557,10 +1556,10 @@
       3090,
       3089
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "norfair"
   },
   "55": {
-    "area": "norfair",
     "xys": [
       [
         56,
@@ -1597,10 +1596,10 @@
       2895,
       2896
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "norfair"
   },
   "56": {
-    "area": "norfair",
     "xys": [
       [
         63,
@@ -1642,10 +1641,10 @@
       2963,
       2964
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "norfair"
   },
   "57": {
-    "area": "norfair",
     "xys": [
       [
         61,
@@ -1702,10 +1701,10 @@
       3296,
       3230
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "norfair"
   },
   "58": {
-    "area": "norfair",
     "xys": [
       [
         63,
@@ -1717,10 +1716,10 @@
     "indexes": [
       2967
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "norfair"
   },
   "59": {
-    "area": "norfair",
     "xys": [
       [
         61,
@@ -1762,10 +1761,10 @@
       3428,
       3429
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "norfair"
   },
   "60": {
-    "area": "norfair",
     "xys": [
       [
         62,
@@ -1777,10 +1776,10 @@
     "indexes": [
       3362
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "norfair"
   },
   "61": {
-    "area": "norfair",
     "xys": [
       [
         58,
@@ -1882,10 +1881,10 @@
       3358,
       3359
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "norfair"
   },
   "62": {
-    "area": "norfair",
     "xys": [
       [
         63,
@@ -1932,10 +1931,10 @@
       3557,
       3623
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "norfair"
   },
   "63": {
-    "area": "norfair",
     "xys": [
       [
         58,
@@ -1957,10 +1956,10 @@
       3621,
       3620
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "norfair"
   },
   "64": {
-    "area": "norfair",
     "xys": [
       [
         55,
@@ -1982,10 +1981,10 @@
       3618,
       3617
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "norfair"
   },
   "65": {
-    "area": "norfair",
     "xys": [
       [
         52,
@@ -2007,10 +2006,10 @@
       3615,
       3614
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "norfair"
   },
   "66": {
-    "area": "norfair",
     "xys": [
       [
         49,
@@ -2027,10 +2026,10 @@
       3613,
       3679
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "norfair"
   },
   "67": {
-    "area": "norfair",
     "xys": [
       [
         48,
@@ -2042,10 +2041,10 @@
     "indexes": [
       3678
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "norfair"
   },
   "68": {
-    "area": "norfair",
     "xys": [
       [
         56,
@@ -2082,10 +2081,10 @@
       3422,
       3488
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "norfair"
   },
   "69": {
-    "area": "norfair",
     "xys": [
       [
         55,
@@ -2112,10 +2111,10 @@
       3485,
       3484
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "norfair"
   },
   "70": {
-    "area": "norfair",
     "xys": [
       [
         55,
@@ -2162,10 +2161,10 @@
       3353,
       3352
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "norfair"
   },
   "71": {
-    "area": "norfair",
     "xys": [
       [
         51,
@@ -2187,10 +2186,10 @@
       3417,
       3483
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "norfair"
   },
   "72": {
-    "area": "norfair",
     "xys": [
       [
         50,
@@ -2217,10 +2216,10 @@
       3480,
       3479
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "norfair"
   },
   "73": {
-    "area": "norfair",
     "xys": [
       [
         50,
@@ -2267,10 +2266,10 @@
       3410,
       3409
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "norfair"
   },
   "74": {
-    "area": "norfair",
     "xys": [
       [
         42,
@@ -2312,10 +2311,10 @@
       3540,
       3539
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "norfair"
   },
   "75": {
-    "area": "norfair",
     "xys": [
       [
         44,
@@ -2342,10 +2341,10 @@
       3609,
       3608
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "norfair"
   },
   "76": {
-    "area": "norfair",
     "xys": [
       [
         46,
@@ -2367,10 +2366,10 @@
       3544,
       3610
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "norfair"
   },
   "77": {
-    "area": "norfair",
     "xys": [
       [
         47,
@@ -2382,10 +2381,10 @@
     "indexes": [
       3545
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "norfair"
   },
   "78": {
-    "area": "elevator",
     "xys": [
       [
         47,
@@ -2402,10 +2401,10 @@
       3281,
       3347
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "elevator"
   },
   "79": {
-    "area": "norfair",
     "xys": [
       [
         47,
@@ -2417,10 +2416,10 @@
     "indexes": [
       3215
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "norfair"
   },
   "80": {
-    "area": "norfair",
     "xys": [
       [
         46,
@@ -2432,10 +2431,10 @@
     "indexes": [
       3214
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "norfair"
   },
   "81": {
-    "area": "norfair",
     "xys": [
       [
         51,
@@ -2497,10 +2496,10 @@
       3216,
       3218
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "norfair"
   },
   "82": {
-    "area": "norfair",
     "xys": [
       [
         52,
@@ -2527,10 +2526,10 @@
       3154,
       3088
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "norfair"
   },
   "83": {
-    "area": "norfair",
     "xys": [
       [
         50,
@@ -2557,10 +2556,10 @@
       3150,
       3149
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "norfair"
   },
   "84": {
-    "area": "norfair",
     "xys": [
       [
         46,
@@ -2572,10 +2571,10 @@
     "indexes": [
       3148
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "norfair"
   },
   "85": {
-    "area": "norfair",
     "xys": [
       [
         42,
@@ -2602,10 +2601,10 @@
       3146,
       3147
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "norfair"
   },
   "86": {
-    "area": "norfair",
     "xys": [
       [
         29,
@@ -2702,10 +2701,10 @@
       3077,
       3143
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "norfair"
   },
   "87": {
-    "area": "norfair",
     "xys": [
       [
         42,
@@ -2717,10 +2716,10 @@
     "indexes": [
       3078
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "norfair"
   },
   "88": {
-    "area": "norfair",
     "xys": [
       [
         45,
@@ -2767,10 +2766,10 @@
       3207,
       3206
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "norfair"
   },
   "89": {
-    "area": "norfair",
     "xys": [
       [
         37,
@@ -2797,10 +2796,10 @@
       3270,
       3271
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "norfair"
   },
   "90": {
-    "area": "norfair",
     "xys": [
       [
         35,
@@ -2812,10 +2811,10 @@
     "indexes": [
       3203
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "norfair"
   },
   "91": {
-    "area": "norfair",
     "xys": [
       [
         38,
@@ -2827,10 +2826,10 @@
     "indexes": [
       3272
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "norfair"
   },
   "92": {
-    "area": "norfair",
     "xys": [
       [
         36,
@@ -2862,10 +2861,10 @@
       3534,
       3600
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "norfair"
   },
   "93": {
-    "area": "norfair",
     "xys": [
       [
         37,
@@ -2892,10 +2891,10 @@
       3537,
       3538
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "norfair"
   },
   "94": {
-    "area": "norfair",
     "xys": [
       [
         30,
@@ -2992,10 +2991,10 @@
       3666,
       3667
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "norfair"
   },
   "95": {
-    "area": "norfair",
     "xys": [
       [
         29,
@@ -3017,10 +3016,10 @@
       3527,
       3461
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "norfair"
   },
   "96": {
-    "area": "norfair",
     "xys": [
       [
         31,
@@ -3037,10 +3036,10 @@
       3463,
       3462
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "norfair"
   },
   "97": {
-    "area": "norfair",
     "xys": [
       [
         32,
@@ -3062,10 +3061,10 @@
       3398,
       3332
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "norfair"
   },
   "98": {
-    "area": "norfair",
     "xys": [
       [
         35,
@@ -3102,10 +3101,10 @@
       3334,
       3335
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "norfair"
   },
   "99": {
-    "area": "norfair",
     "xys": [
       [
         45,
@@ -3127,10 +3126,10 @@
       3015,
       3081
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "norfair"
   },
   "100": {
-    "area": "norfair",
     "xys": [
       [
         47,
@@ -3157,10 +3156,10 @@
       2884,
       2885
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "norfair"
   },
   "101": {
-    "area": "norfair",
     "xys": [
       [
         48,
@@ -3182,10 +3181,10 @@
       3018,
       3084
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "norfair"
   },
   "102": {
-    "area": "norfair",
     "xys": [
       [
         49,
@@ -3197,10 +3196,10 @@
     "indexes": [
       3019
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "norfair"
   },
   "103": {
-    "area": "norfair",
     "xys": [
       [
         51,
@@ -3222,10 +3221,10 @@
       3086,
       3085
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "norfair"
   },
   "104": {
-    "area": "norfair",
     "xys": [
       [
         45,
@@ -3272,10 +3271,10 @@
       2877,
       2876
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "norfair"
   },
   "105": {
-    "area": "norfair",
     "xys": [
       [
         37,
@@ -3287,10 +3286,10 @@
     "indexes": [
       2875
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "norfair"
   },
   "106": {
-    "area": "norfair",
     "xys": [
       [
         40,
@@ -3337,10 +3336,10 @@
       3009,
       3010
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "norfair"
   },
   "107": {
-    "area": "norfair",
     "xys": [
       [
         35,
@@ -3362,10 +3361,10 @@
       2872,
       2938
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "norfair"
   },
   "108": {
-    "area": "norfair",
     "xys": [
       [
         33,
@@ -3377,10 +3376,10 @@
     "indexes": [
       2937
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "norfair"
   },
   "109": {
-    "area": "norfair",
     "xys": [
       [
         35,
@@ -3392,10 +3391,10 @@
     "indexes": [
       2807
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "norfair"
   },
   "110": {
-    "area": "norfair",
     "xys": [
       [
         35,
@@ -3452,10 +3451,10 @@
       2802,
       2801
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "norfair"
   },
   "111": {
-    "area": "norfair",
     "xys": [
       [
         28,
@@ -3482,10 +3481,10 @@
       2932,
       2998
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "norfair"
   },
   "112": {
-    "area": "norfair",
     "xys": [
       [
         31,
@@ -3502,10 +3501,10 @@
       2737,
       2736
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "norfair"
   },
   "113": {
-    "area": "norfair",
     "xys": [
       [
         29,
@@ -3532,10 +3531,10 @@
       2603,
       2670
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "norfair"
   },
   "114": {
-    "area": "norfair",
     "xys": [
       [
         31,
@@ -3547,10 +3546,10 @@
     "indexes": [
       2671
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "norfair"
   },
   "115": {
-    "area": "norfair",
     "xys": [
       [
         31,
@@ -3567,10 +3566,10 @@
       2605,
       2604
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "norfair"
   },
   "116": {
-    "area": "brinstar",
     "xys": [
       [
         18,
@@ -3587,10 +3586,10 @@
       2196,
       2197
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "brinstar"
   },
   "117": {
-    "area": "brinstar",
     "xys": [
       [
         27,
@@ -3657,10 +3656,10 @@
       2268,
       2269
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "brinstar"
   },
   "118": {
-    "area": "brinstar",
     "xys": [
       [
         27,
@@ -3697,10 +3696,10 @@
       2069,
       2068
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "brinstar"
   },
   "119": {
-    "area": "brinstar",
     "xys": [
       [
         14,
@@ -3777,10 +3776,10 @@
       2066,
       2067
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "brinstar"
   },
   "120": {
-    "area": "brinstar",
     "xys": [
       [
         23,
@@ -3827,10 +3826,10 @@
       1865,
       1864
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "brinstar"
   },
   "121": {
-    "area": "brinstar",
     "xys": [
       [
         24,
@@ -3847,10 +3846,10 @@
       1872,
       1938
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "brinstar"
   },
   "122": {
-    "area": "brinstar",
     "xys": [
       [
         23,
@@ -3862,10 +3861,10 @@
     "indexes": [
       1937
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "brinstar"
   },
   "123": {
-    "area": "brinstar",
     "xys": [
       [
         25,
@@ -3897,10 +3896,10 @@
       1743,
       1809
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "brinstar"
   },
   "124": {
-    "area": "brinstar",
     "xys": [
       [
         26,
@@ -3917,10 +3916,10 @@
       1742,
       1741
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "brinstar"
   },
   "125": {
-    "area": "brinstar",
     "xys": [
       [
         24,
@@ -3932,10 +3931,10 @@
     "indexes": [
       1740
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "brinstar"
   },
   "126": {
-    "area": "elevator",
     "xys": [
       [
         21,
@@ -3992,10 +3991,10 @@
       1605,
       1803
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "elevator"
   },
   "127": {
-    "area": "crateria",
     "xys": [
       [
         21,
@@ -4007,10 +4006,10 @@
     "indexes": [
       1143
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "crateria"
   },
   "128": {
-    "area": "crateria",
     "xys": [
       [
         20,
@@ -4037,10 +4036,10 @@
       1140,
       1206
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "crateria"
   },
   "129": {
-    "area": "crateria",
     "xys": [
       [
         18,
@@ -4107,10 +4106,10 @@
       941,
       1007
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "crateria"
   },
   "130": {
-    "area": "crateria",
     "xys": [
       [
         19,
@@ -4187,10 +4186,10 @@
       1076,
       1075
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "crateria"
   },
   "131": {
-    "area": "crateria",
     "xys": [
       [
         16,
@@ -4207,10 +4206,10 @@
       478,
       477
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "crateria"
   },
   "132": {
-    "area": "crateria",
     "xys": [
       [
         14,
@@ -4222,10 +4221,10 @@
     "indexes": [
       476
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "crateria"
   },
   "133": {
-    "area": "crateria",
     "xys": [
       [
         16,
@@ -4237,10 +4236,10 @@
     "indexes": [
       412
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "crateria"
   },
   "134": {
-    "area": "crateria",
     "xys": [
       [
         10,
@@ -4297,10 +4296,10 @@
       344,
       279
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "crateria"
   },
   "135": {
-    "area": "crateria",
     "xys": [
       [
         9,
@@ -4342,10 +4341,10 @@
       207,
       141
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "crateria"
   },
   "136": {
-    "area": "crateria",
     "xys": [
       [
         10,
@@ -4382,10 +4381,10 @@
       147,
       146
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "crateria"
   },
   "137": {
-    "area": "crateria",
     "xys": [
       [
         20,
@@ -4417,7 +4416,8 @@
       150,
       148
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "crateria"
   },
   "138": {
     "xys": [
@@ -4579,12 +4579,11 @@
       ]
     ],
     "name": "landing site",
-    "area": "crateria",
     "id": 138,
-    "world_id": 1
+    "world_id": 1,
+    "zone": "crateria"
   },
   "139": {
-    "area": "crateria",
     "xys": [
       [
         30,
@@ -4601,10 +4600,10 @@
       96,
       97
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "crateria"
   },
   "140": {
-    "area": "crateria",
     "xys": [
       [
         36,
@@ -4821,10 +4820,10 @@
       109,
       173
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "crateria"
   },
   "141": {
-    "area": "crateria",
     "xys": [
       [
         39,
@@ -4841,10 +4840,10 @@
       171,
       172
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "crateria"
   },
   "142": {
-    "area": "wrecked-ship",
     "xys": [
       [
         42,
@@ -4926,10 +4925,10 @@
       111,
       110
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "wrecked-ship"
   },
   "143": {
-    "area": "wrecked-ship",
     "xys": [
       [
         42,
@@ -4941,10 +4940,10 @@
     "indexes": [
       240
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "wrecked-ship"
   },
   "144": {
-    "area": "wrecked-ship",
     "xys": [
       [
         50,
@@ -4986,10 +4985,10 @@
       45,
       44
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "wrecked-ship"
   },
   "145": {
-    "area": "wrecked-ship",
     "xys": [
       [
         53,
@@ -5011,10 +5010,10 @@
       52,
       51
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "wrecked-ship"
   },
   "146": {
-    "area": "wrecked-ship",
     "xys": [
       [
         48,
@@ -5086,10 +5085,10 @@
       441,
       440
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "wrecked-ship"
   },
   "147": {
-    "area": "wrecked-ship",
     "xys": [
       [
         47,
@@ -5116,10 +5115,10 @@
       309,
       308
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "wrecked-ship"
   },
   "148": {
-    "area": "wrecked-ship",
     "xys": [
       [
         47,
@@ -5131,10 +5130,10 @@
     "indexes": [
       509
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "wrecked-ship"
   },
   "149": {
-    "area": "wrecked-ship",
     "xys": [
       [
         50,
@@ -5161,10 +5160,10 @@
       514,
       515
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "wrecked-ship"
   },
   "150": {
-    "area": "wrecked-ship",
     "xys": [
       [
         45,
@@ -5176,10 +5175,10 @@
     "indexes": [
       639
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "wrecked-ship"
   },
   "151": {
-    "area": "wrecked-ship",
     "xys": [
       [
         50,
@@ -5211,10 +5210,10 @@
       642,
       640
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "wrecked-ship"
   },
   "152": {
-    "area": "wrecked-ship",
     "xys": [
       [
         51,
@@ -5226,10 +5225,10 @@
     "indexes": [
       645
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "wrecked-ship"
   },
   "153": {
-    "area": "wrecked-ship",
     "xys": [
       [
         49,
@@ -5241,10 +5240,10 @@
     "indexes": [
       313
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "wrecked-ship"
   },
   "154": {
-    "area": "wrecked-ship",
     "xys": [
       [
         50,
@@ -5261,10 +5260,10 @@
       380,
       379
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "wrecked-ship"
   },
   "155": {
-    "area": "wrecked-ship",
     "xys": [
       [
         52,
@@ -5281,10 +5280,10 @@
       382,
       381
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "wrecked-ship"
   },
   "156": {
-    "area": "wrecked-ship",
     "xys": [
       [
         53,
@@ -5306,10 +5305,10 @@
       317,
       251
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "wrecked-ship"
   },
   "157": {
-    "area": "wrecked-ship",
     "xys": [
       [
         52,
@@ -5346,10 +5345,10 @@
       315,
       316
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "wrecked-ship"
   },
   "158": {
-    "area": "crateria",
     "xys": [
       [
         60,
@@ -5426,10 +5425,10 @@
       389,
       390
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "crateria"
   },
   "159": {
-    "area": "crateria",
     "xys": [
       [
         61,
@@ -5456,10 +5455,10 @@
       457,
       523
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "crateria"
   },
   "160": {
-    "area": "crateria",
     "xys": [
       [
         61,
@@ -5506,10 +5505,10 @@
       652,
       653
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "crateria"
   },
   "161": {
-    "area": "crateria",
     "xys": [
       [
         57,
@@ -5521,10 +5520,10 @@
     "indexes": [
       651
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "crateria"
   },
   "162": {
-    "area": "crateria",
     "xys": [
       [
         57,
@@ -5536,10 +5535,10 @@
     "indexes": [
       717
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "crateria"
   },
   "163": {
-    "area": "elevator",
     "xys": [
       [
         57,
@@ -5591,10 +5590,10 @@
       1245,
       1311
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "elevator"
   },
   "164": {
-    "area": "maridia",
     "xys": [
       [
         57,
@@ -5621,10 +5620,10 @@
       1509,
       1575
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "maridia"
   },
   "165": {
-    "area": "maridia",
     "xys": [
       [
         58,
@@ -5636,10 +5635,10 @@
     "indexes": [
       1510
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "maridia"
   },
   "166": {
-    "area": "maridia",
     "xys": [
       [
         56,
@@ -5681,10 +5680,10 @@
       1569,
       1568
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "maridia"
   },
   "167": {
-    "area": "maridia",
     "xys": [
       [
         49,
@@ -5696,10 +5695,10 @@
     "indexes": [
       1567
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "maridia"
   },
   "168": {
-    "area": "maridia",
     "xys": [
       [
         49,
@@ -5711,10 +5710,10 @@
     "indexes": [
       1633
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "maridia"
   },
   "169": {
-    "area": "maridia",
     "xys": [
       [
         49,
@@ -5726,10 +5725,10 @@
     "indexes": [
       1699
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "maridia"
   },
   "170": {
-    "area": "maridia",
     "xys": [
       [
         48,
@@ -5821,10 +5820,10 @@
       1564,
       1497
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "maridia"
   },
   "171": {
-    "area": "maridia",
     "xys": [
       [
         48,
@@ -5851,10 +5850,10 @@
       1368,
       1434
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "maridia"
   },
   "172": {
-    "area": "maridia",
     "xys": [
       [
         49,
@@ -5866,10 +5865,10 @@
     "indexes": [
       1237
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "maridia"
   },
   "173": {
-    "area": "maridia",
     "xys": [
       [
         50,
@@ -5906,10 +5905,10 @@
       1304,
       1370
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "maridia"
   },
   "174": {
-    "area": "elevator",
     "xys": [
       [
         45,
@@ -5941,10 +5940,10 @@
       1629,
       1563
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "elevator"
   },
   "175": {
-    "area": "maridia",
     "xys": [
       [
         45,
@@ -5966,10 +5965,10 @@
       2223,
       2289
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "maridia"
   },
   "176": {
-    "area": "maridia",
     "xys": [
       [
         44,
@@ -5996,10 +5995,10 @@
       2286,
       2285
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "maridia"
   },
   "177": {
-    "area": "maridia",
     "xys": [
       [
         48,
@@ -6021,10 +6020,10 @@
       2291,
       2290
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "maridia"
   },
   "178": {
-    "area": "maridia",
     "xys": [
       [
         49,
@@ -6071,10 +6070,10 @@
       2096,
       2095
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "maridia"
   },
   "179": {
-    "area": "maridia",
     "xys": [
       [
         54,
@@ -6101,10 +6100,10 @@
       2230,
       2229
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "maridia"
   },
   "180": {
-    "area": "maridia",
     "xys": [
       [
         55,
@@ -6126,10 +6125,10 @@
       2299,
       2300
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "maridia"
   },
   "181": {
-    "area": "maridia",
     "xys": [
       [
         46,
@@ -6156,10 +6155,10 @@
       2225,
       2224
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "maridia"
   },
   "182": {
-    "area": "maridia",
     "xys": [
       [
         46,
@@ -6176,10 +6175,10 @@
       2026,
       2092
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "maridia"
   },
   "183": {
-    "area": "maridia",
     "xys": [
       [
         44,
@@ -6196,10 +6195,10 @@
       2024,
       2090
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "maridia"
   },
   "184": {
-    "area": "maridia",
     "xys": [
       [
         44,
@@ -6226,10 +6225,10 @@
       2221,
       2222
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "maridia"
   },
   "185": {
-    "area": "maridia",
     "xys": [
       [
         48,
@@ -6326,10 +6325,10 @@
       1958,
       1957
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "maridia"
   },
   "186": {
-    "area": "maridia",
     "xys": [
       [
         52,
@@ -6356,10 +6355,10 @@
       1898,
       1897
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "maridia"
   },
   "187": {
-    "area": "maridia",
     "xys": [
       [
         52,
@@ -6376,10 +6375,10 @@
       1834,
       1833
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "maridia"
   },
   "188": {
-    "area": "maridia",
     "xys": [
       [
         55,
@@ -6421,10 +6420,10 @@
       1767,
       1765
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "maridia"
   },
   "189": {
-    "area": "maridia",
     "xys": [
       [
         48,
@@ -6441,10 +6440,10 @@
       1764,
       1763
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "maridia"
   },
   "190": {
-    "area": "maridia",
     "xys": [
       [
         46,
@@ -6471,10 +6470,10 @@
       1760,
       1759
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "maridia"
   },
   "191": {
-    "area": "maridia",
     "xys": [
       [
         60,
@@ -6516,10 +6515,10 @@
       1706,
       1640
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "maridia"
   },
   "192": {
-    "area": "maridia",
     "xys": [
       [
         61,
@@ -6531,10 +6530,10 @@
     "indexes": [
       1777
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "maridia"
   },
   "193": {
-    "area": "maridia",
     "xys": [
       [
         55,
@@ -6591,10 +6590,10 @@
       1704,
       1705
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "maridia"
   },
   "194": {
-    "area": "maridia",
     "xys": [
       [
         63,
@@ -6671,10 +6670,10 @@
       1707,
       1641
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "maridia"
   },
   "195": {
-    "area": "maridia",
     "xys": [
       [
         64,
@@ -6686,10 +6685,10 @@
     "indexes": [
       1648
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "maridia"
   },
   "196": {
-    "area": "maridia",
     "xys": [
       [
         65,
@@ -6701,10 +6700,10 @@
     "indexes": [
       1649
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "maridia"
   },
   "197": {
-    "area": "maridia",
     "xys": [
       [
         64,
@@ -6741,10 +6740,10 @@
       1781,
       1847
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "maridia"
   },
   "198": {
-    "area": "maridia",
     "xys": [
       [
         63,
@@ -6771,10 +6770,10 @@
       1910,
       1911
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "maridia"
   },
   "199": {
-    "area": "maridia",
     "xys": [
       [
         61,
@@ -6786,10 +6785,10 @@
     "indexes": [
       1909
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "maridia"
   },
   "200": {
-    "area": "maridia",
     "xys": [
       [
         50,
@@ -6806,10 +6805,10 @@
       1634,
       1700
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "maridia"
   },
   "201": {
-    "area": "maridia",
     "xys": [
       [
         40,
@@ -6821,10 +6820,10 @@
     "indexes": [
       2284
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "maridia"
   },
   "202": {
-    "area": "maridia",
     "xys": [
       [
         40,
@@ -6836,10 +6835,10 @@
     "indexes": [
       2350
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "maridia"
   },
   "203": {
-    "area": "maridia",
     "xys": [
       [
         39,
@@ -6856,10 +6855,10 @@
       2349,
       2283
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "maridia"
   },
   "204": {
-    "area": "maridia",
     "xys": [
       [
         38,
@@ -6886,10 +6885,10 @@
       2280,
       2279
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "maridia"
   },
   "205": {
-    "area": "maridia",
     "xys": [
       [
         34,
@@ -6986,10 +6985,10 @@
       2013,
       2079
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "maridia"
   },
   "206": {
-    "area": "maridia",
     "xys": [
       [
         39,
@@ -7056,10 +7055,10 @@
       2150,
       2085
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "maridia"
   },
   "207": {
-    "area": "maridia",
     "xys": [
       [
         40,
@@ -7111,10 +7110,10 @@
       2022,
       2021
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "maridia"
   },
   "208": {
-    "area": "maridia",
     "xys": [
       [
         39,
@@ -7221,10 +7220,10 @@
       1952,
       1953
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "maridia"
   },
   "209": {
-    "area": "maridia",
     "xys": [
       [
         41,
@@ -7266,10 +7265,10 @@
       1758,
       1824
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "maridia"
   },
   "210": {
-    "area": "maridia",
     "xys": [
       [
         42,
@@ -7281,10 +7280,10 @@
     "indexes": [
       1956
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "maridia"
   },
   "211": {
-    "area": "maridia",
     "xys": [
       [
         43,
@@ -7346,10 +7345,10 @@
       1561,
       1560
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "maridia"
   },
   "212": {
-    "area": "maridia",
     "xys": [
       [
         40,
@@ -7381,10 +7380,10 @@
       1489,
       1555
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "maridia"
   },
   "213": {
-    "area": "maridia",
     "xys": [
       [
         36,
@@ -7411,10 +7410,10 @@
       1553,
       1487
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "maridia"
   },
   "214": {
-    "area": "maridia",
     "xys": [
       [
         35,
@@ -7441,10 +7440,10 @@
       1687,
       1753
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "maridia"
   },
   "215": {
-    "area": "brinstar",
     "xys": [
       [
         17,
@@ -7466,10 +7465,10 @@
       1337,
       1271
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "brinstar"
   },
   "216": {
-    "area": "brinstar",
     "xys": [
       [
         18,
@@ -7531,10 +7530,10 @@
       1801,
       1800
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "brinstar"
   },
   "217": {
-    "area": "brinstar",
     "xys": [
       [
         17,
@@ -7556,10 +7555,10 @@
       1797,
       1798
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "brinstar"
   },
   "218": {
-    "area": "brinstar",
     "xys": [
       [
         14,
@@ -7671,10 +7670,10 @@
       1990,
       2056
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "brinstar"
   },
   "219": {
-    "area": "brinstar",
     "xys": [
       [
         10,
@@ -7686,10 +7685,10 @@
     "indexes": [
       1462
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "brinstar"
   },
   "220": {
-    "area": "brinstar",
     "xys": [
       [
         14,
@@ -7716,10 +7715,10 @@
       1665,
       1664
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "brinstar"
   },
   "221": {
-    "area": "brinstar",
     "xys": [
       [
         16,
@@ -7731,10 +7730,10 @@
     "indexes": [
       1732
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "brinstar"
   },
   "222": {
-    "area": "brinstar",
     "xys": [
       [
         17,
@@ -7761,10 +7760,10 @@
       1467,
       1466
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "brinstar"
   },
   "223": {
-    "area": "brinstar",
     "xys": [
       [
         11,
@@ -7791,10 +7790,10 @@
       1726,
       1727
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "brinstar"
   },
   "224": {
-    "area": "brinstar",
     "xys": [
       [
         5,
@@ -7886,10 +7885,10 @@
       1986,
       1985
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "brinstar"
   },
   "225": {
-    "area": "brinstar",
     "xys": [
       [
         9,
@@ -7931,10 +7930,10 @@
       2049,
       2050
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "brinstar"
   },
   "226": {
-    "area": "brinstar",
     "xys": [
       [
         4,
@@ -7946,10 +7945,10 @@
     "indexes": [
       1984
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "brinstar"
   },
   "227": {
-    "area": "brinstar",
     "xys": [
       [
         4,
@@ -8041,10 +8040,10 @@
       1920,
       1853
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "brinstar"
   },
   "228": {
-    "area": "brinstar",
     "xys": [
       [
         3,
@@ -8076,10 +8075,10 @@
       1651,
       1652
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "brinstar"
   },
   "229": {
-    "area": "brinstar",
     "xys": [
       [
         0,
@@ -8091,10 +8090,10 @@
     "indexes": [
       1650
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "brinstar"
   },
   "230": {
-    "area": "brinstar",
     "xys": [
       [
         3,
@@ -8106,10 +8105,10 @@
     "indexes": [
       1851
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "brinstar"
   },
   "231": {
-    "area": "brinstar",
     "xys": [
       [
         5,
@@ -8151,10 +8150,10 @@
       1915,
       1850
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "brinstar"
   },
   "232": {
-    "area": "brinstar",
     "xys": [
       [
         0,
@@ -8166,10 +8165,10 @@
     "indexes": [
       1848
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "brinstar"
   },
   "233": {
-    "area": "brinstar",
     "xys": [
       [
         0,
@@ -8181,10 +8180,10 @@
     "indexes": [
       1914
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "brinstar"
   },
   "234": {
-    "area": "brinstar",
     "xys": [
       [
         3,
@@ -8196,10 +8195,10 @@
     "indexes": [
       1521
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "brinstar"
   },
   "235": {
-    "area": "brinstar",
     "xys": [
       [
         0,
@@ -8211,10 +8210,10 @@
     "indexes": [
       1452
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "brinstar"
   },
   "236": {
-    "area": "brinstar",
     "xys": [
       [
         3,
@@ -8236,10 +8235,10 @@
       1454,
       1453
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "brinstar"
   },
   "237": {
-    "area": "brinstar",
     "xys": [
       [
         7,
@@ -8276,10 +8275,10 @@
       1457,
       1458
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "brinstar"
   },
   "238": {
-    "area": "brinstar",
     "xys": [
       [
         8,
@@ -8296,10 +8295,10 @@
       1460,
       1461
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "brinstar"
   },
   "239": {
-    "area": "elevator",
     "xys": [
       [
         4,
@@ -8361,10 +8360,10 @@
       1192,
       1258
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "elevator"
   },
   "240": {
-    "area": "crateria",
     "xys": [
       [
         4,
@@ -8376,10 +8375,10 @@
     "indexes": [
       532
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "crateria"
   },
   "241": {
-    "area": "crateria",
     "xys": [
       [
         8,
@@ -8406,10 +8405,10 @@
       534,
       533
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "crateria"
   },
   "242": {
-    "area": "crateria",
     "xys": [
       [
         10,
@@ -8441,10 +8440,10 @@
       542,
       541
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "crateria"
   },
   "243": {
-    "area": "crateria",
     "xys": [
       [
         15,
@@ -8461,10 +8460,10 @@
       543,
       609
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "crateria"
   },
   "244": {
-    "area": "elevator",
     "xys": [
       [
         15,
@@ -8476,10 +8475,10 @@
     "indexes": [
       675
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "elevator"
   },
   "245": {
-    "area": "tourian",
     "xys": [
       [
         15,
@@ -8496,10 +8495,10 @@
       741,
       807
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "tourian"
   },
   "246": {
-    "area": "tourian",
     "xys": [
       [
         16,
@@ -8511,10 +8510,10 @@
     "indexes": [
       808
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "tourian"
   },
   "247": {
-    "area": "tourian",
     "xys": [
       [
         14,
@@ -8551,10 +8550,10 @@
       802,
       801
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "tourian"
   },
   "248": {
-    "area": "tourian",
     "xys": [
       [
         8,
@@ -8571,10 +8570,10 @@
       800,
       866
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "tourian"
   },
   "249": {
-    "area": "tourian",
     "xys": [
       [
         9,
@@ -8611,10 +8610,10 @@
       871,
       872
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "tourian"
   },
   "250": {
-    "area": "tourian",
     "xys": [
       [
         15,
@@ -8631,10 +8630,10 @@
       873,
       939
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "tourian"
   },
   "251": {
-    "area": "tourian",
     "xys": [
       [
         15,
@@ -8651,10 +8650,10 @@
       1005,
       1004
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "tourian"
   },
   "252": {
-    "area": "tourian",
     "xys": [
       [
         13,
@@ -8671,10 +8670,10 @@
       1003,
       1002
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "tourian"
   },
   "253": {
-    "area": "tourian",
     "xys": [
       [
         11,
@@ -8701,10 +8700,10 @@
       999,
       998
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "tourian"
   },
   "254": {
-    "area": "tourian",
     "xys": [
       [
         7,
@@ -8721,10 +8720,10 @@
       997,
       1063
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "tourian"
   },
   "255": {
-    "area": "tourian",
     "xys": [
       [
         6,
@@ -8736,10 +8735,10 @@
     "indexes": [
       1062
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "tourian"
   },
   "256": {
-    "area": "tourian",
     "xys": [
       [
         11,
@@ -8766,10 +8765,10 @@
       1065,
       1064
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "tourian"
   },
   "257": {
-    "area": "tourian",
     "xys": [
       [
         12,
@@ -8791,10 +8790,10 @@
       1134,
       1200
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "tourian"
   },
   "258": {
-    "area": "tourian",
     "xys": [
       [
         11,
@@ -8806,10 +8805,10 @@
     "indexes": [
       1133
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "tourian"
   },
   "259": {
-    "area": "tourian",
     "xys": [
       [
         11,
@@ -8836,10 +8835,10 @@
       1197,
       1196
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "tourian"
   },
   "260": {
-    "area": "tourian",
     "xys": [
       [
         7,
@@ -8856,10 +8855,10 @@
       1195,
       1194
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "tourian"
   },
   "261": {
-    "area": "tourian",
     "xys": [
       [
         6,
@@ -8876,10 +8875,10 @@
       1260,
       1326
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "tourian"
   },
   "262": {
-    "area": "tourian",
     "xys": [
       [
         7,
@@ -8946,10 +8945,10 @@
       1328,
       1327
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "tourian"
   },
   "263": {
-    "area": "tourian",
     "xys": [
       [
         13,
@@ -9046,10 +9045,10 @@
       1333,
       1399
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "tourian"
   },
   "264": {
-    "area": "void",
     "xys": [
       [
         18,
@@ -9256,6 +9255,7 @@
       2545,
       1618
     ],
-    "world_id": 1
+    "world_id": 1,
+    "zone": "void"
   }
 }

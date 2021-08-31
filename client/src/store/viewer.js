@@ -47,7 +47,7 @@ export default ({ store }) => {
       let room = getSelectedRoom()
       if (!room) {
         room = state.draft_room = {
-          area: room_tool,
+          zone: room_tool,
           xys: [],
         }
       }

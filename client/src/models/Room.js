@@ -5,7 +5,7 @@ const _schema = {
   properties: {
     xys: fields.xy,
     name: { type: 'string' },
-    area: { type: 'string' },
+    zone: { type: 'string' },
   },
 }
 
@@ -34,7 +34,7 @@ const Room = {
     if (map_style === 'off') {
       return []
     }
-    const { area } = room
+    const { zone } = room
     const _xys = {}
     room.xys.forEach((xy) => (_xys[xy] = true))
     return room.xys.map(([x, y]) => {
@@ -45,7 +45,7 @@ const Room = {
         y,
         onClick,
         class: [
-          `sm-room -absolute -${area} -style-${map_style}`,
+          `sm-room -absolute -${zone} -style-${map_style}`,
           {
             br0: _xys[[x + 1, y]],
             bl0: _xys[[x - 1, y]],

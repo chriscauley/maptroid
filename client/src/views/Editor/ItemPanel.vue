@@ -8,13 +8,13 @@
     </div>
     <div class="list-group" v-else-if="open === 'room'">
       <div class="list-group-item">All: {{ stats.screens.all }} / {{ stats.rooms.all }}</div>
-      <template v-for="area in areas" :key="area">
-        <div class="accordion__header" @click="toggle(area)">
-          {{ area }} {{ stats.screens[area] }} / {{ stats.rooms[area] }}
+      <template v-for="zone in zones" :key="zone">
+        <div class="accordion__header" @click="toggle(zone)">
+          {{ zone }} {{ stats.screens[zone] }} / {{ stats.rooms[zone] }}
         </div>
-        <template v-if="area === selected">
+        <template v-if="zone === selected">
           <div v-for="room in rooms" class="list-group-item" :key="room.id">
-            <i :class="`sm-room -${room.area}`" />
+            <i :class="`sm-room -${room.zone}`" />
             <span class="flex-grow">
               {{ room.name }}
             </span>
@@ -58,7 +58,7 @@
 import OpenSeadragon from 'openseadragon'
 import { sortBy } from 'lodash'
 
-import Area from '@/models/Area'
+import Zone from '@/models/Zone'
 
 export default {
   props: {
@@ -69,7 +69,7 @@ export default {
     return {
       open: 'tracker',
       selected: null,
-      areas: Area.list,
+      zones: Zone.list,
       css: {
         btn: (name) => ['btn', name === this.open ? '-primary' : '-secondary'],
       },
@@ -98,15 +98,15 @@ export default {
         groups: {},
       }
       this.rooms.forEach((room) => {
-        const { area } = room
-        if (!stats.groups[area]) {
-          stats.groups[area] = []
+        const { zone } = room
+        if (!stats.groups[zone]) {
+          stats.groups[zone] = []
         }
         stats.rooms.all += 1
         stats.screens.all += room.xys.length
-        stats.rooms[area] = (stats.rooms[area] || 0) + 1
-        stats.screens[area] = (stats.screens[area] || 0) + room.xys.length
-        stats.groups[area].push(room)
+        stats.rooms[zone] = (stats.rooms[zone] || 0) + 1
+        stats.screens[zone] = (stats.screens[zone] || 0) + room.xys.length
+        stats.groups[zone].push(room)
       })
       return stats
     },

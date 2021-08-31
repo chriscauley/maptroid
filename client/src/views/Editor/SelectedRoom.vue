@@ -4,8 +4,8 @@
     <input type="text" v-model="room.name" />
     <div>xys: {{ room.xys }}</div>
     <div>
-      <select v-model="room.area">
-        <option v-for="area in areas" :key="area" :value="area">{{ area }}</option>
+      <select v-model="room.zone">
+        <option v-for="zone in zones" :key="zone" :value="zone">{{ zone }}</option>
       </select>
     </div>
     <button class="btn -primary">Save</button>
@@ -14,14 +14,14 @@
 </template>
 
 <script>
-import Area from '@/models/Area'
+import Zone from '@/models/Zone'
 import Mousetrap from '@unrest/vue-mousetrap'
 
 export default {
   mixins: [Mousetrap.Mixin],
   data() {
     const mousetrap = { esc: () => this.$store.viewer.unSelectRoom() }
-    return { saved: null, areas: Area.list, mousetrap }
+    return { saved: null, zones: Zone.list, mousetrap }
   },
   computed: {
     room() {

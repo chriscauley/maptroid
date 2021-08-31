@@ -31,7 +31,7 @@
 </template>
 
 <script>
-import Area from '@/models/Area'
+import Zone from '@/models/Zone'
 import Item from '@/models/Item'
 import { map_markers, doors } from '@/models'
 
@@ -61,7 +61,7 @@ export default {
         { slug: 'boss', name: 'Boss', icon: 'sm-map -boss' },
         { slug: 'chozo', name: 'Chozo', icon: 'sm-chozo' },
         this.makeTool('door', doors),
-        this.makeTool('room', Area.list),
+        this.makeTool('room', Zone.list),
         this.makeTool('map', map_markers),
       ]
     },
