@@ -63,6 +63,7 @@ import Area from '@/models/Area'
 export default {
   props: {
     viewer: Object,
+    world: Object,
   },
   data() {
     return {
@@ -83,12 +84,12 @@ export default {
         chozo: [],
         door: [],
       }
-      const _all = sortBy(this.$store.item.getAll(), 'type')
+      const _all = sortBy(this.$store.item.getAll({ world_id: this.world.id }), 'type')
       _all.forEach((i) => items[i.class].push(i))
       return items
     },
     rooms() {
-      return this.$store.room.getAll()
+      return this.$store.room.getAll({ world_id: this.world.id })
     },
     stats() {
       const stats = {

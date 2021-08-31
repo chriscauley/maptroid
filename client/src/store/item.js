@@ -4,9 +4,9 @@ import initial from '@/../public/sm/item.json'
 
 export default () => {
   const item_store = Store('item', initial)
-  item_store.getItems = () => item_store.getAll().filter((i) => i.class === 'item')
-  item_store.getGrid = () => {
-    const items = item_store.getItems()
+  item_store.getItems = (q) => item_store.getAll(q).filter((i) => i.class === 'item')
+  item_store.getGrid = (q) => {
+    const items = item_store.getItems(q)
     const hist = {}
     items.forEach((item) => (hist[item.type] = (hist[item.type] || 0) + 1))
     const rows = [Item.packs, Item.beams, Item.abilities].map((slugs) => {

@@ -46,12 +46,15 @@ export default {
       const p = new Point(x + window.scrollX, y + window.scrollY)
       return this.viewer.world.getItemAt(0).windowToImageCoordinates(p)
     },
+    refetchItems() {
+      return this.$store.item.getAll({ world_id: this.world.id })
+    },
     press(e) {
       const { selected_tool, item_tool } = this.$store.viewer.state
       if (selected_tool === 'item') {
         const { x, y } = this.$store.viewer.getPointer(this.world.map_item_size)
         const data = this.makeItem({ x, y, class: 'item', type: item_tool })
-        this.$store.item.save(data).then(() => this.$store.item.getAll())
+        this.$store.item.save(data).then(this.refetchItems)
       } else if (selected_tool === 'room') {
         this.$store.viewer.clickRoom()
       } else {
@@ -69,7 +72,7 @@ export default {
       if (width && height && ['boss', 'door', 'map', 'chozo'].includes(selected_tool)) {
         const type = this.$store.viewer.state[selected_tool + '_tool']
         const data = this.makeItem({ x, y, height, width, type, class: selected_tool })
-        this.$store.item.save(data).then(() => this.$store.item.getAll())
+        this.$store.item.save(data).then(this.refetchItems)
       }
       this.$store.viewer.patch({ drag_start: null, drag_end: null })
     },

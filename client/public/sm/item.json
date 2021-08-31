@@ -14,7 +14,8 @@
     "screen_xy": [
       5,
       7
-    ]
+    ],
+    "world_id": 1
   },
   "2": {
     "type": "high-jump",
@@ -31,7 +32,8 @@
     "screen_xy": [
       3,
       10
-    ]
+    ],
+    "world_id": 1
   },
   "3": {
     "type": "ice-beam",
@@ -48,7 +50,8 @@
     "screen_xy": [
       12,
       7
-    ]
+    ],
+    "world_id": 1
   },
   "4": {
     "type": "grappling-hook",
@@ -65,7 +68,8 @@
     "screen_xy": [
       4,
       7
-    ]
+    ],
+    "world_id": 1
   },
   "5": {
     "type": "reserve-tank",
@@ -82,7 +86,8 @@
     "screen_xy": [
       2,
       7
-    ]
+    ],
+    "world_id": 1
   },
   "6": {
     "type": "missile",
@@ -99,7 +104,8 @@
     "screen_xy": [
       13,
       9
-    ]
+    ],
+    "world_id": 1
   },
   "7": {
     "type": "energy-tank",
@@ -116,7 +122,8 @@
     "screen_xy": [
       15,
       10
-    ]
+    ],
+    "world_id": 1
   },
   "8": {
     "type": "reserve-tank",
@@ -133,7 +140,8 @@
     "screen_xy": [
       15,
       4
-    ]
+    ],
+    "world_id": 1
   },
   "9": {
     "type": "missile",
@@ -150,7 +158,8 @@
     "screen_xy": [
       6,
       4
-    ]
+    ],
+    "world_id": 1
   },
   "10": {
     "type": "missile",
@@ -167,7 +176,8 @@
     "screen_xy": [
       3,
       7
-    ]
+    ],
+    "world_id": 1
   },
   "11": {
     "type": "power-bomb",
@@ -184,7 +194,8 @@
     "screen_xy": [
       9,
       0
-    ]
+    ],
+    "world_id": 1
   },
   "12": {
     "type": "varia-suit",
@@ -201,7 +212,8 @@
     "screen_xy": [
       7,
       9
-    ]
+    ],
+    "world_id": 1
   },
   "13": {
     "type": "missile",
@@ -218,7 +230,8 @@
     "screen_xy": [
       14,
       8
-    ]
+    ],
+    "world_id": 1
   },
   "14": {
     "type": "energy-tank",
@@ -235,7 +248,8 @@
     "screen_xy": [
       3,
       4
-    ]
+    ],
+    "world_id": 1
   },
   "15": {
     "type": "missile",
@@ -252,7 +266,8 @@
     "screen_xy": [
       1,
       8
-    ]
+    ],
+    "world_id": 1
   },
   "16": {
     "type": "super-missile",
@@ -269,7 +284,8 @@
     "screen_xy": [
       5,
       8
-    ]
+    ],
+    "world_id": 1
   },
   "17": {
     "type": "missile",
@@ -286,7 +302,8 @@
     "screen_xy": [
       13,
       8
-    ]
+    ],
+    "world_id": 1
   },
   "18": {
     "type": "screw-attack",
@@ -303,7 +320,8 @@
     "screen_xy": [
       11,
       8
-    ]
+    ],
+    "world_id": 1
   },
   "19": {
     "type": "energy-tank",
@@ -320,7 +338,8 @@
     "screen_xy": [
       14,
       11
-    ]
+    ],
+    "world_id": 1
   },
   "20": {
     "type": "power-bomb",
@@ -337,7 +356,8 @@
     "screen_xy": [
       7,
       8
-    ]
+    ],
+    "world_id": 1
   },
   "21": {
     "type": "energy-tank",
@@ -354,7 +374,8 @@
     "screen_xy": [
       10,
       1
-    ]
+    ],
+    "world_id": 1
   },
   "22": {
     "type": "power-bomb",
@@ -371,7 +392,8 @@
     "screen_xy": [
       12,
       8
-    ]
+    ],
+    "world_id": 1
   },
   "23": {
     "type": "missile",
@@ -388,7 +410,8 @@
     "screen_xy": [
       11,
       7
-    ]
+    ],
+    "world_id": 1
   },
   "24": {
     "type": "missile",
@@ -405,7 +428,8 @@
     "screen_xy": [
       15,
       9
-    ]
+    ],
+    "world_id": 1
   },
   "25": {
     "type": "spazer",
@@ -422,7 +446,8 @@
     "screen_xy": [
       11,
       9
-    ]
+    ],
+    "world_id": 1
   },
   "26": {
     "type": "energy-tank",
@@ -439,7 +464,8 @@
     "screen_xy": [
       7,
       8
-    ]
+    ],
+    "world_id": 1
   },
   "27": {
     "type": "missile",
@@ -456,7 +482,8 @@
     "screen_xy": [
       9,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "28": {
     "type": "missile",
@@ -473,7 +500,8 @@
     "screen_xy": [
       3,
       9
-    ]
+    ],
+    "world_id": 1
   },
   "29": {
     "type": "missile",
@@ -490,7 +518,8 @@
     "screen_xy": [
       12,
       9
-    ]
+    ],
+    "world_id": 1
   },
   "30": {
     "type": "missile",
@@ -507,7 +536,8 @@
     "screen_xy": [
       4,
       7
-    ]
+    ],
+    "world_id": 1
   },
   "31": {
     "type": "morph-ball",
@@ -524,7 +554,8 @@
     "screen_xy": [
       5,
       9
-    ]
+    ],
+    "world_id": 1
   },
   "32": {
     "type": "power-bomb",
@@ -541,7 +572,8 @@
     "screen_xy": [
       8,
       10
-    ]
+    ],
+    "world_id": 1
   },
   "33": {
     "type": "charge-beam",
@@ -558,7 +590,8 @@
     "screen_xy": [
       5,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "34": {
     "type": "energy-tank",
@@ -575,7 +608,8 @@
     "screen_xy": [
       4,
       9
-    ]
+    ],
+    "world_id": 1
   },
   "35": {
     "type": "super-missile",
@@ -592,7 +626,8 @@
     "screen_xy": [
       7,
       9
-    ]
+    ],
+    "world_id": 1
   },
   "36": {
     "type": "energy-tank",
@@ -609,7 +644,8 @@
     "screen_xy": [
       5,
       9
-    ]
+    ],
+    "world_id": 1
   },
   "37": {
     "type": "power-bomb",
@@ -626,7 +662,8 @@
     "screen_xy": [
       12,
       10
-    ]
+    ],
+    "world_id": 1
   },
   "38": {
     "type": "reserve-tank",
@@ -643,7 +680,8 @@
     "screen_xy": [
       11,
       7
-    ]
+    ],
+    "world_id": 1
   },
   "39": {
     "type": "missile",
@@ -660,7 +698,8 @@
     "screen_xy": [
       9,
       7
-    ]
+    ],
+    "world_id": 1
   },
   "40": {
     "type": "missile",
@@ -677,7 +716,8 @@
     "screen_xy": [
       14,
       7
-    ]
+    ],
+    "world_id": 1
   },
   "41": {
     "type": "super-missile",
@@ -694,7 +734,8 @@
     "screen_xy": [
       4,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "42": {
     "type": "super-missile",
@@ -711,7 +752,8 @@
     "screen_xy": [
       10,
       7
-    ]
+    ],
+    "world_id": 1
   },
   "43": {
     "type": "energy-tank",
@@ -728,7 +770,8 @@
     "screen_xy": [
       11,
       9
-    ]
+    ],
+    "world_id": 1
   },
   "44": {
     "type": "power-bomb",
@@ -745,7 +788,8 @@
     "screen_xy": [
       6,
       7
-    ]
+    ],
+    "world_id": 1
   },
   "45": {
     "type": "missile",
@@ -762,7 +806,8 @@
     "screen_xy": [
       4,
       2
-    ]
+    ],
+    "world_id": 1
   },
   "46": {
     "type": "missile",
@@ -779,7 +824,8 @@
     "screen_xy": [
       2,
       7
-    ]
+    ],
+    "world_id": 1
   },
   "47": {
     "type": "missile",
@@ -796,7 +842,8 @@
     "screen_xy": [
       14,
       9
-    ]
+    ],
+    "world_id": 1
   },
   "48": {
     "type": "energy-tank",
@@ -813,7 +860,8 @@
     "screen_xy": [
       12,
       2
-    ]
+    ],
+    "world_id": 1
   },
   "49": {
     "type": "missile",
@@ -830,7 +878,8 @@
     "screen_xy": [
       7,
       9
-    ]
+    ],
+    "world_id": 1
   },
   "50": {
     "type": "missile",
@@ -847,7 +896,8 @@
     "screen_xy": [
       5,
       12
-    ]
+    ],
+    "world_id": 1
   },
   "51": {
     "type": "missile",
@@ -864,7 +914,8 @@
     "screen_xy": [
       14,
       5
-    ]
+    ],
+    "world_id": 1
   },
   "52": {
     "type": "super-missile",
@@ -881,7 +932,8 @@
     "screen_xy": [
       6,
       8
-    ]
+    ],
+    "world_id": 1
   },
   "53": {
     "type": "power-bomb",
@@ -898,7 +950,8 @@
     "screen_xy": [
       4,
       9
-    ]
+    ],
+    "world_id": 1
   },
   "54": {
     "type": "missile",
@@ -915,7 +968,8 @@
     "screen_xy": [
       2,
       8
-    ]
+    ],
+    "world_id": 1
   },
   "55": {
     "type": "power-bomb",
@@ -932,7 +986,8 @@
     "screen_xy": [
       4,
       3
-    ]
+    ],
+    "world_id": 1
   },
   "56": {
     "type": "missile",
@@ -949,7 +1004,8 @@
     "screen_xy": [
       11,
       7
-    ]
+    ],
+    "world_id": 1
   },
   "57": {
     "type": "super-missile",
@@ -966,7 +1022,8 @@
     "screen_xy": [
       4,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "58": {
     "type": "energy-tank",
@@ -983,7 +1040,8 @@
     "screen_xy": [
       2,
       5
-    ]
+    ],
+    "world_id": 1
   },
   "59": {
     "type": "space-jump",
@@ -1000,7 +1058,8 @@
     "screen_xy": [
       4,
       8
-    ]
+    ],
+    "world_id": 1
   },
   "60": {
     "type": "missile",
@@ -1017,7 +1076,8 @@
     "screen_xy": [
       12,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "61": {
     "type": "plasma-beam",
@@ -1034,7 +1094,8 @@
     "screen_xy": [
       9,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "62": {
     "type": "super-missile",
@@ -1051,7 +1112,8 @@
     "screen_xy": [
       8,
       9
-    ]
+    ],
+    "world_id": 1
   },
   "63": {
     "type": "energy-tank",
@@ -1068,7 +1130,8 @@
     "screen_xy": [
       3,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "64": {
     "type": "reserve-tank",
@@ -1085,7 +1148,8 @@
     "screen_xy": [
       3,
       11
-    ]
+    ],
+    "world_id": 1
   },
   "65": {
     "type": "missile",
@@ -1102,7 +1166,8 @@
     "screen_xy": [
       13,
       8
-    ]
+    ],
+    "world_id": 1
   },
   "66": {
     "type": "missile",
@@ -1119,7 +1184,8 @@
     "screen_xy": [
       12,
       3
-    ]
+    ],
+    "world_id": 1
   },
   "67": {
     "type": "missile",
@@ -1136,7 +1202,8 @@
     "screen_xy": [
       1,
       15
-    ]
+    ],
+    "world_id": 1
   },
   "68": {
     "type": "gravity-suit",
@@ -1153,7 +1220,8 @@
     "screen_xy": [
       7,
       9
-    ]
+    ],
+    "world_id": 1
   },
   "69": {
     "type": "missile",
@@ -1170,7 +1238,8 @@
     "screen_xy": [
       14,
       9
-    ]
+    ],
+    "world_id": 1
   },
   "70": {
     "type": "missile",
@@ -1187,7 +1256,8 @@
     "screen_xy": [
       2,
       11
-    ]
+    ],
+    "world_id": 1
   },
   "71": {
     "type": "missile",
@@ -1204,7 +1274,8 @@
     "screen_xy": [
       2,
       9
-    ]
+    ],
+    "world_id": 1
   },
   "72": {
     "type": "super-missile",
@@ -1221,7 +1292,8 @@
     "screen_xy": [
       2,
       7
-    ]
+    ],
+    "world_id": 1
   },
   "73": {
     "type": "missile",
@@ -1238,7 +1310,8 @@
     "screen_xy": [
       12,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "74": {
     "type": "missile",
@@ -1255,7 +1328,8 @@
     "screen_xy": [
       8,
       9
-    ]
+    ],
+    "world_id": 1
   },
   "75": {
     "type": "wave-beam",
@@ -1272,7 +1346,8 @@
     "screen_xy": [
       11,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "76": {
     "type": "missile",
@@ -1289,7 +1364,8 @@
     "screen_xy": [
       12,
       3
-    ]
+    ],
+    "world_id": 1
   },
   "77": {
     "type": "speed-booster",
@@ -1306,7 +1382,8 @@
     "screen_xy": [
       11,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "78": {
     "type": "missile",
@@ -1323,7 +1400,8 @@
     "screen_xy": [
       12,
       13
-    ]
+    ],
+    "world_id": 1
   },
   "79": {
     "type": "missile",
@@ -1340,7 +1418,8 @@
     "screen_xy": [
       12,
       8
-    ]
+    ],
+    "world_id": 1
   },
   "80": {
     "type": "missile",
@@ -1357,7 +1436,8 @@
     "screen_xy": [
       13,
       8
-    ]
+    ],
+    "world_id": 1
   },
   "81": {
     "type": "power-bomb",
@@ -1374,7 +1454,8 @@
     "screen_xy": [
       7,
       8
-    ]
+    ],
+    "world_id": 1
   },
   "82": {
     "type": "energy-tank",
@@ -1391,7 +1472,8 @@
     "screen_xy": [
       13,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "83": {
     "type": "missile",
@@ -1408,7 +1490,8 @@
     "screen_xy": [
       7,
       11
-    ]
+    ],
+    "world_id": 1
   },
   "84": {
     "type": "missile",
@@ -1425,7 +1508,8 @@
     "screen_xy": [
       2,
       11
-    ]
+    ],
+    "world_id": 1
   },
   "85": {
     "type": "missile",
@@ -1442,7 +1526,8 @@
     "screen_xy": [
       13,
       11
-    ]
+    ],
+    "world_id": 1
   },
   "86": {
     "type": "energy-tank",
@@ -1459,7 +1544,8 @@
     "screen_xy": [
       3,
       8
-    ]
+    ],
+    "world_id": 1
   },
   "87": {
     "type": "power-bomb",
@@ -1476,7 +1562,8 @@
     "screen_xy": [
       13,
       7
-    ]
+    ],
+    "world_id": 1
   },
   "88": {
     "type": "bomb",
@@ -1493,7 +1580,8 @@
     "screen_xy": [
       12,
       10
-    ]
+    ],
+    "world_id": 1
   },
   "89": {
     "type": "missile",
@@ -1510,7 +1598,8 @@
     "screen_xy": [
       4,
       7
-    ]
+    ],
+    "world_id": 1
   },
   "90": {
     "type": "super-missile",
@@ -1527,7 +1616,8 @@
     "screen_xy": [
       11,
       9
-    ]
+    ],
+    "world_id": 1
   },
   "91": {
     "type": "missile",
@@ -1544,7 +1634,8 @@
     "screen_xy": [
       7,
       11
-    ]
+    ],
+    "world_id": 1
   },
   "92": {
     "type": "missile",
@@ -1561,7 +1652,8 @@
     "screen_xy": [
       4,
       10
-    ]
+    ],
+    "world_id": 1
   },
   "93": {
     "type": "missile",
@@ -1578,7 +1670,8 @@
     "screen_xy": [
       4,
       12
-    ]
+    ],
+    "world_id": 1
   },
   "94": {
     "type": "missile",
@@ -1595,7 +1688,8 @@
     "screen_xy": [
       12,
       9
-    ]
+    ],
+    "world_id": 1
   },
   "95": {
     "type": "super-missile",
@@ -1612,7 +1706,8 @@
     "screen_xy": [
       12,
       8
-    ]
+    ],
+    "world_id": 1
   },
   "96": {
     "type": "spring-ball",
@@ -1629,7 +1724,8 @@
     "screen_xy": [
       8,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "97": {
     "type": "missile",
@@ -1646,7 +1742,8 @@
     "screen_xy": [
       5,
       10
-    ]
+    ],
+    "world_id": 1
   },
   "98": {
     "type": "missile",
@@ -1663,7 +1760,8 @@
     "screen_xy": [
       3,
       11
-    ]
+    ],
+    "world_id": 1
   },
   "99": {
     "width": 1,
@@ -1680,7 +1778,8 @@
     "screen_xy": [
       7,
       10
-    ]
+    ],
+    "world_id": 1
   },
   "100": {
     "width": 1,
@@ -1697,7 +1796,8 @@
     "screen_xy": [
       2,
       12
-    ]
+    ],
+    "world_id": 1
   },
   "101": {
     "width": 5,
@@ -1714,7 +1814,8 @@
     "screen_xy": [
       3,
       5
-    ]
+    ],
+    "world_id": 1
   },
   "102": {
     "width": 5,
@@ -1731,7 +1832,8 @@
     "screen_xy": [
       9,
       4
-    ]
+    ],
+    "world_id": 1
   },
   "104": {
     "width": 4,
@@ -1748,7 +1850,8 @@
     "screen_xy": [
       6,
       5
-    ]
+    ],
+    "world_id": 1
   },
   "105": {
     "width": 5,
@@ -1765,7 +1868,8 @@
     "screen_xy": [
       6,
       7
-    ]
+    ],
+    "world_id": 1
   },
   "106": {
     "width": 9,
@@ -1782,7 +1886,8 @@
     "screen_xy": [
       8,
       1
-    ]
+    ],
+    "world_id": 1
   },
   "107": {
     "width": 8,
@@ -1799,7 +1904,8 @@
     "screen_xy": [
       3,
       7
-    ]
+    ],
+    "world_id": 1
   },
   "108": {
     "width": 6,
@@ -1816,7 +1922,8 @@
     "screen_xy": [
       5,
       3
-    ]
+    ],
+    "world_id": 1
   },
   "109": {
     "width": 10,
@@ -1833,7 +1940,8 @@
     "screen_xy": [
       3,
       3
-    ]
+    ],
+    "world_id": 1
   },
   "110": {
     "width": 8,
@@ -1850,7 +1958,8 @@
     "screen_xy": [
       4,
       0
-    ]
+    ],
+    "world_id": 1
   },
   "111": {
     "width": 12,
@@ -1867,7 +1976,8 @@
     "screen_xy": [
       1,
       9
-    ]
+    ],
+    "world_id": 1
   },
   "112": {
     "class": "map",
@@ -1884,7 +1994,8 @@
     "screen_xy": [
       5,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "113": {
     "class": "map",
@@ -1901,7 +2012,8 @@
     "screen_xy": [
       3,
       9
-    ]
+    ],
+    "world_id": 1
   },
   "114": {
     "class": "map",
@@ -1918,7 +2030,8 @@
     "screen_xy": [
       3,
       9
-    ]
+    ],
+    "world_id": 1
   },
   "115": {
     "class": "map",
@@ -1935,7 +2048,8 @@
     "screen_xy": [
       3,
       9
-    ]
+    ],
+    "world_id": 1
   },
   "116": {
     "class": "map",
@@ -1952,7 +2066,8 @@
     "screen_xy": [
       9,
       9
-    ]
+    ],
+    "world_id": 1
   },
   "117": {
     "class": "map",
@@ -1969,7 +2084,8 @@
     "screen_xy": [
       3,
       9
-    ]
+    ],
+    "world_id": 1
   },
   "118": {
     "class": "map",
@@ -1986,7 +2102,8 @@
     "screen_xy": [
       7,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "119": {
     "class": "map",
@@ -2003,7 +2120,8 @@
     "screen_xy": [
       7,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "120": {
     "class": "map",
@@ -2020,7 +2138,8 @@
     "screen_xy": [
       5,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "121": {
     "class": "map",
@@ -2037,7 +2156,8 @@
     "screen_xy": [
       5,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "122": {
     "class": "map",
@@ -2054,7 +2174,8 @@
     "screen_xy": [
       7,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "123": {
     "class": "map",
@@ -2071,7 +2192,8 @@
     "screen_xy": [
       7,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "124": {
     "class": "map",
@@ -2088,7 +2210,8 @@
     "screen_xy": [
       7,
       9
-    ]
+    ],
+    "world_id": 1
   },
   "125": {
     "class": "map",
@@ -2105,7 +2228,8 @@
     "screen_xy": [
       7,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "126": {
     "class": "map",
@@ -2122,7 +2246,8 @@
     "screen_xy": [
       7,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "127": {
     "class": "map",
@@ -2139,7 +2264,8 @@
     "screen_xy": [
       5,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "128": {
     "class": "map",
@@ -2156,7 +2282,8 @@
     "screen_xy": [
       6,
       9
-    ]
+    ],
+    "world_id": 1
   },
   "129": {
     "class": "map",
@@ -2173,7 +2300,8 @@
     "screen_xy": [
       7,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "130": {
     "class": "map",
@@ -2190,7 +2318,8 @@
     "screen_xy": [
       7,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "131": {
     "class": "map",
@@ -2207,7 +2336,8 @@
     "screen_xy": [
       7,
       9
-    ]
+    ],
+    "world_id": 1
   },
   "132": {
     "class": "map",
@@ -2224,7 +2354,8 @@
     "screen_xy": [
       7,
       9
-    ]
+    ],
+    "world_id": 1
   },
   "133": {
     "class": "map",
@@ -2241,7 +2372,8 @@
     "screen_xy": [
       7,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "134": {
     "class": "map",
@@ -2258,7 +2390,8 @@
     "screen_xy": [
       8,
       9
-    ]
+    ],
+    "world_id": 1
   },
   "135": {
     "class": "map",
@@ -2275,7 +2408,8 @@
     "screen_xy": [
       6,
       9
-    ]
+    ],
+    "world_id": 1
   },
   "136": {
     "class": "map",
@@ -2292,7 +2426,8 @@
     "screen_xy": [
       5,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "137": {
     "class": "map",
@@ -2309,7 +2444,8 @@
     "screen_xy": [
       7,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "138": {
     "class": "map",
@@ -2326,7 +2462,8 @@
     "screen_xy": [
       3,
       9
-    ]
+    ],
+    "world_id": 1
   },
   "140": {
     "class": "map",
@@ -2343,7 +2480,8 @@
     "screen_xy": [
       1,
       4
-    ]
+    ],
+    "world_id": 1
   },
   "141": {
     "class": "map",
@@ -2360,7 +2498,8 @@
     "screen_xy": [
       5,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "142": {
     "class": "map",
@@ -2377,7 +2516,8 @@
     "screen_xy": [
       5,
       9
-    ]
+    ],
+    "world_id": 1
   },
   "143": {
     "class": "map",
@@ -2394,7 +2534,8 @@
     "screen_xy": [
       7,
       9
-    ]
+    ],
+    "world_id": 1
   },
   "144": {
     "class": "map",
@@ -2411,7 +2552,8 @@
     "screen_xy": [
       5,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "145": {
     "class": "map",
@@ -2428,7 +2570,8 @@
     "screen_xy": [
       5,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "146": {
     "class": "map",
@@ -2445,7 +2588,8 @@
     "screen_xy": [
       3,
       9
-    ]
+    ],
+    "world_id": 1
   },
   "147": {
     "class": "map",
@@ -2462,7 +2606,8 @@
     "screen_xy": [
       9,
       9
-    ]
+    ],
+    "world_id": 1
   },
   "148": {
     "class": "map",
@@ -2479,7 +2624,8 @@
     "screen_xy": [
       7,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "150": {
     "class": "chozo",
@@ -2495,7 +2641,8 @@
     "screen_xy": [
       0,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "152": {
     "class": "chozo",
@@ -2511,7 +2658,8 @@
     "screen_xy": [
       12,
       10
-    ]
+    ],
+    "world_id": 1
   },
   "153": {
     "class": "chozo",
@@ -2527,7 +2675,8 @@
     "screen_xy": [
       1,
       8
-    ]
+    ],
+    "world_id": 1
   },
   "154": {
     "class": "chozo",
@@ -2543,7 +2692,8 @@
     "screen_xy": [
       10,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "155": {
     "class": "chozo",
@@ -2559,7 +2709,8 @@
     "screen_xy": [
       2,
       7
-    ]
+    ],
+    "world_id": 1
   },
   "156": {
     "class": "chozo",
@@ -2575,7 +2726,8 @@
     "screen_xy": [
       2,
       8
-    ]
+    ],
+    "world_id": 1
   },
   "157": {
     "class": "chozo",
@@ -2591,7 +2743,8 @@
     "screen_xy": [
       2,
       7
-    ]
+    ],
+    "world_id": 1
   },
   "158": {
     "class": "chozo",
@@ -2607,7 +2760,8 @@
     "screen_xy": [
       2,
       7
-    ]
+    ],
+    "world_id": 1
   },
   "159": {
     "class": "chozo",
@@ -2623,7 +2777,8 @@
     "screen_xy": [
       11,
       8
-    ]
+    ],
+    "world_id": 1
   },
   "160": {
     "class": "chozo",
@@ -2639,7 +2794,8 @@
     "screen_xy": [
       1,
       10
-    ]
+    ],
+    "world_id": 1
   },
   "161": {
     "class": "chozo",
@@ -2655,7 +2811,8 @@
     "screen_xy": [
       3,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "162": {
     "class": "chozo",
@@ -2671,7 +2828,8 @@
     "screen_xy": [
       11,
       9
-    ]
+    ],
+    "world_id": 1
   },
   "163": {
     "class": "chozo",
@@ -2687,7 +2845,8 @@
     "screen_xy": [
       8,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "164": {
     "class": "chozo",
@@ -2703,7 +2862,8 @@
     "screen_xy": [
       2,
       7
-    ]
+    ],
+    "world_id": 1
   },
   "165": {
     "class": "chozo",
@@ -2719,7 +2879,8 @@
     "screen_xy": [
       2,
       7
-    ]
+    ],
+    "world_id": 1
   },
   "166": {
     "class": "chozo",
@@ -2735,7 +2896,8 @@
     "screen_xy": [
       3,
       7
-    ]
+    ],
+    "world_id": 1
   },
   "167": {
     "class": "chozo",
@@ -2751,7 +2913,8 @@
     "screen_xy": [
       9,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "168": {
     "class": "chozo",
@@ -2767,7 +2930,8 @@
     "screen_xy": [
       11,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "169": {
     "class": "chozo",
@@ -2783,7 +2947,8 @@
     "screen_xy": [
       2,
       9
-    ]
+    ],
+    "world_id": 1
   },
   "170": {
     "class": "chozo",
@@ -2799,7 +2964,8 @@
     "screen_xy": [
       12,
       7
-    ]
+    ],
+    "world_id": 1
   },
   "171": {
     "class": "chozo",
@@ -2815,7 +2981,8 @@
     "screen_xy": [
       11,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "173": {
     "class": "door",
@@ -2832,7 +2999,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "174": {
     "class": "door",
@@ -2849,7 +3017,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "175": {
     "class": "door",
@@ -2866,7 +3035,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "176": {
     "class": "door",
@@ -2883,7 +3053,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "177": {
     "class": "door",
@@ -2900,7 +3071,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "178": {
     "class": "door",
@@ -2917,7 +3089,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "179": {
     "class": "door",
@@ -2934,7 +3107,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "180": {
     "class": "door",
@@ -2951,7 +3125,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "181": {
     "class": "door",
@@ -2968,7 +3143,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "182": {
     "class": "door",
@@ -2985,7 +3161,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "183": {
     "class": "door",
@@ -3002,7 +3179,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "184": {
     "class": "door",
@@ -3019,7 +3197,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "185": {
     "class": "door",
@@ -3036,7 +3215,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "186": {
     "class": "door",
@@ -3053,7 +3233,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "187": {
     "class": "door",
@@ -3070,7 +3251,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "188": {
     "class": "door",
@@ -3087,7 +3269,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "189": {
     "class": "door",
@@ -3104,7 +3287,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "190": {
     "class": "door",
@@ -3121,7 +3305,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "191": {
     "class": "door",
@@ -3138,7 +3323,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "192": {
     "class": "door",
@@ -3155,7 +3341,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "193": {
     "class": "door",
@@ -3172,7 +3359,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "194": {
     "class": "door",
@@ -3189,7 +3377,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "195": {
     "class": "door",
@@ -3206,7 +3395,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "196": {
     "class": "door",
@@ -3223,7 +3413,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "197": {
     "class": "door",
@@ -3240,7 +3431,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "198": {
     "class": "door",
@@ -3257,7 +3449,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "199": {
     "class": "door",
@@ -3274,7 +3467,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "200": {
     "class": "door",
@@ -3291,7 +3485,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "201": {
     "class": "door",
@@ -3308,7 +3503,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "202": {
     "class": "door",
@@ -3325,7 +3521,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "203": {
     "class": "door",
@@ -3342,7 +3539,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "204": {
     "class": "door",
@@ -3359,7 +3557,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "205": {
     "class": "door",
@@ -3376,7 +3575,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "206": {
     "class": "door",
@@ -3393,7 +3593,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "207": {
     "class": "door",
@@ -3410,7 +3611,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "208": {
     "class": "door",
@@ -3427,7 +3629,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "209": {
     "class": "door",
@@ -3444,7 +3647,8 @@
     "screen_xy": [
       6,
       3
-    ]
+    ],
+    "world_id": 1
   },
   "210": {
     "class": "door",
@@ -3461,7 +3665,8 @@
     "screen_xy": [
       6,
       14
-    ]
+    ],
+    "world_id": 1
   },
   "211": {
     "class": "door",
@@ -3478,7 +3683,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "212": {
     "class": "door",
@@ -3495,7 +3701,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "213": {
     "class": "door",
@@ -3512,7 +3719,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "214": {
     "class": "door",
@@ -3529,7 +3737,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "215": {
     "class": "door",
@@ -3546,7 +3755,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "216": {
     "class": "door",
@@ -3563,7 +3773,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "217": {
     "class": "door",
@@ -3580,7 +3791,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "218": {
     "class": "door",
@@ -3597,7 +3809,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "219": {
     "class": "door",
@@ -3614,7 +3827,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "220": {
     "class": "door",
@@ -3631,7 +3845,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "221": {
     "class": "door",
@@ -3648,7 +3863,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "222": {
     "class": "door",
@@ -3665,7 +3881,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "223": {
     "class": "door",
@@ -3682,7 +3899,8 @@
     "screen_xy": [
       6,
       13
-    ]
+    ],
+    "world_id": 1
   },
   "224": {
     "class": "door",
@@ -3699,7 +3917,8 @@
     "screen_xy": [
       6,
       2
-    ]
+    ],
+    "world_id": 1
   },
   "225": {
     "class": "door",
@@ -3716,7 +3935,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "226": {
     "class": "door",
@@ -3733,7 +3953,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "227": {
     "class": "door",
@@ -3750,7 +3971,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "228": {
     "class": "door",
@@ -3767,7 +3989,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "229": {
     "class": "door",
@@ -3784,7 +4007,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "230": {
     "class": "door",
@@ -3801,7 +4025,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "231": {
     "class": "door",
@@ -3818,7 +4043,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "232": {
     "class": "door",
@@ -3835,7 +4061,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "233": {
     "class": "door",
@@ -3852,7 +4079,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "234": {
     "class": "door",
@@ -3869,7 +4097,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "235": {
     "class": "door",
@@ -3886,7 +4115,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "236": {
     "class": "door",
@@ -3903,7 +4133,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "237": {
     "class": "door",
@@ -3920,7 +4151,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "238": {
     "class": "door",
@@ -3937,7 +4169,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "239": {
     "class": "door",
@@ -3954,7 +4187,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "240": {
     "class": "door",
@@ -3971,7 +4205,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "241": {
     "class": "door",
@@ -3988,7 +4223,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "242": {
     "class": "door",
@@ -4005,7 +4241,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "244": {
     "class": "door",
@@ -4022,7 +4259,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "245": {
     "class": "door",
@@ -4039,7 +4277,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "246": {
     "class": "door",
@@ -4056,7 +4295,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "247": {
     "class": "door",
@@ -4073,7 +4313,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "248": {
     "class": "door",
@@ -4090,7 +4331,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "250": {
     "class": "door",
@@ -4107,7 +4349,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "251": {
     "class": "door",
@@ -4124,7 +4367,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "252": {
     "class": "door",
@@ -4141,7 +4385,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "253": {
     "class": "door",
@@ -4158,7 +4403,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "254": {
     "class": "door",
@@ -4175,7 +4421,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "255": {
     "class": "door",
@@ -4192,7 +4439,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "256": {
     "class": "door",
@@ -4209,7 +4457,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "257": {
     "class": "door",
@@ -4226,7 +4475,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "258": {
     "class": "door",
@@ -4243,7 +4493,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "259": {
     "class": "door",
@@ -4260,7 +4511,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "260": {
     "class": "door",
@@ -4277,7 +4529,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "261": {
     "class": "door",
@@ -4294,7 +4547,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "262": {
     "class": "door",
@@ -4311,7 +4565,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "263": {
     "class": "door",
@@ -4328,7 +4583,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "264": {
     "class": "door",
@@ -4345,7 +4601,8 @@
     "screen_xy": [
       6,
       13
-    ]
+    ],
+    "world_id": 1
   },
   "265": {
     "class": "door",
@@ -4362,7 +4619,8 @@
     "screen_xy": [
       6,
       2
-    ]
+    ],
+    "world_id": 1
   },
   "266": {
     "class": "door",
@@ -4379,7 +4637,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "268": {
     "class": "door",
@@ -4396,7 +4655,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "269": {
     "class": "door",
@@ -4413,7 +4673,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "270": {
     "class": "door",
@@ -4430,7 +4691,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "271": {
     "class": "door",
@@ -4447,7 +4709,8 @@
     "screen_xy": [
       6,
       13
-    ]
+    ],
+    "world_id": 1
   },
   "273": {
     "class": "door",
@@ -4464,7 +4727,8 @@
     "screen_xy": [
       6,
       2
-    ]
+    ],
+    "world_id": 1
   },
   "274": {
     "class": "door",
@@ -4481,7 +4745,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "275": {
     "class": "door",
@@ -4498,7 +4763,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "276": {
     "class": "door",
@@ -4515,7 +4781,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "277": {
     "class": "door",
@@ -4532,7 +4799,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "278": {
     "class": "door",
@@ -4549,7 +4817,8 @@
     "screen_xy": [
       6,
       2
-    ]
+    ],
+    "world_id": 1
   },
   "279": {
     "class": "door",
@@ -4566,7 +4835,8 @@
     "screen_xy": [
       6,
       13
-    ]
+    ],
+    "world_id": 1
   },
   "280": {
     "class": "door",
@@ -4583,7 +4853,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "281": {
     "class": "door",
@@ -4600,7 +4871,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "282": {
     "class": "door",
@@ -4617,7 +4889,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "283": {
     "class": "door",
@@ -4634,7 +4907,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "284": {
     "class": "door",
@@ -4651,7 +4925,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "285": {
     "class": "door",
@@ -4668,7 +4943,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "286": {
     "class": "door",
@@ -4685,7 +4961,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "287": {
     "class": "door",
@@ -4702,7 +4979,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "288": {
     "class": "door",
@@ -4719,7 +4997,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "289": {
     "class": "door",
@@ -4736,7 +5015,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "290": {
     "class": "door",
@@ -4753,7 +5033,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "291": {
     "class": "door",
@@ -4770,7 +5051,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "292": {
     "class": "door",
@@ -4787,7 +5069,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "293": {
     "class": "door",
@@ -4804,7 +5087,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "294": {
     "class": "door",
@@ -4821,7 +5105,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "295": {
     "class": "door",
@@ -4838,7 +5123,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "296": {
     "class": "door",
@@ -4855,7 +5141,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "297": {
     "class": "door",
@@ -4872,7 +5159,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "298": {
     "class": "door",
@@ -4889,7 +5177,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "299": {
     "class": "door",
@@ -4906,7 +5195,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "300": {
     "class": "door",
@@ -4923,7 +5213,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "301": {
     "class": "door",
@@ -4940,7 +5231,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "302": {
     "class": "door",
@@ -4957,7 +5249,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "303": {
     "class": "door",
@@ -4974,7 +5267,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "304": {
     "class": "door",
@@ -4991,7 +5285,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "305": {
     "class": "door",
@@ -5008,7 +5303,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "306": {
     "class": "door",
@@ -5025,7 +5321,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "307": {
     "class": "door",
@@ -5042,7 +5339,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "308": {
     "class": "door",
@@ -5059,7 +5357,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "309": {
     "class": "door",
@@ -5076,7 +5375,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "310": {
     "class": "door",
@@ -5093,7 +5393,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "311": {
     "class": "door",
@@ -5110,7 +5411,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "312": {
     "class": "door",
@@ -5127,7 +5429,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "313": {
     "class": "door",
@@ -5144,7 +5447,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "314": {
     "class": "door",
@@ -5161,7 +5465,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "315": {
     "class": "door",
@@ -5178,7 +5483,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "316": {
     "class": "door",
@@ -5195,7 +5501,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "317": {
     "class": "door",
@@ -5212,7 +5519,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "319": {
     "class": "door",
@@ -5229,7 +5537,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "320": {
     "class": "door",
@@ -5246,7 +5555,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "321": {
     "class": "door",
@@ -5263,7 +5573,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "322": {
     "class": "door",
@@ -5280,7 +5591,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "323": {
     "class": "door",
@@ -5297,7 +5609,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "324": {
     "class": "door",
@@ -5314,7 +5627,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "325": {
     "class": "door",
@@ -5331,7 +5645,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "326": {
     "class": "door",
@@ -5348,7 +5663,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "327": {
     "class": "door",
@@ -5365,7 +5681,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "328": {
     "class": "door",
@@ -5382,7 +5699,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "329": {
     "class": "door",
@@ -5399,7 +5717,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "330": {
     "class": "door",
@@ -5416,7 +5735,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "331": {
     "class": "door",
@@ -5433,7 +5753,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "332": {
     "class": "door",
@@ -5450,7 +5771,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "333": {
     "class": "door",
@@ -5467,7 +5789,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "334": {
     "class": "door",
@@ -5484,7 +5807,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "335": {
     "class": "door",
@@ -5501,7 +5825,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "336": {
     "class": "door",
@@ -5518,7 +5843,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "337": {
     "class": "door",
@@ -5535,7 +5861,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "338": {
     "class": "door",
@@ -5552,7 +5879,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "339": {
     "class": "door",
@@ -5569,7 +5897,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "340": {
     "class": "door",
@@ -5586,7 +5915,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "341": {
     "class": "door",
@@ -5603,7 +5933,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "342": {
     "class": "door",
@@ -5620,7 +5951,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "343": {
     "class": "door",
@@ -5637,7 +5969,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "344": {
     "class": "door",
@@ -5654,7 +5987,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "346": {
     "class": "door",
@@ -5671,7 +6005,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "347": {
     "class": "door",
@@ -5688,7 +6023,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "348": {
     "class": "door",
@@ -5705,7 +6041,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "349": {
     "class": "door",
@@ -5722,7 +6059,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "350": {
     "class": "door",
@@ -5739,7 +6077,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "351": {
     "class": "door",
@@ -5756,7 +6095,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "352": {
     "class": "door",
@@ -5773,7 +6113,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "353": {
     "class": "door",
@@ -5790,7 +6131,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "354": {
     "class": "door",
@@ -5807,7 +6149,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "355": {
     "class": "door",
@@ -5824,7 +6167,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "356": {
     "class": "door",
@@ -5841,7 +6185,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "357": {
     "class": "door",
@@ -5858,7 +6203,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "358": {
     "class": "door",
@@ -5875,7 +6221,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "359": {
     "class": "door",
@@ -5892,7 +6239,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "360": {
     "class": "door",
@@ -5909,7 +6257,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "361": {
     "class": "door",
@@ -5926,7 +6275,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "362": {
     "class": "door",
@@ -5943,7 +6293,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "363": {
     "class": "door",
@@ -5960,7 +6311,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "364": {
     "class": "door",
@@ -5977,7 +6329,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "365": {
     "class": "door",
@@ -5994,7 +6347,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "366": {
     "class": "door",
@@ -6011,7 +6365,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "367": {
     "class": "door",
@@ -6028,7 +6383,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "368": {
     "class": "door",
@@ -6045,7 +6401,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "369": {
     "class": "door",
@@ -6062,7 +6419,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "370": {
     "class": "door",
@@ -6079,7 +6437,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "371": {
     "class": "door",
@@ -6096,7 +6455,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "372": {
     "class": "door",
@@ -6113,7 +6473,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "373": {
     "class": "door",
@@ -6130,7 +6491,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "374": {
     "class": "door",
@@ -6147,7 +6509,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "375": {
     "class": "door",
@@ -6164,7 +6527,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "376": {
     "class": "door",
@@ -6181,7 +6545,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "377": {
     "class": "door",
@@ -6198,7 +6563,8 @@
     "screen_xy": [
       12,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "378": {
     "class": "door",
@@ -6215,7 +6581,8 @@
     "screen_xy": [
       6,
       12
-    ]
+    ],
+    "world_id": 1
   },
   "379": {
     "class": "door",
@@ -6232,7 +6599,8 @@
     "screen_xy": [
       6,
       3
-    ]
+    ],
+    "world_id": 1
   },
   "380": {
     "class": "door",
@@ -6249,7 +6617,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "381": {
     "class": "door",
@@ -6266,7 +6635,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "382": {
     "class": "door",
@@ -6283,7 +6653,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "383": {
     "class": "door",
@@ -6300,7 +6671,8 @@
     "screen_xy": [
       6,
       13
-    ]
+    ],
+    "world_id": 1
   },
   "384": {
     "class": "door",
@@ -6317,7 +6689,8 @@
     "screen_xy": [
       6,
       2
-    ]
+    ],
+    "world_id": 1
   },
   "385": {
     "class": "door",
@@ -6334,7 +6707,8 @@
     "screen_xy": [
       6,
       2
-    ]
+    ],
+    "world_id": 1
   },
   "386": {
     "class": "door",
@@ -6351,7 +6725,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "387": {
     "class": "door",
@@ -6368,7 +6743,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "388": {
     "class": "door",
@@ -6385,7 +6761,8 @@
     "screen_xy": [
       6,
       13
-    ]
+    ],
+    "world_id": 1
   },
   "389": {
     "class": "door",
@@ -6402,7 +6779,8 @@
     "screen_xy": [
       6,
       13
-    ]
+    ],
+    "world_id": 1
   },
   "390": {
     "class": "door",
@@ -6419,7 +6797,8 @@
     "screen_xy": [
       6,
       2
-    ]
+    ],
+    "world_id": 1
   },
   "391": {
     "class": "door",
@@ -6436,7 +6815,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "392": {
     "class": "door",
@@ -6453,7 +6833,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "393": {
     "class": "door",
@@ -6470,7 +6851,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "394": {
     "class": "door",
@@ -6487,7 +6869,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "395": {
     "class": "door",
@@ -6504,7 +6887,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "396": {
     "class": "door",
@@ -6521,7 +6905,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "397": {
     "class": "door",
@@ -6538,7 +6923,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "398": {
     "class": "door",
@@ -6555,7 +6941,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "399": {
     "class": "door",
@@ -6572,7 +6959,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "400": {
     "class": "door",
@@ -6589,7 +6977,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "401": {
     "class": "door",
@@ -6606,7 +6995,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "402": {
     "class": "door",
@@ -6623,7 +7013,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "403": {
     "class": "door",
@@ -6640,7 +7031,8 @@
     "screen_xy": [
       6,
       2
-    ]
+    ],
+    "world_id": 1
   },
   "404": {
     "class": "door",
@@ -6657,7 +7049,8 @@
     "screen_xy": [
       6,
       13
-    ]
+    ],
+    "world_id": 1
   },
   "405": {
     "class": "door",
@@ -6674,7 +7067,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "406": {
     "class": "door",
@@ -6691,7 +7085,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "408": {
     "class": "door",
@@ -6708,7 +7103,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "409": {
     "class": "door",
@@ -6725,7 +7121,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "410": {
     "class": "door",
@@ -6742,7 +7139,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "411": {
     "class": "door",
@@ -6759,7 +7157,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "412": {
     "class": "door",
@@ -6776,7 +7175,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "413": {
     "class": "door",
@@ -6793,7 +7193,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "414": {
     "class": "door",
@@ -6810,7 +7211,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "415": {
     "class": "door",
@@ -6827,7 +7229,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "416": {
     "class": "door",
@@ -6844,7 +7247,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "417": {
     "class": "door",
@@ -6861,7 +7265,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "418": {
     "class": "door",
@@ -6878,7 +7283,8 @@
     "screen_xy": [
       6,
       2
-    ]
+    ],
+    "world_id": 1
   },
   "419": {
     "class": "door",
@@ -6895,7 +7301,8 @@
     "screen_xy": [
       6,
       14
-    ]
+    ],
+    "world_id": 1
   },
   "420": {
     "class": "door",
@@ -6912,7 +7319,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "421": {
     "class": "door",
@@ -6929,7 +7337,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "422": {
     "class": "door",
@@ -6946,7 +7355,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "423": {
     "class": "door",
@@ -6963,7 +7373,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "424": {
     "class": "door",
@@ -6980,7 +7391,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "425": {
     "class": "door",
@@ -6997,7 +7409,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "426": {
     "class": "door",
@@ -7014,7 +7427,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "427": {
     "class": "door",
@@ -7031,7 +7445,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "428": {
     "class": "door",
@@ -7048,7 +7463,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "429": {
     "class": "door",
@@ -7065,7 +7481,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "430": {
     "class": "door",
@@ -7082,7 +7499,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "431": {
     "class": "door",
@@ -7099,7 +7517,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "432": {
     "class": "door",
@@ -7116,7 +7535,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "433": {
     "class": "door",
@@ -7133,7 +7553,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "434": {
     "class": "door",
@@ -7150,7 +7571,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "435": {
     "class": "door",
@@ -7167,7 +7589,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "436": {
     "class": "door",
@@ -7184,7 +7607,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "437": {
     "class": "door",
@@ -7201,7 +7625,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "438": {
     "class": "door",
@@ -7218,7 +7643,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "439": {
     "class": "door",
@@ -7235,7 +7661,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "440": {
     "class": "door",
@@ -7252,7 +7679,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "441": {
     "class": "door",
@@ -7269,7 +7697,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "442": {
     "class": "door",
@@ -7286,7 +7715,8 @@
     "screen_xy": [
       6,
       13
-    ]
+    ],
+    "world_id": 1
   },
   "443": {
     "class": "door",
@@ -7303,7 +7733,8 @@
     "screen_xy": [
       6,
       2
-    ]
+    ],
+    "world_id": 1
   },
   "444": {
     "class": "door",
@@ -7320,7 +7751,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "445": {
     "class": "door",
@@ -7337,7 +7769,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "446": {
     "class": "door",
@@ -7354,7 +7787,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "447": {
     "class": "door",
@@ -7371,7 +7805,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "448": {
     "class": "door",
@@ -7388,7 +7823,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "449": {
     "class": "door",
@@ -7405,7 +7841,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "450": {
     "class": "door",
@@ -7422,7 +7859,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "451": {
     "class": "door",
@@ -7439,7 +7877,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "452": {
     "class": "door",
@@ -7456,7 +7895,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "453": {
     "class": "door",
@@ -7473,7 +7913,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "454": {
     "class": "door",
@@ -7490,7 +7931,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "455": {
     "class": "door",
@@ -7507,7 +7949,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "456": {
     "class": "door",
@@ -7524,7 +7967,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "457": {
     "class": "door",
@@ -7541,7 +7985,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "459": {
     "class": "door",
@@ -7558,7 +8003,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "460": {
     "class": "door",
@@ -7575,7 +8021,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "461": {
     "class": "door",
@@ -7592,7 +8039,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "462": {
     "class": "door",
@@ -7609,7 +8057,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "463": {
     "class": "door",
@@ -7626,7 +8075,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "464": {
     "class": "door",
@@ -7643,7 +8093,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "465": {
     "class": "door",
@@ -7660,7 +8111,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "466": {
     "class": "door",
@@ -7677,7 +8129,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "467": {
     "class": "door",
@@ -7694,7 +8147,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "468": {
     "class": "door",
@@ -7711,7 +8165,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "469": {
     "class": "door",
@@ -7728,7 +8183,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "470": {
     "class": "door",
@@ -7745,7 +8201,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "471": {
     "class": "door",
@@ -7762,7 +8219,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "472": {
     "class": "door",
@@ -7779,7 +8237,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "473": {
     "class": "door",
@@ -7796,7 +8255,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "474": {
     "class": "door",
@@ -7813,7 +8273,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "475": {
     "class": "door",
@@ -7830,7 +8291,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "476": {
     "class": "door",
@@ -7847,7 +8309,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "477": {
     "class": "door",
@@ -7864,7 +8327,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "478": {
     "class": "door",
@@ -7881,7 +8345,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "479": {
     "class": "door",
@@ -7898,7 +8363,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "480": {
     "class": "door",
@@ -7915,7 +8381,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "481": {
     "class": "door",
@@ -7932,7 +8399,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "482": {
     "class": "door",
@@ -7949,7 +8417,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "483": {
     "class": "door",
@@ -7966,7 +8435,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "484": {
     "class": "door",
@@ -7983,7 +8453,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "485": {
     "class": "door",
@@ -8000,7 +8471,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "486": {
     "class": "door",
@@ -8017,7 +8489,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "487": {
     "class": "door",
@@ -8034,7 +8507,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "488": {
     "class": "door",
@@ -8051,7 +8525,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "489": {
     "class": "door",
@@ -8068,7 +8543,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "490": {
     "class": "door",
@@ -8085,7 +8561,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "491": {
     "class": "door",
@@ -8102,7 +8579,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "492": {
     "class": "door",
@@ -8119,7 +8597,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "493": {
     "class": "door",
@@ -8136,7 +8615,8 @@
     "screen_xy": [
       6,
       3
-    ]
+    ],
+    "world_id": 1
   },
   "494": {
     "class": "door",
@@ -8153,7 +8633,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "495": {
     "class": "door",
@@ -8170,7 +8651,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "496": {
     "class": "door",
@@ -8187,7 +8669,8 @@
     "screen_xy": [
       6,
       14
-    ]
+    ],
+    "world_id": 1
   },
   "497": {
     "class": "door",
@@ -8204,7 +8687,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "498": {
     "class": "door",
@@ -8221,7 +8705,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "499": {
     "class": "door",
@@ -8238,7 +8723,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "500": {
     "class": "door",
@@ -8255,7 +8741,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "501": {
     "class": "door",
@@ -8272,7 +8759,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "502": {
     "class": "door",
@@ -8289,7 +8777,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "503": {
     "class": "door",
@@ -8306,7 +8795,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "504": {
     "class": "door",
@@ -8323,7 +8813,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "505": {
     "class": "door",
@@ -8340,7 +8831,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "506": {
     "class": "door",
@@ -8357,7 +8849,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "507": {
     "class": "door",
@@ -8374,7 +8867,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "508": {
     "class": "door",
@@ -8391,7 +8885,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "509": {
     "class": "door",
@@ -8408,7 +8903,8 @@
     "screen_xy": [
       6,
       12
-    ]
+    ],
+    "world_id": 1
   },
   "510": {
     "class": "door",
@@ -8425,7 +8921,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "511": {
     "class": "door",
@@ -8442,7 +8939,8 @@
     "screen_xy": [
       6,
       3
-    ]
+    ],
+    "world_id": 1
   },
   "512": {
     "class": "door",
@@ -8459,7 +8957,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "513": {
     "class": "door",
@@ -8476,7 +8975,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "514": {
     "class": "door",
@@ -8493,7 +8993,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "515": {
     "class": "door",
@@ -8510,7 +9011,8 @@
     "screen_xy": [
       6,
       13
-    ]
+    ],
+    "world_id": 1
   },
   "516": {
     "class": "door",
@@ -8527,7 +9029,8 @@
     "screen_xy": [
       6,
       2
-    ]
+    ],
+    "world_id": 1
   },
   "517": {
     "class": "door",
@@ -8544,7 +9047,8 @@
     "screen_xy": [
       6,
       13
-    ]
+    ],
+    "world_id": 1
   },
   "518": {
     "class": "door",
@@ -8561,7 +9065,8 @@
     "screen_xy": [
       6,
       2
-    ]
+    ],
+    "world_id": 1
   },
   "519": {
     "class": "door",
@@ -8578,7 +9083,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "520": {
     "class": "door",
@@ -8595,7 +9101,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "522": {
     "class": "door",
@@ -8612,7 +9119,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "523": {
     "class": "door",
@@ -8629,7 +9137,8 @@
     "screen_xy": [
       6,
       13
-    ]
+    ],
+    "world_id": 1
   },
   "524": {
     "class": "door",
@@ -8646,7 +9155,8 @@
     "screen_xy": [
       6,
       2
-    ]
+    ],
+    "world_id": 1
   },
   "525": {
     "class": "door",
@@ -8663,7 +9173,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "526": {
     "class": "door",
@@ -8680,7 +9191,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "527": {
     "class": "door",
@@ -8697,7 +9209,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "528": {
     "class": "door",
@@ -8714,7 +9227,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "529": {
     "class": "door",
@@ -8731,7 +9245,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "530": {
     "class": "door",
@@ -8748,7 +9263,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "531": {
     "class": "door",
@@ -8765,7 +9281,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "532": {
     "class": "door",
@@ -8782,7 +9299,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "533": {
     "class": "door",
@@ -8799,7 +9317,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "534": {
     "class": "door",
@@ -8816,7 +9335,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "535": {
     "class": "door",
@@ -8833,7 +9353,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "536": {
     "class": "door",
@@ -8850,7 +9371,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "537": {
     "class": "door",
@@ -8867,7 +9389,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "538": {
     "class": "door",
@@ -8884,7 +9407,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "539": {
     "class": "door",
@@ -8901,7 +9425,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "540": {
     "class": "door",
@@ -8918,7 +9443,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "541": {
     "class": "door",
@@ -8935,7 +9461,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "542": {
     "class": "door",
@@ -8952,7 +9479,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "543": {
     "class": "door",
@@ -8969,7 +9497,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "544": {
     "class": "door",
@@ -8986,7 +9515,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "545": {
     "class": "door",
@@ -9003,7 +9533,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "546": {
     "class": "door",
@@ -9020,7 +9551,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "547": {
     "class": "door",
@@ -9037,7 +9569,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "548": {
     "class": "door",
@@ -9054,7 +9587,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "549": {
     "class": "door",
@@ -9071,7 +9605,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "550": {
     "class": "door",
@@ -9088,7 +9623,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "551": {
     "class": "door",
@@ -9105,7 +9641,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "552": {
     "class": "door",
@@ -9122,7 +9659,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "553": {
     "class": "door",
@@ -9139,7 +9677,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "554": {
     "class": "door",
@@ -9156,7 +9695,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "555": {
     "class": "door",
@@ -9173,7 +9713,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "556": {
     "class": "door",
@@ -9190,7 +9731,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "557": {
     "class": "door",
@@ -9207,7 +9749,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "558": {
     "class": "door",
@@ -9224,7 +9767,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "559": {
     "class": "door",
@@ -9241,7 +9785,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "560": {
     "class": "door",
@@ -9258,7 +9803,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "561": {
     "class": "door",
@@ -9275,7 +9821,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "562": {
     "class": "door",
@@ -9292,7 +9839,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "563": {
     "class": "door",
@@ -9309,7 +9857,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "564": {
     "class": "door",
@@ -9326,7 +9875,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "565": {
     "class": "door",
@@ -9343,7 +9893,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "566": {
     "class": "door",
@@ -9360,7 +9911,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "567": {
     "class": "door",
@@ -9377,7 +9929,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "568": {
     "class": "door",
@@ -9394,7 +9947,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "569": {
     "class": "door",
@@ -9411,7 +9965,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "570": {
     "class": "door",
@@ -9428,7 +9983,8 @@
     "screen_xy": [
       6,
       13
-    ]
+    ],
+    "world_id": 1
   },
   "571": {
     "class": "door",
@@ -9445,7 +10001,8 @@
     "screen_xy": [
       6,
       2
-    ]
+    ],
+    "world_id": 1
   },
   "572": {
     "class": "door",
@@ -9462,7 +10019,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "573": {
     "class": "door",
@@ -9479,7 +10037,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "574": {
     "class": "door",
@@ -9496,7 +10055,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "575": {
     "class": "door",
@@ -9513,7 +10073,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "576": {
     "class": "door",
@@ -9530,7 +10091,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "577": {
     "class": "door",
@@ -9547,7 +10109,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "578": {
     "class": "door",
@@ -9564,7 +10127,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "579": {
     "class": "door",
@@ -9581,7 +10145,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "580": {
     "class": "door",
@@ -9598,7 +10163,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "581": {
     "class": "door",
@@ -9615,7 +10181,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "582": {
     "class": "door",
@@ -9632,7 +10199,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "583": {
     "class": "door",
@@ -9649,7 +10217,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "584": {
     "class": "door",
@@ -9666,7 +10235,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "585": {
     "class": "door",
@@ -9683,7 +10253,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "586": {
     "class": "door",
@@ -9700,7 +10271,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "587": {
     "class": "door",
@@ -9717,7 +10289,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "588": {
     "class": "door",
@@ -9734,7 +10307,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "589": {
     "class": "door",
@@ -9751,7 +10325,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "590": {
     "class": "door",
@@ -9768,7 +10343,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "591": {
     "class": "door",
@@ -9785,7 +10361,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "592": {
     "class": "door",
@@ -9802,7 +10379,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "593": {
     "class": "door",
@@ -9819,7 +10397,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "594": {
     "class": "door",
@@ -9836,7 +10415,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "595": {
     "class": "door",
@@ -9853,7 +10433,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "596": {
     "class": "door",
@@ -9870,7 +10451,8 @@
     "screen_xy": [
       6,
       2
-    ]
+    ],
+    "world_id": 1
   },
   "597": {
     "class": "door",
@@ -9887,7 +10469,8 @@
     "screen_xy": [
       6,
       13
-    ]
+    ],
+    "world_id": 1
   },
   "598": {
     "class": "door",
@@ -9904,7 +10487,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "599": {
     "class": "door",
@@ -9921,7 +10505,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "600": {
     "class": "door",
@@ -9938,7 +10523,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "601": {
     "class": "door",
@@ -9955,7 +10541,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "602": {
     "class": "door",
@@ -9972,7 +10559,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "603": {
     "class": "door",
@@ -9989,7 +10577,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "604": {
     "class": "door",
@@ -10006,7 +10595,8 @@
     "screen_xy": [
       6,
       2
-    ]
+    ],
+    "world_id": 1
   },
   "605": {
     "class": "door",
@@ -10023,7 +10613,8 @@
     "screen_xy": [
       6,
       13
-    ]
+    ],
+    "world_id": 1
   },
   "606": {
     "class": "door",
@@ -10040,7 +10631,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "607": {
     "class": "door",
@@ -10057,7 +10649,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "608": {
     "class": "door",
@@ -10074,7 +10667,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "609": {
     "class": "door",
@@ -10091,7 +10685,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "610": {
     "class": "door",
@@ -10108,7 +10703,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "611": {
     "class": "door",
@@ -10125,7 +10721,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "612": {
     "class": "door",
@@ -10142,7 +10739,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "613": {
     "class": "door",
@@ -10159,7 +10757,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "614": {
     "class": "door",
@@ -10176,7 +10775,8 @@
     "screen_xy": [
       6,
       13
-    ]
+    ],
+    "world_id": 1
   },
   "615": {
     "class": "door",
@@ -10193,7 +10793,8 @@
     "screen_xy": [
       6,
       2
-    ]
+    ],
+    "world_id": 1
   },
   "616": {
     "class": "door",
@@ -10210,7 +10811,8 @@
     "screen_xy": [
       6,
       13
-    ]
+    ],
+    "world_id": 1
   },
   "617": {
     "class": "door",
@@ -10227,7 +10829,8 @@
     "screen_xy": [
       6,
       2
-    ]
+    ],
+    "world_id": 1
   },
   "618": {
     "class": "door",
@@ -10244,7 +10847,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "619": {
     "class": "door",
@@ -10261,7 +10865,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "620": {
     "class": "door",
@@ -10278,7 +10883,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "621": {
     "class": "door",
@@ -10295,7 +10901,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "622": {
     "class": "door",
@@ -10312,7 +10919,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "623": {
     "class": "door",
@@ -10329,7 +10937,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "624": {
     "class": "door",
@@ -10346,7 +10955,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "625": {
     "class": "door",
@@ -10363,7 +10973,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "626": {
     "class": "door",
@@ -10380,7 +10991,8 @@
     "screen_xy": [
       6,
       13
-    ]
+    ],
+    "world_id": 1
   },
   "627": {
     "class": "door",
@@ -10397,7 +11009,8 @@
     "screen_xy": [
       6,
       2
-    ]
+    ],
+    "world_id": 1
   },
   "628": {
     "class": "door",
@@ -10414,7 +11027,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "629": {
     "class": "door",
@@ -10431,7 +11045,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "630": {
     "class": "door",
@@ -10448,7 +11063,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "631": {
     "class": "door",
@@ -10465,7 +11081,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "632": {
     "class": "door",
@@ -10482,7 +11099,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "633": {
     "class": "door",
@@ -10499,7 +11117,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "634": {
     "class": "door",
@@ -10516,7 +11135,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "635": {
     "class": "door",
@@ -10533,7 +11153,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "636": {
     "class": "door",
@@ -10550,7 +11171,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "637": {
     "class": "door",
@@ -10567,7 +11189,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "638": {
     "class": "door",
@@ -10584,7 +11207,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "639": {
     "class": "door",
@@ -10601,7 +11225,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "640": {
     "class": "door",
@@ -10618,7 +11243,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "641": {
     "class": "door",
@@ -10635,7 +11261,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "642": {
     "class": "door",
@@ -10652,7 +11279,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "643": {
     "class": "door",
@@ -10669,7 +11297,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "644": {
     "class": "door",
@@ -10686,7 +11315,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "645": {
     "class": "door",
@@ -10703,7 +11333,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "646": {
     "class": "door",
@@ -10720,7 +11351,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "647": {
     "class": "door",
@@ -10737,7 +11369,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "648": {
     "class": "door",
@@ -10754,7 +11387,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "649": {
     "class": "door",
@@ -10771,7 +11405,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "650": {
     "class": "door",
@@ -10788,7 +11423,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "651": {
     "class": "door",
@@ -10805,7 +11441,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "652": {
     "class": "door",
@@ -10822,7 +11459,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "653": {
     "class": "door",
@@ -10839,7 +11477,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "654": {
     "class": "door",
@@ -10856,7 +11495,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "655": {
     "class": "door",
@@ -10873,7 +11513,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "656": {
     "class": "door",
@@ -10890,7 +11531,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "657": {
     "class": "door",
@@ -10907,7 +11549,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "658": {
     "class": "door",
@@ -10924,7 +11567,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "659": {
     "class": "door",
@@ -10941,7 +11585,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "660": {
     "class": "door",
@@ -10958,7 +11603,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "661": {
     "class": "door",
@@ -10975,7 +11621,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "662": {
     "class": "door",
@@ -10992,7 +11639,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "663": {
     "class": "door",
@@ -11009,7 +11657,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "664": {
     "class": "door",
@@ -11026,7 +11675,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "665": {
     "class": "door",
@@ -11043,7 +11693,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "666": {
     "class": "door",
@@ -11060,7 +11711,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "667": {
     "class": "door",
@@ -11077,7 +11729,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "668": {
     "class": "door",
@@ -11094,7 +11747,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "669": {
     "class": "door",
@@ -11111,7 +11765,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "670": {
     "class": "door",
@@ -11128,7 +11783,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "671": {
     "class": "door",
@@ -11145,7 +11801,8 @@
     "screen_xy": [
       6,
       13
-    ]
+    ],
+    "world_id": 1
   },
   "672": {
     "class": "door",
@@ -11162,7 +11819,8 @@
     "screen_xy": [
       6,
       2
-    ]
+    ],
+    "world_id": 1
   },
   "673": {
     "class": "door",
@@ -11179,7 +11837,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "674": {
     "class": "door",
@@ -11196,7 +11855,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "675": {
     "class": "door",
@@ -11213,7 +11873,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "676": {
     "class": "door",
@@ -11230,7 +11891,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "677": {
     "class": "door",
@@ -11247,7 +11909,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "678": {
     "class": "door",
@@ -11264,7 +11927,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "679": {
     "class": "door",
@@ -11281,7 +11945,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "680": {
     "class": "door",
@@ -11298,7 +11963,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "681": {
     "class": "door",
@@ -11315,7 +11981,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "682": {
     "class": "door",
@@ -11332,7 +11999,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "683": {
     "class": "door",
@@ -11349,7 +12017,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "684": {
     "class": "door",
@@ -11366,7 +12035,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "685": {
     "class": "door",
@@ -11383,7 +12053,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "686": {
     "class": "door",
@@ -11400,7 +12071,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "687": {
     "class": "door",
@@ -11417,7 +12089,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "688": {
     "class": "door",
@@ -11434,7 +12107,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "689": {
     "class": "door",
@@ -11451,7 +12125,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "690": {
     "class": "door",
@@ -11468,7 +12143,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "691": {
     "class": "door",
@@ -11485,7 +12161,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "692": {
     "class": "door",
@@ -11502,7 +12179,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "693": {
     "class": "door",
@@ -11519,7 +12197,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "694": {
     "class": "door",
@@ -11536,7 +12215,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "695": {
     "class": "door",
@@ -11553,7 +12233,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "696": {
     "class": "door",
@@ -11570,7 +12251,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "697": {
     "class": "door",
@@ -11587,7 +12269,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "698": {
     "class": "door",
@@ -11604,7 +12287,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "699": {
     "class": "door",
@@ -11621,7 +12305,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "700": {
     "class": "door",
@@ -11638,7 +12323,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "701": {
     "class": "door",
@@ -11655,7 +12341,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "702": {
     "class": "door",
@@ -11672,7 +12359,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "703": {
     "class": "door",
@@ -11689,7 +12377,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "704": {
     "class": "door",
@@ -11706,7 +12395,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "705": {
     "class": "door",
@@ -11723,7 +12413,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "706": {
     "class": "door",
@@ -11740,7 +12431,8 @@
     "screen_xy": [
       1,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "707": {
     "class": "door",
@@ -11757,7 +12449,8 @@
     "screen_xy": [
       14,
       6
-    ]
+    ],
+    "world_id": 1
   },
   "708": {
     "class": "door",
@@ -11774,66 +12467,7 @@
     "screen_xy": [
       1,
       6
-    ]
-  },
-  "709": {
-    "class": "item",
-    "world_xy": [
-      7,
-      41
     ],
-    "screen_xy": [
-      7,
-      13
-    ],
-    "width": 1,
-    "height": 1,
-    "type": "varia-suit",
-    "id": 709
-  },
-  "710": {
-    "class": "item",
-    "world_xy": [
-      12,
-      42
-    ],
-    "screen_xy": [
-      6,
-      5
-    ],
-    "width": 1,
-    "height": 1,
-    "type": "missile",
-    "id": 710
-  },
-  "711": {
-    "class": "item",
-    "world_xy": [
-      12,
-      42
-    ],
-    "screen_xy": [
-      0,
-      14
-    ],
-    "width": 1,
-    "height": 1,
-    "type": "missile",
-    "id": 711
-  },
-  "712": {
-    "class": "item",
-    "world_xy": [
-      10,
-      42
-    ],
-    "screen_xy": [
-      14,
-      13
-    ],
-    "width": 1,
-    "height": 1,
-    "type": "missile",
-    "id": 712
+    "world_id": 1
   }
 }

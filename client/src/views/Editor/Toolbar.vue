@@ -1,13 +1,9 @@
 <template>
   <div class="viewer-toolbar">
-    <div
-      v-for="tool in tools"
-      :key="tool.name"
-      :title="tool.name"
-      @click="selectTool(tool)"
-      :class="css.tool(tool)"
-    >
-      <i :class="tool.icon" />
+    <div v-for="tool in tools" :key="tool.name" class="viewer-toolbar__tool">
+      <div :title="tool.name" @click="selectTool(tool)" :class="css.tool(tool)">
+        <i :class="tool.icon" />
+      </div>
       <div v-if="tool.children" class="viewer-toolbar__children">
         <div
           v-for="child in tool.children"
@@ -52,7 +48,7 @@ export default {
           if (tool.selected !== undefined) {
             selected = selected && tool.selected
           }
-          return `btn viewer-toolbar__tool ${selected ? '-primary' : '-secondary'}`
+          return `btn ${selected ? '-primary' : '-secondary'}`
         },
       }
     },
@@ -81,24 +77,28 @@ export default {
   },
   methods: {
     selectTool(tool) {
-      this.$store.viewer.patch({ selected_tool: tool.slug, ...tool.extra_state })
+      const data = { selected_tool: tool.slug }
+      if (tool.variant) {
+        data[tool.slug + '_tool'] = tool.variant
+      }
+      this.$store.viewer.patch(data)
     },
     makeTool(slug, children) {
       const selected_child = this.$store.viewer.state[slug + '_tool']
       const { selected_tool } = this.$store.viewer.state
       const selected = slug === selected_tool && children.includes(selected_child)
-      const active_child = selected ? selected_child : children[0]
+      const variant = selected ? selected_child : children[0]
       return {
         slug,
         selected,
-        extra_state: { [slug + '_tool']: active_child },
+        variant,
         name: slug[0].toUpperCase() + slug.slice(1),
-        icon: `sm-${slug} -${active_child}`,
+        icon: `sm-${slug} -${variant}`,
         children: children?.map((child_slug) => ({
           slug: child_slug,
           class: `sm-${slug} -${child_slug}`,
           btn: ['btn', selected_child === child_slug ? '-primary' : '-secondary'],
-          click: () => this.$store.viewer.patch({ [slug + '_tool']: child_slug }),
+          click: () => this.selectTool({ slug, variant: child_slug }),
         })),
       }
     },

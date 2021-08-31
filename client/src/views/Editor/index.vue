@@ -14,7 +14,7 @@
       <toolbar :world="world" />
     </template>
     <selected-room v-if="$store.viewer.getSelectedRoom()" _scale="_scale" />
-    <item-panel v-else :viewer="viewer" />
+    <item-panel v-else :viewer="viewer" :world="world" />
   </div>
 </template>
 
@@ -41,11 +41,11 @@ export default {
       return this.$store.viewer.state.selected_item
     },
     items() {
-      return this.$store.item.getAll()
+      return this.$store.item.getAll({ world_id: this.world.id })
     },
     screens() {
       let out = []
-      const rooms = this.$store.room.getAll().slice()
+      const rooms = this.$store.room.getAll({ world_id: this.world.id }).slice()
       const { draft_room } = this.$store.viewer.state
       if (draft_room) {
         rooms.push(draft_room)

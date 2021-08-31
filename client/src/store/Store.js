@@ -12,7 +12,7 @@ const prepareItem = ({ ...item }, getNextId) => {
 export default (name, initial) => {
   const store = LocalStorage(name, { prepareItem, initial })
 
-  store.getAll = () => store.getPage({ per_page: 1e9 })?.items || []
+  store.getAll = (query) => store.getPage({ per_page: 1e9, query })?.items || []
   window['_download' + name[0].toUpperCase() + name.slice(1)] = store.downloadJson = () => {
     const data = {}
     store.getAll().forEach((i) => (data[i.id] = i))

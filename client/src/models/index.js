@@ -21,4 +21,4 @@ export const map_markers = [
   'ship',
 ]
 
-export const doors = ['blue', 'green', 'red', 'orange', 'purple', 'brown', 'eye']
+export const doors = ['blue', 'green', 'red', 'orange', 'purple', 'brown', 'eye', 'elevator']
