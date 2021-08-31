@@ -4,6 +4,7 @@
       <open-seadragon :pixelated="true" :options="viewer_options" :events="viewer_events" />
       <template v-if="viewer">
         <html-overlay :viewer="viewer" :world="world" :screens="screens" :items="visible_items" />
+        <svg-overlay :viewer="viewer" :world="world" :arrows="arrows" />
       </template>
     </div>
   </div>
@@ -13,6 +14,7 @@
 import Mousetrap from '@unrest/vue-mousetrap'
 
 import HtmlOverlay from './HtmlOverlay.vue'
+import SvgOverlay from './SvgOverlay.vue'
 import ViewerMixin from './Mixin'
 import WorldMixin from './WorldMixin'
 import Room from '@/models/Room'
@@ -21,7 +23,7 @@ export default {
   __route: {
     path: '/viewer/:world_id',
   },
-  components: { HtmlOverlay },
+  components: { HtmlOverlay, SvgOverlay },
   mixins: [ViewerMixin, WorldMixin, Mousetrap.Mixin],
   computed: {
     screens() {
@@ -53,6 +55,9 @@ export default {
       return {
         'up,down,left,right': (e) => this.move(e),
       }
+    },
+    arrows() {
+      return this.game.getArrows()
     },
   },
   methods: {

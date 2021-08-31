@@ -17,6 +17,7 @@ class Game {
       screens: {},
       rooms: {},
       actions: [],
+      xys: [],
       xy: null,
     }
 
@@ -71,23 +72,51 @@ class Game {
   }
   start() {
     // TODO use wordl.start_xy instead of item.type === 'ship'
-    const ship = this.getItemsByType('ship')?.[0]
-    this.goto(ship.world_xy)
+    if (this.playthrough.actions.length) {
+      this.playthrough.actions.forEach(([action, ...args]) => {
+        this[action](...args)
+      })
+    } else {
+      const ship = this.getItemsByType('ship')?.[0]
+      this.goto([...ship.world_xy])
+    }
   }
   move(direction) {
     this.goto(vec.add(this.state.xy, DIRECTIONS[direction]))
   }
   goto(xy) {
-    this.playthrough.actions.push(['goto', xy])
     const new_room = this.getRoomByXY(xy)
     if (!new_room) {
       return
     }
+    this.playthrough.actions.push(['goto', xy])
+    this.state.xys.push(xy)
     this.state.xy = xy
     if (new_room !== this.state.room) {
       this.state.room = new_room
       this.emit('goto-room', new_room)
     }
+  }
+  getArrows() {
+    let last_xy = this.state.xys[0]
+    return this.state.xys.slice(1).map((xy) => {
+      const [x1, y1] = last_xy
+      const [x2, y2] = xy
+      last_xy = xy
+      const arrow = { x1, y1, x2, y2 }
+
+      // arrows should start and end from center of box
+      arrow.x1 += 0.5
+      arrow.x2 += 0.5
+      arrow.y1 += 0.5
+      arrow.y2 += 0.5
+      if (x1 === x2) {
+        arrow['marker-end'] = `url(#arrowhead-${y1 > y2 ? 'up' : 'down'})`
+      } else {
+        arrow['marker-end'] = `url(#arrowhead-${x1 > x2 ? 'left' : 'right'})`
+      }
+      return arrow
+    })
   }
 }
 
