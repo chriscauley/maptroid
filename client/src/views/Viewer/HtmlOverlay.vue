@@ -72,12 +72,6 @@ export default {
     this.viewer.addOverlay(this.$el, new OpenSeadragon.Rect(0, 0, 1, 1))
     const { x, y } = this.viewer.world.getItemAt(0).getContentSize()
     this.SIZE = Math.max(x, y)
-    const W = x / this.world.map_screen_size
-    const H = y / this.world.map_screen_size
-    if (this.world.H !== H || this.world.W !== W) {
-      Object.assign(this.world, { W, H })
-      this.$store.world.save(this.world)
-    }
     // this.viewer.addHandler('animation-finish', () => {
     //   this.border_width = this.viewer.viewport.imageToViewportCoordinates(new Point(2, 2)).x
     // })

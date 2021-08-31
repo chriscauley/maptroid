@@ -1,7 +1,7 @@
 <template>
   <div class="flex-grow">
     <div class="viewer-wrapper" v-if="world">
-      <open-seadragon :pixelated="true" :options="options" :events="events" />
+      <open-seadragon :pixelated="true" :options="viewer_options" :events="viewer_events" />
       <template v-if="viewer">
         <html-overlay :viewer="viewer" :world="world" :screens="screens" :items="visible_items" />
       </template>
@@ -30,7 +30,9 @@ export default {
         }
         out.push({ x: xy[0], y: xy[1], css: '-color-black' })
       })
-      const { W, H } = this.world
+      const { x, y } = this.viewer.world.getItemAt(0).getContentSize()
+      const W = x / this.world.map_screen_size
+      const H = y / this.world.map_screen_size
       const [min_x, min_y] = this.visible_xys[0]
       const [max_x, max_y] = this.visible_xys[this.visible_xys.length - 1].map((n) => n + 1)
       const width = max_x - min_x
