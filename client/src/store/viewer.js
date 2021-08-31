@@ -10,33 +10,40 @@ export default ({ store }) => {
     selected_room_id: null,
     map_style: 'full',
     map_tool: 'save',
-    rando: null,
     zoom: 1,
   })
-  const getMousePoint = () => {
-    const { selected_tool, pointer } = state
-    const { x, y } = pointer || { x: 0, y: 0 }
-    const scale = selected_tool === 'room' ? 256 : 16
-    return {
-      scale,
-      x: Math.floor(x / scale),
-      y: Math.floor(y / scale),
-    }
-  }
   const getSelectedRoom = () => {
     const id = state.selected_room_id
     return id ? store.room.getOne(id) : state.draft_room
   }
+
+  const getPointer = (scale = 1) => {
+    const start = state.drag_start || state.pointer
+    if (!start) {
+      return {}
+    }
+    const end = state.drag_end || { x: start.x, y: start.y }
+    const [x1, y1, x2, y2] = [start.x, start.y, end.x + scale, end.y + scale].map(
+      (i) => scale * Math.floor(i / scale),
+    )
+
+    const x = Math.min(x1, x2)
+    const y = Math.min(y1, y2)
+    const width = Math.abs(x1 - x2)
+    const height = Math.abs(y1 - y2)
+    return { x, y, width, height }
+  }
+
   return {
     state,
-    getMousePoint,
     getSelectedRoom,
+    getPointer,
     patch: (new_state) => {
       Object.assign(state, new_state)
     },
-    clickRoom: () => {
+    clickRoom: (scale) => {
       const { room_tool } = state
-      const { x, y } = getMousePoint()
+      const { x, y } = getPointer(scale)
       let room = getSelectedRoom()
       if (!room) {
         room = state.draft_room = {
@@ -50,29 +57,10 @@ export default ({ store }) => {
       } else {
         room.xys.push([x, y])
       }
-
-      // TODO for some reason HtmlOverlay does not react to room.xys.push
-      state.rando = Math.random()
     },
     unSelectRoom() {
       delete state.selected_room_id
       delete state.draft_room
-    },
-    get pointer() {
-      const start = state.drag_start || state.pointer
-      if (!start) {
-        return {}
-      }
-      const end = state.drag_end || { x: start.x, y: start.y }
-      const [x1, y1, x2, y2] = [start.x, start.y, end.x + 16, end.y + 16].map(
-        (i) => 16 * Math.floor(i / 16),
-      )
-
-      const x = Math.min(x1, x2)
-      const y = Math.min(y1, y2)
-      const width = Math.abs(x1 - x2)
-      const height = Math.abs(y1 - y2)
-      return { x, y, width, height }
     },
   }
 }

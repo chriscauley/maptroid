@@ -9,7 +9,11 @@ export default {
       viewer: null,
       overzoomed: false,
       current_room: null,
-      events: {
+    }
+  },
+  computed: {
+    viewer_events() {
+      return {
         open: (event) => {
           this.viewer = event.eventSource
           const p = new OpenSeadragon.Point(2, 2)
@@ -25,9 +29,11 @@ export default {
           drawer.context.imageSmoothingEnabled = !this.overzoomed
           this.$store.viewer.patch({ zoom: viewport.getZoom() })
         },
-      },
-      options: {
-        tileSources: ['/output/SuperMetroidMapZebes.dzi'],
+      }
+    },
+    viewer_options() {
+      return {
+        tileSources: [this.world.dzi], // from WorldMixin
         // tileSources: { type: 'image', url: 'SuperMetroidMapZebes.png' },
         maxZoomPixelRatio: 8,
         showNavigator: true,
@@ -42,10 +48,8 @@ export default {
           dblClickToZoom: false,
         },
         ...this.getViewerOptions(),
-      },
-    }
-  },
-  computed: {
+      }
+    },
     viewer_class() {
       return ['viewer-wrapper', { '-overzoomed': this.overzoomed }]
     },

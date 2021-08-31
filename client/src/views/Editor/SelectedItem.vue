@@ -57,14 +57,14 @@ export default {
       this.$store.item.save(this.item)
     },
     deleteItem(e) {
-      if (e.ctrlKey) {
-        this.$store.item.delete(this.item)
-        this.close()
-        return
-      }
       const confirmDelete = () => {
         this.$ui.alert()
         this.$store.item.delete(this.item)
+        this.close()
+      }
+      if (e.ctrlKey) {
+        confirmDelete()
+        return
       }
       this.$ui.alert({
         text: 'Are you sure?',

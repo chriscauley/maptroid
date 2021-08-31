@@ -9,7 +9,8 @@ Image.MAX_IMAGE_PIXELS = 933120000
 
 import deepzoom
 
-name = 'SuperMetroidMapZebes'
+name = 'SuperZeroMission'
+
 
 # Specify your source image
 SOURCE = f"client/public/{name}.png"
@@ -24,4 +25,4 @@ creator = deepzoom.ImageCreator(
 )
 
 # Create Deep Zoom image pyramid from source
-creator.create(SOURCE, "client/public/output/{name}.dzi")
+creator.create(SOURCE, f"client/public/output/{name}.dzi")

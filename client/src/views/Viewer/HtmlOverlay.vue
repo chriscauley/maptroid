@@ -24,14 +24,9 @@ export default {
   },
   computed: {
     ui_box() {
-      const { x, y, width, height } = this.$store.viewer.pointer
+      const { x, y, width, height } = this.$store.viewer.getPointer(this.world.map_item_size)
       return {
-        style: this._scale({
-          left: x,
-          top: y,
-          width,
-          height,
-        }),
+        style: this._scale({ x, y, width, height }),
         class: 'osd__drag-box',
       }
     },
@@ -60,7 +55,7 @@ export default {
           item,
           attrs: {
             class: ['html-overlay__screen-mask', item.class],
-            style: this._scale({ x, y, width, height }, 256),
+            style: this._scale({ x, y, width, height }, this.world.map_screen_size),
             onClick: item.onClick,
           },
         }

@@ -27,19 +27,16 @@ const Room = {
     const y2 = Math.max(...ys)
     return [x1, y1, x2 - x1 + 1, y2 - y1 + 1]
   },
-  getMapBounds(room) {
-    return Room.getBounds(room).map((i) => i * 256)
+  getMapBounds(room, world) {
+    return Room.getBounds(room).map((i) => i * world.map_screen_size)
   },
   makeRoom(room, { map_style = 'off', onClick, selected }) {
     if (map_style === 'off') {
       return []
     }
     const { area } = room
-    const xy2i = (xy) => xy[0] + xy[1] * 66
     const _xys = {}
-    room.xys.forEach((xy) => {
-      _xys[xy2i(xy)] = true
-    })
+    room.xys.forEach((xy) => (_xys[xy] = true))
     return room.xys.map(([x, y]) => {
       return {
         id: `screen-${x}_${y}`,
@@ -50,10 +47,10 @@ const Room = {
         class: [
           `sm-room -absolute -${area} -style-${map_style}`,
           {
-            br0: _xys[xy2i([x + 1, y])],
-            bl0: _xys[xy2i([x - 1, y])],
-            bb0: _xys[xy2i([x, y + 1])],
-            bt0: _xys[xy2i([x, y - 1])],
+            br0: _xys[[x + 1, y]],
+            bl0: _xys[[x - 1, y]],
+            bb0: _xys[[x, y + 1]],
+            bt0: _xys[[x, y - 1]],
             '-selected': selected,
           },
         ],

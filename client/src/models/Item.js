@@ -37,15 +37,15 @@ const _schema = {
 
 export default {
   _schema,
-  getMapBounds(item, _world) {
-    // TODO 256 and 16 should be on world, not constants
+  getMapBounds(item, world) {
     const [world_x, world_y] = item.world_xy
     const [screen_x, screen_y] = item.screen_xy
+    const { map_screen_size, map_item_size } = world
     return {
-      x: world_x * 256 + screen_x * 16,
-      y: world_y * 256 + screen_y * 16,
-      width: item.width * 16,
-      height: item.height * 16,
+      x: world_x * map_screen_size + screen_x * map_item_size,
+      y: world_y * map_screen_size + screen_y * map_item_size,
+      width: item.width * map_item_size,
+      height: item.height * map_item_size,
     }
   },
   all,

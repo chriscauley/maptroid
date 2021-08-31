@@ -40,6 +40,9 @@ import Item from '@/models/Item'
 import { map_markers, doors } from '@/models'
 
 export default {
+  props: {
+    world: Object,
+  },
   computed: {
     css() {
       const { selected_tool } = this.$store.viewer.state
@@ -71,8 +74,9 @@ export default {
       if (!pointer) {
         return
       }
-      const [x, y] = [pointer.x, pointer.y].map((i) => Math.floor(i / 16))
-      return [`${x}x${y}`, `${x / 16}x${y / 16}`]
+      const { map_item_size } = this.world
+      const [x, y] = [pointer.x, pointer.y].map((i) => Math.floor(i / map_item_size))
+      return [`${x}x${y}`, `${x / map_item_size}x${y / map_item_size}`]
     },
   },
   methods: {

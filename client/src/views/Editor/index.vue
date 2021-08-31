@@ -1,11 +1,17 @@
 <template>
-  <div :class="[viewer_class, 'map-editor']">
-    <open-seadragon :pixelated="true" :options="options" :events="events" />
+  <div :class="[viewer_class, 'map-editor']" v-if="world">
+    <open-seadragon :pixelated="true" :options="viewer_options" :events="viewer_events" />
     <template v-if="viewer">
-      <html-overlay :viewer="viewer" :screens="screens" :items="items" @click-item="clickItem" />
+      <html-overlay
+        :viewer="viewer"
+        :world="world"
+        :screens="screens"
+        :items="items"
+        @click-item="clickItem"
+      />
       <selected-item :viewer="viewer" v-if="selected_item" :key="selected_item" />
-      <mouse-tracker :viewer="viewer" />
-      <toolbar />
+      <mouse-tracker :viewer="viewer" :world="world" />
+      <toolbar :world="world" />
     </template>
     <selected-room v-if="$store.viewer.getSelectedRoom()" _scale="_scale" />
     <item-panel v-else :viewer="viewer" />
@@ -20,15 +26,16 @@ import SelectedRoom from './SelectedRoom.vue'
 import Toolbar from './Toolbar.vue'
 import HtmlOverlay from '../Viewer/HtmlOverlay.vue'
 import ViewerMixin from '../Viewer/Mixin'
+import WorldMixin from '../Viewer/WorldMixin'
 
 import Room from '@/models/Room'
 
 export default {
   __route: {
-    path: '/editor/',
+    path: '/editor/:world_id/',
   },
   components: { HtmlOverlay, ItemPanel, MouseTracker, SelectedItem, SelectedRoom, Toolbar },
-  mixins: [ViewerMixin],
+  mixins: [ViewerMixin, WorldMixin],
   computed: {
     selected_item() {
       return this.$store.viewer.state.selected_item
@@ -44,7 +51,6 @@ export default {
         rooms.push(draft_room)
       }
       const { map_style, selected_room_id } = this.$store.viewer.state
-      this.$store.viewer.state.rando // eslint-disable-line
       rooms.forEach((room) => {
         const onClick = () => this.$store.viewer.patch({ selected_room_id: room.id })
         const selected = room.id === selected_room_id
@@ -57,6 +63,7 @@ export default {
     clickItem(item) {
       this.$store.viewer.patch({ selected_item: item.id })
     },
+    onGameLoad() {},
   },
 }
 </script>

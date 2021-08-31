@@ -52,6 +52,10 @@ $items: morph-ball bomb screw-attack missile super-missile energy-tank energy2-t
   &.-eye {
     background: gray;
   }
+  &.-elevator {
+    background: #d8c800;
+    border-radius: 100%;
+  }
 }
 
 

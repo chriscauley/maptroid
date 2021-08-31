@@ -17,7 +17,7 @@ import Room from '@/models/Room'
 
 export default {
   __route: {
-    path: '/',
+    path: '/viewer/:world_id',
   },
   components: { HtmlOverlay },
   mixins: [ViewerMixin, WorldMixin],
@@ -43,7 +43,7 @@ export default {
   },
   methods: {
     getViewerOptions() {
-      return { showNavigator: false }
+      return { showNavigator: false, tileSources: [this.world.dzi] }
     },
     onGameLoad() {
       // TODO use wordl.start_xy instead of item.type === 'ship'

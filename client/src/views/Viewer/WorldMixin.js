@@ -5,10 +5,11 @@ export default {
     return { game: null, world: null }
   },
   mounted() {
+    const world_id = Number(this.$route.params.world_id)
     Promise.all([
-      this.$store.world.fetchOne(1),
-      this.$store.item.getAll(),
-      this.$store.room.getAll(),
+      this.$store.world.fetchOne(world_id),
+      this.$store.item.getAll(world_id),
+      this.$store.room.getAll(world_id),
     ]).then(([world, items, rooms]) => {
       this.world = world
       this.game = new Game()
@@ -20,7 +21,9 @@ export default {
       // this.onViewerDone = () => world.populate({ items, rooms })
     })
   },
-  onGameLoad() {
-    console.warn('Component does not define on game load')
+  methods: {
+    onGameLoad() {
+      console.warn('Component does not define on game load')
+    },
   },
 }
