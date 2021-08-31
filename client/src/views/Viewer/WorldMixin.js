@@ -14,16 +14,10 @@ export default {
       this.world = world
       this.game = new Game()
       this.game.populate({ world, items, rooms })
-      this.onGameLoad()
       // world.MITT_EVENTS.forEach((event) => {
       //   this[event] && world.on(event, this[event])
       // })
       // this.onViewerDone = () => world.populate({ items, rooms })
     })
-  },
-  methods: {
-    onGameLoad() {
-      console.warn('Component does not define on game load')
-    },
   },
 }

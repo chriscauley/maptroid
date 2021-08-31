@@ -160,8 +160,12 @@
   &__screen-mask {
     @apply absolute;
     background: red; /* This should never appear! */
-    &.-color-black {
+    &.-black {
       @apply bg-black;
+    }
+    &.-outline-blue {
+      background: transparent;
+      border: 5px dashed blue;
     }
   }
 }

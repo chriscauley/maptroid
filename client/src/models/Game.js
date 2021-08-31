@@ -1,16 +1,28 @@
 import Room from './Room'
+import vec from '@/lib/vec'
+import mitt from 'mitt'
+
+const DIRECTIONS = {
+  up: [0, -1],
+  down: [0, 1],
+  left: [-1, 0],
+  right: [1, 0],
+}
 
 class Game {
-  // constructor(options) {
-  //   this.options = options
-  //   Object.assign(this, {
-  //     state: {
-  //       items: {},
-  //       screens: {},
-  //       rooms: {},
-  //     },
-  //   })
-  // }
+  constructor(options) {
+    this.options = options
+    const { on, off, emit } = mitt()
+    const state = {
+      items: {},
+      screens: {},
+      rooms: {},
+      actions: [],
+      xy: null,
+    }
+
+    Object.assign(this, { on, off, emit, state })
+  }
   populate({ _world, items, rooms }) {
     const cache = {
       room_by_id: {},
@@ -57,6 +69,26 @@ class Game {
       getItemsByType: (type) => cache.items_by_type[type],
       getRoomByXY: (xy) => cache.room_by_xy[xy],
     })
+  }
+  start() {
+    // TODO use wordl.start_xy instead of item.type === 'ship'
+    const ship = this.getItemsByType('ship')?.[0]
+    this.goto(ship.world_xy)
+  }
+  move(direction) {
+    this.goto(vec.add(this.state.xy, DIRECTIONS[direction]))
+  }
+  goto(xy) {
+    this.state.actions.push(['goto', xy])
+    const new_room = this.getRoomByXY(xy)
+    if (!new_room) {
+      return
+    }
+    this.state.xy = xy
+    if (new_room !== this.state.room) {
+      this.state.room = new_room
+      this.emit('goto-room', new_room)
+    }
   }
 }
 

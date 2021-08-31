@@ -56,7 +56,7 @@ export default {
     visible_xys() {
       const [x, y, width, height] = Room.getBounds(this.current_room)
       const out = []
-      range(x, x + width).forEach((x) => range(y, height).forEach((y) => out.push([x, y])))
+      range(x, x + width).forEach((x) => range(y, y + height).forEach((y) => out.push([x, y])))
       return out
     },
     visible_items() {
@@ -75,7 +75,7 @@ export default {
       )
     },
     gotoRoom(room) {
-      const [x, y, width, height] = room.getMapBounds()
+      const [x, y, width, height] = Room.getMapBounds(room, this.world)
       this.gotoBounds(x, y, width, height)
       this.current_room = room
     },

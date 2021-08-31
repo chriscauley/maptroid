@@ -63,7 +63,6 @@ export default {
     clickItem(item) {
       this.$store.viewer.patch({ selected_item: item.id })
     },
-    onGameLoad() {},
   },
 }
 </script>

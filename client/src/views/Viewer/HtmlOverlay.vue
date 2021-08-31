@@ -54,8 +54,8 @@ export default {
       return this.screens.map(({ x, y, width = 1, height = 1, ...item }) => {
         // there's a slight issue with cracks showing between elements
         // add 0.5% to width/height to stop it
-        width *= 1.005
-        height *= 1.005
+        width *= 1.001
+        height *= 1.001
         return {
           item,
           attrs: {
