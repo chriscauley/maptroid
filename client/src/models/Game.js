@@ -10,8 +10,7 @@ const DIRECTIONS = {
 }
 
 class Game {
-  constructor(options) {
-    this.options = options
+  constructor({ playthrough }) {
     const { on, off, emit } = mitt()
     const state = {
       items: {},
@@ -21,7 +20,7 @@ class Game {
       xy: null,
     }
 
-    Object.assign(this, { on, off, emit, state })
+    Object.assign(this, { on, off, emit, state, playthrough })
   }
   populate({ _world, items, rooms }) {
     const cache = {
@@ -79,7 +78,7 @@ class Game {
     this.goto(vec.add(this.state.xy, DIRECTIONS[direction]))
   }
   goto(xy) {
-    this.state.actions.push(['goto', xy])
+    this.playthrough.actions.push(['goto', xy])
     const new_room = this.getRoomByXY(xy)
     if (!new_room) {
       return

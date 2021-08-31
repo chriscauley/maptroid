@@ -51,9 +51,9 @@ export default {
     },
     mousetrap() {
       return {
-        'up,down,left,right': (e) => this.move(e)
+        'up,down,left,right': (e) => this.move(e),
       }
-    }
+    },
   },
   methods: {
     getViewerOptions() {
@@ -73,7 +73,8 @@ export default {
     move(e) {
       const direction = e.key.replace('Arrow', '').toLowerCase()
       this.game.move(direction)
-    }
+      this.$store.playthrough.save(this.game.playthrough)
+    },
   },
 }
 </script>
