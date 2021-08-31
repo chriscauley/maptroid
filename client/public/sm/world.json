@@ -1,9 +1,40 @@
 {
   "1": {
     "name": "Super Metroid",
-    "dzi": "SuperMetroidMapZebes.dzi",
+    "dzi": "/output/SuperMetroidMapZebes.dzi",
+    "id": 1,
+    "map_screen_size": 256,
+    "map_item_size": 16,
+    "zones": [
+      "crateria",
+      "brinstar",
+      "wrecked-ship",
+      "maridia",
+      "norfair",
+      "tourian",
+      "elevator",
+      "void"
+    ],
     "W": 66,
-    "H": 56,
-    "id": 1
+    "H": 56
+  },
+  "2": {
+    "name": "Super Zero Mission",
+    "dzi": "/output/SuperZeroMission.dzi",
+    "id": 2,
+    "map_screen_size": 32,
+    "map_item_size": 2,
+    "zones": [
+      "crateria",
+      "brinstar",
+      "kraid",
+      "pirate-ship",
+      "chozodia",
+      "norfair",
+      "ridley",
+      "tourian",
+      "elevator",
+      "void"
+    ]
   }
 }

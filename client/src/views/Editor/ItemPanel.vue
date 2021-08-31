@@ -58,8 +58,6 @@
 import OpenSeadragon from 'openseadragon'
 import { sortBy } from 'lodash'
 
-import Zone from '@/models/Zone'
-
 export default {
   props: {
     viewer: Object,
@@ -69,7 +67,7 @@ export default {
     return {
       open: 'tracker',
       selected: null,
-      zones: Zone.list,
+      zones: this.world.zones,
       css: {
         btn: (name) => ['btn', name === this.open ? '-primary' : '-secondary'],
       },

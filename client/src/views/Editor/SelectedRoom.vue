@@ -14,14 +14,17 @@
 </template>
 
 <script>
-import Zone from '@/models/Zone'
 import Mousetrap from '@unrest/vue-mousetrap'
 
 export default {
+  props: {
+    world: Object,
+  },
   mixins: [Mousetrap.Mixin],
   data() {
+    const { zones } = this.world
     const mousetrap = { esc: () => this.$store.viewer.unSelectRoom() }
-    return { saved: null, zones: Zone.list, mousetrap }
+    return { saved: null, zones: zones, mousetrap }
   },
   computed: {
     room() {

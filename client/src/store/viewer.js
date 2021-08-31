@@ -38,9 +38,7 @@ export default ({ store }) => {
     state,
     getSelectedRoom,
     getPointer,
-    patch: (new_state) => {
-      Object.assign(state, new_state)
-    },
+    patch: (new_state) => Object.assign(state, new_state),
     clickRoom: (scale) => {
       const { room_tool } = state
       const { x, y } = getPointer(scale)
