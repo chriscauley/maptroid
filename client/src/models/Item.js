@@ -3,8 +3,6 @@ import fields from './fields'
 const abilities = [
   'varia-suit',
   'gravity-suit',
-  'x-ray',
-  'grappling-hook',
   'morph-ball',
   'bomb',
   'spring-ball',
@@ -16,7 +14,15 @@ const abilities = [
 
 const packs = ['missile', 'super-missile', 'power-bomb', 'energy-tank', 'reserve-tank']
 
-const beams = ['charge-beam', 'ice-beam', 'wave-beam', 'spazer', 'plasma-beam']
+const beams = [
+  'charge-beam',
+  'ice-beam',
+  'wave-beam',
+  'spazer',
+  'plasma-beam',
+  'x-ray',
+  'grappling-hook',
+]
 
 const misc = ['pedastool', 'energy2-tank']
 

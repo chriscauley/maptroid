@@ -16,7 +16,7 @@
 }
 
 .osd-panel {
-  width: 300px;
+  @apply flex flex-col w-96;
   &__title {
     @apply text-lg p-4;
   }
@@ -26,9 +26,22 @@
   &__item-icon {
     font-size: 2rem;
   }
-  &__item-number {
-    @apply bg-blue-500 flex h-6 items-center justify-center rounded-full w-6;
+  &__action-list {
+    max-height: 6rem;
+    overflow: scroll;
   }
+  .btn.-mini {
+    @apply p-1;
+  }
+}
+
+.osd-panel__item-number, .html-overlay__item .target_number {
+  @apply bg-blue-500 flex h-6 items-center justify-center rounded-full w-6;
+}
+
+.html-overlay__item .target_number {
+  position: relative;
+  top: 1rem;
 }
 
 .viewer-toolbar, .viewer-panel__buttons {
@@ -124,31 +137,33 @@
   &.-item, &.-map, &.-boss, &.-room {
     top: 0;
   }
-  .tracker__grid {
-    .tracker__row {
-      display: flex;
-      gap: 0.25rem;
-      margin-bottom: 0.5rem;
-      .sm-item {
-        position: relative;
-        filter: grayscale(1);
-        opacity: 0.5;
-        &.has {
-          filter: unset;
-          opacity: unset;
-        }
-        .flaire {
-          background: black;
-          bottom: 0;
-          font-size: 0.4em;
-          position: absolute;
-          right: 0;
-        }
-      }
-    }
-  }
   .list-group-item {
     gap: 0.5rem;
+  }
+}
+
+.inventory {
+  font-size: 1.8rem;
+  .inventory__row {
+    display: flex;
+    gap: 0.25rem;
+    margin-bottom: 0.5rem;
+    .sm-item {
+      position: relative;
+      filter: grayscale(1);
+      opacity: 0.5;
+      &.has {
+        filter: unset;
+        opacity: unset;
+      }
+      .flaire {
+        background: black;
+        bottom: 0;
+        font-size: 0.4em;
+        position: absolute;
+        right: 0;
+      }
+    }
   }
 }
 

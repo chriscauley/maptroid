@@ -1,5 +1,7 @@
 <template>
-  <div v-bind="item_attrs" />
+  <div v-bind="item_attrs">
+    <div v-if="target_number !== undefined" class="target_number">{{ target_number }}</div>
+  </div>
 </template>
 
 <script>

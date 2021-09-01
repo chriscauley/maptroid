@@ -23,13 +23,7 @@
         </template>
       </template>
     </div>
-    <div v-if="open === 'tracker'" class="tracker__grid">
-      <div v-for="(row, i) in $store.item.getGrid()" class="tracker__row" :key="i">
-        <div v-for="cell in row" :class="cell.class" :key="cell.slug">
-          <div v-if="cell.count" class="flaire">{{ cell.count }}</div>
-        </div>
-      </div>
-    </div>
+    <inventory :items="items" />
     <div class="viewer-panel__buttons">
       <div :class="css.btn('tracker')" @click="open = 'tracker'">
         <i class="fa fa-check-square-o" />
@@ -58,7 +52,10 @@
 import OpenSeadragon from 'openseadragon'
 import { sortBy } from 'lodash'
 
+import Inventory from './Inventory.vue'
+
 export default {
+  components: { Inventory },
   props: {
     viewer: Object,
     world: Object,
@@ -74,6 +71,9 @@ export default {
     }
   },
   computed: {
+    items() {
+      return this.$store.item.getAll({ world_id: this.world.id })
+    },
     itemsByClass() {
       const items = {
         map: [],
@@ -82,7 +82,7 @@ export default {
         chozo: [],
         door: [],
       }
-      const _all = sortBy(this.$store.item.getAll({ world_id: this.world.id }), 'type')
+      const _all = sortBy(this.items, 'type')
       _all.forEach((i) => items[i.class].push(i))
       return items
     },

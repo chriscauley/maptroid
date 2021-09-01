@@ -4,10 +4,16 @@
       <open-seadragon :pixelated="true" :options="viewer_options" :events="viewer_events" />
       <template v-if="viewer">
         <html-overlay :viewer="viewer" :world="world" :screens="screens">
-          <item-box v-for="item in items" :item="item" :world="world" :key="item.id" />
+          <item-box
+            v-for="(item, i) in items"
+            :item="item"
+            :world="world"
+            :key="item.id"
+            :target_number="i + 1"
+          />
         </html-overlay>
         <svg-overlay :viewer="viewer" :world="world" :arrows="arrows" />
-        <viewer-panel :room="current_room" :items="items" />
+        <viewer-panel :room="current_room" :items="items" :game="game" />
       </template>
     </div>
   </div>
@@ -62,7 +68,8 @@ export default {
     },
     mousetrap() {
       return {
-        'up,down,left,right': (e) => this.move(e),
+        'up,down,left,right': this.move,
+        '1,2,3,4,5,6,7,8,9': this.getItem,
       }
     },
     arrows() {
@@ -83,6 +90,9 @@ export default {
     onViewerDone() {
       this.game.on('goto-room', this.gotoRoom)
       this.game.start()
+    },
+    getItem(e) {
+      this.game.getItem(this.items[Number(e.key) - 1].id)
     },
     move(e) {
       const direction = e.key.replace('Arrow', '').toLowerCase()

@@ -27,6 +27,7 @@ class Game {
     const cache = {
       room_by_id: {},
       room_by_xy: {},
+      item_by_id: {},
       items_by_xy: {},
       items_by_room_id: {},
       items_by_type: {},
@@ -51,10 +52,10 @@ class Game {
     }
 
     items.forEach((item) => {
+      cache.item_by_id[item.id] = item
       _add(cache.items_by_room_id, item.room_id, item)
       _add(cache.items_by_xy, item.world_xy, item)
       _add(cache.items_by_type, item.type, item)
-      cache.items_by_xy[item.world_xy].push(item)
       const room = cache.room_by_id[item.room_id]
       if (room && !Room.containsXY(room, item.world_xy)) {
         console.warn('item:', item)
@@ -64,18 +65,20 @@ class Game {
     })
 
     Object.assign(this, {
-      getItemsbyXY: (xy) => cache.items_by_xy[xy],
-      getItemsByRoomId: (id) => cache.items_by_room_id[id],
-      getItemsByType: (type) => cache.items_by_type[type],
+      getItemsbyXY: (xy) => cache.items_by_xy[xy] || [],
+      getItemsByRoomId: (id) => cache.items_by_room_id[id] || [],
+      getItemsByType: (type) => cache.items_by_type[type] || [],
       getRoomByXY: (xy) => cache.room_by_xy[xy],
+      listItems: () => items.filter((i) => this.state.items[i.id]),
+      listMissingItems: () => items.filter((i) => !this.state.items[i.id]),
     })
   }
   start() {
     // TODO use wordl.start_xy instead of item.type === 'ship'
-    if (this.playthrough.actions.length) {
-      this.playthrough.actions.forEach(([action, ...args]) => {
-        this[action](...args)
-      })
+    const { actions } = this.playthrough
+    if (actions.length) {
+      this.playthrough.actions = [] // reset actions to avoid duplicates during replay
+      actions.forEach(([action, ...args]) => this[action](...args))
     } else {
       const ship = this.getItemsByType('ship')?.[0]
       this.goto([...ship.world_xy])
@@ -83,6 +86,22 @@ class Game {
   }
   move(direction) {
     this.goto(vec.add(this.state.xy, DIRECTIONS[direction]))
+  }
+  getItem(item_id) {
+    this.playthrough.actions.push(['getItem', item_id])
+    this.state.items[item_id] = true
+  }
+  undo(i = 1) {
+    while (i--) {
+      const action = this.playthrough.actions.pop()
+      if (action[0] === 'goto') {
+        this.state.xys.pop()
+        this.goto(this.state.xys.pop())
+        this.playthrough.actions.pop() // remove extra action made by previous line
+      } else if (action[0] === 'getItem') {
+        delete this.state.items[action[1]]
+      }
+    }
   }
   goto(xy) {
     const new_room = this.getRoomByXY(xy)

@@ -55,6 +55,7 @@ export default {
       return ['viewer-wrapper', { '-overzoomed': this.overzoomed }]
     },
     visible_xys() {
+      // TODO only in viewer
       const [x, y, width, height] = Room.getBounds(this.current_room)
       const out = []
       range(x, x + width).forEach((x) => range(y, y + height).forEach((y) => out.push([x, y])))
