@@ -11,6 +11,26 @@
   @apply h-full w-full;
 }
 
+.viewer-wrapper {
+  @apply flex
+}
+
+.osd-panel {
+  width: 300px;
+  &__title {
+    @apply text-lg p-4;
+  }
+  &__item {
+    @apply gap-2;
+  }
+  &__item-icon {
+    font-size: 2rem;
+  }
+  &__item-number {
+    @apply bg-blue-500 flex h-6 items-center justify-center rounded-full w-6;
+  }
+}
+
 .viewer-toolbar, .viewer-panel__buttons {
   @apply bottom-0 fixed flex left-0;
   font-size: 2rem;

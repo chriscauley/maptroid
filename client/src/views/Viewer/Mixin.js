@@ -51,6 +51,7 @@ export default {
       }
     },
     viewer_class() {
+      // TODO only used in editor
       return ['viewer-wrapper', { '-overzoomed': this.overzoomed }]
     },
     visible_xys() {

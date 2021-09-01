@@ -7,6 +7,7 @@
           <item-box v-for="item in items" :item="item" :world="world" :key="item.id" />
         </html-overlay>
         <svg-overlay :viewer="viewer" :world="world" :arrows="arrows" />
+        <viewer-panel :room="current_room" :items="items" />
       </template>
     </div>
   </div>
@@ -17,6 +18,7 @@ import Mousetrap from '@unrest/vue-mousetrap'
 
 import HtmlOverlay from './HtmlOverlay.vue'
 import ItemBox from './ItemBox.vue'
+import ViewerPanel from './Panel.vue'
 import SvgOverlay from './SvgOverlay.vue'
 import ViewerMixin from './Mixin'
 import WorldMixin from './WorldMixin'
@@ -26,7 +28,7 @@ export default {
   __route: {
     path: '/viewer/:world_id',
   },
-  components: { HtmlOverlay, ItemBox, SvgOverlay },
+  components: { HtmlOverlay, ItemBox, SvgOverlay, ViewerPanel },
   mixins: [ViewerMixin, WorldMixin, Mousetrap.Mixin],
   computed: {
     items() {
