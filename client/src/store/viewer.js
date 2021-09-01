@@ -2,6 +2,7 @@ import { reactive } from 'vue'
 
 export default ({ store }) => {
   const state = reactive({
+    // TODO much of these are tool realted and would justify a second store
     selected_tool: null,
     door_tool: 'blue',
     room_tool: 'crateria',

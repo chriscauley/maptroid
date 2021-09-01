@@ -170,10 +170,7 @@
   }
 }
 
-.map-editor .html-overlay__item {
-  cursor: pointer;
-  position: absolute;
-  outline: 5px solid white;
+.html-overlay__item {
   &.sm-boss, &.sm-map, &.sm-chozo {
     background: none;
   }
@@ -188,8 +185,15 @@
   }
 }
 
-.map-editor.-overzoomed .html-overlay__item {
-  outline: none;
+.map-editor {
+  .html-overlay__item {
+    cursor: pointer;
+    position: absolute;
+    outline: 5px solid white;
+  }
+  &.-overzoomed .html-overlay__item {
+    outline: none;
+  }
 }
 
 

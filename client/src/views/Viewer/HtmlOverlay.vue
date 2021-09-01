@@ -3,6 +3,7 @@
     <template v-for="(blocks, i) in block_groups" :key="i">
       <div v-for="block in blocks" v-bind="block.attrs" :key="block.attrs.id" />
     </template>
+    <slot />
     <div v-bind="ui_box" />
   </div>
 </template>
@@ -36,6 +37,9 @@ export default {
       }
     },
     item_blocks() {
+      if (this.items?.length) {
+        console.warn('Use Viewer/ItemBox.vue instead of item_blocks')
+      }
       return this.items?.map((item) => {
         const { id, type, class: _class } = item
         const { x, y, width, height } = Item.getMapBounds(item, this.world)
@@ -74,10 +78,10 @@ export default {
     // TODO this should probably go in store.viewer
     this.viewer.addOverlay(this.$el, new OpenSeadragon.Rect(0, 0, 1, 1))
     const { x, y } = this.viewer.world.getItemAt(0).getContentSize()
+    this.$store.viewer.patch({ size: Math.max(x, y) })
+
+    // TODO this is already in store.viewer B)
     this.SIZE = Math.max(x, y)
-    // this.viewer.addHandler('animation-finish', () => {
-    //   this.border_width = this.viewer.viewport.imageToViewportCoordinates(new Point(2, 2)).x
-    // })
   },
   methods: {
     _scale(attrs, scale = 1) {

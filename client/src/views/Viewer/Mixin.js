@@ -59,9 +59,6 @@ export default {
       range(x, x + width).forEach((x) => range(y, y + height).forEach((y) => out.push([x, y])))
       return out
     },
-    visible_items() {
-      return this.game.getItemsByRoomId(this.current_room.id)
-    },
   },
   methods: {
     getViewerOptions() {

@@ -3,7 +3,9 @@
     <div class="viewer-wrapper" v-if="world">
       <open-seadragon :pixelated="true" :options="viewer_options" :events="viewer_events" />
       <template v-if="viewer">
-        <html-overlay :viewer="viewer" :world="world" :screens="screens" :items="visible_items" />
+        <html-overlay :viewer="viewer" :world="world" :screens="screens">
+          <item-box v-for="item in items" :item="item" :world="world" :key="item.id" />
+        </html-overlay>
         <svg-overlay :viewer="viewer" :world="world" :arrows="arrows" />
       </template>
     </div>
@@ -14,6 +16,7 @@
 import Mousetrap from '@unrest/vue-mousetrap'
 
 import HtmlOverlay from './HtmlOverlay.vue'
+import ItemBox from './ItemBox.vue'
 import SvgOverlay from './SvgOverlay.vue'
 import ViewerMixin from './Mixin'
 import WorldMixin from './WorldMixin'
@@ -23,9 +26,13 @@ export default {
   __route: {
     path: '/viewer/:world_id',
   },
-  components: { HtmlOverlay, SvgOverlay },
+  components: { HtmlOverlay, ItemBox, SvgOverlay },
   mixins: [ViewerMixin, WorldMixin, Mousetrap.Mixin],
   computed: {
+    items() {
+      const room_items = this.game.getItemsByRoomId(this.current_room.id)
+      return room_items.filter((i) => i.class === 'item' || i.class === 'boss')
+    },
     screens() {
       const out = []
       this.visible_xys.forEach((xy) => {
