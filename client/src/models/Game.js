@@ -14,6 +14,7 @@ class Game {
     const { on, off, emit } = mitt()
     const state = {
       items: {},
+      missing: {},
       screens: {},
       rooms: {},
       actions: [],
@@ -89,7 +90,14 @@ class Game {
   }
   getItem(item_id) {
     this.playthrough.actions.push(['getItem', item_id])
-    this.state.items[item_id] = true
+    if (this.state.missing[item_id]) {
+      delete this.state.missing[item_id]
+    } else if (this.state.items[item_id]) {
+      this.state.missing[item_id] = true
+      delete this.state.items[item_id]
+    } else {
+      this.state.items[item_id] = true
+    }
   }
   undo(i = 1) {
     while (i--) {

@@ -15,6 +15,8 @@
             :world="world"
             :key="item.id"
             :target_number="i + 1"
+            :game="game"
+            @click="clickItem(item)"
           />
         </html-overlay>
         <svg-overlay :viewer="viewer" :world="world" :arrows="arrows" />
@@ -46,11 +48,17 @@ export default {
   },
   computed: {
     items() {
-      const room_items = this.game.getItemsByRoomId(this.current_room.id)
-      return room_items.filter((i) => i.class === 'item' || i.class === 'boss')
+      const items = this.locked ?
+            this.game.getItemsByRoomId(this.current_room.id) :
+            this.$store.item.getAll({ world_id: this.world.id })
+
+      return items.filter((i) => i.class === 'item' || i.class === 'boss')
     },
     screens() {
       const out = []
+      if (!this.current_room) {
+        return out
+      }
       this.visible_xys.forEach((xy) => {
         if (Room.containsXY(this.game.state.room, xy)) {
           return
@@ -79,7 +87,7 @@ export default {
     mousetrap() {
       return {
         'up,down,left,right': this.move,
-        '1,2,3,4,5,6,7,8,9': this.getItem,
+        '1,2,3,4,5,6,7,8,9': this.pressItem,
       }
     },
     arrows() {
@@ -101,7 +109,11 @@ export default {
       this.game.on('goto-room', this.gotoRoom)
       this.game.start()
     },
-    getItem(e) {
+    clickItem(item) {
+      this.game.getItem(item.id)
+      this.$store.playthrough.save(this.game.playthrough)
+    },
+    pressItem(e) {
       this.game.getItem(this.items[Number(e.key) - 1].id)
     },
     move(e) {

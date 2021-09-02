@@ -1,5 +1,5 @@
 <template>
-  <svg class="osd-svg">
+  <svg class="osd__svg">
     <g>
       <rect v-for="(rect, i) in rects" :key="i" v-bind="rect" />
       <!-- <path v-for="(path, i) in prepped_paths" :key="i" v-bind="path" /> -->

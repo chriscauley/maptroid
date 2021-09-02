@@ -1,6 +1,7 @@
 <template>
   <div v-bind="item_attrs">
-    <div v-if="target_number !== undefined" class="target_number">{{ target_number }}</div>
+    <i v-if="icon" :class="icon" />
+    <div v-else-if="target_number" class="html-overlay__target-number">{{ target_number }}</div>
   </div>
 </template>
 
@@ -12,9 +13,18 @@ export default {
   props: {
     item: Object,
     world: Object,
+    game: Object,
     target_number: Number,
   },
   computed: {
+    icon() {
+      if (this.game?.state.items[this.item.id]) {
+        return 'html-overlay__target-number fa fa-check'
+      } else if (this.game?.state.missing[this.item.id]) {
+        return 'html-overlay__target-number fa fa-close'
+      }
+      return undefined
+    },
     item_attrs() {
       const { item, world } = this
       const { id, type, class: _class } = item
