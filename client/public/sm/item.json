@@ -243,10 +243,10 @@
     "room_index": 67,
     "world_xy": [
       38,
-      38
+      37
     ],
     "screen_xy": [
-      3,
+      5,
       4
     ],
     "world_id": 1
@@ -6558,10 +6558,10 @@
     "room_index": 108,
     "world_xy": [
       38,
-      38
+      37
     ],
     "screen_xy": [
-      12,
+      14,
       6
     ],
     "world_id": 1
@@ -12469,5 +12469,2677 @@
       6
     ],
     "world_id": 1
+  },
+  "710": {
+    "world_xy": [
+      16,
+      22
+    ],
+    "screen_xy": [
+      2,
+      10
+    ],
+    "world_id": 2,
+    "width": 1,
+    "height": 1,
+    "class": "item",
+    "type": "power-bomb",
+    "id": 710
+  },
+  "711": {
+    "world_xy": [
+      20,
+      22
+    ],
+    "screen_xy": [
+      3,
+      5
+    ],
+    "world_id": 2,
+    "width": 1,
+    "height": 1,
+    "class": "item",
+    "type": "power-bomb",
+    "id": 711
+  },
+  "712": {
+    "world_xy": [
+      18,
+      20
+    ],
+    "screen_xy": [
+      2,
+      8
+    ],
+    "world_id": 2,
+    "width": 1,
+    "height": 1,
+    "class": "item",
+    "type": "missile",
+    "id": 712
+  },
+  "713": {
+    "world_xy": [
+      27,
+      20
+    ],
+    "screen_xy": [
+      10,
+      5
+    ],
+    "world_id": 2,
+    "width": 1,
+    "height": 1,
+    "class": "item",
+    "type": "reserve-tank",
+    "id": 713
+  },
+  "714": {
+    "world_xy": [
+      31,
+      19
+    ],
+    "screen_xy": [
+      6,
+      5
+    ],
+    "world_id": 2,
+    "width": 1,
+    "height": 1,
+    "class": "item",
+    "type": "super-missile",
+    "id": 714
+  },
+  "715": {
+    "world_xy": [
+      35,
+      19
+    ],
+    "screen_xy": [
+      6,
+      3
+    ],
+    "world_id": 2,
+    "width": 1,
+    "height": 1,
+    "class": "item",
+    "type": "energy-tank",
+    "id": 715
+  },
+  "717": {
+    "world_xy": [
+      20,
+      45
+    ],
+    "screen_xy": [
+      4,
+      8
+    ],
+    "world_id": 2,
+    "width": 1,
+    "height": 1,
+    "class": "item",
+    "type": "x-ray",
+    "id": 717
+  },
+  "718": {
+    "world_xy": [
+      19,
+      45
+    ],
+    "screen_xy": [
+      11,
+      8
+    ],
+    "world_id": 2,
+    "width": 1,
+    "height": 1,
+    "class": "item",
+    "type": "power-bomb",
+    "id": 718
+  },
+  "719": {
+    "world_xy": [
+      74,
+      41
+    ],
+    "screen_xy": [
+      8,
+      11
+    ],
+    "world_id": 2,
+    "width": 1,
+    "height": 1,
+    "class": "item",
+    "type": "gravity-suit",
+    "id": 719
+  },
+  "720": {
+    "world_xy": [
+      69,
+      37
+    ],
+    "screen_xy": [
+      13,
+      10
+    ],
+    "world_id": 2,
+    "width": 1,
+    "height": 1,
+    "class": "item",
+    "type": "energy-tank",
+    "id": 720
+  },
+  "721": {
+    "world_xy": [
+      79,
+      36
+    ],
+    "screen_xy": [
+      9,
+      6
+    ],
+    "world_id": 2,
+    "width": 1,
+    "height": 1,
+    "class": "item",
+    "type": "power-bomb",
+    "id": 721
+  },
+  "722": {
+    "world_xy": [
+      74,
+      28
+    ],
+    "screen_xy": [
+      5,
+      5
+    ],
+    "world_id": 2,
+    "width": 1,
+    "height": 1,
+    "class": "item",
+    "type": "power-bomb",
+    "id": 722
+  },
+  "723": {
+    "world_xy": [
+      72,
+      23
+    ],
+    "screen_xy": [
+      12,
+      9
+    ],
+    "world_id": 2,
+    "width": 1,
+    "height": 1,
+    "class": "item",
+    "type": "power-bomb",
+    "id": 723
+  },
+  "724": {
+    "world_xy": [
+      66,
+      19
+    ],
+    "screen_xy": [
+      5,
+      11
+    ],
+    "world_id": 2,
+    "width": 1,
+    "height": 1,
+    "class": "item",
+    "type": "power-bomb",
+    "id": 724
+  },
+  "725": {
+    "world_xy": [
+      81,
+      21
+    ],
+    "screen_xy": [
+      14,
+      2
+    ],
+    "world_id": 2,
+    "width": 1,
+    "height": 1,
+    "class": "item",
+    "type": "missile",
+    "id": 725
+  },
+  "726": {
+    "world_xy": [
+      57,
+      24
+    ],
+    "screen_xy": [
+      12,
+      11
+    ],
+    "world_id": 2,
+    "width": 1,
+    "height": 1,
+    "class": "item",
+    "type": "bomb",
+    "id": 726
+  },
+  "727": {
+    "world_xy": [
+      42,
+      21
+    ],
+    "screen_xy": [
+      8,
+      7
+    ],
+    "world_id": 2,
+    "width": 1,
+    "height": 1,
+    "class": "item",
+    "type": "grappling-hook",
+    "id": 727
+  },
+  "728": {
+    "world_xy": [
+      39,
+      21
+    ],
+    "screen_xy": [
+      10,
+      4
+    ],
+    "world_id": 2,
+    "width": 1,
+    "height": 1,
+    "class": "item",
+    "type": "missile",
+    "id": 728
+  },
+  "729": {
+    "world_xy": [
+      34,
+      21
+    ],
+    "screen_xy": [
+      4,
+      12
+    ],
+    "world_id": 2,
+    "width": 1,
+    "height": 1,
+    "class": "item",
+    "type": "super-missile",
+    "id": 729
+  },
+  "730": {
+    "world_xy": [
+      39,
+      25
+    ],
+    "screen_xy": [
+      6,
+      5
+    ],
+    "world_id": 2,
+    "width": 1,
+    "height": 1,
+    "class": "item",
+    "type": "missile",
+    "id": 730
+  },
+  "731": {
+    "world_xy": [
+      49,
+      23
+    ],
+    "screen_xy": [
+      8,
+      7
+    ],
+    "world_id": 2,
+    "width": 1,
+    "height": 1,
+    "class": "item",
+    "type": "missile",
+    "id": 731
+  },
+  "732": {
+    "world_xy": [
+      63,
+      16
+    ],
+    "screen_xy": [
+      12,
+      5
+    ],
+    "world_id": 2,
+    "width": 1,
+    "height": 1,
+    "class": "item",
+    "type": "missile",
+    "id": 732
+  },
+  "733": {
+    "world_xy": [
+      87,
+      6
+    ],
+    "screen_xy": [
+      14,
+      4
+    ],
+    "world_id": 2,
+    "width": 1,
+    "height": 1,
+    "class": "item",
+    "type": "missile",
+    "id": 733
+  },
+  "734": {
+    "world_xy": [
+      85,
+      6
+    ],
+    "screen_xy": [
+      4,
+      13
+    ],
+    "world_id": 2,
+    "width": 1,
+    "height": 1,
+    "class": "item",
+    "type": "missile",
+    "id": 734
+  },
+  "735": {
+    "world_xy": [
+      82,
+      6
+    ],
+    "screen_xy": [
+      6,
+      8
+    ],
+    "world_id": 2,
+    "width": 1,
+    "height": 1,
+    "class": "item",
+    "type": "super-missile",
+    "id": 735
+  },
+  "736": {
+    "world_xy": [
+      72,
+      7
+    ],
+    "screen_xy": [
+      12,
+      4
+    ],
+    "world_id": 2,
+    "width": 1,
+    "height": 1,
+    "class": "item",
+    "type": "energy-tank",
+    "id": 736
+  },
+  "737": {
+    "world_xy": [
+      75,
+      4
+    ],
+    "screen_xy": [
+      13,
+      5
+    ],
+    "world_id": 2,
+    "width": 1,
+    "height": 1,
+    "class": "item",
+    "type": "power-bomb",
+    "id": 737
+  },
+  "738": {
+    "world_xy": [
+      24,
+      33
+    ],
+    "screen_xy": [
+      6,
+      8
+    ],
+    "world_id": 2,
+    "width": 1,
+    "height": 1,
+    "class": "item",
+    "type": "charge-beam",
+    "id": 738
+  },
+  "741": {
+    "world_xy": [
+      25,
+      39
+    ],
+    "screen_xy": [
+      13,
+      9
+    ],
+    "world_id": 2,
+    "width": 1,
+    "height": 1,
+    "class": "item",
+    "type": "missile",
+    "id": 741
+  },
+  "742": {
+    "world_xy": [
+      35,
+      38
+    ],
+    "screen_xy": [
+      8,
+      8
+    ],
+    "world_id": 2,
+    "width": 1,
+    "height": 1,
+    "class": "item",
+    "type": "missile",
+    "id": 742
+  },
+  "744": {
+    "world_xy": [
+      36,
+      33
+    ],
+    "screen_xy": [
+      6,
+      14
+    ],
+    "world_id": 2,
+    "width": 1,
+    "height": 1,
+    "class": "item",
+    "type": "energy-tank",
+    "id": 744
+  },
+  "745": {
+    "world_xy": [
+      40,
+      37
+    ],
+    "screen_xy": [
+      11,
+      4
+    ],
+    "world_id": 2,
+    "width": 1,
+    "height": 1,
+    "class": "item",
+    "type": "missile",
+    "id": 745
+  },
+  "746": {
+    "world_xy": [
+      48,
+      36
+    ],
+    "screen_xy": [
+      1,
+      2
+    ],
+    "world_id": 2,
+    "width": 1,
+    "height": 1,
+    "class": "item",
+    "type": "energy-tank",
+    "id": 746
+  },
+  "747": {
+    "world_xy": [
+      47,
+      34
+    ],
+    "screen_xy": [
+      7,
+      0
+    ],
+    "world_id": 2,
+    "width": 1,
+    "height": 1,
+    "class": "item",
+    "type": "energy-tank",
+    "id": 747
+  },
+  "748": {
+    "world_xy": [
+      29,
+      38
+    ],
+    "screen_xy": [
+      7,
+      7
+    ],
+    "world_id": 2,
+    "width": 1,
+    "height": 1,
+    "class": "item",
+    "type": "energy-tank",
+    "id": 748
+  },
+  "749": {
+    "world_xy": [
+      25,
+      36
+    ],
+    "screen_xy": [
+      4,
+      6
+    ],
+    "world_id": 2,
+    "width": 1,
+    "height": 1,
+    "class": "item",
+    "type": "missile",
+    "id": 749
+  },
+  "750": {
+    "world_xy": [
+      27,
+      36
+    ],
+    "screen_xy": [
+      4,
+      5
+    ],
+    "world_id": 2,
+    "width": 1,
+    "height": 1,
+    "class": "item",
+    "type": "super-missile",
+    "id": 750
+  },
+  "751": {
+    "world_xy": [
+      45,
+      36
+    ],
+    "screen_xy": [
+      13,
+      4
+    ],
+    "world_id": 2,
+    "width": 1,
+    "height": 1,
+    "class": "item",
+    "type": "missile",
+    "id": 751
+  },
+  "753": {
+    "world_xy": [
+      66,
+      11
+    ],
+    "screen_xy": [
+      4,
+      5
+    ],
+    "world_id": 2,
+    "width": 1,
+    "height": 1,
+    "class": "item",
+    "type": "energy-tank",
+    "id": 753
+  },
+  "754": {
+    "world_xy": [
+      69,
+      10
+    ],
+    "screen_xy": [
+      12,
+      13
+    ],
+    "world_id": 2,
+    "width": 1,
+    "height": 1,
+    "class": "item",
+    "type": "power-bomb",
+    "id": 754
+  },
+  "756": {
+    "world_xy": [
+      58,
+      12
+    ],
+    "screen_xy": [
+      8,
+      5
+    ],
+    "world_id": 2,
+    "width": 1,
+    "height": 1,
+    "class": "item",
+    "type": "super-missile",
+    "id": 756
+  },
+  "757": {
+    "world_xy": [
+      52,
+      16
+    ],
+    "screen_xy": [
+      2,
+      12
+    ],
+    "world_id": 2,
+    "width": 1,
+    "height": 1,
+    "class": "item",
+    "type": "missile",
+    "id": 757
+  },
+  "758": {
+    "world_xy": [
+      53,
+      14
+    ],
+    "screen_xy": [
+      1,
+      7
+    ],
+    "world_id": 2,
+    "width": 1,
+    "height": 1,
+    "class": "item",
+    "type": "energy-tank",
+    "id": 758
+  },
+  "761": {
+    "world_xy": [
+      21,
+      23
+    ],
+    "screen_xy": [
+      14,
+      2
+    ],
+    "world_id": 2,
+    "width": 20,
+    "height": 9,
+    "type": "ship",
+    "class": "map",
+    "id": 761
+  },
+  "762": {
+    "world_xy": [
+      65,
+      6
+    ],
+    "screen_xy": [
+      14,
+      11
+    ],
+    "world_id": 2,
+    "width": 1,
+    "height": 1,
+    "class": "item",
+    "type": "missile",
+    "id": 762
+  },
+  "763": {
+    "world_xy": [
+      82,
+      8
+    ],
+    "screen_xy": [
+      13,
+      9
+    ],
+    "world_id": 2,
+    "width": 1,
+    "height": 1,
+    "class": "item",
+    "type": "power-bomb",
+    "id": 763
+  },
+  "764": {
+    "world_xy": [
+      85,
+      14
+    ],
+    "screen_xy": [
+      2,
+      8
+    ],
+    "world_id": 2,
+    "width": 1,
+    "height": 1,
+    "class": "item",
+    "type": "super-missile",
+    "id": 764
+  },
+  "765": {
+    "world_xy": [
+      85,
+      17
+    ],
+    "screen_xy": [
+      12,
+      11
+    ],
+    "world_id": 2,
+    "width": 1,
+    "height": 1,
+    "class": "item",
+    "type": "energy-tank",
+    "id": 765
+  },
+  "766": {
+    "world_xy": [
+      93,
+      17
+    ],
+    "screen_xy": [
+      7,
+      12
+    ],
+    "world_id": 2,
+    "width": 1,
+    "height": 1,
+    "class": "item",
+    "type": "power-bomb",
+    "id": 766
+  },
+  "767": {
+    "world_xy": [
+      95,
+      20
+    ],
+    "screen_xy": [
+      3,
+      6
+    ],
+    "world_id": 2,
+    "width": 1,
+    "height": 1,
+    "class": "item",
+    "type": "energy-tank",
+    "id": 767
+  },
+  "768": {
+    "world_xy": [
+      88,
+      16
+    ],
+    "screen_xy": [
+      6,
+      5
+    ],
+    "world_id": 2,
+    "width": 4,
+    "height": 10,
+    "type": "save",
+    "class": "map",
+    "id": 768
+  },
+  "769": {
+    "world_xy": [
+      90,
+      14
+    ],
+    "screen_xy": [
+      4,
+      3
+    ],
+    "world_id": 2,
+    "width": 9,
+    "height": 11,
+    "type": "map",
+    "class": "map",
+    "id": 769
+  },
+  "770": {
+    "world_xy": [
+      81,
+      11
+    ],
+    "screen_xy": [
+      10,
+      3
+    ],
+    "world_id": 2,
+    "width": 8,
+    "height": 10,
+    "type": "energy",
+    "class": "map",
+    "id": 770
+  },
+  "771": {
+    "world_xy": [
+      79,
+      9
+    ],
+    "screen_xy": [
+      7,
+      2
+    ],
+    "world_id": 2,
+    "width": 6,
+    "height": 12,
+    "type": "save",
+    "class": "map",
+    "id": 771
+  },
+  "772": {
+    "world_xy": [
+      78,
+      8
+    ],
+    "screen_xy": [
+      1,
+      3
+    ],
+    "world_id": 2,
+    "width": 8,
+    "height": 10,
+    "type": "energy",
+    "class": "map",
+    "id": 772
+  },
+  "773": {
+    "world_xy": [
+      74,
+      11
+    ],
+    "screen_xy": [
+      4,
+      4
+    ],
+    "world_id": 2,
+    "width": 7,
+    "height": 9,
+    "type": "energy",
+    "class": "map",
+    "id": 773
+  },
+  "774": {
+    "world_xy": [
+      42,
+      37
+    ],
+    "screen_xy": [
+      1,
+      3
+    ],
+    "world_id": 2,
+    "width": 1,
+    "height": 1,
+    "class": "item",
+    "type": "power-bomb",
+    "id": 774
+  },
+  "775": {
+    "world_xy": [
+      43,
+      34
+    ],
+    "screen_xy": [
+      8,
+      5
+    ],
+    "world_id": 2,
+    "width": 1,
+    "height": 1,
+    "class": "item",
+    "type": "missile",
+    "id": 775
+  },
+  "776": {
+    "world_xy": [
+      36,
+      31
+    ],
+    "screen_xy": [
+      7,
+      7
+    ],
+    "world_id": 2,
+    "width": 1,
+    "height": 1,
+    "class": "item",
+    "type": "varia-suit",
+    "id": 776
+  },
+  "777": {
+    "world_xy": [
+      18,
+      37
+    ],
+    "screen_xy": [
+      12,
+      9
+    ],
+    "world_id": 2,
+    "width": 1,
+    "height": 1,
+    "class": "item",
+    "type": "morph-ball",
+    "id": 777
+  },
+  "778": {
+    "world_xy": [
+      12,
+      28
+    ],
+    "screen_xy": [
+      14,
+      5
+    ],
+    "world_id": 2,
+    "width": 1,
+    "height": 1,
+    "class": "item",
+    "type": "power-bomb",
+    "id": 778
+  },
+  "779": {
+    "world_xy": [
+      7,
+      25
+    ],
+    "screen_xy": [
+      7,
+      10
+    ],
+    "world_id": 2,
+    "width": 1,
+    "height": 1,
+    "class": "item",
+    "type": "power-bomb",
+    "id": 779
+  },
+  "780": {
+    "world_xy": [
+      6,
+      22
+    ],
+    "screen_xy": [
+      2,
+      9
+    ],
+    "world_id": 2,
+    "width": 1,
+    "height": 1,
+    "class": "item",
+    "type": "missile",
+    "id": 780
+  },
+  "781": {
+    "world_xy": [
+      6,
+      22
+    ],
+    "screen_xy": [
+      13,
+      9
+    ],
+    "world_id": 2,
+    "width": 1,
+    "height": 1,
+    "class": "item",
+    "type": "missile",
+    "id": 781
+  },
+  "782": {
+    "world_xy": [
+      43,
+      25
+    ],
+    "screen_xy": [
+      12,
+      8
+    ],
+    "world_id": 2,
+    "width": 1,
+    "height": 1,
+    "class": "item",
+    "type": "super-missile",
+    "id": 782
+  },
+  "783": {
+    "world_xy": [
+      52,
+      24
+    ],
+    "screen_xy": [
+      3,
+      3
+    ],
+    "world_id": 2,
+    "width": 5,
+    "height": 11,
+    "type": "save",
+    "class": "map",
+    "id": 783
+  },
+  "784": {
+    "world_xy": [
+      52,
+      25
+    ],
+    "screen_xy": [
+      3,
+      4
+    ],
+    "world_id": 2,
+    "width": 10,
+    "height": 10,
+    "type": "map",
+    "class": "map",
+    "id": 784
+  },
+  "785": {
+    "world_xy": [
+      51,
+      25
+    ],
+    "screen_xy": [
+      13,
+      3
+    ],
+    "world_id": 2,
+    "width": 2,
+    "height": 10,
+    "type": "blue",
+    "class": "door",
+    "id": 785
+  },
+  "786": {
+    "world_xy": [
+      52,
+      25
+    ],
+    "screen_xy": [
+      1,
+      3
+    ],
+    "world_id": 2,
+    "width": 2,
+    "height": 10,
+    "type": "blue",
+    "class": "door",
+    "id": 786
+  },
+  "787": {
+    "world_xy": [
+      52,
+      25
+    ],
+    "screen_xy": [
+      13,
+      3
+    ],
+    "world_id": 2,
+    "width": 2,
+    "height": 10,
+    "type": "blue",
+    "class": "door",
+    "id": 787
+  },
+  "788": {
+    "world_xy": [
+      53,
+      25
+    ],
+    "screen_xy": [
+      1,
+      3
+    ],
+    "world_id": 2,
+    "width": 2,
+    "height": 10,
+    "type": "blue",
+    "class": "door",
+    "id": 788
+  },
+  "789": {
+    "world_xy": [
+      52,
+      24
+    ],
+    "screen_xy": [
+      13,
+      3
+    ],
+    "world_id": 2,
+    "width": 2,
+    "height": 10,
+    "type": "blue",
+    "class": "door",
+    "id": 789
+  },
+  "790": {
+    "world_xy": [
+      53,
+      24
+    ],
+    "screen_xy": [
+      13,
+      3
+    ],
+    "world_id": 2,
+    "width": 2,
+    "height": 10,
+    "type": "blue",
+    "class": "door",
+    "id": 790
+  },
+  "791": {
+    "world_xy": [
+      54,
+      24
+    ],
+    "screen_xy": [
+      1,
+      3
+    ],
+    "world_id": 2,
+    "width": 2,
+    "height": 10,
+    "type": "blue",
+    "class": "door",
+    "id": 791
+  },
+  "792": {
+    "world_xy": [
+      38,
+      19
+    ],
+    "screen_xy": [
+      13,
+      3
+    ],
+    "world_id": 2,
+    "width": 2,
+    "height": 10,
+    "type": "blue",
+    "class": "door",
+    "id": 792
+  },
+  "793": {
+    "world_xy": [
+      39,
+      19
+    ],
+    "screen_xy": [
+      13,
+      3
+    ],
+    "world_id": 2,
+    "width": 2,
+    "height": 10,
+    "type": "blue",
+    "class": "door",
+    "id": 793
+  },
+  "794": {
+    "world_xy": [
+      40,
+      19
+    ],
+    "screen_xy": [
+      1,
+      3
+    ],
+    "world_id": 2,
+    "width": 2,
+    "height": 10,
+    "type": "blue",
+    "class": "door",
+    "id": 794
+  },
+  "795": {
+    "world_xy": [
+      38,
+      22
+    ],
+    "screen_xy": [
+      13,
+      3
+    ],
+    "world_id": 2,
+    "width": 2,
+    "height": 10,
+    "type": "blue",
+    "class": "door",
+    "id": 795
+  },
+  "796": {
+    "world_xy": [
+      39,
+      22
+    ],
+    "screen_xy": [
+      1,
+      3
+    ],
+    "world_id": 2,
+    "width": 2,
+    "height": 10,
+    "type": "blue",
+    "class": "door",
+    "id": 796
+  },
+  "797": {
+    "world_xy": [
+      40,
+      22
+    ],
+    "screen_xy": [
+      1,
+      3
+    ],
+    "world_id": 2,
+    "width": 2,
+    "height": 10,
+    "type": "blue",
+    "class": "door",
+    "id": 797
+  },
+  "798": {
+    "world_xy": [
+      41,
+      22
+    ],
+    "screen_xy": [
+      13,
+      3
+    ],
+    "world_id": 2,
+    "width": 2,
+    "height": 10,
+    "type": "blue",
+    "class": "door",
+    "id": 798
+  },
+  "799": {
+    "world_xy": [
+      42,
+      22
+    ],
+    "screen_xy": [
+      1,
+      3
+    ],
+    "world_id": 2,
+    "width": 2,
+    "height": 10,
+    "type": "blue",
+    "class": "door",
+    "id": 799
+  },
+  "801": {
+    "world_xy": [
+      39,
+      22
+    ],
+    "screen_xy": [
+      13,
+      3
+    ],
+    "world_id": 2,
+    "width": 2,
+    "height": 10,
+    "type": "red",
+    "class": "door",
+    "id": 801
+  },
+  "802": {
+    "world_xy": [
+      39,
+      24
+    ],
+    "screen_xy": [
+      13,
+      3
+    ],
+    "world_id": 2,
+    "width": 2,
+    "height": 10,
+    "type": "red",
+    "class": "door",
+    "id": 802
+  },
+  "803": {
+    "world_xy": [
+      40,
+      24
+    ],
+    "screen_xy": [
+      1,
+      3
+    ],
+    "world_id": 2,
+    "width": 2,
+    "height": 10,
+    "type": "blue",
+    "class": "door",
+    "id": 803
+  },
+  "804": {
+    "world_xy": [
+      25,
+      37
+    ],
+    "screen_xy": [
+      12,
+      3
+    ],
+    "world_id": 2,
+    "width": 1,
+    "height": 1,
+    "class": "item",
+    "type": "energy-tank",
+    "id": 804
+  },
+  "805": {
+    "world_xy": [
+      38,
+      30
+    ],
+    "screen_xy": [
+      14,
+      10
+    ],
+    "world_id": 2,
+    "width": 1,
+    "height": 1,
+    "class": "item",
+    "type": "energy-tank",
+    "id": 805
+  },
+  "806": {
+    "world_xy": [
+      67,
+      74
+    ],
+    "screen_xy": [
+      6,
+      5
+    ],
+    "world_id": 2,
+    "width": 1,
+    "height": 1,
+    "class": "item",
+    "type": "energy-tank",
+    "id": 806
+  },
+  "807": {
+    "world_xy": [
+      67,
+      73
+    ],
+    "screen_xy": [
+      3,
+      7
+    ],
+    "world_id": 2,
+    "width": 1,
+    "height": 1,
+    "class": "item",
+    "type": "missile",
+    "id": 807
+  },
+  "808": {
+    "world_xy": [
+      63,
+      75
+    ],
+    "screen_xy": [
+      8,
+      4
+    ],
+    "world_id": 2,
+    "width": 1,
+    "height": 1,
+    "class": "item",
+    "type": "power-bomb",
+    "id": 808
+  },
+  "809": {
+    "world_xy": [
+      62,
+      74
+    ],
+    "screen_xy": [
+      2,
+      1
+    ],
+    "world_id": 2,
+    "width": 1,
+    "height": 1,
+    "class": "item",
+    "type": "super-missile",
+    "id": 809
+  },
+  "810": {
+    "world_xy": [
+      69,
+      70
+    ],
+    "screen_xy": [
+      11,
+      12
+    ],
+    "world_id": 2,
+    "width": 1,
+    "height": 1,
+    "class": "item",
+    "type": "power-bomb",
+    "id": 810
+  },
+  "811": {
+    "world_xy": [
+      75,
+      73
+    ],
+    "screen_xy": [
+      6,
+      10
+    ],
+    "world_id": 2,
+    "width": 1,
+    "height": 1,
+    "class": "item",
+    "type": "missile",
+    "id": 811
+  },
+  "812": {
+    "world_xy": [
+      74,
+      74
+    ],
+    "screen_xy": [
+      6,
+      15
+    ],
+    "world_id": 2,
+    "width": 1,
+    "height": 1,
+    "class": "item",
+    "type": "super-missile",
+    "id": 812
+  },
+  "813": {
+    "world_xy": [
+      51,
+      74
+    ],
+    "screen_xy": [
+      3,
+      12
+    ],
+    "world_id": 2,
+    "width": 1,
+    "height": 1,
+    "class": "item",
+    "type": "power-bomb",
+    "id": 813
+  },
+  "814": {
+    "world_xy": [
+      48,
+      76
+    ],
+    "screen_xy": [
+      0,
+      12
+    ],
+    "world_id": 2,
+    "width": 1,
+    "height": 1,
+    "class": "item",
+    "type": "super-missile",
+    "id": 814
+  },
+  "815": {
+    "world_xy": [
+      46,
+      74
+    ],
+    "screen_xy": [
+      7,
+      8
+    ],
+    "world_id": 2,
+    "width": 1,
+    "height": 1,
+    "class": "item",
+    "type": "missile",
+    "id": 815
+  },
+  "816": {
+    "world_xy": [
+      49,
+      71
+    ],
+    "screen_xy": [
+      7,
+      8
+    ],
+    "world_id": 2,
+    "width": 1,
+    "height": 1,
+    "class": "item",
+    "type": "energy-tank",
+    "id": 816
+  },
+  "817": {
+    "world_xy": [
+      60,
+      68
+    ],
+    "screen_xy": [
+      7,
+      11
+    ],
+    "world_id": 2,
+    "width": 1,
+    "height": 1,
+    "class": "item",
+    "type": "power-bomb",
+    "id": 817
+  },
+  "818": {
+    "world_xy": [
+      59,
+      68
+    ],
+    "screen_xy": [
+      10,
+      2
+    ],
+    "world_id": 2,
+    "width": 1,
+    "height": 1,
+    "class": "item",
+    "type": "missile",
+    "id": 818
+  },
+  "819": {
+    "world_xy": [
+      56,
+      65
+    ],
+    "screen_xy": [
+      6,
+      6
+    ],
+    "world_id": 2,
+    "width": 1,
+    "height": 1,
+    "class": "item",
+    "type": "power-bomb",
+    "id": 819
+  },
+  "820": {
+    "world_xy": [
+      62,
+      70
+    ],
+    "screen_xy": [
+      6,
+      8
+    ],
+    "world_id": 2,
+    "width": 1,
+    "height": 1,
+    "class": "item",
+    "type": "screw-attack",
+    "id": 820
+  },
+  "821": {
+    "world_xy": [
+      62,
+      70
+    ],
+    "screen_xy": [
+      6,
+      8
+    ],
+    "world_id": 2,
+    "width": 1,
+    "height": 1,
+    "class": "item",
+    "type": "screw-attack",
+    "id": 821
+  },
+  "822": {
+    "world_xy": [
+      52,
+      77
+    ],
+    "screen_xy": [
+      9,
+      6
+    ],
+    "world_id": 2,
+    "width": 1,
+    "height": 1,
+    "class": "item",
+    "type": "missile",
+    "id": 822
+  },
+  "823": {
+    "world_xy": [
+      49,
+      66
+    ],
+    "screen_xy": [
+      7,
+      3
+    ],
+    "world_id": 2,
+    "width": 1,
+    "height": 1,
+    "class": "item",
+    "type": "missile",
+    "id": 823
+  },
+  "824": {
+    "world_xy": [
+      50,
+      65
+    ],
+    "screen_xy": [
+      9,
+      14
+    ],
+    "world_id": 2,
+    "width": 1,
+    "height": 1,
+    "class": "item",
+    "type": "missile",
+    "id": 824
+  },
+  "825": {
+    "world_xy": [
+      48,
+      66
+    ],
+    "screen_xy": [
+      5,
+      7
+    ],
+    "world_id": 2,
+    "width": 1,
+    "height": 1,
+    "class": "item",
+    "type": "energy-tank",
+    "id": 825
+  },
+  "826": {
+    "world_xy": [
+      47,
+      66
+    ],
+    "screen_xy": [
+      5,
+      9
+    ],
+    "world_id": 2,
+    "width": 1,
+    "height": 1,
+    "class": "item",
+    "type": "super-missile",
+    "id": 826
+  },
+  "827": {
+    "world_xy": [
+      47,
+      64
+    ],
+    "screen_xy": [
+      3,
+      4
+    ],
+    "world_id": 2,
+    "width": 1,
+    "height": 1,
+    "class": "item",
+    "type": "missile",
+    "id": 827
+  },
+  "828": {
+    "world_xy": [
+      43,
+      64
+    ],
+    "screen_xy": [
+      2,
+      9
+    ],
+    "world_id": 2,
+    "width": 1,
+    "height": 1,
+    "class": "item",
+    "type": "missile",
+    "id": 828
+  },
+  "829": {
+    "world_xy": [
+      43,
+      63
+    ],
+    "screen_xy": [
+      12,
+      6
+    ],
+    "world_id": 2,
+    "width": 1,
+    "height": 1,
+    "class": "item",
+    "type": "power-bomb",
+    "id": 829
+  },
+  "830": {
+    "world_xy": [
+      48,
+      61
+    ],
+    "screen_xy": [
+      5,
+      7
+    ],
+    "world_id": 2,
+    "width": 1,
+    "height": 1,
+    "class": "item",
+    "type": "wave-beam",
+    "id": 830
+  },
+  "831": {
+    "world_xy": [
+      55,
+      58
+    ],
+    "screen_xy": [
+      10,
+      9
+    ],
+    "world_id": 2,
+    "width": 1,
+    "height": 1,
+    "class": "item",
+    "type": "high-jump",
+    "id": 831
+  },
+  "832": {
+    "world_xy": [
+      46,
+      56
+    ],
+    "screen_xy": [
+      6,
+      9
+    ],
+    "world_id": 2,
+    "width": 1,
+    "height": 1,
+    "class": "item",
+    "type": "spring-ball",
+    "id": 832
+  },
+  "833": {
+    "world_xy": [
+      47,
+      57
+    ],
+    "screen_xy": [
+      14,
+      11
+    ],
+    "world_id": 2,
+    "width": 1,
+    "height": 1,
+    "class": "item",
+    "type": "power-bomb",
+    "id": 833
+  },
+  "834": {
+    "world_xy": [
+      50,
+      56
+    ],
+    "screen_xy": [
+      13,
+      11
+    ],
+    "world_id": 2,
+    "width": 1,
+    "height": 1,
+    "class": "item",
+    "type": "energy-tank",
+    "id": 834
+  },
+  "835": {
+    "world_xy": [
+      53,
+      53
+    ],
+    "screen_xy": [
+      9,
+      14
+    ],
+    "world_id": 2,
+    "width": 1,
+    "height": 1,
+    "class": "item",
+    "type": "super-missile",
+    "id": 835
+  },
+  "836": {
+    "world_xy": [
+      49,
+      52
+    ],
+    "screen_xy": [
+      4,
+      2
+    ],
+    "world_id": 2,
+    "width": 1,
+    "height": 1,
+    "class": "item",
+    "type": "super-missile",
+    "id": 836
+  },
+  "837": {
+    "world_xy": [
+      51,
+      53
+    ],
+    "screen_xy": [
+      5,
+      5
+    ],
+    "world_id": 2,
+    "width": 1,
+    "height": 1,
+    "class": "item",
+    "type": "super-missile",
+    "id": 837
+  },
+  "838": {
+    "world_xy": [
+      50,
+      50
+    ],
+    "screen_xy": [
+      5,
+      5
+    ],
+    "world_id": 2,
+    "width": 1,
+    "height": 1,
+    "class": "item",
+    "type": "ice-beam",
+    "id": 838
+  },
+  "839": {
+    "world_xy": [
+      40,
+      50
+    ],
+    "screen_xy": [
+      7,
+      15
+    ],
+    "world_id": 2,
+    "width": 1,
+    "height": 1,
+    "class": "item",
+    "type": "power-bomb",
+    "id": 839
+  },
+  "840": {
+    "world_xy": [
+      39,
+      51
+    ],
+    "screen_xy": [
+      12,
+      4
+    ],
+    "world_id": 2,
+    "width": 1,
+    "height": 1,
+    "class": "item",
+    "type": "energy-tank",
+    "id": 840
+  },
+  "841": {
+    "world_xy": [
+      47,
+      54
+    ],
+    "screen_xy": [
+      0,
+      8
+    ],
+    "world_id": 2,
+    "width": 1,
+    "height": 1,
+    "class": "item",
+    "type": "missile",
+    "id": 841
+  },
+  "842": {
+    "world_xy": [
+      39,
+      55
+    ],
+    "screen_xy": [
+      7,
+      9
+    ],
+    "world_id": 2,
+    "width": 1,
+    "height": 1,
+    "class": "item",
+    "type": "super-missile",
+    "id": 842
+  },
+  "843": {
+    "world_xy": [
+      35,
+      56
+    ],
+    "screen_xy": [
+      6,
+      5
+    ],
+    "world_id": 2,
+    "width": 1,
+    "height": 1,
+    "class": "item",
+    "type": "super-missile",
+    "id": 843
+  },
+  "844": {
+    "world_xy": [
+      32,
+      54
+    ],
+    "screen_xy": [
+      3,
+      7
+    ],
+    "world_id": 2,
+    "width": 1,
+    "height": 1,
+    "class": "item",
+    "type": "power-bomb",
+    "id": 844
+  },
+  "845": {
+    "world_xy": [
+      33,
+      52
+    ],
+    "screen_xy": [
+      9,
+      2
+    ],
+    "world_id": 2,
+    "width": 1,
+    "height": 1,
+    "class": "item",
+    "type": "missile",
+    "id": 845
+  },
+  "846": {
+    "world_xy": [
+      32,
+      53
+    ],
+    "screen_xy": [
+      9,
+      7
+    ],
+    "world_id": 2,
+    "width": 1,
+    "height": 1,
+    "class": "item",
+    "type": "missile",
+    "id": 846
+  },
+  "847": {
+    "world_xy": [
+      22,
+      66
+    ],
+    "screen_xy": [
+      10,
+      13
+    ],
+    "world_id": 2,
+    "width": 1,
+    "height": 1,
+    "class": "item",
+    "type": "energy-tank",
+    "id": 847
+  },
+  "848": {
+    "world_xy": [
+      30,
+      66
+    ],
+    "screen_xy": [
+      14,
+      9
+    ],
+    "world_id": 2,
+    "width": 1,
+    "height": 1,
+    "class": "item",
+    "type": "super-missile",
+    "id": 848
+  },
+  "849": {
+    "world_xy": [
+      24,
+      68
+    ],
+    "screen_xy": [
+      6,
+      7
+    ],
+    "world_id": 2,
+    "width": 1,
+    "height": 1,
+    "class": "item",
+    "type": "super-missile",
+    "id": 849
+  },
+  "850": {
+    "world_xy": [
+      23,
+      68
+    ],
+    "screen_xy": [
+      13,
+      4
+    ],
+    "world_id": 2,
+    "width": 1,
+    "height": 1,
+    "class": "item",
+    "type": "speed-booster",
+    "id": 850
+  },
+  "851": {
+    "world_xy": [
+      20,
+      64
+    ],
+    "screen_xy": [
+      2,
+      9
+    ],
+    "world_id": 2,
+    "width": 1,
+    "height": 1,
+    "class": "item",
+    "type": "missile",
+    "id": 851
+  },
+  "852": {
+    "world_xy": [
+      17,
+      64
+    ],
+    "screen_xy": [
+      13,
+      7
+    ],
+    "world_id": 2,
+    "width": 1,
+    "height": 1,
+    "class": "item",
+    "type": "power-bomb",
+    "id": 852
+  },
+  "853": {
+    "world_xy": [
+      21,
+      60
+    ],
+    "screen_xy": [
+      11,
+      10
+    ],
+    "world_id": 2,
+    "width": 1,
+    "height": 1,
+    "class": "item",
+    "type": "super-missile",
+    "id": 853
+  },
+  "854": {
+    "world_xy": [
+      22,
+      57
+    ],
+    "screen_xy": [
+      4,
+      6
+    ],
+    "world_id": 2,
+    "width": 1,
+    "height": 1,
+    "class": "item",
+    "type": "super-missile",
+    "id": 854
+  },
+  "855": {
+    "world_xy": [
+      27,
+      57
+    ],
+    "screen_xy": [
+      4,
+      7
+    ],
+    "world_id": 2,
+    "width": 1,
+    "height": 1,
+    "class": "item",
+    "type": "power-bomb",
+    "id": 855
+  },
+  "856": {
+    "world_xy": [
+      27,
+      63
+    ],
+    "screen_xy": [
+      15,
+      12
+    ],
+    "world_id": 2,
+    "width": 1,
+    "height": 1,
+    "class": "item",
+    "type": "missile",
+    "id": 856
+  },
+  "857": {
+    "world_xy": [
+      33,
+      59
+    ],
+    "screen_xy": [
+      4,
+      8
+    ],
+    "world_id": 2,
+    "width": 1,
+    "height": 1,
+    "class": "item",
+    "type": "energy-tank",
+    "id": 857
+  },
+  "858": {
+    "world_xy": [
+      29,
+      60
+    ],
+    "screen_xy": [
+      3,
+      4
+    ],
+    "world_id": 2,
+    "width": 1,
+    "height": 1,
+    "class": "item",
+    "type": "energy-tank",
+    "id": 858
+  },
+  "859": {
+    "world_xy": [
+      26,
+      55
+    ],
+    "screen_xy": [
+      12,
+      11
+    ],
+    "world_id": 2,
+    "width": 1,
+    "height": 1,
+    "class": "item",
+    "type": "missile",
+    "id": 859
+  },
+  "860": {
+    "world_xy": [
+      26,
+      53
+    ],
+    "screen_xy": [
+      14,
+      6
+    ],
+    "world_id": 2,
+    "width": 1,
+    "height": 1,
+    "class": "item",
+    "type": "missile",
+    "id": 860
+  },
+  "861": {
+    "world_xy": [
+      26,
+      54
+    ],
+    "screen_xy": [
+      11,
+      11
+    ],
+    "world_id": 2,
+    "width": 1,
+    "height": 1,
+    "class": "item",
+    "type": "super-missile",
+    "id": 861
+  },
+  "862": {
+    "world_xy": [
+      22,
+      53
+    ],
+    "screen_xy": [
+      4,
+      6
+    ],
+    "world_id": 2,
+    "width": 1,
+    "height": 1,
+    "class": "item",
+    "type": "super-missile",
+    "id": 862
+  },
+  "863": {
+    "world_xy": [
+      12,
+      56
+    ],
+    "screen_xy": [
+      8,
+      8
+    ],
+    "world_id": 2,
+    "width": 1,
+    "height": 1,
+    "class": "item",
+    "type": "missile",
+    "id": 863
+  },
+  "864": {
+    "world_xy": [
+      13,
+      56
+    ],
+    "screen_xy": [
+      8,
+      7
+    ],
+    "world_id": 2,
+    "width": 1,
+    "height": 1,
+    "class": "item",
+    "type": "missile",
+    "id": 864
+  },
+  "865": {
+    "world_xy": [
+      17,
+      54
+    ],
+    "screen_xy": [
+      8,
+      11
+    ],
+    "world_id": 2,
+    "width": 1,
+    "height": 1,
+    "class": "item",
+    "type": "missile",
+    "id": 865
+  },
+  "866": {
+    "world_xy": [
+      14,
+      60
+    ],
+    "screen_xy": [
+      0,
+      6
+    ],
+    "world_id": 2,
+    "width": 1,
+    "height": 1,
+    "class": "item",
+    "type": "missile",
+    "id": 866
+  },
+  "867": {
+    "world_xy": [
+      12,
+      59
+    ],
+    "screen_xy": [
+      1,
+      8
+    ],
+    "world_id": 2,
+    "width": 1,
+    "height": 1,
+    "class": "item",
+    "type": "missile",
+    "id": 867
+  },
+  "868": {
+    "world_xy": [
+      12,
+      55
+    ],
+    "screen_xy": [
+      4,
+      9
+    ],
+    "world_id": 2,
+    "width": 1,
+    "height": 1,
+    "class": "item",
+    "type": "spazer",
+    "id": 868
+  },
+  "869": {
+    "world_xy": [
+      10,
+      57
+    ],
+    "screen_xy": [
+      6,
+      5
+    ],
+    "world_id": 2,
+    "width": 1,
+    "height": 1,
+    "class": "item",
+    "type": "space-jump",
+    "id": 869
+  },
+  "870": {
+    "world_xy": [
+      11,
+      61
+    ],
+    "screen_xy": [
+      9,
+      5
+    ],
+    "world_id": 2,
+    "width": 1,
+    "height": 1,
+    "class": "item",
+    "type": "energy-tank",
+    "id": 870
+  },
+  "871": {
+    "world_xy": [
+      9,
+      61
+    ],
+    "screen_xy": [
+      3,
+      11
+    ],
+    "world_id": 2,
+    "width": 1,
+    "height": 1,
+    "class": "item",
+    "type": "super-missile",
+    "id": 871
+  },
+  "872": {
+    "world_xy": [
+      6,
+      47
+    ],
+    "screen_xy": [
+      8,
+      8
+    ],
+    "world_id": 2,
+    "width": 1,
+    "height": 1,
+    "class": "item",
+    "type": "missile",
+    "id": 872
+  },
+  "873": {
+    "world_xy": [
+      10,
+      52
+    ],
+    "screen_xy": [
+      4,
+      4
+    ],
+    "world_id": 2,
+    "width": 1,
+    "height": 1,
+    "class": "item",
+    "type": "plasma-beam",
+    "id": 873
+  },
+  "874": {
+    "world_xy": [
+      27,
+      46
+    ],
+    "screen_xy": [
+      6,
+      3
+    ],
+    "world_id": 2,
+    "width": 1,
+    "height": 1,
+    "class": "item",
+    "type": "missile",
+    "id": 874
+  },
+  "875": {
+    "world_xy": [
+      28,
+      46
+    ],
+    "screen_xy": [
+      8,
+      0
+    ],
+    "world_id": 2,
+    "width": 1,
+    "height": 1,
+    "class": "item",
+    "type": "super-missile",
+    "id": 875
+  },
+  "876": {
+    "world_xy": [
+      26,
+      44
+    ],
+    "screen_xy": [
+      8,
+      5
+    ],
+    "world_id": 2,
+    "width": 1,
+    "height": 1,
+    "class": "item",
+    "type": "power-bomb",
+    "id": 876
+  },
+  "877": {
+    "world_xy": [
+      23,
+      41
+    ],
+    "screen_xy": [
+      1,
+      13
+    ],
+    "world_id": 2,
+    "width": 1,
+    "height": 1,
+    "class": "item",
+    "type": "power-bomb",
+    "id": 877
+  },
+  "878": {
+    "world_xy": [
+      21,
+      49
+    ],
+    "screen_xy": [
+      15,
+      10
+    ],
+    "world_id": 2,
+    "width": 1,
+    "height": 1,
+    "class": "item",
+    "type": "energy-tank",
+    "id": 878
+  },
+  "879": {
+    "world_xy": [
+      22,
+      50
+    ],
+    "screen_xy": [
+      7,
+      4
+    ],
+    "world_id": 2,
+    "width": 1,
+    "height": 1,
+    "class": "item",
+    "type": "missile",
+    "id": 879
+  },
+  "880": {
+    "world_xy": [
+      61,
+      63
+    ],
+    "screen_xy": [
+      5,
+      6
+    ],
+    "world_id": 2,
+    "width": 1,
+    "height": 1,
+    "class": "item",
+    "type": "energy-tank",
+    "id": 880
+  },
+  "881": {
+    "world_xy": [
+      60,
+      63
+    ],
+    "screen_xy": [
+      13,
+      4
+    ],
+    "world_id": 2,
+    "width": 1,
+    "height": 1,
+    "class": "item",
+    "type": "missile",
+    "id": 881
+  },
+  "882": {
+    "world_xy": [
+      61,
+      63
+    ],
+    "screen_xy": [
+      12,
+      4
+    ],
+    "world_id": 2,
+    "width": 1,
+    "height": 1,
+    "class": "item",
+    "type": "missile",
+    "id": 882
+  },
+  "883": {
+    "world_xy": [
+      62,
+      63
+    ],
+    "screen_xy": [
+      12,
+      4
+    ],
+    "world_id": 2,
+    "width": 1,
+    "height": 1,
+    "class": "item",
+    "type": "missile",
+    "id": 883
+  },
+  "884": {
+    "world_xy": [
+      67,
+      60
+    ],
+    "screen_xy": [
+      10,
+      8
+    ],
+    "world_id": 2,
+    "width": 1,
+    "height": 1,
+    "class": "item",
+    "type": "reserve-tank",
+    "id": 884
+  },
+  "885": {
+    "world_xy": [
+      62,
+      71
+    ],
+    "screen_xy": [
+      9,
+      8
+    ],
+    "world_id": 2,
+    "width": 1,
+    "height": 1,
+    "class": "item",
+    "type": "missile",
+    "id": 885
   }
 }
