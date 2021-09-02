@@ -1,6 +1,11 @@
 <template>
   <div class="flex-grow">
     <div class="viewer-wrapper" v-if="world">
+      <div class="unrest-floating-actions -left">
+        <div class="btn -primary" @click="locked = !locked">
+          <i :class="`fa fa-${locked ? 'lock' : 'unlock-alt'}`" />
+        </div>
+      </div>
       <open-seadragon :pixelated="true" :options="viewer_options" :events="viewer_events" />
       <template v-if="viewer">
         <html-overlay :viewer="viewer" :world="world" :screens="screens">
@@ -36,6 +41,9 @@ export default {
   },
   components: { HtmlOverlay, ItemBox, SvgOverlay, ViewerPanel },
   mixins: [ViewerMixin, WorldMixin, Mousetrap.Mixin],
+  data() {
+    return { locked: true }
+  },
   computed: {
     items() {
       const room_items = this.game.getItemsByRoomId(this.current_room.id)
@@ -55,10 +63,12 @@ export default {
       const [min_x, min_y] = this.visible_xys[0]
       const [max_x, max_y] = this.visible_xys[this.visible_xys.length - 1].map((n) => n + 1)
       const width = max_x - min_x
-      out.push({ x: 0, y: 0, width: min_x, height: H, class: '-black' }) // left
-      out.push({ x: min_x, y: 0, width, height: min_y, class: '-black' }) // above
-      out.push({ x: min_x, y: max_y, width, height: H - max_y, class: '-black' }) // below
-      out.push({ x: max_x, y: 0, width: W - max_x, height: H, class: '-black' }) // right
+      if (this.locked) {
+        out.push({ x: 0, y: 0, width: min_x, height: H, class: '-black' }) // left
+        out.push({ x: min_x, y: 0, width, height: min_y, class: '-black' }) // above
+        out.push({ x: min_x, y: max_y, width, height: H - max_y, class: '-black' }) // below
+        out.push({ x: max_x, y: 0, width: W - max_x, height: H, class: '-black' }) // right
+      }
       out.push(this.game_screen)
       return out
     },
@@ -76,18 +86,18 @@ export default {
       return this.game.getArrows()
     },
   },
+  watch: {
+    locked: 'updateLocked',
+  },
   methods: {
     getViewerOptions() {
       return {
         showNavigator: false,
         tileSources: [this.world.dzi],
-        panHorizontal: false,
-        panVertical: false,
-        panHorizontal: false,
-        mouseNavEnabled: false,
       }
     },
     onViewerDone() {
+      this.updateLocked()
       this.game.on('goto-room', this.gotoRoom)
       this.game.start()
     },
@@ -98,6 +108,9 @@ export default {
       const direction = e.key.replace('Arrow', '').toLowerCase()
       this.game.move(direction)
       this.$store.playthrough.save(this.game.playthrough)
+    },
+    updateLocked() {
+      this.viewer.setMouseNavEnabled(!this.locked)
     },
   },
 }
