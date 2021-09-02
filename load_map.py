@@ -1,19 +1,16 @@
 #!/usr/bin/env python3
 # https://github.com/openzoom/deepzoom.py/blob/master/examples/helloworld/helloworld-dzi.py
-
-
-import os
+import sys
 from PIL import Image
 
 Image.MAX_IMAGE_PIXELS = 933120000
 
 import deepzoom
 
-name = 'SuperZeroMission'
-
 
 # Specify your source image
-SOURCE = f"client/public/{name}.png"
+SOURCE = sys.argv[1]
+name = SOURCE.split('/')[-1]
 
 # Create Deep Zoom Image creator with weird parameters
 creator = deepzoom.ImageCreator(
