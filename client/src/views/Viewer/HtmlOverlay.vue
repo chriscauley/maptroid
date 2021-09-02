@@ -10,7 +10,6 @@
 
 <script>
 import OpenSeadragon from 'openseadragon'
-import Item from '@/models/Item'
 
 export default {
   props: {
@@ -36,28 +35,10 @@ export default {
         class: 'osd__drag-box',
       }
     },
-    item_blocks() {
-      if (this.items?.length) {
-        console.warn('Use Viewer/ItemBox.vue instead of item_blocks')
-      }
-      return this.items?.map((item) => {
-        const { id, type, class: _class } = item
-        const { x, y, width, height } = Item.getMapBounds(item, this.world)
-        return {
-          item,
-          attrs: {
-            id: `overlay-item-${id}`,
-            class: `html-overlay__item -class-${_class} sm-${_class} -${type}`,
-            style: this._scale({ x, y, width, height }),
-            onClick: () => this.$emit('click-item', item),
-          },
-        }
-      })
-    },
     screen_blocks() {
       return this.screens.map(({ x, y, width = 1, height = 1, ...item }) => {
         // there's a slight issue with cracks showing between elements
-        // add 0.5% to width/height to stop it
+        // add 0.1% to width/height to stop it
         width *= 1.001
         height *= 1.001
         return {
@@ -71,7 +52,7 @@ export default {
       })
     },
     block_groups() {
-      return [this.screen_blocks, this.item_blocks]
+      return [this.screen_blocks]
     },
   },
   mounted() {

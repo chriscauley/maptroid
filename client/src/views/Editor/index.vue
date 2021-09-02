@@ -2,13 +2,15 @@
   <div :class="[viewer_class, 'map-editor']" v-if="world">
     <open-seadragon :pixelated="true" :options="viewer_options" :events="viewer_events" />
     <template v-if="viewer">
-      <html-overlay
-        :viewer="viewer"
-        :world="world"
-        :screens="screens"
-        :items="items"
-        @click-item="clickItem"
-      />
+      <html-overlay :viewer="viewer" :world="world" :screens="screens" @click-item="clickItem">
+        <item-box
+          v-for="item in items"
+          :item="item"
+          :world="world"
+          :key="item.id"
+          @click="clickItem(item)"
+        />
+      </html-overlay>
       <selected-item v-if="selected_item" :key="selected_item" :viewer="viewer" />
       <mouse-tracker :viewer="viewer" :world="world" />
       <toolbar :world="world" />
@@ -24,7 +26,9 @@ import MouseTracker from './MouseTracker.vue'
 import SelectedItem from './SelectedItem.vue'
 import SelectedRoom from './SelectedRoom.vue'
 import Toolbar from './Toolbar.vue'
+
 import HtmlOverlay from '../Viewer/HtmlOverlay.vue'
+import ItemBox from '../Viewer/ItemBox.vue'
 import ViewerMixin from '../Viewer/Mixin'
 import WorldMixin from '../Viewer/WorldMixin'
 
@@ -34,7 +38,15 @@ export default {
   __route: {
     path: '/editor/:world_id/',
   },
-  components: { HtmlOverlay, ItemPanel, MouseTracker, SelectedItem, SelectedRoom, Toolbar },
+  components: {
+    HtmlOverlay,
+    ItemBox,
+    ItemPanel,
+    MouseTracker,
+    SelectedItem,
+    SelectedRoom,
+    Toolbar,
+  },
   mixins: [ViewerMixin, WorldMixin],
   computed: {
     selected_item() {
@@ -52,7 +64,10 @@ export default {
       }
       const { map_style, selected_room_id } = this.$store.viewer.state
       rooms.forEach((room) => {
-        const onClick = () => this.$store.viewer.patch({ selected_room_id: room.id })
+        const onClick = () => {
+          const { zone, id } = room
+          this.$store.viewer.patch({ selected_room_id: id, room_tool: zone, selected_tool: 'room' })
+        }
         const selected = room.id === selected_room_id
         out = out.concat(Room.makeRoom(room, { map_style, selected, onClick }))
       })

@@ -52,6 +52,8 @@
 import OpenSeadragon from 'openseadragon'
 import { sortBy } from 'lodash'
 
+import Room from '@/models/Room'
+import Item from '@/models/Item'
 import Inventory from './Inventory.vue'
 
 export default {
@@ -111,14 +113,20 @@ export default {
   },
   methods: {
     gotoItem(item) {
-      const { x, y, width, height } = item
-      this.goto(x, y, width, height)
+      const { room_id } = item
+      const room = room_id && this.$store.room.getOne(room_id)
+      if (room) {
+        this.gotoRoom(room)
+      } else {
+        const { x, y, width, height } = Item.getMapBounds(item, this.world)
+        this.goto(x, y, width, height)
+      }
       this.viewer.addOnceHandler('animation-finish', () =>
         this.$store.viewer.patch({ selected_item: item.id }),
       )
     },
     gotoRoom(room) {
-      const [x, y, width, height] = room.getMapBounds()
+      const [x, y, width, height] = Room.getMapBounds(room, this.world)
       this.goto(x, y, width, height)
     },
     goto(x, y, width, height) {
