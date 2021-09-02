@@ -1,44 +1,69 @@
 <template>
   <div class="viewer-toolbar">
-    <div v-for="tool in tools" :key="tool.name" class="viewer-toolbar__tool">
-      <div :title="tool.name" @click="selectTool(tool)" :class="css.tool(tool)">
-        <i :class="tool.icon" />
+    <div class="viewer-toolbar__row">
+      <div class="viewer-toolbar__debug">{{ viewer_data }}</div>
+    </div>
+    <div class="viewer-toolbar__row" v-if="selected_tool?.children">
+      <div
+        v-for="(child, i) in selected_tool.children"
+        :key="child.slug"
+        @click="child.click"
+        :class="child.btn"
+        :title="child.slug"
+      >
+        <i :class="child.class" />
+        <div v-if="!ctrl_down" class="flaire">{{ i + 1 }}</div>
       </div>
-      <div v-if="tool.children" class="viewer-toolbar__children">
-        <div
-          v-for="child in tool.children"
-          :key="child.slug"
-          @click="child.click"
-          :class="child.btn"
-          :title="child.slug"
-        >
-          <i :class="child.class" />
+    </div>
+    <div class="viewer-toolbar__row">
+      <div
+        v-for="(tool, i) in tools"
+        :key="tool.name"
+        :title="tool.name"
+        @click="selectTool(tool)"
+        :class="css.tool(tool)"
+      >
+        <i :class="tool.icon" />
+        <div v-if="ctrl_down" class="flaire">{{ i + 1 }}</div>
+      </div>
+      <div class="btn -light">
+        <i class="fa fa-gear" />
+        <div class="viewer-toolbar__hover">
+          <select v-model="$store.viewer.state.map_style">
+            <option value="off">off</option>
+            <option value="mini">mini</option>
+            <option value="full">full</option>
+          </select>
         </div>
       </div>
     </div>
-    <div class="btn -light viewer-toolbar__tool">
-      <i class="fa fa-gear" />
-      <div class="viewer-toolbar__children -menu">
-        <select v-model="$store.viewer.state.map_style">
-          <option value="off">off</option>
-          <option value="mini">mini</option>
-          <option value="full">full</option>
-        </select>
-      </div>
-    </div>
-    <div class="viewer-toolbar__debug">{{ viewer_data }}</div>
   </div>
 </template>
 
 <script>
 import Item from '@/models/Item'
 import { map_markers, doors } from '@/models'
+import Mousetrap from '@unrest/vue-mousetrap'
 
 export default {
+  mixins: [Mousetrap.Mixin],
   props: {
     world: Object,
   },
+  data() {
+    return { ctrl_down: false }
+  },
   computed: {
+    mousetrap() {
+      return {
+        '1,2,3,4,5,6,7,8,9': this.pressChild,
+        'mod+1,mod+2,mod+3,mod+4,mod+5,mod+6,mod+7,mod+8,mod+9': this.pressTool,
+        mod: {
+          keyup: () => (this.ctrl_down = false),
+          keydown: () => (this.ctrl_down = true),
+        },
+      }
+    },
     css() {
       const { selected_tool } = this.$store.viewer.state
       return {
@@ -64,6 +89,13 @@ export default {
         this.makeTool('map', map_markers),
       ]
     },
+    selected_tool() {
+      const { selected_tool, item_tool } = this.$store.viewer.state
+      if (selected_tool === 'item') {
+        return this.tools.find((t) => t.children?.find((c) => c.slug === item_tool))
+      }
+      return this.tools.find((t) => t.slug === selected_tool)
+    },
     viewer_data() {
       const { pointer } = this.$store.viewer.state
       if (!pointer) {
@@ -75,6 +107,21 @@ export default {
     },
   },
   methods: {
+    pressTool(e) {
+      e.preventDefault()
+      const tool = this.tools[e.key - 1]
+      if (tool) {
+        this.selectTool(tool)
+      }
+    },
+    pressChild(e) {
+      e.preventDefault()
+      const tool = this.selected_tool
+      const child = tool.children?.[e.key - 1]
+      if (child) {
+        child.click()
+      }
+    },
     selectTool(tool) {
       const data = { selected_tool: tool.slug }
       if (tool.variant) {

@@ -54,25 +54,43 @@
 }
 
 .viewer-toolbar {
+  @apply flex-col;
+  &__row {
+    @apply flex;
+  }
   &__tool {
     @apply flex relative;
     &:hover .viewer-toolbar__children {
       @apply flex;
     }
   }
-  &__children {
-    @apply absolute flex-col hidden left-0;
-    bottom: 100%;
-    &.-menu {
-      @apply p-4;
-      background: var(--bg);
-      font-size: 1rem;
+  .btn {
+    @apply relative rounded-none;
+    &:first-child {
+      @apply rounded-l;
+    }
+    &:last-child {
+      @apply rounded-r;
     }
   }
   &__debug {
     @apply absolute -bg-bg p-2;
     bottom: 100%;
     font-size: 1rem;
+  }
+  &__hover {
+    @apply absolute flex-col hidden left-0;
+    bottom: 100%;
+    @apply p-4;
+    background: var(--bg);
+    font-size: 1rem;
+  }
+  .btn:hover &__hover {
+    @apply flex;
+  }
+  .flaire {
+    @apply absolute bg-blue-700 bottom-0 flex h-4 items-center justify-center right-0 rounded-full  w-4;
+    font-size: 0.75rem;
   }
 }
 
@@ -224,11 +242,11 @@
   .html-overlay__item {
     cursor: pointer;
     position: absolute;
-    outline: 5px solid white;
+    outline: 5px solid red;
   }
-  &.-overzoomed .html-overlay__item {
-    outline: none;
-  }
+  /* &.-overzoomed .html-overlay__item { */
+  /*   outline: none; */
+  /* } */
 }
 
 
