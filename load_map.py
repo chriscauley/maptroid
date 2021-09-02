@@ -10,7 +10,7 @@ import deepzoom
 
 # Specify your source image
 SOURCE = sys.argv[1]
-name = SOURCE.split('/')[-1]
+name = SOURCE.split('/')[-1].split('.')[0]
 
 # Create Deep Zoom Image creator with weird parameters
 creator = deepzoom.ImageCreator(

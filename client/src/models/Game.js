@@ -2,13 +2,6 @@ import Room from './Room'
 import vec from '@/lib/vec'
 import mitt from 'mitt'
 
-const DIRECTIONS = {
-  up: [0, -1],
-  down: [0, 1],
-  left: [-1, 0],
-  right: [1, 0],
-}
-
 class Game {
   constructor({ playthrough }) {
     const { on, off, emit } = mitt()
@@ -86,7 +79,7 @@ class Game {
     }
   }
   move(direction) {
-    this.goto(vec.add(this.state.xy, DIRECTIONS[direction]))
+    this.goto(vec.add(this.state.xy, vec.dxyByName[direction]))
   }
   getItem(item_id) {
     this.playthrough.actions.push(['getItem', item_id])

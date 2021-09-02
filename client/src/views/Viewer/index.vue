@@ -48,9 +48,9 @@ export default {
   },
   computed: {
     items() {
-      const items = this.locked ?
-            this.game.getItemsByRoomId(this.current_room.id) :
-            this.$store.item.getAll({ world_id: this.world.id })
+      const items = this.locked
+        ? this.game.getItemsByRoomId(this.current_room.id)
+        : this.$store.item.getAll({ world_id: this.world.id })
 
       return items.filter((i) => i.class === 'item' || i.class === 'boss')
     },

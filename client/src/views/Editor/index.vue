@@ -11,7 +11,7 @@
           @click="clickItem(item)"
         />
       </html-overlay>
-      <selected-item v-if="selected_item" :key="selected_item" :viewer="viewer" />
+      <selected-item v-if="selected_item" :key="selected_item" :viewer="viewer" :world="world" />
       <mouse-tracker :viewer="viewer" :world="world" />
       <toolbar :world="world" />
     </template>

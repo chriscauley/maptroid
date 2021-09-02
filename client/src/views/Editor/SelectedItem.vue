@@ -9,10 +9,27 @@
         </span>
       </div>
     </div>
+    <hr />
+    <div>
+      <span class="btn-group">
+        <i
+          v-for="(dxy, name) in dxyByName"
+          :class="`btn -primary -mini fa fa-arrow-${name}`"
+          :key="name"
+          @click="moveItem(dxy)"
+        />
+      </span>
+      {{ ' ' }}
+      <span title="Coordinates of item on screen">{{ item.screen_xy.join(',') }}</span>
+      @
+      <span title="Coordinates of screen on world">{{ item.world_xy.join(',') }}</span>
+    </div>
   </unrest-popper>
 </template>
 
 <script>
+import mod from '@/lib/mod'
+import vec from '@/lib/vec'
 import Item from '@/models/Item'
 import { bosses, map_markers, doors } from '@/models'
 import Mousetrap from '@unrest/vue-mousetrap'
@@ -27,6 +44,13 @@ const types_by_class = {
 
 export default {
   mixins: [Mousetrap.Mixin],
+  props: {
+    world: Object,
+  },
+  data() {
+    const { dxyByName } = vec
+    return { dxyByName }
+  },
   computed: {
     item_types() {
       return types_by_class[this.item.class]
@@ -49,6 +73,20 @@ export default {
     },
   },
   methods: {
+    moveItem(dxy) {
+      this.item.screen_xy = vec.add(this.item.screen_xy, dxy)
+      const max_xy = this.world.map_screen_size / this.world.map_item_size
+      const dimensions = [0, 1]
+      dimensions.forEach((i) => {
+        if (this.item.screen_xy[i] === -1) {
+          this.item.world_xy[i]--
+        } else if (this.item.screen_xy[i] === max_xy) {
+          this.item.world_xy[i]++
+        }
+        this.item.screen_xy[i] = mod(this.item.screen_xy[i], max_xy)
+      })
+      this.$store.item.save(this.item)
+    },
     close() {
       this.$store.viewer.patch({ selected_item: null })
     },

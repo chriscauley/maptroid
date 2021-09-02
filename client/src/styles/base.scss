@@ -34,9 +34,21 @@
     max-height: 6rem;
     overflow: scroll;
   }
-  .btn.-mini {
-    @apply p-1;
+}
+
+.btn-group .btn {
+  @apply rounded-none;
+  &:first-child {
+    @apply rounded-l;
   }
+  &:last-child {
+    @apply rounded-r;
+  }
+}
+
+.btn.-mini {
+  @apply p-1;
+  user-select:none;
 }
 
 .osd-panel, .html-overlay {
@@ -77,13 +89,7 @@
     }
   }
   .btn {
-    @apply relative rounded-none;
-    &:first-child {
-      @apply rounded-l;
-    }
-    &:last-child {
-      @apply rounded-r;
-    }
+    @apply relative;
   }
   &__debug {
     @apply absolute -bg-bg p-2;
@@ -220,37 +226,34 @@
 }
 
 
-.html-overlay {
-  &__item {
-    @apply absolute cursor-pointer;
-    border: 5px solid white;
-    box-sizing: content-box;
+.html-overlay__screen-mask {
+  @apply absolute;
+  background: red; /* This should never appear! */
+  &.-black {
+    @apply bg-black;
   }
-  &__screen-mask {
-    @apply absolute;
-    background: red; /* This should never appear! */
-    &.-black {
-      @apply bg-black;
-    }
-    &.-outline-blue {
-      background: transparent;
-      border: 5px dashed blue;
-    }
+  &.-outline-blue {
+    background: transparent;
+    border: 5px dashed blue;
   }
 }
 
 .html-overlay__item {
+  @apply absolute cursor-pointer;
+  border: 5px solid white;
+  box-sizing: content-box;
+  margin: -5px;
   &.sm-boss, &.sm-map, &.sm-chozo {
     background: none;
   }
   &.sm-boss {
-    outline: 5px solid red;
+    border-color: red;
   }
   &.sm-chozo {
-    outline: 5px solid blue;
+    border-color: blue;
   }
   &.sm-map {
-    outline: 5px solid #8F8;
+    border-color: #8F8;
   }
 }
 
@@ -258,10 +261,12 @@
   .html-overlay__item {
     cursor: pointer;
     position: absolute;
-    outline: 5px solid red;
+    &.sm-item {
+      border-color: purple;
+    }
   }
   /* &.-overzoomed .html-overlay__item { */
-  /*   outline: none; */
+  /*   border: 0; */
   /* } */
 }
 
