@@ -36,5 +36,24 @@
       "elevator",
       "void"
     ]
+  },
+  "3": {
+    "name": "Super Metroid Ascent",
+    "dzi": "/output/Ascent.dzi",
+    "id": 3,
+    "map_screen_size": 32,
+    "map_item_size": 2,
+    "zones": [
+      "crateria",
+      "brinstar",
+      "kraid",
+      "pirate-ship",
+      "chozodia",
+      "norfair",
+      "ridley",
+      "tourian",
+      "elevator",
+      "void"
+    ]
   }
 }
