@@ -2,7 +2,9 @@
   <div class="osd-panel -viewer">
     <div class="osd-panel__inner">
       <inventory :items="game.listItems()" :missing_items="game.listMissingItems()" />
-      <div class="osd-panel__title">Room #{{ room.id }} - {{ room.name || 'unknown' }}</div>
+      <div v-if="room" class="osd-panel__title">
+        Room #{{ room.id }} - {{ room.name || 'unknown' }}
+      </div>
       <div class="osd-panel__items list-group">
         <div v-for="(item, i) in items" :key="item.id" class="osd-panel__item list-group-item">
           <i v-if="icons[item.id]" :class="icons[item.id]" />

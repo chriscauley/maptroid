@@ -1,7 +1,7 @@
 <template>
   <header :class="css.nav.outer()">
     <section :class="css.nav.section('left')">
-      <router-link to="/" :class="css.nav.brand()">Metroid</router-link>
+      <router-link to="/" :class="css.nav.brand()">Maptroid</router-link>
     </section>
     <section class="unrest-grid">
       <unrest-dropdown class="btn -light" :items="items">

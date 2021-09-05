@@ -58,11 +58,11 @@ export default {
   mounted() {
     // TODO this should probably go in store.viewer
     this.viewer.addOverlay(this.$el, new OpenSeadragon.Rect(0, 0, 1, 1))
-    const { x, y } = this.viewer.world.getItemAt(0).getContentSize()
-    this.$store.viewer.patch({ size: Math.max(x, y) })
+    const { x } = this.viewer.world.getItemAt(0).getContentSize()
+    this.$store.viewer.patch({ size: x })
 
     // TODO this is already in store.viewer B)
-    this.SIZE = Math.max(x, y)
+    this.SIZE = x
   },
   methods: {
     _scale(attrs, scale = 1) {

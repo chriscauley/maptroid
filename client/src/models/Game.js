@@ -119,7 +119,7 @@ class Game {
   }
   getArrows() {
     let last_xy = this.state.xys[0]
-    return this.state.xys.slice(1).map((xy) => {
+    const raw_arrows = this.state.xys.slice(1).map((xy) => {
       const [x1, y1] = last_xy
       const [x2, y2] = xy
       last_xy = xy
@@ -131,12 +131,45 @@ class Game {
       arrow.y1 += 0.5
       arrow.y2 += 0.5
       if (x1 === x2) {
-        arrow['marker-end'] = `url(#arrowhead-${y1 > y2 ? 'up' : 'down'})`
+        arrow.direction = y1 > y2 ? 'up' : 'down'
+        arrow.orientation = 'y'
       } else {
-        arrow['marker-end'] = `url(#arrowhead-${x1 > x2 ? 'left' : 'right'})`
+        arrow.direction = x1 > x2 ? 'left' : 'right'
+        arrow.orientation = 'x'
       }
+      arrow['marker-end'] = `url(#arrowhead-${arrow.direction})`
+      arrow._slug = [x1, y1 + '|' + x2, y2].join(',')
       return arrow
     })
+    const combined_arrows = []
+    let current_arrow = {}
+    raw_arrows.forEach((raw_arrow) => {
+      if (raw_arrow.direction !== current_arrow.direction) {
+        current_arrow = {
+          ...raw_arrow,
+          length: 1,
+        }
+        if (current_arrow.orientation === 'x') {
+          const offset = current_arrow.direction === 'right' ? 0.1 : -0.1
+          current_arrow.y1 += offset
+          current_arrow.y2 += offset
+        } else {
+          const offset = current_arrow.direction === 'up' ? 0.1 : -0.1
+          current_arrow.x1 += offset
+          current_arrow.x2 += offset
+        }
+        combined_arrows.push(current_arrow)
+      } else {
+        // continue current arrow in direction
+        current_arrow.length += 1
+        if (current_arrow.orientation === 'x') {
+          current_arrow.x2 = raw_arrow.x2
+        } else {
+          current_arrow.y2 = raw_arrow.y2
+        }
+      }
+    })
+    return combined_arrows
   }
 }
 

@@ -48,7 +48,7 @@ export default {
   },
   computed: {
     items() {
-      const items = this.locked
+      const items = this.current_room
         ? this.game.getItemsByRoomId(this.current_room.id)
         : this.$store.item.getAll({ world_id: this.world.id })
 
