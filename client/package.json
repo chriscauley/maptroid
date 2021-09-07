@@ -3,19 +3,21 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "lint": "eslint \"src/**/*\"",
-    "serve": "vite preview"
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "lint": "eslint \"src/**/*\""
   },
   "dependencies": {
+    "core-js": "^3.6.5",
     "@popperjs/core": "^2.9.3",
     "@unrest/css": "^0.0.7",
     "@unrest/tailwind": "^0.1.0",
     "@unrest/vue": "^0.2.0",
+    "@unrest/vue-form": "^0.0.8",
     "@unrest/vue-mousetrap": "^0.0.6",
     "@unrest/vue-storage": "^0.0.9",
     "file-saver": "^2.0.5",
+    "jsonschema": "^1.4.0",
     "mitt": "^3.0.0",
     "openseadragon": "^2.4.2",
     "postcss-for": "^2.1.1",
@@ -26,6 +28,10 @@
   "devDependencies": {
     "@unrest/eslint-config": "^0.0.5",
     "@vitejs/plugin-vue": "^1.3.0",
+    "@vue/cli-plugin-babel": "~4.5.0",
+    "@vue/cli-plugin-eslint": "~4.5.0",
+    "@vue/cli-service": "~4.5.0",
+    "@vue/compiler-sfc": "^3.0.0",
     "@vue/compiler-sfc": "^3.0.5",
     "postcss": "^7",
     "postcss-import": "^12.0.0",
@@ -33,5 +39,10 @@
     "sass-loader": "^10.1.1",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat",
     "vite": "^2.4.4"
-  }
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead"
+  ]
 }
