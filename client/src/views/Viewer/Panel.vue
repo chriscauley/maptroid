@@ -1,7 +1,11 @@
 <template>
   <div class="osd-panel -viewer">
     <div class="osd-panel__inner">
-      <inventory :items="game.listItems()" :missing_items="game.listMissingItems()" />
+      <inventory
+        :world="world"
+        :items="game.listItems()"
+        :missing_items="game.listMissingItems()"
+      />
       <div v-if="room" class="osd-panel__title">
         Room #{{ room.id }} - {{ room.name || 'unknown' }}
       </div>
@@ -41,6 +45,7 @@ export default {
     game: Object,
     items: Array,
     room: Object,
+    world: Object,
   },
   computed: {
     icons() {

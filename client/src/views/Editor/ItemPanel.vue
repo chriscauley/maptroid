@@ -23,26 +23,16 @@
         </template>
       </template>
     </div>
-    <inventory :items="items" />
+    <inventory :items="items" :world="world" />
     <div class="viewer-panel__buttons">
-      <div :class="css.btn('tracker')" @click="open = 'tracker'">
-        <i class="fa fa-check-square-o" />
-      </div>
-      <div :class="css.btn('item')" @click="open = 'item'">
-        <i class="fa fa-list" />
-        <div class="flaire">{{ itemsByClass.item.length }}</div>
-      </div>
-      <div :class="css.btn('map')" @click="open = 'map'">
-        <i class="sm-map -map" />
-        <div class="flaire">{{ itemsByClass.map.length }}</div>
-      </div>
-      <div :class="css.btn('boss')" @click="open = 'boss'">
-        <i class="sm-map -boss" />
-        <div class="flaire">{{ itemsByClass.boss.length }}</div>
-      </div>
-      <div :class="css.btn('room')" @click="open = 'room'">
-        <i class="sm-room -brinstar" />
-        <div class="flaire">{{ rooms.length }}</div>
+      <div
+        v-for="[slug, icon, c] in panels"
+        :key="slug"
+        :class="css.btn(slug)"
+        @click="open = slug"
+      >
+        <i :class="icon" />
+        <div v-if="c" class="flaire">{{ c }}</div>
       </div>
     </div>
   </div>
@@ -73,6 +63,15 @@ export default {
     }
   },
   computed: {
+    panels() {
+      return [
+        ['tracker', 'fa fa-check-square-o'],
+        ['item', 'fa fa-list', this.itemsByClass.item.length],
+        ['map', 'sm-map -map', this.itemsByClass.map.length],
+        ['boss', 'sm-map -boss', this.itemsByClass.boss.length],
+        ['room', 'sm-room -brinstar', this.rooms.length],
+      ]
+    },
     items() {
       return this.$store.item.getAll({ world_id: this.world.id })
     },

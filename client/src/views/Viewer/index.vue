@@ -20,7 +20,7 @@
           />
         </html-overlay>
         <svg-overlay :viewer="viewer" :world="world" :arrows="arrows" />
-        <viewer-panel :room="current_room" :items="items" :game="game" />
+        <viewer-panel :room="current_room" :items="items" :game="game" :world="world" />
       </template>
     </div>
   </div>
