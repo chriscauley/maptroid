@@ -16,7 +16,10 @@
       "void"
     ],
     "W": 66,
-    "H": 56
+    "H": 56,
+    "custom_items": [
+      ""
+    ]
   },
   "2": {
     "name": "Super Zero Mission",
@@ -44,16 +47,14 @@
     "map_screen_size": 32,
     "map_item_size": 2,
     "zones": [
-      "crateria",
-      "brinstar",
-      "kraid",
-      "pirate-ship",
-      "chozodia",
-      "norfair",
-      "ridley",
-      "tourian",
-      "elevator",
-      "void"
+      "zone-1",
+      "zone-2",
+      "zone-3"
+    ],
+    "custom_items": [
+      "weapons-tank",
+      "shinespark",
+      "boost-ball"
     ]
   }
 }
