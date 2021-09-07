@@ -3,6 +3,7 @@ import App from './App.vue'
 import OpenSeadragon from './OpenSeadragon.vue'
 
 import Unrest from '@unrest/vue'
+import form from '@unrest/vue-form'
 import '@unrest/tailwind/dist.css'
 
 import store from '@/store'
@@ -11,6 +12,7 @@ import router from '@/router'
 
 createApp(App)
   .component('OpenSeadragon', OpenSeadragon)
+  .use(form.plugin)
   .use(store)
   .use(Unrest.plugin)
   .use(Unrest.ui)

@@ -3,9 +3,11 @@ import Unrest from '@unrest/vue'
 import { createRouter, createWebHistory } from 'vue-router'
 
 import views from '@/views'
+import admin from '@/admin'
 
 const routes = [
   ...Unrest.loadViews(views),
+  ...Unrest.loadViews(admin.views),
   // ...auth.routes,
 ]
 

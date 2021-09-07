@@ -47,4 +47,26 @@ export default {
       console.warn('TODO save items after migration')
     })
   },
+  moveItems(store) {
+    // I had to move all tiems in ascent because the map wasn't aligned right
+    store.item
+      .getAll()
+      .filter((i) => i.world_id === 3)
+      .forEach((i) => {
+        // I shifted the map 28, 26 pixels, item size is 2 px so move each 14,13
+        i.screen_xy[0] -= 14
+        i.screen_xy[1] -= 13
+
+        // this put almost all items in a different room
+        if (i.screen_xy[0] < 0) {
+          i.screen_xy[0] += 16
+          i.world_xy[0] -= 1
+        }
+        if (i.screen_xy[1] < 0) {
+          i.screen_xy[1] += 16
+          i.world_xy[1] -= 1
+        }
+        store.item.save(i)
+      })
+  },
 }

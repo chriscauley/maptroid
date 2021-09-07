@@ -24,11 +24,13 @@
         :class="css.tool(tool)"
       >
         <i :class="tool.icon" />
-        <div v-if="ctrl_down" class="flaire">{{ i + 1 }}</div>
+        <div v-if="i !== 0 && ctrl_down" class="flaire">{{ i }}</div>
       </div>
       <div class="btn -light">
         <i class="fa fa-gear" />
         <div class="viewer-toolbar__hover">
+          <router-link :to="`/admin/main/world/${world.id}/`">Admin</router-link>
+          <router-link :to="`/viewer/${world.id}/`">Viewer</router-link>
           <select v-model="$store.viewer.state.map_style">
             <option value="off">off</option>
             <option value="mini">mini</option>
@@ -77,17 +79,19 @@ export default {
       }
     },
     tools() {
+      const { custom_items } = this.world
       return [
         { slug: null, name: 'Select', icon: 'fa fa-mouse-pointer' },
         this.makeTool('item', Item.packs),
         this.makeTool('item', Item.abilities),
         this.makeTool('item', Item.beams),
+        custom_items.length && this.makeTool('item', custom_items),
         { slug: 'boss', name: 'Boss', icon: 'sm-map -boss' },
         { slug: 'chozo', name: 'Chozo', icon: 'sm-chozo' },
         this.makeTool('door', doors),
         this.makeTool('room', this.world.zones),
         this.makeTool('map', map_markers),
-      ]
+      ].filter(Boolean)
     },
     selected_tool() {
       const { selected_tool, item_tool } = this.$store.viewer.state
@@ -109,7 +113,7 @@ export default {
   methods: {
     pressTool(e) {
       e.preventDefault()
-      const tool = this.tools[e.key - 1]
+      const tool = this.tools[e.key]
       if (tool) {
         this.selectTool(tool)
       }

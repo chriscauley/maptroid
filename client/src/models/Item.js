@@ -26,21 +26,7 @@ const misc = ['pedastool', 'energy2-tank']
 
 const all = [...abilities, ...packs, ...beams, ...misc]
 
-const _schema = {
-  type: 'object',
-  properties: {
-    type: { type: 'string' },
-    class: { type: 'string' },
-    width: { type: 'number' },
-    height: { type: 'number' },
-    world_xy: fields.xy,
-    screen_xy: fields.xy,
-    room_id: { type: 'number' },
-  },
-}
-
 export default {
-  _schema,
   getMapBounds(item, world) {
     const [world_x, world_y] = item.world_xy
     const [screen_x, screen_y] = item.screen_xy
