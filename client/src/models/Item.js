@@ -1,5 +1,3 @@
-import fields from './fields'
-
 const abilities = [
   'varia-suit',
   'gravity-suit',

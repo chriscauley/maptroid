@@ -1,5 +1,3 @@
-$items: morph-ball bomb screw-attack missile super-missile energy-tank energy2-tank varia-suit space-jump power-bomb high-jump speed-booster pedastool reserve-tank x-ray spring-ball grappling-hook charge-beam spazer wave-beam ice-beam plasma-beam gravity-suit;
-
 .sm-item, .sm-room, .sm-map, .sm-chozo, .sm-door {
   background-size: 100% auto;
   display: inline-block;
@@ -12,6 +10,8 @@ $items: morph-ball bomb screw-attack missile super-missile energy-tank energy2-t
   background-image: url("/sm/chozo.png");
 }
 
+$items: morph-ball bomb screw-attack missile super-missile energy-tank energy2-tank varia-suit space-jump power-bomb high-jump speed-booster pedastool reserve-tank x-ray spring-ball grappling-hook charge-beam spazer wave-beam ice-beam plasma-beam gravity-suit;
+
 .sm-item {
   background-image: url("/sm/items.png");
   @for $i from 0 to length($items) {
@@ -21,6 +21,17 @@ $items: morph-ball bomb screw-attack missile super-missile energy-tank energy2-t
     }
     &.-#{"" + $name}-alt {
       background-position: 0 ($i * 2 + 1) * -100%;
+    }
+  }
+}
+
+$ascent-items: weapons-tank shinespark boost-ball;
+.sm-item {
+  @for $i from 0 to length($ascent-items) {
+    $name: nth($ascent-items, $i + 1);
+    &.-#{"" + $name} {
+      background-image: url("/sm/ascent-items.png");
+      background-position: 0 $i * -100%;
     }
   }
 }
@@ -68,10 +79,17 @@ $zone-colors: (
   "norfair": #d42020,
   "tourian": #991b8c,
   "void": #000000,
+
+  /* Super Zero Mission */
   "ridley": #5c152b,
   "chozodia": #d1b102,
   "kraid": #044f60,
   "pirate-ship": #283f63,
+
+  /* Ascent */
+  "zone-1": #d83890,
+  "zone-2": #d1b102,
+  "zone-3": #d42020,
 );
 
 @mixin room($name, $color) {
