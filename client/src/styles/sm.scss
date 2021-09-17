@@ -90,14 +90,23 @@ $zone-colors: (
   "zone-1": #d83890,
   "zone-2": #d1b102,
   "zone-3": #d42020,
+
+  /* Vitality */
+  "pendulu-moda": #017e13,
+  "tag-lacora": #283888,
+  "tchornobog": #044f60,
+  "akhlys": #d42020,
+  "andavald": #991b8c,
+  "elseq": #5c152b,
 );
 
 @mixin room($name, $color) {
   &.-#{"" + $name} {
     background: $color;
     fill: $color;
-    &.-selected {
-      /* background: linear-gradient(45deg, transparent 25%, $color 25%, $color 50%, transparent 50%, transparent 75%, $color 75%, $color 100%); */
+    .map-editor.-has-selected-room &:not(.-selected) {
+      opacity: 0.5;
+      background: linear-gradient(45deg, transparent 25%, $color 25%, $color 50%, transparent 50%, transparent 75%, $color 75%, $color 100%);
     }
   }
 }
@@ -113,9 +122,13 @@ $zone-colors: (
     border: 0;
   }
   &.-elevator {
-    background: black url("/sm/elevator.png");
+    background: url("/sm/elevator.png");
     border: 0;
     background-size: 100% auto;
+    opacity: 0.5;
+    &.-selected {
+      opacity: 1;
+    }
   }
   &.-absolute {
     position: absolute;

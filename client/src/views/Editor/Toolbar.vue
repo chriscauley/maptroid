@@ -85,7 +85,7 @@ export default {
         this.makeTool('item', Item.packs),
         this.makeTool('item', Item.abilities),
         this.makeTool('item', Item.beams),
-        custom_items.length && this.makeTool('item', custom_items),
+        custom_items?.length && this.makeTool('item', custom_items),
         { slug: 'boss', name: 'Boss', icon: 'sm-map -boss' },
         { slug: 'chozo', name: 'Chozo', icon: 'sm-chozo' },
         this.makeTool('door', doors),

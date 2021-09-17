@@ -25,7 +25,7 @@ admin_modules.forEach((model_name) =>
   }),
 )
 
-// _migrations.locateItems(store)
+// _migrations.moveItems(store)
 // _migrations.migrateItems(store)
 window._store = store
 

@@ -56,5 +56,22 @@
       "shinespark",
       "boost-ball"
     ]
+  },
+  "4": {
+    "name": "Super Metroid Vitality",
+    "dzi": "/output/Vitality.dzi",
+    "id": 4,
+    "map_screen_size": 32,
+    "map_item_size": 2,
+    "zones": [
+      "crateria",
+      "brinstar",
+      "wrecked-ship",
+      "maridia",
+      "norfair",
+      "tourian",
+      "elevator",
+      "void"
+    ]
   }
 }

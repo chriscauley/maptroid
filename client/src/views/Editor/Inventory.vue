@@ -31,7 +31,7 @@ export default {
         match[key] = i
       })
       const item_sets = [Item.packs, Item.beams, Item.abilities]
-      if (this.world.custom_items.length) {
+      if (this.world.custom_items?.length) {
         item_sets.push(this.world.custom_items)
       }
       const rows = item_sets.map((slugs) => {
