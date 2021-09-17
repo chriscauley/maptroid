@@ -22,7 +22,7 @@ export default {
 
   mounted() {
     const { ...options } = this.options
-    options.id = this.id
+    options.element = this.$el
     window.jawn = this.viewer = new OpenSeadragon(options)
 
     const viewport = this.viewer.viewport

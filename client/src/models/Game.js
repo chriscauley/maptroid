@@ -29,11 +29,11 @@ class Game {
     rooms.forEach((room) => {
       room.xys.forEach((xy) => {
         if (cache.room_by_xy[xy]) {
-          console.warn('old room:', cache.room_by_xy[xy])
-          console.warn('new_room:', room)
-          throw 'XY already occupied by room.'
+          // TODO not sure how tohandle this, but it is necessary for some worlds
+          console.warn('duplicate rooms detected')
+        } else {
+          cache.room_by_xy[xy] = room
         }
-        cache.room_by_xy[xy] = room
       })
       cache.room_by_id[room.id] = room
     })
