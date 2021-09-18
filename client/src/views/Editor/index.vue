@@ -16,7 +16,7 @@
       <toolbar :world="world" />
     </template>
     <selected-room v-if="$store.viewer.getSelectedRoom()" _scale="_scale" :world="world" />
-    <item-panel v-else :viewer="viewer" :world="world" />
+    <item-panel v-else :viewer="viewer" :world="world" :game="game" />
   </div>
 </template>
 
@@ -75,6 +75,16 @@ export default {
         const selected = room.id === selected_room_id
         out = out.concat(Room.makeRoom(room, { map_style, selected, onClick }))
       })
+      const { oobFix } = this.$store.viewer.state
+      if (oobFix) {
+        oobFix.onClick = () => {
+          oobFix.item.screen_xy = oobFix.screen_xy
+          oobFix.item.world_xy = oobFix.world_xy
+          this.$store.item.save(oobFix.item)
+          this.$store.viewer.patch({ selected_item: oobFix.item.id })
+        }
+        out.push(oobFix)
+      }
       return out
     },
   },

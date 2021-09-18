@@ -1,5 +1,5 @@
 <template>
-  <div v-if="open" :class="`viewer-panel -${open || 'closed'}`">
+  <div :class="`viewer-panel -${open || 'closed'}`">
     <div class="list-group" v-if="'item|map|boss'.includes(open)">
       <div v-for="item in itemsByClass[open]" class="list-group-item" :key="item.id">
         <span> {{ item.id }} - {{ item.type || '???' }} </span>
@@ -23,7 +23,14 @@
         </template>
       </template>
     </div>
-    <inventory :items="items" :world="world" />
+    <inventory v-if="open === 'tracker'" :items="items" :world="world" />
+    <warnings
+      v-if="open === 'warnings'"
+      :game="game"
+      :items="items"
+      :gotoRoom="gotoRoom"
+      :gotoItem="gotoItem"
+    />
     <div class="viewer-panel__buttons">
       <div
         v-for="[slug, icon, c] in panels"
@@ -45,12 +52,14 @@ import { sortBy } from 'lodash'
 import Room from '@/models/Room'
 import Item from '@/models/Item'
 import Inventory from './Inventory.vue'
+import Warnings from './Warnings.vue'
 
 export default {
-  components: { Inventory },
+  components: { Inventory, Warnings },
   props: {
     viewer: Object,
     world: Object,
+    game: Object,
   },
   data() {
     return {
@@ -70,6 +79,7 @@ export default {
         ['map', 'sm-map -map', this.itemsByClass.map.length],
         ['boss', 'sm-map -boss', this.itemsByClass.boss.length],
         ['room', 'sm-room -brinstar', this.rooms.length],
+        ['warnings', 'fa fa-warning'],
       ]
     },
     items() {

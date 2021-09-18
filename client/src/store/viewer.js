@@ -1,4 +1,5 @@
 import { reactive } from 'vue'
+import Item from '@/models/Item'
 
 export default ({ store }) => {
   const state = reactive({
@@ -8,6 +9,7 @@ export default ({ store }) => {
     room_tool: 'crateria',
     item_tool: 'missile',
     selected_item: null,
+    oobFix: null,
     selected_room_id: null,
     map_style: 'full',
     map_tool: 'save',
@@ -39,7 +41,15 @@ export default ({ store }) => {
     state,
     getSelectedRoom,
     getPointer,
-    patch: (new_state) => Object.assign(state, new_state),
+    patch: (new_state) => {
+      Object.assign(state, new_state)
+      if ('selected_item' in new_state) {
+        const item = store.item.getOne(state.selected_item)
+        state.oobFix = item && Item.getOutOfBoundsFix(item)
+      } else {
+        delete state.oobFix
+      }
+    },
     clickRoom: (scale, game) => {
       const { room_tool } = state
       let { x, y } = getPointer(scale)

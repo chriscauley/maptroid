@@ -1,7 +1,14 @@
 <template>
   <form class="selected-room" @submit.prevent="save">
-    #{{ room.id }}
-    <input type="text" v-model="room.name" />
+    #{{ room.id }} - {{ room.zone }}
+    <div>
+      <input type="text" v-model="room.name" />
+      <select v-model="room.elevator">
+        <option v-for="elevator in elevators" :value="elevator.id" :key="elevator.id">
+          {{ elevator.name || '???' }}
+        </option>
+      </select>
+    </div>
     <div>xys: {{ room.xys }}</div>
     <div>
       <select v-model="room.zone">
@@ -30,6 +37,9 @@ export default {
     room() {
       return this.$store.viewer.getSelectedRoom()
     },
+    elevators() {
+      return this.$store.room.getAll({ world_id: this.world.id, zone: 'elevator' })
+    },
   },
   mounted() {
     this.$el.querySelector('input').focus()
@@ -40,6 +50,9 @@ export default {
       this.$store.room.save(this.room)
       this.$ui.toast(`Room saved: ${this.room.name}`)
       this.$store.viewer.unSelectRoom()
+    },
+    setSelectingElevator() {
+      this.$store.viewer.patch({ selecting_elevator: true })
     },
   },
 }
