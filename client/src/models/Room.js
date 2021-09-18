@@ -52,6 +52,7 @@ const Room = {
             bb0: _xys[[x, y + 1]],
             bt0: _xys[[x, y - 1]],
             '-selected': selected,
+            '-draft': !room.id,
           },
         ],
       }

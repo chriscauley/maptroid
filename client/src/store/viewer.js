@@ -40,13 +40,18 @@ export default ({ store }) => {
     getSelectedRoom,
     getPointer,
     patch: (new_state) => Object.assign(state, new_state),
-    clickRoom: (scale) => {
+    clickRoom: (scale, game) => {
       const { room_tool } = state
       let { x, y } = getPointer(scale)
       x = x / scale
       y = y / scale
       let room = getSelectedRoom()
       if (!room) {
+        const unselected_room = game.getRoomByXY([x, y])
+        if (unselected_room) {
+          state.selected_room_id = unselected_room.id
+          return
+        }
         room = state.draft_room = {
           zone: room_tool,
           xys: [],

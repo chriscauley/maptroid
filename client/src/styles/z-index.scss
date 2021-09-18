@@ -1,14 +1,15 @@
 .viewer-toolbar__children,
-.html-overlay__item,
 .html-overlay__screen-mask,
 .osd__svg {
   z-index: 1;
 }
+
 .map-editor.-has-selected-room .html-overlay__screen-mask:not(.-selected) {
   pointer-events: none;
   z-index: 2;
 }
 
+.html-overlay__item,
 .osd__mouse-tracker {
   z-index: 2;
 }

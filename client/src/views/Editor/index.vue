@@ -12,7 +12,7 @@
         />
       </html-overlay>
       <selected-item v-if="selected_item" :key="selected_item" :viewer="viewer" :world="world" />
-      <mouse-tracker :viewer="viewer" :world="world" />
+      <mouse-tracker :viewer="viewer" :world="world" :game="game" />
       <toolbar :world="world" />
     </template>
     <selected-room v-if="$store.viewer.getSelectedRoom()" _scale="_scale" :world="world" />

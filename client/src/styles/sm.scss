@@ -133,9 +133,12 @@ $zone-colors: (
   &.-absolute {
     position: absolute;
   }
-  &.-selected {
+  &.-selected, &.-draft {
     border-style: dashed;
     border-width: 0.5em;
+  }
+  &.-draft {
+    border-color: #ff8;
   }
   &.br0 {
     border-right: 0;

@@ -8,7 +8,6 @@
     "lint": "eslint \"src/**/*\""
   },
   "dependencies": {
-    "core-js": "^3.6.5",
     "@popperjs/core": "^2.9.3",
     "@unrest/css": "^0.0.7",
     "@unrest/tailwind": "^0.1.0",
@@ -16,6 +15,7 @@
     "@unrest/vue-form": "^0.0.8",
     "@unrest/vue-mousetrap": "^0.0.6",
     "@unrest/vue-storage": "^0.0.9",
+    "core-js": "^3.6.5",
     "file-saver": "^2.0.5",
     "jsonschema": "^1.4.0",
     "mitt": "^3.0.0",
@@ -31,8 +31,8 @@
     "@vue/cli-plugin-babel": "~4.5.0",
     "@vue/cli-plugin-eslint": "~4.5.0",
     "@vue/cli-service": "~4.5.0",
-    "@vue/compiler-sfc": "^3.0.0",
     "@vue/compiler-sfc": "^3.0.5",
+    "eslint": "^7.32.0",
     "postcss": "^7",
     "postcss-import": "^12.0.0",
     "sass": "^1.32.8",
