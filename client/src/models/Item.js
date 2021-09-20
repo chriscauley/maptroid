@@ -12,7 +12,7 @@ const abilities = [
   'screw-attack',
 ]
 
-const packs = ['missile', 'super-missile', 'power-bomb', 'energy-tank', 'reserve-tank']
+const packs = ['missile', 'super-missile', 'power-bomb', 'energy-tank', 'reserve-tank', 'confused']
 
 const beams = [
   'charge-beam',

@@ -23,6 +23,10 @@ $items: morph-ball bomb screw-attack missile super-missile energy-tank energy2-t
       background-position: 0 ($i * 2 + 1) * -100%;
     }
   }
+  &.-confused {
+    background-image: url("/sm/confused.png");
+    background-position: unset;
+  }
 }
 
 $ascent-items: weapons-tank shinespark boost-ball;
