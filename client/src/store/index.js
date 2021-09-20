@@ -1,4 +1,4 @@
-import admin from '@/admin'
+import unrest from '@unrest/vue'
 
 import admin_options from './admin'
 import item from './item'
@@ -18,7 +18,7 @@ Object.entries(modules).forEach(([name, module]) => {
 })
 
 admin_modules.forEach((model_name) =>
-  admin.register({
+  unrest.admin.register({
     model_name,
     storage: store[model_name],
     admin_options: admin_options[model_name],

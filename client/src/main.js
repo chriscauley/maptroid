@@ -2,7 +2,7 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import OpenSeadragon from './OpenSeadragon.vue'
 
-import Unrest from '@unrest/vue'
+import unrest from '@unrest/vue'
 import form from '@unrest/vue-form'
 import '@unrest/tailwind/dist.css'
 
@@ -14,7 +14,7 @@ createApp(App)
   .component('OpenSeadragon', OpenSeadragon)
   .use(form.plugin)
   .use(store)
-  .use(Unrest.plugin)
-  .use(Unrest.ui)
+  .use(unrest.plugin)
+  .use(unrest.ui)
   .use(router)
   .mount('#app')

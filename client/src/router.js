@@ -1,13 +1,12 @@
-import Unrest from '@unrest/vue'
+import unrest from '@unrest/vue'
 // import auth from '@unrest/vue-auth'
 import { createRouter, createWebHistory } from 'vue-router'
 
 import views from '@/views'
-import admin from '@/admin'
 
 const routes = [
-  ...Unrest.loadViews(views),
-  ...Unrest.loadViews(admin.views),
+  ...unrest.loadViews(views),
+  ...unrest.loadViews(unrest.admin.views),
   // ...auth.routes,
 ]
 
@@ -16,6 +15,6 @@ const router = createRouter({
   routes,
 })
 
-router.beforeEach(Unrest.applyMeta)
+router.beforeEach(unrest.applyMeta)
 
 export default router
