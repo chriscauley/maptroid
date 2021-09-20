@@ -19,19 +19,20 @@ export default {
   },
   computed: {
     grid() {
+      // TODO move this check someplace else
       const hist = {}
       // console.log(this.missing_items?.filter(i => i.class==="item"))
       this.items.forEach((item) => (hist[item.type] = (hist[item.type] || 0) + 1))
       const match = {}
       this.items.forEach((i) => {
-        const key = `${i.world_xy}|${i.screen_xy}`
+        const key = `${i.world_xy}|${i.screen_xy}|${i.class}`
         if (match[key]) {
           console.warn('potentially duplicated item', match[key], i)
         }
         match[key] = i
       })
       const item_sets = [Item.packs, Item.beams, Item.abilities]
-      if (this.world.custom_items?.length) {
+      if (this.world.custom_items?.[0]) {
         item_sets.push(this.world.custom_items)
       }
       const rows = item_sets.map((slugs) => {

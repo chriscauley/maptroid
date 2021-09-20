@@ -2,6 +2,8 @@ import Room from './Room'
 import vec from '@/lib/vec'
 import mitt from 'mitt'
 
+const DUPLICATE = 'duplicate'
+
 class Game {
   constructor({ playthrough }) {
     const { on, off, emit } = mitt()
@@ -14,7 +16,6 @@ class Game {
       xys: [],
       xy: null,
     }
-
     Object.assign(this, { on, off, emit, state, playthrough })
   }
   populate({ _world, items, rooms }) {
@@ -25,12 +26,18 @@ class Game {
       items_by_xy: {},
       items_by_room_id: {},
       items_by_type: {},
+      duplicates: {},
     }
     rooms.forEach((room) => {
       room.xys.forEach((xy) => {
         if (cache.room_by_xy[xy]) {
           // TODO not sure how tohandle this, but it is necessary for some worlds
           console.warn('duplicate rooms detected')
+          if (!cache.duplicates[xy]) {
+            cache.duplicates[xy] = [cache.room_by_xy[xy]]
+            cache.room_by_xy[xy] = DUPLICATE
+          }
+          cache.duplicates[xy].push(room)
         } else {
           cache.room_by_xy[xy] = room
         }
@@ -63,8 +70,23 @@ class Game {
       getItemsByRoomId: (id) => cache.items_by_room_id[id] || [],
       getItemsByType: (type) => cache.items_by_type[type] || [],
       getRoomByXY: (xy) => cache.room_by_xy[xy],
+      getRoomById: (id) => cache.room_by_id[id],
       listItems: () => items.filter((i) => this.state.items[i.id]),
       listMissingItems: () => items.filter((i) => !this.state.items[i.id]),
+      getDuplicates: () => cache.duplicates,
+      getDuplicate: (xy) => {
+        const current_room = this.state.room
+        const duplicates = cache.duplicates[xy]
+        if (current_room.elevator) {
+          return cache.room_by_id[current_room.elevator]
+        }
+        if (duplicates.find((r) => r.id === current_room?.id)) {
+          return current_room
+        }
+        // TODO what do we do if there's more than one option?
+        // TODO need to make rooms connected to more than just "elevators"
+        return duplicates[0]
+      },
     })
   }
   start() {
@@ -105,9 +127,12 @@ class Game {
     }
   }
   goto(xy) {
-    const new_room = this.getRoomByXY(xy)
+    let new_room = this.getRoomByXY(xy)
     if (!new_room) {
       return
+    }
+
+    if (new_room === DUPLICATE) {
     }
     this.playthrough.actions.push(['goto', xy])
     this.state.xys.push(xy)
@@ -170,6 +195,21 @@ class Game {
       }
     })
     return combined_arrows
+  }
+  getWarnings() {
+    const out = {}
+    Object.entries(this.getDuplicates()).forEach(([_xy, rooms]) => {
+      rooms = rooms.filter((r) => r.zone !== 'elevator')
+      if (rooms.length === 1) {
+        return
+      }
+      const key = rooms
+        .map((r) => r.id)
+        .sort()
+        .join(',')
+      out[key] = rooms
+    })
+    return out
   }
 }
 
