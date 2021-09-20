@@ -49,7 +49,8 @@
     "zones": [
       "zone-1",
       "zone-2",
-      "zone-3"
+      "zone-3",
+      "void"
     ],
     "custom_items": [
       "weapons-tank",
@@ -64,6 +65,23 @@
     "map_screen_size": 32,
     "map_item_size": 2,
     "zones": [
+      "pendulu-moda",
+      "tag-lacora",
+      "tchornobog",
+      "akhlys",
+      "andavald",
+      "elseq",
+      "elevator",
+      "void"
+    ]
+  },
+  "5": {
+    "name": "Ice Metal",
+    "dzi": "/output/IceMetal.dzi",
+    "id": 5,
+    "map_screen_size": 32,
+    "map_item_size": 2,
+    "zones": [
       "crateria",
       "brinstar",
       "wrecked-ship",
@@ -73,5 +91,31 @@
       "elevator",
       "void"
     ]
+  },
+  "6": {
+    "name": "Cliffhanger",
+    "dzi": "/output/Cliffhanger.dzi",
+    "map_screen_size": 32,
+    "map_item_size": 2,
+    "zones": [
+      "surripere",
+      "eldridge",
+      "melkabah",
+      "juolbrin",
+      "melfad",
+      "keruarn",
+      "elevator"
+    ],
+    "id": 6
+  },
+  "7": {
+    "name": "Eris",
+    "dzi": "/output/Eris2012.dzi",
+    "map_screen_size": 32,
+    "map_item_size": 2,
+    "zones": [
+      "crateria"
+    ],
+    "id": 7
   }
 }

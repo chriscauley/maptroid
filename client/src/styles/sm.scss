@@ -98,6 +98,14 @@ $zone-colors: (
   "akhlys": #d42020,
   "andavald": #991b8c,
   "elseq": #5c152b,
+
+  /* Cliffhanger */
+  "eldridge": #585c65,
+  "surripere": #283888,
+  "melkabah": #991b8c,
+  "juolbrin": #017e13,
+  "melfad": #991b8c,
+  "keruarn": #5c152b,
 );
 
 @mixin room($name, $color) {
