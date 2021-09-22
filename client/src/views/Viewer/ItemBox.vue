@@ -26,13 +26,17 @@ export default {
       return undefined
     },
     item_attrs() {
+      const { selected_item } = this.$store.viewer.state
       const { item, world } = this
       const { id, type, class: _class } = item
       const { x, y, width, height } = Item.getMapBounds(item, world)
       const { size } = this.$store.viewer.state
       return {
         id: `overlay-item-${id}`,
-        class: `html-overlay__item -class-${_class} sm-${_class} -${type}`,
+        class: [
+          `html-overlay__item -class-${_class} sm-${_class} -${type}`,
+          { '-selected': selected_item === item.id },
+        ],
         style: scale.html({ x, y, width, height }, 1, size),
       }
     },

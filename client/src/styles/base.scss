@@ -258,6 +258,9 @@
   &.sm-map {
     border-color: #8F8;
   }
+  &.-selected {
+    border-color: green;
+  }
 }
 
 .map-editor {
