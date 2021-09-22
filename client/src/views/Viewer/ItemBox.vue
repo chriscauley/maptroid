@@ -30,7 +30,7 @@ export default {
       const { item, world } = this
       const { id, type, class: _class } = item
       const { x, y, width, height } = Item.getMapBounds(item, world)
-      const { size } = this.$store.viewer.state
+      const size = this.$store.osd.state.content_width
       return {
         id: `overlay-item-${id}`,
         class: [

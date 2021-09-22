@@ -6,28 +6,25 @@ import Room from '@/models/Room'
 
 export default {
   data() {
-    return {
-      overzoomed: false,
-      current_room: null,
-    }
+    return { current_room: null }
   },
   computed: {
     viewer_events() {
       return {
         open: (event) => {
-          this.$store.osd_viewer = event.eventSource
-          const p = new OpenSeadragon.Point(2, 2)
-          const width = this.$store.osd_viewer.viewport.imageToViewportCoordinates(p).x
-          document.body.style.setProperty('--border-width', width + 'px')
+          this.$store.osd.viewer = event.eventSource
+          const border_width = 2 * this.$store.osd.state.px_width
+          document.body.style.setProperty('--border-width', border_width + 'px')
           this.onViewerDone?.()
         },
         zoom: (event) => {
           const { world, viewport, drawer } = event.eventSource
           const tiledImage = world.getItemAt(0)
-          const targetZoom = tiledImage.source.dimensions.x / viewport.getContainerSize().x
-          this.overzoomed = viewport.getZoom() > targetZoom
-          drawer.context.imageSmoothingEnabled = !this.overzoomed
-          this.$store.viewer.patch({ zoom: viewport.getZoom() })
+          const target_zoom = tiledImage.source.dimensions.x / viewport.getContainerSize().x
+          const viewport_zoom = viewport.getZoom()
+          const image_zoom = Math.floor(viewport_zoom / target_zoom)
+          drawer.context.imageSmoothingEnabled = image_zoom < 1
+          this.$store.osd.patch({ viewport_zoom, image_zoom })
         },
       }
     },
@@ -52,7 +49,8 @@ export default {
     },
     viewer_class() {
       // TODO only used in editor
-      return ['viewer-wrapper', { '-overzoomed': this.overzoomed }]
+      const overzoomed = this.$store.osd.state.image_zoom > 1
+      return ['viewer-wrapper', { '-overzoomed': overzoomed }]
     },
     visible_xys() {
       // TODO only in viewer
@@ -70,7 +68,7 @@ export default {
       // TODO move to viewer store
       const { x, y, width, height } = Item.getMapBounds(item, this.world)
       this.gotoBounds(x, y, width, height)
-      this.$store.osd_viewer.addOnceHandler('animation-finish', () =>
+      this.$store.osd.viewer.addOnceHandler('animation-finish', () =>
         this.$store.viewer.patch({ selected_item: item.id }),
       )
     },
@@ -82,7 +80,7 @@ export default {
     gotoBounds(x, y, width, height) {
       const b = 64
       const bounds = new OpenSeadragon.Rect(x - b, y - b, width + b * 2, height + b * 2)
-      const { viewport } = this.$store.osd_viewer
+      const { viewport } = this.$store.osd.viewer
       viewport.fitBounds(viewport.imageToViewportRectangle(bounds))
     },
   },

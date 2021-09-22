@@ -7,7 +7,7 @@
         </div>
       </div>
       <open-seadragon :pixelated="true" :options="viewer_options" :events="viewer_events" />
-      <template v-if="$store.osd_viewer">
+      <template v-if="$store.osd.viewer">
         <html-overlay :world="world" :screens="screens">
           <item-box
             v-for="(item, i) in items"
@@ -71,10 +71,9 @@ export default {
         }
         out.push({ x: xy[0], y: xy[1], class: '-black' })
       })
-      // TODO store content size in viewer store (see note in HtmlOverlay)
-      const { x, y } = this.$store.osd_viewer.world.getItemAt(0).getContentSize()
-      const W = x / this.world.map_screen_size
-      const H = y / this.world.map_screen_size
+      const { content_width, content_height } = this.$store.osd.state
+      const W = content_width / this.world.map_screen_size
+      const H = content_height / this.world.map_screen_size
       const [min_x, min_y] = this.visible_xys[0]
       const [max_x, max_y] = this.visible_xys[this.visible_xys.length - 1].map((n) => n + 1)
       const width = max_x - min_x
@@ -130,7 +129,7 @@ export default {
       this.$store.playthrough.save(this.game.playthrough)
     },
     updateLocked() {
-      this.$store.osd_viewer.setMouseNavEnabled(!this.locked)
+      this.$store.osd.viewer.setMouseNavEnabled(!this.locked)
     },
   },
 }

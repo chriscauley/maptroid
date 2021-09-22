@@ -1,7 +1,7 @@
 <template>
   <div :class="editor_class" v-if="world">
     <open-seadragon :pixelated="true" :options="viewer_options" :events="viewer_events" />
-    <template v-if="$store.osd_viewer">
+    <template v-if="$store.osd.viewer">
       <html-overlay :world="world" :screens="screens" @click-item="clickItem">
         <item-box
           v-for="item in items"
@@ -50,8 +50,13 @@ export default {
   mixins: [ViewerMixin, WorldMixin],
   computed: {
     editor_class() {
-      const { selected_room_id } = this.$store.viewer.state
-      return [this.viewer_class, 'map-editor', { '-has-selected-room': selected_room_id }]
+      return [
+        'viewer-wrapper map-editor',
+        {
+          '-overzoomed': this.$store.osd.state.image_zoom > 1,
+          '-has-selected-room': this.$store.viewer.state.selected_room_id,
+        },
+      ]
     },
     selected_item() {
       return this.$store.viewer.state.selected_item

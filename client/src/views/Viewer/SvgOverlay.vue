@@ -40,8 +40,8 @@ export default {
     },
   },
   mounted() {
-    this.$store.osd_viewer.svgOverlay(this.$el)
-    const { x, y } = this.$store.osd_viewer.world.getItemAt(0).getContentSize()
+    this.$store.osd.viewer.svgOverlay(this.$el)
+    const { x, y } = this.$store.osd.viewer.world.getItemAt(0).getContentSize()
     this.W = this.H = Math.max(x, y)
   },
   methods: {
