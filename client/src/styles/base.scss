@@ -34,6 +34,9 @@
     max-height: 6rem;
     overflow: scroll;
   }
+  .list-group-item.-selected {
+    background: var(--bg-alt);
+  }
 }
 
 .btn-group .btn {

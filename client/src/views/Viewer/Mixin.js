@@ -1,6 +1,7 @@
 import { range } from 'lodash'
 import OpenSeadragon from 'openseadragon'
 
+import Item from '@/models/Item'
 import Room from '@/models/Room'
 
 export default {
@@ -67,7 +68,7 @@ export default {
       return {}
     },
     gotoItem(item) {
-      const { x, y, width, height } = item
+      const { x, y, width, height } = Item.getMapBounds(item, this.world)
       this.gotoBounds(x, y, width, height)
       this.viewer.addOnceHandler('animation-finish', () =>
         this.$store.viewer.patch({ selected_item: item.id }),
@@ -79,8 +80,8 @@ export default {
       this.current_room = room
     },
     gotoBounds(x, y, width, height) {
-      const b = 192
-      const bounds = new OpenSeadragon.Rect(x - b, y - b, width + b * 4, height + b * 2)
+      const b = 64
+      const bounds = new OpenSeadragon.Rect(x - b, y - b, width + b * 2, height + b * 2)
       const { viewport } = this.viewer
       viewport.fitBounds(viewport.imageToViewportRectangle(bounds))
     },

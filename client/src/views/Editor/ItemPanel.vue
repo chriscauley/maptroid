@@ -46,11 +46,8 @@
 </template>
 
 <script>
-import OpenSeadragon from 'openseadragon'
 import { sortBy } from 'lodash'
 
-import Room from '@/models/Room'
-import Item from '@/models/Item'
 import Inventory from './Inventory.vue'
 import Warnings from './Warnings.vue'
 
@@ -60,6 +57,8 @@ export default {
     viewer: Object,
     world: Object,
     game: Object,
+    gotoRoom: Function,
+    gotoItem: Function,
   },
   data() {
     return {
@@ -121,29 +120,6 @@ export default {
     },
   },
   methods: {
-    gotoItem(item) {
-      const { room_id } = item
-      const room = room_id && this.$store.room.getOne(room_id)
-      if (room) {
-        this.gotoRoom(room)
-      } else {
-        const { x, y, width, height } = Item.getMapBounds(item, this.world)
-        this.goto(x, y, width, height)
-      }
-      this.viewer.addOnceHandler('animation-finish', () =>
-        this.$store.viewer.patch({ selected_item: item.id }),
-      )
-    },
-    gotoRoom(room) {
-      const [x, y, width, height] = Room.getMapBounds(room, this.world)
-      this.goto(x, y, width, height)
-    },
-    goto(x, y, width, height) {
-      const b = 192
-      const bounds = new OpenSeadragon.Rect(x - b, y - b, width + b * 4, height + b * 2)
-      const { viewport } = this.viewer
-      viewport.fitBounds(viewport.imageToViewportRectangle(bounds))
-    },
     toggle(key) {
       this.selected = this.selected === key ? null : key
     },

@@ -20,7 +20,14 @@
           />
         </html-overlay>
         <svg-overlay :viewer="viewer" :world="world" :arrows="arrows" />
-        <viewer-panel :room="current_room" :items="items" :game="game" :world="world" />
+        <viewer-panel
+          :room="current_room"
+          :items="items"
+          :game="game"
+          :world="world"
+          :viewer="viewer"
+          :gotoItem="gotoItem"
+        />
       </template>
     </div>
   </div>
@@ -112,6 +119,7 @@ export default {
     clickItem(item) {
       this.game.getItem(item.id)
       this.$store.playthrough.save(this.game.playthrough)
+      this.$store.viewer.patch({ selected_item: item.id })
     },
     pressItem(e) {
       this.game.getItem(this.items[Number(e.key) - 1].id)

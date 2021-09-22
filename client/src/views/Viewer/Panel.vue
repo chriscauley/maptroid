@@ -10,11 +10,13 @@
         Room #{{ room.id }} - {{ room.name || 'unknown' }}
       </div>
       <div class="osd-panel__items list-group">
-        <div v-for="(item, i) in items" :key="item.id" class="osd-panel__item list-group-item">
+        <div v-for="(item, i) in items" :key="item.id" :class="css.itemWrapper(item)">
           <i v-if="icons[item.id]" :class="icons[item.id]" />
           <div v-else class="osd-panel__target-number">{{ i + 1 }}</div>
           <div :class="css.item(item)" />
           <div class="flex-grow">{{ item.type }}</div>
+          <div class="flex-grow" />
+          <i class="fa fa-search" @click="gotoItem(item)" />
         </div>
       </div>
       <div class="flex-grow" />
@@ -46,6 +48,8 @@ export default {
     items: Array,
     room: Object,
     world: Object,
+    viewer: Object,
+    gotoItem: Function,
   },
   computed: {
     icons() {
@@ -61,7 +65,12 @@ export default {
       return out
     },
     css() {
+      const { selected_item } = this.$store.viewer.state
       return {
+        itemWrapper: (item) => [
+          'osd-panel__item list-group-item',
+          { '-selected': selected_item === item.id },
+        ],
         item: (item) => {
           if (item.class === 'boss') {
             return 'sm-map -boss osd-panel__item-icon'

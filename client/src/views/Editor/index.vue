@@ -16,7 +16,14 @@
       <toolbar :world="world" />
     </template>
     <selected-room v-if="$store.viewer.getSelectedRoom()" _scale="_scale" :world="world" />
-    <item-panel v-else :viewer="viewer" :world="world" :game="game" />
+    <item-panel
+      v-else
+      :viewer="viewer"
+      :world="world"
+      :game="game"
+      :gotoRoom="gotoRoom"
+      :gotoItem="gotoItem"
+    />
   </div>
 </template>
 
