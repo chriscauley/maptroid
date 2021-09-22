@@ -17,7 +17,6 @@ export default {
   components: { SvgDefs },
   props: {
     arrows: Array,
-    viewer: Object,
     world: Object,
   },
   data() {
@@ -41,8 +40,8 @@ export default {
     },
   },
   mounted() {
-    this.viewer.svgOverlay(this.$el)
-    const { x, y } = this.viewer.world.getItemAt(0).getContentSize()
+    this.$store.osd_viewer.svgOverlay(this.$el)
+    const { x, y } = this.$store.osd_viewer.world.getItemAt(0).getContentSize()
     this.W = this.H = Math.max(x, y)
   },
   methods: {

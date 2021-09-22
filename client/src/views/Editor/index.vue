@@ -1,8 +1,8 @@
 <template>
   <div :class="editor_class" v-if="world">
     <open-seadragon :pixelated="true" :options="viewer_options" :events="viewer_events" />
-    <template v-if="viewer">
-      <html-overlay :viewer="viewer" :world="world" :screens="screens" @click-item="clickItem">
+    <template v-if="$store.osd_viewer">
+      <html-overlay :world="world" :screens="screens" @click-item="clickItem">
         <item-box
           v-for="item in items"
           :item="item"
@@ -11,19 +11,12 @@
           @click="clickItem(item)"
         />
       </html-overlay>
-      <selected-item v-if="selected_item" :key="selected_item" :viewer="viewer" :world="world" />
-      <mouse-tracker :viewer="viewer" :world="world" :game="game" />
+      <selected-item v-if="selected_item" :key="selected_item" :world="world" />
+      <mouse-tracker :world="world" :game="game" />
       <toolbar :world="world" />
     </template>
     <selected-room v-if="$store.viewer.getSelectedRoom()" _scale="_scale" :world="world" />
-    <item-panel
-      v-else
-      :viewer="viewer"
-      :world="world"
-      :game="game"
-      :gotoRoom="gotoRoom"
-      :gotoItem="gotoItem"
-    />
+    <item-panel v-else :world="world" :game="game" :gotoRoom="gotoRoom" :gotoItem="gotoItem" />
   </div>
 </template>
 

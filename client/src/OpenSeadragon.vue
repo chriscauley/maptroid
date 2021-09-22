@@ -23,7 +23,7 @@ export default {
   mounted() {
     const { ...options } = this.options
     options.element = this.$el
-    window.jawn = this.viewer = new OpenSeadragon(options)
+    window.viewer_jawn = this.viewer = new OpenSeadragon(options)
 
     const viewport = this.viewer.viewport
     viewport.centerSpringY.animationTime = 0.25

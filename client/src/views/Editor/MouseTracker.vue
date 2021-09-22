@@ -11,7 +11,6 @@ const { MouseTracker, Point } = OpenSeadragon
 export default {
   mixins: [Mousetrap.Mixin],
   props: {
-    viewer: Object,
     world: Object,
     game: Object,
   },
@@ -32,7 +31,7 @@ export default {
   },
   mounted() {
     this.$el.parentNode.removeChild(this.$el)
-    this.viewer.addOverlay(this.$el, undefined, undefined, () => {})
+    this.$store.osd_viewer.addOverlay(this.$el, undefined, undefined, () => {})
     this.mouseTracker = new MouseTracker({
       element: this.$el,
       pressHandler: this.press,
@@ -45,7 +44,7 @@ export default {
     eventToImagePoint(e) {
       const { x, y } = e.originalEvent
       const p = new Point(x + window.scrollX, y + window.scrollY)
-      return this.viewer.world.getItemAt(0).windowToImageCoordinates(p)
+      return this.$store.osd_viewer.world.getItemAt(0).windowToImageCoordinates(p)
     },
     refetchItems() {
       return this.$store.item.getAll({ world_id: this.world.id })

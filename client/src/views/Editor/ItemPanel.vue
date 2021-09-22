@@ -54,7 +54,6 @@ import Warnings from './Warnings.vue'
 export default {
   components: { Inventory, Warnings },
   props: {
-    viewer: Object,
     world: Object,
     game: Object,
     gotoRoom: Function,

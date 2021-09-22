@@ -15,7 +15,6 @@ export default {
   props: {
     items: Array,
     screens: Array,
-    viewer: Object,
     world: Object,
   },
   emits: ['click-item'],
@@ -57,8 +56,8 @@ export default {
   },
   mounted() {
     // TODO this should probably go in store.viewer
-    this.viewer.addOverlay(this.$el, new OpenSeadragon.Rect(0, 0, 1, 1))
-    const { x } = this.viewer.world.getItemAt(0).getContentSize()
+    this.$store.osd_viewer.addOverlay(this.$el, new OpenSeadragon.Rect(0, 0, 1, 1))
+    const { x } = this.$store.osd_viewer.world.getItemAt(0).getContentSize()
     this.$store.viewer.patch({ size: x })
 
     // TODO this is already in store.viewer B)

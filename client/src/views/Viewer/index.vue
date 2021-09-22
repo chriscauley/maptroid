@@ -7,8 +7,8 @@
         </div>
       </div>
       <open-seadragon :pixelated="true" :options="viewer_options" :events="viewer_events" />
-      <template v-if="viewer">
-        <html-overlay :viewer="viewer" :world="world" :screens="screens">
+      <template v-if="$store.osd_viewer">
+        <html-overlay :world="world" :screens="screens">
           <item-box
             v-for="(item, i) in items"
             :item="item"
@@ -19,13 +19,12 @@
             @click="clickItem(item)"
           />
         </html-overlay>
-        <svg-overlay :viewer="viewer" :world="world" :arrows="arrows" />
+        <svg-overlay :world="world" :arrows="arrows" />
         <viewer-panel
           :room="current_room"
           :items="items"
           :game="game"
           :world="world"
-          :viewer="viewer"
           :gotoItem="gotoItem"
         />
       </template>
@@ -72,7 +71,8 @@ export default {
         }
         out.push({ x: xy[0], y: xy[1], class: '-black' })
       })
-      const { x, y } = this.viewer.world.getItemAt(0).getContentSize()
+      // TODO store content size in viewer store (see note in HtmlOverlay)
+      const { x, y } = this.$store.osd_viewer.world.getItemAt(0).getContentSize()
       const W = x / this.world.map_screen_size
       const H = y / this.world.map_screen_size
       const [min_x, min_y] = this.visible_xys[0]
@@ -130,7 +130,7 @@ export default {
       this.$store.playthrough.save(this.game.playthrough)
     },
     updateLocked() {
-      this.viewer.setMouseNavEnabled(!this.locked)
+      this.$store.osd_viewer.setMouseNavEnabled(!this.locked)
     },
   },
 }

@@ -48,7 +48,6 @@ export default {
     items: Array,
     room: Object,
     world: Object,
-    viewer: Object,
     gotoItem: Function,
   },
   computed: {

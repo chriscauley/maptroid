@@ -1,3 +1,4 @@
+import { reactive, markRaw } from 'vue'
 import unrest from '@unrest/vue'
 
 import admin_options from './admin'
@@ -9,7 +10,18 @@ import world from './world'
 
 import _migrations from './migrations'
 
-const store = {}
+const state = reactive({
+  osd_viewer: null,
+})
+
+const store = {
+  get osd_viewer() {
+    return state.osd_viewer
+  },
+  set osd_viewer(value) {
+    state.osd_viewer = markRaw(value)
+  }
+}
 const modules = { item, playthrough, room, viewer, world }
 const admin_modules = ['item', 'playthrough', 'room', 'world']
 

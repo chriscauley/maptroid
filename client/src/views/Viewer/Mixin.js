@@ -7,7 +7,6 @@ import Room from '@/models/Room'
 export default {
   data() {
     return {
-      viewer: null,
       overzoomed: false,
       current_room: null,
     }
@@ -16,9 +15,9 @@ export default {
     viewer_events() {
       return {
         open: (event) => {
-          this.viewer = event.eventSource
+          this.$store.osd_viewer = event.eventSource
           const p = new OpenSeadragon.Point(2, 2)
-          const width = this.viewer.viewport.imageToViewportCoordinates(p).x
+          const width = this.$store.osd_viewer.viewport.imageToViewportCoordinates(p).x
           document.body.style.setProperty('--border-width', width + 'px')
           this.onViewerDone?.()
         },
@@ -68,9 +67,10 @@ export default {
       return {}
     },
     gotoItem(item) {
+      // TODO move to viewer store
       const { x, y, width, height } = Item.getMapBounds(item, this.world)
       this.gotoBounds(x, y, width, height)
-      this.viewer.addOnceHandler('animation-finish', () =>
+      this.$store.osd_viewer.addOnceHandler('animation-finish', () =>
         this.$store.viewer.patch({ selected_item: item.id }),
       )
     },
@@ -82,7 +82,7 @@ export default {
     gotoBounds(x, y, width, height) {
       const b = 64
       const bounds = new OpenSeadragon.Rect(x - b, y - b, width + b * 2, height + b * 2)
-      const { viewport } = this.viewer
+      const { viewport } = this.$store.osd_viewer
       viewport.fitBounds(viewport.imageToViewportRectangle(bounds))
     },
   },
