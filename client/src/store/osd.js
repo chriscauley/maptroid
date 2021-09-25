@@ -4,11 +4,7 @@ import { reactive, markRaw } from 'vue'
 import OpenSeadragon from 'openseadragon'
 
 export default () => {
-  const state = reactive({
-    _viewer: null,
-    width: null,
-    height: null,
-  })
+  const state = reactive({ _viewer: null })
 
   const osd_store = {
     state,
@@ -18,12 +14,15 @@ export default () => {
       return state._viewer
     },
     set viewer(viewer) {
-      const p = new OpenSeadragon.Point(1, 1)
-      const px = viewer.viewport.imageToViewportCoordinates(p)
-      const size = viewer.world.getItemAt(0).getContentSize()
-
+      let px = { x: 1, y: 1 }
+      let size = px
+      if (viewer) {
+        const p = new OpenSeadragon.Point(1, 1)
+        px = viewer.viewport.imageToViewportCoordinates(p)
+        size = viewer.world.getItemAt(0).getContentSize()
+      }
       Object.assign(state, {
-        _viewer: markRaw(viewer),
+        _viewer: viewer ? markRaw(viewer) : viewer,
         px_width: px.x,
         px_height: px.y,
         content_width: size.x,

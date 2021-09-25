@@ -8,6 +8,10 @@ export default {
   data() {
     return { current_room: null }
   },
+  unmounted() {
+    this.viewer?.destroy()
+    this.$store.osd.viewer = null
+  },
   computed: {
     viewer_events() {
       return {
