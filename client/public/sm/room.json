@@ -23186,5 +23186,57 @@
     "name": "shaft-3",
     "world_id": 6,
     "id": 694
+  },
+  "695": {
+    "zone": "crateria",
+    "xys": [
+      [
+        25,
+        10
+      ],
+      [
+        25,
+        11
+      ],
+      [
+        26,
+        11
+      ],
+      [
+        27,
+        11
+      ]
+    ],
+    "name": "where i learned to bomb jump supers",
+    "world_id": 7,
+    "id": 695
+  },
+  "696": {
+    "zone": "crateria",
+    "xys": [
+      [
+        8,
+        4
+      ],
+      [
+        8,
+        3
+      ],
+      [
+        9,
+        3
+      ],
+      [
+        9,
+        4
+      ],
+      [
+        10,
+        4
+      ]
+    ],
+    "name": "the supers that taught me to bomb jump 2",
+    "world_id": 7,
+    "id": 696
   }
 }

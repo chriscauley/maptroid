@@ -117,5 +117,25 @@
       "crateria"
     ],
     "id": 7
+  },
+  "8": {
+    "name": "Dependence",
+    "dzi": "/output/Dependence.dzi",
+    "map_screen_size": 32,
+    "map_item_size": 2,
+    "zones": [
+      "crateria"
+    ],
+    "id": 8
+  },
+  "9": {
+    "name": "Z-Factor",
+    "dzi": "/output/Z-Factor.dzi",
+    "map_screen_size": 32,
+    "map_item_size": 2,
+    "zones": [
+      "crateria"
+    ],
+    "id": 9
   }
 }
