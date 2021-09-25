@@ -28,7 +28,7 @@ admin_modules.forEach((model_name) =>
 )
 
 // _migrations.moveItems(store)
-// _migrations.migrateItems(store)
+// _migrations.clearPlaythroughs(store)
 window._store = store
 
 export default {

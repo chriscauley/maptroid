@@ -1,3 +1,5 @@
+import assert from 'assert'
+
 export default {
   locateItems(store) {
     // give the rooms an room_id and map_xy
@@ -69,5 +71,17 @@ export default {
         }
         store.item.save(i)
       })
+  },
+  clearPlaythroughs(store) {
+    // Some bug is causing playthroughs to be duplicated
+    const exists = {}
+    store.playthrough.getAll().forEach((p) => {
+      if (exists[p.world_id]) {
+        assert(p.actions.length < exists[p.world_id])
+        store.playthrough.delete(p)
+      } else {
+        exists[p.world_id] = p.actions.length
+      }
+    })
   },
 }
