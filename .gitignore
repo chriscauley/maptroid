@@ -5,3 +5,5 @@ deepzoom.py
 __pycache__
 .venv
 db.sqlite3
+.secret_key
+server/unrest
