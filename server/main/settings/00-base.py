@@ -61,8 +61,8 @@ DATABASES = {
 }
 
 
-_pv = 'django.contrib.auth.password_validation.'
 # Password validation
+_pv = 'django.contrib.auth.password_validation.'
 AUTH_PASSWORD_VALIDATORS = [
     { 'NAME': f'{_pv}UserAttributeSimilarityValidator' },
     { 'NAME': f'{_pv}MinimumLengthValidator' },
@@ -72,16 +72,10 @@ AUTH_PASSWORD_VALIDATORS = [
 
 
 # Internationalization
-# https://docs.djangoproject.com/en/3.2/topics/i18n/
-
 LANGUAGE_CODE = 'en-us'
-
 TIME_ZONE = 'UTC'
-
 USE_I18N = True
-
 USE_L10N = True
-
 USE_TZ = True
 
 
@@ -94,10 +88,13 @@ USE_TZ = True
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, '../../.static')
+STATIC_ROOT = os.path.join(BASE_DIR, '../.static')
 STATICFILES_DIRS = [
-  os.path.join(BASE_DIR, '../static')
+  os.path.join(BASE_DIR, '../static'),
+  os.path.join(BASE_DIR, '../dist'),
 ]
 
+print(STATICFILES_DIRS)
+
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, '../../.media')
+MEDIA_ROOT = os.path.join(BASE_DIR, '../.media')
