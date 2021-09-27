@@ -22,7 +22,7 @@ for world_slug in os.listdir(SMILE_DIR):
     keys += os.listdir(os.path.join(world_dir, room_slice))
 
   keys = list(set(keys))
-  print('\n\n', world)
+  print('\n\nAnalyzing world: ', world)
   for key in keys:
     missing = []
     for room_slice in ROOM_SLICES:
@@ -30,3 +30,6 @@ for world_slug in os.listdir(SMILE_DIR):
         missing.push(room_slice)
     if missing:
       print(f'{key} missing in: {missing}')
+    room, new = Room.objects.get_or_create(key=key, world=world)
+    if new:
+      print(f'New Room: {room}')

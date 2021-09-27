@@ -7,6 +7,6 @@ class World(models.Model):
 
 class Room(models.Model):
   world = models.ForeignKey(World, null=True, blank=True, on_delete=models.SET_NULL)
-  name = models.CharField(max_length=128)
-  key = models.CharField(max_length=128)
+  name = models.CharField(max_length=128, null=True, blank=True)
+  key = models.CharField(max_length=128, null=True, blank=True)
   __str__ = lambda self: f'{self.name or "unnamed"} - ({self.key})'
