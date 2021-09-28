@@ -1,0 +1,27 @@
+.ur-files {
+  &__file-list {
+    @apply flex flex-wrap gap-2;
+  }
+  &__file {
+    @apply border flex flex-wrap p-2 rounded w-1/4;
+    &:hover {
+      background: var(--bg-alt);
+      ._preview-wrapper {
+        background: repeating-conic-gradient(#808080 0% 25%, white 0% 50%) 50% / 20px 20px;
+      }
+    }
+    ._preview {
+      @apply absolute h-full left-0 top-0 w-full;
+      background: center no-repeat;
+      background-size: contain;
+    }
+    ._preview-wrapper {
+      @apply relative w-full;
+      &:before {
+        content: '';
+        display: block;
+        padding-top: 50%;
+      }
+    }
+  }
+}
