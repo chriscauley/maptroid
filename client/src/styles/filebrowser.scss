@@ -1,9 +1,16 @@
 .ur-files {
+  overflow-y: hidden;
+  &__content {
+    @apply flex h-full;
+  }
   &__file-list {
-    @apply flex flex-wrap gap-2;
+    @apply flex flex-wrap h-full overflow-y-scroll;
+  }
+  &__file-wrapper {
+    @apply p-2 w-1/4;
   }
   &__file {
-    @apply border flex flex-wrap p-2 rounded w-1/4;
+    @apply border cursor-pointer flex flex-wrap p-2 relative rounded;
     &:hover {
       background: var(--bg-alt);
       ._preview-wrapper {
@@ -23,5 +30,28 @@
         padding-top: 50%;
       }
     }
+    ._actions {
+      @apply absolute right-0 top-0;
+    }
+  }
+  &__selected {
+    flex-basis: 75%;
+    overflow: scroll;
+    ._image {
+      width: 100%;
+      height: 100%;
+    }
+    img {
+      max-width: unset;
+    }
+  }
+}
+
+.ur-files.-has-selected .ur-files {
+  &__file-list {
+    flex-basis: 25%;
+  }
+  &__file-wrapper {
+    @apply w-full;
   }
 }
