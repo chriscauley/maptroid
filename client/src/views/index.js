@@ -8,4 +8,8 @@ import Viewer from './Viewer/index.vue'
 export default {
   Editor,
   FileBrowser,
-  ScreenshotViewer, SpriteGallery, Viewer, Tracer }
+  ScreenshotViewer,
+  SpriteGallery,
+  Viewer,
+  Tracer,
+}

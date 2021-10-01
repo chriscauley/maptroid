@@ -35,7 +35,7 @@ export default {
   },
   methods: {
     getRoomSrc(room, layer) {
-      const world = this.worlds.find(w => w.id === room.world_id)
+      const world = this.worlds.find((w) => w.id === room.world_id)
       return `/static/smile_exports/${world.slug}/${layer}/${room.key}`
     },
     nextLayer() {

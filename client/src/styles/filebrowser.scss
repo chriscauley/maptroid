@@ -1,10 +1,10 @@
 .ur-files {
   overflow-y: hidden;
   &__content {
-    @apply flex h-full;
+    @apply flex h-full w-full;
   }
   &__file-list {
-    @apply flex flex-wrap h-full overflow-y-scroll;
+    @apply flex flex-wrap h-full overflow-y-scroll w-full;
   }
   &__file-wrapper {
     @apply p-2 w-1/4;
@@ -21,6 +21,7 @@
       @apply absolute h-full left-0 top-0 w-full;
       background: center no-repeat;
       background-size: contain;
+      image-rendering: pixelated;
     }
     ._preview-wrapper {
       @apply relative w-full;
@@ -45,6 +46,12 @@
       max-width: unset;
     }
   }
+  ._flex-clear {
+    flex-basis: 100%;
+  }
+  .fa-folder {
+    @apply mr-2;
+  }
 }
 
 .ur-files.-has-selected .ur-files {
@@ -53,5 +60,14 @@
   }
   &__file-wrapper {
     @apply w-full;
+  }
+}
+
+.ur-files {
+  &__breadcrumbs {
+    @apply flex items-center p-4;
+  }
+  &__folder-dropdown {
+    @apply relative ml-4;
   }
 }
