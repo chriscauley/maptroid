@@ -7,6 +7,9 @@ authors = ["chriscauley <chris@lablackey.com>"]
 [tool.poetry.dependencies]
 python = "^3.6"
 Django = "^3.2.7"
+ImageHash = "^4.2.1"
+pytesseract = "^0.3.8"
+np = "^1.0.2"
 
 [tool.poetry.dev-dependencies]
 

@@ -8,3 +8,5 @@ db.sqlite3
 .secret_key
 server/unrest
 server/dist
+.static
+.media

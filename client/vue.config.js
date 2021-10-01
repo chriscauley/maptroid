@@ -12,7 +12,6 @@ if (VUE_APP_OFFLINE) {
     port: 8942,
     historyApiFallback: true,
   }
-  module.exports.publicPath = '/maptroid/'
 } else {
   module.exports.publicPath = '/static/'
 }

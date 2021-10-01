@@ -5,6 +5,7 @@
   "scripts": {
     "build": "vue-cli-service build --dest ../server/dist",
     "lint": "eslint \"src/**/*\"",
+    "serve": "VUE_APP_OFFLINE=1 vue-cli-service serve",
     "watch": "yarn build --watch"
   },
   "dependencies": {
