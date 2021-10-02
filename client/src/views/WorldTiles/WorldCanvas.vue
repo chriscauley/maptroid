@@ -7,18 +7,18 @@ import { debounce } from 'lodash'
 import ScaleMixin from './ScaleMixin'
 
 export default {
+  mixins: [ScaleMixin],
   props: {
     sources: Array,
     world: Object,
   },
-  mixins: [ScaleMixin],
   data() {
-    return { _frame: null, x: 1, y: 1, zoom_px: 1 }
+    return { frame: null, x: 1, y: 1, zoom_px: 1 }
   },
   mounted() {
-    this._resize();
+    this._resize()
     this.resize = debounce(this._resize, 200)
-    this.redraw();
+    this.redraw()
     window.addEventListener('resize', this.resize)
   },
   unmounted() {
@@ -26,26 +26,24 @@ export default {
   },
   methods: {
     _resize() {
-      const { width, height } = this.$el.parentElement.getBoundingClientRect();
-      Object.assign(this.$el, { width, height});
+      const { width, height } = this.$el.parentElement.getBoundingClientRect()
+      Object.assign(this.$el, { width, height })
       this.ctx = this.$el.getContext('2d')
-      this.ctx.imageSmoothingEnabled = false;
+      this.ctx.imageSmoothingEnabled = false
     },
     redraw() {
-      cancelAnimationFrame(this._frame)
-      this._frame = requestAnimationFrame(this.redraw)
+      cancelAnimationFrame(this.frame)
+      this.frame = requestAnimationFrame(this.redraw)
       const { width, height } = this.$el
       this.ctx.clearRect(0, 0, width, height)
       this.ctx.save()
       const { offsetX, offsetY, scale } = this.boxy
       this.ctx.translate(scale * offsetX, scale * offsetY)
       this.ctx.scale(scale, scale)
-      this.sources.forEach(s => s(this.ctx, this.boxy))
+      this.sources.forEach((s) => s(this.ctx, this.boxy))
       this.ctx.restore()
     },
-    onMousewheel() {
-
-    }
-  }
+    onMousewheel() {},
+  },
 }
 </script>

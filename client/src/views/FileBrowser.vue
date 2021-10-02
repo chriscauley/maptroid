@@ -62,10 +62,13 @@ export default {
     },
     breadcrumbs() {
       let sofar = []
-      return this.path.split('/').filter(Boolean).map((name) => {
-        sofar.push(name)
-        return { to: `?path=/${sofar.join('/')}/`, name }
-      })
+      return this.path
+        .split('/')
+        .filter(Boolean)
+        .map((name) => {
+          sofar.push(name)
+          return { to: `?path=/${sofar.join('/')}/`, name }
+        })
     },
     mousetrap() {
       return {

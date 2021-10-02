@@ -10,7 +10,7 @@ export default {
         min_scale: 1,
         max_scale: 5,
         mouse: { x: 0, y: 0 },
-      }
+      },
     }
   },
   methods: {
@@ -18,7 +18,7 @@ export default {
       // this hook should be overriden by component
     },
     mousemove(event) {
-      const { scale, offsetX, offsetY, min_scale, max_scale } = this.boxy
+      const { scale, offsetX, offsetY } = this.boxy
       const box = this.$el.getBoundingClientRect()
       const clientX = event.pageX - box.left
       const clientY = event.pageY - box.top
@@ -43,14 +43,13 @@ export default {
       const box = this.$el.getBoundingClientRect()
       const clientX = event.pageX - box.left
       const clientY = event.pageY - box.top
-      console.log(clientX, clientY)
 
       const nextScale = clamp(scale - event.deltaY / 100, min_scale, max_scale)
 
-      const currentBoxWidth  = box.width / scale
+      const currentBoxWidth = box.width / scale
       const currentBoxHeight = box.height / scale
 
-      const nextBoxWidth  = box.width / nextScale
+      const nextBoxWidth = box.width / nextScale
       const nextBoxHeight = box.height / nextScale
 
       const deltaX = (nextBoxWidth - currentBoxWidth) * (clientX / box.width - 0.5)
@@ -69,6 +68,6 @@ export default {
         offsetY: offsetY - deltaY,
         scale: nextScale,
       })
-    }
-  }
+    },
+  },
 }

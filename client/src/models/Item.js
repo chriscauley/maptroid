@@ -34,14 +34,14 @@ export default {
     const [screen_x, screen_y] = item.screen_xy
     const { map_screen_size, map_item_size } = world
     // TODO this makes the item fill the whole room
-    if (item.class === 'item') {
-      return {
-        x: world_x * map_screen_size,
-        y: world_y * map_screen_size,
-        width: map_screen_size,
-        height: map_screen_size,
-      }
-    }
+    // if (item.class === 'item') {
+    //   return {
+    //     x: world_x * map_screen_size,
+    //     y: world_y * map_screen_size,
+    //     width: map_screen_size,
+    //     height: map_screen_size,
+    //   }
+    // }
     const width = item.width * map_item_size
     const height = item.height * map_item_size
     const x = world_x * map_screen_size + screen_x * map_item_size

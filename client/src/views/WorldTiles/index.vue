@@ -11,7 +11,7 @@ const GRID = 8
 
 export default {
   __route: {
-    path: '/world-tiles/:world_id/'
+    path: '/world-tiles/:world_id/',
   },
   components: { WorldCanvas },
   data() {
@@ -28,16 +28,16 @@ export default {
     },
     sources() {
       return [
-        ctx => ctx.drawImage(this.world_map, 0, 0),
+        (ctx) => ctx.drawImage(this.world_map, 0, 0),
         (ctx, boxy) => {
           ctx.strokeStyle = 'white'
           ctx.linewidth = 2
           const { x, y } = boxy.mouse
           const floor = (n) => GRID * Math.floor(n / GRID)
           ctx.strokeRect(floor(x), floor(y), GRID, GRID)
-        }
+        },
       ]
-    }
+    },
   },
   methods: {
     draw() {
@@ -47,6 +47,6 @@ export default {
       ctx.clearRect(0, 0, width, height)
       ctx.drawImage(this.world_map, 0, 0)
     },
-  }
+  },
 }
 </script>
