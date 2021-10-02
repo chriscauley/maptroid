@@ -6,7 +6,7 @@ django.setup()
 from django.conf import settings
 from maptroid.models import World, Room
 
-SMILE_DIR = os.path.join(settings.BASE_DIR, '../static/smile_exports/')
+SMILE_DIR = os.path.join(settings.BASE_DIR, '../.media/smile_exports/')
 ROOM_SLICES = ['plm_enemies', 'layer-1', 'bts', 'layer-2']
 
 for world_slug in os.listdir(SMILE_DIR):

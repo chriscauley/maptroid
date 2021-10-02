@@ -36,7 +36,7 @@ export default {
   methods: {
     getRoomSrc(room, layer) {
       const world = this.worlds.find((w) => w.id === room.world_id)
-      return `/static/smile_exports/${world.slug}/${layer}/${room.key}`
+      return `/media/smile_exports/${world.slug}/${layer}/${room.key}`
     },
     nextLayer() {
       const index = this.layers.indexOf(this.active_layer) + 1
