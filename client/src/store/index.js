@@ -5,14 +5,16 @@ import item from './item'
 import osd from './osd'
 import playthrough from './playthrough'
 import room from './room'
+import room2 from './room2'
 import viewer from './viewer'
 import world from './world'
+import world2 from './world2'
 
 import _migrations from './migrations'
 
 const store = {}
 
-const modules = { item, osd, playthrough, room, viewer, world }
+const modules = { item, osd, playthrough, room, room2, viewer, world, world2 }
 const admin_modules = ['item', 'playthrough', 'room', 'world']
 
 Object.entries(modules).forEach(([name, module]) => {

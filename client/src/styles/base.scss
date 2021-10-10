@@ -294,3 +294,11 @@
     border-bottom: var(--bg) 1px solid;
   }
 }
+
+.app-body {
+  @apply flex flex-grow;
+  .app-panel {
+    outline: 1px white solid;
+    width: 300px;
+  }
+}
