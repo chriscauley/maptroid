@@ -2,9 +2,15 @@ from django.db import models
 
 _choices = lambda l: zip(l,l)
 
+class Zone(models.Model):
+  name = models.CharField(max_length=128)
+  slug = models.CharField(max_length=128)
+  __str__ = lambda self: self.name
+
 class World(models.Model):
   name = models.CharField(max_length=128)
   slug = models.CharField(max_length=128)
+  zones = models.ManyToManyField(Zone)
   __str__ = lambda self: self.name
 
 class Room(models.Model):
@@ -33,3 +39,8 @@ class Sprite(models.Model):
 
 class Entity(models.Model):
   TYPES = _choices(['item', 'environment', 'enemy', 'door', 'station', 'unknown'])
+
+class Screenshot(models.Model):
+  world = models.ForeignKey(World, models.SET_NULL, null=True, blank=True)
+  zone = models.ForeignKey(Zone, models.SET_NULL, null=True, blank=True)
+  image = models.ImageField(upload_to="screenshots")

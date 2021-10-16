@@ -6,8 +6,8 @@ from main.views import list_dir, delete_file
 import maptroid.forms
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    re_path('^(screenshot-viewer|editor|viewer|file-browser|world-tiles)', index),
+    path('djadmin/', admin.site.urls),
+    re_path('^(admin|dread.*|screenshot.*|editor|viewer|file-browser|world-tiles)', index),
     path('api/list-dir/', list_dir),
     path('api/delete-file/', delete_file),
     path('', include('unrest.urls')),

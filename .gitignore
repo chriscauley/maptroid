@@ -8,5 +8,6 @@ db.sqlite3
 .secret_key
 server/unrest
 server/dist
+server/main/settings/local.py
 .static
 .media
