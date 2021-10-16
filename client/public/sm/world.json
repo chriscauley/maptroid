@@ -1,7 +1,7 @@
 {
   "1": {
     "name": "Super Metroid",
-    "dzi": "/output/SuperMetroidMapZebes.dzi",
+    "dzi": "/media/deepzoom/SuperMetroidMapZebes.dzi",
     "id": 1,
     "map_screen_size": 256,
     "map_item_size": 16,
@@ -23,7 +23,7 @@
   },
   "2": {
     "name": "Super Zero Mission",
-    "dzi": "/output/SuperZeroMission.dzi",
+    "dzi": "/media/deepzoom/SuperZeroMission.dzi",
     "id": 2,
     "map_screen_size": 32,
     "map_item_size": 2,
@@ -42,7 +42,7 @@
   },
   "3": {
     "name": "Super Metroid Ascent",
-    "dzi": "/output/Ascent.dzi",
+    "dzi": "/media/deepzoom/Ascent.dzi",
     "id": 3,
     "map_screen_size": 32,
     "map_item_size": 2,
@@ -60,7 +60,7 @@
   },
   "4": {
     "name": "Super Metroid Vitality",
-    "dzi": "/output/Vitality.dzi",
+    "dzi": "/media/deepzoom/Vitality.dzi",
     "id": 4,
     "map_screen_size": 32,
     "map_item_size": 2,
@@ -77,7 +77,7 @@
   },
   "5": {
     "name": "Ice Metal",
-    "dzi": "/output/IceMetal.dzi",
+    "dzi": "/media/deepzoom/IceMetal.dzi",
     "id": 5,
     "map_screen_size": 32,
     "map_item_size": 2,
@@ -94,7 +94,7 @@
   },
   "6": {
     "name": "Cliffhanger",
-    "dzi": "/output/Cliffhanger.dzi",
+    "dzi": "/media/deepzoom/Cliffhanger.dzi",
     "map_screen_size": 32,
     "map_item_size": 2,
     "zones": [
@@ -110,7 +110,7 @@
   },
   "7": {
     "name": "Eris",
-    "dzi": "/output/Eris2012.dzi",
+    "dzi": "/media/deepzoom/Eris2012.dzi",
     "map_screen_size": 32,
     "map_item_size": 2,
     "zones": [
@@ -120,7 +120,7 @@
   },
   "8": {
     "name": "Dependence",
-    "dzi": "/output/Dependence.dzi",
+    "dzi": "/media/deepzoom/Dependence.dzi",
     "map_screen_size": 32,
     "map_item_size": 2,
     "zones": [
@@ -130,7 +130,7 @@
   },
   "9": {
     "name": "Z-Factor",
-    "dzi": "/output/Z-Factor.dzi",
+    "dzi": "/media/deepzoom/Z-Factor.dzi",
     "map_screen_size": 32,
     "map_item_size": 2,
     "zones": [

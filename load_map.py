@@ -22,4 +22,4 @@ creator = deepzoom.ImageCreator(
 )
 
 # Create Deep Zoom image pyramid from source
-creator.create(SOURCE, f"client/public/output/{name}.dzi")
+creator.create(SOURCE, f"server/.media/deepzoom/{name}.dzi")
