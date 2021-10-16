@@ -296,9 +296,18 @@
 }
 
 .app-body {
-  @apply flex flex-grow;
+  @apply relative flex flex-grow;
   .app-panel {
-    outline: 1px white solid;
+    @apply overflow-auto relative;
     width: 300px;
+  }
+  .app-panel__inner {
+    @apply absolute inset-0;
+  }
+}
+
+.ur-toolbar {
+  &.-topleft {
+    @apply absolute left-0 top-0;
   }
 }
