@@ -1315,10 +1315,10 @@
     eslint-plugin-vue "^7.0.0-0"
     prettier "^1.18.2"
 
-"@unrest/tailwind@^0.1.0":
-  version "0.1.0"
-  resolved "https://registry.yarnpkg.com/@unrest/tailwind/-/tailwind-0.1.0.tgz#a7c4e617e51a484088e9e2612ee39c9e42149f93"
-  integrity sha512-5hp0D4rWKgs9+TpPMf+ScPkP6ha2N7IwDCxJm9m+lj/ueLC3qCKQiK5zGPBDEHU8+cHZCl41hO8VG659y8Nz9Q==
+"@unrest/tailwind@^0.1.3":
+  version "0.1.13"
+  resolved "https://registry.yarnpkg.com/@unrest/tailwind/-/tailwind-0.1.13.tgz#cb8e92bd7cf1ba26fb5466fb3fd29155be935b16"
+  integrity sha512-WAc0X0zxXXbNi4cwJAbqPkWKTOD0fYQY/Y+idAmwV/awOhHNSi7ILB5k4wZUtn+tfc7HGPDEilzUDT9QhJAGRg==
 
 "@unrest/vue-form@^0.0.8":
   version "0.0.8"
@@ -1337,23 +1337,23 @@
     "@unrest/eslint-config" "^0.0.4"
     mousetrap "^1.6.5"
 
-"@unrest/vue-storage@^0.0.9":
-  version "0.0.9"
-  resolved "https://registry.yarnpkg.com/@unrest/vue-storage/-/vue-storage-0.0.9.tgz#09ab6f964616357bef74924f1d6fc76e46396aba"
-  integrity sha512-5k5H31M0xHDhQHh9nLJfMNoL2nIk2soGwpmyhXhAT32dt9H0kcc/7U6gYv2YjIIqH+8B93L5KeFi0AX3BiJqGw==
+"@unrest/vue-storage@^0.0.11":
+  version "0.0.11"
+  resolved "https://registry.yarnpkg.com/@unrest/vue-storage/-/vue-storage-0.0.11.tgz#09abe601f2e4b1e97944ea6a3d9d3c01276fcdc3"
+  integrity sha512-9ZcnHLYYHnm3WfU4udyPOxtyuAR5HXA17dYRmmTWYFFSKTOzT7DHEdhF+GqNXYmBnKTJ+0rq+l+yC0KVEoTZ7g==
   dependencies:
     axios "^0.21.1"
     core-js "^3.6.5"
     local-storage-json "^1.1.0"
-    vue "^3.0.0"
 
-"@unrest/vue@^0.2.0":
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/@unrest/vue/-/vue-0.2.0.tgz#6706ad477bf219db104978ccaf0a4b23c061d7b7"
-  integrity sha512-kajGRY1d4RhXqA4Lo8Bu1gTM/iWtKSRCV6E3u2eusXwkWFdCNx14zO5kBH30AykSupplIGRrdJLaJP3PdUmMKA==
+"@unrest/vue@^0.2.1":
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/@unrest/vue/-/vue-0.2.1.tgz#3b9ef9cbbd52ba3ed9f70c2a57c1fb720470c8e9"
+  integrity sha512-lnbjmTgtNucJ7KKINJgRnfwiKWQ3f8xPcF/KtqStSTHVbE5Bjl9tC5UMGJh06v22YEDBSnSqTw8gZwMtErBkxQ==
   dependencies:
     dedent "^0.7.0"
     lodash.clonedeep "^4.5.0"
+    lodash.startcase "^4.4.0"
     marked "^2.1.3"
 
 "@vitejs/plugin-vue@^1.3.0":
@@ -6005,6 +6005,11 @@ lodash.pick@^4.4.0:
   version "4.4.0"
   resolved "https://registry.yarnpkg.com/lodash.pick/-/lodash.pick-4.4.0.tgz#52f05610fff9ded422611441ed1fc123a03001b3"
   integrity sha1-UvBWEP/53tQiYRRB7R/BI6AwAbM=
+
+lodash.startcase@^4.4.0:
+  version "4.4.0"
+  resolved "https://registry.yarnpkg.com/lodash.startcase/-/lodash.startcase-4.4.0.tgz#9436e34ed26093ed7ffae1936144350915d9add8"
+  integrity sha1-lDbjTtJgk+1/+uGTYUQ1CRXZrdg=
 
 lodash.topath@^4.5.2:
   version "4.5.2"
