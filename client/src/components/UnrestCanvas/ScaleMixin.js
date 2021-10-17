@@ -1,45 +1,55 @@
 const clamp = (number, lower, upper) => Math.min(upper, Math.max(number, lower))
 
 export default {
-  data() {
-    return {
-      boxy: {
-        offsetX: 0,
-        offsetY: 0,
-        scale: 1,
-        min_scale: 1,
-        max_scale: 5,
-        mouse: { x: 0, y: 0 },
-      },
-    }
+  props: {
+    state: {
+      type: Object,
+      default: () => ({}),
+    },
+  },
+  mounted() {
+    Object.assign(this.state, {
+      offsetX: 0,
+      offsetY: 0,
+      scale: 1,
+      grid_size: 4,
+      min_scale: 1,
+      max_scale: 5,
+      mouse: { x: 0, y: 0, grid_x: 0, grid_y: 0 },
+      ...this.state,
+    })
   },
   methods: {
     onMousewheel() {
       // this hook should be overriden by component
     },
     mousemove(event) {
-      const { scale, offsetX, offsetY } = this.boxy
+      const { scale, offsetX, offsetY, grid_size } = this.state
       const box = this.$el.getBoundingClientRect()
       const clientX = event.pageX - box.left
       const clientY = event.pageY - box.top
-      this.boxy.mouse = {
-        x: clientX / scale - offsetX,
-        y: clientY / scale - offsetY,
-      }
+      const x = clientX / scale - offsetX
+      const y = clientY / scale - offsetY
+      const grid_ix = Math.floor(x / grid_size)
+      const grid_iy = Math.floor(y / grid_size)
+      const grid_x = grid_ix * grid_size
+      const grid_y = grid_iy * grid_size
+      this.state.mouse = { x, y, grid_ix, grid_iy, grid_x, grid_y }
     },
     mousewheel(event) {
       if (event.ctrlKey) {
         this.mousezoom(event)
       } else {
-        this.boxy.offsetX -= event.deltaX / this.boxy.scale
-        this.boxy.offsetY -= event.deltaY / this.boxy.scale
+        this.state.offsetX -= event.deltaX / this.state.scale
+        this.state.offsetY -= event.deltaY / this.state.scale
       }
-      this.boxy.offsetX = clamp(this.boxy.offsetX, -500, 500)
-      this.boxy.offsetY = clamp(this.boxy.offsetY, -500, 500)
-      this.onMousewheel(this.boxy)
+      this.state.offsetX = clamp(this.state.offsetX, -1500, 500)
+      this.state.offsetY = clamp(this.state.offsetY, -1500, 500)
+      this.mousemove(event)
+      this.onMousewheel(this.state)
     },
     mousezoom(event) {
-      const { scale, offsetX, offsetY, min_scale, max_scale } = this.boxy
+      const { scale, offsetX, offsetY, min_scale, max_scale } = this.state
       const box = this.$el.getBoundingClientRect()
       const clientX = event.pageX - box.left
       const clientY = event.pageY - box.top
@@ -63,11 +73,17 @@ export default {
       //   bottom    : nextOffsetY * nextScale
       // })
 
-      Object.assign(this.boxy, {
+      Object.assign(this.state, {
         offsetX: offsetX - deltaX,
         offsetY: offsetY - deltaY,
         scale: nextScale,
       })
+    },
+    scaleUp() {
+      this.state.scale = Math.min(5, Math.floor(this.state.scale + 1))
+    },
+    scaleDown() {
+      this.state.scale = Math.max(1, Math.floor(this.state.scale - 1))
     },
   },
 }

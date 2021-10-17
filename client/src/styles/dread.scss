@@ -1,0 +1,19 @@
+.panel-screenshot {
+  @apply relative;
+  &__buttons {
+    @apply absolute bottom-0 flex gap-2 justify-between p-2 w-full;
+    background: rgba(0,0,0,0.75);
+  }
+}
+
+.dread-anchor {
+  @apply absolute cursor-pointer bg-white;
+  transform: translate(-50%, -50%);
+}
+
+.__debug {
+  @apply absolute bottom-0 flex left-0;
+  .w-48 {
+    width: 12rem;
+  }
+}

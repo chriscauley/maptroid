@@ -1,6 +1,7 @@
 @import "./filebrowser";
 @import "./sm";
 @import "./z-index";
+@import "./dread";
 
 .app-wrapper {
   @apply flex flex-col;
@@ -303,6 +304,16 @@
   }
   .app-panel__inner {
     @apply absolute inset-0;
+  }
+}
+
+.app-panel__pagination {
+  @apply flex justify-center;
+  .btn.-current {
+    @apply cursor-default text-white;
+    &:hover {
+      @apply bg-transparent;
+    }
   }
 }
 

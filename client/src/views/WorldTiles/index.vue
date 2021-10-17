@@ -9,18 +9,23 @@
           v-for="layer in layers"
           :key="layer"
           :class="css.layer(layer)"
-          @click="selected.layer=layer"
-          >
+          @click="selected.layer = layer"
+        >
           {{ layer }}
         </div>
       </div>
-      <div v-for="room in rooms" :key="room.id" class="list-group-item" @click="selected.room=room">
+      <div
+        v-for="room in rooms"
+        :key="room.id"
+        class="list-group-item"
+        @click="selected.room = room"
+      >
         <div>
           <div>{{ room.key }}</div>
           <img
-            v-if="selected.room===room"
+            v-if="selected.room === room"
             :src="`/media/smile_exports/${world.slug}/${selected.layer}/${room.key}`"
-            />
+          />
         </div>
       </div>
     </div>
@@ -64,7 +69,7 @@ export default {
   computed: {
     css() {
       return {
-        layer: layer => ['btn', layer === this.selected.layer ? '-primary' : '-secondary']
+        layer: (layer) => ['btn', layer === this.selected.layer ? '-primary' : '-secondary'],
       }
     },
     world() {

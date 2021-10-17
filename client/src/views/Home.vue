@@ -6,6 +6,6 @@
 export default {
   __route: {
     path: '/',
-  }
+  },
 }
 </script>
