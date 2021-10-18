@@ -37,9 +37,7 @@ export default {
   methods: {
     bindEvents() {
       const { events = {}, viewer } = this
-      Object.entries(events).forEach(
-        ([key, handler]) => console.log('bound', key) || viewer.addHandler(key, handler),
-      )
+      Object.entries(events).forEach(([key, handler]) => viewer.addHandler(key, handler))
     },
   },
 }

@@ -8,12 +8,21 @@
 
 .dread-anchor {
   @apply absolute cursor-pointer border border-white;
+  img {
+    @apply hidden w-full;
+  }
   &:hover {
     border-width: 4px;
     border-style: dashed;
   }
   &.ur-dragging {
-    border: 0
+    background-size: 100% 100%;
+    border: 0;
+    filter: invert(1);
+    opacity: 0.5;
+    img {
+      display: block;
+    }
   }
 }
 

@@ -40,21 +40,18 @@ import Openseadragon from 'openseadragon'
 import ScreenshotListItem from './ScreenshotListItem.vue'
 import ScreenshotOverlay from './ScreenshotOverlay.vue'
 import HtmlOverlay from '@/vue-openseadragon/HtmlOverlay.vue'
-import UnrestCanvas from '@/components/UnrestCanvas/index.vue'
-// import Storage from '@/components/UnrestCanvas/tool_storage'
-// import UnrestToolbar from '@/components/UnrestToolbar.vue'
 
 const ZONE = 1
 
 export default {
-  components: { HtmlOverlay, ScreenshotOverlay, ScreenshotListItem, UnrestCanvas }, //, UnrestToolbar },
+  components: { HtmlOverlay, ScreenshotOverlay, ScreenshotListItem },
   data() {
     return {
       // const tool_storage = Storage('dread-tools')
       selected: null,
       canvas_state: {},
       cropped_images: {},
-      page: 1,
+      current_page: 1,
     }
   },
   computed: {
@@ -80,11 +77,11 @@ export default {
       return range(1, 1 + pages).map((number) => ({
         number,
         class: ['btn -link', number === page && '-current'],
-        onClick: () => (this.page = number),
+        onClick: () => (this.current_page = number),
       }))
     },
     screenshot_page() {
-      return this.$store.screenshot.getPage({ page: this.page })
+      return this.$store.screenshot.getPage({ page: this.current_page })
     },
     visible_screenshots() {
       return (this.screenshot_page?.items || []).filter((s) => s.zone === ZONE)
@@ -106,7 +103,6 @@ export default {
     visible_screenshots() {
       this.visible_screenshots.forEach((screenshot) => {
         if (screenshot.zone === ZONE) {
-          console.log('adding', screenshot.key)
           this.$store.osd.addImage(screenshot)
         }
       })
@@ -128,7 +124,6 @@ export default {
         const box = viewer.container.getBoundingClientRect()
         const position = new Openseadragon.Point(event.pageX - box.left, event.pageY - box.top)
         const factor = Math.pow(viewer.zoomPerScroll, event.deltaY / 10)
-        console.log(factor)
         viewport.zoomBy(factor, viewport.pointFromPixel(position, true))
       } else {
         var center = viewport.pixelFromPoint(viewport.getCenter(true))

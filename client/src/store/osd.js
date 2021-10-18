@@ -44,7 +44,7 @@ export default () => {
         image.data._world = { x: 0, y: 0, width: 1 }
       }
       const { x, y, width } = image.data._world
-      state._viewer.addSimpleImage({ url: image.src, x, y, width, opacity: 0.5 })
+      state._viewer.addSimpleImage({ url: image.src, x, y, width, opacity: 1 })
     },
     moveImage(image, client_delta) {
       const osd_item = state._viewer.world._items.find((i) => image.src === i.source.url)
@@ -58,6 +58,13 @@ export default () => {
       image.data._world.x = point.x
       image.data._world.y = point.y
       console.warn('TODO debounced save image')
+    },
+    setOpacity(image, value) {
+      const osd_item = state._viewer.world._items.find((i) => image.src === i.source.url)
+      osd_item.setOpacity(value)
+    },
+    setAllOpacity(value) {
+      state._viewer.world._items.forEach((i) => i.setOpacity(value))
     },
   }
 

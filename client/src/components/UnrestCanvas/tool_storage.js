@@ -1,23 +1,5 @@
 import { ReactiveLocalStorage } from '@unrest/vue-storage'
 
-const actions = {
-  shape: {
-    mousedown(storage, mouse) {
-      storage.patch({ tool_state: { x: mouse.x, y: mouse.y } })
-    },
-    mousemove(storage, mouse) {
-      const { x, y } = storage.tool_state
-      const width = mouse.x - x
-      const height = mouse.y - y
-      storage.patch({ tool_state: { x, y, width, height } })
-    },
-    mouseup(storage, mouse) {
-      const { x, y, width, height } = storage.tool_state
-      createBox()
-    },
-  },
-}
-
 export default (LS_KEY) => {
   const icon_map = {
     rect: 'fa fa-square-o',
@@ -30,7 +12,7 @@ export default (LS_KEY) => {
     { slug: 'shape', icon: 'fa fa-area-chart', variants: ['rect', 'ellipse', 'freeform'] },
   ]
 
-  const makeTool = ({ state, patch }, { slug, name, variants = [], icon, actions }) => {
+  const makeTool = ({ state, patch }, { slug, name, variants = [], icon }) => {
     const { selected_tool, selected_variant } = state
     const variant_selected = !variants.length || variants.includes(selected_variant)
     const selected = slug === selected_tool && variant_selected

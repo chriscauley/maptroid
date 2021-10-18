@@ -1,11 +1,22 @@
 <template>
-  <unrest-draggable class="dread-anchor" :style="style" @drag="drag" osd-off="true" />
+  <unrest-draggable
+    class="dread-anchor"
+    :style="style"
+    @drag="drag"
+    @dragstart="dragstart"
+    @dragend="dragend"
+  >
+    <img :src="screenshot.src" />
+  </unrest-draggable>
 </template>
 
 <script>
 export default {
   props: {
     screenshot: Object,
+  },
+  data() {
+    return { dragging: false }
   },
   computed: {
     style() {
@@ -22,9 +33,18 @@ export default {
   methods: {
     drag(state) {
       const [x, y] = state.last_dxy
+      this.dragging = true
       if (x || y) {
         this.$store.osd.moveImage(this.screenshot, { x, y })
       }
+    },
+    dragstart() {
+      this.$store.osd.setAllOpacity(1)
+      this.$store.osd.setOpacity(this.screenshot, 0)
+    },
+    dragend() {
+      this.dragging = false
+      this.$store.osd.setAllOpacity(1)
     },
   },
 }
