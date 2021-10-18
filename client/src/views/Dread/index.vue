@@ -1,11 +1,22 @@
 <template>
   <div class="app-body">
     <div class="flex-grow">
-      <!-- <unrest-toolbar :storage="tool_storage" class="-topleft" /> -->
-      <unrest-canvas :sources="sources" :state="canvas_state" />
-      <unrest-draggable v-for="(anchor, i) in anchors" :key="i" v-bind="anchor">
-        <i class="fa fa-anchor" />
-      </unrest-draggable>
+      <open-seadragon
+        @mousewheel.prevent="osdWheel"
+        :options="osd_options"
+        :callback="bindViewer"
+        class="dread-viewer"
+        :pixelated="true"
+      />
+      <template v-if="$store.osd.viewer">
+        <html-overlay>
+          <screenshot-overlay
+            v-for="screenshot in visible_screenshots"
+            :key="screenshot.id"
+            :screenshot="screenshot"
+          />
+        </html-overlay>
+      </template>
     </div>
     <div class="app-panel">
       <div class="app-panel__inner">
@@ -24,8 +35,11 @@
 
 <script>
 import { range } from 'lodash'
-import ScreenshotListItem, { img_cache } from './ScreenshotListItem.vue'
+import Openseadragon from 'openseadragon'
 
+import ScreenshotListItem from './ScreenshotListItem.vue'
+import ScreenshotOverlay from './ScreenshotOverlay.vue'
+import HtmlOverlay from '@/vue-openseadragon/HtmlOverlay.vue'
 import UnrestCanvas from '@/components/UnrestCanvas/index.vue'
 // import Storage from '@/components/UnrestCanvas/tool_storage'
 // import UnrestToolbar from '@/components/UnrestToolbar.vue'
@@ -33,18 +47,34 @@ import UnrestCanvas from '@/components/UnrestCanvas/index.vue'
 const ZONE = 1
 
 export default {
-  components: { ScreenshotListItem, UnrestCanvas }, //, UnrestToolbar },
+  components: { HtmlOverlay, ScreenshotOverlay, ScreenshotListItem, UnrestCanvas }, //, UnrestToolbar },
   data() {
     return {
       // const tool_storage = Storage('dread-tools')
       selected: null,
-      active_screenshots: [],
       canvas_state: {},
       cropped_images: {},
       page: 1,
     }
   },
   computed: {
+    osd_options() {
+      return {
+        maxZoomPixelRatio: 8,
+        showNavigator: true,
+        showZoomControl: false,
+        showHomeControl: false,
+        showFullPageControl: false,
+        showRotationControl: false,
+        debugmode: false,
+        clickTimeThreshold: 1000,
+        mouseNavEnabled: false,
+        gestureSettingsMouse: {
+          clickToZoom: false,
+          dblClickToZoom: false,
+        },
+      }
+    },
     pages() {
       const { pages = 0, page } = this.screenshot_page || {}
       return range(1, 1 + pages).map((number) => ({
@@ -71,23 +101,43 @@ export default {
         }
       })
     },
-    sources() {
-      const sources = []
+  },
+  watch: {
+    visible_screenshots() {
       this.visible_screenshots.forEach((screenshot) => {
-        sources.push({
-          draw: (ctx) => {
-            const [x, y] = screenshot.data.zone_xy
-            ctx.drawImage(img_cache[screenshot.id], x, y)
-          },
-        })
+        if (screenshot.zone === ZONE) {
+          console.log('adding', screenshot.key)
+          this.$store.osd.addImage(screenshot)
+        }
       })
-      return sources
     },
   },
   methods: {
     dragAnchor(screenshot, dxy) {
       screenshot.data.zone_xy[0] += dxy[0]
       screenshot.data.zone_xy[1] += dxy[1]
+    },
+    bindViewer(viewer) {
+      this.$store.osd.viewer = viewer
+    },
+    osdWheel(event) {
+      // Loosely adapted from OSD.Viewer.onCanvasDragEnd and OSD.viewer.onCanvasScroll
+      const viewer = this.$store.osd.viewer
+      const viewport = viewer.viewport
+      if (event.ctrlKey) {
+        const box = viewer.container.getBoundingClientRect()
+        const position = new Openseadragon.Point(event.pageX - box.left, event.pageY - box.top)
+        const factor = Math.pow(viewer.zoomPerScroll, event.deltaY / 10)
+        console.log(factor)
+        viewport.zoomBy(factor, viewport.pointFromPixel(position, true))
+      } else {
+        var center = viewport.pixelFromPoint(viewport.getCenter(true))
+        var target = viewport.pointFromPixel(
+          new Openseadragon.Point(center.x + 2 * event.deltaX, center.y + 2 * event.deltaY),
+        )
+        viewport.panTo(target, false)
+      }
+      viewport.applyConstraints()
     },
   },
 }

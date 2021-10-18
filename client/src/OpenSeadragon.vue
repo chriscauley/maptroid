@@ -14,6 +14,7 @@ export default {
     options: Object,
     events: Object,
     pixelated: Boolean,
+    callback: Function,
   },
 
   data() {
@@ -30,12 +31,15 @@ export default {
     viewport.centerSpringX.animationTime = 0.25
     viewport.zoomSpring.animationTime = 0.25
     this.bindEvents()
+    this.callback?.(this.viewer)
   },
 
   methods: {
     bindEvents() {
       const { events = {}, viewer } = this
-      Object.entries(events).forEach(([key, handler]) => viewer.addHandler(key, handler))
+      Object.entries(events).forEach(
+        ([key, handler]) => console.log('bound', key) || viewer.addHandler(key, handler),
+      )
     },
   },
 }

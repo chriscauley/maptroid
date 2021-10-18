@@ -7,8 +7,14 @@
 }
 
 .dread-anchor {
-  @apply absolute cursor-pointer bg-white;
-  transform: translate(-50%, -50%);
+  @apply absolute cursor-pointer border border-white;
+  &:hover {
+    border-width: 4px;
+    border-style: dashed;
+  }
+  &.ur-dragging {
+    border: 0
+  }
 }
 
 .__debug {
@@ -16,4 +22,8 @@
   .w-48 {
     width: 12rem;
   }
+}
+
+.dread-viewer {
+  background: white;
 }
