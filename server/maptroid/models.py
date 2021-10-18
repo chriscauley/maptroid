@@ -43,4 +43,5 @@ class Entity(models.Model):
 class Screenshot(models.Model):
   world = models.ForeignKey(World, models.SET_NULL, null=True, blank=True)
   zone = models.ForeignKey(Zone, models.SET_NULL, null=True, blank=True)
-  image = models.ImageField(upload_to="screenshots")
+  src = models.ImageField(upload_to="screenshots")
+  data = models.JSONField(default=dict, blank=True)
