@@ -15,9 +15,11 @@ class World(models.Model):
 
 class Room(models.Model):
   world = models.ForeignKey(World, null=True, blank=True, on_delete=models.SET_NULL)
+  zone = models.ForeignKey(Zone, models.SET_NULL, null=True, blank=True)
   name = models.CharField(max_length=128, null=True, blank=True)
   key = models.CharField(max_length=128, null=True, blank=True)
   sprite_ids = models.JSONField(default=list)
+  data = models.JSONField(default=dict, blank=True)
   __str__ = lambda self: f'{self.name or "unnamed"} - ({self.key})'
 
 class Character(models.Model):

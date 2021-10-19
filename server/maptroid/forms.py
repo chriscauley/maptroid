@@ -55,4 +55,4 @@ class ScreenshotForm(forms.ModelForm):
 class ZoneForm(forms.ModelForm):
   class Meta:
     model = Zone
-    fields = ['name']
+    fields = ['name', 'slug']
