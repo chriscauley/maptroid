@@ -5,6 +5,9 @@ import OpenSeadragon from 'openseadragon'
 
 const { Point } = (window.OSD = OpenSeadragon)
 
+let i_y = 0
+let i_x = 0
+
 export default () => {
   const state = reactive({ _viewer: null })
 
@@ -41,7 +44,12 @@ export default () => {
         return
       }
       if (image.data._world === undefined) {
-        image.data._world = { x: 0, y: 0, width: 1 }
+        image.data._world = { x: i_x, y: 0.4 * i_y, width: 1 }
+        i_y++
+        if (i_y === 8) {
+          i_x++
+          i_y = 0
+        }
       }
       const { x, y, width } = image.data._world
       state._viewer.addSimpleImage({ url: image.src, x, y, width, opacity: 1 })
