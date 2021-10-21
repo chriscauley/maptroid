@@ -1,4 +1,5 @@
 from django.db import models
+from .dread import process_screenshot
 
 _choices = lambda l: zip(l,l)
 
@@ -45,5 +46,13 @@ class Entity(models.Model):
 class Screenshot(models.Model):
   world = models.ForeignKey(World, models.SET_NULL, null=True, blank=True)
   zone = models.ForeignKey(Zone, models.SET_NULL, null=True, blank=True)
-  src = models.ImageField(upload_to="screenshots")
+  original = models.ImageField(upload_to="screenshots")
+  output = models.ImageField(upload_to="output", null=True, blank=True)
   data = models.JSONField(default=dict, blank=True)
+  def save(self, *args, **kwargs):
+    super().save(*args, **kwargs)
+    if self.id and not self.output and self.original:
+      process_screenshot(self)
+  def reprocess(self):
+    self.output = None
+    self.save()
