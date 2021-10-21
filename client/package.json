@@ -19,6 +19,7 @@
     "core-js": "^3.6.5",
     "file-saver": "^2.0.5",
     "jsonschema": "^1.4.0",
+    "lodash.startcase": "^4.4.0",
     "mitt": "^3.0.0",
     "openseadragon": "^2.4.2",
     "postcss-for": "^2.1.1",

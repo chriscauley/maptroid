@@ -24,6 +24,7 @@
         <div v-if="!ctrl_down" class="flaire">{{ i + 1 }}</div>
       </div>
     </div>
+    <slot />
   </div>
 </template>
 

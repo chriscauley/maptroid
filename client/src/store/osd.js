@@ -5,9 +5,6 @@ import OpenSeadragon from 'openseadragon'
 
 const { Point } = (window.OSD = OpenSeadragon)
 
-let i_y = 0
-let i_x = 0
-
 export default () => {
   const state = reactive({ _viewer: null })
 
@@ -28,6 +25,7 @@ export default () => {
         size = viewer.world.getItemAt(0)?.getContentSize() || px
       }
       Object.assign(state, {
+        image_count: 0,
         _viewer: viewer ? markRaw(viewer) : viewer,
         px_width: px.x,
         px_height: px.y,
@@ -39,23 +37,22 @@ export default () => {
       if (!state.contentFactor) {
         state.contentFactor = state._viewer.world._contentFactor
       }
-      const osd_item = state._viewer.world._items.find((i) => image.src === i.source.url)
+      const osd_item = state._viewer.world._items.find((i) => image.output === i.source.url)
       if (osd_item) {
         return
       }
       if (image.data._world === undefined) {
+        // viewer.world.getItemCount() doesn't update until end of thread so we need to count our own
+        const i_x = Math.floor(state.image_count / 8)
+        const i_y = state.image_count % 8
         image.data._world = { x: i_x, y: 0.4 * i_y, width: 1 }
-        i_y++
-        if (i_y === 8) {
-          i_x++
-          i_y = 0
-        }
       }
       const { x, y, width } = image.data._world
-      state._viewer.addSimpleImage({ url: image.src, x, y, width, opacity: 1 })
+      state._viewer.addSimpleImage({ url: image.output, x, y, width, opacity: 1 })
+      state.image_count++
     },
     moveImage(image, client_delta) {
-      const osd_item = state._viewer.world._items.find((i) => image.src === i.source.url)
+      const osd_item = state._viewer.world._items.find((i) => image.output === i.source.url)
       const pixel = osd_item.viewport.pixelFromPoint(
         new Point(image.data._world.x, image.data._world.y),
       )
@@ -68,11 +65,16 @@ export default () => {
       console.warn('TODO debounced save image')
     },
     setOpacity(image, value) {
-      const osd_item = state._viewer.world._items.find((i) => image.src === i.source.url)
+      const osd_item = state._viewer.world._items.find((i) => image.output === i.source.url)
       osd_item.setOpacity(value)
     },
     setAllOpacity(value) {
       state._viewer.world._items.forEach((i) => i.setOpacity(value))
+    },
+    scaleBlock(block) {
+      // The bg is made from fully zoomed in blocks, meaning 1280px is "100%" and 1/2 block is 16px
+      // using half blocks since I think that's the smallest possible geometry in dread
+      return `${(100 * block * 16) / 1280}%`
     },
   }
 

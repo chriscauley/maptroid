@@ -35,7 +35,9 @@
       </div>
       <div v-if="selected" class="ur-files__selected">
         <div class="_image">
-          <img :src="selected.path" />
+          <div class="grid__16-5">
+            <img :src="selected.path" />
+          </div>
         </div>
       </div>
     </div>

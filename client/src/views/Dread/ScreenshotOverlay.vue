@@ -6,7 +6,7 @@
     @dragstart="dragstart"
     @dragend="dragend"
   >
-    <img :src="screenshot.src" />
+    <img :src="screenshot.output" />
   </unrest-draggable>
 </template>
 

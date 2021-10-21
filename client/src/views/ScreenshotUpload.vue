@@ -6,7 +6,7 @@
     <div v-if="screenshots">Existing Screenshots: {{ screenshots.length }}</div>
     <div>
       Pending: {{ pending_files.length }}
-      <img v-for="(file, i) in pending_files" :key="i" :src="file.src" />
+      <img v-for="(file, i) in pending_files" :key="i" :src="file.original" />
     </div>
   </div>
 </template>
@@ -15,7 +15,7 @@
 import axios from 'axios'
 export default {
   data() {
-    return { schema: null, state: { zone: 5, world: 3 }, pending_files: [], warnings: [] }
+    return { schema: null, state: { zone: 8, world: 3 }, pending_files: [], warnings: [] }
   },
   computed: {
     screenshots() {
@@ -31,15 +31,18 @@ export default {
     axios.get('/api/schema/screenshot/?schema=1').then(({ data }) => {
       this.schema = data.schema
       delete this.schema.properties.data
-      delete this.schema.properties.src
+      delete this.schema.properties.original
+      delete this.schema.properties.output
     })
   },
   methods: {
     changeFiles(e) {
       e.target.files.forEach((file) => {
-        const existing = this.screenshots.find((s) => s.src.endsWith(file.name))
+        const name = file.name.replace('-9A9B6E0371D34263D6B6577F9CBA54D5', '')
+
+        const existing = this.screenshots.find((s) => s.original.endsWith(name))
         if (existing) {
-          this.warnings.push(`Skipping already uploaded screenshot: ${file.name} #${existing.id}`)
+          this.warnings.push(`Skipping already uploaded screenshot: ${name} #${existing.id}`)
           return
         }
         const reader = new FileReader()
@@ -47,7 +50,7 @@ export default {
         reader.addEventListener(
           'load',
           () => {
-            this.pending_files.push({ name: file.name, src: reader.result })
+            this.pending_files.push({ name, dataURL: reader.result })
           },
           false,
         )
@@ -57,9 +60,10 @@ export default {
     },
     submit() {
       const { zone, world } = this.state
-      this.pending_files.forEach(({ name, src }) => {
+      this.pending_files.forEach(({ name, dataURL }) => {
+        // switch adds this console id string which is annoyingly long
         const data = {
-          src: { dataURL: src, name },
+          original: { dataURL, name },
           zone,
           world,
         }

@@ -2,9 +2,10 @@
   overflow-y: hidden;
   &__content {
     @apply flex h-full w-full;
+    padding-bottom: 60px;
   }
   &__file-list {
-    @apply flex flex-wrap h-full overflow-y-scroll w-full;
+    @apply flex flex-wrap h-full overflow-y-scroll pb-16 w-full;
   }
   &__file-wrapper {
     @apply p-2 w-1/4;
@@ -36,6 +37,7 @@
     }
   }
   &__selected {
+    background: white;
     flex-basis: 75%;
     overflow: scroll;
     ._image {
@@ -44,6 +46,7 @@
     }
     img {
       max-width: unset;
+      padding: 0 10px 10px 0;
     }
   }
   ._flex-clear {

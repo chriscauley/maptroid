@@ -1,6 +1,6 @@
 <template>
   <div :key="screenshot.id" class="panel-screenshot">
-    <img :src="screenshot.src" />
+    <img :src="screenshot.output" />
     <div class="panel-screenshot__buttons">
       #{{ screenshot.id }}
       <template v-if="screenshot.zone">

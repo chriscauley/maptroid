@@ -1,6 +1,7 @@
 <template>
   <div class="app-body">
     <div class="flex-grow">
+      <unrest-toolbar :storage="tool_storage" class="-topleft" />
       <open-seadragon
         @mousewheel.prevent="osdWheel"
         :options="osd_options"
@@ -11,47 +12,63 @@
       <template v-if="$store.osd.viewer">
         <html-overlay>
           <screenshot-overlay
-            v-for="screenshot in visible_screenshots"
+            v-for="screenshot in screenshots"
             :key="screenshot.id"
             :screenshot="screenshot"
           />
+          <room-canvas v-for="room in rooms" :key="room.id" :room="room" />
         </html-overlay>
       </template>
     </div>
     <div class="app-panel">
       <div class="app-panel__inner">
-        <div class="app-panel__pagination" style="display:flex">
-          <div v-for="page in pages" :key="page.number" v-bind="page">{{ page.number }}</div>
+        <div>
+          <div class="btn -primary" @click="newRoom">New Room</div>
+          Rooms: {{ rooms?.length }}
         </div>
         <screenshot-list-item
-          v-for="screenshot in screenshot_page?.items"
+          v-for="screenshot in screenshots"
           :key="screenshot.id"
           :screenshot="screenshot"
         />
       </div>
     </div>
+    <room-form v-if="editing_room" :room="editing_room" @close="editing_room = null" />
   </div>
 </template>
 
 <script>
-import { range } from 'lodash'
 import Openseadragon from 'openseadragon'
 
+import RoomCanvas from './RoomCanvas.vue'
+import RoomForm from './RoomForm.vue'
 import ScreenshotListItem from './ScreenshotListItem.vue'
 import ScreenshotOverlay from './ScreenshotOverlay.vue'
 import HtmlOverlay from '@/vue-openseadragon/HtmlOverlay.vue'
+import UnrestToolbar from '@/components/UnrestToolbar.vue'
+import tool_storage from './tools'
 
-const ZONE = 1
+const WORLD = 3 // hardcoded for now since this interface is dread only
 
 export default {
-  components: { HtmlOverlay, ScreenshotOverlay, ScreenshotListItem },
+  __route: {
+    path: '/dread/:zone_id/:zone_slug/',
+  },
+  components: {
+    HtmlOverlay,
+    RoomCanvas,
+    RoomForm,
+    ScreenshotOverlay,
+    ScreenshotListItem,
+    UnrestToolbar,
+  },
   data() {
     return {
-      // const tool_storage = Storage('dread-tools')
       selected: null,
+      editing_room: null,
       canvas_state: {},
       cropped_images: {},
-      current_page: 1,
+      tool_storage,
     }
   },
   computed: {
@@ -72,22 +89,8 @@ export default {
         },
       }
     },
-    pages() {
-      const { pages = 0, page } = this.screenshot_page || {}
-      return range(1, 1 + pages).map((number) => ({
-        number,
-        class: ['btn -link', number === page && '-current'],
-        onClick: () => (this.current_page = number),
-      }))
-    },
-    screenshot_page() {
-      return this.$store.screenshot.getPage({ page: this.current_page })
-    },
-    visible_screenshots() {
-      return (this.screenshot_page?.items || []).filter((s) => s.zone === ZONE)
-    },
     anchors() {
-      return this.visible_screenshots.map((screenshot) => {
+      return this.screenshots.map((screenshot) => {
         const { width, height, zone_xy } = screenshot.data
         const top = height / 2 + zone_xy[1]
         const left = width / 2 + zone_xy[0]
@@ -98,17 +101,33 @@ export default {
         }
       })
     },
+    search_params() {
+      // screenshots and zones search on same values
+      const { zone_id } = this.$route.params
+      return { query: { world: WORLD, zone: zone_id, per_page: 5000 } }
+    },
+    screenshots() {
+      return this.$store.screenshot.getPage(this.search_params)?.items
+    },
+    rooms() {
+      return this.$store.room2.getPage(this.search_params)?.items
+    },
   },
   watch: {
-    visible_screenshots() {
-      this.visible_screenshots.forEach((screenshot) => {
-        if (screenshot.zone === ZONE) {
-          this.$store.osd.addImage(screenshot)
-        }
-      })
+    screenshots() {
+      this.screenshots?.forEach((screenshot) => this.$store.osd.addImage(screenshot))
     },
   },
   methods: {
+    newRoom() {
+      this.editing_room = {
+        world: WORLD,
+        zone: this.$route.params.zone_id,
+        data: {
+          zone_bounds: [0, 0, 10, 10],
+        },
+      }
+    },
     dragAnchor(screenshot, dxy) {
       screenshot.data.zone_xy[0] += dxy[0]
       screenshot.data.zone_xy[1] += dxy[1]
