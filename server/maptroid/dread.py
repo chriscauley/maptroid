@@ -68,7 +68,6 @@ def process_screenshot(screenshot):
 
     # shifting logic from https://stackoverflow.com/questions/19068085/shift-image-content-with-opencv
     def shift(img_rgb, xy_shift, output_name=None):
-        print('shifting', xy_shift)
         shifted = img_rgb.copy()
         shifted = cv2.cvtColor(shifted, cv2.COLOR_RGB2RGBA)
         for i in range(shifted.shape[1] -1, shifted.shape[1] - xy_shift[0], -1):
@@ -89,5 +88,5 @@ def process_screenshot(screenshot):
         'xy_shift': xy_shift
     }
     cv2.imwrite(final_path, shifted)
-    screenshot.output = final_path.split(settings.MEDIA_ROOT)[-1].strip('/')
+    screenshot.output = final_path.split('.media/')[-1].strip('/')
     screenshot.save()

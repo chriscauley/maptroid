@@ -2,6 +2,7 @@ import Dread from './Dread/index.vue'
 import Editor from './Editor/index.vue'
 import FileBrowser from './FileBrowser.vue'
 import Home from './Home.vue'
+import ScreenshotAnalyzer from './ScreenshotAnalyzer/index.vue'
 import ScreenshotUpload from './ScreenshotUpload.vue'
 import ScreenshotViewer from './ScreenshotViewer.vue'
 import SpriteGallery from './SpriteGallery.vue'
@@ -14,6 +15,7 @@ export default {
   Editor,
   FileBrowser,
   Home,
+  ScreenshotAnalyzer,
   ScreenshotUpload,
   ScreenshotViewer,
   SpriteGallery,

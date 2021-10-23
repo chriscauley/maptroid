@@ -1,7 +1,8 @@
+@import "./dread";
 @import "./filebrowser";
 @import "./sm";
+@import "./unrest-breadcrumbs";
 @import "./z-index";
-@import "./dread";
 
 .app-wrapper {
   @apply flex flex-col;
@@ -325,6 +326,7 @@
 }
 
 .grid__16-5 {
+  display: inline-block;
   position: relative;
   &:before {
     content: "";
@@ -335,4 +337,16 @@
     background-position: 0px 0px;
     display: block;
   }
+}
+
+.ur-wrapper {
+  @apply flex-grow h-full relative w-full;
+}
+
+.ur-inner {
+  @apply absolute inset-0 overflow-auto;
+}
+
+.max-w-unset {
+  max-width: unset;
 }

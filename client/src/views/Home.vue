@@ -6,6 +6,10 @@
         {{ zone.name }}
       </router-link>
     </div>
+    <h2>Misc</h2>
+    <div v-for="link in links" :key="link">
+      <router-link :to="link">{{ link }}</router-link>
+    </div>
   </div>
 </template>
 
@@ -17,6 +21,9 @@ export default {
   computed: {
     dread_zones() {
       return this.$store.zone.getPage({ query: { world: 3 } })?.items || []
+    },
+    links() {
+      return ['/screenshot/analyzer']
     },
   },
 }

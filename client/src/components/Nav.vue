@@ -3,6 +3,7 @@
     <section :class="css.nav.section('left')">
       <router-link to="/" :class="css.nav.brand()">{{ title }}</router-link>
     </section>
+    <section id="nav-breadcrumbs" class="unrest-breadcrumbs" />
     <section class="unrest-grid" v-if="world">
       <router-link v-for="[link, name] in world_links" :key="link" :to="link" class="link">
         {{ name }}
