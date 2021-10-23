@@ -8,6 +8,8 @@
 </template>
 
 <script>
+const clamp = (min, value, max) => Math.min(max, Math.max(min, value))
+
 export default {
   props: {
     width: Number,
@@ -39,6 +41,9 @@ export default {
         }
       })
     },
+    height() {
+      return Math.max(this.rect.height / this.grid_size)
+    },
   },
   watch: {
     width: 'resize',
@@ -68,6 +73,8 @@ export default {
       }
       event.grid.x = Math.floor(event.grid.px / event.grid.size)
       event.grid.y = Math.floor(event.grid.py / event.grid.size)
+      event.grid.x = clamp(0, event.grid.x, this.width)
+      event.grid.y = clamp(0, event.grid.y, this.height)
     },
   },
 }

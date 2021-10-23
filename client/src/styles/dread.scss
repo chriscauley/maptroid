@@ -36,3 +36,69 @@
 .dread-viewer {
   background: white;
 }
+
+@mixin checkered($c1, $c2, $s:16.5px) {
+  background: repeating-conic-gradient($c1 0% 25%, $c2 0% 50%) 50% / #{$s} #{$s};
+}
+
+.-tool_door, .-tool_wall {
+  @apply h-4 w-4;
+  background: white;
+}
+
+.-tool_wall.-variant_, .dread-square.-type_wall_ {
+  &solid {
+    background: black;
+  }
+  &room {
+    background: gray;
+  }
+  &mixed {
+    @include checkered(black, gray);
+  }
+  &ignore {
+    @include checkered(red, gray);
+  }
+}
+
+.dread-square {}
+
+.-tool_door.-variant_, .dread-square.-type_door_ {
+  $bomb: pink;
+  $gate1: #dbe503;
+  $gate2: #374760;
+  $wave: #a15fb5;
+  $grapple1: #3f9fcc;
+  $grapple2: #486177;
+  &bomb {
+    @include checkered($bomb, $gate2);
+  }
+  &gate {
+    @include checkered($gate1, $gate2);
+  }
+  &wave-beam {
+    @include checkered($wave, $grapple2);
+  }
+  &grapple-beam {
+    @include checkered($grapple1, $grapple2);
+  }
+  &trash {
+    background: transparent;
+    color: red;
+    &:before {
+      @apply absolute;
+      content: "X";
+      font-family: monospace;
+      font-size: 20px;
+      font-style: normal;
+      line-height: 1;
+    }
+  }
+}
+
+.ur-toolbar .btn {
+  @apply relative;
+  .flaire {
+    @apply absolute bottom-0 right-0;
+  }
+}

@@ -2,7 +2,13 @@
   <div class="app-body">
     <div class="ur-wrapper">
       <div v-if="screenshot" class="ur-inner">
-        <unrest-mouse-tracker :width="width" :items="grid_items" @click="click">
+        <unrest-toolbar :storage="tool_storage" />
+        <unrest-mouse-tracker
+          :width="width"
+          :items="grid_items"
+          @click="click"
+          @mousemove.prevent="mousemove"
+        >
           <div class="grid__16-5">
             <img class="max-w-unset" :src="screenshot.output" @load="onLoad" />
           </div>
@@ -21,6 +27,7 @@
 
 <script>
 import Breadcrumbs from './Breadcrumbs.vue'
+import tool_storage from './tool_storage'
 const WORLD = 3 // TODO world hardcoded as dread
 
 const _xy = (() => {
@@ -39,7 +46,7 @@ export default {
   },
   components: { Breadcrumbs },
   data() {
-    return { width: 1, items: [] }
+    return { width: 1, items: [], tool_storage }
   },
   computed: {
     zones() {
@@ -74,7 +81,7 @@ export default {
     grid_items() {
       return Object.entries(this.screenshot.data.human.entities).map(([xy, type]) => ({
         xy: _xy(xy),
-        class: `-type-${type}`,
+        class: `dread-square -type_${type}`,
       }))
     },
   },
@@ -82,13 +89,38 @@ export default {
     onLoad(event) {
       this.width = event.target.width / 16.5
     },
+
     click(event) {
-      const { x, y } = event.grid
-      this.$store.screenshot.setItemAtXY(this.screenshot, x, y, 'door')
-      this.save()
+      const { selected_tool } = this.tool_storage.state
+      if (['wall', 'door'].includes(selected_tool)) {
+        if (event.shiftKey) {
+          this.removeXY(event)
+        } else {
+          this.setXY(event)
+        }
+      }
     },
-    save() {
-      this.$store.screenshot.save(this.screenshot)
+
+    mousemove(event) {
+      if (event.which === 1) {
+        this.click(event)
+      }
+    },
+
+    setXY(event) {
+      const { x, y } = event.grid
+      const { selected_tool, selected_variant } = this.tool_storage.state
+      if (selected_variant === 'trash') {
+        this.removeXY(event)
+      } else {
+        const type = `${selected_tool}_${selected_variant}`
+        this.$store.screenshot.setItemAtXY(this.screenshot, [x, y], type)
+      }
+    },
+
+    removeXY(event) {
+      const { x, y } = event.grid
+      this.$store.screenshot.setItemAtXY(this.screenshot, [x, y], null)
     },
   },
 }

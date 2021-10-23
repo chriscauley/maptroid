@@ -1,3 +1,5 @@
+import { debounce } from 'lodash'
+
 import { RestStorage } from '@unrest/vue-storage'
 
 const fromServer = (screenshot) => {
@@ -14,8 +16,17 @@ export default () => {
     fromServer,
   })
 
-  storage.setItemAtXY = (screenshot, x, y, type) => {
-    screenshot.data.human.entities[[x, y]] = type
+  const _save = debounce(storage.save, 1000)
+
+  storage.setItemAtXY = (screenshot, xy, type) => {
+    const current = screenshot.data.human.entities[xy]
+    if (type === null && current) {
+      delete screenshot.data.human.entities[xy]
+      _save(screenshot)
+    } else if (current !== type) {
+      screenshot.data.human.entities[xy] = type
+      _save(screenshot)
+    }
   }
   return storage
 }

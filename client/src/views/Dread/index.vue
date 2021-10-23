@@ -45,7 +45,6 @@ import RoomForm from './RoomForm.vue'
 import ScreenshotListItem from './ScreenshotListItem.vue'
 import ScreenshotOverlay from './ScreenshotOverlay.vue'
 import HtmlOverlay from '@/vue-openseadragon/HtmlOverlay.vue'
-import UnrestToolbar from '@/components/UnrestToolbar.vue'
 import tool_storage from './tools'
 
 const WORLD = 3 // hardcoded for now since this interface is dread only
@@ -60,7 +59,6 @@ export default {
     RoomForm,
     ScreenshotOverlay,
     ScreenshotListItem,
-    UnrestToolbar,
   },
   data() {
     return {
