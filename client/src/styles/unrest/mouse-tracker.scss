@@ -1,0 +1,11 @@
+.unrest-mouse-tracker {
+  @apply inline-block relative;
+  &__cursor {
+    @apply absolute border border-white;
+    z-index: 2;
+  }
+  &__item {
+    @apply absolute bg-red-500;
+    z-index: 1;
+  }
+}

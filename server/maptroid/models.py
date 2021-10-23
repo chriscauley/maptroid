@@ -49,10 +49,16 @@ class Screenshot(models.Model):
   original = models.ImageField(upload_to="screenshots")
   output = models.ImageField(upload_to="output", null=True, blank=True)
   data = models.JSONField(default=dict, blank=True)
+
+  @property
+  def original_url(self):
+    return self.original and self.original.url
+
   def save(self, *args, **kwargs):
     super().save(*args, **kwargs)
     if self.id and not self.output and self.original:
       process_screenshot(self)
+
   def reprocess(self):
     self.output = None
     self.save()

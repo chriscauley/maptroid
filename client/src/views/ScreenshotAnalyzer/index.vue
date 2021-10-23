@@ -2,9 +2,11 @@
   <div class="app-body">
     <div class="ur-wrapper">
       <div v-if="screenshot" class="ur-inner">
-        <div class="grid__16-5">
-          <img class="max-w-unset" :src="screenshot.output" />
-        </div>
+        <unrest-mouse-tracker :width="width" :items="grid_items" @click="click">
+          <div class="grid__16-5">
+            <img class="max-w-unset" :src="screenshot.output" @load="onLoad" />
+          </div>
+        </unrest-mouse-tracker>
       </div>
     </div>
     <div class="app-panel"></div>
@@ -21,11 +23,24 @@
 import Breadcrumbs from './Breadcrumbs.vue'
 const WORLD = 3 // TODO world hardcoded as dread
 
+const _xy = (() => {
+  const cache = {}
+  return (xy) => {
+    if (!cache[xy]) {
+      cache[xy] = xy.split(',').map((i) => Number(i))
+    }
+    return cache[xy]
+  }
+})()
+
 export default {
   __route: {
     path: '/screenshot/analyzer/:zone_id?/:screenshot_id?/',
   },
   components: { Breadcrumbs },
+  data() {
+    return { width: 1, items: [] }
+  },
   computed: {
     zones() {
       const q = { query: { per_page: 5000, world: WORLD } }
@@ -55,6 +70,25 @@ export default {
     screenshot() {
       const screenshot_id = parseInt(this.$route.params.screenshot_id)
       return this.zone_screenshots?.find((s) => s.id === screenshot_id)
+    },
+    grid_items() {
+      return Object.entries(this.screenshot.data.human.entities).map(([xy, type]) => ({
+        xy: _xy(xy),
+        class: `-type-${type}`,
+      }))
+    },
+  },
+  methods: {
+    onLoad(event) {
+      this.width = event.target.width / 16.5
+    },
+    click(event) {
+      const { x, y } = event.grid
+      this.$store.screenshot.setItemAtXY(this.screenshot, x, y, 'door')
+      this.save()
+    },
+    save() {
+      this.$store.screenshot.save(this.screenshot)
     },
   },
 }

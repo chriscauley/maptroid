@@ -27,7 +27,7 @@ class ScreenshotForm(forms.ModelForm):
 
   def __init__(self, *args, **kwargs):
     super().__init__(*args, **kwargs)
-    if not self.data.get('original') == self.instance.original:
+    if not self.data.get('original') == self.instance.original_url:
       self._original = self.data.get('original')
 
   def clean_original(self):
