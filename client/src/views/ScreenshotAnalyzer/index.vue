@@ -2,15 +2,18 @@
   <div class="app-body">
     <div class="ur-wrapper">
       <div v-if="screenshot" class="ur-inner">
-        <unrest-toolbar :storage="tool_storage" />
+      <unrest-toolbar :storage="tool_storage" />
         <unrest-mouse-tracker
           :width="width"
           :items="grid_items"
           @click="click"
           @mousemove.prevent="mousemove"
         >
-          <div class="grid__16-5">
-            <img class="max-w-unset" :src="screenshot.output" @load="onLoad" />
+          <div class="screenshot-analyzer__grid" ref="grid">
+            <img class="max-w-unset" :src="screenshot.output" @load="onLoad" :style="image_style" />
+          </div>
+          <div class="screenshot-analyzer__debug">
+            {{ debug_text }}
           </div>
         </unrest-mouse-tracker>
       </div>
@@ -27,8 +30,11 @@
 
 <script>
 import Breadcrumbs from './Breadcrumbs.vue'
+import Mousetrap from '@unrest/vue-mousetrap'
 import tool_storage from './tool_storage'
 const WORLD = 3 // TODO world hardcoded as dread
+
+export const PX_PER_GRID = 8.25
 
 const _xy = (() => {
   const cache = {}
@@ -40,7 +46,15 @@ const _xy = (() => {
   }
 })()
 
+const dxys = {
+  up: [0, -1],
+  down: [0, 1],
+  right: [1, 0],
+  left: [-1, 0],
+}
+
 export default {
+  mixins: [Mousetrap.Mixin],
   __route: {
     path: '/screenshot/analyzer/:zone_id?/:screenshot_id?/',
   },
@@ -49,6 +63,43 @@ export default {
     return { width: 1, items: [], tool_storage }
   },
   computed: {
+    image_style() {
+      const [x, y] = this.shifts.delta
+      return {
+        left: x+'px',
+        position: 'relative',
+        top: y+'px',
+        zIndex: -1,
+      }
+    },
+    mousetrap() {
+      const { selected_tool } = this.tool_storage.state
+      if (selected_tool === 'regrid') {
+        return {
+          'up,down,left,right': this.moveGrid,
+        }
+      }
+    },
+    shifts() {
+      const shifts = {
+        output: this.screenshot?.data.output?.shift || [0,0],
+        human: this.screenshot?.data.human?.shift,
+      }
+      shifts.human = shifts.human || [...shifts.output]
+      shifts.delta = [
+        shifts.human[0] - shifts.output[0],
+        shifts.human[1] - shifts.output[1],
+      ]
+      return shifts
+    },
+    debug_text() {
+      const { selected_tool } = this.tool_storage.state
+      if (selected_tool === 'regrid') {
+        const { output, human, delta } = this.shifts
+        return `human(${human}) - output(${output}) = delta(${delta})`
+      }
+      return ''
+    },
     zones() {
       const q = { query: { per_page: 5000, world: WORLD } }
       return this.$store.zone.getPage(q)?.items.map((zone) => ({
@@ -87,7 +138,7 @@ export default {
   },
   methods: {
     onLoad(event) {
-      this.width = event.target.width / 16.5
+      this.width = event.target.width / PX_PER_GRID
     },
 
     click(event) {
@@ -121,6 +172,17 @@ export default {
     removeXY(event) {
       const { x, y } = event.grid
       this.$store.screenshot.setItemAtXY(this.screenshot, [x, y], null)
+    },
+
+    moveGrid(event) {
+      event.preventDefault()
+      const dxy = dxys[event.key.toLowerCase().replace('arrow', '')]
+      if (!this.screenshot.data.human.shift) {
+        this.screenshot.data.human.shift = [...this.screenshot.data.output.shift]
+      }
+      const { shift } = this.screenshot.data.human
+      shift[0] += dxy[0]
+      shift[1] += dxy[1]
     },
   },
 }

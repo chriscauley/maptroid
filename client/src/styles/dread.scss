@@ -64,12 +64,13 @@
 .dread-square {}
 
 .-tool_door.-variant_, .dread-square.-type_door_ {
-  $bomb: pink;
+  $bomb: hotpink;
   $gate1: #dbe503;
   $gate2: #374760;
   $wave: #a15fb5;
   $grapple1: #3f9fcc;
   $grapple2: #486177;
+  $screw-attack: #1b91ec;
   &bomb {
     @include checkered($bomb, $gate2);
   }
@@ -94,6 +95,9 @@
       line-height: 1;
     }
   }
+  &screw-attack {
+    background: $screw-attack;
+  }
 }
 
 .ur-toolbar .btn {
@@ -101,4 +105,9 @@
   .flaire {
     @apply absolute bottom-0 right-0;
   }
+}
+
+.screenshot-analyzer__debug {
+  @apply border bottom-0 fixed left-0 p-2;
+  background: var(--bg-alt);
 }

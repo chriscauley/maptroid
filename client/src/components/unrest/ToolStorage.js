@@ -1,12 +1,12 @@
 import { ReactiveLocalStorage } from '@unrest/vue-storage'
 import startCase from 'lodash.startcase'
 
-const defaultIcon = (tool, variant) => {
+const _getIcon = (tool, variant) => {
   return `-tool_${tool} -variant_${variant}`
 }
 
-export default (LS_KEY, { tools, getIcon = defaultIcon }) => {
-  const makeTool = ({ state, save }, { slug, name, variants = [] }) => {
+export default (LS_KEY, { tools }) => {
+  const makeTool = ({ state, save }, { slug, name, variants = [], getIcon = _getIcon }) => {
     const { selected_tool, selected_variant } = state
     const variant_selected = !variants.length || variants.includes(selected_variant)
     const selected = slug === selected_tool && variant_selected

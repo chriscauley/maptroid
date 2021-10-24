@@ -31,6 +31,7 @@ const tools = [
   { slug: 'door', variants: door1_variants },
   { slug: 'door', variants: door2_variants },
   { slug: 'wall', variants: wall_variants },
+  { slug: 'regrid', getIcon: () => 'fa fa-arrows' },
 ]
 
 export default ToolStorage('screenshot/analyzer', { tools })

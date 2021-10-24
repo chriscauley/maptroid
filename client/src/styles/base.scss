@@ -5,6 +5,11 @@
 @import "./unrest/mouse-tracker";
 @import "./z-index";
 
+body {
+  /* mousewheel navigation is annoying on all my scrolling elements */
+  overscroll-behavior: none;
+}
+
 .app-wrapper {
   @apply flex flex-col;
   height: 100vh;
@@ -323,6 +328,12 @@
   z-index: 1;
   &.-topleft {
     @apply absolute left-0 top-0;
+  }
+  &__row {
+    @apply flex;
+    .btn > .fa {
+      line-height: 1;
+    }
   }
 }
 

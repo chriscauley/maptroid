@@ -4,6 +4,8 @@ import numpy as np
 import os
 import re
 
+PX_PER_GRID = 8.25
+
 def mkdir(root, *args):
     parts = os.path.join(*args).strip('/').split('/')
     path = root
@@ -53,7 +55,7 @@ def process_screenshot(screenshot):
 
     def find_max_offset(coords):
         coords = coords or [0]
-        mod_coords = [round(coord %16.5) for coord in coords]
+        mod_coords = [round(coord % PX_PER_GRID) for coord in coords]
         mod_hist = np.histogram(mod_coords, max(mod_coords) or 1)
         abs_hist = np.histogram(coords, max(coords) or 1)
         return list(mod_hist[0]).index(max(mod_hist[0]))
@@ -81,12 +83,18 @@ def process_screenshot(screenshot):
 
         if output_name:
             show(output_name, shifted)
-        return shifted, xy_shift
+        return shifted
 
-    shifted, xy_shift = shift(img_rgb, find_xy_shift(img_rgb))
-    screenshot.data['ml'] = {
-        'xy_shift': xy_shift
-    }
+    if not 'human' in screenshot.data:
+        screenshot.data['human'] = {}
+    human = screenshot.data['human'] = {}
+    ml = screenshot.data['ml'] = {}
+    output = screenshot.data['output'] = {}
+
+    ml['shift'] = find_xy_shift(img_rgb)
+    output['shift'] = human.get('shift') or ml['shift']
+    shifted = shift(img_rgb, output['shift'])
+
     cv2.imwrite(final_path, shifted)
     screenshot.output = final_path.split('.media/')[-1].strip('/')
     screenshot.save()

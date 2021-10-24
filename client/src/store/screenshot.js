@@ -6,7 +6,6 @@ const fromServer = (screenshot) => {
   screenshot.key = `screenshot__${screenshot.id}`
   screenshot.data.human = screenshot.data.human || {}
   screenshot.data.human.entities = screenshot.data.human.entities || {}
-  delete screenshot.data.human.items
   return screenshot
 }
 
@@ -20,7 +19,7 @@ export default () => {
 
   storage.setItemAtXY = (screenshot, xy, type) => {
     const current = screenshot.data.human.entities[xy]
-    if (type === null && current) {
+    if (type === null) {
       delete screenshot.data.human.entities[xy]
       _save(screenshot)
     } else if (current !== type) {
