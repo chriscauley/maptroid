@@ -4,7 +4,7 @@ import numpy as np
 import os
 import re
 
-PX_PER_GRID = 8.25
+PX_PER_GRID = 16.5
 
 def mkdir(root, *args):
     parts = os.path.join(*args).strip('/').split('/')

@@ -2,16 +2,16 @@
   <div class="app-body">
     <div class="ur-wrapper">
       <div v-if="screenshot" class="ur-inner">
-      <unrest-toolbar :storage="tool_storage" />
+        <unrest-toolbar :storage="tool_storage" style="position: fixed; left: 0; top: 76px;" />
         <unrest-mouse-tracker
           :width="width"
           :items="grid_items"
           @click="click"
           @mousemove.prevent="mousemove"
-        >
-          <div class="screenshot-analyzer__grid" ref="grid">
-            <img class="max-w-unset" :src="screenshot.output" @load="onLoad" :style="image_style" />
-          </div>
+          style="margin-top: 70px;"
+          >
+          <div class="screenshot-analyzer__grid" ref="grid" :style="grid_style" />
+          <img class="max-w-unset" :src="screenshot.output" @load="onLoad" :style="image_style" />
           <div class="screenshot-analyzer__debug">
             {{ debug_text }}
           </div>
@@ -34,7 +34,7 @@ import Mousetrap from '@unrest/vue-mousetrap'
 import tool_storage from './tool_storage'
 const WORLD = 3 // TODO world hardcoded as dread
 
-export const PX_PER_GRID = 8.25
+export const PX_PER_GRID = 16.5
 
 const _xy = (() => {
   const cache = {}
@@ -63,12 +63,26 @@ export default {
     return { width: 1, items: [], tool_storage }
   },
   computed: {
+    grid_style() {
+      const canvas = document.createElement('canvas')
+      const s = canvas.width = canvas.height = Math.floor(PX_PER_GRID)
+      const ctx = canvas.getContext('2d')
+      const { selected_tool } = this.tool_storage.state
+      ctx.fillStyle = selected_tool === 'regrid' ? 'white' : 'black'
+      ctx.rect(s-1, 0, s, s)
+      ctx.rect(0, s-1, s, s)
+      ctx.fill()
+      return {
+        backgroundImage: `url(${canvas.toDataURL()})`,
+        backgroundSize: PX_PER_GRID+'px',
+      }
+    },
     image_style() {
       const [x, y] = this.shifts.delta
       return {
-        left: x+'px',
+        left: -x+'px',
         position: 'relative',
-        top: y+'px',
+        top: -y+'px',
         zIndex: -1,
       }
     },
@@ -181,8 +195,8 @@ export default {
         this.screenshot.data.human.shift = [...this.screenshot.data.output.shift]
       }
       const { shift } = this.screenshot.data.human
-      shift[0] += dxy[0]
-      shift[1] += dxy[1]
+      shift[0] -= dxy[0]
+      shift[1] -= dxy[1]
     },
   },
 }
