@@ -15,17 +15,24 @@ export default () => {
     fromServer,
   })
 
-  const _save = debounce(storage.save, 1000)
+  const _bounce_cache = {}
+  const bounceSave = (storage.bounceSave = (screenshot) => {
+    if (!_bounce_cache[screenshot.id]) {
+      _bounce_cache[screenshot.id] = debounce((s) => storage.save(s), 1000)
+    }
+    _bounce_cache[screenshot.id](screenshot)
+  })
 
   storage.setItemAtXY = (screenshot, xy, type) => {
     const current = screenshot.data.human.entities[xy]
     if (type === null) {
       delete screenshot.data.human.entities[xy]
-      _save(screenshot)
+      bounceSave(screenshot)
     } else if (current !== type) {
       screenshot.data.human.entities[xy] = type
-      _save(screenshot)
+      bounceSave(screenshot)
     }
   }
+
   return storage
 }

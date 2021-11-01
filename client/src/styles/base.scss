@@ -60,6 +60,18 @@ body {
 .btn.-mini {
   @apply p-1;
   user-select:none;
+  .fa {
+    line-height: 1;
+    font-weight: normal;
+  }
+}
+
+.btn.-fa-stack {
+  @apply relative;
+  .-fa-stack-badge {
+    @apply absolute bottom-0 mr-2 mb-1 right-0;
+    font-size: 0.5em;
+  }
 }
 
 .osd-panel, .html-overlay {
@@ -325,7 +337,6 @@ body {
 }
 
 .ur-toolbar {
-  z-index: 1;
   &.-topleft {
     @apply absolute left-0 top-0;
   }

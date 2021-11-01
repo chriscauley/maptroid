@@ -20,7 +20,7 @@ export default {
   },
   computed: {
     dread_zones() {
-      return this.$store.zone.getPage({ query: { world: 3 } })?.items || []
+      return this.$store.zone.getPage({ query: { per_page: 500, world: 3 } })?.items || []
     },
     links() {
       return ['/screenshot/analyzer']

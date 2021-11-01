@@ -9,7 +9,7 @@
           @click="click"
           @mousemove.prevent="mousemove"
           style="margin-top: 70px;"
-          >
+        >
           <div class="screenshot-analyzer__grid" ref="grid" :style="grid_style" />
           <img class="max-w-unset" :src="screenshot.output" @load="onLoad" :style="image_style" />
           <div class="screenshot-analyzer__debug">
@@ -54,35 +54,35 @@ const dxys = {
 }
 
 export default {
+  components: { Breadcrumbs },
   mixins: [Mousetrap.Mixin],
   __route: {
     path: '/screenshot/analyzer/:zone_id?/:screenshot_id?/',
   },
-  components: { Breadcrumbs },
   data() {
     return { width: 1, items: [], tool_storage }
   },
   computed: {
     grid_style() {
       const canvas = document.createElement('canvas')
-      const s = canvas.width = canvas.height = Math.floor(PX_PER_GRID)
+      const s = (canvas.width = canvas.height = Math.floor(PX_PER_GRID))
       const ctx = canvas.getContext('2d')
       const { selected_tool } = this.tool_storage.state
       ctx.fillStyle = selected_tool === 'regrid' ? 'white' : 'black'
-      ctx.rect(s-1, 0, s, s)
-      ctx.rect(0, s-1, s, s)
+      ctx.rect(s - 1, 0, s, s)
+      ctx.rect(0, s - 1, s, s)
       ctx.fill()
       return {
         backgroundImage: `url(${canvas.toDataURL()})`,
-        backgroundSize: PX_PER_GRID+'px',
+        backgroundSize: PX_PER_GRID + 'px',
       }
     },
     image_style() {
       const [x, y] = this.shifts.delta
       return {
-        left: -x+'px',
+        left: -x + 'px',
         position: 'relative',
-        top: -y+'px',
+        top: -y + 'px',
         zIndex: -1,
       }
     },
@@ -93,17 +93,15 @@ export default {
           'up,down,left,right': this.moveGrid,
         }
       }
+      return {}
     },
     shifts() {
       const shifts = {
-        output: this.screenshot?.data.output?.shift || [0,0],
+        output: this.screenshot?.data.output?.shift || [0, 0],
         human: this.screenshot?.data.human?.shift,
       }
       shifts.human = shifts.human || [...shifts.output]
-      shifts.delta = [
-        shifts.human[0] - shifts.output[0],
-        shifts.human[1] - shifts.output[1],
-      ]
+      shifts.delta = [shifts.human[0] - shifts.output[0], shifts.human[1] - shifts.output[1]]
       return shifts
     },
     debug_text() {

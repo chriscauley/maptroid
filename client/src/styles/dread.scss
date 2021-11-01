@@ -15,7 +15,7 @@
     border-width: 4px;
     border-style: dashed;
   }
-  &.ur-dragging {
+  &.-dragging {
     background-size: 100% 100%;
     border: 0;
     filter: invert(1);
@@ -102,12 +102,70 @@
 
 .ur-toolbar .btn {
   @apply relative;
-  .flaire {
-    @apply absolute bottom-0 right-0;
-  }
 }
 
 .screenshot-analyzer__debug {
   @apply border bottom-0 fixed left-0 p-2;
   background: var(--bg-alt);
+}
+
+.ur-toolbar .fa-object-group {
+  font-weight: normal;
+  &:after {
+    @apply absolute block bottom-0 h-3 m-1 right-0 rounded-full w-3;
+    content: '';
+  }
+  &.-group-0:after {
+    @apply border border-white;
+  }
+}
+
+.dread-group {
+  @apply flex gap-4 mb-4;
+  &__circle {
+    @apply h-4 rounded-full w-4;
+  }
+}
+
+@mixin color-group($number, $color) {
+  .ur-toolbar .fa-object-group.-group-#{$number}:after, .dread-group__circle.-group-#{$number} {
+    background: $color
+  }
+  .dread-anchor.-group-#{$number} {
+    border-color: $color;
+  }
+}
+
+@include color-group(0, white);
+@include color-group(1, #F00);
+@include color-group(2, #0F0);
+@include color-group(3, #00F);
+@include color-group(4, #0FF);
+@include color-group(5, #F0F);
+@include color-group(6, #FF0);
+@include color-group(7, #888);
+@include color-group(8, #964B00);
+
+.room-canvas {
+  image-rendering: pixelated;
+  height: 100%;
+  width: 100%;
+  &__wrapper {
+    @apply absolute;
+    outline: 4px double pink;
+    z-index: 2;
+    &:hover {
+      outline: 8px double pink;
+    }
+  }
+  &__resize {
+    @apply absolute;
+    top: 100%;
+    left: 100%;
+  }
+}
+
+.dread-debug {
+  @apply fixed bottom-0 left-0 p-2;
+  background: rgba(0,0,0,0.5);
 }

@@ -1,6 +1,6 @@
 <template>
   <unrest-draggable
-    class="dread-anchor"
+    :class="css"
     :style="style"
     @drag="drag"
     @dragstart="dragstart"
@@ -14,37 +14,68 @@
 export default {
   props: {
     screenshot: Object,
+    storage: Object,
   },
   data() {
     return { dragging: false }
   },
   computed: {
+    css() {
+      const { group } = this.screenshot.data._world
+      return [`dread-anchor -group-${group}`, { '-dragging': this.dragging }]
+    },
     style() {
-      const { x, y, width } = this.screenshot.data._world
+      const { xy, width } = this.screenshot.data._world
       const height = 430 / 1280
       return {
         width: `${100 * width}%`,
         height: `${100 * height}%`,
-        top: `${100 * y}%`,
-        left: `${100 * x}%`,
+        top: `${100 * xy[1]}%`,
+        left: `${100 * xy[0]}%`,
       }
     },
   },
   methods: {
-    drag(state) {
-      const [x, y] = state.last_dxy
-      this.dragging = true
-      if (x || y) {
-        this.$store.osd.moveImage(this.screenshot, { x, y })
-      }
-    },
     dragstart() {
+      const { selected_tool } = this.storage.state
+      if (selected_tool === 'group') {
+        return
+      }
       this.$store.osd.setAllOpacity(1)
       this.$store.osd.setOpacity(this.screenshot, 0)
+      this.dragging = true
     },
+
+    drag(state, event) {
+      const { selected_tool } = this.storage.state
+      if (selected_tool === 'group') {
+        return
+      }
+      const [x, y] = state.last_dxy
+      if (x || y) {
+        const { group } = this.screenshot.data._world
+        const move_group = group && !event.shiftKey
+        this.$store.osd.moveImage(this.screenshot, { x, y }, move_group)
+      }
+    },
+
     dragend() {
       this.dragging = false
       this.$store.osd.setAllOpacity(1)
+
+      // if the screenshot was not moved and the group tool is selected, toggle the group
+      const { selected_tool, selected_variant } = this.storage.state
+      if (selected_tool === 'group') {
+        if (!selected_variant || this.screenshot.data._world.group === selected_variant) {
+          this.$store.osd.setGroup(this.screenshot, null)
+        } else {
+          this.$store.osd.setGroup(this.screenshot, selected_variant)
+        }
+      }
+
+      if (selected_tool === 'trash') {
+        this.$store.screenshot.delete(this.screenshot)
+      }
     },
   },
 }

@@ -1,42 +1,23 @@
-import { ReactiveLocalStorage } from '@unrest/vue-storage'
-import startCase from 'lodash.startcase'
+import { range } from 'lodash'
 
-// TODO replace with @/components/unrest/ToolStorage
-export const ToolStorage = (LS_KEY, tools) => {
-  const icon_map = {
-    rect: 'fa fa-square-o',
-    ellipsis: 'fa fa-circle-o',
-    freeform: 'fa fa-area-chart',
-  }
+import ToolStorage from '@/components/unrest/ToolStorage'
 
-  const makeTool = ({ state, save }, { slug, name, variants = [], icon }) => {
-    const { selected_tool, selected_variant } = state
-    const variant_selected = !variants.length || variants.includes(selected_variant)
-    const selected = slug === selected_tool && variant_selected
-
-    return {
-      slug,
-      icon,
-      name: name || startCase(slug),
-      class: `btn ${selected ? '-primary' : '-secondary'}`,
-      click: () => save({ selected_tool: slug, selected_variant: variants[0] }),
-      children: variants?.map((child_slug) => ({
-        slug: child_slug,
-        icon: icon_map[child_slug] || `fa fa-${child_slug}`,
-        class: ['btn', selected_variant === child_slug ? '-primary' : '-secondary'],
-        click: () => save({ selected_tool: slug, selected_variant: child_slug }),
-      })),
-    }
-  }
-
-  const storage = ReactiveLocalStorage({ LS_KEY, initial: { selected_tool: tools[0]?.slug } })
-  storage.listTools = () => tools.map((tool) => makeTool(storage, tool))
-  return storage
+const room_icons = {
+  edit: 'fa fa-edit',
+  move: 'fa fa-arrows',
+  resize: 'fa fa-arrows-alt',
 }
 
 const tools = [
-  { slug: 'select', icon: 'fa fa-mouse-pointer' },
-  { slug: 'rearrange_background', icon: 'fa fa-puzzle-piece' },
+  { slug: 'select', getIcon: () => 'fa fa-mouse-pointer' },
+  { slug: 'rearrange_background', getIcon: () => 'fa fa-puzzle-piece' },
+  {
+    slug: 'group',
+    getIcon: (_, variant) => `fa fa-object-group -group-${variant}`,
+    variants: range(9),
+  },
+  { slug: 'trash', getIcon: () => 'fa fa-trash' },
+  { slug: 'room', variants: ['edit', 'resize', 'move'], getIcon: (_, v) => room_icons[v] },
 ]
 
-export default ToolStorage('tools__dread', tools)
+export default ToolStorage('tools__dread', { tools })
