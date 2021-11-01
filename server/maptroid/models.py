@@ -6,6 +6,7 @@ _choices = lambda l: zip(l,l)
 class Zone(models.Model):
   name = models.CharField(max_length=128)
   slug = models.CharField(max_length=128)
+  data = models.JSONField(default=dict, blank=True)
   __str__ = lambda self: self.name
 
 class World(models.Model):

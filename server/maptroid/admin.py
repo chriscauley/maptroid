@@ -4,7 +4,9 @@ from maptroid.models import Zone, Room, World, Screenshot
 
 @admin.register(Zone)
 class ZoneAdmin(admin.ModelAdmin):
-    pass
+    list_display = ['name', '_screenshot_count']
+    def _screenshot_count(self, obj):
+        return obj.screenshot_set.all().count()
 
 @admin.register(Room)
 class RoomAdmin(admin.ModelAdmin):
@@ -16,4 +18,4 @@ class WorldAdmin(admin.ModelAdmin):
 
 @admin.register(Screenshot)
 class ScreenshotAdmin(admin.ModelAdmin):
-    pass
+    list_display = ["id", "world", "zone"]
