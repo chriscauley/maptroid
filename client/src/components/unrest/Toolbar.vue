@@ -2,26 +2,25 @@
   <div class="ur-toolbar">
     <div class="ur-toolbar__row btn-group">
       <div
-        v-for="(tool, i) in tools"
+        v-for="tool in tools"
         :key="tool.name"
         :title="tool.name"
         @click="tool.click"
         :class="tool.class"
       >
         <i :class="tool.icon" />
-        <div v-if="i !== 0 && ctrl_down" class="flaire">{{ i }}</div>
       </div>
+      <slot name="buttons" />
     </div>
     <div class="ur-toolbar__row btn-group" v-if="selected_tool?.children">
       <div
-        v-for="(child, i) in selected_tool.children"
+        v-for="child in selected_tool.children"
         :key="child.slug"
         @click="child.click"
         :class="child.class"
         :title="child.slug"
       >
         <i :class="child.icon" />
-        <div v-if="!ctrl_down" class="flaire">{{ i + 1 }}</div>
       </div>
     </div>
     <slot />
@@ -34,9 +33,6 @@ export default {
     storage: Object,
   },
   computed: {
-    ctrl_down() {
-      return false
-    },
     tools() {
       return this.storage.listTools()
     },
