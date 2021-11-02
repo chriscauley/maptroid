@@ -21,11 +21,11 @@ export default {
   },
   computed: {
     css() {
-      const { group } = this.screenshot.data._world
+      const { group } = this.screenshot.data.zone
       return [`dread-anchor -group-${group}`, { '-dragging': this.dragging }]
     },
     style() {
-      const { xy, width } = this.screenshot.data._world
+      const { xy, width } = this.screenshot.data.zone
       const height = 430 / 1280
       return {
         width: `${100 * width}%`,
@@ -53,7 +53,7 @@ export default {
       }
       const [x, y] = state.last_dxy
       if (x || y) {
-        const { group } = this.screenshot.data._world
+        const { group } = this.screenshot.data.zone
         const move_group = group && !event.shiftKey
         this.$store.osd.moveImage(this.screenshot, { x, y }, move_group)
       }
@@ -66,7 +66,7 @@ export default {
       // if the screenshot was not moved and the group tool is selected, toggle the group
       const { selected_tool, selected_variant } = this.storage.state
       if (selected_tool === 'group') {
-        if (!selected_variant || this.screenshot.data._world.group === selected_variant) {
+        if (!selected_variant || this.screenshot.data.zone.group === selected_variant) {
           this.$store.osd.setGroup(this.screenshot, null)
         } else {
           this.$store.osd.setGroup(this.screenshot, selected_variant)

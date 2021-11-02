@@ -60,13 +60,13 @@ export default {
   },
   methods: {
     countGroup(group) {
-      return this.screenshots.filter((s) => (s.data._world.group || 0) === group).length
+      return this.screenshots.filter((s) => (s.data.zone.group || 0) === group).length
     },
     confirmMerge() {
-      const screenshots = this.screenshots.filter((s) => (s.data._world?.group || 0) === this.merge)
+      const screenshots = this.screenshots.filter((s) => (s.data.zone?.group || 0) === this.merge)
       Promise.all(
         screenshots.map((screenshot) => {
-          screenshot.data._world.group = this.keep
+          screenshot.data.zone.group = this.keep
           return this.$store.screenshot.save(screenshot)
         }),
       ).then(() => {

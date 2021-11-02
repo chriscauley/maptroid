@@ -4,6 +4,7 @@ import { RestStorage } from '@unrest/vue-storage'
 
 const fromServer = (screenshot) => {
   screenshot.key = `screenshot__${screenshot.id}`
+  // TODO is data.human still in use? I think that was just part of the unfinished "analyzer"
   screenshot.data.human = screenshot.data.human || {}
   screenshot.data.human.entities = screenshot.data.human.entities || {}
   return screenshot

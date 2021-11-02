@@ -54,14 +54,14 @@ export default ({ store }) => {
       if (osd_item) {
         return
       }
-      if (image.data._world === undefined) {
+      if (image.data.zone === undefined) {
         // viewer.world.getItemCount() doesn't update until end of thread so we need to count our own
         const x = 3 + roundDreadPixel(state.new_count % 8)
         const y = roundDreadPixel(0.35 * Math.floor(state.new_count / 8))
-        image.data._world = { raw_xy: [x, y], width: 1, xy: [x, y], group: 7 }
+        image.data.zone = { raw_xy: [x, y], width: 1, xy: [x, y], group: 7 }
         state.new_count++
       }
-      const { xy, width } = image.data._world
+      const { xy, width } = image.data.zone
       state._viewer.addSimpleImage({ url: image.output, x: xy[0], y: xy[1], width, opacity: 1 })
       state.images.push(image)
       state.image_count++
@@ -69,10 +69,10 @@ export default ({ store }) => {
 
     dragRoom(action, room, client_delta) {
       const scale = 1280 / PX_PER_BLOCK
-      if (!room.data._world) {
-        room.data._world = { raw_bounds: room.data.zone_bounds.map((i) => i / scale) }
+      if (!room.data.zone) {
+        room.data.zone = { raw_bounds: room.data.zone_bounds.map((i) => i / scale) }
       }
-      const [raw_x, raw_y, raw_w, raw_h] = room.data._world.raw_bounds
+      const [raw_x, raw_y, raw_w, raw_h] = room.data.zone.raw_bounds
       let old_point
       if (action === 'move') {
         old_point = new Point(raw_x, raw_y)
@@ -84,46 +84,44 @@ export default ({ store }) => {
       new_pixel.y += client_delta[1]
       const new_point = state._viewer.viewport.pointFromPixel(new_pixel)
       if (action === 'move') {
-        room.data._world.raw_bounds[0] = new_point.x
-        room.data._world.raw_bounds[1] = new_point.y
+        room.data.zone.raw_bounds[0] = new_point.x
+        room.data.zone.raw_bounds[1] = new_point.y
       } else if (action === 'resize') {
-        room.data._world.raw_bounds[2] = new_point.x
-        room.data._world.raw_bounds[3] = new_point.y
+        room.data.zone.raw_bounds[2] = new_point.x
+        room.data.zone.raw_bounds[3] = new_point.y
       }
-      room.data.zone_bounds = room.data._world.raw_bounds.map((i) => i * scale)
+      room.data.zone_bounds = room.data.zone.raw_bounds.map((i) => i * scale)
       room.data.zone_bounds = room.data.zone_bounds.map((i) => Math.floor(i))
     },
 
     moveImage(image, client_delta, move_group) {
       const osd_item = state._viewer.world._items.find((i) => image.output === i.source.url)
-      const old_xy = image.data._world.xy.slice()
+      const old_xy = image.data.zone.xy.slice()
       const pixel = osd_item.viewport.pixelFromPoint(
-        new Point(image.data._world.raw_xy[0], image.data._world.raw_xy[1]),
+        new Point(image.data.zone.raw_xy[0], image.data.zone.raw_xy[1]),
       )
       pixel.x += client_delta.x
       pixel.y += client_delta.y
       const point = osd_item.viewport.pointFromPixel(pixel)
-      image.data._world.raw_xy[0] = point.x
-      image.data._world.raw_xy[1] = point.y
+      image.data.zone.raw_xy[0] = point.x
+      image.data.zone.raw_xy[1] = point.y
       point.x = roundDreadPixel(point.x)
       point.y = roundDreadPixel(point.y)
-      image.data._world.xy = [point.x, point.y]
+      image.data.zone.xy = [point.x, point.y]
       osd_item.setPosition(point, true)
       store.screenshot.bounceSave(image)
       // console.warn('TODO debounced save image')
 
-      const delta_point = vec.subtract(old_xy, image.data._world.xy)
-      const { group } = image.data._world
+      const delta_point = vec.subtract(old_xy, image.data.zone.xy)
+      const { group } = image.data.zone
       if (group && move_group && vec.magnitude(delta_point)) {
-        const images = state.images.filter(
-          (i) => i.id !== image.id && i.data._world.group === group,
-        )
+        const images = state.images.filter((i) => i.id !== image.id && i.data.zone.group === group)
         images.forEach((image) => {
           const osd_item = state._viewer.world._items.find((i) => image.output === i.source.url)
-          const new_xy = (image.data._world.xy = vec.subtract(image.data._world.xy, delta_point))
+          const new_xy = (image.data.zone.xy = vec.subtract(image.data.zone.xy, delta_point))
           const new_point = new Point(new_xy[0], new_xy[1])
           osd_item.setPosition(new_point, true)
-          image.data._world.raw_xy = new_xy.slice()
+          image.data.zone.raw_xy = new_xy.slice()
           store.screenshot.bounceSave(image)
         })
       }
@@ -145,9 +143,9 @@ export default ({ store }) => {
     },
 
     setGroup(image, group) {
-      image.data._world.group = group
+      image.data.zone.group = group
       if (!group) {
-        delete image.data._world.group
+        delete image.data.zone.group
       }
       store.screenshot.bounceSave(image)
     },

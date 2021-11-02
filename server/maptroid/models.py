@@ -4,6 +4,8 @@ from .dread import process_screenshot
 _choices = lambda l: zip(l,l)
 
 class Zone(models.Model):
+  class Meta:
+    ordering = ('name',)
   name = models.CharField(max_length=128)
   slug = models.CharField(max_length=128)
   data = models.JSONField(default=dict, blank=True)

@@ -154,18 +154,18 @@ export default {
 
       // Because of the top gradient in the Dread map viewer, we need ot put down bottommost pieces first
       // sort from bottom to put top most pieces on top
-      items = sortBy(items, 'data._world.xy.1')
+      items = sortBy(items, 'data.zone.xy.1')
       items.reverse()
 
       if (!show_all) {
-        items = items.filter((i) => i.data._world?.group !== 8)
+        items = items.filter((i) => i.data.zone?.group !== 8)
       }
       if (limit && sort_from) {
         let limited = []
         const rest = []
-        items.forEach((i) => (i.data._world?.group === 1 ? limited : rest).push(i))
+        items.forEach((i) => (i.data.zone?.group === 1 ? limited : rest).push(i))
         const sort_index = ['right', 'left'].includes(sort_from) ? 0 : 1
-        limited = sortBy(limited, `data._world.xy.${sort_index}`)
+        limited = sortBy(limited, `data.zone.xy.${sort_index}`)
         if (['bottom', 'right'].includes(sort_from)) {
           limited.reverse()
         }

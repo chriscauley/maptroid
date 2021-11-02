@@ -37,10 +37,10 @@ def process(zone, world):
     fails = []
     passes = []
     for screenshot in screenshots:
-        if not (screenshot.data.get('_world') or {}).get('xy'):
+        if not (screenshot.data.get('zone') or {}).get('xy'):
             fails.append(f'Screenshot #{screenshot.id} is missing positioning data')
             continue
-        [x, y] = screenshot.data['_world']['xy']
+        [x, y] = screenshot.data['zone']['xy']
         ratio_bounds['max_x'] = max(ratio_bounds['max_x'], x + ratio_width)
         ratio_bounds['max_y'] = max(ratio_bounds['max_y'], y + ratio_height)
         ratio_bounds['min_x'] = min(ratio_bounds['min_x'], x)
