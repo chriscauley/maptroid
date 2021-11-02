@@ -1,0 +1,69 @@
+from django.conf import settings
+from django.http import JsonResponse
+from django.shortcuts import get_object_or_404
+import math
+import os
+from PIL import Image
+import sys
+
+from maptroid.dread import mkdir
+from maptroid.models import World, Zone, Screenshot
+
+cache = {}
+
+def process_zone(request, world_id=None, zone_id=None):
+    key = f'{world_id}_{zone_id}'
+    if not key in cache or request.GET.get('force'):
+        zone = get_object_or_404(Zone, id=zone_id)
+        world = get_object_or_404(World, id=world_id)
+        cache[key] = process(zone, world)
+    return JsonResponse(cache[key])
+
+def process(zone, world):
+
+    # hardcoded dread values. OSD corrdinates are ratio of px_width
+    px_width = 1280
+    px_height = 430
+    ratio_width = px_width/px_width
+    ratio_height = px_height/px_width
+
+    screenshots = Screenshot.objects.filter(zone=zone, world=world)
+    ratio_bounds = {
+        'max_x': -sys.maxsize - 1,
+        'min_x': sys.maxsize,
+        'max_y': -sys.maxsize - 1,
+        'min_y': sys.maxsize,
+    }
+    fails = []
+    passes = []
+    for screenshot in screenshots:
+        if not (screenshot.data.get('_world') or {}).get('xy'):
+            fails.append(f'Screenshot #{screenshot.id} is missing positioning data')
+            continue
+        [x, y] = screenshot.data['_world']['xy']
+        ratio_bounds['max_x'] = max(ratio_bounds['max_x'], x + ratio_width)
+        ratio_bounds['max_y'] = max(ratio_bounds['max_y'], y + ratio_height)
+        ratio_bounds['min_x'] = min(ratio_bounds['min_x'], x)
+        ratio_bounds['min_y'] = min(ratio_bounds['min_y'], y)
+        passes.append([x, y, screenshot])
+    zone_width = math.ceil(px_width * (ratio_bounds['max_x'] - ratio_bounds['min_x']))
+    zone_height = math.ceil(px_width * (ratio_bounds['max_y'] - ratio_bounds['min_y']))
+    image = Image.new('RGBA', (zone_width, zone_height), (0, 0, 0, 0))
+    passes = sorted(passes, key=lambda i: -i[1]) # bottom images first to mitigate shadow problem
+    for [ratio_x, ratio_y, screenshot] in passes:
+        x = int(px_width * (ratio_x - ratio_bounds['min_x']))
+        y = int(px_width * (ratio_y - ratio_bounds['min_y']))
+        _screenshot = Image.open(screenshot.output)
+        image.paste(_screenshot, (x, y), mask=_screenshot)
+
+    path = f'dread_zones/{world.id}/{zone.id}-{zone.name}.png'
+    mkdir(settings.MEDIA_ROOT, f'dread_zones/{world.id}')
+    image.save(os.path.join(settings.MEDIA_ROOT, path))
+    return {
+        'name': zone.name,
+        'id': zone.id,
+        'screenshot_count': screenshots.count(),
+        'ratio_bounds': ratio_bounds,
+        'zone_map_url': os.path.join(settings.MEDIA_URL, path),
+        'fails': fails,
+    }

@@ -1,7 +1,7 @@
 <template>
   <div class="app-wrapper">
     <app-nav />
-    <router-view />
+    <router-view :key="$route.path" />
     <unrest-ui />
   </div>
 </template>
