@@ -45,9 +45,6 @@
 import { range } from 'lodash'
 
 export default {
-  props: {
-    screenshots: Array,
-  },
   data() {
     return {
       keep: undefined,
@@ -57,6 +54,11 @@ export default {
       limits: [10, 50, 100, 150, 200, 300, 400],
       directions: ['left', 'right', 'top', 'bottom'],
     }
+  },
+  computed: {
+    screenshots() {
+      return this.$store.osd.state.screenshots
+    },
   },
   methods: {
     countGroup(group) {

@@ -17,7 +17,7 @@ const roundDreadPixel = (fraction) => {
 }
 
 export default ({ store }) => {
-  const state = reactive({ _viewer: null, images: [] })
+  const state = reactive({ _viewer: null, screenshots: [] })
 
   const osd_store = {
     PX_PER_BLOCK,
@@ -37,7 +37,7 @@ export default ({ store }) => {
         size = viewer.world.getItemAt(0)?.getContentSize() || px
       }
       Object.assign(state, {
-        image_count: 0,
+        screenshot_count: 0,
         new_count: 0,
         _viewer: viewer ? markRaw(viewer) : viewer,
         px_width: px.x,
@@ -46,25 +46,32 @@ export default ({ store }) => {
         content_height: size.y,
       })
     },
-    addImage(image) {
+
+    addScreenshots(screenshots) {
+      state.screenshots = []
+      screenshots.forEach(osd_store.addScreenshot)
+    },
+
+    addScreenshot(screenshot) {
       if (!state.contentFactor) {
         state.contentFactor = state._viewer.world._contentFactor
       }
-      const osd_item = state._viewer.world._items.find((i) => image.output === i.source.url)
+      const osd_item = state._viewer.world._items.find((i) => screenshot.output === i.source.url)
       if (osd_item) {
         return
       }
-      if (image.data.zone === undefined) {
+      if (screenshot.data.zone === undefined) {
         // viewer.world.getItemCount() doesn't update until end of thread so we need to count our own
         const x = 3 + roundDreadPixel(state.new_count % 8)
         const y = roundDreadPixel(0.35 * Math.floor(state.new_count / 8))
-        image.data.zone = { raw_xy: [x, y], width: 1, xy: [x, y], group: 7 }
+        screenshot.data.zone = { raw_xy: [x, y], width: 1, xy: [x, y], group: 7 }
         state.new_count++
       }
-      const { xy, width } = image.data.zone
-      state._viewer.addSimpleImage({ url: image.output, x: xy[0], y: xy[1], width, opacity: 1 })
-      state.images.push(image)
-      state.image_count++
+      const { xy, width } = screenshot.data.zone
+      const url = screenshot.output
+      state._viewer.addSimpleImage({ url, x: xy[0], y: xy[1], width, opacity: 1 })
+      state.screenshots.push(screenshot)
+      state.screenshot_count++
     },
 
     dragRoom(action, room, client_delta) {
@@ -94,41 +101,44 @@ export default ({ store }) => {
       room.data.zone_bounds = room.data.zone_bounds.map((i) => Math.floor(i))
     },
 
-    moveImage(image, client_delta, move_group) {
-      const osd_item = state._viewer.world._items.find((i) => image.output === i.source.url)
-      const old_xy = image.data.zone.xy.slice()
+    moveScreenshot(screenshot, client_delta, move_group) {
+      const { output, data } = screenshot
+
+      const osd_item = state._viewer.world._items.find((i) => output === i.source.url)
+      const old_xy = data.zone.xy.slice()
       const pixel = osd_item.viewport.pixelFromPoint(
-        new Point(image.data.zone.raw_xy[0], image.data.zone.raw_xy[1]),
+        new Point(data.zone.raw_xy[0], data.zone.raw_xy[1]),
       )
       pixel.x += client_delta.x
       pixel.y += client_delta.y
       const point = osd_item.viewport.pointFromPixel(pixel)
-      image.data.zone.raw_xy[0] = point.x
-      image.data.zone.raw_xy[1] = point.y
+      data.zone.raw_xy[0] = point.x
+      data.zone.raw_xy[1] = point.y
       point.x = roundDreadPixel(point.x)
       point.y = roundDreadPixel(point.y)
-      image.data.zone.xy = [point.x, point.y]
+      data.zone.xy = [point.x, point.y]
       osd_item.setPosition(point, true)
-      store.screenshot.bounceSave(image)
-      // console.warn('TODO debounced save image')
+      store.screenshot.bounceSave(screenshot)
 
-      const delta_point = vec.subtract(old_xy, image.data.zone.xy)
-      const { group } = image.data.zone
+      const delta_point = vec.subtract(old_xy, data.zone.xy)
+      const { group } = data.zone
       if (group && move_group && vec.magnitude(delta_point)) {
-        const images = state.images.filter((i) => i.id !== image.id && i.data.zone.group === group)
-        images.forEach((image) => {
-          const osd_item = state._viewer.world._items.find((i) => image.output === i.source.url)
-          const new_xy = (image.data.zone.xy = vec.subtract(image.data.zone.xy, delta_point))
+        const group_screenshots = state.screenshots.filter(
+          (i) => i.id !== screenshot.id && i.data.zone.group === group,
+        )
+        group_screenshots.forEach((ss) => {
+          const osd_item = state._viewer.world._items.find((i) => ss.output === i.source.url)
+          const new_xy = (ss.data.zone.xy = vec.subtract(ss.data.zone.xy, delta_point))
           const new_point = new Point(new_xy[0], new_xy[1])
           osd_item.setPosition(new_point, true)
-          image.data.zone.raw_xy = new_xy.slice()
-          store.screenshot.bounceSave(image)
+          ss.data.zone.raw_xy = new_xy.slice()
+          store.screenshot.bounceSave(ss)
         })
       }
     },
 
-    setOpacity(image, value) {
-      const osd_item = state._viewer.world._items.find((i) => image.output === i.source.url)
+    setOpacity(screenshot, value) {
+      const osd_item = state._viewer.world._items.find((i) => screenshot.output === i.source.url)
       osd_item.setOpacity(value)
     },
 
@@ -142,12 +152,12 @@ export default ({ store }) => {
       return `${(100 * block * PX_PER_BLOCK) / 1280}%`
     },
 
-    setGroup(image, group) {
-      image.data.zone.group = group
+    setGroup(screenshot, group) {
+      screenshot.data.zone.group = group
       if (!group) {
-        delete image.data.zone.group
+        delete screenshot.data.zone.group
       }
-      store.screenshot.bounceSave(image)
+      store.screenshot.bounceSave(screenshot)
     },
   }
 

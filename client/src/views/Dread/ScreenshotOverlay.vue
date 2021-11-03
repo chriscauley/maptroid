@@ -55,7 +55,7 @@ export default {
       if (x || y) {
         const { group } = this.screenshot.data.zone
         const move_group = group && !event.shiftKey
-        this.$store.osd.moveImage(this.screenshot, { x, y }, move_group)
+        this.$store.osd.moveScreenshot(this.screenshot, { x, y }, move_group)
       }
     },
 
