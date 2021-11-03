@@ -3,18 +3,18 @@ from .dread import process_screenshot
 
 _choices = lambda l: zip(l,l)
 
+class World(models.Model):
+  name = models.CharField(max_length=128)
+  slug = models.CharField(max_length=128)
+  __str__ = lambda self: self.name
+
 class Zone(models.Model):
   class Meta:
     ordering = ('name',)
   name = models.CharField(max_length=128)
   slug = models.CharField(max_length=128)
+  world = models.ForeignKey(World, models.CASCADE)
   data = models.JSONField(default=dict, blank=True)
-  __str__ = lambda self: self.name
-
-class World(models.Model):
-  name = models.CharField(max_length=128)
-  slug = models.CharField(max_length=128)
-  zones = models.ManyToManyField(Zone)
   __str__ = lambda self: self.name
 
 class Room(models.Model):
