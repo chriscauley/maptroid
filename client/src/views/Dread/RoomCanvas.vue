@@ -14,6 +14,7 @@ import { debounce } from 'lodash'
 
 export default {
   props: {
+    osd_store: Object,
     room: Object,
     mode: String,
   },
@@ -28,15 +29,15 @@ export default {
     wrapper_style() {
       const [x, y, width, height] = this.room.data.zone_bounds
       return {
-        height: this.$store.osd.scaleBlock(height),
-        left: this.$store.osd.scaleBlock(x),
-        top: this.$store.osd.scaleBlock(y),
-        width: this.$store.osd.scaleBlock(width),
+        height: this.osd_store.scaleBlock(height),
+        left: this.osd_store.scaleBlock(x),
+        top: this.osd_store.scaleBlock(y),
+        width: this.osd_store.scaleBlock(width),
         pointerEvents: this.mode ? '' : 'none',
       }
     },
     canvasAttrs() {
-      const scale = this.$store.osd.PX_PER_BLOCK
+      const scale = this.osd_store.PX_PER_BLOCK
       const [_x, _y, width, height] = this.room.data.zone_bounds
       return {
         width: width * scale,
@@ -55,7 +56,7 @@ export default {
       // const px_per_block = box.width / this.room.data.zone_bounds[2]
     },
     draw() {
-      const scale = this.$store.osd.PX_PER_BLOCK
+      const scale = this.osd_store.PX_PER_BLOCK
       const { width, height } = this.$refs.canvas
       const ctx = this.$refs.canvas.getContext('2d')
       ctx.imageSmoothingEnabled = false
@@ -73,7 +74,7 @@ export default {
       ctx.stroke()
     },
     drag({ last_dxy }) {
-      this.$store.osd.dragRoom(this.mode, this.room, last_dxy)
+      this.osd_store.dragRoom(this.mode, this.room, last_dxy)
       this.$emit('debug', this.room.data.zone_bounds.map((i) => i.toFixed(1)).join(', '))
       this.save()
     },

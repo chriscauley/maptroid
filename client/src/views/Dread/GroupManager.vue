@@ -45,6 +45,9 @@
 import { range } from 'lodash'
 
 export default {
+  props: {
+    osd_store: Object,
+  },
   data() {
     return {
       keep: undefined,
@@ -57,7 +60,7 @@ export default {
   },
   computed: {
     screenshots() {
-      return this.$store.osd.state.screenshots
+      return this.osd_store.state.screenshots
     },
   },
   methods: {

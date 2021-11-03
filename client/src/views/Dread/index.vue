@@ -12,25 +12,31 @@
           </div>
         </template>
       </unrest-toolbar>
-      <dread-viewer :zone="zone" />
-      <template v-if="$store.osd.viewer">
-        <html-overlay>
+      <dread-viewer :zone="zone" :osd_store="osd_store" />
+      <template v-if="osd_store.viewer">
+        <html-overlay :viewer="osd_store.viewer">
           <screenshot-overlay
-            v-for="screenshot in $store.osd.state.screenshots"
+            v-for="screenshot in osd_store.state.screenshots"
             :key="screenshot.id"
             :screenshot="screenshot"
-            :storage="tool_storage"
+            :tool_storage="tool_storage"
+            :osd_store="osd_store"
           />
           <room-canvas
             v-for="room in rooms"
             :key="room.id"
             :room="room"
             :mode="room_mode"
+            :osd_store="osd_store"
             @debug="setDebug"
           />
         </html-overlay>
       </template>
-      <group-manager v-if="managing_groups" @close="managing_groups = null" />
+      <group-manager
+        v-if="managing_groups"
+        @close="managing_groups = null"
+        :osd_store="osd_store"
+      />
     </div>
     <room-form
       v-if="editing_room"
@@ -52,6 +58,7 @@ import RoomForm from './RoomForm.vue'
 import ScreenshotOverlay from './ScreenshotOverlay.vue'
 import HtmlOverlay from '@/vue-openseadragon/HtmlOverlay.vue'
 import tool_storage from './tools'
+import OsdStore from './OsdStore'
 
 const WORLD = 3 // hardcoded for now since this interface is dread only
 
@@ -76,6 +83,7 @@ export default {
       tool_storage,
       managing_groups: false,
       debug: '',
+      osd_store: OsdStore(this),
     }
   },
   computed: {

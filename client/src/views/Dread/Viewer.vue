@@ -2,7 +2,7 @@
   <open-seadragon
     @mousewheel.prevent="osdWheel"
     :options="osd_options"
-    :callback="bindViewer"
+    :callback="osd_store.bindViewer"
     class="dread-viewer"
     :pixelated="true"
   />
@@ -15,8 +15,9 @@ import { sortBy } from 'lodash'
 const WORLD = 3 // hardcoded for now since this interface is dread only
 
 export default {
-  params: {
+  props: {
     zone: Object,
+    osd_store: Object,
   },
   computed: {
     osd_options() {
@@ -66,15 +67,12 @@ export default {
       }
       items = limited.slice(0, parseInt(limit)).concat(rest)
     }
-    this.$store.osd.addScreenshots(items)
+    this.osd_store.addScreenshots(items)
   },
   methods: {
-    bindViewer(viewer) {
-      this.$store.osd.viewer = viewer
-    },
     osdWheel(event) {
       // Loosely adapted from OSD.Viewer.onCanvasDragEnd and OSD.viewer.onCanvasScroll
-      const viewer = this.$store.osd.viewer
+      const viewer = this.osd_store.viewer
       const viewport = viewer.viewport
       if (event.ctrlKey) {
         const box = viewer.container.getBoundingClientRect()
