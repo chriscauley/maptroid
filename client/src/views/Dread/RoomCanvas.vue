@@ -37,11 +37,11 @@ export default {
       }
     },
     canvasAttrs() {
-      const scale = this.osd_store.PX_PER_BLOCK
+      const { px_per_block } = this.osd_store.getGeometry()
       const [_x, _y, width, height] = this.room.data.zone_bounds
       return {
-        width: width * scale,
-        height: height * scale,
+        width: width * px_per_block,
+        height: height * px_per_block,
         class: 'room-canvas',
         id: `room-canvas__${this.room.id}`,
       }
@@ -56,20 +56,20 @@ export default {
       // const px_per_block = box.width / this.room.data.zone_bounds[2]
     },
     draw() {
-      const scale = this.osd_store.PX_PER_BLOCK
+      const { px_per_block } = this.osd_store.getGeometry()
       const { width, height } = this.$refs.canvas
       const ctx = this.$refs.canvas.getContext('2d')
       ctx.imageSmoothingEnabled = false
       ctx.clearRect(0, 0, width, height)
 
       ctx.beginPath()
-      for (let i = 0; i * scale <= height; i++) {
-        ctx.moveTo(0, scale * i)
-        ctx.lineTo(width, scale * i)
+      for (let i = 0; i * px_per_block <= height; i++) {
+        ctx.moveTo(0, px_per_block * i)
+        ctx.lineTo(width, px_per_block * i)
       }
-      for (let i = 0; i * scale <= width; i++) {
-        ctx.moveTo(scale * i, 0)
-        ctx.lineTo(scale * i, height)
+      for (let i = 0; i * px_per_block <= width; i++) {
+        ctx.moveTo(px_per_block * i, 0)
+        ctx.lineTo(px_per_block * i, height)
       }
       ctx.stroke()
     },

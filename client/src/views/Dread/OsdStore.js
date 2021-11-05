@@ -5,21 +5,26 @@ import vec from '@/lib/vec'
 
 const { Point } = Openseadragon
 
-const PX_PER_GRID = 1
-const PX_PER_BLOCK = 17.855
-// const PX_PER_BLOCK = 16.5
+const PX_PER_GRID = 0.5
 
 export default (component) => {
   const { $store } = component
   const osd_store = OsdStore()
   const { state } = osd_store
 
-  const _roundDreadPixel = (fraction) => {
-    const pixels = fraction * 1280
-    const rounded_pixels = Math.floor(pixels / PX_PER_GRID) * PX_PER_GRID
-    return rounded_pixels / 1280 // fraction rounded to nearest pixel
+  const getGeometry = () => {
+    return component.zone.data.screenshot
   }
 
+  const _roundDreadPixel = (fraction) => {
+    const geo = getGeometry()
+    const pixels = fraction * geo.width
+    const rounded_pixels = Math.floor(pixels / PX_PER_GRID) * PX_PER_GRID
+    return rounded_pixels / geo.width // fraction rounded to nearest pixel
+  }
+
+  // TODO this was used to hack geometry... make it a form if needed again
+  // window.gg = getGeometry
   const addScreenshots = (screenshots) => {
     osd_store.patch({ screenshot_count: 0, new_count: 0 })
     state.screenshots = []
@@ -49,7 +54,8 @@ export default (component) => {
   }
 
   const dragRoom = (action, room, client_delta) => {
-    const scale = 1280 / PX_PER_BLOCK
+    const geo = getGeometry()
+    const scale = geo.width / geo.px_per_block
     if (!room.data.zone) {
       room.data.zone = { raw_bounds: room.data.zone_bounds.map((i) => i / scale) }
     }
@@ -121,9 +127,8 @@ export default (component) => {
   }
 
   const scaleBlock = (block) => {
-    // The bg is made from fully zoomed in blocks, meaning 1280px is "100%" and 1/2 block is 16px
-    // using half blocks since I think that's the smallest possible geometry in dread
-    return `${(100 * block * PX_PER_BLOCK) / 1280}%`
+    const geo = getGeometry()
+    return `${(100 * block * geo.px_per_block) / geo.width}%`
   }
 
   const setGroup = (screenshot, group) => {
@@ -135,7 +140,7 @@ export default (component) => {
   }
 
   Object.assign(osd_store, {
-    PX_PER_BLOCK,
+    getGeometry,
     addScreenshots,
     dragRoom,
     moveScreenshot,

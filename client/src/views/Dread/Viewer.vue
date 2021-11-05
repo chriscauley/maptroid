@@ -51,6 +51,7 @@ export default {
     // Because of the top gradient in the Dread map viewer, we need ot put down bottommost pieces first
     // sort from bottom to put top most pieces on top
     items = sortBy(items, 'data.zone.xy.1')
+    items = sortBy(items, 'data.zone.group')
     items.reverse()
 
     if (!show_all) {

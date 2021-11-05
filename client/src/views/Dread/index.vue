@@ -21,6 +21,7 @@
             :screenshot="screenshot"
             :tool_storage="tool_storage"
             :osd_store="osd_store"
+            :zone="zone"
           />
           <room-canvas
             v-for="room in rooms"

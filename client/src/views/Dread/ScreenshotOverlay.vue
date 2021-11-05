@@ -16,6 +16,7 @@ export default {
     screenshot: Object,
     tool_storage: Object,
     osd_store: Object,
+    zone: Object,
   },
   data() {
     return { dragging: false }
@@ -26,8 +27,8 @@ export default {
       return [`dread-anchor -group-${group}`, { '-dragging': this.dragging }]
     },
     style() {
-      const { xy, width } = this.screenshot.data.zone
-      const height = 430 / 1280
+      const { xy } = this.screenshot.data.zone
+      const { width, height } = this.zone.data.screenshot
       return {
         width: `${100 * width}%`,
         height: `${100 * height}%`,
