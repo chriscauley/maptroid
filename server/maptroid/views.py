@@ -9,18 +9,14 @@ import sys
 from maptroid.dread import mkdir
 from maptroid.models import World, Zone, Screenshot
 
-cache = {}
-
 def process_zone(request, world_id=None, zone_id=None):
-    key = f'{world_id}_{zone_id}'
-    if not key in cache or request.GET.get('force'):
-        zone = get_object_or_404(Zone, id=zone_id)
-        world = get_object_or_404(World, id=world_id)
-        cache[key] = process(zone, world)
-    return JsonResponse(cache[key])
+    zone = get_object_or_404(Zone, id=zone_id)
+    world = get_object_or_404(World, id=world_id)
+    if not 'output' in zone.data or request.GET.get('force'):
+        process(zone, world)
+    return JsonResponse(zone.data)
 
 def process(zone, world):
-
     # hardcoded dread values. OSD corrdinates are ratio of px_width
     px_width = 1280
     px_height = 430
@@ -46,8 +42,10 @@ def process(zone, world):
         ratio_bounds['min_x'] = min(ratio_bounds['min_x'], x)
         ratio_bounds['min_y'] = min(ratio_bounds['min_y'], y)
         passes.append([x, y, screenshot])
-    zone_width = math.ceil(px_width * (ratio_bounds['max_x'] - ratio_bounds['min_x']))
-    zone_height = math.ceil(px_width * (ratio_bounds['max_y'] - ratio_bounds['min_y']))
+    ratio_bounds['width'] = ratio_bounds['max_x'] - ratio_bounds['min_x']
+    ratio_bounds['height'] = ratio_bounds['max_y'] - ratio_bounds['min_y']
+    zone_width = math.ceil(px_width * ratio_bounds['width'])
+    zone_height = math.ceil(px_width * ratio_bounds['height'])
     image = Image.new('RGBA', (zone_width, zone_height), (0, 0, 0, 0))
     passes = sorted(passes, key=lambda i: -i[1]) # bottom images first to mitigate shadow problem
     for [ratio_x, ratio_y, screenshot] in passes:
@@ -55,15 +53,16 @@ def process(zone, world):
         y = int(px_width * (ratio_y - ratio_bounds['min_y']))
         _screenshot = Image.open(screenshot.output)
         image.paste(_screenshot, (x, y), mask=_screenshot)
+        _screenshot.close()
 
-    path = f'dread_zones/{world.id}/{zone.id}-{zone.name}.png'
+    path = f'dread_zones/{zone.id}-{zone.name}.png'
     mkdir(settings.MEDIA_ROOT, f'dread_zones/{world.id}')
     image.save(os.path.join(settings.MEDIA_ROOT, path))
-    return {
-        'name': zone.name,
-        'id': zone.id,
+    zone.data['output'] = {
+        'png': os.path.join(settings.MEDIA_URL, path),
+        'dzi': os.path.join(settings.MEDIA_URL, f'dread_zones/{zone.id}-{zone.name}.dzi'),
         'screenshot_count': screenshots.count(),
         'ratio_bounds': ratio_bounds,
-        'zone_map_url': os.path.join(settings.MEDIA_URL, path),
         'fails': fails,
     }
+    zone.save()
