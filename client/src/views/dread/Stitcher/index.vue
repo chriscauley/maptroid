@@ -65,7 +65,7 @@ const WORLD = 3 // hardcoded for now since this interface is dread only
 
 export default {
   __route: {
-    path: '/dread/:zone_id/:zone_slug/',
+    path: '/dread-stitcher/:zone_id/:zone_slug/',
     meta: {
       title: ({ params }) => startCase(params.zone_slug),
     },

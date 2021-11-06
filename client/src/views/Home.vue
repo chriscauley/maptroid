@@ -1,11 +1,18 @@
 <template>
   <div>
     <h2>Dread Editor</h2>
-    <div v-for="zone in dread_zones" :key="zone.id">
-      <router-link :to="`/dread/${zone.id}/${zone.slug}/`">
-        {{ zone.name }}
-      </router-link>
-    </div>
+    <table class="table">
+      <tr v-for="zone in dread_zones" :key="zone.id">
+        <td>{{ zone.id }}</td>
+        <td>{{ zone.name }}</td>
+        <td>
+          <router-link class="link" :to="`/dread-stitcher/${zone.id}/${zone.slug}/`">
+            Stitcher
+          </router-link>
+        </td>
+      </tr>
+    </table>
+
     <h2>Misc</h2>
     <div v-for="link in links" :key="link">
       <router-link :to="link">{{ link }}</router-link>

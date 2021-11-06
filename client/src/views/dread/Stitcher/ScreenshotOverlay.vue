@@ -30,8 +30,8 @@ export default {
       const { xy } = this.screenshot.data.zone
       const { width, height } = this.zone.data.screenshot
       return {
-        width: `${100 * width}%`,
-        height: `${100 * height}%`,
+        width: `${(100 * width) / width}%`,
+        height: `${(100 * height) / width}%`,
         top: `${100 * xy[1]}%`,
         left: `${100 * xy[0]}%`,
       }
