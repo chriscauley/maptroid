@@ -1,16 +1,20 @@
 <template>
   <div class="room-canvas__wrapper" :style="wrapper_style">
     <canvas v-bind="canvasAttrs" @mousemove="mousemove" ref="canvas" />
-    <unrest-draggable v-if="action_icon" class="room-canvas__resize" @drag="drag">
-      <div class="btn -mini -primary">
-        <i :class="action_icon" />
-      </div>
-    </unrest-draggable>
+    <div class="room-canvas__grid" :style="grid_style" />
+    <template v-if="mode">
+      <unrest-draggable class="room-canvas__resize btn -mini -primary" @drag="resize">
+        <i class="fa fa-arrows-alt" />
+      </unrest-draggable>
+      <unrest-draggable class="room-canvas__move btn -mini -primary" @drag="move">
+        <i class="fa fa-arrows" />
+      </unrest-draggable>
+    </template>
   </div>
 </template>
 
 <script>
-import { debounce } from 'lodash'
+const grids = {}
 
 export default {
   props: {
@@ -20,11 +24,24 @@ export default {
   },
   emits: ['debug'],
   computed: {
-    action_icon() {
+    grid_style() {
+      const { px_per_block } = this.osd_store.getGeometry()
+      const size = Math.floor(px_per_block)
+      if (!grids[size]) {
+        const canvas = document.createElement('canvas')
+        canvas.width = canvas.height = size
+        const ctx = canvas.getContext('2d')
+        ctx.fillStyle = 'black'
+        ctx.rect(0, 0, 1, size)
+        ctx.rect(0, 0, size, 1)
+        ctx.fill()
+        grids[size] = `url(${canvas.toDataURL()})`
+      }
+      const width = this.room.data.zone_bounds[2]
       return {
-        resize: 'fa fa-arrows-alt',
-        move: 'fa fa-arrows',
-      }[this.mode]
+        backgroundImage: grids[size],
+        backgroundSize: `${100 / width}% auto`,
+      }
     },
     wrapper_style() {
       const [x, y, width, height] = this.room.data.zone_bounds
@@ -56,32 +73,23 @@ export default {
       // const px_per_block = box.width / this.room.data.zone_bounds[2]
     },
     draw() {
-      const { px_per_block } = this.osd_store.getGeometry()
       const { width, height } = this.$refs.canvas
       const ctx = this.$refs.canvas.getContext('2d')
       ctx.imageSmoothingEnabled = false
       ctx.clearRect(0, 0, width, height)
-
-      ctx.beginPath()
-      for (let i = 0; i * px_per_block <= height; i++) {
-        ctx.moveTo(0, px_per_block * i)
-        ctx.lineTo(width, px_per_block * i)
-      }
-      for (let i = 0; i * px_per_block <= width; i++) {
-        ctx.moveTo(px_per_block * i, 0)
-        ctx.lineTo(px_per_block * i, height)
-      }
-      ctx.stroke()
     },
-    drag(event) {
-      this.osd_store.dragRoom(this.mode, this.room, event._drag.last_dxy)
+    resize(event) {
+      this._drag('resize', event)
+    },
+    move(event) {
+      this._drag('move', event)
+    },
+    _drag(mode, event) {
+      this.osd_store.dragRoom(mode, this.room, event._drag.last_dxy)
       this.$emit('debug', this.room.data.zone_bounds.map((i) => i.toFixed(1)).join(', '))
-      this.save()
+      this.$store.room2.bounceSave(this.room)
+      // this.draw()
     },
-    save: debounce(function() {
-      this.$store.room2.save(this.room)
-      this.draw()
-    }, 1000),
   },
 }
 </script>

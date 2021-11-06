@@ -6,8 +6,13 @@
   }
 }
 
-.dread-anchor {
-  @apply absolute cursor-pointer border border-white;
+.dread-screenshot {
+  @apply absolute cursor-pointer border border-white hidden;
+  .dread-stitcher.-tool-ss_trash &,
+  .dread-stitcher.-tool-ss_group &,
+  .dread-stitcher.-tool-ss_move & {
+    display: block;
+  }
   img {
     @apply hidden w-full;
   }
@@ -135,7 +140,7 @@
   .ur-toolbar .fa-object-group.-group-#{$number}:after, .dread-group__circle.-group-#{$number} {
     background: $color
   }
-  .dread-anchor.-group-#{$number} {
+  .dread-screenshot.-group-#{$number} {
     border-color: $color;
   }
 }
@@ -156,16 +161,22 @@
   width: 100%;
   &__wrapper {
     @apply absolute;
-    outline: 4px double pink;
+    outline: 2px solid pink;
     z-index: 2;
     &:hover {
-      outline: 8px double pink;
+      outline: 4px solid pink;
     }
   }
   &__resize {
-    @apply absolute;
-    top: 100%;
-    left: 100%;
+    @apply absolute bottom-0 right-0;
+  }
+  &__move {
+    @apply absolute top-0 left-0;
+  }
+  &__grid {
+    @apply absolute inset-0;
+    pointer-events: none;
+    image-rendering: pixelated;
   }
 }
 
@@ -194,3 +205,4 @@
     opacity: 0.25;
   }
 }
+

@@ -11,6 +11,8 @@
 </template>
 
 <script>
+const no_drag = ['ss_group', 'ss_trash']
+
 export default {
   props: {
     screenshot: Object,
@@ -24,7 +26,7 @@ export default {
   computed: {
     css() {
       const { group } = this.screenshot.data.zone
-      return [`dread-anchor -group-${group}`, { '-dragging': this.dragging }]
+      return [`dread-screenshot -group-${group}`, { '-dragging': this.dragging }]
     },
     style() {
       const { xy } = this.screenshot.data.zone
@@ -40,7 +42,7 @@ export default {
   methods: {
     dragstart() {
       const { selected_tool } = this.tool_storage.state
-      if (selected_tool === 'group') {
+      if (no_drag.includes(selected_tool)) {
         return
       }
       this.osd_store.setAllOpacity(1)
@@ -50,7 +52,7 @@ export default {
 
     drag(event) {
       const { selected_tool } = this.tool_storage.state
-      if (selected_tool === 'group') {
+      if (no_drag.includes(selected_tool)) {
         return
       }
       const [x, y] = event._drag.last_dxy
@@ -67,7 +69,7 @@ export default {
 
       // if the screenshot was not moved and the group tool is selected, toggle the group
       const { selected_tool, selected_variant } = this.tool_storage.state
-      if (selected_tool === 'group') {
+      if (selected_tool === 'ss_group') {
         if (!selected_variant || this.screenshot.data.zone.group === selected_variant) {
           this.osd_store.setGroup(this.screenshot, null)
         } else {
@@ -75,7 +77,7 @@ export default {
         }
       }
 
-      if (selected_tool === 'trash') {
+      if (selected_tool === 'ss_trash') {
         this.$store.screenshot.delete(this.screenshot)
       }
     },

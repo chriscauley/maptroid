@@ -48,7 +48,8 @@ export default (component) => {
     }
     const { xy, width } = screenshot.data.zone
     const url = screenshot.output
-    state._viewer.addSimpleImage({ url, x: xy[0], y: xy[1], width, opacity: 1 })
+    const index = state.screenshots.length
+    state._viewer.addSimpleImage({ url, x: xy[0], y: xy[1], width, opacity: 1, index })
     state.screenshots.push(screenshot)
     state.screenshot_count++
   }

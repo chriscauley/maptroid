@@ -1,6 +1,6 @@
 <template>
   <div class="app-body">
-    <div class="flex-grow" v-if="zone">
+    <div :class="css" v-if="zone">
       <unrest-toolbar :storage="tool_storage" class="-topleft">
         <template #buttons>
           <div class="btn -info" @click="managing_groups = true">
@@ -39,12 +39,6 @@
         :osd_store="osd_store"
       />
     </div>
-    <room-form
-      v-if="editing_room"
-      :room="editing_room"
-      @close="editing_room = null"
-      @refetch="refetchRooms"
-    />
     <div class="dread-debug">{{ debug }}</div>
   </div>
 </template>
@@ -55,7 +49,6 @@ import { startCase } from 'lodash'
 import DreadViewer from './Viewer.vue'
 import GroupManager from './GroupManager.vue'
 import RoomCanvas from './RoomCanvas.vue'
-import RoomForm from './RoomForm.vue'
 import ScreenshotOverlay from './ScreenshotOverlay.vue'
 import HtmlOverlay from '@/vue-openseadragon/HtmlOverlay.vue'
 import tool_storage from './tools'
@@ -75,12 +68,10 @@ export default {
     GroupManager,
     HtmlOverlay,
     RoomCanvas,
-    RoomForm,
     ScreenshotOverlay,
   },
   data() {
     return {
-      editing_room: null,
       tool_storage,
       managing_groups: false,
       debug: '',
@@ -88,6 +79,17 @@ export default {
     }
   },
   computed: {
+    css() {
+      const { selected_tool: _t, selected_variant: _v } = tool_storage.state
+      return `flex-grow dread-stitcher -tool-${_t} -variant-${_v}`
+    },
+    mode() {
+      const { selected_tool } = tool_storage.state
+      if (['ss_move', 'ss_group', 'ss_trash'].includes(selected_tool)) {
+        return 'screenshots'
+      }
+      return 'room'
+    },
     zone() {
       return this.$store.zone.getOne(this.$route.params.zone_id)
     },
@@ -115,13 +117,16 @@ export default {
     newRoom() {
       const { x, y } = this.osd_store.viewer.viewport.getCenter()
       const scale = (i) => Math.floor((i * 1280) / this.zone.data.screenshot.px_per_block)
-      this.editing_room = {
+      const room = {
         world: WORLD,
         zone: this.$route.params.zone_id,
         data: {
           zone_bounds: [scale(x), scale(y), 10, 10],
         },
       }
+      this.$store.room2.save(room).then(() => {
+        this.refetchRooms()
+      })
     },
   },
 }
