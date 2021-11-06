@@ -8,14 +8,19 @@ class World(models.Model):
   slug = models.CharField(max_length=128)
   __str__ = lambda self: self.name
 
+
 class Zone(models.Model):
   class Meta:
     ordering = ('name',)
   name = models.CharField(max_length=128)
   slug = models.CharField(max_length=128)
   world = models.ForeignKey(World, models.CASCADE)
-  data = models.JSONField(default=dict, blank=True)
+
+  default_data = lambda: { 'world': { 'xy': [0, 0] } }
+  data = models.JSONField(default=default_data, blank=True)
+
   __str__ = lambda self: self.name
+
 
 class Room(models.Model):
   world = models.ForeignKey(World, null=True, blank=True, on_delete=models.SET_NULL)
@@ -26,9 +31,11 @@ class Room(models.Model):
   data = models.JSONField(default=dict, blank=True)
   __str__ = lambda self: f'{self.name or "unnamed"} - ({self.key})'
 
+
 class Character(models.Model):
   letter = models.CharField(max_length=1, blank=True, default='')
   image = models.ImageField(upload_to="smile_characters")
+
 
 class Sprite(models.Model):
   """
@@ -43,8 +50,10 @@ class Sprite(models.Model):
   image = models.ImageField(upload_to="smile_sprites")
   type = models.CharField(max_length=16, choices=TYPES, default='unknown')
 
+
 class Entity(models.Model):
   TYPES = _choices(['item', 'environment', 'enemy', 'door', 'station', 'unknown'])
+
 
 class Screenshot(models.Model):
   world = models.ForeignKey(World, models.SET_NULL, null=True, blank=True)

@@ -83,7 +83,7 @@ export default {
       } else {
         const center = viewport.pixelFromPoint(viewport.getCenter(true))
         const target = viewport.pointFromPixel(
-          new Openseadragon.Point(center.x + 2 * event.deltaX, center.y + 2 * event.deltaY),
+          new Openseadragon.Point(center.x - 2 * event.deltaX, center.y + 2 * event.deltaY),
         )
         viewport.panTo(target, false)
       }

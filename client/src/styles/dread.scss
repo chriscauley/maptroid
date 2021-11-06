@@ -37,6 +37,10 @@
   background: white;
 }
 
+.dread-world-viewer {
+  background: #0c0b10;
+}
+
 @mixin checkered($c1, $c2, $s:16.5px) {
   background: repeating-conic-gradient($c1 0% 25%, $c2 0% 50%) 50% / #{$s} #{$s};
 }
@@ -168,4 +172,25 @@
 .dread-debug {
   @apply fixed bottom-0 left-0 p-2;
   background: rgba(0,0,0,0.5);
+}
+
+.zone-box {
+  @apply absolute opacity-0;
+  transform: translate(-50%, -50%);
+  &:hover {
+    opacity: 1;
+  }
+  .unrest-draggable {
+    @apply absolute bg-white cursor-pointer h-4 rounded-full w-4;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+  img {
+    width: 100%;
+  }
+  &.-dragging {
+    filter: invert(1);
+    opacity: 0.25;
+  }
 }

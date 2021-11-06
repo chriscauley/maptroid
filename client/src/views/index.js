@@ -1,4 +1,5 @@
 import Dread from './Dread/index.vue'
+import DreadWorld from './DreadWorld/index.vue'
 import Editor from './Editor/index.vue'
 import FileBrowser from './FileBrowser.vue'
 import Home from './Home.vue'
@@ -13,6 +14,7 @@ import WorldTiles from './WorldTiles/index.vue'
 
 export default {
   Dread,
+  DreadWorld,
   Editor,
   FileBrowser,
   Home,
