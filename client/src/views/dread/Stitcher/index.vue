@@ -113,11 +113,13 @@ export default {
       this.$store.room2.getPage(this.search_params)
     },
     newRoom() {
+      const { x, y } = this.osd_store.viewer.viewport.getCenter()
+      const scale = (i) => Math.floor((i * 1280) / this.zone.data.screenshot.px_per_block)
       this.editing_room = {
         world: WORLD,
         zone: this.$route.params.zone_id,
         data: {
-          zone_bounds: [0, 0, 10, 10],
+          zone_bounds: [scale(x), scale(y), 10, 10],
         },
       }
     },
