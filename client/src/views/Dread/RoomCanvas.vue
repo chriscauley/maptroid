@@ -1,5 +1,5 @@
 <template>
-  <div @drag="drag" class="room-canvas__wrapper" :style="wrapper_style">
+  <div class="room-canvas__wrapper" :style="wrapper_style">
     <canvas v-bind="canvasAttrs" @mousemove="mousemove" ref="canvas" />
     <unrest-draggable v-if="action_icon" class="room-canvas__resize" @drag="drag">
       <div class="btn -mini -primary">
@@ -73,8 +73,8 @@ export default {
       }
       ctx.stroke()
     },
-    drag({ last_dxy }) {
-      this.osd_store.dragRoom(this.mode, this.room, last_dxy)
+    drag(event) {
+      this.osd_store.dragRoom(this.mode, this.room, event._drag.last_dxy)
       this.$emit('debug', this.room.data.zone_bounds.map((i) => i.toFixed(1)).join(', '))
       this.save()
     },

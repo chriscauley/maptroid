@@ -48,12 +48,12 @@ export default {
       this.dragging = true
     },
 
-    drag(state, event) {
+    drag(event) {
       const { selected_tool } = this.tool_storage.state
       if (selected_tool === 'group') {
         return
       }
-      const [x, y] = state.last_dxy
+      const [x, y] = event._drag.last_dxy
       if (x || y) {
         const { group } = this.screenshot.data.zone
         const move_group = group && !event.shiftKey
