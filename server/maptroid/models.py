@@ -1,5 +1,8 @@
+from django.conf import settings
 from django.db import models
 from .dread import process_screenshot
+
+import os
 
 _choices = lambda l: zip(l,l)
 
@@ -12,6 +15,7 @@ class World(models.Model):
 class Zone(models.Model):
   class Meta:
     ordering = ('name',)
+  __str__ = lambda self: self.name
   name = models.CharField(max_length=128)
   slug = models.CharField(max_length=128)
   world = models.ForeignKey(World, models.CASCADE)
@@ -19,7 +23,8 @@ class Zone(models.Model):
   default_data = lambda: { 'world': { 'xy': [0, 0] } }
   data = models.JSONField(default=default_data, blank=True)
 
-  __str__ = lambda self: self.name
+  def get_image_path(self, ext='png'):
+    return os.path.join(settings.MEDIA_ROOT, f'dread_zones/{self.id}-{self.name}.{ext}')
 
 
 class Room(models.Model):

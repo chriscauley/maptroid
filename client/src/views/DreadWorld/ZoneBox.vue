@@ -20,7 +20,7 @@ export default {
     },
     draggable() {
       // TODO enable/disable based on toolbar
-      return false
+      return true
     },
     style() {
       if (!this.width) {

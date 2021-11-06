@@ -190,7 +190,7 @@
     width: 100%;
   }
   &.-dragging {
-    filter: invert(1);
+    filter: invert(1) contrast(2);
     opacity: 0.25;
   }
 }
