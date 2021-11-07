@@ -6,7 +6,7 @@ import os
 from PIL import Image
 from unrest import schema
 
-from .models import World, Room, Screenshot, Zone
+from .models import World, Room, Screenshot, Zone, Item
 
 @schema.register
 class WorldForm(forms.ModelForm):
@@ -51,3 +51,10 @@ class ZoneForm(forms.ModelForm):
   class Meta:
     model = Zone
     fields = ['name', 'slug', 'data']
+
+
+@schema.register
+class ItemForm(forms.ModelForm):
+  class Meta:
+    model = Item
+    fields = ['room', 'zone', 'data']

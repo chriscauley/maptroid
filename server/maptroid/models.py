@@ -12,6 +12,10 @@ class World(models.Model):
   __str__ = lambda self: self.name
 
 
+def default_data():
+  return { 'world': { 'xy': [0, 0] } }
+
+
 class Zone(models.Model):
   class Meta:
     ordering = ('name',)
@@ -20,7 +24,6 @@ class Zone(models.Model):
   slug = models.CharField(max_length=128)
   world = models.ForeignKey(World, models.CASCADE)
 
-  default_data = lambda: { 'world': { 'xy': [0, 0] } }
   data = models.JSONField(default=default_data, blank=True)
 
   def get_image_path(self, ext='png'):
@@ -28,7 +31,7 @@ class Zone(models.Model):
 
 
 class Room(models.Model):
-  world = models.ForeignKey(World, null=True, blank=True, on_delete=models.SET_NULL)
+  world = models.ForeignKey(World, models.SET_NULL, null=True, blank=True)
   zone = models.ForeignKey(Zone, models.SET_NULL, null=True, blank=True)
   name = models.CharField(max_length=128, null=True, blank=True)
   key = models.CharField(max_length=128, null=True, blank=True)
@@ -36,6 +39,11 @@ class Room(models.Model):
   data = models.JSONField(default=dict, blank=True)
   __str__ = lambda self: f'{self.name or "unnamed"} - ({self.key})'
 
+
+class Item(models.Model):
+  room = models.ForeignKey(Room, models.CASCADE)
+  zone = models.ForeignKey(Zone, models.SET_NULL, null=True, blank=True)
+  data = models.JSONField(default=dict, blank=True)
 
 class Character(models.Model):
   letter = models.CharField(max_length=1, blank=True, default='')
