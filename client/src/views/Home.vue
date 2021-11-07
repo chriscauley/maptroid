@@ -30,7 +30,7 @@ export default {
       return this.$store.zone.getPage({ query: { per_page: 500, world: 3 } })?.items || []
     },
     links() {
-      return ['/screenshot/analyzer']
+      return ['/screenshotupload/', '/dread/sprites/']
     },
   },
 }

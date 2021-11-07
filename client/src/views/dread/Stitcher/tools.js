@@ -1,4 +1,5 @@
 import { range } from 'lodash'
+import DreadItems from '@/models/DreadItems'
 
 import ToolStorage from '@/components/unrest/ToolStorage'
 
@@ -10,7 +11,21 @@ const tools = [
     getIcon: (_, variant) => `fa fa-object-group -group-${variant}`,
     variants: range(9),
   },
-  { slug: 'room', getIcon: () => 'fa fa-edit' },
+  { slug: 'room_bounds', getIcon: () => 'fa fa-edit' },
+  { slug: 'room_item_trash', getIcon: () => 'fa fa-trash' },
 ]
+
+Object.entries(DreadItems.type_map).forEach(([type_name, variants]) => {
+  if (['doors', 'blocks'].includes(type_name)) {
+    return
+  }
+  // TODO should be inside a component. Maybe tools needs an init function?
+  DreadItems.makeCss() // idempotent
+  tools.push({
+    slug: 'room_item',
+    variants,
+    getIcon: (i, v) => DreadItems.getClass(v),
+  })
+})
 
 export default ToolStorage('tools__dread', { tools })

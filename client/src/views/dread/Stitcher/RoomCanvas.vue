@@ -1,30 +1,42 @@
 <template>
   <div class="room-canvas__wrapper" :style="wrapper_style">
-    <canvas v-bind="canvasAttrs" @mousemove="mousemove" ref="canvas" />
-    <div class="room-canvas__grid" :style="grid_style" />
-    <template v-if="mode">
+    <unrest-draggable @dragend="dragend">
+      <canvas v-bind="canvasAttrs" ref="canvas" />
+    </unrest-draggable>
+    <template v-if="tool.selected === 'room_bounds'">
       <unrest-draggable class="room-canvas__resize btn -mini -primary" @drag="resize">
         <i class="fa fa-arrows-alt" />
       </unrest-draggable>
+      <div class="room-canvas__delete btn -mini -danger" @click="$emit('delete', room)">
+        <i class="fa fa-trash" />
+      </div>
       <unrest-draggable class="room-canvas__move btn -mini -primary" @drag="move">
         <i class="fa fa-arrows" />
       </unrest-draggable>
     </template>
+    <i v-for="item in items" v-bind="item.attrs" :key="item.id" @click="clickItem(item)" />
   </div>
 </template>
 
 <script>
+import DreadItems from '@/models/DreadItems'
+
 const grids = {}
 
 export default {
   props: {
     osd_store: Object,
     room: Object,
-    mode: String,
+    tool_storage: Object,
+    zone_items: Array,
   },
-  emits: ['debug'],
+  emits: ['debug', 'delete', 'add-item', 'delete-item'],
   computed: {
-    grid_style() {
+    tool() {
+      const { selected_tool, selected_variant } = this.tool_storage.state
+      return { selected: selected_tool, variant: selected_variant }
+    },
+    wrapper_style() {
       const { px_per_block } = this.osd_store.getGeometry()
       const size = Math.floor(px_per_block)
       if (!grids[size]) {
@@ -37,20 +49,15 @@ export default {
         ctx.fill()
         grids[size] = `url(${canvas.toDataURL()})`
       }
-      const width = this.room.data.zone_bounds[2]
-      return {
-        backgroundImage: grids[size],
-        backgroundSize: `${100 / width}% auto`,
-      }
-    },
-    wrapper_style() {
       const [x, y, width, height] = this.room.data.zone_bounds
       return {
         height: this.osd_store.scaleBlock(height),
         left: this.osd_store.scaleBlock(x),
         top: this.osd_store.scaleBlock(y),
         width: this.osd_store.scaleBlock(width),
-        pointerEvents: this.mode ? '' : 'none',
+        pointerEvents: this.tool.selected.startsWith('room') ? '' : 'none',
+        backgroundImage: grids[size],
+        backgroundSize: `${100 / width}% auto`,
       }
     },
     canvasAttrs() {
@@ -63,14 +70,62 @@ export default {
         id: `room-canvas__${this.room.id}`,
       }
     },
+    items() {
+      return this.zone_items
+        .filter((i) => i.room === this.room.id)
+        .map((item) => {
+          const { type, bounds } = item.data
+          const [x, y, w, h] = bounds
+          const [_x, _y, W, H] = this.room.data.zone_bounds
+          return {
+            id: item.id,
+            attrs: {
+              id: `zone-item__${item.id}`,
+              class: DreadItems.getClass(type),
+              style: {
+                position: 'absolute',
+                left: `${(100 * x) / W}%`,
+                top: `${(100 * y) / H}%`,
+                width: `${(100 * w) / W}%`,
+                height: `${(100 * h) / H}%`,
+              },
+            },
+          }
+        })
+    },
   },
   mounted() {
     this.draw()
   },
   methods: {
-    mousemove() {
-      // const box = this.$el.getBoundingClientRect()
-      // const px_per_block = box.width / this.room.data.zone_bounds[2]
+    getGrid(xy) {
+      const box = this.$el.getBoundingClientRect()
+      const px_per_block = box.width / this.room.data.zone_bounds[2]
+      const pixels_x = xy[0] - box.x
+      const pixels_y = xy[1] - box.y
+      return [Math.floor(pixels_x / px_per_block), Math.floor(pixels_y / px_per_block)]
+    },
+    clickItem(item) {
+      if (this.tool.selected === 'room_item_trash') {
+        this.$emit('delete-item', item)
+      }
+    },
+    dragend(event) {
+      if (this.tool.selected === 'room_item') {
+        const { xy, xy_start } = event._drag
+        const [x0, y0] = this.getGrid(xy_start)
+        const [x1, y1] = this.getGrid(xy)
+        const bounds = [
+          Math.min(x0, x1),
+          Math.min(y0, y1),
+          1 + Math.abs(x1 - x0),
+          1 + Math.abs(y1 - y0),
+        ]
+        this.$emit('add-item', {
+          room: this.room.id,
+          data: { type: this.tool.variant, bounds },
+        })
+      }
     },
     draw() {
       const { width, height } = this.$refs.canvas

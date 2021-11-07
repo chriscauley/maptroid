@@ -2,6 +2,7 @@ import unrest from '@unrest/vue'
 
 import admin_options from './admin'
 import item from './item'
+import item2 from './item2'
 import osd from './osd'
 import playthrough from './playthrough'
 import room from './room'
@@ -16,7 +17,19 @@ import _migrations from './migrations'
 
 const store = {}
 
-const modules = { item, osd, playthrough, room, room2, screenshot, viewer, world, world2, zone }
+const modules = {
+  item,
+  item2,
+  osd,
+  playthrough,
+  room,
+  room2,
+  screenshot,
+  viewer,
+  world,
+  world2,
+  zone,
+}
 const admin_modules = ['item', 'playthrough', 'room', 'world']
 
 Object.entries(modules).forEach(([name, module]) => {

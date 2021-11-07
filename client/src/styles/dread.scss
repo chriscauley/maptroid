@@ -178,6 +178,9 @@
     pointer-events: none;
     image-rendering: pixelated;
   }
+  &__delete {
+    @apply absolute right-0 top-0;
+  }
 }
 
 .dread-debug {
@@ -206,3 +209,22 @@
   }
 }
 
+.dread-icon {
+  @apply block;
+  background-size: cover;
+  background-repeat: no-repeat;
+  width: 1em;
+  height: 1em;
+  &.-type-door {
+    height: 4em;
+  }
+  &.-type-door__shutter-platform {
+    width: 6em;
+    height: 1em;
+  }
+}
+
+.ur-toolbar .dread-icon {
+  font-size: 24px;
+  margin: -4px;
+}

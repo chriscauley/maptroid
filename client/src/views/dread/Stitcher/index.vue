@@ -27,9 +27,13 @@
             v-for="room in rooms"
             :key="room.id"
             :room="room"
-            :mode="room_mode"
+            :tool_storage="tool_storage"
             :osd_store="osd_store"
             @debug="setDebug"
+            @delete="deleteRoom"
+            @delete-item="deleteItem"
+            @add-item="addItem"
+            :zone_items="zone_items"
           />
         </html-overlay>
       </template>
@@ -93,14 +97,13 @@ export default {
     zone() {
       return this.$store.zone.getOne(this.$route.params.zone_id)
     },
-    room_mode() {
-      const { selected_tool, selected_variant } = tool_storage.state
-      return selected_tool === 'room' ? selected_variant : undefined
+    zone_items() {
+      return this.$store.item2.getPage(this.search_params)?.items || []
     },
     search_params() {
       // screenshots and zones search on same values
       const { zone_id } = this.$route.params
-      return { query: { world: WORLD, zone: zone_id, per_page: 5000 } }
+      return { query: { zone: zone_id, per_page: 5000 } }
     },
     rooms() {
       return this.$store.room2.getPage(this.search_params)?.items
@@ -110,9 +113,19 @@ export default {
     setDebug(value) {
       this.debug = value
     },
+    refetchItems() {
+      this.$store.item2.api.markStale()
+      this.$store.item2.getPage(this.search_params)
+    },
     refetchRooms() {
       this.$store.room2.api.markStale()
       this.$store.room2.getPage(this.search_params)
+    },
+    deleteRoom(room) {
+      this.$store.room2.delete(room).then(this.refetchRooms)
+    },
+    deleteItem(item) {
+      this.$store.item2.delete(item).then(this.refetchItems)
     },
     newRoom() {
       const { x, y } = this.osd_store.viewer.viewport.getCenter()
@@ -124,9 +137,11 @@ export default {
           zone_bounds: [scale(x), scale(y), 10, 10],
         },
       }
-      this.$store.room2.save(room).then(() => {
-        this.refetchRooms()
-      })
+      this.$store.room2.save(room).then(this.refetchRooms)
+    },
+    addItem(item) {
+      item.zone = this.zone.id
+      this.$store.item2.save(item).then(this.refetchItems)
     },
   },
 }

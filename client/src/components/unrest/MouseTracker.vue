@@ -28,18 +28,15 @@ export default {
       }
     },
     prepped_items() {
-      return this.items.map((item) => {
-        const style = {
+      return this.items.map((item) => ({
+        style: {
           left: item.xy[0] * this.grid_size + 'px',
           top: item.xy[1] * this.grid_size + 'px',
           width: (item.width || 1) * this.grid_size + 'px',
           height: (item.height || 1) * this.grid_size + 'px',
-        }
-        return {
-          style,
-          class: ['unrest-mouse-tracker__item', item.class],
-        }
-      })
+        },
+        class: ['unrest-mouse-tracker__item', item.class],
+      }))
     },
     height() {
       return Math.max(this.rect.height / this.grid_size)
