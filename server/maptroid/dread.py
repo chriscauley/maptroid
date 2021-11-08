@@ -4,7 +4,33 @@ import numpy as np
 import os
 import re
 
+STATIC_DIR = os.path.join(settings.BASE_DIR, '../static')
 PX_PER_GRID = 16.5
+cache = {}
+
+def open_as_rgba(path):
+    return cv2.cvtColor(cv2.imread(path), cv2.COLOR_RGB2RGBA)
+
+def get_templates():
+    if 'xy_templates' not in cache:
+        # I pulled these edges from a screenshot
+        x_template = open_as_rgba(os.path.join(STATIC_DIR, 'x_template.png'))
+        y_template = open_as_rgba(os.path.join(STATIC_DIR, 'y_template.png'))
+        cache['xy_templates'] = x_template, y_template
+        print('cached templates')
+    return cache['xy_templates']
+
+def get_threshold():
+    if 'threshold' not in cache:
+        mask = open_as_rgba(os.path.join(STATIC_DIR, 'dread/mask.png'))
+        ret, threshold = cv2.threshold(mask, 0, 255, cv2.THRESH_BINARY)
+        for row in threshold:
+            for pixel in row:
+                if pixel [0] == 0:
+                    pixel[3] = 0
+        cache['threshold'] = threshold
+        print('cached threshold')
+    return cache['threshold']
 
 def mkdir(root, *args):
     parts = os.path.join(*args).strip('/').split('/')
@@ -24,7 +50,6 @@ def process_screenshot(screenshot):
     source_dir, fname = source_path.rsplit('/', 1)
     final_dir = mkdir(source_dir, 'output')
     final_path = os.path.join(final_dir, re.sub(r'.jpe?g$', '.png', fname))
-    xywh = (0, 140, 1280, 570)
 
     # Make temp dir(s) as needed
     TEMP_DIR = mkdir(settings.MEDIA_ROOT, 'temp', fname)
@@ -32,12 +57,14 @@ def process_screenshot(screenshot):
     def show(filename, img):
         cv2.imwrite(os.path.join(TEMP_DIR, filename+'.png'), img)
 
-    # I pulled these edges from a screenshot
-    x_template = cv2.imread(os.path.join(settings.BASE_DIR, '../static/x_template.png'))
-    y_template = cv2.imread(os.path.join(settings.BASE_DIR, '../static/y_template.png'))
+    x_template, y_template = get_templates()
 
     #load image into variable
-    img_rgb = cv2.imread(source_path)[150:570, 0:1280]
+    img_rgb = open_as_rgba(source_path)
+    threshold = get_threshold()
+    img_rgb[threshold==0] = 0
+    img_rgb = img_rgb[150:570, 0:1280]
+    show('masked', img_rgb)
 
     def locate(source_img, template_img, output_name=None):
         w, h = template_img.shape[0], template_img.shape[1]
@@ -71,7 +98,6 @@ def process_screenshot(screenshot):
     # shifting logic from https://stackoverflow.com/questions/19068085/shift-image-content-with-opencv
     def shift(img_rgb, xy_shift, output_name=None):
         shifted = img_rgb.copy()
-        shifted = cv2.cvtColor(shifted, cv2.COLOR_RGB2RGBA)
         for i in range(shifted.shape[1] -1, shifted.shape[1] - xy_shift[0], -1):
             shifted = np.roll(shifted, -1, axis=1)
             shifted[:, -1] = 0
