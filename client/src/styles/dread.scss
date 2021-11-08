@@ -210,21 +210,34 @@
 }
 
 .dread-icon {
-  @apply block;
-  background-size: cover;
-  background-repeat: no-repeat;
+  @apply block relative;
   width: 1em;
   height: 1em;
-  &.-type-door {
-    height: 4em;
+  &:before {
+    @apply absolute block inset-0;
+    content: "";
+    background-size: cover;
+    background-repeat: no-repeat;
+    filter: brightness(1.25) contrast(1.25);
   }
-  &.-type-door__shutter-platform {
-    width: 6em;
-    height: 1em;
+  &.-type-block__void:before {
+    background: repeating-conic-gradient(red 0% 25%, black 0% 50%) 50% / 25px 25px !important;
+  }
+  &.-type-transit__transport-capsule:before {
+    background: repeating-conic-gradient(purple 0% 25%, black 0% 50%) 50% / 25px 25px !important;
+  }
+  &:hover {
+    opacity: 0;
+    transition: 0.5s;
   }
 }
 
 .ur-toolbar .dread-icon {
   font-size: 24px;
   margin: -4px;
+}
+
+.room-canvas__wrapper .dread-icon:before {
+  outline: white solid 2px;
+  inset: -10%;
 }

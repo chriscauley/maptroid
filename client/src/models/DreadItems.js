@@ -8,6 +8,9 @@ const items = [
   'item__cube',
   'boss',
   'central-unit',
+  'grapple-swing-point',
+  'morphball-launcher-exit',
+  'morphball-launcher',
 ]
 
 const stations = [
@@ -23,6 +26,7 @@ const stations = [
 const transit = [
   'transit__elevator',
   'transit__shuttle',
+  'transit__transport-capsule',
   'teleportal__green',
   'teleportal__orange',
   'teleportal__red',
@@ -33,15 +37,20 @@ const transit = [
 ]
 
 const blocks = [
+  'block__void',
   'block__grapple-beam',
   'box__enky',
   'box__storm-missile',
   'box__wide-beam',
   'cover__plasma-beam',
   'cover__missile',
+  'cover__super-missile',
+  'cover__wave-beam',
+  'box__grapple-beam',
 ]
 
 const doors = [
+  'door__central-unit',
   'door__grapple-beam',
   'door__emmi-zone',
   'door__charge-beam',
@@ -51,6 +60,7 @@ const doors = [
   'door__shutter-platform',
   'door__thermal',
   'door__thermal-trapdoor',
+  'door__closed-thermal',
   'door__wide-beam',
   'door__access-closed',
 ]
@@ -64,13 +74,14 @@ const makeCss = () => {
   }
   const head = document.head || document.getElementsByTagName('head')[0]
   const style = document.createElement('style')
+  style.id = id
 
   head.appendChild(style)
 
   const css = all
     .map((slug) => {
       const url = `/static/dread/icons/${slug.replace('__', '/')}.png`
-      return `.dread-icon.-type-${slug} { background-image: url("${url}") }`
+      return `.dread-icon.-type-${slug}:before { background-image: url("${url}") }`
     })
     .join('\n')
   style.type = 'text/css'

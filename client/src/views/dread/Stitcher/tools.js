@@ -15,11 +15,8 @@ const tools = [
   { slug: 'room_item_trash', getIcon: () => 'fa fa-trash' },
 ]
 
-Object.entries(DreadItems.type_map).forEach(([type_name, variants]) => {
-  if (['doors', 'blocks'].includes(type_name)) {
-    return
-  }
-  // TODO should be inside a component. Maybe tools needs an init function?
+Object.entries(DreadItems.type_map).forEach(([_name, variants]) => {
+  // TODO makeCss should be inside a component. Maybe tools needs an init function?
   DreadItems.makeCss() // idempotent
   tools.push({
     slug: 'room_item',
