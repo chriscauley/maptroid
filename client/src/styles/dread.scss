@@ -232,9 +232,17 @@
   }
 }
 
-.ur-toolbar .dread-icon {
-  font-size: 24px;
-  margin: -4px;
+.ur-toolbar {
+  .dread-icon, .room-color {
+    font-size: 24px;
+    margin: -4px;
+  }
+}
+
+.ur-toolbar .room-color {
+  width: 1em;
+  height: 1em;
+  background: var(--dread-color);
 }
 
 .room-canvas__wrapper .dread-icon:before {

@@ -1,6 +1,6 @@
 <template>
   <div class="room-canvas__wrapper" :style="wrapper_style">
-    <unrest-draggable @dragend="dragend">
+    <unrest-draggable @dragend="dragend" @drag="drag">
       <canvas v-bind="canvasAttrs" ref="canvas" />
     </unrest-draggable>
     <template v-if="tool.selected === 'room_bounds'">
@@ -15,6 +15,7 @@
       </unrest-draggable>
     </template>
     <i v-for="item in items" v-bind="item.attrs" :key="item.id" @click="clickItem(item)" />
+    <div v-for="(style, i) in drawn_colors" :style="style" :key="i" @click="clickColor(i)" />
   </div>
 </template>
 
@@ -31,6 +32,9 @@ export default {
     zone_items: Array,
   },
   emits: ['debug', 'delete', 'add-item', 'delete-item'],
+  data() {
+    return { drawing: null }
+  },
   computed: {
     tool() {
       const { selected_tool, selected_variant } = this.tool_storage.state
@@ -60,6 +64,25 @@ export default {
         backgroundSize: `${100 / width}% auto`,
       }
     },
+    drawn_colors() {
+      const colors = (this.room.data.colors || []).slice()
+      if (this.drawing) {
+        colors.push({ color: this.tool.variant, bounds: this.drawing, draft: true })
+      }
+      const [_x, _y, W, H] = this.room.data.zone_bounds
+      return colors.map((color) => {
+        const [x, y, w, h] = color.bounds
+        return {
+          position: 'absolute',
+          left: `${(100 * x) / W}%`,
+          top: `${(100 * y) / H}%`,
+          width: `${(100 * w) / W}%`,
+          height: `${(100 * h) / H}%`,
+          border: color.draft && '3px solid white',
+          backgroundColor: DreadItems.colors[color.color],
+        }
+      })
+    },
     canvasAttrs() {
       const { px_per_block } = this.osd_store.getGeometry()
       const [_x, _y, width, height] = this.room.data.zone_bounds
@@ -71,12 +94,12 @@ export default {
       }
     },
     items() {
+      const [_x, _y, W, H] = this.room.data.zone_bounds
       return this.zone_items
         .filter((i) => i.room === this.room.id)
         .map((item) => {
           const { type, bounds } = item.data
           const [x, y, w, h] = bounds
-          const [_x, _y, W, H] = this.room.data.zone_bounds
           return {
             id: item.id,
             attrs: {
@@ -110,6 +133,18 @@ export default {
         this.$emit('delete-item', item)
       }
     },
+    drag(event) {
+      if (this.tool.selected === 'room_colors' && this.tool.variant !== 'TRASH') {
+        const [x1, y1] = this.getGrid(event._drag.xy_start)
+        const [x2, y2] = this.getGrid(event._drag.xy)
+        this.drawing = [
+          Math.min(x1, x2),
+          Math.min(y1, y2),
+          Math.abs(x1 - x2) + 1,
+          Math.abs(y1 - y2) + 1,
+        ]
+      }
+    },
     dragend(event) {
       if (this.tool.selected === 'room_item') {
         const { xy, xy_start } = event._drag
@@ -125,6 +160,14 @@ export default {
           room: this.room.id,
           data: { type: this.tool.variant, bounds },
         })
+      } else if (this.tool.selected === 'room_colors' && this.tool.variant !== 'TRASH') {
+        const colors = this.room.data.colors || []
+        colors.push({
+          color: this.tool.variant,
+          bounds: this.drawing,
+        })
+        this.setColors(colors)
+        this.drawing = null
       }
     },
     draw() {
@@ -144,6 +187,15 @@ export default {
       this.$emit('debug', this.room.data.zone_bounds.map((i) => i.toFixed(1)).join(', '))
       this.$store.room2.bounceSave(this.room)
       // this.draw()
+    },
+    clickColor(index) {
+      if (this.tool.variant === 'TRASH') {
+        this.setColors(this.room.data.colors.filter((_, i) => i !== index))
+      }
+    },
+    setColors(colors) {
+      this.room.data.colors = colors // eslint-disable-line vue/no-mutating-props
+      this.$store.room2.save(this.room)
     },
   },
 }
