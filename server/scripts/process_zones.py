@@ -8,9 +8,12 @@ from maptroid.views import process
 import os
 import sys
 
-if len(sys.argv) == 2 and sys.argv[1].isdigit():
-    zone_id = sys.argv[1]
-if (not len(sys.argv) > 1):
+zone_id = None
+for arg in sys.argv:
+    if arg.isdigit():
+        zone_id = int(arg)
+
+if not zone_id:
     zones = Zone.objects.filter(world=3)
     for zone in zones:
         print(zone.id, '-', zone.name, os.path.exists(zone.get_image_path('dzi')))
