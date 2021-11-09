@@ -6,7 +6,7 @@
         <td>{{ zone.id }}</td>
         <td>{{ zone.name }}</td>
         <td>
-          <router-link class="link" :to="`/dread-stitcher/${zone.id}/${zone.slug}/`">
+          <router-link class="link" :to="`/dread-stitcher/${zone.slug}/`">
             Stitcher
           </router-link>
         </td>

@@ -36,6 +36,7 @@ export default {
         height: `${(100 * height) / width}%`,
         top: `${100 * xy[1]}%`,
         left: `${100 * xy[0]}%`,
+        zIndex: 100 + (this.screenshot.zIndex || 0),
       }
     },
   },
@@ -63,7 +64,7 @@ export default {
       }
     },
 
-    dragend() {
+    dragend(event) {
       this.dragging = false
       this.osd_store.setAllOpacity(1)
 
@@ -79,6 +80,10 @@ export default {
 
       if (selected_tool === 'ss_trash') {
         this.$store.screenshot.delete(this.screenshot)
+      }
+
+      if (event.ctrlKey) {
+        this.osd_store.sendScreenshotToBottom(this.screenshot)
       }
     },
   },

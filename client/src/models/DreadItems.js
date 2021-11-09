@@ -1,3 +1,5 @@
+import colors from '@/lib/dread_colors'
+
 const items = [
   'missile__tank',
   'missile__plus-tank',
@@ -66,40 +68,6 @@ const doors = [
 ]
 
 const all = [...items, ...stations, ...transit, ...blocks, ...doors]
-
-const colors = {
-  TRASH: 'red',
-
-  room: '#557085',
-  room_unexplored: '#2e3e4d',
-  room_box: '#082938',
-
-  transit: '#a68bea',
-  transit_box: '#493f64',
-  transit_unexplored: '#705e98',
-
-  save: '#f7d804',
-  save_box: '#61580d',
-  save_unexplored: '#948511',
-
-  emmi: '#609868',
-  emmi_box: '#1f3429',
-  emmi_unexplored: '#375740',
-
-  hot: '#d2493f',
-  hot_unexplored: '#6b3640',
-
-  lava: '#eb8308',
-  lava_unexplored: '#eb8308',
-
-  water: '#46a9a9',
-  water_unexplored: '#255e62',
-
-  cold: '#eb8308',
-  cold_unexplored: '#eb8308',
-
-  void: '#081f2d',
-}
 
 const makeCss = () => {
   const id = 'dread-items-css'

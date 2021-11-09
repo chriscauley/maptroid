@@ -21,8 +21,9 @@ export default {
   },
   computed: {
     osd_options() {
+      const editing = !!this.$route.query.mode
       return {
-        maxZoomPixelRatio: 8,
+        maxZoomPixelRatio: editing ? 8 : 4,
         showNavigator: true,
         showZoomControl: false,
         showHomeControl: false,
@@ -30,6 +31,7 @@ export default {
         showRotationControl: false,
         debugmode: false,
         clickTimeThreshold: 1000,
+        visibilityRatio: editing ? 0.25 : 1,
         mouseNavEnabled: false,
         gestureSettingsMouse: {
           clickToZoom: false,
@@ -39,36 +41,40 @@ export default {
     },
     search_params() {
       // screenshots and zones search on same values
-      const { zone_id } = this.$route.params
-      return { query: { world: WORLD, zone: zone_id, per_page: 5000 } }
+      return { query: { world: WORLD, zone: this.zone.id, per_page: 5000 } }
     },
   },
   async mounted() {
-    window.$store = this.$store
-    let { items } = await this.$store.screenshot.fetchPage(this.search_params)
-    const { limit, sort_from, show_all = false } = this.$route.query
+    if (this.$route.query.mode === 'screenshots') {
+      let { items } = await this.$store.screenshot.fetchPage(this.search_params)
+      const { limit, sort_from, show_all = false } = this.$route.query
 
-    // Because of the top gradient in the Dread map viewer, we need ot put down bottommost pieces first
-    // sort from bottom to put top most pieces on top
-    items = sortBy(items, 'data.zone.xy.1')
-    // items = sortBy(items, 'data.zone.group')
-    items.reverse()
+      // Because of the top gradient in the Dread map viewer, we need ot put down bottommost pieces first
+      // sort from bottom to put top most pieces on top
+      items = sortBy(items, 'data.zone.xy.1')
+      // items = sortBy(items, 'data.zone.group')
+      items.reverse()
 
-    if (!show_all) {
-      items = items.filter((i) => i.data.zone?.group !== 8)
-    }
-    if (limit && sort_from) {
-      let limited = []
-      const rest = []
-      items.forEach((i) => (i.data.zone?.group === 1 ? limited : rest).push(i))
-      const sort_index = ['right', 'left'].includes(sort_from) ? 0 : 1
-      limited = sortBy(limited, `data.zone.xy.${sort_index}`)
-      if (['bottom', 'right'].includes(sort_from)) {
-        limited.reverse()
+      if (!show_all) {
+        items = items.filter((i) => i.data.zone?.group !== 8)
       }
-      items = limited.slice(0, parseInt(limit)).concat(rest)
+      if (limit && sort_from) {
+        let limited = []
+        const rest = []
+        items.forEach((i) => (i.data.zone?.group === 1 ? limited : rest).push(i))
+        const sort_index = ['right', 'left'].includes(sort_from) ? 0 : 1
+        limited = sortBy(limited, `data.zone.xy.${sort_index}`)
+        if (['bottom', 'right'].includes(sort_from)) {
+          limited.reverse()
+        }
+        items = limited.slice(0, parseInt(limit)).concat(rest)
+      }
+      this.osd_store.addScreenshots(items)
+    } else {
+      const { min_x: x, min_y: y, width } = this.zone.data.output.ratio_bounds
+      const tileSource = this.zone.data.output.dzi
+      this.osd_store.viewer.addTiledImage({ tileSource, width, x, y })
     }
-    this.osd_store.addScreenshots(items)
   },
   methods: {
     osdWheel(event) {
@@ -83,7 +89,7 @@ export default {
       } else {
         const center = viewport.pixelFromPoint(viewport.getCenter(true))
         const target = viewport.pointFromPixel(
-          new Openseadragon.Point(center.x - 2 * event.deltaX, center.y + 2 * event.deltaY),
+          new Openseadragon.Point(center.x + 2 * event.deltaX, center.y + 2 * event.deltaY),
         )
         viewport.panTo(target, false)
       }

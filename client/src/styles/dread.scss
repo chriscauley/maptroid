@@ -1,3 +1,7 @@
+:root {
+  --dread-void: #021118;
+}
+
 .panel-screenshot {
   @apply relative;
   &__buttons {
@@ -31,6 +35,25 @@
   }
 }
 
+.dread-stitcher {
+  &.-mode-undefined {
+    .room-canvas__wrapper {
+      outline: 0;
+      background: none !important
+    }
+    .dread-viewer {
+      background: var(--dread-void);
+    }
+  }
+  &.-tool-room_colors .room-canvas__wrapper {
+    outline: 0;
+    background: none !important
+  }
+  &.-mode-screenshots .dread-icon {
+    display: none;
+  }
+}
+
 .__debug {
   @apply absolute bottom-0 flex left-0;
   .w-48 {
@@ -43,7 +66,7 @@
 }
 
 .dread-world-viewer {
-  background: #0c0b10;
+  background: var(--dread-void);
 }
 
 @mixin checkered($c1, $c2, $s:16.5px) {
@@ -222,9 +245,6 @@
   }
   &.-type-block__void:before {
     background: repeating-conic-gradient(red 0% 25%, black 0% 50%) 50% / 25px 25px !important;
-  }
-  &.-type-transit__transport-capsule:before {
-    background: repeating-conic-gradient(purple 0% 25%, black 0% 50%) 50% / 25px 25px !important;
   }
   &:hover {
     opacity: 0;

@@ -42,7 +42,7 @@ export default (component) => {
     if (screenshot.data.zone === undefined) {
       // viewer.world.getItemCount() doesn't update until end of thread so we need to count our own
       const x = 3 + _roundDreadPixel(state.new_count % 8)
-      const y = _roundDreadPixel(0.35 * Math.floor(state.new_count / 8))
+      const y = 3 - _roundDreadPixel(0.35 * Math.floor(state.new_count / 8))
       screenshot.data.zone = { raw_xy: [x, y], width: 1, xy: [x, y], group: 7 }
       state.new_count++
     }
@@ -140,11 +140,19 @@ export default (component) => {
     $store.screenshot.bounceSave(screenshot)
   }
 
+  let bottom = -1
+  const sendScreenshotToBottom = (screenshot) => {
+    const osd_item = state._viewer.world._items.find((i) => screenshot.output === i.source.url)
+    state._viewer.world.setItemIndex(osd_item, bottom--)
+    screenshot.zIndex = bottom
+  }
+
   Object.assign(osd_store, {
     getGeometry,
     addScreenshots,
     dragRoom,
     moveScreenshot,
+    sendScreenshotToBottom,
     setOpacity,
     setAllOpacity,
     scaleBlock,

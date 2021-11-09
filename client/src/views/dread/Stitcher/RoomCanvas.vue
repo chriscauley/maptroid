@@ -14,8 +14,18 @@
         <i class="fa fa-arrows" />
       </unrest-draggable>
     </template>
-    <i v-for="item in items" v-bind="item.attrs" :key="item.id" @click="clickItem(item)" />
-    <div v-for="(style, i) in drawn_colors" :style="style" :key="i" @click="clickColor(i)" />
+    <i
+      v-for="item in items"
+      v-bind="item.attrs"
+      :key="item.id"
+      @click="(e) => clickItem(e, item)"
+    />
+    <div
+      v-for="(style, i) in drawn_colors"
+      :style="style"
+      :key="i"
+      @click="(e) => clickColor(e, i)"
+    />
   </div>
 </template>
 
@@ -65,12 +75,21 @@ export default {
       }
     },
     drawn_colors() {
+      if (this.$route.query.mode !== 'room') {
+        return []
+      }
       const colors = (this.room.data.colors || []).slice()
       if (this.drawing) {
         colors.push({ color: this.tool.variant, bounds: this.drawing, draft: true })
       }
       const [_x, _y, W, H] = this.room.data.zone_bounds
-      return colors.map((color) => {
+      return colors.map((color, _index) => {
+        // if (!color.bounds) {
+        //   // TODO occasionally data becomes corrupted and this deletes it
+        //   this.clickColor({shiftKey: true }, _index)
+        //   console.log('deleting', _index)
+        //   return {}
+        // }
         const [x, y, w, h] = color.bounds
         return {
           position: 'absolute',
@@ -121,27 +140,34 @@ export default {
     this.draw()
   },
   methods: {
-    getGrid(xy) {
+    getGrid(xy, half) {
       const box = this.$el.getBoundingClientRect()
       const px_per_block = box.width / this.room.data.zone_bounds[2]
       const pixels_x = xy[0] - box.x
       const pixels_y = xy[1] - box.y
+      if (half) {
+        return [
+          Math.floor((2 * pixels_x) / px_per_block) / 2,
+          Math.floor((2 * pixels_y) / px_per_block) / 2,
+        ]
+      }
       return [Math.floor(pixels_x / px_per_block), Math.floor(pixels_y / px_per_block)]
     },
-    clickItem(item) {
-      if (this.tool.selected === 'room_item_trash') {
+    clickItem(event, item) {
+      if (event.shiftKey || this.tool.selected === 'room_item_trash') {
         this.$emit('delete-item', item)
       }
     },
     drag(event) {
-      if (this.tool.selected === 'room_colors' && this.tool.variant !== 'TRASH') {
-        const [x1, y1] = this.getGrid(event._drag.xy_start)
-        const [x2, y2] = this.getGrid(event._drag.xy)
+      const is_trash = this.tool.variant === 'TRASH' || event.shiftKey
+      if (this.tool.selected === 'room_colors' && !is_trash) {
+        const [x1, y1] = this.getGrid(event._drag.xy_start, true)
+        const [x2, y2] = this.getGrid(event._drag.xy, true)
         this.drawing = [
           Math.min(x1, x2),
           Math.min(y1, y2),
-          Math.abs(x1 - x2) + 1,
-          Math.abs(y1 - y2) + 1,
+          Math.abs(x1 - x2) + 0.5,
+          Math.abs(y1 - y2) + 0.5,
         ]
       }
     },
@@ -188,12 +214,14 @@ export default {
       this.$store.room2.bounceSave(this.room)
       // this.draw()
     },
-    clickColor(index) {
-      if (this.tool.variant === 'TRASH') {
+    clickColor(event, index) {
+      if (event.shiftKey || this.tool.variant === 'TRASH') {
         this.setColors(this.room.data.colors.filter((_, i) => i !== index))
       }
     },
     setColors(colors) {
+      // TODO somehow when deleting colors, corrupted data can be added.
+      colors = colors.filter((c) => c.bounds)
       this.room.data.colors = colors // eslint-disable-line vue/no-mutating-props
       this.$store.room2.save(this.room)
     },
