@@ -50,6 +50,17 @@
       />
     </div>
     <div v-if="debug" class="dread-debug">{{ debug }}</div>
+    <unrest-admin-popup>
+      Woot
+      <template #buttons>
+        <router-link to="?mode=screenshots" class="btn btn-primary">
+          <i class="fa fa-picture-o" />
+        </router-link>
+        <router-link to="?mode=room" class="btn btn-primary">
+          <i class="fa fa-edit" />
+        </router-link>
+      </template>
+    </unrest-admin-popup>
   </div>
 </template>
 

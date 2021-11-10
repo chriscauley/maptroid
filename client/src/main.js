@@ -3,6 +3,7 @@ import App from './App.vue'
 import OpenSeadragon from './OpenSeadragon.vue'
 import UnrestMouseTracker from '@/components/unrest/MouseTracker.vue'
 import UnrestToolbar from '@/components/unrest/Toolbar.vue'
+import UnrestAdminPopup from '@/components/unrest/AdminPopup.vue'
 
 import unrest from '@unrest/vue'
 import auth from '@unrest/vue-auth'
@@ -22,6 +23,7 @@ createApp(App)
   .component('OpenSeadragon', OpenSeadragon)
   .component('UnrestMouseTracker', UnrestMouseTracker)
   .component('UnrestToolbar', UnrestToolbar)
+  .component('UnrestAdminPopup', UnrestAdminPopup)
   .use(form.plugin)
   .use(store)
   .use(unrest.plugin)
