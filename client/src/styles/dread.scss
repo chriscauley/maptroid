@@ -12,9 +12,9 @@
 
 .dread-screenshot {
   @apply absolute cursor-pointer border border-white hidden;
-  .dread-stitcher.-tool-ss_trash &,
-  .dread-stitcher.-tool-ss_group &,
-  .dread-stitcher.-tool-ss_move & {
+  .dread-zone.-tool-ss_trash &,
+  .dread-zone.-tool-ss_group &,
+  .dread-zone.-tool-ss_move & {
     display: block;
   }
   img {
@@ -35,7 +35,7 @@
   }
 }
 
-.dread-stitcher {
+.dread-zone {
   &.-mode-undefined {
     .room-canvas__wrapper {
       outline: 0;

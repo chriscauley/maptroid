@@ -92,7 +92,7 @@ export default {
     css() {
       const m = this.$route.query.mode
       const { selected_tool: _t, selected_variant: _v } = this.tool_storage.state
-      return `flex-grow dread-stitcher -tool-${_t} -variant-${_v} -mode-${m}`
+      return `flex-grow dread-zone -tool-${_t} -variant-${_v} -mode-${m}`
     },
     zones() {
       return this.$store.zone.getPage({ query: { world_id: WORLD, per_page: 5000 } })?.items

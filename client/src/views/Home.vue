@@ -1,21 +1,21 @@
 <template>
   <div>
-    <h2>Dread Editor</h2>
+    <h2>Dread</h2>
     <table class="table">
       <tr v-for="zone in dread_zones" :key="zone.id">
         <td>{{ zone.id }}</td>
         <td>
-          <router-link class="link" :to="`/dread-stitcher/${zone.slug}/`">
+          <router-link class="link" :to="`/dread/${zone.slug}/`">
             {{ zone.name }}
           </router-link>
         </td>
         <td v-if="$auth.user?.is_superuser">
-          <router-link class="link" :to="`/dread-stitcher/${zone.slug}/?mode=room`">
+          <router-link class="link" :to="`/dread/${zone.slug}/?mode=room`">
             Edit Rooms
           </router-link>
         </td>
         <td v-if="$auth.user?.is_superuser">
-          <router-link class="link" :to="`/dread-stitcher/${zone.slug}/?mode=screenshots`">
+          <router-link class="link" :to="`/dread/${zone.slug}/?mode=screenshots`">
             Edit Screenshots
           </router-link>
         </td>
