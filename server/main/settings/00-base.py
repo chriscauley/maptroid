@@ -16,6 +16,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    'social_django',
+
     'maptroid',
 ]
 
@@ -60,7 +63,7 @@ DATABASES = {
 }
 
 
-# Password validation
+# Authentication
 _pv = 'django.contrib.auth.password_validation.'
 AUTH_PASSWORD_VALIDATORS = [
     { 'NAME': f'{_pv}UserAttributeSimilarityValidator' },
@@ -68,6 +71,13 @@ AUTH_PASSWORD_VALIDATORS = [
     { 'NAME': f'{_pv}CommonPasswordValidator' },
     { 'NAME': f'{_pv}NumericPasswordValidator' },
 ]
+LOGIN_REDIRECT_URL = '/'
+SOCIAL_AUTH_POSTGRES_JSONFIELD = False
+AUTHENTICATION_BACKENDS = (
+    'social_core.backends.twitter.TwitterOAuth',
+    'social_core.backends.github.GithubOAuth2',
+    'django.contrib.auth.backends.ModelBackend',
+)
 
 
 # Internationalization

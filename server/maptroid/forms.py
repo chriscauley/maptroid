@@ -10,12 +10,14 @@ from .models import World, Room, Screenshot, Zone, Item
 
 @schema.register
 class WorldForm(forms.ModelForm):
+  user_can_GET = user_can_LIST = 'ALL'
   class Meta:
     model = World
     fields = ('name', 'slug')
 
 @schema.register
 class RoomForm(forms.ModelForm):
+  user_can_GET = user_can_LIST = 'ALL'
   class Meta:
     model = Room
     fields = ['name', 'key', 'world', 'zone', 'data']
@@ -48,6 +50,7 @@ class ScreenshotForm(forms.ModelForm):
 
 @schema.register
 class ZoneForm(forms.ModelForm):
+  user_can_GET = user_can_LIST = 'ALL'
   class Meta:
     model = Zone
     fields = ['name', 'slug', 'data']
@@ -55,6 +58,7 @@ class ZoneForm(forms.ModelForm):
 
 @schema.register
 class ItemForm(forms.ModelForm):
+  user_can_GET = user_can_LIST = 'ALL'
   class Meta:
     model = Item
     fields = ['room', 'zone', 'data']
