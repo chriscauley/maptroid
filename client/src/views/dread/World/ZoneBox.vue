@@ -1,7 +1,8 @@
 <template>
   <div :class="css" :style="style" :title="zone.name">
     <img :src="`/static/dread/${zone.slug}.png`" @load="onload" ref="img" />
-    <unrest-draggable v-if="draggable" @drag="drag" @dragend="dragend" />
+    <unrest-draggable v-if="$route.query.mode === 'edit'" @drag="drag" @dragend="dragend" />
+    <router-link v-else :to="`/dread/${zone.slug}/`" />
   </div>
 </template>
 
@@ -17,10 +18,6 @@ export default {
   computed: {
     css() {
       return ['zone-box', this.dragging && '-dragging']
-    },
-    draggable() {
-      // TODO enable/disable based on toolbar
-      return true
     },
     style() {
       if (!this.width) {

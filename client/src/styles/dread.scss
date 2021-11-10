@@ -230,6 +230,9 @@
     filter: invert(1) contrast(2);
     opacity: 0.25;
   }
+  a {
+    @apply absolute inset-0;
+  }
 }
 
 .dread-icon {
