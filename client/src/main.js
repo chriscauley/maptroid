@@ -5,12 +5,18 @@ import UnrestMouseTracker from '@/components/unrest/MouseTracker.vue'
 import UnrestToolbar from '@/components/unrest/Toolbar.vue'
 
 import unrest from '@unrest/vue'
+import auth from '@unrest/vue-auth'
 import form from '@unrest/vue-form'
 import '@unrest/tailwind/dist.css'
 
 import store from '@/store'
 import '@/styles/base.scss'
 import router from '@/router'
+
+auth.configure({
+  AUTH_START: '/',
+  oauth_providers: ['github'],
+})
 
 createApp(App)
   .component('OpenSeadragon', OpenSeadragon)
@@ -21,4 +27,5 @@ createApp(App)
   .use(unrest.plugin)
   .use(unrest.ui)
   .use(router)
+  .use(auth.plugin)
   .mount('#app')

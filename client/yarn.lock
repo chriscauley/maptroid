@@ -1320,6 +1320,11 @@
   resolved "https://registry.yarnpkg.com/@unrest/tailwind/-/tailwind-0.1.13.tgz#cb8e92bd7cf1ba26fb5466fb3fd29155be935b16"
   integrity sha512-WAc0X0zxXXbNi4cwJAbqPkWKTOD0fYQY/Y+idAmwV/awOhHNSi7ILB5k4wZUtn+tfc7HGPDEilzUDT9QhJAGRg==
 
+"@unrest/vue-auth@^0.0.8":
+  version "0.0.8"
+  resolved "https://registry.yarnpkg.com/@unrest/vue-auth/-/vue-auth-0.0.8.tgz#b5a0ef6e9b2852905ecce046ccb5c588779ba4d6"
+  integrity sha512-57TU9NkgW4VYTwr/2Lz2sGNZjt8Oidnw7WQO5+BushcTwAoGCm6nTiAegmJnocWYNylolwHMo34CqlW1TTdBcg==
+
 "@unrest/vue-form@^0.0.8":
   version "0.0.8"
   resolved "https://registry.yarnpkg.com/@unrest/vue-form/-/vue-form-0.0.8.tgz#b5a9295ee27dba0d0e0c394005b08afff01601b7"

@@ -30,10 +30,9 @@
   background: red !important;
 }
 
-.unrest-floating-actions {
-  z-index: 200;
-}
-
+.ur-dropdown .dropdown-items,
+.ur-dropdown .ur-popper,
+.unrest-floating-actions,
 .ur-toolbar {
   z-index: 200;
 }

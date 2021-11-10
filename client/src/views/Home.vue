@@ -4,10 +4,19 @@
     <table class="table">
       <tr v-for="zone in dread_zones" :key="zone.id">
         <td>{{ zone.id }}</td>
-        <td>{{ zone.name }}</td>
         <td>
           <router-link class="link" :to="`/dread-stitcher/${zone.slug}/`">
-            Stitcher
+            {{ zone.name }}
+          </router-link>
+        </td>
+        <td v-if="$auth.user?.is_superuser">
+          <router-link class="link" :to="`/dread-stitcher/${zone.slug}/?mode=room`">
+            Edit Rooms
+          </router-link>
+        </td>
+        <td v-if="$auth.user?.is_superuser">
+          <router-link class="link" :to="`/dread-stitcher/${zone.slug}/?mode=screenshots`">
+            Edit Screenshots
           </router-link>
         </td>
       </tr>

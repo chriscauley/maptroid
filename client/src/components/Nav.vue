@@ -14,6 +14,7 @@
       <unrest-dropdown class="btn -light" :items="items">
         <i class="fa fa-bars" />
       </unrest-dropdown>
+      <unrest-auth-menu />
     </section>
   </header>
 </template>
