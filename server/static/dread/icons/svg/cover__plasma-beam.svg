@@ -10,13 +10,13 @@
    xmlns:xlink="http://www.w3.org/1999/xlink"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="125.71289"
-   height="490.47852"
-   viewBox="0 0 33.261535 129.77244"
+   width="127.99999"
+   height="384"
+   viewBox="0 0 33.866664 101.6"
    version="1.1"
    id="svg8"
    inkscape:version="0.92.5 (2060ec1f9f, 2020-04-08)"
-   sodipodi:docname="plasma-door.svg">
+   sodipodi:docname="cover__plasma-beam.svg">
   <defs
      id="defs2">
     <linearGradient
@@ -25,7 +25,7 @@
       <stop
          id="stop825"
          offset="0"
-         style="stop-color:#000000;stop-opacity:0" />
+         style="stop-color:#0000ff;stop-opacity:0" />
       <stop
          style="stop-color:#0000ff;stop-opacity:0.22058824"
          offset="0.90858036"
@@ -45,7 +45,7 @@
        fy="61.898808"
        r="80.130951"
        gradientUnits="userSpaceOnUse"
-       gradientTransform="translate(291.67433,-15.222431)" />
+       gradientTransform="matrix(0.78290889,0,0,0.78290889,238.6998,2.4464167)" />
   </defs>
   <sodipodi:namedview
      id="base"
@@ -55,8 +55,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1.8797969"
-     inkscape:cx="233.0876"
-     inkscape:cy="266.51815"
+     inkscape:cx="64.000003"
+     inkscape:cy="273.49033"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -86,11 +86,18 @@
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
      id="layer1"
-     transform="translate(78.742254,18.195672)">
+     transform="translate(59.128551,-0.11863987)">
     <path
-       style="fill:url(#radialGradient823);fill-opacity:1;stroke:none;stroke-width:0.26458332"
-       d="m -45.480719,-18.195672 a 80.130951,80.130951 0 0 0 -33.261535,64.87201 80.130951,80.130951 0 0 0 33.261535,64.900432 z"
+       style="fill:url(#radialGradient823);fill-opacity:1;stroke:none;stroke-width:0.20714463"
+       d="M -25.261887,0.11863987 A 62.735234,62.735234 0 0 0 -51.302639,50.907514 62.735234,62.735234 0 0 0 -25.261887,101.71864 Z"
        id="path815"
        inkscape:connector-curvature="0" />
+    <rect
+       style="fill:none;fill-opacity:1;stroke:none;stroke-width:1.32291663;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect3252"
+       width="33.866665"
+       height="101.6"
+       x="-59.128551"
+       y="0.11864003" />
   </g>
 </svg>
