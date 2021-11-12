@@ -1,6 +1,13 @@
-for i in `ls svg/|grep svg`
+FILES="${@:-$(ls svg/|grep svg)}"
+
+for i in ${FILES}
 do
-    inkscape -z svg/$i -e ${i%.*}.png
+    NAME=${i%.*}
+    inkscape -z svg/$NAME.svg -e $NAME.png
 done
 
-optipng *.png -o 7
+for i in ${FILES}
+do
+    NAME=${i%.*}
+    optipng $NAME.png -o 7
+done
