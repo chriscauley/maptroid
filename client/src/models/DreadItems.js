@@ -1,18 +1,15 @@
 import colors from '@/lib/dread_colors'
 
 const items = [
-  'missile__tank',
-  'missile__plus-tank',
-  'power-bomb',
+  'boss',
+  'central-unit',
   'energy__tank',
   'energy__part',
   'item__sphere',
   'item__cube',
-  'boss',
-  'central-unit',
-  'grapple-swing-point',
-  'morphball-launcher-exit',
-  'morphball-launcher',
+  'missile__tank',
+  'missile__plus-tank',
+  'power-bomb',
 ]
 
 const stations = [
@@ -29,26 +26,29 @@ const transit = [
   'transit__elevator',
   'transit__shuttle',
   'transit__transport-capsule',
-  'teleportal__green',
-  'teleportal__orange',
-  'teleportal__red',
-  'teleportal__purple',
-  'teleportal__yellow',
   'teleportal__blue',
   'teleportal__cyan',
+  'teleportal__green',
+  'teleportal__orange',
+  'teleportal__purple',
+  'teleportal__red',
+  'teleportal__yellow',
 ]
 
 const blocks = [
   'block__void',
   'block__grapple-beam',
   'box__enky',
+  'box__grapple-beam',
   'box__storm-missile',
   'box__wide-beam',
   'cover__plasma-beam',
   'cover__missile',
   'cover__super-missile',
   'cover__wave-beam',
-  'box__grapple-beam',
+  'grapple-swing-point',
+  'morphball-launcher-exit',
+  'morphball-launcher',
 ]
 
 const doors = [
@@ -81,7 +81,7 @@ const makeCss = () => {
   head.appendChild(style)
 
   const lines = all.map((slug) => {
-    const url = `/static/dread/icons/${slug.replace('__', '/')}.png`
+    const url = `/static/dread/icons/${slug}.png`
     return `.dread-icon.-type-${slug}:before { background-image: url("${url}") }`
   })
   Object.entries(colors).forEach(([name, color]) => {
