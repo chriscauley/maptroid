@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="16.933334mm"
+   height="16.933283mm"
+   viewBox="0 0 16.933334 16.933283"
+   version="1.1"
+   id="svg2289"
+   inkscape:version="0.92.5 (2060ec1f9f, 2020-04-08)"
+   sodipodi:docname="power-bomb.svg">
+  <defs
+     id="defs2283" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="5.2386365"
+     inkscape:cx="-46.47197"
+     inkscape:cy="46.494905"
+     inkscape:document-units="mm"
+     inkscape:current-layer="g2963"
+     showgrid="false"
+     inkscape:window-width="1920"
+     inkscape:window-height="1136"
+     inkscape:window-x="0"
+     inkscape:window-y="27"
+     inkscape:window-maximized="1"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0" />
+  <metadata
+     id="metadata2286">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-439.02265,-372.12946)">
+    <g
+       id="g2963">
+      <ellipse
+         style="fill:#ff0000;fill-opacity:1;stroke:none;stroke-width:0.80332685;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         id="path10633"
+         cx="447.48932"
+         cy="380.5961"
+         rx="8.4666672"
+         ry="8.4666414" />
+      <ellipse
+         style="fill:#333333;fill-opacity:1;stroke:none;stroke-width:1.45493674;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         id="path10820"
+         cx="447.48932"
+         cy="380.5961"
+         rx="7.6729398"
+         ry="7.6729169" />
+      <g
+         id="g3137"
+         transform="matrix(1.3585493,0,0,1.3585493,-174.00424,-116.77403)">
+        <rect
+           transform="rotate(-45)"
+           style="fill:#ff0000;fill-opacity:1;stroke:#ff0000;stroke-width:0.26458332;stroke-opacity:1"
+           id="rect2937"
+           width="2.0202458"
+           height="2.0202458"
+           x="63.572254"
+           y="581.32129" />
+        <path
+           id="rect2939-3"
+           d="m 460.85204,365.01069 -1.06659,1.06661 1.0201,1.0201 a 3.7141766,2.4374284 0 0 0 0.386,-1.07539 3.7141766,2.4374284 0 0 0 -0.33951,-1.01132 z"
+           style="fill:#ff0000;fill-opacity:1;stroke:#ff0000;stroke-width:0.26458332;stroke-opacity:1"
+           inkscape:connector-curvature="0" />
+        <path
+           id="rect2939"
+           d="m 454.10776,364.97039 a 3.7141766,2.4374284 0 0 0 -0.36224,1.04283 3.7141766,2.4374284 0 0 0 0.41494,1.11776 l 1.05368,-1.05368 z"
+           style="fill:#ff0000;fill-opacity:1;stroke:#ff0000;stroke-width:0.26458332;stroke-opacity:1"
+           inkscape:connector-curvature="0" />
+        <ellipse
+           ry="2.6851263"
+           rx="4.0408092"
+           cy="366.10385"
+           cx="457.46854"
+           id="path2987"
+           style="fill:none;fill-opacity:1;stroke:#ff0000;stroke-width:0.51838166;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      </g>
+    </g>
+  </g>
+</svg>
