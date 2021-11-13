@@ -87,3 +87,11 @@ class Screenshot(models.Model):
   def reprocess(self):
     self.output = None
     self.save()
+
+
+class Video(models.Model):
+  url = models.TextField()
+  title = models.CharField(max_length=255)
+  channel_name = models.CharField(max_length=30)
+  data = models.JSONField(default=dict, blank=True)
+  world = models.ForeignKey(World, models.CASCADE)

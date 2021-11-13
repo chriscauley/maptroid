@@ -1,5 +1,5 @@
 from django.contrib import admin
-from maptroid.models import Zone, Item,  Room, World, Screenshot
+from maptroid.models import Zone, Item,  Room, World, Screenshot, Video
 
 
 @admin.register(Zone)
@@ -22,6 +22,11 @@ class ItemAdmin(admin.ModelAdmin):
 
 @admin.register(Room)
 class RoomAdmin(admin.ModelAdmin):
+    pass
+
+
+@admin.register(Video)
+class VideoAdmin(admin.ModelAdmin):
     pass
 
 

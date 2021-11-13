@@ -6,7 +6,7 @@ import os
 from PIL import Image
 from unrest import schema
 
-from .models import World, Room, Screenshot, Zone, Item
+from .models import World, Room, Screenshot, Zone, Item, Video
 
 @schema.register
 class WorldForm(forms.ModelForm):
@@ -62,3 +62,11 @@ class ItemForm(forms.ModelForm):
   class Meta:
     model = Item
     fields = ['room', 'zone', 'data']
+
+
+@schema.register
+class VideoForm(forms.ModelForm):
+  user_can_GET = user_can_LIST = 'ALL'
+  class Meta:
+    model = Video
+    fields = ['url', 'title', 'channel_name', 'data']
