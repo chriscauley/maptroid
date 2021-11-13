@@ -3,7 +3,7 @@ import Openseadragon from 'openseadragon'
 
 import vec from '@/lib/vec'
 
-const { Point } = Openseadragon
+const { Point, Rect } = Openseadragon
 
 const PX_PER_GRID = 0.5
 
@@ -140,11 +140,32 @@ export default (component) => {
     $store.screenshot.bounceSave(screenshot)
   }
 
+  // TODO this function was a failed attempt at reording screenshots. Remove?
   let bottom = -1
   const sendScreenshotToBottom = (screenshot) => {
     const osd_item = state._viewer.world._items.find((i) => screenshot.output === i.source.url)
     state._viewer.world.setItemIndex(osd_item, bottom--)
     screenshot.zIndex = bottom
+  }
+
+  // TODO everything below here can be abstracted for World viewer as well
+  const selectItem = (item) => {
+    if (!item || item.id === state.selected_item?.id) {
+      delete state.selected_item
+    } else {
+      state.selected_item = item
+      gotoItem(item)
+    }
+  }
+
+  // TODO this will different for world viewer
+  const gotoItem = (item) => {
+    const geo = getGeometry()
+    const scale = geo.width / geo.px_per_block
+    const room = component.rooms.find((r) => r.id === item.room)
+    const [x, y, w, h] = room.data.zone_bounds.map((i) => i / scale)
+    const b = 0.02
+    state._viewer.viewport.fitBounds(new Rect(x - b, y - b, w + 2 * b, h + 2 * b))
   }
 
   Object.assign(osd_store, {
@@ -156,6 +177,7 @@ export default (component) => {
     setOpacity,
     setAllOpacity,
     scaleBlock,
+    selectItem,
     setGroup,
   })
 

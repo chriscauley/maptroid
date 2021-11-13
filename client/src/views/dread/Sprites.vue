@@ -1,16 +1,21 @@
 <template>
   <div class="dread-sprites">
+    <div v-for="(items, type_name) in type_map" :key="type_name">
+      <template v-for="item in items" :key="item">
+        <div v-if="sizes[item]?.[0] < 256">
+          <i class="fa fa-warning -red" />
+          {{ sizes[item][0] }} {{ item }}
+        </div>
+        <div v-if="sizes[item] && (sizes[item][0] + sizes[item][1]) % 128">
+          {{ item }} {{ sizes[item] }}
+        </div>
+      </template>
+    </div>
     <section v-for="(items, type_name) in type_map" :key="type_name" class="dread-sprites__section">
-      <div class="dread-sprites__section__title">{{ type_name }}</div>
-
       <div v-for="item in items" :key="item" class="dread-sprites__item">
         <div class="dread-sprites__title">
           <i :class="getClass(item)" />
           {{ item }}
-          <div v-if="sizes[item]">
-            {{ sizes[item] }}
-            <i v-if="sizes[item][0] < 256" class="fa fa-error -red" />
-          </div>
           <div
             v-for="(slugs, color) in colors_by_type[item]"
             :key="color"
@@ -21,12 +26,16 @@
             <i v-if="!isColorApproved(color)" class="fa fa-warning" />
           </div>
         </div>
-        <div class="dread-sprites__images">
+        <div :class="['dread-sprites__images', sizes[item] && '-size-loaded']">
           <div>
-            <img :src="`${static_}${item}.png`" title="png" @load="(e) => load(item, e)" />
+            <img :src="`${static_}${item}.png`" title="png" />
           </div>
           <div @click="logSvg(item)">
-            <img :src="`${static_}svg/${item}.svg`" :key="keys[item] || 0" />
+            <img
+              :src="`${static_}svg/${item}.svg`"
+              :key="keys[item] || 0"
+              @load="(e) => load(item, e)"
+            />
           </div>
           <div>
             <img :src="`${static_}source/${item}.png`" title="source" class="source" />
@@ -137,7 +146,9 @@ export default {
       return storage.state.approved_colors[color]
     },
     load(type, event) {
-      this.sizes[type] = event.target.width
+      if (!sizes[type]) {
+        this.sizes[type] = [event.target.width, event.target.height]
+      }
     },
     toggleColor(color) {
       if (this.isColorApproved(color)) {

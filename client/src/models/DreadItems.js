@@ -1,15 +1,16 @@
 import colors from '@/lib/dread_colors'
+import { startCase } from 'lodash'
 
 const items = [
-  'boss',
-  'central-unit',
-  'energy__tank',
-  'energy__part',
-  'item__sphere',
-  'item__cube',
   'missile__tank',
   'missile__plus-tank',
+  'energy__part',
+  'energy__tank',
   'power-bomb',
+  'item__sphere',
+  'item__cube',
+  'boss',
+  'central-unit',
 ]
 
 const stations = [
@@ -62,7 +63,6 @@ const doors = [
   'door__shutter-platform',
   'door__thermal',
   'door__thermal-trapdoor',
-  'door__closed-thermal',
   'door__wide-beam',
   'door__access-closed',
 ]
@@ -91,6 +91,21 @@ const makeCss = () => {
   style.appendChild(document.createTextNode(lines.join('\n')))
 }
 
+const name_cache = {
+  // These pre-defined names act as overridse
+  'door__shutter-platform': 'Shutter Platform',
+  'door__thermal-trapdoor': 'Thermal Trapdoor',
+  missile__tank: 'Missile Tank',
+  'missile__plus-tank': 'Missile + Tank',
+  energy__part: 'Energy Part',
+  energy__tank: 'Energy Tank',
+  'power-bomb': 'Power Bomb',
+  item__sphere: 'Item Sphere',
+  item__cube: 'Item Cube',
+  boss: 'Boss',
+  'central-unit': 'Central Unit',
+}
+
 export default {
   colors,
   items,
@@ -100,8 +115,19 @@ export default {
   doors,
   type_map: { items, stations, transit, blocks, doors },
   makeCss,
-  getClass: (item) => {
-    const type = item.split('__')[0]
-    return `dread-icon -type-${type} -type-${item}`
+  getClass: (slug) => {
+    const type = slug.split('__')[0]
+    return `dread-icon -type-${type} -type-${slug}`
+  },
+  getName: (item) => {
+    if (item.data.name) {
+      return item.data.name
+    }
+    const type = item.data.type
+    if (!name_cache[type]) {
+      const [a, b] = type.split('__')
+      name_cache[type] = startCase(`${b}-${a}`)
+    }
+    return name_cache[type]
   },
 }

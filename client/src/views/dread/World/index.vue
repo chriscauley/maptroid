@@ -6,12 +6,18 @@
         <zone-box v-for="zone in zones" :key="zone.id" :zone="zone" :osd_store="osd_store" />
       </html-overlay>
     </div>
+    <unrest-admin-popup>
+      {{ items.length }}
+    </unrest-admin-popup>
+    <item-list :zone_items="items" />
   </div>
 </template>
 
 <script>
 import HtmlOverlay from '@/vue-openseadragon/HtmlOverlay.vue'
 
+import DreadItems from '@/models/DreadItems'
+import ItemList from '@/components/ItemList.vue'
 import OsdStore from './OsdStore'
 import Viewer from './Viewer.vue'
 import ZoneBox from './ZoneBox.vue'
@@ -22,8 +28,9 @@ export default {
   __route: {
     path: '/dread/',
   },
-  components: { HtmlOverlay, Viewer, ZoneBox },
+  components: { HtmlOverlay, ItemList, Viewer, ZoneBox },
   data() {
+    DreadItems.makeCss()
     const osd_store = OsdStore(this)
     return { osd_store }
   },
@@ -31,6 +38,10 @@ export default {
     zones() {
       const q = { query: { per_page: 5000, world: WORLD } }
       return this.$store.zone.getPage(q)?.items?.filter((z) => !z.data.hidden)
+    },
+    items() {
+      const q = { query: { per_page: 5000, world: WORLD } }
+      return this.$store.item2.getPage(q)?.items || []
     },
   },
 }

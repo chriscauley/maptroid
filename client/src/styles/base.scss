@@ -196,9 +196,10 @@ body {
   &.-item, &.-map, &.-boss, &.-room {
     top: 0;
   }
-  .list-group-item {
-    gap: 0.5rem;
-  }
+}
+
+.list-group-item {
+  @apply gap-2;
 }
 
 .inventory {

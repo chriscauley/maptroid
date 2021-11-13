@@ -52,6 +52,10 @@
   &.-mode-screenshots .dread-icon {
     display: none;
   }
+  &.-mode-room .dread-icon:hover {
+    opacity: 0;
+    transition: 0.5s;
+  }
 }
 
 .__debug {
@@ -248,10 +252,6 @@
   }
   &.-type-block__void:before {
     background: repeating-conic-gradient(red 0% 25%, black 0% 50%) 50% / 25px 25px !important;
-  }
-  &:hover {
-    opacity: 0;
-    transition: 0.5s;
   }
 }
 

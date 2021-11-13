@@ -49,9 +49,9 @@
         :osd_store="osd_store"
       />
     </div>
+    <item-list v-if="zone" :zone_items="zone_items" :storage="osd_store" />
     <div v-if="debug" class="dread-debug">{{ debug }}</div>
     <unrest-admin-popup>
-      Woot
       <template #buttons>
         <router-link to="?mode=screenshots" class="btn btn-primary">
           <i class="fa fa-picture-o" />
@@ -67,8 +67,10 @@
 <script>
 import { startCase } from 'lodash'
 
+import DreadItems from '@/models/DreadItems'
 import DreadViewer from './Viewer.vue'
 import GroupManager from './GroupManager.vue'
+import ItemList from '@/components/ItemList.vue'
 import RoomCanvas from './RoomCanvas.vue'
 import ScreenshotOverlay from './ScreenshotOverlay.vue'
 import HtmlOverlay from '@/vue-openseadragon/HtmlOverlay.vue'
@@ -76,6 +78,9 @@ import ToolStorage from './ToolStorage'
 import OsdStore from './OsdStore'
 
 const WORLD = 3 // hardcoded for now since this interface is dread only
+
+const allowed_types = [...DreadItems.items, ...DreadItems.stations, ...DreadItems.transit]
+const allowed_by_type = Object.fromEntries(allowed_types.map((t) => [t, true]))
 
 export default {
   __route: {
@@ -88,6 +93,7 @@ export default {
     DreadViewer,
     GroupManager,
     HtmlOverlay,
+    ItemList,
     RoomCanvas,
     ScreenshotOverlay,
   },
@@ -111,12 +117,17 @@ export default {
     zone() {
       return this.zones?.find((z) => z.slug === this.$route.params.zone_slug)
     },
-    zone_items() {
-      return this.$store.item2.getPage(this.search_params)?.items || []
-    },
     search_params() {
-      // screenshots and zones search on same values
+      // items and rooms search on same values
       return { query: { zone: this.zone.id, per_page: 5000 } }
+    },
+    zone_items() {
+      const world_items = this.$store.item2.getPage(this.search_params)?.items || []
+      let zone_items = world_items.filter((i) => i.zone === this.zone.id)
+      if (!this.$auth.user?.is_superuser) {
+        zone_items = zone_items.filter((i) => allowed_by_type[i.data.type])
+      }
+      return zone_items
     },
     rooms() {
       return this.$store.room2.getPage(this.search_params)?.items
