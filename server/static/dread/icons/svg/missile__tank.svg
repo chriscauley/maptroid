@@ -9,13 +9,13 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="16.933334mm"
-   height="16.933283mm"
-   viewBox="0 0 16.933334 16.933283"
+   width="67.73333mm"
+   height="67.733124mm"
+   viewBox="0 0 67.733328 67.733124"
    version="1.1"
    id="svg1021"
    inkscape:version="0.92.5 (2060ec1f9f, 2020-04-08)"
-   sodipodi:docname="missile-tank.svg">
+   sodipodi:docname="missile__tank.svg">
   <defs
      id="defs1015" />
   <sodipodi:namedview
@@ -26,8 +26,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="0.88580495"
-     inkscape:cx="-414.81492"
-     inkscape:cy="-104.4964"
+     inkscape:cx="-208.78762"
+     inkscape:cy="30.973568"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      showgrid="true"
@@ -44,7 +44,7 @@
        type="xygrid"
        id="grid1969"
        originx="132.09205"
-       originy="-166.74875" />
+       originy="-166.74876" />
   </sodipodi:namedview>
   <metadata
      id="metadata1018">
@@ -62,24 +62,24 @@
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
      id="layer1"
-     transform="translate(132.09206,-113.31797)">
+     transform="translate(132.09206,-62.51812)">
     <ellipse
-       style="fill:#b30000;fill-opacity:1;stroke:none;stroke-width:0.80332685;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       style="fill:#b30000;fill-opacity:1;stroke:none;stroke-width:3.21330714;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        id="path10633"
-       cx="-123.6254"
-       cy="121.78461"
-       rx="8.4666672"
-       ry="8.4666414" />
+       cx="-98.225395"
+       cy="96.384682"
+       rx="33.866665"
+       ry="33.866562" />
     <ellipse
-       style="fill:#333333;fill-opacity:1;stroke:none;stroke-width:1.45493674;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       style="fill:#333333;fill-opacity:1;stroke:none;stroke-width:5.81974649;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        id="path10820"
-       cx="-123.6254"
-       cy="121.78461"
-       rx="7.6729398"
-       ry="7.6729169" />
+       cx="-98.225395"
+       cy="96.384682"
+       rx="30.691757"
+       ry="30.691666" />
     <g
        id="g2097"
-       transform="matrix(1.6666684,0,0,1.6666684,83.034522,-81.780797)">
+       transform="matrix(6.6666732,0,0,6.6666732,728.41423,-717.87688)">
       <path
          inkscape:connector-curvature="0"
          id="path1973"
