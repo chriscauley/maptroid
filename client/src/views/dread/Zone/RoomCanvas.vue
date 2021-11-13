@@ -14,12 +14,16 @@
         <i class="fa fa-arrows" />
       </unrest-draggable>
     </template>
-    <i
+    <div
       v-for="item in items"
       v-bind="item.attrs"
       :key="item.id"
       @click="(e) => clickItem(e, item)"
-    />
+    >
+      <unrest-popper v-if="item.selected" placement="bottom" offset="0,10">
+        <div class="room-canvas__popper">{{ item.name }}</div>
+      </unrest-popper>
+    </div>
     <div
       v-for="(style, i) in drawn_colors"
       :style="style"
@@ -69,7 +73,6 @@ export default {
         left: this.osd_store.scaleBlock(x),
         top: this.osd_store.scaleBlock(y),
         width: this.osd_store.scaleBlock(width),
-        pointerEvents: this.tool.selected.startsWith('room') ? '' : 'none',
         backgroundImage: grids[size],
         backgroundSize: `${100 / width}% auto`,
       }
@@ -119,11 +122,14 @@ export default {
         .map((item) => {
           const { type, bounds } = item.data
           const [x, y, w, h] = bounds
+          const selected = this.osd_store.state.selected_item?.id === item.id
           return {
             id: item.id,
+            name: DreadItems.getName(item),
+            selected,
             attrs: {
               id: `zone-item__${item.id}`,
-              class: DreadItems.getClass(type),
+              class: [DreadItems.getClass(type), selected && '-selected'],
               style: {
                 position: 'absolute',
                 left: `${(100 * x) / W}%`,

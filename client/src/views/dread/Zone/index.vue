@@ -49,7 +49,12 @@
         :osd_store="osd_store"
       />
     </div>
-    <item-list v-if="zone" :zone_items="zone_items" :storage="osd_store" />
+    <item-list
+      v-if="zone"
+      :zone_items="zone_items"
+      :storage="osd_store"
+      @select-item="osd_store.gotoItem"
+    />
     <div v-if="debug" class="dread-debug">{{ debug }}</div>
     <unrest-admin-popup>
       <template #buttons>

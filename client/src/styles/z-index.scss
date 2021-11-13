@@ -21,6 +21,13 @@
   z-index: 3
 }
 
+.dread-item {
+  z-index: 1;
+  &.-selected {
+    z-index: 2
+  }
+}
+
 .oob-fix {
   z-index: 4
 }
@@ -34,6 +41,7 @@
 .ur-dropdown .ur-popper,
 .unrest-floating-actions,
 .ur-toolbar,
+.osd .navigator,
 .item-list {
   z-index: 200;
 }

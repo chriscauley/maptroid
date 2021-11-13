@@ -208,6 +208,11 @@
   &__delete {
     @apply absolute right-0 top-0;
   }
+  &__popper {
+    @apply p-2 rounded border;
+    background: var(--bg);
+    white-space: nowrap;
+  }
 }
 
 .dread-debug {

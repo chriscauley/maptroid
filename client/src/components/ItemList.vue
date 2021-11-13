@@ -3,7 +3,7 @@
     <div class="osd-panel__inner">
       <div v-for="bin in item_bins" class="list-group" :key="bin.type">
         <template v-for="item in bin.items" :key="item.id">
-          <div class="list-group-item" @click="storage.selectItem(item)">
+          <div class="list-group-item" @click="$emit('select-item', item)">
             <i :class="[bin.icon, obtained[item.id] && '-obtained']" />
             <span class="flex-grow">{{ getName(item) }}</span>
             <i v-if="$auth.user.is_superuser" class="fa fa-pencil" @click="edit(item)" />
@@ -24,6 +24,7 @@ export default {
     playthrough: Object,
     storage: Object,
   },
+  emits: ['select-item'],
   computed: {
     obtained() {
       return {}

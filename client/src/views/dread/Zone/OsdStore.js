@@ -154,7 +154,6 @@ export default (component) => {
       delete state.selected_item
     } else {
       state.selected_item = item
-      gotoItem(item)
     }
   }
 
@@ -166,12 +165,14 @@ export default (component) => {
     const [x, y, w, h] = room.data.zone_bounds.map((i) => i / scale)
     const b = 0.02
     state._viewer.viewport.fitBounds(new Rect(x - b, y - b, w + 2 * b, h + 2 * b))
+    state._viewer.addOnceHandler('animation-finish', () => selectItem(item))
   }
 
   Object.assign(osd_store, {
     getGeometry,
     addScreenshots,
     dragRoom,
+    gotoItem,
     moveScreenshot,
     sendScreenshotToBottom,
     setOpacity,
