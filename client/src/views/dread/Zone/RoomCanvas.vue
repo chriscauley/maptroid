@@ -45,7 +45,7 @@ export default {
     tool_storage: Object,
     zone_items: Array,
   },
-  emits: ['debug', 'delete', 'add-item', 'delete-item'],
+  emits: ['debug', 'delete', 'add-item', 'delete-item', 'select-item'],
   data() {
     return { drawing: null }
   },
@@ -162,6 +162,8 @@ export default {
     clickItem(event, item) {
       if (event.shiftKey || this.tool.selected === 'room_item_trash') {
         this.$emit('delete-item', item)
+      } else {
+        this.$emit('select-item', item)
       }
     },
     drag(event) {

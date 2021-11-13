@@ -40,6 +40,7 @@
             @delete-item="deleteItem"
             @add-item="addItem"
             :zone_items="zone_items"
+            @select-item="osd_store.selectItem"
           />
         </html-overlay>
       </template>

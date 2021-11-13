@@ -6,7 +6,7 @@
           <div class="list-group-item" @click="$emit('select-item', item)">
             <i :class="[bin.icon, obtained[item.id] && '-obtained']" />
             <span class="flex-grow">{{ getName(item) }}</span>
-            <i v-if="$auth.user.is_superuser" class="fa fa-pencil" @click="edit(item)" />
+            <i v-if="$auth.user?.is_superuser" class="fa fa-pencil" @click="edit(item)" />
             <i :class="`fa fa-checkbox`" />
           </div>
         </template>
