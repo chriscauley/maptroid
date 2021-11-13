@@ -25,15 +25,15 @@
       <stop
          id="stop825"
          offset="0"
-         style="stop-color:#0000ff;stop-opacity:0" />
+         style="stop-color:#e40bd4;stop-opacity:0" />
       <stop
-         style="stop-color:#0000ff;stop-opacity:0.22058824"
+         style="stop-color:#e40bd4;stop-opacity:0.22058824"
          offset="0.90858036"
          id="stop834" />
       <stop
          id="stop827"
          offset="1"
-         style="stop-color:#0000ff;stop-opacity:1" />
+         style="stop-color:#e40bd4;stop-opacity:1" />
     </linearGradient>
     <radialGradient
        inkscape:collect="always"

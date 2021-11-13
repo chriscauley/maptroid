@@ -23,15 +23,15 @@
        inkscape:collect="always"
        id="linearGradient2107">
       <stop
-         style="stop-color:#ff0000;stop-opacity:0"
+         style="stop-color:#ff69b4;stop-opacity:0"
          offset="0"
          id="stop2103" />
       <stop
          id="stop2111"
          offset="0.79780352"
-         style="stop-color:#ff0000;stop-opacity:0.49803922;" />
+         style="stop-color:#ff69b4;stop-opacity:0.49803922;" />
       <stop
-         style="stop-color:#ff0000;stop-opacity:1"
+         style="stop-color:#ff69b4;stop-opacity:1"
          offset="1"
          id="stop2105" />
     </linearGradient>
@@ -101,7 +101,7 @@
        x="-83.034439"
        y="-8.6364841" />
     <rect
-       style="fill:#000000;fill-opacity:1;stroke:none;stroke-width:1.90394163;stroke-linecap:butt;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       style="fill:#333333;fill-opacity:1;stroke:none;stroke-width:1.90394163;stroke-linecap:butt;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        id="rect2004"
        width="14.816667"
        height="14.816667"

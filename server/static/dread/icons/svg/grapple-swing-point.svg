@@ -65,21 +65,21 @@
      id="layer1"
      transform="translate(-429.94791,-349.91666)">
     <rect
-       style="fill:#eeeeee;fill-opacity:1;stroke:none;stroke-width:5.61773443;stroke-linecap:butt;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       style="fill:#f0f0f0;fill-opacity:1;stroke:none;stroke-width:5.61773443;stroke-linecap:butt;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        id="rect2828"
        width="16.933332"
        height="16.933332"
        x="429.94791"
        y="349.91666" />
     <rect
-       style="fill:#000000;fill-opacity:1;stroke:none;stroke-width:1.90394163;stroke-linecap:butt;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       style="fill:#333333;fill-opacity:1;stroke:none;stroke-width:1.90394163;stroke-linecap:butt;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        id="rect2832"
        width="14.816667"
        height="14.816667"
        x="431.00623"
        y="350.97498" />
     <path
-       style="fill:#00ffff;fill-opacity:1;stroke:none;stroke-width:0.26064017px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       style="fill:#02c5ff;fill-opacity:1;stroke:none;stroke-width:0.26064017px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        d="m 431.79999,353.09166 6.61458,10.58333 6.61459,-10.58333 z"
        id="path2834"
        inkscape:connector-curvature="0"

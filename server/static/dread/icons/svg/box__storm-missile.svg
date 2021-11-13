@@ -65,7 +65,7 @@
      id="layer1"
      transform="translate(569.10931,-154.48193)">
     <rect
-       style="fill:#000100;fill-opacity:1;stroke:none;stroke-width:2.80030417;stroke-linecap:square;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       style="fill:#333333;fill-opacity:1;stroke:none;stroke-width:2.80030417;stroke-linecap:square;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        id="rect4936"
        width="67.733337"
        height="101.6"
@@ -79,31 +79,31 @@
        x="-566.99261"
        y="156.5986" />
     <circle
-       style="fill:#00ff00;fill-opacity:1;stroke:none;stroke-width:4.23333359;stroke-linecap:square;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       style="fill:#00c703;fill-opacity:1;stroke:none;stroke-width:4.23333359;stroke-linecap:square;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        id="path4972"
        cx="-535.24261"
        cy="166.95699"
        r="8.2020836" />
     <circle
-       style="fill:#00ff00;fill-opacity:1;stroke:none;stroke-width:4.23333359;stroke-linecap:square;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       style="fill:#00c703;fill-opacity:1;stroke:none;stroke-width:4.23333359;stroke-linecap:square;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        id="path4972-2"
        cx="-535.24261"
        cy="186.11946"
        r="8.2020836" />
     <circle
-       style="fill:#00ff00;fill-opacity:1;stroke:none;stroke-width:4.23333359;stroke-linecap:square;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       style="fill:#00c703;fill-opacity:1;stroke:none;stroke-width:4.23333359;stroke-linecap:square;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        id="path4972-8"
        cx="-535.24261"
        cy="205.28192"
        r="8.2020836" />
     <circle
-       style="fill:#00ff00;fill-opacity:1;stroke:none;stroke-width:4.23333359;stroke-linecap:square;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       style="fill:#00c703;fill-opacity:1;stroke:none;stroke-width:4.23333359;stroke-linecap:square;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        id="path4972-9"
        cx="-535.24261"
        cy="224.4444"
        r="8.2020836" />
     <circle
-       style="fill:#00ff00;fill-opacity:1;stroke:none;stroke-width:4.23333359;stroke-linecap:square;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       style="fill:#00c703;fill-opacity:1;stroke:none;stroke-width:4.23333359;stroke-linecap:square;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        id="path4972-7"
        cx="-535.24261"
        cy="243.60686"

@@ -60,7 +60,7 @@
     <g
        id="g2963">
       <ellipse
-         style="fill:#ff0000;fill-opacity:1;stroke:none;stroke-width:0.80332685;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         style="fill:#ffd14e;fill-opacity:1;stroke:none;stroke-width:0.80332685;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
          id="path10633"
          cx="447.48932"
          cy="380.5961"
@@ -78,7 +78,7 @@
          transform="matrix(1.3585493,0,0,1.3585493,-174.00424,-116.77403)">
         <rect
            transform="rotate(-45)"
-           style="fill:#ff0000;fill-opacity:1;stroke:#ff0000;stroke-width:0.26458332;stroke-opacity:1"
+           style="fill:#ffd14e;fill-opacity:1;stroke:#ffd14e;stroke-width:0.26458332;stroke-opacity:1"
            id="rect2937"
            width="2.0202458"
            height="2.0202458"
@@ -87,12 +87,12 @@
         <path
            id="rect2939-3"
            d="m 460.85204,365.01069 -1.06659,1.06661 1.0201,1.0201 a 3.7141766,2.4374284 0 0 0 0.386,-1.07539 3.7141766,2.4374284 0 0 0 -0.33951,-1.01132 z"
-           style="fill:#ff0000;fill-opacity:1;stroke:#ff0000;stroke-width:0.26458332;stroke-opacity:1"
+           style="fill:#ffd14e;fill-opacity:1;stroke:#ffd14e;stroke-width:0.26458332;stroke-opacity:1"
            inkscape:connector-curvature="0" />
         <path
            id="rect2939"
            d="m 454.10776,364.97039 a 3.7141766,2.4374284 0 0 0 -0.36224,1.04283 3.7141766,2.4374284 0 0 0 0.41494,1.11776 l 1.05368,-1.05368 z"
-           style="fill:#ff0000;fill-opacity:1;stroke:#ff0000;stroke-width:0.26458332;stroke-opacity:1"
+           style="fill:#ffd14e;fill-opacity:1;stroke:#ffd14e;stroke-width:0.26458332;stroke-opacity:1"
            inkscape:connector-curvature="0" />
         <ellipse
            ry="2.6851263"
@@ -100,7 +100,7 @@
            cy="366.10385"
            cx="457.46854"
            id="path2987"
-           style="fill:none;fill-opacity:1;stroke:#ff0000;stroke-width:0.51838166;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+           style="fill:none;fill-opacity:1;stroke:#ffd14e;stroke-width:0.51838166;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
       </g>
     </g>
   </g>
