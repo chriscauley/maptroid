@@ -30,5 +30,6 @@ export default (LS_KEY, { tools }) => {
   const initial = { selected_tool: tools[0]?.slug, selected_variant: tools[0]?.variants?.[0] }
   const storage = ReactiveLocalStorage({ LS_KEY, initial })
   storage.listTools = () => tools.map((tool) => makeTool(storage, tool))
+
   return storage
 }

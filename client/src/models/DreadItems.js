@@ -125,7 +125,7 @@ export default {
     }
     const type = item.data.type
     if (!name_cache[type]) {
-      const [a, b=''] = type.split('__')
+      const [a, b = ''] = type.split('__')
       name_cache[type] = startCase(`${b}-${a}`)
     }
     return name_cache[type]

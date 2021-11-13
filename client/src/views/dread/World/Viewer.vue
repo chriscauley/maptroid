@@ -45,7 +45,7 @@ export default {
       if (event.ctrlKey) {
         const box = viewer.container.getBoundingClientRect()
         const position = new Openseadragon.Point(event.pageX - box.left, event.pageY - box.top)
-        const factor = Math.pow(viewer.zoomPerScroll, -event.deltaY / 10)
+        const factor = Math.pow(viewer.zoomPerScroll, -event.deltaY / 20)
         viewport.zoomBy(factor, viewport.pointFromPixel(position, true))
       } else {
         const center = viewport.pixelFromPoint(viewport.getCenter(true))

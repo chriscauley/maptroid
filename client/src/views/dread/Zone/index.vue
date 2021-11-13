@@ -40,6 +40,7 @@
             @delete-item="deleteItem"
             @add-item="addItem"
             :zone_items="zone_items"
+            :zones="zones"
             @select-item="osd_store.selectItem"
           />
         </html-overlay>
@@ -59,12 +60,13 @@
     <div v-if="debug" class="dread-debug">{{ debug }}</div>
     <unrest-admin-popup>
       <template #buttons>
-        <router-link to="?mode=screenshots" class="btn btn-primary">
+        <!-- these can't be router links because osda and tool storages aren't dynamic -->
+        <a href="?mode=screenshots" class="btn btn-primary">
           <i class="fa fa-picture-o" />
-        </router-link>
-        <router-link to="?mode=room" class="btn btn-primary">
+        </a>
+        <a href="?mode=room" class="btn btn-primary">
           <i class="fa fa-edit" />
-        </router-link>
+        </a>
       </template>
     </unrest-admin-popup>
   </div>

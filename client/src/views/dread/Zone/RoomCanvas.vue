@@ -13,6 +13,7 @@
       <unrest-draggable class="room-canvas__move btn -mini -primary" @drag="move">
         <i class="fa fa-arrows" />
       </unrest-draggable>
+      <room-form :room="room" :zones="zones" />
     </template>
     <div
       v-for="item in items"
@@ -21,7 +22,19 @@
       @click="(e) => clickItem(e, item)"
     >
       <unrest-popper v-if="item.selected" placement="bottom" offset="0,10">
-        <div class="room-canvas__popper">{{ item.name }}</div>
+        <div class="room-canvas__popper" @click.stop>
+          <div v-if="$auth.user?.is_superuser" class="form-control">
+            <input v-model="item.name" @input="saveItemName(item)" />
+            <input v-model="item.reward" @input="saveItemReward(item)" />
+          </div>
+          <div v-else>
+            <div class="room-canvas__popper-name">{{ item.name }}</div>
+            <div v-if="item.reward" class="room-canvas__popper-reward">
+              <i class="fa fa-plus" />
+              {{ item.reward }}
+            </div>
+          </div>
+        </div>
       </unrest-popper>
     </div>
     <div
@@ -35,15 +48,18 @@
 
 <script>
 import DreadItems from '@/models/DreadItems'
+import RoomForm from './RoomForm.vue'
 
 const grids = {}
 
 export default {
+  components: { RoomForm },
   props: {
     osd_store: Object,
     room: Object,
     tool_storage: Object,
     zone_items: Array,
+    zones: Array,
   },
   emits: ['debug', 'delete', 'add-item', 'delete-item', 'select-item'],
   data() {
@@ -125,7 +141,9 @@ export default {
           const selected = this.osd_store.state.selected_item?.id === item.id
           return {
             id: item.id,
+            _item: item,
             name: DreadItems.getName(item),
+            reward: item.data.reward,
             selected,
             attrs: {
               id: `zone-item__${item.id}`,
@@ -232,6 +250,14 @@ export default {
       colors = colors.filter((c) => c.bounds)
       this.room.data.colors = colors // eslint-disable-line vue/no-mutating-props
       this.$store.room2.save(this.room)
+    },
+    saveItemName(item) {
+      item._item.data.name = item.name
+      this.$store.item2.bounceSave(item._item)
+    },
+    saveItemReward(item) {
+      item._item.data.reward = item.reward
+      this.$store.item2.bounceSave(item._item)
     },
   },
 }

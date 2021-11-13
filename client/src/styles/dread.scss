@@ -197,6 +197,9 @@
   &__resize {
     @apply absolute bottom-0 right-0;
   }
+  &__edit {
+    @apply absolute bottom-0 left-0;
+  }
   &__move {
     @apply absolute top-0 left-0;
   }
@@ -211,6 +214,8 @@
   &__popper {
     @apply p-2 rounded border;
     background: var(--bg);
+  }
+  &__popper-name, &__popper-reward {
     white-space: nowrap;
   }
 }

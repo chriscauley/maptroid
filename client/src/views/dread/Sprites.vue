@@ -146,7 +146,7 @@ export default {
       return storage.state.approved_colors[color]
     },
     load(type, event) {
-      if (!sizes[type]) {
+      if (!this.sizes[type]) {
         this.sizes[type] = [event.target.width, event.target.height]
       }
     },

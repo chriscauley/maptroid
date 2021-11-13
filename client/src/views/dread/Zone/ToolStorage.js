@@ -23,6 +23,7 @@ export default (component) => {
   } else if (mode === 'room') {
     tools = [
       { slug: 'room_bounds', getIcon: () => 'fa fa-edit' },
+      { slug: 'room_link', getIcon: () => 'fa fa-link' },
       { slug: 'room_colors', getIcon: (_, v) => `room-color -color-${v}`, variants: color_names },
       { slug: 'room_item_trash', getIcon: () => 'fa fa-trash' },
     ]
@@ -35,6 +36,11 @@ export default (component) => {
       })
     })
   }
+  const storage = ToolStorage('tools__dread', { tools })
+  if (!storage.listTools().find((t) => t.slug === storage.state.selected_tool)) {
+    // depending on the mode, the toolbar may not exist
+    storage.save({ selected_tool: null, selected_variant: null })
+  }
 
-  return ToolStorage('tools__dread', { tools })
+  return storage
 }
