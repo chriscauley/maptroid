@@ -272,3 +272,83 @@
   outline: white solid 2px;
   inset: -10%;
 }
+
+.item-list {
+  background: var(--bg);
+  .dread-icon {
+    font-size: 2em;
+  }
+  .list-group-item {
+    cursor: pointer;
+  }
+}
+
+.dread-sprites {
+  &__item {
+    @apply mb-4;
+  }
+  &__title {
+    @apply font-bold flex gap-2 items-center;
+    font-size: 2.5rem;
+  }
+  &__section {
+    @apply mb-4;
+    &__title {
+      font-size: 3rem;
+    }
+  }
+  &__images {
+    @apply flex gap-4;
+    img {
+      max-width: unset
+    }
+    &.-size-loaded img {
+      width: 255px;
+      image-rendering: pixelated;
+    }
+    .source {
+      filter: brightness(1.5);
+    }
+  }
+  &__swatch {
+    @apply cursor-pointer flex items-center justify-center;
+    background: repeating-conic-gradient(white 0% 25%, black 0% 50%) 50% / 20px 20px;
+    height: 1em;
+    width: 1em;
+    .fa-warning {
+      font-size: 0.75em;
+      text-shadow: 0 0 1px black;
+    }
+  }
+  &__overlay-images {
+    @apply relative;
+    svg {
+      height: unset !important;
+      min-width: 500px;
+    }
+    ._fg {
+      @apply absolute left-0 opacity-0 top-0;
+      filter: invert(1);
+      z-index: 2;
+      &:hover {
+        opacity: 0.5;
+      }
+    }
+    ._bg {
+      @apply relative;
+      z-index: 1
+    }
+  }
+  &__swatches {
+    @apply flex flex-wrap gap-4;
+    font-size: 3rem;
+    .-selected {
+      border: 2px dotted black;
+      box-shadow: 0 0 2px white;
+    }
+  }
+}
+
+.fa.-red {
+  @apply text-red-500;
+}

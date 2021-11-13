@@ -20,6 +20,21 @@ def process_zone(request, world_id=None, zone_id=None):
         process(zone, world)
     return JsonResponse(zone.data)
 
+
+def replace_svg_color(request):
+    if not request.user.is_superuser:
+        raise NotImplementedError()
+    data = json.loads(request.body.decode("utf-8"))
+    _type = data['type']
+    target = os.path.join(settings.BASE_DIR, f'../static/dread/icons/svg/{_type}.svg')
+    if not os.path.exists(target):
+        raise NotImplementedError()
+    with open(target, 'w') as f:
+        f.write(data['text'])
+        f.close()
+    return JsonResponse({})
+
+
 def process(zone, world):
     # hardcoded dread values. OSD corrdinates are ratio of px_width
     px_width = 1280
