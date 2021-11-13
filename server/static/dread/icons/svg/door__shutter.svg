@@ -9,9 +9,9 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="70"
-   height="148"
-   viewBox="0 0 18.520834 39.158333"
+   width="512.00006"
+   height="1024.0001"
+   viewBox="0 0 135.46669 270.93336"
    version="1.1"
    id="svg3496"
    inkscape:version="0.92.5 (2060ec1f9f, 2020-04-08)"
@@ -26,8 +26,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="3.6093972"
-     inkscape:cx="60.519092"
-     inkscape:cy="87.211949"
+     inkscape:cx="11.341573"
+     inkscape:cy="59.144439"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -44,7 +44,7 @@
     <inkscape:grid
        type="xygrid"
        id="grid4118"
-       originx="-1855.6783"
+       originx="-1855.6785"
        originy="1329.1063" />
   </sodipodi:namedview>
   <metadata
@@ -63,26 +63,26 @@
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
      id="layer1"
-     transform="translate(-1855.6781,-1586.948)">
+     transform="translate(-1855.6781,-1355.173)">
     <rect
-       style="fill:#333333;fill-opacity:1;stroke:none;stroke-width:1.5368017;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       style="fill:#333333;fill-opacity:1;stroke:none;stroke-width:10.93938923;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        id="rect7663-32"
-       width="16.984018"
-       height="37.621727"
-       x="1856.4465"
-       y="1587.7163"
+       width="124.52718"
+       height="259.99533"
+       x="1861.1478"
+       y="1360.6418"
        ry="0" />
     <rect
-       style="fill:none;fill-opacity:1;stroke:#f0f0f0;stroke-width:1.53679836;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       style="fill:none;fill-opacity:1;stroke:#f0f0f0;stroke-width:10.93936634;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        id="rect7663-3"
-       width="16.984035"
-       height="37.621536"
-       x="1856.4465"
-       y="1587.7164"
+       width="124.52731"
+       height="259.99402"
+       x="1861.1478"
+       y="1360.6427"
        ry="0" />
     <g
        id="g8378"
-       transform="translate(-14.469716,-1.2268738)">
+       transform="matrix(7.3320209,0,0,6.9107762,-11856.449,-9620.1892)">
       <g
          transform="translate(-0.08125346)"
          id="g8359">

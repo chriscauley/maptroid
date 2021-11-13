@@ -9,13 +9,13 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="137.5403"
-   height="36.415386"
-   viewBox="0 0 36.390871 9.6349043"
+   width="1024.0001"
+   height="256"
+   viewBox="0 0 270.93337 67.733334"
    version="1.1"
    id="svg3496"
    inkscape:version="0.92.5 (2060ec1f9f, 2020-04-08)"
-   sodipodi:docname="door_thermal-trapdoor.svg">
+   sodipodi:docname="door__thermal-trapdoor.svg">
   <defs
      id="defs3490" />
   <sodipodi:namedview
@@ -25,9 +25,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="3.6093972"
-     inkscape:cx="9.3824181"
-     inkscape:cy="14.191914"
+     inkscape:zoom="0.63805731"
+     inkscape:cx="273.0701"
+     inkscape:cy="-47.925577"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -63,18 +63,18 @@
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
      id="layer1"
-     transform="translate(-1776.4802,-1586.569)">
+     transform="translate(-1776.4802,-1528.4705)">
     <rect
-       style="fill:#333333;fill-opacity:1;stroke:#f0f0f0;stroke-width:1.0583334;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       style="fill:#333333;fill-opacity:1;stroke:#f0f0f0;stroke-width:7.64682245;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        id="rect7663"
-       width="35.332539"
-       height="8.5765715"
-       x="1777.0094"
-       y="1587.0981"
+       width="263.28653"
+       height="60.08651"
+       x="1780.3036"
+       y="1532.2939"
        ry="0" />
     <g
        id="g7676"
-       transform="translate(-2.1440202,7.3951303)">
+       transform="matrix(7.4516727,0,0,7.0058895,-11477.365,-9534.9308)">
       <rect
          ry="1.3199952"
          y="1582.2247"
@@ -161,12 +161,12 @@
          style="fill:none;stroke:#b30000;stroke-width:1.0583334;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
     </g>
     <rect
-       style="fill:none;fill-opacity:1;stroke:#f0f0f0;stroke-width:1.0583334;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       style="fill:none;fill-opacity:1;stroke:#f0f0f0;stroke-width:7.64682245;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        id="rect7663-3"
-       width="35.332539"
-       height="8.5765715"
-       x="1777.0094"
-       y="1587.0981"
+       width="263.28653"
+       height="60.08651"
+       x="1780.3036"
+       y="1532.2939"
        ry="0" />
   </g>
 </svg>
