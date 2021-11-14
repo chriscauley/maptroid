@@ -291,6 +291,16 @@
   .list-group-item {
     cursor: pointer;
   }
+  &__header {
+    @apply cursor-pointer flex px-4 py-2 sticky top-0;
+    background: var(--bg-alt);
+    border-bottom: var(--bg) 1px solid;
+    z-index: 1;
+  }
+  &__player {
+    max-width: 100%;
+    overflow-x: hidden;
+  }
 }
 
 .dread-sprites {
@@ -361,4 +371,9 @@
 
 .fa.-red {
   @apply text-red-500;
+}
+
+.embedded-video {
+  @apply absolute top-0 left-0;
+  width: 700px;
 }

@@ -1,5 +1,5 @@
 <template>
-  <div class="room-canvas__wrapper" :style="wrapper_style">
+  <div :class="css" :style="wrapper_style">
     <unrest-draggable @dragend="dragend" @drag="drag">
       <canvas v-bind="canvasAttrs" ref="canvas" />
     </unrest-draggable>
@@ -23,10 +23,7 @@
     >
       <unrest-popper v-if="item.selected" placement="bottom" offset="0,10">
         <div class="room-canvas__popper" @click.stop>
-          <div v-if="$auth.user?.is_superuser" class="form-control">
-            <input v-model="item.name" @input="saveItemName(item)" />
-            <input v-model="item.reward" @input="saveItemReward(item)" />
-          </div>
+          <item-form v-if="$auth.user?.is_superuser" :item="item._item" :name="item.name" />
           <div v-else>
             <div class="room-canvas__popper-name">{{ item.name }}</div>
             <div v-if="item.reward" class="room-canvas__popper-reward">
@@ -48,12 +45,13 @@
 
 <script>
 import DreadItems from '@/models/DreadItems'
+import ItemForm from './ItemForm'
 import RoomForm from './RoomForm.vue'
 
 const grids = {}
 
 export default {
-  components: { RoomForm },
+  components: { ItemForm, RoomForm },
   props: {
     osd_store: Object,
     room: Object,
@@ -66,6 +64,11 @@ export default {
     return { drawing: null }
   },
   computed: {
+    css() {
+      const selected_id = this.osd_store.state.selected_item?.id
+      const has_selected = !!this.room_items.find((i) => i.id === selected_id)
+      return ['room-canvas__wrapper', has_selected && '-selected-item']
+    },
     tool() {
       const { selected_tool, selected_variant } = this.tool_storage.state
       return { selected: selected_tool, variant: selected_variant }
@@ -131,33 +134,34 @@ export default {
         id: `room-canvas__${this.room.id}`,
       }
     },
+    room_items() {
+      return this.zone_items.filter((i) => i.room === this.room.id)
+    },
     items() {
       const [_x, _y, W, H] = this.room.data.zone_bounds
-      return this.zone_items
-        .filter((i) => i.room === this.room.id)
-        .map((item) => {
-          const { type, bounds } = item.data
-          const [x, y, w, h] = bounds
-          const selected = this.osd_store.state.selected_item?.id === item.id
-          return {
-            id: item.id,
-            _item: item,
-            name: DreadItems.getName(item),
-            reward: item.data.reward,
-            selected,
-            attrs: {
-              id: `zone-item__${item.id}`,
-              class: [DreadItems.getClass(type), selected && '-selected'],
-              style: {
-                position: 'absolute',
-                left: `${(100 * x) / W}%`,
-                top: `${(100 * y) / H}%`,
-                width: `${(100 * w) / W}%`,
-                height: `${(100 * h) / H}%`,
-              },
+      return this.room_items.map((item) => {
+        const { type, bounds } = item.data
+        const [x, y, w, h] = bounds
+        const selected = this.osd_store.state.selected_item?.id === item.id
+        return {
+          id: item.id,
+          _item: item,
+          name: DreadItems.getName(item),
+          reward: item.data.reward,
+          selected,
+          attrs: {
+            id: `zone-item__${item.id}`,
+            class: [DreadItems.getClass(type), selected && '-selected'],
+            style: {
+              position: 'absolute',
+              left: `${(100 * x) / W}%`,
+              top: `${(100 * y) / H}%`,
+              width: `${(100 * w) / W}%`,
+              height: `${(100 * h) / H}%`,
             },
-          }
-        })
+          },
+        }
+      })
     },
   },
   mounted() {
@@ -250,14 +254,6 @@ export default {
       colors = colors.filter((c) => c.bounds)
       this.room.data.colors = colors // eslint-disable-line vue/no-mutating-props
       this.$store.room2.save(this.room)
-    },
-    saveItemName(item) {
-      item._item.data.name = item.name
-      this.$store.item2.bounceSave(item._item)
-    },
-    saveItemReward(item) {
-      item._item.data.reward = item.reward
-      this.$store.item2.bounceSave(item._item)
     },
   },
 }

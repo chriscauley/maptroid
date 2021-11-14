@@ -11,10 +11,9 @@ export default (component) => {
   const { $store } = component
   const osd_store = OsdStore()
   const { state } = osd_store
+  state.selected_item = null
 
-  const getGeometry = () => {
-    return component.zone.data.screenshot
-  }
+  const getGeometry = () => component.zone.data.screenshot
 
   const _roundDreadPixel = (fraction) => {
     const geo = getGeometry()
@@ -165,7 +164,9 @@ export default (component) => {
     const [x, y, w, h] = room.data.zone_bounds.map((i) => i / scale)
     const b = 0.02
     state._viewer.viewport.fitBounds(new Rect(x - b, y - b, w + 2 * b, h + 2 * b))
-    state._viewer.addOnceHandler('animation-finish', () => selectItem(item))
+
+    // TODO very hacky, but view.animationFinish didn't work because it doesn't always animate
+    setTimeout(() => selectItem(item), 400)
   }
 
   Object.assign(osd_store, {

@@ -3,11 +3,13 @@ import unrest from '@unrest/vue'
 import admin_options from './admin'
 import item from './item'
 import item2 from './item2'
+import local from './local'
 import osd from './osd'
 import playthrough from './playthrough'
 import room from './room'
 import room2 from './room2'
 import screenshot from './screenshot'
+import video from './video'
 import viewer from './viewer'
 import world from './world'
 import world2 from './world2'
@@ -20,11 +22,13 @@ const store = {}
 const modules = {
   item,
   item2,
+  local,
   osd,
   playthrough,
   room,
   room2,
   screenshot,
+  video,
   viewer,
   world,
   world2,

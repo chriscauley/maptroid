@@ -51,22 +51,23 @@
         :osd_store="osd_store"
       />
     </div>
-    <item-list
-      v-if="zone"
-      :zone_items="zone_items"
-      :storage="osd_store"
-      @select-item="osd_store.gotoItem"
-    />
+    <video-player v-if="video" />
+    <item-list v-if="zone" :zone_items="zone_items" @select-item="osd_store.gotoItem" />
     <div v-if="debug" class="dread-debug">{{ debug }}</div>
     <unrest-admin-popup>
       <template #buttons>
         <!-- these can't be router links because osda and tool storages aren't dynamic -->
-        <a href="?mode=screenshots" class="btn btn-primary">
+        <a href="?mode=screenshots" class="btn -primary">
           <i class="fa fa-picture-o" />
         </a>
-        <a href="?mode=room" class="btn btn-primary">
+        <a href="?mode=room" class="btn -primary">
           <i class="fa fa-edit" />
         </a>
+        <unrest-dropdown :items="video_items">
+          <div class="btn -primary">
+            <i class="fa fa-youtube-play" />
+          </div>
+        </unrest-dropdown>
       </template>
     </unrest-admin-popup>
   </div>
@@ -84,6 +85,7 @@ import ScreenshotOverlay from './ScreenshotOverlay.vue'
 import HtmlOverlay from '@/vue-openseadragon/HtmlOverlay.vue'
 import ToolStorage from './ToolStorage'
 import OsdStore from './OsdStore'
+import VideoPlayer from '@/components/Video.vue'
 
 const WORLD = 3 // hardcoded for now since this interface is dread only
 
@@ -104,6 +106,7 @@ export default {
     ItemList,
     RoomCanvas,
     ScreenshotOverlay,
+    VideoPlayer,
   },
   data() {
     return {
@@ -135,10 +138,24 @@ export default {
       if (!this.$auth.user?.is_superuser) {
         zone_items = zone_items.filter((i) => allowed_by_type[i.data.type])
       }
-      return zone_items
+      return DreadItems.prepDisplayItems(zone_items, this.video)
     },
     rooms() {
       return this.$store.room2.getPage(this.search_params)?.items
+    },
+    video_items() {
+      return this.videos.map((video) => ({
+        text: video.title,
+        href: `?video=${video.id}`,
+      }))
+    },
+    videos() {
+      const q = { query: { world: WORLD, per_page: 5000 } }
+      return this.$store.video.getPage(q)?.items || []
+    },
+    video() {
+      const video_id = parseInt(this.$route.query.video) || undefined
+      return video_id && this.$store.video.getOne(video_id)
     },
   },
   methods: {

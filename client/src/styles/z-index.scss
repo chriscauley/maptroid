@@ -28,6 +28,10 @@
   }
 }
 
+.room-canvas__wrapper.-selected-item {
+  z-index: 3;
+}
+
 .oob-fix {
   z-index: 4
 }
@@ -42,6 +46,7 @@
 .unrest-floating-actions,
 .ur-toolbar,
 .osd .navigator,
-.item-list {
+.item-list,
+.embedded-video {
   z-index: 200;
 }

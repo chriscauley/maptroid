@@ -31,7 +31,7 @@ export default {
         showRotationControl: false,
         debugmode: false,
         clickTimeThreshold: 1000,
-        visibilityRatio: editing ? 0.25 : 1,
+        // visibilityRatio: editing ? 0.75 : 1,
         mouseNavEnabled: false,
         gestureSettingsMouse: {
           clickToZoom: false,

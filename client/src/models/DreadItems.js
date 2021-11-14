@@ -106,6 +106,23 @@ const name_cache = {
   'central-unit': 'Central Unit',
 }
 
+const getClass = (slug) => {
+  const type = slug.split('__')[0]
+  return `dread-icon -type-${type} -type-${slug}`
+}
+
+const getName = (item) => {
+  if (item.data.name) {
+    return item.data.name
+  }
+  const type = item.data.type
+  if (!name_cache[type]) {
+    const [a, b = ''] = type.split('__')
+    name_cache[type] = startCase(`${b}-${a}`)
+  }
+  return name_cache[type]
+}
+
 export default {
   colors,
   items,
@@ -113,21 +130,16 @@ export default {
   transit,
   blocks,
   doors,
+  getName,
+  getClass,
   type_map: { items, stations, transit, blocks, doors },
   makeCss,
-  getClass: (slug) => {
-    const type = slug.split('__')[0]
-    return `dread-icon -type-${type} -type-${slug}`
-  },
-  getName: (item) => {
-    if (item.data.name) {
-      return item.data.name
-    }
-    const type = item.data.type
-    if (!name_cache[type]) {
-      const [a, b = ''] = type.split('__')
-      name_cache[type] = startCase(`${b}-${a}`)
-    }
-    return name_cache[type]
+  prepDisplayItems(display_items, video) {
+    return display_items.map((item) => ({
+      ...item,
+      name: getName(item),
+      icon: getClass(item.data.type),
+      video_times: video?.times_by_id[item.id],
+    }))
   },
 }

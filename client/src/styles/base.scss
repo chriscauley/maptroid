@@ -310,7 +310,7 @@ body {
 
 .accordion {
   &__header {
-    @apply cursor-pointer px-4 py-2;
+    @apply cursor-pointer flex px-4 py-2;
     background: var(--bg-alt);
     border-bottom: var(--bg) 1px solid;
   }
@@ -365,4 +365,8 @@ body {
 
 .max-w-unset {
   max-width: unset;
+}
+
+.flexy {
+  @apply flex flex-wrap gap-2;
 }

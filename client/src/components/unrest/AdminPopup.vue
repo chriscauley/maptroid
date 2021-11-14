@@ -1,5 +1,5 @@
 <template>
-  <div class="unrest-floating-actions admin-popup__root">
+  <div class="unrest-floating-actions -left admin-popup__root">
     <div class="btn -primary" @click="open = true">
       <i class="fa fa-cogs" />
     </div>
