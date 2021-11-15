@@ -78,7 +78,7 @@
 
 <script>
 import Mousetrap from '@unrest/vue-mousetrap'
-import { startCase } from 'lodash'
+import { startCase, sortBy } from 'lodash'
 
 import DreadItems from '@/models/DreadItems'
 import DreadViewer from './Viewer.vue'
@@ -114,6 +114,7 @@ export default {
     VideoPlayer,
   },
   mixins: [Mousetrap.Mixin],
+  provide: ['video'],
   data() {
     return {
       mousetrap: { g: this.toggleGrid },
@@ -143,14 +144,19 @@ export default {
       return { query: { zone: this.zone.id, per_page: 5000 } }
     },
     world_items() {
-      return this.$store.item2.getPage(WORLD_QUERY)?.items || []
+      const items = this.$store.item2.getPage(WORLD_QUERY)?.items || []
+      if (this.videos.length) {
+        const video = this.video || this.videos[0]
+        return sortBy(items, (i) => video.times_by_id[i.id]?.[0].seconds || Infinity)
+      }
+      return items
     },
     zone_items() {
       let zone_items = this.world_items.filter((i) => i.zone === this.zone.id)
       if (!this.$auth.user?.is_superuser) {
         zone_items = zone_items.filter((i) => allowed_by_type[i.data.type])
       }
-      return DreadItems.prepDisplayItems(zone_items, this.video)
+      return DreadItems.prepDisplayItems(zone_items, this.videos)
     },
     rooms() {
       return this.$store.room2.getPage(this.search_params)?.items
@@ -166,8 +172,7 @@ export default {
       return this.$store.video.getPage(q)?.items || []
     },
     video() {
-      const video_id = parseInt(this.$route.query.video) || undefined
-      return video_id && this.$store.video.getOne(video_id)
+      return this.videos.find((v) => v.id === parseInt(this.$route.query.video))
     },
   },
   methods: {

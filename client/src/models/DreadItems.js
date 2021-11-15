@@ -135,12 +135,12 @@ export default {
   getClass,
   type_map: { items, stations, transit, blocks, doors },
   makeCss,
-  prepDisplayItems(display_items, video) {
+  prepDisplayItems(display_items, videos = []) {
     return display_items.map((item) => ({
       ...item,
       name: getName(item),
       icon: getClass(item.data.type),
-      video_times: video?.times_by_id[item.id],
+      times_by_video_id: Object.fromEntries(videos.map((v) => [v.id, v.times_by_id[item.id]])),
     }))
   },
 }

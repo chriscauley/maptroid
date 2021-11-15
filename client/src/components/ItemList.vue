@@ -16,7 +16,11 @@
           <div class="list-group-item" @click="$emit('select-item', item)">
             <i :class="item.icon" />
             <span class="flex-grow truncate">{{ item.name }}</span>
-            <div v-for="time in item.video_times" :key="time.seconds" class="pill -primary">
+            <div
+              v-for="time in item.times_by_video_id[$route.query.video]"
+              :key="time.seconds"
+              class="pill -primary"
+            >
               {{ time.hms }}
             </div>
           </div>

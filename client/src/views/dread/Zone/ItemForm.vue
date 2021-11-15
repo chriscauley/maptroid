@@ -4,13 +4,9 @@
     <input v-model="name_override" @input="saveItem" placeholder="Name Override" />
     <input v-model="reward" @input="saveItem" placeholder="Reward" />
     <div class="flexy select-none">
-      <span class="pill -primary" v-for="time in item.video_times" :key="time.seconds">
+      <span class="pill -primary" v-for="time in video_times" :key="time.seconds">
         {{ time.hms }}
-        <i
-          v-if="$auth.user?.is_superuser"
-          class="fa fa-close cursor-pointer"
-          @click="(e) => deleteTime(e, time)"
-        />
+        <i class="fa fa-close cursor-pointer" @click="(e) => deleteTime(e, time)" />
       </span>
       <i class="fa fa-youtube-play" @click="addTime" />
     </div>
@@ -19,6 +15,7 @@
 
 <script>
 export default {
+  inject: ['video'],
   props: {
     item: Object,
     name: String,
@@ -29,12 +26,13 @@ export default {
       reward: this.item.data.reward,
     }
   },
-  computed: {
-    video() {
-      return this.$store.video.getOne(this.$route.query.video)
-    },
-  },
   methods: {
+    video_times() {
+      if (!video) {
+        return []
+      }
+      return this.item.times_by_video_id[this.video.id]
+    },
     saveItem() {
       this.item.data.name = this.name_override // eslint-disable-line
       this.item.data.reward = this.reward // eslint-disable-line
