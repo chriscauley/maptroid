@@ -3,6 +3,7 @@
     <unrest-draggable @dragend="dragend" @drag="drag">
       <canvas v-bind="canvasAttrs" ref="canvas" />
     </unrest-draggable>
+    <router-link v-if="to_zone" :to="to_zone" class="room-canvas__to-zone" />
     <template v-if="tool.selected === 'room_bounds'">
       <unrest-draggable class="room-canvas__resize btn -mini -primary" @drag="resize">
         <i class="fa fa-arrows-alt" />
@@ -64,10 +65,17 @@ export default {
     return { drawing: null }
   },
   computed: {
+    to_zone() {
+      if (this.room.data.to_zone) {
+        const zone = this.zones.find((z) => z.id === this.room.data.to_zone)
+        return zone && `/dread/${zone.slug}/`
+      }
+      return undefined
+    },
     css() {
       const selected_id = this.osd_store.state.selected_item?.id
       const has_selected = !!this.room_items.find((i) => i.id === selected_id)
-      return ['room-canvas__wrapper', has_selected && '-selected-item']
+      return ['room-canvas__wrapper', has_selected && '-selected-item', this.to_zone && '-to-zone']
     },
     tool() {
       const { selected_tool, selected_variant } = this.tool_storage.state

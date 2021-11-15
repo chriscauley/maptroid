@@ -39,7 +39,7 @@
 .dread-zone.-mode-undefined {
   .room-canvas__wrapper {
     outline: 0;
-    background: none !important
+    background: none !important;
   }
 }
 
@@ -217,6 +217,12 @@
   &__popper-name, &__popper-reward {
     white-space: nowrap;
   }
+  &__to-zone {
+    @apply absolute inset-0;
+    &:hover {
+      border: 4px solid white;
+    }
+  }
 }
 
 .dread-debug {
@@ -373,6 +379,6 @@
 }
 
 .embedded-video {
-  @apply absolute top-0 left-0;
+  @apply absolute bottom-0 left-0;
   width: 700px;
 }

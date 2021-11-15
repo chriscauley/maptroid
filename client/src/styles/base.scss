@@ -370,3 +370,18 @@ body {
 .flexy {
   @apply flex flex-wrap gap-2;
 }
+
+.floating-nav {
+  @apply absolute left-0 p-4 top-0 select-none;
+  background: var(--bg);
+  &__title {
+    font-weight: bold;
+    font-size: 2rem;
+  }
+}
+
+.admin-popup__root {
+  @apply absolute bottom-0 flex;
+  left: 50%;
+  transform: translate(-50%, 0);
+}

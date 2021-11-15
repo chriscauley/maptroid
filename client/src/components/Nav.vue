@@ -1,51 +1,54 @@
 <template>
-  <header :class="css.nav.outer()">
-    <section :class="css.nav.section('left')">
-      <router-link to="/" :class="css.nav.brand()">{{ title }}</router-link>
-    </section>
-    <section id="nav-breadcrumbs" class="unrest-breadcrumbs" />
-    <section class="unrest-grid" v-if="world">
-      <router-link v-for="[link, name] in world_links" :key="link" :to="link" class="link">
-        {{ name }}
-      </router-link>
-    </section>
-    <div class="flex-grow" />
-    <section class="unrest-grid">
-      <unrest-dropdown class="btn -light" :items="items">
-        <i class="fa fa-bars" />
-      </unrest-dropdown>
-      <unrest-auth-menu />
-    </section>
-  </header>
+  <unrest-dropdown class="floating-nav">
+    <div class="floating-nav__title link">{{ title }}</div>
+    <template #content>
+      <div class="dropdown-items">
+        <router-link class="dropdown-item" to="/dread/">
+          Metroid Dread
+        </router-link>
+        <router-link v-for="link in zone_links" :key="link.to" class="dropdown-item" :to="link.to">
+          - {{ link.text }}
+        </router-link>
+        <router-link class="dropdown-item" to="/dread-download/">
+          - Download Maps + Icons
+        </router-link>
+        <template v-if="$auth.user?.is_superuser">
+          <router-link class="dropdown-item" to="/dread-sprites/">Sprites</router-link>
+          <router-link class="dropdown-item" to="/screenshotupload/"
+            >Upload Screenshots</router-link
+          >
+        </template>
+      </div>
+    </template>
+  </unrest-dropdown>
 </template>
 
 <script>
-import css from '@unrest/css'
+const WORLD = 3
+
 export default {
-  data() {
-    const items = [
-      { to: '/', text: 'Interactive Map' },
-      { class: 'divider' },
-      { to: '/editor/', text: 'Editor' },
-      { to: '/spritegallery/', text: 'Item Gallery' },
-    ]
-    return { css, items }
-  },
   computed: {
-    world_links() {
-      const { world_id } = this.$route.params
-      return [
-        [`/admin/main/world/${world_id}/`, 'Admin'],
-        [`/viewer/${world_id}/`, 'Viewer'],
-        [`/editor/${world_id}/`, 'Editor'],
-      ]
+    zones() {
+      const q = { query: { world_id: WORLD, per_page: 5000 } }
+      return this.$store.zone.getPage(q)?.items || []
     },
-    world() {
-      const { world_id } = this.$route.params
-      return world_id && this.$store.world.getOne(world_id)
+    zone_links() {
+      return this.zones
+        .filter((z) => !z.data.hidden)
+        .map((zone) => ({
+          text: zone.name,
+          to: `/dread/${zone.slug}/`,
+        }))
     },
     title() {
-      return this.world?.name || 'Project Maptroid'
+      const zone = this.zones.find((z) => z.slug === this.$route.params.zone_slug)
+      if (zone) {
+        return `Maptroid: ${zone.name}`
+      }
+      if (this.$route.fullPath.startsWith('/dread')) {
+        return 'Maptroid: Dread'
+      }
+      return 'Project Maptroid'
     },
   },
 }

@@ -41,12 +41,21 @@
   background: red !important;
 }
 
-.ur-dropdown .dropdown-items,
-.ur-dropdown .ur-popper,
+.admin-popup__root,
+.floating-nav,
 .unrest-floating-actions,
 .ur-toolbar,
 .osd .navigator,
 .item-list,
 .embedded-video {
   z-index: 200;
+}
+
+.ur-dropdown .dropdown-items,
+.ur-dropdown .ur-popper {
+  z-index: 300;
+}
+
+.modal {
+  z-index: 400;
 }
