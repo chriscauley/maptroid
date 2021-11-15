@@ -11,6 +11,7 @@ const items = [
   'item__cube',
   'boss',
   'central-unit',
+  'samus',
 ]
 
 const stations = [

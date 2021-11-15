@@ -35,20 +35,16 @@
   }
 }
 
-.dread-zone {
-  &.-mode-undefined {
-    .room-canvas__wrapper {
-      outline: 0;
-      background: none !important
-    }
-    .dread-viewer {
-      background: var(--dread-void);
-    }
-  }
-  &.-tool-room_colors .room-canvas__wrapper {
+.dread-zone.-hide-grid,
+.dread-zone.-mode-undefined {
+  .room-canvas__wrapper {
     outline: 0;
     background: none !important
   }
+}
+
+
+.dread-zone {
   &.-mode-screenshots .dread-icon {
     display: none;
   }
@@ -67,6 +63,9 @@
 
 .dread-viewer {
   background: white;
+  .dread-zone.-mode-undefined & {
+    background: var(--dread-void);
+  }
 }
 
 .dread-world-viewer {

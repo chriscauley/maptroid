@@ -1,6 +1,6 @@
 <template>
   <div class="app-body">
-    <div :class="css" v-if="zones && zone">
+    <div :class="css.wrapper" v-if="zones && zone">
       <unrest-toolbar v-if="$route.query.mode" :storage="tool_storage" class="-topleft">
         <template #buttons>
           <div
@@ -13,6 +13,9 @@
           <div v-if="$route.query.mode === 'room'" class="btn -info -fa-stack" @click="newRoom">
             <i class="fa fa-square-o" />
             <i class="fa fa-plus -fa-stack-badge" />
+          </div>
+          <div :class="css.grid_toggle" @click="toggleGrid">
+            <i class="fa fa-hashtag" />
           </div>
         </template>
       </unrest-toolbar>
@@ -74,6 +77,7 @@
 </template>
 
 <script>
+import Mousetrap from '@unrest/vue-mousetrap'
 import { startCase } from 'lodash'
 
 import DreadItems from '@/models/DreadItems'
@@ -108,8 +112,10 @@ export default {
     ScreenshotOverlay,
     VideoPlayer,
   },
+  mixins: [Mousetrap.Mixin],
   data() {
     return {
+      mousetrap: { g: this.toggleGrid },
       debug: '',
       managing_groups: false,
       osd_store: OsdStore(this),
@@ -119,8 +125,11 @@ export default {
   computed: {
     css() {
       const m = this.$route.query.mode
-      const { selected_tool: _t, selected_variant: _v } = this.tool_storage.state
-      return `flex-grow dread-zone -tool-${_t} -variant-${_v} -mode-${m}`
+      const { selected_tool: _t, selected_variant: _v, hide_grid: _g } = this.tool_storage.state
+      return {
+        wrapper: [`flex-grow dread-zone -tool-${_t} -variant-${_v} -mode-${m}`, _g && '-hide-grid'],
+        grid_toggle: `btn -${_g ? 'danger' : 'secondary'}`,
+      }
     },
     zones() {
       return this.$store.zone.getPage({ query: { world_id: WORLD, per_page: 5000 } })?.items
@@ -159,6 +168,10 @@ export default {
     },
   },
   methods: {
+    toggleGrid() {
+      const { hide_grid } = this.tool_storage.state
+      this.tool_storage.save({ hide_grid: !hide_grid })
+    },
     setDebug(value) {
       this.debug = value
     },
