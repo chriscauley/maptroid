@@ -91,12 +91,11 @@ def process(zone, world):
         image.paste(_screenshot, (x, y), mask=_screenshot)
         _screenshot.close()
 
-    path = f'dread_zones/{zone.id}-{zone.name}.png'
-    mkdir(settings.MEDIA_ROOT, f'dread_zones/{world.id}')
-    image.save(os.path.join(settings.MEDIA_ROOT, path))
+    path = zone.get_image_path('png')
+    image.save(path)
     zone.data['output'] = {
-        'png': os.path.join(settings.MEDIA_URL, path),
-        'dzi': os.path.join(settings.MEDIA_URL, f'dread_zones/{zone.id}-{zone.name}.dzi'),
+        'png': zone.get_image_url('png'),
+        'dzi': zone.get_image_url('dzi'),
         'screenshot_count': screenshots.count(),
         'ratio_bounds': ratio_bounds,
         'fails': fails,

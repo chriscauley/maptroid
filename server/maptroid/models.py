@@ -27,7 +27,9 @@ class Zone(models.Model):
   data = models.JSONField(default=default_data, blank=True)
 
   def get_image_path(self, ext='png'):
-    return os.path.join(settings.MEDIA_ROOT, f'dread_zones/{self.id}-{self.name}.{ext}')
+    return os.path.join(settings.MEDIA_ROOT, f'dread_zones/{self.id}-{self.slug}.{ext}')
+  def get_image_url(self, ext='png'):
+    return os.path.join(settings.MEDIA_URL, f'dread_zones/{self.id}-{self.slug}.{ext}')
 
 
 class Room(models.Model):
