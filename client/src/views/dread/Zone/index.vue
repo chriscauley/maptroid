@@ -54,7 +54,7 @@
         :osd_store="osd_store"
       />
     </div>
-    <video-player v-if="video" />
+    <video-player v-if="video" :world_items="world_items" />
     <item-list v-if="zone" :zone_items="zone_items" @select-item="osd_store.gotoItem" />
     <div v-if="debug" class="dread-debug">{{ debug }}</div>
     <unrest-admin-popup>
@@ -92,6 +92,7 @@ import OsdStore from './OsdStore'
 import VideoPlayer from '@/components/Video.vue'
 
 const WORLD = 3 // hardcoded for now since this interface is dread only
+const WORLD_QUERY = { query: { world_id: WORLD, per_page: 5000 } }
 
 const allowed_types = [...DreadItems.items, ...DreadItems.stations, ...DreadItems.transit]
 const allowed_by_type = Object.fromEntries(allowed_types.map((t) => [t, true]))
@@ -132,7 +133,7 @@ export default {
       }
     },
     zones() {
-      return this.$store.zone.getPage({ query: { world_id: WORLD, per_page: 5000 } })?.items
+      return this.$store.zone.getPage(WORLD_QUERY)?.items
     },
     zone() {
       return this.zones?.find((z) => z.slug === this.$route.params.zone_slug)
@@ -141,9 +142,11 @@ export default {
       // items and rooms search on same values
       return { query: { zone: this.zone.id, per_page: 5000 } }
     },
+    world_items() {
+      return this.$store.item2.getPage(WORLD_QUERY)?.items || []
+    },
     zone_items() {
-      const world_items = this.$store.item2.getPage(this.search_params)?.items || []
-      let zone_items = world_items.filter((i) => i.zone === this.zone.id)
+      let zone_items = this.world_items.filter((i) => i.zone === this.zone.id)
       if (!this.$auth.user?.is_superuser) {
         zone_items = zone_items.filter((i) => allowed_by_type[i.data.type])
       }

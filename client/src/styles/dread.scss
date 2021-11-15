@@ -382,3 +382,11 @@
   @apply absolute bottom-0 left-0;
   width: 700px;
 }
+
+.item-bar {
+  @apply flex gap-6;
+  background: var(--bg);
+  &__item {
+    @apply flex gap-2 items-center;
+  }
+}
