@@ -6,9 +6,11 @@
     class="dread-viewer"
     :pixelated="true"
   />
+  <zoom-controls v-if="osd_store.viewer" :viewer="osd_store.viewer" />
 </template>
 
 <script>
+import ZoomControls from '@/vue-openseadragon/ZoomControls.vue'
 import Openseadragon from 'openseadragon'
 import { sortBy } from 'lodash'
 
@@ -21,6 +23,7 @@ const WORLD = 3 // hardcoded for now since this interface is dread only
 const IS_EDITOR = localStorage.getItem('is_an_editor')
 
 export default {
+  components: { ZoomControls },
   props: {
     zone: Object,
     osd_store: Object,
@@ -30,6 +33,7 @@ export default {
       const editing = !!this.$route.query.mode
       return {
         maxZoomPixelRatio: editing ? 8 : 4,
+        navigatorAutoFade: false,
         showNavigator: true,
         showZoomControl: false,
         showHomeControl: false,

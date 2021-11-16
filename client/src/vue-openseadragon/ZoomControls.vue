@@ -1,5 +1,5 @@
 <template>
-  <div class="osd-zoom-controls" v-if="zoom">
+  <div v-if="zoom" class="osd-zoom-controls" :style="wrapper_style">
     <div class="osd-zoom-controls__track" />
     <unrest-draggable
       class="osd-zoom-controls__current"
@@ -25,8 +25,12 @@ export default {
     return { zoom: null, start_zoom: undefined, box: undefined }
   },
   computed: {
+    wrapper_style() {
+      const { height, width } = this.viewer.navigator.element.getBoundingClientRect()
+      return { right: `${width}px`, height: `${height}px` }
+    },
     handle_style() {
-      return { top: `${(100 * (this.zoom.current - this.zoom.min)) / this.zoom.range}%` }
+      return { bottom: `${(100 * (this.zoom.current - this.zoom.min)) / this.zoom.range}%` }
     },
     mousetrap() {
       return {
@@ -54,7 +58,7 @@ export default {
     },
     drag(event) {
       const { xy_start, xy } = event._drag
-      const delta_ratio = (xy[1] - xy_start[1]) / this.box.height
+      const delta_ratio = (xy_start[1] - xy[1]) / this.box.height
       this.applyZoom(this.start_zoom + delta_ratio * this.zoom.range)
     },
     applyZoom(value) {
