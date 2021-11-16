@@ -288,8 +288,14 @@
 }
 
 .room-canvas__wrapper .dread-icon:before {
-  outline: white solid 2px;
+  cursor: pointer;
   inset: -10%;
+  outline: white solid 2px;
+  transition: inset 0.25s;
+  .dread-zone.-zoom-0 & {
+    /* todo this makes everything square so I'll need to adapt it based off of image size */
+    inset: -0.75rem;
+  }
 }
 
 .item-list {

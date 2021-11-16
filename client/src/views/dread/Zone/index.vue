@@ -134,8 +134,12 @@ export default {
     css() {
       const m = this.$route.query.mode
       const { selected_tool: _t, selected_variant: _v, hide_grid: _g } = this.tool_storage.state
+      const zoom = Math.round(this.osd_store.state.zoom)
       return {
-        wrapper: [`flex-grow dread-zone -tool-${_t} -variant-${_v} -mode-${m}`, _g && '-hide-grid'],
+        wrapper: [
+          `flex-grow dread-zone -tool-${_t} -variant-${_v} -mode-${m} -zoom-${zoom}`,
+          _g && '-hide-grid',
+        ],
         grid_toggle: `btn -${_g ? 'danger' : 'secondary'}`,
       }
     },

@@ -17,6 +17,7 @@ export default () => {
     },
     bindViewer(viewer) {
       state._viewer = viewer
+      viewer.addHandler('zoom', () => state.zoom = viewer.viewport.getZoom())
     },
   }
 }
