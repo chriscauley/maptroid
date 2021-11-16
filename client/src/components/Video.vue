@@ -78,7 +78,7 @@ export default {
       this.player = new window.YT.Player(this.player_id, {
         width,
         height,
-        videoId: this.video.url.match(/v=(.*)$/)[1],
+        videoId: this.video.external_id,
         playerVars: { start: this.video.max_event, origin },
       })
       this.interval = setInterval(this.setTime, 60)

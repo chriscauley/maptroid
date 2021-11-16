@@ -18,8 +18,7 @@ auth.configure({
   AUTH_START: '/',
   oauth_providers: ['github'],
 })
-
-createApp(App)
+const app = createApp(App)
   .component('OpenSeadragon', OpenSeadragon)
   .component('UnrestMouseTracker', UnrestMouseTracker)
   .component('UnrestToolbar', UnrestToolbar)
@@ -30,4 +29,6 @@ createApp(App)
   .use(unrest.ui)
   .use(router)
   .use(auth.plugin)
-  .mount('#app')
+
+app.config.unwrapInjectedRef = true
+app.mount('#app')

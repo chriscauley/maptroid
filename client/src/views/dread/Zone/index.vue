@@ -78,6 +78,7 @@
 </template>
 
 <script>
+import { computed } from 'vue'
 import Mousetrap from '@unrest/vue-mousetrap'
 import { startCase, sortBy } from 'lodash'
 
@@ -114,9 +115,12 @@ export default {
     RoomCanvas,
     ScreenshotOverlay,
     VideoPlayer,
+    ZoomControls,
   },
   mixins: [Mousetrap.Mixin],
-  provide: ['video'],
+  provide() {
+    return { video: computed(() => this.video) }
+  },
   data() {
     return {
       mousetrap: { g: this.toggleGrid },
@@ -141,8 +145,7 @@ export default {
     zone() {
       return this.zones?.find((z) => z.slug === this.$route.params.zone_slug)
     },
-    search_params() {
-      // items and rooms search on same values
+    room_params() {
       return { query: { zone: this.zone.id, per_page: 5000 } }
     },
     world_items() {
@@ -161,7 +164,7 @@ export default {
       return DreadItems.prepDisplayItems(zone_items, this.videos)
     },
     rooms() {
-      return this.$store.room2.getPage(this.search_params)?.items
+      return this.$store.room2.getPage(this.room_params)?.items
     },
     video_items() {
       return this.videos.map((video) => ({
@@ -170,8 +173,7 @@ export default {
       }))
     },
     videos() {
-      const q = { query: { world: WORLD, per_page: 5000 } }
-      return this.$store.video.getPage(q)?.items || []
+      return this.$store.video.getPage(WORLD_QUERY)?.items || []
     },
     video() {
       return this.videos.find((v) => v.id === parseInt(this.$route.query.video))
@@ -187,11 +189,11 @@ export default {
     },
     refetchItems() {
       this.$store.item2.api.markStale()
-      this.$store.item2.getPage(this.search_params)
+      this.$store.item2.getPage(WORLD_QUERY)
     },
     refetchRooms() {
       this.$store.room2.api.markStale()
-      this.$store.room2.getPage(this.search_params)
+      this.$store.room2.getPage(this.room_params)
     },
     deleteRoom(room) {
       this.$store.room2.delete(room).then(this.refetchRooms)

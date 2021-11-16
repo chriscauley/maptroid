@@ -26,13 +26,15 @@ export default {
       reward: this.item.data.reward,
     }
   },
-  methods: {
+  computed: {
     video_times() {
-      if (!video) {
+      if (!this.video) {
         return []
       }
       return this.item.times_by_video_id[this.video.id]
     },
+  },
+  methods: {
     saveItem() {
       this.item.data.name = this.name_override // eslint-disable-line
       this.item.data.reward = this.reward // eslint-disable-line
@@ -55,10 +57,10 @@ export default {
       this.saveVideo()
     },
     saveVideo() {
+      const WORLD = 3
       this.$store.video
         .save(this.video)
-        .then(() => this.$store.video.getOne(this.$route.query.video))
-      // this.$store.video.markStale()
+        .then(() => this.$store.video.getPage({ query: { world_id: WORLD, per_page: 5000 } }))
     },
   },
 }

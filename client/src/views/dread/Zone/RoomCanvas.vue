@@ -68,7 +68,8 @@ export default {
     to_zone() {
       if (this.room.data.to_zone) {
         const zone = this.zones.find((z) => z.id === this.room.data.to_zone)
-        return zone && `/dread/${zone.slug}/`
+        const query = this.$auth.user?.is_superuser ? `?video=${this.$route.query.video}` : ''
+        return zone && `/dread/${zone.slug}/${query}`
       }
       return undefined
     },
