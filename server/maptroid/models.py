@@ -91,9 +91,29 @@ class Screenshot(models.Model):
     self.save()
 
 
+class Channel(models.Model):
+  SOURCES = _choices(['youtube'])
+  source = models.CharField(max_length=16, choices=SOURCES, default="youtube")
+  external_id = models.CharField(max_length=24)
+  name = models.CharField(max_length=30)
+  icon = models.ImageField(upload_to="channel_icons")
+  __str__ = lambda self: self.name
+
+
 class Video(models.Model):
-  url = models.TextField()
+  SOURCES = _choices(['youtube'])
+  source = models.CharField(max_length=16, choices=SOURCES, default="youtube")
+  external_id = models.CharField(max_length=24)
   title = models.CharField(max_length=255)
-  channel_name = models.CharField(max_length=30)
+  channel = models.ForeignKey(Channel, models.CASCADE)
   data = models.JSONField(default=dict, blank=True)
   world = models.ForeignKey(World, models.CASCADE)
+  __str__ = lambda self: self.title
+
+  @property
+  def channel_name(self):
+    return self.channel.name
+
+  @property
+  def channel_icon(self):
+    return self.channel.icon.url

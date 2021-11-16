@@ -67,6 +67,7 @@ class ItemForm(forms.ModelForm):
 @schema.register
 class VideoForm(forms.ModelForm):
   user_can_GET = user_can_LIST = 'ALL'
+  readonly_fields = ['channel_icon', 'channel_name']
   class Meta:
     model = Video
-    fields = ['url', 'title', 'channel_name', 'data']
+    fields = ['source', 'external_id', 'title', 'data']
