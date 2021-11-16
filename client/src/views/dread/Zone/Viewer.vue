@@ -14,6 +14,12 @@ import { sortBy } from 'lodash'
 
 const WORLD = 3 // hardcoded for now since this interface is dread only
 
+// TODO put this feature in a config menu
+// currently, because OSD loves to eat events, I disable OSD's controls while editing
+// but osd's natural usage is better for everyone else
+// the only way to trigger this is to manually set this in the console
+const IS_EDITOR = localStorage.getItem('is_an_editor')
+
 export default {
   props: {
     zone: Object,
@@ -32,7 +38,7 @@ export default {
         debugmode: false,
         clickTimeThreshold: 1000,
         // visibilityRatio: editing ? 0.75 : 1,
-        mouseNavEnabled: false,
+        mouseNavEnabled: !IS_EDITOR,
         gestureSettingsMouse: {
           clickToZoom: false,
           dblClickToZoom: false,
@@ -78,6 +84,9 @@ export default {
   },
   methods: {
     osdWheel(event) {
+      if (!IS_EDITOR) {
+        return
+      }
       // Loosely adapted from OSD.Viewer.onCanvasDragEnd and OSD.viewer.onCanvasScroll
       const viewer = this.osd_store.viewer
       const viewport = viewer.viewport
