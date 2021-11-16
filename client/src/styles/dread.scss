@@ -211,13 +211,6 @@
   &__delete {
     @apply absolute right-0 top-0;
   }
-  &__popper {
-    @apply p-2 rounded border;
-    background: var(--bg);
-  }
-  &__popper-name, &__popper-reward {
-    white-space: nowrap;
-  }
   &__to-zone {
     @apply absolute inset-0;
     &:hover {
@@ -226,6 +219,16 @@
   }
 }
 
+.item-popper {
+  @apply p-2 rounded border;
+  background: var(--bg);
+  &__name, &__reward {
+    white-space: nowrap;
+  }
+  .flexy .fa {
+    cursor: pointer;
+  }
+}
 .dread-debug {
   @apply fixed bottom-0 left-0 p-2;
   background: rgba(0,0,0,0.5);

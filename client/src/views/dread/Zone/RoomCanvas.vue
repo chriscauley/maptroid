@@ -22,18 +22,7 @@
       :key="item.id"
       @click="(e) => clickItem(e, item)"
     >
-      <unrest-popper v-if="item.selected" placement="bottom" offset="0,10">
-        <div class="room-canvas__popper" @click.stop>
-          <item-form v-if="$auth.user?.is_superuser" :item="item._item" :name="item.name" />
-          <div v-else>
-            <div class="room-canvas__popper-name">{{ item.name }}</div>
-            <div v-if="item.reward" class="room-canvas__popper-reward">
-              <i class="fa fa-plus" />
-              {{ item.reward }}
-            </div>
-          </div>
-        </div>
-      </unrest-popper>
+      <item-popper v-if="item.selected" :item="item._item" />
     </div>
     <div
       v-for="(style, i) in drawn_colors"
@@ -46,13 +35,14 @@
 
 <script>
 import DreadItems from '@/models/DreadItems'
-import ItemForm from './ItemForm'
+import ItemPopper from './ItemPopper'
 import RoomForm from './RoomForm.vue'
 
 const grids = {}
 
 export default {
-  components: { ItemForm, RoomForm },
+  components: { ItemPopper, RoomForm },
+  inject: ['video'],
   props: {
     osd_store: Object,
     room: Object,
