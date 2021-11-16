@@ -23,8 +23,11 @@
 
 .room-canvas__wrapper .dread-icon {
   z-index: 1;
+  &.-type-missile {
+    z-index: 2; /* there's one missile under a stealth door in artaria */
+  }
   &.-selected {
-    z-index: 2
+    z-index: 3;
   }
 }
 

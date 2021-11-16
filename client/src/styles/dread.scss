@@ -45,6 +45,7 @@
 
 
 .dread-zone {
+  @apply relative;
   &.-mode-screenshots .dread-icon {
     display: none;
   }

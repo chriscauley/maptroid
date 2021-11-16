@@ -1,0 +1,25 @@
+.osd-zoom-controls {
+  @apply absolute bottom-0 m-6 right-0;
+  height: 8rem;
+  width: 3rem;
+  &__track {
+    @apply absolute bg-white top-0 h-full;
+    left: 50%;
+    transform: translate(-50%, 0);
+    width: 2px;
+  }
+  &__bar {
+    @apply absolute bg-white;
+    height: 2px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+  }
+  &__current {
+    @apply absolute bg-white;
+    height: 8px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 75%;
+  }
+}

@@ -47,6 +47,7 @@
             @select-item="osd_store.selectItem"
           />
         </html-overlay>
+        <zoom-controls :viewer="osd_store.viewer" />
       </template>
       <group-manager
         v-if="managing_groups"
@@ -90,6 +91,7 @@ import HtmlOverlay from '@/vue-openseadragon/HtmlOverlay.vue'
 import ToolStorage from './ToolStorage'
 import OsdStore from './OsdStore'
 import VideoPlayer from '@/components/Video.vue'
+import ZoomControls from '@/vue-openseadragon/ZoomControls.vue'
 
 const WORLD = 3 // hardcoded for now since this interface is dread only
 const WORLD_QUERY = { query: { world_id: WORLD, per_page: 5000 } }
