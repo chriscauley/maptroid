@@ -103,8 +103,10 @@ class Channel(models.Model):
 class Video(models.Model):
   SOURCES = _choices(['youtube'])
   source = models.CharField(max_length=16, choices=SOURCES, default="youtube")
+  thumbnail = models.ImageField(upload_to="video_thumbnails")
   external_id = models.CharField(max_length=24)
   title = models.CharField(max_length=255)
+  label = models.CharField(max_length=64)
   channel = models.ForeignKey(Channel, models.CASCADE)
   data = models.JSONField(default=dict, blank=True)
   world = models.ForeignKey(World, models.CASCADE)
@@ -117,3 +119,7 @@ class Video(models.Model):
   @property
   def channel_icon(self):
     return self.channel.icon.url
+
+  @property
+  def thumbnail_url(self):
+    return self.thumbnail.url
