@@ -119,7 +119,10 @@ export default {
   },
   mixins: [Mousetrap.Mixin],
   provide() {
-    return { video: computed(() => this.video) }
+    return {
+      video: computed(() => this.video),
+      videos: computed(() => this.videos),
+    }
   },
   data() {
     return {
@@ -169,14 +172,15 @@ export default {
     video_items() {
       return this.videos.map((video) => ({
         text: video.title,
-        href: `?video=${video.id}`,
+        onClick: () => this.$store.local.save({ video_id: video.id }),
       }))
     },
     videos() {
       return this.$store.video.getPage(WORLD_QUERY)?.items || []
     },
     video() {
-      return this.videos.find((v) => v.id === parseInt(this.$route.query.video))
+      const { selected_video_id } = this.$store.local.state
+      return this.videos.find((v) => v.id === selected_video_id) || this.videos[0]
     },
   },
   methods: {

@@ -1,33 +1,46 @@
 <template>
-  <div v-if="video" class="embedded-video">
-    <div v-if="$auth.user?.is_superuser" class="item-bar">
-      <span v-for="item in grouped_items" :key="item.type" class="item-bar__item">
-        <span :class="item.icon" /> {{ item.count }}
-      </span>
+  <div class="video-box" v-if="video">
+    <div class="list-group-item cursor-pointer" @click="open = true">
+      Route:
+      <div class="flex-grow truncate">{{ video.label }}</div>
+      by {{ video.channel_name }}
+      <img :src="video.channel_icon" class="video-box__avatar" />
     </div>
-    <div :id="player_id" />
+    <div v-if="start_at" class="video-box__player">
+      <div class="item-bar">
+        <span v-for="item in grouped_items" :key="item.type" class="item-bar__item">
+          <span :class="item.icon" /> {{ item.count }}
+        </span>
+      </div>
+      <div :id="player_id" />
+    </div>
+    <unrest-modal v-if="open" @close="open = false">
+      <video-picker @close="open = false" />
+    </unrest-modal>
   </div>
 </template>
 
 <script>
 import DreadItems from '@/models/DreadItems'
+import VideoPicker from './VideoPicker.vue'
 
 const VISIBLE_LIST = DreadItems.items.slice(0, -1)
 const VISIBLE = {}
 VISIBLE_LIST.forEach((t) => (VISIBLE[t] = true))
 
 export default {
+  components: { VideoPicker },
+  inject: ['video'],
   props: {
     world_items: Array,
   },
   data() {
     const player_id = `_player_${Math.round(Math.random() * 1e6)}`
-    return { player: null, player_id }
+    return { player: null, open: null, player_id }
   },
   computed: {
-    video() {
-      const video_id = parseInt(this.$route.query.video)
-      return video_id && this.$store.video.getOne(video_id)
+    start_at() {
+      return this.$auth.user?.is_superuser ? this.video.max_event : null
     },
     grouped_items() {
       const bins = {}
@@ -72,6 +85,9 @@ export default {
   },
   methods: {
     loadVideo() {
+      if (!this.start_at) {
+        return
+      }
       const width = this.$el.clientWidth
       const height = (width * 360) / 640
       const { origin } = window.location
@@ -79,7 +95,7 @@ export default {
         width,
         height,
         videoId: this.video.external_id,
-        playerVars: { start: this.video.max_event, origin },
+        playerVars: { start: this.start_at, origin },
       })
       this.interval = setInterval(this.setTime, 60)
     },

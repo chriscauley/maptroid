@@ -15,9 +15,9 @@
       </div>
       <div v-else>
         <div class="item-popper__name">{{ item.name }}</div>
-        <div v-if="item.reward" class="item-popper__reward">
+        <div v-if="reward" class="item-popper__reward">
           <i class="fa fa-plus" />
-          {{ item.reward }}
+          {{ reward }}
         </div>
         <div class="flexy select-none">
           <a

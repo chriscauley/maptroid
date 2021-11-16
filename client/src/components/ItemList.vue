@@ -11,13 +11,13 @@
         <div class="flex-grow" />
         <i class="fa fa-close cursor-pointer" @click="collapsed = true" />
       </div>
-      <div class="scroll-me list-group">
+      <div class="list-group">
         <template v-for="item in items" :key="item.id">
           <div class="list-group-item" @click="$emit('select-item', item)">
             <i :class="item.icon" />
             <span class="flex-grow truncate">{{ item.name }}</span>
             <div
-              v-for="time in item.times_by_video_id[$route.query.video]"
+              v-for="time in item.times_by_video_id[video.id]"
               :key="time.seconds"
               class="pill -primary"
             >
@@ -36,6 +36,7 @@ import { sortBy } from 'lodash'
 import DreadItems from '@/models/DreadItems'
 
 export default {
+  inject: ['video'],
   props: {
     zone_items: Object,
     playthrough: Object,

@@ -382,15 +382,38 @@
   @apply text-red-500;
 }
 
-.embedded-video {
+.video-box {
   @apply absolute bottom-0 left-0;
-  width: 700px;
+  background: var(--bg);
+  &__avatar {
+    border-radius: 100%;
+    max-width: 2rem;
+  }
+  &__player {
+    width: 700px;
+  }
+}
+
+.video-picker {
+  &__video {
+    @apply border cursor-pointer rounded-lg;
+    max-width: 300px;
+  }
+  &__label {
+    @apply text-lg p-2;
+  }
+  &__title {
+    @apply p-2 pb-0 truncate;
+  }
+  &__by {
+    @apply flex items-center gap-2 p-2;
+  }
 }
 
 .item-bar {
   @apply flex gap-6;
-  background: var(--bg);
   &__item {
     @apply flex gap-2 items-center;
   }
 }
+
