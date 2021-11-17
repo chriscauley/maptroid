@@ -8,6 +8,7 @@
     </div>
     <div v-if="start_at" class="video-box__player">
       <div class="item-bar">
+        <i class="fa fa-youtube-play cursor-pointer" @click="toggleVideo" />
         <span v-for="item in grouped_items" :key="item.type" class="item-bar__item">
           <span :class="item.icon" /> {{ item.count }}
         </span>
@@ -84,8 +85,14 @@ export default {
     }
   },
   methods: {
+    toggleVideo() {
+      this.$store.local.save({ show_video: !this.$store.local.state.show_video })
+      // TODO right now killing/restoring video is unstable, so I just reload the page
+      window.location.reload()
+    },
     loadVideo() {
-      if (!this.start_at) {
+      const { show_video } = this.$store.local.state
+      if (!show_video || !this.start_at) {
         return
       }
       const width = this.$el.clientWidth
