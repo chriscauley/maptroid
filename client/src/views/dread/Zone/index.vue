@@ -57,22 +57,7 @@
     <video-player v-if="video" :world_items="world_items" />
     <item-list v-if="zone" :zone_items="zone_items" @select-item="osd_store.gotoItem" />
     <div v-if="debug" class="dread-debug">{{ debug }}</div>
-    <unrest-admin-popup>
-      <template #buttons>
-        <!-- these can't be router links because osda and tool storages aren't dynamic -->
-        <a href="?mode=screenshots" class="btn -primary">
-          <i class="fa fa-picture-o" />
-        </a>
-        <a href="?mode=room" class="btn -primary">
-          <i class="fa fa-edit" />
-        </a>
-        <unrest-dropdown :items="video_items">
-          <div class="btn -primary">
-            <i class="fa fa-youtube-play" />
-          </div>
-        </unrest-dropdown>
-      </template>
-    </unrest-admin-popup>
+    <admin-popup />
   </div>
 </template>
 
@@ -81,6 +66,7 @@ import { computed } from 'vue'
 import Mousetrap from '@unrest/vue-mousetrap'
 import { startCase, sortBy } from 'lodash'
 
+import AdminPopup from './AdminPopup.vue'
 import DreadItems from '@/models/DreadItems'
 import DreadViewer from './Viewer.vue'
 import GroupManager from './GroupManager.vue'
@@ -106,6 +92,7 @@ export default {
     },
   },
   components: {
+    AdminPopup,
     DreadViewer,
     GroupManager,
     HtmlOverlay,
@@ -169,12 +156,6 @@ export default {
     },
     rooms() {
       return this.$store.room2.getPage(this.room_params)?.items
-    },
-    video_items() {
-      return this.videos.map((video) => ({
-        text: video.title,
-        onClick: () => this.$store.local.save({ video_id: video.id }),
-      }))
     },
     videos() {
       return this.$store.video.getPage(WORLD_QUERY)?.items || []
