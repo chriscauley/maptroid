@@ -9,9 +9,9 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="511.99927"
-   height="512"
-   viewBox="0 0 1679.9976 2376"
+   width="255.94783"
+   height="256"
+   viewBox="0 0 839.82882 1188"
    version="1.1"
    id="svg8"
    inkscape:version="0.92.5 (2060ec1f9f, 2020-04-08)"
@@ -26,7 +26,7 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="0.24748737"
-     inkscape:cx="-590.92147"
+     inkscape:cx="-1270.6534"
      inkscape:cy="1138.9585"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
@@ -56,10 +56,10 @@
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
      id="layer1"
-     transform="translate(734.9988,1041.4939)">
+     transform="translate(908.91273,-146.5061)">
     <g
        id="g864"
-       transform="matrix(0.99999859,0,0,1.0016812,1.8238702e-4,2687.1384)">
+       transform="matrix(0.49989813,0,0,0.5008406,-541.48759,2010.8223)">
       <path
          sodipodi:nodetypes="cssssccssssssssssssssssssssssssssssssssccssssssc"
          inkscape:connector-curvature="0"
@@ -74,11 +74,11 @@
          style="fill:#73f001;fill-opacity:1;stroke:#000000;stroke-width:11.84678841;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
     </g>
     <rect
-       style="fill:none;fill-opacity:1;stroke:none;stroke-width:3.9912312;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       style="fill:none;fill-opacity:1;stroke:none;stroke-width:1.99541378;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        id="rect860"
-       width="2372.0088"
-       height="2376"
-       x="-1081.0044"
-       y="-1041.4939" />
+       width="1185.7644"
+       height="1188"
+       x="-1081.8805"
+       y="146.5061" />
   </g>
 </svg>

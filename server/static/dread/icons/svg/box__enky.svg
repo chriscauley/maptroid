@@ -9,9 +9,9 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="511.99997"
-   height="1023.9999"
-   viewBox="0 0 135.46666 270.93332"
+   width="256"
+   height="512"
+   viewBox="0 0 67.733334 135.46668"
    version="1.1"
    id="svg3496"
    inkscape:version="0.92.5 (2060ec1f9f, 2020-04-08)"
@@ -26,8 +26,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="0.70710684"
-     inkscape:cx="79.466211"
-     inkscape:cy="583.1577"
+     inkscape:cx="-171.55666"
+     inkscape:cy="583.15771"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -44,8 +44,8 @@
     <inkscape:grid
        type="xygrid"
        id="grid4118"
-       originx="249.91603"
-       originy="318.6713" />
+       originx="249.91602"
+       originy="318.67133" />
   </sodipodi:namedview>
   <metadata
      id="metadata3493">
@@ -63,17 +63,17 @@
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
      id="layer1"
-     transform="translate(249.91606,-344.73792)">
+     transform="translate(249.91606,-480.20456)">
     <rect
-       style="fill:#333333;fill-opacity:0;stroke:none;stroke-width:8.40613747;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       style="fill:#333333;fill-opacity:0;stroke:none;stroke-width:4.20306921;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        id="rect5838"
-       width="135.46666"
-       height="270.93332"
+       width="67.733337"
+       height="135.46667"
        x="-249.91606"
-       y="344.73792" />
+       y="480.20456" />
     <g
        id="g5847"
-       transform="translate(-32.606627,57.757976)">
+       transform="matrix(0.50000003,0,0,0.50000003,-141.26134,336.71459)">
       <path
          sodipodi:nodetypes="scccccccccccccccccccccccccccccccccccccccsccccccccscsccscccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccscccccccccccccccccssccsssccccccccsscccccccccccccccccccccccccsccccccccccccsccccccccccscccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccscccccccccccccssssaaaaaaaaaaaaaaaaaaa"
          inkscape:connector-curvature="0"
