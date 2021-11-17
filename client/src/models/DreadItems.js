@@ -39,8 +39,10 @@ const transit = [
 
 const blocks = [
   'block__void',
+  'grapple-swing-point',
+  'morphball-launcher-exit',
+  'morphball-launcher',
   'block__grapple-beam',
-  'box__enky',
   'box__grapple-beam',
   'box__storm-missile',
   'box__wide-beam',
@@ -48,9 +50,7 @@ const blocks = [
   'cover__missile',
   'cover__super-missile',
   'cover__wave-beam',
-  'grapple-swing-point',
-  'morphball-launcher-exit',
-  'morphball-launcher',
+  'door__wide-beam',
 ]
 
 const doors = [
@@ -59,13 +59,13 @@ const doors = [
   'door__emmi-zone',
   'door__charge-beam',
   'door__power-beam',
-  'door__sensor-lock',
   'door__shutter',
-  'door__shutter-platform',
   'door__thermal',
-  'door__thermal-trapdoor',
-  'door__wide-beam',
   'door__access-closed',
+  'box__enky',
+  'door__sensor-lock',
+  'door__shutter-platform',
+  'door__thermal-trapdoor',
 ]
 
 const all = [...items, ...stations, ...transit, ...blocks, ...doors]
@@ -96,6 +96,9 @@ const name_cache = {
   // These pre-defined names act as overridse
   'door__shutter-platform': 'Shutter Platform',
   'door__thermal-trapdoor': 'Thermal Trapdoor',
+  transit__elevator: 'Shuttle',
+  transit__shuttle: 'Elevator',
+  'transit__transport-capsule': 'Transport Capsule',
   missile__tank: 'Missile Tank',
   'missile__plus-tank': 'Missile + Tank',
   energy__part: 'Energy Part',
@@ -113,6 +116,9 @@ const getClass = (slug) => {
 }
 
 const getName = (item) => {
+  if (typeof item === 'string') {
+    return getName({ data: { type: item } })
+  }
   if (item.data.name) {
     return item.data.name
   }
@@ -125,6 +131,7 @@ const getName = (item) => {
 }
 
 export default {
+  all,
   colors,
   items,
   stations,
