@@ -110,12 +110,18 @@ export default {
   },
   data() {
     return {
-      mousetrap: { g: this.toggleGrid },
+      mousetrap: { g: this.toggleGrid, esc: this.blurItem },
       debug: '',
       managing_groups: false,
       osd_store: OsdStore(this),
       tool_storage: ToolStorage(this),
     }
+  },
+  mounted() {
+    document.addEventListener('click', this.blurItem)
+  },
+  unmounted() {
+    document.removeEventListener('click', this.blurItem)
   },
   computed: {
     css() {
@@ -203,6 +209,9 @@ export default {
       item.zone = this.zone.id
       this.$store.item2.save(item).then(this.refetchItems)
     },
+    blurItem() {
+      this.osd_store.selectItem(null)
+    }
   },
 }
 </script>
