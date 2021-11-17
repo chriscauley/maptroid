@@ -1,4 +1,5 @@
 import dread from './dread/index'
+import Downloads from './Downloads.vue'
 import Editor from './Editor/index.vue'
 import FileBrowser from './FileBrowser.vue'
 import Home from './Home.vue'
@@ -13,6 +14,7 @@ import WorldTiles from './WorldTiles/index.vue'
 
 export default {
   ...dread,
+  Downloads,
   Editor,
   FileBrowser,
   Home,

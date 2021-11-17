@@ -9,7 +9,7 @@ import unrest.user.forms
 
 urlpatterns = [
     path('djadmin/', admin.site.urls),
-    re_path('^(admin|auth|dread|process|screenshot|editor|viewer|file-browser|world-tiles)', index),
+    re_path('^(admin|auth|dread|downloads|process|screenshot|editor|viewer|file-browser|world-tiles)', index),
     path('api/list-dir/', list_dir),
     path('api/delete-file/', delete_file),
     path('api/process-zone/<world_id>/<zone_id>/', process_zone),

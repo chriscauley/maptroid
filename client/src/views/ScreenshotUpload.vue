@@ -1,5 +1,5 @@
 <template>
-  <div v-if="schema">
+  <div v-if="schema" class="app-screenshotupload">
     <input type="file" multiple ref="files" @change="changeFiles" />
     <unrest-form :schema="schema" :state="state" @submit="submit" />
     <div :title="warnings.join('\n')">Warnings: {{ warnings.length }}</div>
