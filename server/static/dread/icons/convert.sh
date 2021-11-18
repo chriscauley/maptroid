@@ -3,8 +3,8 @@ set -e
 FILES="${@:-$(ls svg/|grep svg)}"
 
 MEDIA_TARGET=../../../.media/dread_icons
-rm -rf $MEDIA_TARGET tmp
 
+rm -rf $MEDIA_TARGET tmp
 mkdir tmp
 mkdir -p tmp/256
 mkdir -p tmp/128
@@ -25,10 +25,15 @@ done
 for i in 256 128 64 32 16
 do
     optipng tmp/$i/*.png -o 7
-    tmp/zip -r dread-icons-$i.zip tmp/$i/*.png
+    cd tmp/$i
+    zip -r dread-icons-$i.zip *.png
+    cd ../..
 done
 
-zip -r tmp/dread-icons-svg.zip svg/*.svg
+cd svg
+zip -r dread-icons-svg.zip *.svg
+mv dread-icons-svg.zip ../tmp
+cd ..
 
 cp tmp/64/*.png .
 mv tmp $MEDIA_TARGET
