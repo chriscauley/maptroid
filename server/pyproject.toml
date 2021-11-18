@@ -12,6 +12,7 @@ pytesseract = "^0.3.8"
 np = "^1.0.2"
 social-auth-app-django = "4.0.0"
 social-auth-core = "3.3.3"
+django-unrest = "^0.1.2"
 
 [tool.poetry.dev-dependencies]
 

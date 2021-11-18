@@ -87,6 +87,18 @@ argon2 = ["argon2-cffi (>=19.1.0)"]
 bcrypt = ["bcrypt"]
 
 [[package]]
+name = "django-unrest"
+version = "0.1.2"
+description = "A collection of tools for django"
+category = "main"
+optional = false
+python-versions = "*"
+
+[package.dependencies]
+social-auth-app-django = ">=4.0.0"
+social-auth-core = ">=3.3.3"
+
+[[package]]
 name = "idna"
 version = "3.3"
 description = "Internationalized Domain Names in Applications (IDNA)"
@@ -335,7 +347,7 @@ socks = ["PySocks (>=1.5.6,!=1.5.7,<2.0)"]
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.6"
-content-hash = "1ff6f4c21473bd73b93d973d1ed6443ed679b32fb85d0ebbda0c0ce0d78f7cab"
+content-hash = "86fa44c80642a023de9390d46219f27b670998bd54f21d993b16228d5e1eff3c"
 
 [metadata.files]
 asgiref = [
@@ -431,6 +443,9 @@ defusedxml = [
 django = [
     {file = "Django-3.2.7-py3-none-any.whl", hash = "sha256:e93c93565005b37ddebf2396b4dc4b6913c1838baa82efdfb79acedd5816c240"},
     {file = "Django-3.2.7.tar.gz", hash = "sha256:95b318319d6997bac3595517101ad9cc83fe5672ac498ba48d1a410f47afecd2"},
+]
+django-unrest = [
+    {file = "django-unrest-0.1.2.tar.gz", hash = "sha256:eb38dd69681e77b7b54383dd9afaf8f3bec0db91a8bcebc932d2d03fa94a266b"},
 ]
 idna = [
     {file = "idna-3.3-py3-none-any.whl", hash = "sha256:84d9dd047ffa80596e0f246e2eab0b391788b0503584e8945f2368256d2735ff"},
