@@ -319,7 +319,13 @@ body {
 }
 
 .app-body {
-  @apply relative flex flex-grow;
+  @apply relative flex flex-grow p-4;
+  &.-full-screen {
+    @apply p-0;
+  }
+  &.-col {
+    @apply flex-col gap-12;
+  }
   .app-panel {
     @apply overflow-auto relative;
     width: 300px;

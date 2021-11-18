@@ -9,7 +9,7 @@
         <router-link v-for="link in zone_links" :key="link.to" class="dropdown-item" :to="link.to">
           - {{ link.text }}
         </router-link>
-        <router-link class="dropdown-item" to="/dread-download/">
+        <router-link class="dropdown-item" to="/downloads/">
           - Download Maps + Icons
         </router-link>
         <template v-if="$auth.user?.is_superuser">

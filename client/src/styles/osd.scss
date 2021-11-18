@@ -1,5 +1,6 @@
 .osd-zoom-controls {
   @apply absolute mx-4 top-0;
+  display: none;
   width: 2rem;
   &__track {
     @apply absolute bg-white cursor-pointer top-0 h-full;
@@ -13,5 +14,13 @@
     left: 50%;
     transform: translate(-50%, -50%);
     width: 75%;
+  }
+}
+
+@media (max-width: 600px) {
+  .osd-wrapper .navigator,
+  .video-box,
+  .item-list {
+    display:none;
   }
 }

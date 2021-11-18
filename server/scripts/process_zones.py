@@ -51,7 +51,7 @@ if '--skip-dzi' not in sys.argv:
     log('dzi made')
 
 if '--skip-resize' not in sys.argv:
-    for factor in [0.5, 0.25, 0.125, 0.0625]:
+    for factor in [0.5, 0.25, 0.125, 0.0625, 0.03125]:
         SIZE_DIR = f'.media/dread_zones/{factor}x/'
         if not os.path.exists(SIZE_DIR):
             os.mkdir(SIZE_DIR)

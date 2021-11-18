@@ -1,5 +1,5 @@
 <template>
-  <div class="app-body" v-if="zones">
+  <div class="app-body -full-screen" v-if="zones">
     <viewer :osd_store="osd_store" :zones="zones" />
     <div v-if="osd_store.viewer">
       <html-overlay :viewer="osd_store.viewer">

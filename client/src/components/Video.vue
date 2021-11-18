@@ -15,9 +15,11 @@
       </div>
       <div :id="player_id" />
     </div>
-    <unrest-modal v-if="open" @close="open = false">
-      <video-picker @close="open = false" />
-    </unrest-modal>
+    <teleport to="body">
+      <unrest-modal v-if="open" @close="open = false">
+        <video-picker @close="open = false" />
+      </unrest-modal>
+    </teleport>
   </div>
 </template>
 

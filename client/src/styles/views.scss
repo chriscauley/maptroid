@@ -6,12 +6,13 @@
     @apply flex flex-wrap gap-x-4 gap-y-2 justify-center;
   }
   &__card {
-    @apply border p-2 rounded;
+    @apply border p-4 rounded;
   }
   &__card-name {
-    @apply my-2;
+    @apply text-lg;
   }
   &__card-content {
+    @apply flex flex-col items-center gap-2;
     text-align: center;
     width: 256px;
   }
@@ -20,9 +21,18 @@
     height: 256px;
     width: 256px;
     img {
-      max-height: 90%;
-      max-width: 90%;
+      max-height: 100%;
+      max-width: 100%;
+      &:hover {
+        background: repeating-conic-gradient(#808080 0% 25%, white 0% 50%) 50% / 32px 32px;
+      }
     }
+    &.-half {
+      height: 128px;
+    }
+  }
+  p {
+    max-width: 650px;
   }
 }
 

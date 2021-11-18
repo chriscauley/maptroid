@@ -1,5 +1,5 @@
 <template>
-  <div class="app-body">
+  <div class="app-body -full-screen">
     <div :class="css.wrapper" v-if="zones && zone">
       <unrest-toolbar v-if="$route.query.mode" :storage="tool_storage" class="-topleft">
         <template #buttons>
@@ -117,12 +117,6 @@ export default {
       tool_storage: ToolStorage(this),
     }
   },
-  mounted() {
-    document.addEventListener('click', this.blurItem)
-  },
-  unmounted() {
-    document.removeEventListener('click', this.blurItem)
-  },
   computed: {
     css() {
       const m = this.$route.query.mode
@@ -171,6 +165,12 @@ export default {
       return this.videos.find((v) => v.id === selected_video_id) || this.videos[0]
     },
   },
+  mounted() {
+    document.addEventListener('click', this.blurItem)
+  },
+  unmounted() {
+    document.removeEventListener('click', this.blurItem)
+  },
   methods: {
     toggleGrid() {
       const { hide_grid } = this.tool_storage.state
@@ -211,7 +211,7 @@ export default {
     },
     blurItem() {
       this.osd_store.selectItem(null)
-    }
+    },
   },
 }
 </script>
