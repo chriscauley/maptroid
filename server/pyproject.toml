@@ -13,6 +13,9 @@ np = "^1.0.2"
 social-auth-app-django = "4.0.0"
 social-auth-core = "3.3.3"
 django-unrest = "^0.1.2"
+psycopg2-binary = "^2.9.2"
+uWSGI = "^2.0.20"
+django-mailer = "^2.1"
 
 [tool.poetry.dev-dependencies]
 

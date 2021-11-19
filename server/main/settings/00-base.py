@@ -18,8 +18,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'social_django',
+    'mailer',
 
     'maptroid',
+    'contact',
 ]
 
 MIDDLEWARE = [
@@ -105,3 +107,10 @@ STATICFILES_DIRS = [
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, '../.media')
+
+EMAIL_HOST = 'smtp.sparkpostmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'SMTP_Injection'
+EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = SERVER_EMAIL = 'noreply@unrest.io'
+EMAIL_BACKEND = "mailer.backend.DbBackend"

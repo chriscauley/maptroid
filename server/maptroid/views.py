@@ -7,7 +7,7 @@ import os
 from PIL import Image, ImageDraw
 import sys
 
-from maptroid.dread import mkdir
+from maptroid.utils import mkdir
 from maptroid.models import World, Zone, Screenshot, Room
 
 with open(os.path.join(settings.BASE_DIR, '../../client/src/lib/dread_colors.json'), 'r') as f:

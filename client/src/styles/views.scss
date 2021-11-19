@@ -39,3 +39,14 @@
 .app-downloads, .app-screenshotupload {
   @apply mt-20;
 }
+
+.app-contact {
+  @apply flex items-center justify-center w-full;
+  &__form {
+    @apply border p-4;
+    width: 400px;
+    textarea {
+      height: 200px;
+    }
+  }
+}

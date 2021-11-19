@@ -1,3 +1,4 @@
+import Contact from './Contact.vue'
 import dread from './dread/index'
 import Downloads from './Downloads.vue'
 import Editor from './Editor/index.vue'
@@ -14,6 +15,7 @@ import WorldTiles from './WorldTiles/index.vue'
 
 export default {
   ...dread,
+  Contact,
   Downloads,
   Editor,
   FileBrowser,
