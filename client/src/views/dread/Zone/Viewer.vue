@@ -41,7 +41,6 @@ export default {
         showRotationControl: false,
         debugmode: false,
         clickTimeThreshold: 1000,
-        // visibilityRatio: editing ? 0.75 : 1,
         mouseNavEnabled: !IS_EDITOR,
         gestureSettingsMouse: {
           clickToZoom: false,
@@ -88,10 +87,10 @@ export default {
   },
   methods: {
     osdWheel(event) {
+      // Loosely adapted from OSD.Viewer.onCanvasDragEnd and OSD.viewer.onCanvasScroll
       if (!IS_EDITOR) {
         return
       }
-      // Loosely adapted from OSD.Viewer.onCanvasDragEnd and OSD.viewer.onCanvasScroll
       const viewer = this.osd_store.viewer
       const viewport = viewer.viewport
       if (event.ctrlKey) {

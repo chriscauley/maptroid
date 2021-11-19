@@ -17,8 +17,8 @@ export default {
   },
   methods: {
     success() {
-      this.message = "Message sent! Thank you for your feedback."
-    }
-  }
+      this.message = 'Message sent! Thank you for your feedback.'
+    },
+  },
 }
 </script>

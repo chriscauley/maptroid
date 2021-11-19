@@ -11,6 +11,9 @@
 <script>
 import Openseadragon from 'openseadragon'
 
+// TODO see note in zone viewer
+const IS_EDITOR = localStorage.getItem('is_an_editor')
+
 export default {
   props: {
     zones: Array,
@@ -27,7 +30,7 @@ export default {
         showRotationControl: false,
         debugmode: false,
         clickTimeThreshold: 1000,
-        mouseNavEnabled: false,
+        mouseNavEnabled: !IS_EDITOR,
         visibilityRatio: 1,
         gestureSettingsMouse: {
           clickToZoom: false,
@@ -40,6 +43,9 @@ export default {
     osdWheel(event) {
       // TODO copied from Dread/Viewer.vue
       // Loosely adapted from OSD.Viewer.onCanvasDragEnd and OSD.viewer.onCanvasScroll
+      if (!IS_EDITOR) {
+        return
+      }
       const viewer = this.osd_store.viewer
       const viewport = viewer.viewport
       if (event.ctrlKey) {
