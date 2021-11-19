@@ -193,6 +193,9 @@
     &:hover {
       outline: 4px solid pink;
     }
+    &.-selected-item {
+      border: 4px double gold;
+    }
   }
   &__resize {
     @apply absolute bottom-0 right-0;

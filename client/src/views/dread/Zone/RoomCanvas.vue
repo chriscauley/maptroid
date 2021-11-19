@@ -20,7 +20,7 @@
       v-for="item in items"
       v-bind="item.attrs"
       :key="item.id"
-      @click.stop="(e) => clickItem(e, item)"
+      @click.stop="(e) => clickItem(e, item._item)"
     >
       <item-popper v-if="item.selected" :item="item._item" :watchme="osd_store.state.zoom" />
     </div>

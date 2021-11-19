@@ -44,7 +44,7 @@
             @add-item="addItem"
             :zone_items="zone_items"
             :zones="zones"
-            @select-item="osd_store.selectItem"
+            @select-item="gotoItem"
           />
         </html-overlay>
       </template>

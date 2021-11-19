@@ -90,7 +90,7 @@ export default {
         .then(() => this.$store.video.getPage({ query: { world_id: WORLD, per_page: 5000 } }))
     },
     getVideoUrl(time) {
-      return `https://youtu.be/${this.video.external_id}?t=${time.seconds}`
+      return `https://youtu.be/${this.video.external_id}?t=${time.seconds - 10}`
     },
   },
 }
