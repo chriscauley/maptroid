@@ -1,5 +1,5 @@
 <template>
-  <unrest-popper placement="bottom" offset="0,10">
+  <unrest-popper placement="bottom" offset="0,10" :watchme="watchme">
     <div class="item-popper" @click.stop>
       <div v-if="can_edit">
         {{ item.name }}
@@ -41,6 +41,7 @@ export default {
   inject: ['video'],
   props: {
     item: Object,
+    watchme: Number,
   },
   data() {
     return {
