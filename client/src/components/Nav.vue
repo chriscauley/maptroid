@@ -10,7 +10,13 @@
           - {{ link.text }}
         </router-link>
         <router-link class="dropdown-item" to="/downloads/">
-          - Download Maps + Icons
+          Download Maps + Icons
+        </router-link>
+        <router-link class="dropdown-item" to="/about/">
+          About
+        </router-link>
+        <router-link class="dropdown-item" to="/contact/">
+          Contact
         </router-link>
         <template v-if="$auth.user?.is_superuser">
           <router-link class="dropdown-item" to="/dread-sprites/">Sprites</router-link>

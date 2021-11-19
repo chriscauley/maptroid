@@ -50,3 +50,11 @@
     }
   }
 }
+
+.app-about {
+  @apply flex items-center justify-center w-full;
+  &__inner {
+    @apply border p-4;
+    width: 600px;
+  }
+}

@@ -5,7 +5,9 @@
       <p>
         Legal Stuff: All credit for Metroid and Metroid Dread goes to Nintendo and Mercury Steam
         respectively. All metroid related assets on this site are intended as fan art and are
-        released under a Creative Commons license. Please attribute, but if you don't nbd.
+        released under a Creative Commons license. Please attribute, but if you don't nbd. But
+        please <router-link to="/contact/">contact me</router-link>. I'd be thrilled to know someone
+        found this useful.
       </p>
     </div>
     <div class="app-downloads__maps">
@@ -49,7 +51,8 @@
         I learned inkscape in order to make the icons in this map. It took me a long time and so I'd
         be thrilled if anyone else found them useful. All icons expcept for the stealth door,
         pressure plate, and thermo-trapdoor are the same width. If you have better color
-        recommendations or need another size, etc, feel free to contact me.
+        recommendations or need another size, etc, feel free to
+        <router-link to="/contact/">contact me</router-link>.
       </p>
       <p>
         Also, I'm sorry if the groups/names are weird. They developed organically as I made this, so
