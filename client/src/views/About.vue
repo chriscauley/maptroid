@@ -18,16 +18,16 @@
           else could work on it. Feel free to <router-link to="/about/">contact me</router-link>
           if you'd like to know more.
         </p>
-        <p>
-          Legal Stuff: All credit for Metroid and Metroid Dread goes to Nintendo and Mercury Steam
-          respectively. All metroid related assets on this site are intended as fan art and are
-          released under a Creative Commons license. Please attribute, but if you don't nbd. But
-          please <router-link to="/about/">contact me</router-link>. I'd be thrilled to know someone
-          found this useful.
-        </p>
+        <legal-stuff />
       </div>
     </div>
   </div>
 </template>
 
-<script></script>
+<script>
+import LegalStuff from './LegalStuff.vue'
+
+export default {
+  components: { LegalStuff },
+}
+</script>

@@ -2,13 +2,7 @@
   <div class="app-body app-downloads -col">
     <div>
       <h1>Downloads for Metroid Dread</h1>
-      <p>
-        Legal Stuff: All credit for Metroid and Metroid Dread goes to Nintendo and Mercury Steam
-        respectively. All metroid related assets on this site are intended as fan art and are
-        released under a Creative Commons license. Please attribute, but if you don't nbd. But
-        please <router-link to="/contact/">contact me</router-link>. I'd be thrilled to know someone
-        found this useful.
-      </p>
+      <legal-stuff />
     </div>
     <div class="app-downloads__maps">
       <h2>Zone Maps</h2>
@@ -121,12 +115,15 @@
 <script>
 import { startCase } from 'lodash'
 import DreadItems from '@/models/DreadItems'
+import LegalStuff from './LegalStuff.vue'
+
 const map_sizes = [0.5, 0.25, 0.125, 0.0625, 0.03125]
 const icon_sizes = [256, 128, 64, 32, 16]
 
 const WORLD = 3
 
 export default {
+  components: { LegalStuff },
   data() {
     window.__testDownloads = () => {
       const allowed_types = ['image/png', 'image/svg+xml', 'application/zip']
