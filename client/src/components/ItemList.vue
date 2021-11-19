@@ -15,7 +15,10 @@
         <template v-for="item in items" :key="item.id">
           <div class="list-group-item" @click="$emit('select-item', item)">
             <i :class="item.icon" />
-            <span class="flex-grow truncate">{{ item.name }}</span>
+            <div class="flex-grow truncate">
+              {{ item.name }}
+              <div v-if="item.data.reward">Reward: {{ item.data.reward }}</div>
+            </div>
             <div
               v-for="time in item.times_by_video_id[video.id]"
               :key="time.seconds"

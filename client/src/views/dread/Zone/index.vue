@@ -55,7 +55,7 @@
       />
     </div>
     <video-player v-if="video" :world_items="world_items" />
-    <item-list v-if="zone" :zone_items="zone_items" @select-item="osd_store.gotoItem" />
+    <item-list v-if="zone" :zone_items="zone_items" @select-item="gotoItem" />
     <div v-if="debug" class="dread-debug">{{ debug }}</div>
     <admin-popup />
   </div>
@@ -167,6 +167,16 @@ export default {
   },
   mounted() {
     document.addEventListener('click', this.blurItem)
+    if (this.$route.query.item) {
+      const item_id = parseInt(this.$route.query.item)
+      const interval = setInterval(() => {
+        const item = this.zone && this.zone_items.find((i) => i.id === item_id)
+        if (item && this.osd_store.viewer?.isOpen()) {
+          this.gotoItem(item)
+          clearInterval(interval)
+        }
+      }, 100)
+    }
   },
   unmounted() {
     document.removeEventListener('click', this.blurItem)
@@ -211,6 +221,10 @@ export default {
     },
     blurItem() {
       this.osd_store.selectItem(null)
+    },
+    gotoItem(item) {
+      this.osd_store.gotoItem(item)
+      this.$router.replace(`/dread/${this.zone.slug}/?item=${item.id}`)
     },
   },
 }
