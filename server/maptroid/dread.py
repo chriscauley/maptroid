@@ -1,5 +1,6 @@
 import cv2
 from django.conf import settings
+from maptroid.utils import mkdir
 import numpy as np
 import os
 import re
@@ -31,17 +32,6 @@ def get_threshold():
         cache['threshold'] = threshold
         print('cached threshold')
     return cache['threshold']
-
-def mkdir(root, *args):
-    parts = os.path.join(*args).strip('/').split('/')
-    path = root
-    if not os.path.exists(path):
-        os.mkdir(path)
-    for part in parts:
-        path = os.path.join(path, part)
-        if not os.path.exists(path):
-            os.mkdir(path)
-    return path
 
 def process_screenshot(screenshot):
     # Removes top and bottom ui text from screenshot
