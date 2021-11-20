@@ -165,8 +165,10 @@ export default (component) => {
     const b = 0.2
     state._viewer.viewport.fitBounds(new Rect(x - b, y - b, w + 2 * b, h + 2 * b))
 
-    // TODO very hacky, but view.animationFinish didn't work because it doesn't always animate
-    setTimeout(() => selectItem(item), 400)
+    const f = () => selectItem(item)
+    const timeout = setTimeout(f, 10)
+    state._viewer.addOnceHandler('animation-finish', f)
+    state._viewer.addOnceHandler('animation-start', () => clearTimeout(timeout))
   }
 
   Object.assign(osd_store, {
