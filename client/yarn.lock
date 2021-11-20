@@ -1315,10 +1315,10 @@
     eslint-plugin-vue "^7.0.0-0"
     prettier "^1.18.2"
 
-"@unrest/tailwind@^0.1.14":
-  version "0.1.14"
-  resolved "https://registry.yarnpkg.com/@unrest/tailwind/-/tailwind-0.1.14.tgz#62f5ef3b49ae63b04d6a6d3a2c0e4feddf946f0e"
-  integrity sha512-/tURmdgtppXuhMNFGjtDzbl+JIZugnp1k6DHKc1hNFcfCNGElXMDQ1e8ZSpL3KVe1ZyLBOvtXeRkZMujyarIRg==
+"@unrest/tailwind@^0.1.15":
+  version "0.1.15"
+  resolved "https://registry.yarnpkg.com/@unrest/tailwind/-/tailwind-0.1.15.tgz#39c26072e58c0722b2551241ea2c660e5575a4d2"
+  integrity sha512-JDwW6x2eGJQ1SPwASOP3mOFrd0uKkrUZDLAbJg826K0T8WCODJV3OJxQV8q+TpMzPyb0cryLK8FWZXx3w4V5UQ==
 
 "@unrest/vue-auth@^0.0.9":
   version "0.0.9"
