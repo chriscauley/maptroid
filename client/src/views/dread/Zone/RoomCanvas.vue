@@ -18,10 +18,11 @@
     </template>
     <div
       v-for="item in items"
-      v-bind="item.attrs"
       :key="item.id"
+      v-bind="item.attrs"
       @click.stop="(e) => clickItem(e, item._item)"
     >
+      <router-link v-if="item.to" :to="item.to" @click.stop class="transit-link" />
       <item-popper v-if="item.selected" :item="item._item" :watchme="osd_store.state.zoom" />
     </div>
     <div
@@ -42,7 +43,7 @@ const grids = {}
 
 export default {
   components: { ItemPopper, RoomForm },
-  inject: ['video'],
+  inject: ['video', 'transit_choices'],
   props: {
     osd_store: Object,
     room: Object,
@@ -141,12 +142,18 @@ export default {
         const { type, bounds } = item.data
         const [x, y, w, h] = bounds
         const selected = this.osd_store.state.selected_item?.id === item.id
+        let to
+        const tt_id = item.data.transit_target_id
+        if (tt_id && this.transit_choices && !this.$auth.user?.is_superuser) {
+          to = this.transit_choices.find((tc) => tc.id === tt_id)?.to
+        }
         return {
           id: item.id,
           _item: item,
           name: DreadItems.getName(item),
           reward: item.data.reward,
           selected,
+          to,
           attrs: {
             id: `zone-item__${item.id}`,
             class: [DreadItems.getClass(type), selected && '-selected'],

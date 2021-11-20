@@ -5,6 +5,16 @@
         {{ item.name }}
         <input v-model="name_override" @input="saveItem" placeholder="Name Override" />
         <input v-model="reward" @input="saveItem" placeholder="Reward" />
+        <select
+          v-if="transits"
+          v-model="transit_target_id"
+          @change="saveItem"
+          placeholder="Transit"
+        >
+          <option v-for="transit in transits" :value="transit.id" :key="transit.id">
+            {{ transit.name }}
+          </option>
+        </select>
         <div class="flexy select-none">
           <span class="pill -primary" v-for="time in video_times" :key="time.seconds">
             {{ time.hms }}
@@ -38,19 +48,37 @@
 
 <script>
 export default {
-  inject: ['video'],
+  inject: ['video', 'transit_choices'],
   props: {
     item: Object,
     watchme: Number,
   },
   data() {
+    // TODO remove this after all transit choices are set
+    window._checkTransits = () => {
+      this.transit_choices
+        .filter((tc) => tc.zone_id === this.item.zone && !tc._target)
+        .forEach((tc) => console.warn(tc.name, 'is missing endpoint'))
+    }
     return {
       drawing: null,
       name_override: this.item.data.name,
       reward: this.item.data.reward,
+      transit_target_id: this.item.data.transit_target_id,
     }
   },
   computed: {
+    transit_target() {
+      const _id = this.transit_target_id
+      return _id && this.transits.find((tc) => tc.id === _id)
+    },
+    transits() {
+      const { type } = this.item.data
+      if (this.transit_choices.find((tc) => tc.id === this.item.id)) {
+        return this.transit_choices.filter((tc) => tc.type === type && tc.id !== this.item.id)
+      }
+      return null
+    },
     can_edit() {
       return this.$auth.user?.is_superuser
     },
@@ -65,6 +93,10 @@ export default {
     saveItem() {
       this.item.data.name = this.name_override // eslint-disable-line
       this.item.data.reward = this.reward // eslint-disable-line
+      if (this.transits) {
+        delete this.item.data.transit_target
+        this.item.data.transit_target_id = this.transit_target_id // eslint-disable-line
+      }
       this.$store.item2.bounceSave(this.item)
     },
     addTime() {

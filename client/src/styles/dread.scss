@@ -301,6 +301,15 @@
   }
 }
 
+.room-canvas__wrapper .dread-icon .transit-link {
+  /* This makes transit links slightly larger than the icon */
+  @apply absolute;
+  inset: -11%;
+  .dread-zone.-zoom-0 & {
+    inset: -0.8rem;
+  }
+}
+
 .item-list {
   background: var(--bg);
   .dread-icon {

@@ -96,8 +96,8 @@ const name_cache = {
   // These pre-defined names act as overridse
   'door__shutter-platform': 'Shutter Platform',
   'door__thermal-trapdoor': 'Thermal Trapdoor',
-  transit__elevator: 'Shuttle',
-  transit__shuttle: 'Elevator',
+  transit__elevator: 'Elevator',
+  transit__shuttle: 'Shuttle',
   'transit__transport-capsule': 'Transport Capsule',
   missile__tank: 'Missile Tank',
   'missile__plus-tank': 'Missile + Tank',

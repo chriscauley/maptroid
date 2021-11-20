@@ -149,7 +149,7 @@ export default (component) => {
 
   // TODO everything below here can be abstracted for World viewer as well
   const selectItem = (item) => {
-    if (!item || item.id === state.selected_item?.id) {
+    if (!item) {
       delete state.selected_item
     } else {
       state.selected_item = item
@@ -166,7 +166,7 @@ export default (component) => {
     state._viewer.viewport.fitBounds(new Rect(x - b, y - b, w + 2 * b, h + 2 * b))
 
     const f = () => selectItem(item)
-    const timeout = setTimeout(f, 10)
+    const timeout = setTimeout(f, 100)
     state._viewer.addOnceHandler('animation-finish', f)
     state._viewer.addOnceHandler('animation-start', () => clearTimeout(timeout))
   }

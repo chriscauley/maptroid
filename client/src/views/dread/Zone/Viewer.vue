@@ -5,6 +5,7 @@
     :callback="osd_store.bindViewer"
     class="dread-viewer"
     :pixelated="true"
+    :is_editor="$auth.user?.is_superuser"
   />
   <zoom-controls v-if="osd_store.viewer" :viewer="osd_store.viewer" />
 </template>

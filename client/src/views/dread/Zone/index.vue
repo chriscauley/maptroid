@@ -106,6 +106,21 @@ export default {
     return {
       video: computed(() => this.video),
       videos: computed(() => this.videos),
+      transit_choices: computed(() => {
+        const match = (i) => i.data.type.match(/^(teleportal|transit)/)
+        const items = this.world_items.filter(match).map((i) => {
+          const zone = this.zones.find((z) => z.id === i.zone)
+          return {
+            id: i.id,
+            type: i.data.type,
+            zone_id: i.zone,
+            _target: i.data.transit_target_id,
+            to: `/dread/${zone.slug}/?item=${i.id}`,
+            name: i.data.name || `${DreadItems.getName(i)} - ${zone.name}`,
+          }
+        })
+        return sortBy(items, 'name')
+      }),
     }
   },
   data() {
