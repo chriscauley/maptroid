@@ -415,7 +415,7 @@
 .video-picker {
   &__video {
     @apply border cursor-pointer rounded-lg;
-    max-width: 300px;
+    width: 300px;
   }
   &__label {
     @apply text-lg p-2;
@@ -425,6 +425,12 @@
   }
   &__by {
     @apply flex items-center gap-2 p-2;
+  }
+  &__thumbnail {
+    background: no-repeat center;
+    background-size: cover;
+    padding-top: 56%;
+    width: 100%;
   }
 }
 

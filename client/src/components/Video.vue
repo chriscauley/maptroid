@@ -5,6 +5,10 @@
       <div class="flex-grow truncate">{{ video.label }}</div>
       by {{ video.channel_name }}
       <img :src="video.channel_icon" class="video-box__avatar" />
+      <span v-if="current_time">
+        {{ Math.floor(current_time / 60) }}m {{ current_time % 60 }}s
+        {{ Math.floor(getWindowTime() / 60) }}m {{ getWindowTime() % 60 }}s
+      </span>
     </div>
     <div v-if="start_at" class="video-box__player">
       <div class="item-bar">
@@ -39,11 +43,11 @@ export default {
   },
   data() {
     const player_id = `_player_${Math.round(Math.random() * 1e6)}`
-    return { player: null, open: null, player_id }
+    return { player: null, open: null, player_id, current_time: '' }
   },
   computed: {
     start_at() {
-      return this.$auth.user?.is_superuser ? this.video.max_event : null
+      return this.$auth.user?.is_superuser ? this.video.max_event || 1 : null
     },
     grouped_items() {
       const bins = {}
@@ -87,6 +91,9 @@ export default {
     }
   },
   methods: {
+    getWindowTime() {
+      return window.YT_PLAYER_TIME
+    },
     toggleVideo() {
       this.$store.local.save({ show_video: !this.$store.local.state.show_video })
       // TODO right now killing/restoring video is unstable, so I just reload the page
@@ -104,14 +111,14 @@ export default {
         width,
         height,
         videoId: this.video.external_id,
-        playerVars: { start: this.start_at, origin },
+        playerVars: { start: this.start_at, origin, autoplay: 1 },
       })
       this.interval = setInterval(this.setTime, 60)
     },
     setTime() {
       const new_time = Math.floor(this.player.playerInfo.currentTime)
       if (new_time !== window.YT_PLAYER_TIME) {
-        window.YT_PLAYER_TIME = new_time
+        this.current_time = window.YT_PLAYER_TIME = new_time
       }
     },
   },
