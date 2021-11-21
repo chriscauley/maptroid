@@ -1,6 +1,6 @@
 <template>
   <div class="app-body -full-screen" v-if="zones">
-    <viewer :osd_store="osd_store" :zones="zones" />
+    <base-viewer class="dread-world-viewer" :osd_store="osd_store" @viewer-bound="open" />
     <div v-if="osd_store.viewer">
       <html-overlay :viewer="osd_store.viewer">
         <zone-box v-for="zone in zones" :key="zone.id" :zone="zone" :osd_store="osd_store" />
@@ -18,12 +18,12 @@ import { sortBy } from 'lodash'
 import { computed } from 'vue'
 import HtmlOverlay from '@/vue-openseadragon/HtmlOverlay.vue'
 
+import BaseViewer from '@/components/BaseViewer.vue'
 import DreadItems from '@/models/DreadItems'
-import OsdStore from './OsdStore'
-import Viewer from './Viewer.vue'
-import ZoneBox from './ZoneBox.vue'
 import ItemList from '@/components/ItemList.vue'
+import OsdStore from './OsdStore'
 import VideoPlayer from '@/components/Video.vue'
+import ZoneBox from './ZoneBox.vue'
 
 const WORLD = 3 // hardcoded to dread
 const WORLD_QUERY = { query: { world_id: WORLD, per_page: 5000 } }
@@ -32,7 +32,7 @@ export default {
   __route: {
     path: '/dread/',
   },
-  components: { HtmlOverlay, ItemList, VideoPlayer, Viewer, ZoneBox },
+  components: { BaseViewer, HtmlOverlay, ItemList, VideoPlayer, ZoneBox },
   provide() {
     return {
       video: computed(() => this.video),
@@ -69,6 +69,10 @@ export default {
     gotoItem(item) {
       const zone = this.zones.find((z) => z.id === item.zone)
       this.$router.push(`/dread/${zone.slug}/?item=${item.id}`)
+    },
+    open() {
+      const url = '/static/dread/zone_shapes/world-clean_short.png'
+      this.osd_store.viewer.addSimpleImage({ url, width: 1 })
     },
   },
 }
