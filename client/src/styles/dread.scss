@@ -413,6 +413,7 @@
 }
 
 .video-picker {
+  max-width: 650px;
   &__video {
     @apply border cursor-pointer rounded-lg;
     width: 300px;

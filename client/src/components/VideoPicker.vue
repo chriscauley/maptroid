@@ -5,8 +5,12 @@
       Selected route determines item order and display times. The "casual" run is good if you're a
       new player just trying to figure out how to get items. "Unrestricted" runs are (as of
       2021-11-20) using version 1.0.2 which had a glitch making it possible to beat the game without
-      getting varia/gravity suits. The NMG (no major glitches) run is the world record holder for
-      the latest version 1.0.3 as of November 20th, 2021 at 7:11 EST.
+      getting varia/gravity suits. The NMG (no major glitches) run is done using v1.0.3.
+    </p>
+    <p>
+      Note: Times listed are the timecodes of the YouTube video of each run, not the in game time.
+      Records are changing on a daily basis, and time stamps are manually entered, so until I learn
+      how to automate it, this site will almost certainly be out of date.
     </p>
     <div class="flexy">
       <div
