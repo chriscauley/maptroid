@@ -2,15 +2,25 @@
   <div class="video-picker">
     <h2>Select a Route</h2>
     <p>
-      Selected route determines item order and display times. The "casual" run is good if you're a
-      new player just trying to figure out how to get items. "Unrestricted" runs are (as of
-      2021-11-20) using version 1.0.2 which had a glitch making it possible to beat the game without
-      getting varia/gravity suits. The NMG (no major glitches) run is done using v1.0.3.
+      Selected route determines item order and display times.
     </p>
+    <ul class="browser-default">
+      <li>
+        The "casual" run is good if you're a new player just trying to find items.
+      </li>
+      <li>
+        The NMG (no major glitches) run is done using the latest patch v1.0.3.
+      </li>
+      <li>
+        "Unrestricted" runs are using v1.0.2 which had a glitch making it possible to beat the game
+        without getting varia/gravity suits.
+      </li>
+    </ul>
     <p>
       Note: Times listed are the timecodes of the YouTube video of each run, not the in game time.
-      Records are changing on a daily basis, and time stamps are manually entered, so until I learn
-      how to automate it, this site will almost certainly be out of date.
+      Records are changing on a daily basis, and time stamps are manually entered. Please refer to
+      <a href="https://www.speedrun.com/mdread/">speedrun.com</a> and the videos for accurate
+      numbers.
     </p>
     <div class="flexy">
       <div
