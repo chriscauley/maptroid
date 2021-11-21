@@ -1,54 +1,22 @@
 <template>
-  <open-seadragon
-    @mousewheel.prevent="osdWheel"
-    :options="osd_options"
-    :callback="osd_store.bindViewer"
-    class="dread-viewer"
-    :pixelated="true"
-    :is_editor="$auth.user?.is_superuser"
-  />
+  <base-viewer class="dread-viewer" :osd_store="osd_store" />
   <zoom-controls v-if="osd_store.viewer" :viewer="osd_store.viewer" />
 </template>
 
 <script>
+import BaseViewer from '@/components/BaseViewer.vue'
 import ZoomControls from '@/vue-openseadragon/ZoomControls.vue'
-import Openseadragon from 'openseadragon'
 import { sortBy } from 'lodash'
 
 const WORLD = 3 // hardcoded for now since this interface is dread only
 
-// TODO put this feature in a config menu
-// currently, because OSD loves to eat events, I disable OSD's controls while editing
-// but osd's natural usage is better for everyone else
-// the only way to trigger this is to manually set this in the console
-const IS_EDITOR = localStorage.getItem('is_an_editor')
-
 export default {
-  components: { ZoomControls },
+  components: { BaseViewer, ZoomControls },
   props: {
     zone: Object,
     osd_store: Object,
   },
   computed: {
-    osd_options() {
-      const editing = !!this.$route.query.mode
-      return {
-        maxZoomPixelRatio: editing ? 8 : 4,
-        navigatorAutoFade: false,
-        showNavigator: true,
-        showZoomControl: false,
-        showHomeControl: false,
-        showFullPageControl: false,
-        showRotationControl: false,
-        debugmode: false,
-        clickTimeThreshold: 1000,
-        mouseNavEnabled: !IS_EDITOR,
-        gestureSettingsMouse: {
-          clickToZoom: false,
-          dblClickToZoom: false,
-        },
-      }
-    },
     search_params() {
       // screenshots and zones search on same values
       return { query: { world: WORLD, zone: this.zone.id, per_page: 5000 } }
@@ -85,29 +53,6 @@ export default {
       const tileSource = this.zone.data.output.dzi
       this.osd_store.viewer.addTiledImage({ tileSource, width, x, y })
     }
-  },
-  methods: {
-    osdWheel(event) {
-      // Loosely adapted from OSD.Viewer.onCanvasDragEnd and OSD.viewer.onCanvasScroll
-      if (!IS_EDITOR) {
-        return
-      }
-      const viewer = this.osd_store.viewer
-      const viewport = viewer.viewport
-      if (event.ctrlKey) {
-        const box = viewer.container.getBoundingClientRect()
-        const position = new Openseadragon.Point(event.pageX - box.left, event.pageY - box.top)
-        const factor = Math.pow(viewer.zoomPerScroll, -event.deltaY / 20)
-        viewport.zoomBy(factor, viewport.pointFromPixel(position, true))
-      } else {
-        const center = viewport.pixelFromPoint(viewport.getCenter(true))
-        const target = viewport.pointFromPixel(
-          new Openseadragon.Point(center.x + 2 * event.deltaX, center.y + 2 * event.deltaY),
-        )
-        viewport.panTo(target, false)
-      }
-      viewport.applyConstraints()
-    },
   },
 }
 </script>

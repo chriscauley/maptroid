@@ -1,70 +1,20 @@
 <template>
-  <open-seadragon
-    @mousewheel.prevent="osdWheel"
-    :options="osd_options"
-    :callback="bindViewer"
-    class="dread-world-viewer"
-    :pixelated="true"
-  />
+  <base-viewer class="dread-world-viewer" :osd_store="osd_store" @viewer-bound="open" />
 </template>
 
 <script>
-import Openseadragon from 'openseadragon'
-
-// TODO see note in zone viewer
-const IS_EDITOR = localStorage.getItem('is_an_editor')
+import BaseViewer from '@/components/BaseViewer.vue'
 
 export default {
+  components: { BaseViewer },
   props: {
     zones: Array,
     osd_store: Object,
   },
-  computed: {
-    osd_options() {
-      return {
-        maxZoomPixelRatio: 4,
-        showNavigator: true,
-        showZoomControl: false,
-        showHomeControl: false,
-        showFullPageControl: false,
-        showRotationControl: false,
-        debugmode: false,
-        clickTimeThreshold: 1000,
-        mouseNavEnabled: !IS_EDITOR,
-        visibilityRatio: 1,
-        gestureSettingsMouse: {
-          clickToZoom: false,
-          dblClickToZoom: false,
-        },
-      }
-    },
-  },
   methods: {
-    osdWheel(event) {
-      // TODO copied from Dread/Viewer.vue
-      // Loosely adapted from OSD.Viewer.onCanvasDragEnd and OSD.viewer.onCanvasScroll
-      if (!IS_EDITOR) {
-        return
-      }
-      const viewer = this.osd_store.viewer
-      const viewport = viewer.viewport
-      if (event.ctrlKey) {
-        const box = viewer.container.getBoundingClientRect()
-        const position = new Openseadragon.Point(event.pageX - box.left, event.pageY - box.top)
-        const factor = Math.pow(viewer.zoomPerScroll, -event.deltaY / 20)
-        viewport.zoomBy(factor, viewport.pointFromPixel(position, true))
-      } else {
-        const center = viewport.pixelFromPoint(viewport.getCenter(true))
-        const target = viewport.pointFromPixel(
-          new Openseadragon.Point(center.x + 2 * event.deltaX, center.y + 2 * event.deltaY),
-        )
-        viewport.panTo(target, false)
-      }
-      viewport.applyConstraints()
-    },
-    bindViewer(viewer) {
-      this.osd_store.bindViewer(viewer)
-      viewer.addSimpleImage({ url: '/static/dread/zone_shapes/world-clean_short.png', width: 1 })
+    open() {
+      const url = '/static/dread/zone_shapes/world-clean_short.png'
+      this.osd_store.viewer.addSimpleImage({ url, width: 1 })
     },
   },
 }
