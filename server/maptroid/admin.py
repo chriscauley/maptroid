@@ -27,7 +27,8 @@ class RoomAdmin(admin.ModelAdmin):
 
 @admin.register(Video)
 class VideoAdmin(admin.ModelAdmin):
-    pass
+    list_display = ['__str__', 'order']
+    list_editable = ['order']
 
 
 @admin.register(Channel)

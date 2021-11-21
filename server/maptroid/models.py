@@ -101,6 +101,8 @@ class Channel(models.Model):
 
 
 class Video(models.Model):
+  class Meta:
+    ordering = ('order',)
   SOURCES = _choices(['youtube'])
   source = models.CharField(max_length=16, choices=SOURCES, default="youtube")
   thumbnail = models.ImageField(upload_to="video_thumbnails")
@@ -110,6 +112,7 @@ class Video(models.Model):
   channel = models.ForeignKey(Channel, models.CASCADE)
   data = models.JSONField(default=dict, blank=True)
   world = models.ForeignKey(World, models.CASCADE)
+  order = models.IntegerField(default=0)
   __str__ = lambda self: self.title
 
   @property
