@@ -389,7 +389,16 @@ body {
 }
 
 .admin-popup__root {
-  @apply absolute bottom-0 flex;
+  @apply bottom-0 fixed flex;
   left: 50%;
   transform: translate(-50%, 0);
+  &.-right {
+    left: unset;
+    transform: unset;
+    right: 0;
+  }
+}
+
+.pixelated {
+  image-rendering: pixelated;
 }

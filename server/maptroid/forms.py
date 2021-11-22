@@ -18,6 +18,7 @@ class WorldForm(forms.ModelForm):
 @schema.register
 class RoomForm(forms.ModelForm):
   user_can_GET = user_can_LIST = 'ALL'
+  filter_fields = ['zone__slug']
   class Meta:
     model = Room
     fields = ['name', 'key', 'world', 'zone', 'data']
@@ -53,7 +54,7 @@ class ZoneForm(forms.ModelForm):
   user_can_GET = user_can_LIST = 'ALL'
   class Meta:
     model = Zone
-    fields = ['name', 'slug', 'data']
+    fields = ['name', 'slug', 'data', 'world']
 
 
 @schema.register

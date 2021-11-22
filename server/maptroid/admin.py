@@ -13,7 +13,9 @@ class ZoneAdmin(admin.ModelAdmin):
         return obj.item_set.all().count()
 
     def _px_per_block(self, obj):
-        return obj.data['screenshot']['px_per_block']
+        # dread only
+        if 'screenshot' in obj.data:
+            return obj.data['screenshot']['px_per_block']
 
 @admin.register(Item)
 class ItemAdmin(admin.ModelAdmin):

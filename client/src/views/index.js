@@ -10,6 +10,8 @@ import ScreenshotAnalyzer from './ScreenshotAnalyzer/index.vue'
 import ScreenshotUpload from './ScreenshotUpload.vue'
 import ScreenshotViewer from './ScreenshotViewer.vue'
 import SpriteGallery from './SpriteGallery.vue'
+import SuperMetroid from './sm/index.vue'
+import SmAssignZone from './sm/AssignZone.vue'
 import Tracer from './Tracer.vue'
 import Viewer from './Viewer/index.vue'
 import WorldTiles from './WorldTiles/index.vue'
@@ -27,6 +29,8 @@ export default {
   ScreenshotUpload,
   ScreenshotViewer,
   SpriteGallery,
+  SuperMetroid,
+  SmAssignZone,
   Tracer,
   Viewer,
   WorldTiles,

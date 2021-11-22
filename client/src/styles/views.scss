@@ -1,3 +1,17 @@
+.app-sm-assign {
+  &__zones {
+    @apply fixed bottom-0 flex gap-2 left-0 p-2;
+    background: var(--bg);
+    z-index: 1;
+  }
+  &__image {
+    @apply relative mb-4;
+  }
+  &__image-bar {
+    @apply absolute top-0 left-0;
+  }
+}
+
 .app-downloads {
   &__flexy {
     @apply flex flex-wrap gap-2 mb-12;
@@ -36,7 +50,7 @@
   }
 }
 
-.app-downloads, .app-screenshotupload {
+.app-sm-assign, .app-downloads, .app-screenshotupload {
   @apply mt-20;
 }
 

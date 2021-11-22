@@ -4,6 +4,8 @@ os.environ['DJANGO_SETTINGS_MODULE'] = 'main.settings'
 django.setup()
 
 from django.conf import settings
+from PIL import Image
+
 from maptroid.models import World, Room
 
 SMILE_DIR = os.path.join(settings.BASE_DIR, '../.media/smile_exports/')
@@ -22,7 +24,7 @@ for world_slug in os.listdir(SMILE_DIR):
     keys += os.listdir(os.path.join(world_dir, room_slice))
 
   keys = list(set(keys))
-  print('\n\nAnalyzing world: ', world)
+  print('\n\nAnalyzing world: ', world, len(keys), Room.objects.filter(world=world).count())
   for key in keys:
     missing = []
     for room_slice in ROOM_SLICES:
@@ -31,5 +33,13 @@ for world_slug in os.listdir(SMILE_DIR):
     if missing:
       print(f'{key} missing in: {missing}')
     room, new = Room.objects.get_or_create(key=key, world=world)
+    print(key, room.data)
     if new:
       print(f'New Room: {room}')
+    width, height = Image.open(os.path.join(world_dir, 'layer-1', key)).size
+    room.data['zone'] = {
+      'bounds': [0, 0, width / 256, height / 256],
+      'raw': [0, 0, width / 256, height / 256],
+    }
+    print(room.data)
+    room.save()

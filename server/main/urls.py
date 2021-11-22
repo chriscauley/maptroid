@@ -10,7 +10,7 @@ import contact.forms
 
 urlpatterns = [
     path('djadmin/', admin.site.urls),
-    re_path('^(about|admin|auth|contact|dread|downloads|screenshot|editor|viewer|file-browser|world-tiles)', index),
+    re_path('^(about|admin|auth|contact|dread|downloads|screenshot|editor|viewer|file-browser|sm|world-tiles)', index),
     path('api/list-dir/', list_dir),
     path('api/delete-file/', delete_file),
     path('api/replace-svg-color/', replace_svg_color),
