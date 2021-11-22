@@ -1,46 +1,93 @@
 <template>
-  <div v-bind="attrs" :class="css" :title="room.name">
+  <div :style="style" :class="css" :title="`${room.id} - ${room.name}`">
+    <img :src="src" ref="img" @load="draw" style="display:none" />
+    <canvas ref="canvas" />
     <unrest-draggable @drag="drag" />
   </div>
 </template>
 
 <script>
+import vec from '@/lib/vec'
 const WORLD = 'super_metroid'
 
 export default {
   inject: ['osd_store'],
   props: {
     room: Object,
+    mode: String,
   },
   data() {
-    return { drag_xy: [0, 0], drag_raw_xy: [0, 0] }
+    return { drag_xy: [0, 0], drag_raw_xy: [0, 0], backgroundImage: '' }
   },
   computed: {
     css() {
       const { zoom } = this.osd_store.state
       // 0.2 is based off observation
-      return ['sm-room-box', zoom > 0.2 && 'pixelated']
+      return [`sm-room-box -mode-${this.mode}`, zoom > 0.2 && 'pixelated']
     },
-    attrs() {
-      const [x, y, width, height] = this.room.data.zone.bounds
-      const zIndex = 100 - width * height
+    src() {
       const { sm_layer } = this.$store.local.state
+      return `/media/smile_exports/${WORLD}/${sm_layer}/${this.room.key}`
+    },
+    style() {
+      const [x, y, width, height] = this.room.data.zone.bounds
+      if (this.mode === 'overlap') {
+        return {
+          backgroundImage: this.backgroundImage,
+          height: `${height * 64}px`,
+          width: `${width * 64}px`,
+        }
+      }
+      const zIndex = 100 - width * height
       return {
-        style: {
-          backgroundImage: `url("/media/smile_exports/${WORLD}/${sm_layer}/${this.room.key}")`,
-          height: `${height * 100}%`,
-          left: `${x * 100}%`,
-          top: `${y * 100}%`,
-          width: `${width * 100}%`,
-          zIndex,
-        },
+        backgroundImage: this.backgroundImage,
+        height: `${height * 100}%`,
+        left: `${x * 100}%`,
+        top: `${y * 100}%`,
+        width: `${width * 100}%`,
+        zIndex,
       }
     },
   },
   methods: {
     drag(event) {
-      this.osd_store.dragRoom(this.room, event._drag.last_dxy)
-      this.$store.room2.bounceSave(this.room)
+      if (this.mode === 'overlap') {
+        const box = this.$el.getBoundingClientRect()
+        const [x, y] = event._drag.xy
+        const xy = [x - box.x, y - box.y].map((i) => Math.floor(i / 64))
+        this[event.shiftKey ? 'removeHole' : 'addHole'](xy)
+      } else {
+        this.osd_store.dragRoom(this.room, event._drag.last_dxy)
+        this.$store.room2.bounceSave(this.room)
+      }
+    },
+    draw() {
+      const [_x, _y, width, height] = this.room.data.zone.bounds
+      const { canvas, img } = this.$refs
+      canvas.width = width * 256
+      canvas.height = height * 256
+      const ctx = canvas.getContext('2d')
+      ctx.drawImage(img, 0, 0)
+      this.room.data.holes?.forEach(([x, y]) => {
+        ctx.clearRect(x * 256, y * 256, 256, 256)
+      })
+      this.backgroundImage = `url("${canvas.toDataURL()}")`
+    },
+    addHole(xy) {
+      const { holes } = this.room.data
+      if (!holes.find((xy2) => vec.isEqual(xy, xy2))) {
+        holes.push(xy)
+        this.draw()
+        this.$store.room2.bounceSave(this.room)
+      }
+    },
+    removeHole(xy) {
+      const { holes } = this.room.data
+      if (holes.find((xy2) => vec.isEqual(xy, xy2))) {
+        holes = holes.filter((xy2) => !vec.isEqual(xy, xy2))
+        this.draw()
+        this.$store.room2.bounceSave(this.room)
+      }
     },
   },
 }

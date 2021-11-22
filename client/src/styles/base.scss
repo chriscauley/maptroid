@@ -397,6 +397,10 @@ body {
     transform: unset;
     right: 0;
   }
+  .popdown {
+    max-height: 500px;
+    overflow: auto;
+  }
 }
 
 .pixelated {

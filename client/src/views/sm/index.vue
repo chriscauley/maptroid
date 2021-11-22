@@ -8,20 +8,14 @@
         </html-overlay>
       </template>
     </template>
-    <unrest-admin-popup>
-      <template #buttons>
-        <unrest-dropdown :items="layer_items">
-          <div class="btn btn-primary">
-            <i class="fa fa-layer" /> {{ $store.local.state.sm_config.layer }}
-          </div>
-        </unrest-dropdown>
-      </template>
-    </unrest-admin-popup>
+    <admin-popup :rooms="rooms" />
   </div>
 </template>
 
 <script>
 import { computed } from 'vue'
+
+import AdminPopup from './AdminPopup.vue'
 import BaseViewer from '@/components/BaseViewer'
 import HtmlOverlay from '@/vue-openseadragon/HtmlOverlay.vue'
 import RoomBox from './RoomBox.vue'
@@ -31,7 +25,7 @@ export default {
   __route: {
     path: '/sm/:world_slug/:zone_slug/',
   },
-  components: { BaseViewer, HtmlOverlay, RoomBox },
+  components: { AdminPopup, BaseViewer, HtmlOverlay, RoomBox },
   provide() {
     return {
       osd_store: computed(() => this.osd_store),
