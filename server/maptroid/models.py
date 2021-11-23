@@ -13,7 +13,7 @@ class World(models.Model):
 
 
 def default_data():
-  return { 'world': { 'xy': [0, 0] } }
+  return { 'world': { 'bounds': [0, 0, 1, 1] } }
 
 
 class Zone(models.Model):
@@ -26,11 +26,32 @@ class Zone(models.Model):
 
   data = models.JSONField(default=default_data, blank=True)
 
+  # TODO generalize these functions
   def get_image_path(self, ext='png'):
     return os.path.join(settings.MEDIA_ROOT, f'dread_zones/{self.id}-{self.slug}.{ext}')
   def get_image_url(self, ext='png'):
     return os.path.join(settings.MEDIA_URL, f'dread_zones/{self.id}-{self.slug}.{ext}')
 
+  def normalize(self):
+    rooms = self.room_set.all()
+    x_max = y_max = -1e20
+    x_min = y_min = 1e20
+    for room in rooms:
+      x, y, width, height = room.data['zone']['bounds']
+      x_min = min(x, x_min)
+      y_min = min(y, y_min)
+      x_max = max(x + width, x_max)
+      y_max = max(y + height, y_max)
+
+    if x_min or y_min:
+      for room in rooms:
+        room.data['zone']['bounds'][0] -= x_min
+        room.data['zone']['bounds'][1] -= y_min
+        room.save()
+
+    self.data['world']['bounds'][2] = x_max - x_min
+    self.data['world']['bounds'][3] = y_max - y_min
+    self.save()
 
 class Room(models.Model):
   world = models.ForeignKey(World, models.SET_NULL, null=True, blank=True)
@@ -42,10 +63,13 @@ class Room(models.Model):
   __str__ = lambda self: f'{self.name or "unnamed"} - ({self.key})'
 
 
+def default_zone_data():
+  return { 'world': { 'xy': [0,0] } }
+
 class Item(models.Model):
   room = models.ForeignKey(Room, models.CASCADE)
   zone = models.ForeignKey(Zone, models.SET_NULL, null=True, blank=True)
-  data = models.JSONField(default=dict, blank=True)
+  data = models.JSONField(default=default_zone_data, blank=True)
 
 class Character(models.Model):
   letter = models.CharField(max_length=1, blank=True, default='')

@@ -3,7 +3,6 @@ from django.conf import settings
 from django import forms
 import urllib
 import os
-from PIL import Image
 from unrest import schema
 
 from .models import World, Room, Screenshot, Zone, Item, Video

@@ -1,16 +1,23 @@
 .sm-room-box {
   background-size: cover;
-  position: absolute;
   &.-mode-overlap {
     position: relative;
-  }
-  .unrest-draggable {
-    @apply absolute cursor-pointer inset-0;
   }
   canvas {
     display:none;
     width: 100%;
     height: 100%;
+  }
+}
+
+.sm-zone-box {
+  @apply border;
+}
+
+.sm-zone-box, .sm-room-box {
+  @apply absolute;
+  .unrest-draggable {
+    @apply absolute cursor-pointer inset-0;
   }
 }
 

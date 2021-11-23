@@ -3,8 +3,8 @@ import numpy as np
 import os
 from PIL import Image, ImageDraw
 
+from maptroid.dzi import png_to_dzi
 from maptroid.utils import mkdir
-from maptroid.models import World
 
 def open_with_transparency(source, dest=None, bg_color=(0, 0, 0)):
     image = Image.open(source).convert("RGBA")
@@ -26,7 +26,6 @@ def make_holes(image, holes):
     image.putalpha(mask)
 
 def process_zone(zone):
-    from maptroid.dzi import png_to_dzi
     world = zone.world
     CACHE_DIR = mkdir(settings.MEDIA_ROOT, f'sm_cache/{world.slug}')
     ROOM_DIR = mkdir(settings.MEDIA_ROOT, f'sm_room/{world.slug}')
@@ -35,14 +34,11 @@ def process_zone(zone):
     rooms = zone.room_set.all()
     x_min = min([r.data['zone']['bounds'][0] for r in rooms])
     y_min = min([r.data['zone']['bounds'][1] for r in rooms])
-    x_max = max([r.data['zone']['bounds'][0] + r.data['zone']['bounds'][2] for r in rooms])
-    y_max = max([r.data['zone']['bounds'][1] + r.data['zone']['bounds'][3] for r in rooms])
 
-    # normalize rooms if they aren't already
-    if x_min or y_min:
-        raise ValueError("Rooms are not normalized in zone. Please normalize and run again.")
+    zone.normalize()
 
-    zone_image = Image.new('RGBA', ((x_max+1) * 256, (y_max+1) * 256), (0, 0, 0, 0))
+    _, _, zw, zh = zone.data['world']['bounds']
+    zone_image = Image.new('RGBA', ((zw) * 256, (zh) * 256), (0, 0, 0, 0))
     for room in rooms:
         x, y, width, height = room.data['zone']['bounds']
         room_image = Image.new('RGBA', (int(width) * 256, int(height) * 256), (0, 0, 0, 0))
@@ -54,8 +50,11 @@ def process_zone(zone):
         if 'holes' in room.data:
             make_holes(room_image, room.data['holes'])
         room_image.save(os.path.join(ROOM_DIR, room.key))
-        zone_image.paste(room_image, (x * 245, y * 256), mask=room_image)
+        zone_image.paste(room_image, (x * 256, y * 256), mask=room_image)
     dest = os.path.join(ZONE_DIR, f'{zone.slug}.png')
     zone_image.save(dest)
     zone_image.close()
     png_to_dzi(dest)
+
+    zone.data['dzi'] = os.path.join(settings.MEDIA_URL, f'sm_zone/{world.slug}/{zone.slug}.dzi')
+    zone.save()
