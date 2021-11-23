@@ -24,7 +24,7 @@ class ItemAdmin(admin.ModelAdmin):
 
 @admin.register(Room)
 class RoomAdmin(admin.ModelAdmin):
-    pass
+    list_filter = ['zone']
 
 
 @admin.register(Video)

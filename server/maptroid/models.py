@@ -37,7 +37,7 @@ class Room(models.Model):
   zone = models.ForeignKey(Zone, models.SET_NULL, null=True, blank=True)
   name = models.CharField(max_length=128, null=True, blank=True)
   key = models.CharField(max_length=128, null=True, blank=True)
-  sprite_ids = models.JSONField(default=list)
+  sprite_ids = models.JSONField(default=list, blank=True)
   data = models.JSONField(default=dict, blank=True)
   __str__ = lambda self: f'{self.name or "unnamed"} - ({self.key})'
 
