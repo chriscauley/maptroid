@@ -26,6 +26,7 @@ def make_holes(image, holes):
     image.putalpha(mask)
 
 def process_zone(zone):
+    from maptroid.dzi import png_to_dzi
     world = zone.world
     CACHE_DIR = mkdir(settings.MEDIA_ROOT, f'sm_cache/{world.slug}')
     ROOM_DIR = mkdir(settings.MEDIA_ROOT, f'sm_room/{world.slug}')
@@ -41,11 +42,10 @@ def process_zone(zone):
     if x_min or y_min:
         raise ValueError("Rooms are not normalized in zone. Please normalize and run again.")
 
-    zone_image = Image.new('RGBA', ((x_max+1) * 256, (y_max+1) * 256), (0, 0, 0, 255))
+    zone_image = Image.new('RGBA', ((x_max+1) * 256, (y_max+1) * 256), (0, 0, 0, 0))
     for room in rooms:
         x, y, width, height = room.data['zone']['bounds']
-        print(width, height, room.id)
-        room_image = Image.new('RGBA', (int(width) * 256, int(height) * 256), (0, 0, 0, 255))
+        room_image = Image.new('RGBA', (int(width) * 256, int(height) * 256), (0, 0, 0, 0))
         for layer in ['layer-2', 'layer-1']:
             path = os.path.join(settings.MEDIA_ROOT, f'smile_exports/{world.slug}/{layer}/{room.key}')
             layer_path = os.path.join(CACHE_DIR, f'{layer}__{room.key}')
@@ -55,4 +55,7 @@ def process_zone(zone):
             make_holes(room_image, room.data['holes'])
         room_image.save(os.path.join(ROOM_DIR, room.key))
         zone_image.paste(room_image, (x * 245, y * 256), mask=room_image)
-    zone_image.save(os.path.join(ZONE_DIR, f'{zone.id}-{zone.slug}.png'))
+    dest = os.path.join(ZONE_DIR, f'{zone.slug}.png')
+    zone_image.save(dest)
+    zone_image.close()
+    png_to_dzi(dest)
