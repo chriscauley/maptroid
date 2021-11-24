@@ -10,9 +10,11 @@ from PIL import Image
 import pytesseract
 
 from maptroid.models import Room
+from maptroid.sm import set_transparency
 
 WORLD = "super_metroid"
 
+SMILE_BG = (128, 128, 255, 255)
 coords = {
   'workarea': (8, 132, 1031, 899),
   'smile_id': (1066, 136, 1113, 148),
@@ -39,6 +41,7 @@ DIRS = {
   'event_name': get_dir('cache/event_name'),
   'workarea': get_dir('cache/workarea'),
   'cropped_area': get_dir('cache/cropped_area'),
+  'processed': get_dir('cache/processed'),
 }
 
 class JsonCache(dict):
@@ -112,7 +115,7 @@ def read_text(ss_name, type_, coords):
   if not len(hashes):
     print(os.path.join(SOURCE_DIR, ss_name))
   if '?' in matched_letters:
-    url = os.path.join(settings.MEDIA_URL, DIRS[type_].split('.media/')[-1], ss_name)
+    url = to_media_url(DIRS[type_], ss_name)
     hash_to_letter['__missing'].append([url, hashes])
     hash_to_letter._save()
     data['missing_' + type_] += 1
@@ -120,30 +123,72 @@ def read_text(ss_name, type_, coords):
   return matched_letters.replace(' ','')
 
 
+def to_media_url(path, *args):
+  return os.path.join(settings.MEDIA_URL, path.split('/.media/')[-1], *args)
+
+
+def get_cropped_workarea(image):
+  image = image.crop(coords['workarea'])
+  x, y = image.size
+  x -= 1
+  y -= 1
+  while image.getpixel((0, y)) == SMILE_BG:
+    y -= 1
+  while image.getpixel((x, 0)) == SMILE_BG:
+    x -= 1
+  return set_transparency(image.crop((0,0,x,y)))
+
 if __name__ == '__main__':
   rooms = Room.objects.filter(world__slug=WORLD)
+  processed = []
+  for room in rooms:
+    # uncomment this next line to reset all rooms
+    # room.data.pop('plm_enemies', None); room.save()
+    for plm in room.data.get('plm_enemies', []):
+      processed.append(plm['source'])
+
   hash_to_letter['__missing'] = []
 
   for ss_name in os.listdir(SOURCE_DIR):
     if not ss_name.endswith('png'):
       continue
 
+    if ss_name in processed:
+      continue
+
     image = Image.open(os.path.join(SOURCE_DIR, ss_name))
-    workarea = get_cached_image(ss_name, 'workarea', lambda i: i.crop(coords['workarea']))
-    key = read_text(ss_name, 'smile_id', coords['smile_id'])
-    if not key:
+    workarea = get_cached_image(ss_name, 'workarea', get_cropped_workarea)
+    smile_id = read_text(ss_name, 'smile_id', coords['smile_id'])
+    if not smile_id:
       continue
 
     event = read_text(ss_name, 'event_name', coords['event_name'])
-
-    data['all_keys'].add(key)
-    room = rooms.filter(key__icontains=key).first()
-    if not room:
-      print("missing room:", key)
+    if not event:
       continue
-    # room.data['plm_enemies'] = room.data.get('plm_enemies') || []
+
+    data['all_keys'].add(smile_id)
+    room = rooms.filter(key__icontains=smile_id).first()
+    if not room:
+      print("missing room:", smile_id)
+      continue
+
+    room.data['plm_enemies'] = room.data.get('plm_enemies') or []
+    og_dest = os.path.join(DIRS['processed'], ss_name)
+    processed_fname = f'{smile_id}__{event}__{len(room.data["plm_enemies"])}.png'
+    processed_dest = os.path.join(DIRS['processed'], processed_fname)
+    image.save(og_dest)
+    workarea.save(processed_dest)
+    room.data['plm_enemies'].append({
+      'root_url': to_media_url(DIRS['processed']),
+      'source': ss_name,
+      'cropped': processed_fname,
+      'xy': [0, 0],
+    })
+    room.save()
+    print(f'Room #{room.id} plm #{len(room.data["plm_enemies"])} processed!')
 
   if data['missing_smile_id'] or data['missing_event_name']:
     print(f"missing {data['missing_smile_id']} smile_ids")
     print(f"missing {data['missing_event_name']} event names")
-  print(f'{len(data["all_keys"])} / {rooms.count()} rooms with entries')
+  processed_count = Room.objects.filter(data__plm_enemies__isnull=False).count()
+  print(f'{processed_count} / {rooms.count()} rooms have plm_enemies')

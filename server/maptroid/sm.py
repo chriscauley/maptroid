@@ -6,8 +6,10 @@ from PIL import Image, ImageDraw
 from maptroid.dzi import png_to_dzi
 from maptroid.utils import mkdir
 
-def open_with_transparency(source, dest=None, bg_color=(0, 0, 0)):
-    image = Image.open(source).convert("RGBA")
+def set_transparency(image, dest=None, bg_color=(0, 0, 0)):
+    if type(image) == str:
+        image = Image.open(image)
+    image = image.convert("RGBA")
     array = np.array(image, dtype=np.ubyte)
     image.close()
     mask = (array[:,:,:3] == bg_color).all(axis=2)
@@ -45,7 +47,7 @@ def process_zone(zone):
         for layer in ['layer-2', 'layer-1']:
             path = os.path.join(settings.MEDIA_ROOT, f'smile_exports/{world.slug}/{layer}/{room.key}')
             layer_path = os.path.join(CACHE_DIR, f'{layer}__{room.key}')
-            layer_image = open_with_transparency(path, dest=layer_path)
+            layer_image = set_transparency(path, dest=layer_path)
             room_image.paste(layer_image, (0,0), mask=layer_image)
         if 'holes' in room.data:
             make_holes(room_image, room.data['holes'])

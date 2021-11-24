@@ -50,7 +50,7 @@
   }
 }
 
-.smile-ocr, .app-sm-assign, .app-downloads, .app-screenshotupload {
+.sm-plm-enemies, .smile-ocr, .app-sm-assign, .app-downloads, .app-screenshotupload {
   @apply mt-20;
 }
 
@@ -83,5 +83,40 @@
     input {
       @apply bg-white text-black w-8;
     }
+  }
+}
+
+.sm-plm-enemies {
+  @apply absolute inset-0 overflow-scroll;
+  &__top {
+    @apply inline-flex gap-4 left-0 p-2  sticky top-0;
+    background: var(--bg-alt);
+    z-index: 11; /* children are set between 0-10 */
+    div {
+      @apply flex gap-2;
+    }
+  }
+  &__workarea {
+    @apply relative;
+    img {
+      max-width: unset;
+      image-rendering: pixelated;
+    }
+  }
+  &__wrapper {
+    @apply inline-block relative;
+  }
+  &__cropped {
+    @apply absolute;
+    outline: 1px solid white;
+    &:hover {
+      opacity: 0.5;
+      outline: 5px double white;
+      filter: invert(1);
+    }
+  }
+  &__grid {
+    @apply absolute inset-0;
+    pointer-events: none;
   }
 }
