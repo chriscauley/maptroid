@@ -8,6 +8,7 @@ import osd from './osd'
 import playthrough from './playthrough'
 import room from './room'
 import room2 from './room2'
+import smile from './smile'
 import screenshot from './screenshot'
 import video from './video'
 import viewer from './viewer'
@@ -27,6 +28,7 @@ const modules = {
   playthrough,
   room,
   room2,
+  smile,
   screenshot,
   video,
   viewer,

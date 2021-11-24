@@ -101,3 +101,15 @@ def process(zone, world):
         'fails': fails,
     }
     zone.save()
+
+
+def smile_ocr(request):
+    cache_path = os.path.join(settings.BASE_DIR, '../static/smile/hash_to_letter.json')
+    if request.method == 'POST':
+        data = json.loads(request.body.decode("utf-8"))
+        with open(cache_path, 'w') as f:
+            f.write(json.dumps(data, indent=2))
+        return JsonResponse({})
+    with open(cache_path, 'r') as f:
+        letter_cache = json.load(f)
+    return JsonResponse({ 'letter_cache': letter_cache })

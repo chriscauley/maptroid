@@ -5,6 +5,7 @@ import json
 import imagehash
 import np
 import os
+
 from PIL import Image
 import pytesseract
 
@@ -20,18 +21,20 @@ coords = {
 
 SOURCE_DIR = os.path.join(settings.MEDIA_ROOT, 'plm_enemies')
 
-def get_dir(name):
+def get_dir(name, wipe=False):
   out = os.path.join(SOURCE_DIR, name)
   if not os.path.exists(out):
+    print('made', out)
     os.mkdir(out)
+  if wipe:
+    for f in os.listdir(out):
+      os.remove(os.path.join(out, f))
   return out
 
 DIRS = {
   'output': get_dir('output'),
   'cache': get_dir('cache'),
   'json': get_dir('cache/json'),
-  'letters': get_dir('cache/letters'),
-  'room_name': get_dir('cache/room_name'),
   'smile_id': get_dir('cache/smile_id'),
   'event_name': get_dir('cache/event_name'),
   'workarea': get_dir('cache/workarea'),
@@ -41,7 +44,7 @@ DIRS = {
 class JsonCache(dict):
   def __init__(self, name, *args, **kwargs):
     super().__init__(*args, **kwargs)
-    self._path = os.path.join(settings.STATIC_ROOT, name+'.json')
+    self._path = os.path.join(settings.BASE_DIR, '../static/smile', name+'.json')
     if os.path.exists(self._path):
       with open(self._path, 'r') as f:
         self.update(json.loads(f.read()))
@@ -50,7 +53,7 @@ class JsonCache(dict):
     self._save()
   def _save(self):
     with open(self._path, 'w') as f:
-      f.write(json.dumps(self))
+      f.write(json.dumps(self, indent=2))
 
 def replace_color(img, color1, color2):
   data = np.array(img)
@@ -81,21 +84,22 @@ hash_to_letter = JsonCache('hash_to_letter')
 def read_text(ss_name, type_, coords):
   if ss_name in data['room_keys']:
     return data['room_keys'][ss_name]
-  def crop_room_name(image):
+  def crop_text(image):
     cropped = image.crop(coords).convert("L").convert("RGB")
     bg_color = cropped.getpixel((0, 0))
     cropped = replace_color(cropped, [0,0,0], [255,255,255])
     cropped = replace_color(cropped, bg_color, [0,0,0])
+    cropped = replace_color(cropped, [128, 128, 128], [255, 255, 255])
     return cropped
 
-  cropped_room_name = get_cached_image(ss_name, type_, crop_room_name)
+  cropped_text = get_cached_image(ss_name, type_, crop_text)
 
-  width, height = cropped_room_name.size
+  width, height = cropped_text.size
   hashes = []
   current = []
   last = 0
   for x in range(width):
-    col = sum([cropped_room_name.getpixel((x,y))[0]//255 for y in range(height)])
+    col = sum([cropped_text.getpixel((x,y))[0]//255 for y in range(height)])
     if col:
       if not last:
         current = []
@@ -105,10 +109,13 @@ def read_text(ss_name, type_, coords):
 
   hashes = [','.join(h) for h in hashes]
   matched_letters = ' '.join([hash_to_letter.get(h, '?') for h in hashes])
+  if not len(hashes):
+    print(os.path.join(SOURCE_DIR, ss_name))
   if '?' in matched_letters:
     url = os.path.join(settings.MEDIA_URL, DIRS[type_].split('.media/')[-1], ss_name)
     hash_to_letter['__missing'].append([url, hashes])
     hash_to_letter._save()
+    data['missing_' + type_] += 1
     return
   return matched_letters.replace(' ','')
 
@@ -125,12 +132,9 @@ if __name__ == '__main__':
     workarea = get_cached_image(ss_name, 'workarea', lambda i: i.crop(coords['workarea']))
     key = read_text(ss_name, 'smile_id', coords['smile_id'])
     if not key:
-      data['missing_smile_id'] += 1
       continue
 
     event = read_text(ss_name, 'event_name', coords['event_name'])
-    if not event:
-      data['missing_event_name'] += 1
 
     data['all_keys'].add(key)
     room = rooms.filter(key__icontains=key).first()
@@ -143,6 +147,3 @@ if __name__ == '__main__':
     print(f"missing {data['missing_smile_id']} smile_ids")
     print(f"missing {data['missing_event_name']} event names")
   print(f'{len(data["all_keys"])} / {rooms.count()} rooms with entries')
-  # if not _str.startswith("79"):
-  #   print(_str)
-  #   cropped_room_name.save(os.path.join(DEST_DIR, f'cropped_room_name{_str}.png'))

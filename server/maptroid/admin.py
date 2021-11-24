@@ -25,6 +25,7 @@ class ItemAdmin(admin.ModelAdmin):
 @admin.register(Room)
 class RoomAdmin(admin.ModelAdmin):
     list_filter = ['zone']
+    search_fields = ['key']
 
 
 @admin.register(Video)

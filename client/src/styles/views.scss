@@ -50,7 +50,7 @@
   }
 }
 
-.app-sm-assign, .app-downloads, .app-screenshotupload {
+.smile-ocr, .app-sm-assign, .app-downloads, .app-screenshotupload {
   @apply mt-20;
 }
 
@@ -70,5 +70,18 @@
   &__inner {
     @apply border p-4;
     width: 600px;
+  }
+}
+
+.smile-ocr {
+  img {
+    height: 50px;
+    image-rendering: pixelated;
+  }
+  &__inputs {
+    @apply flex gap-2;
+    input {
+      @apply bg-white text-black w-8;
+    }
   }
 }
