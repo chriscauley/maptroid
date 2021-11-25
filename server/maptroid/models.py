@@ -1,8 +1,10 @@
 from django.conf import settings
 from django.db import models
-from .dread import process_screenshot
-
+import imagehash
 import os
+import unrest_image as img
+
+from maptroid.dread import process_screenshot
 
 _choices = lambda l: zip(l,l)
 
@@ -76,17 +78,58 @@ class Character(models.Model):
   image = models.ImageField(upload_to="smile_characters")
 
 
+class ImageHashField(models.BigIntegerField):
+  def get_db_prep_value(self, value, connection, prepared=False):
+    if not value == None:
+      value = img.imagehash_to_int(value) # idempotent for int
+
+    return super().get_db_prep_value(value, connection, prepared)
+
+  def from_db_value(self, value, expression, connection):
+    if isinstance(value, str):
+      value = int(value, 16)
+    if isinstance(value, int):
+      value = img.int_to_imagehash(value)
+    return value
+
+  def to_python(self, value):
+    if isinstance(value, str):
+      value = int(value, 16)
+    if isinstance(value, int):
+      value = img.int_to_imagehash(value)
+    return value
+
+
 class SmileSprite(models.Model):
   """
   A sprite from the smile imports used to match various blocks.
   """
   name = models.CharField(max_length=32, null=True, blank=True)
-  dhash = models.CharField(max_length=24)
-  color_sum = models.IntegerField()
+  dhash = ImageHashField()
+  average_color = models.JSONField()
   image = models.ImageField(upload_to="smile_sprites")
   LAYERS = _choices(['bts', 'plm', 'tile', 'unknown'])
   layer = models.CharField(max_length=16, choices=LAYERS, default='unknown')
   type = models.CharField(max_length=32, blank=True, default='')
+
+  def save(self, *args, **kwargs):
+    if not self.dhash or not self.average_color:
+      self.reprocess()
+    return super().save(*args, **kwargs)
+
+  def reprocess(self):
+    image = img._coerce(self.image.path, 'np')
+    self.average_color = [round(i) for i in image.mean(axis=0).mean(axis=0)]
+    self.dhash = imagehash.dhash(img._coerce(image, 'pil'))
+    self.save()
+
+  @property
+  def url(self):
+    return self.image.url
+
+  @property
+  def binary_dhash(self):
+    return bin(int(str(self.dhash), 16))[2:]
 
 
 class Entity(models.Model):

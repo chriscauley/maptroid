@@ -157,3 +157,28 @@ def save_sprite(request):
         )
         message = "Sprite created"
     return JsonResponse({ 'message': message })
+
+
+def sprite_distances(request):
+    attrs = ['dhash', 'average_color', 'id', 'url']
+    items = []
+    for sprite in SmileSprite.objects.all():
+        items.append({ attr: getattr(sprite,attr) for attr in attrs })
+
+    for item in items:
+        item['distances'] = {}
+        for item2 in items:
+            color = [ abs(a - b) for a, b in zip(item['average_color'], item2['average_color'])]
+            distances = item['distances'][item2['id']] = {
+                'dhash': item['dhash'] - item2['dhash'],
+                'color_diff': color,
+                'color': sum(color),
+                'both': 0,
+            }
+            if distances['color'] > 8:
+                distances['both'] += 1
+            if distances['dhash'] > 8:
+                distances['both'] += 1
+    for item in items:
+        item.pop('dhash') # not serializable
+    return JsonResponse({ 'items': items })
