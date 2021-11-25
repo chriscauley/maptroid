@@ -9,6 +9,7 @@ import ProcessDread from './ProcessDread.vue'
 import ScreenshotAnalyzer from './ScreenshotAnalyzer/index.vue'
 import ScreenshotUpload from './ScreenshotUpload.vue'
 import ScreenshotViewer from './ScreenshotViewer.vue'
+import SmileCompare from './SmileCompare.vue'
 import SmileOcr from './SmileOcr.vue'
 import SpriteGallery from './SpriteGallery.vue'
 import SuperMetroid from './sm/index.vue'
@@ -30,6 +31,7 @@ export default {
   ScreenshotAnalyzer,
   ScreenshotUpload,
   ScreenshotViewer,
+  SmileCompare,
   SmileOcr,
   SpriteGallery,
   SuperMetroid,

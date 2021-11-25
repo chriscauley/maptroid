@@ -50,7 +50,7 @@
   }
 }
 
-.sm-plm-enemies, .smile-ocr, .app-sm-assign, .app-downloads, .app-screenshotupload {
+.smile-compare, .sm-plm-enemies, .smile-ocr, .app-sm-assign, .app-downloads, .app-screenshotupload {
   @apply mt-20;
 }
 
@@ -118,6 +118,23 @@
   &__grid {
     @apply absolute inset-0;
     pointer-events: none;
+  }
+}
+
+.smile-compare {
+  ._cell {
+    &.-green {
+      @apply bg-green-600;
+    }
+    &.-yellow {
+      @apply bg-yellow-500;
+    }
+    &.-orange {
+      @apply bg-yellow-700;
+    }
+    &.-red {
+      @apply bg-red-600;
+    }
   }
 }
 

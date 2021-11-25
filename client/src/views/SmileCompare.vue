@@ -9,16 +9,16 @@
       <tbody>
         <tr>
           <td></td>
-          <td v-for="row in rows" :key="row.id" valign="bottom" @click="sorter=row.id">
+          <td v-for="row in rows" :key="row.id" valign="bottom" @click="sorter = row">
             <img :src="row.url" width="32" />
           </td>
         </tr>
         <tr v-for="row in rows" :key="row.id">
-          <td align="right" @click="sorter=row.id">
+          <td align="right" @click="sorter = row">
             <img :src="row.url" style="height:32px" />
           </td>
-          <td v-for="diff, i in row.diffs" :key="i" align="center" :class="diff.class">
-            {{ diff.value }}
+          <td v-for="(cell, i) in row.cells" :key="i" align="center" :class="cell.class">
+            {{ cell.value }}
           </td>
         </tr>
       </tbody>
@@ -35,45 +35,40 @@ export default {
   },
   computed: {
     sprites() {
-      return this.$store.smilesprite.getPage({query: { per_page: 5000 }})?.items
+      return this.$store.smile.get('sprite-distances/')?.items
     },
     rows() {
-      const start = new Date().valueOf()
-      let rows = this.sprites.map(s => ({...s}))
-      rows.forEach(s => s.dhash = s.binary_dhash.split(""))
-      rows.forEach(s1 => {
-        s1.diffs = rows.map(s2 => {
-          const value = s1.dhash.filter((v,i) => s2.dhash[i] !== v).length
+      let sprites = this.sprites.slice()
+      if (this.sorter) {
+        sprites = sortBy(sprites, (s) => s.distances[this.sorter.id][this.mode])
+      }
+      sprites.forEach((s1) => {
+        s1.cells = sprites.map((s2) => {
+          const value = s1.distances[s2.id][this.mode]
           return { value, class: ['_cell', this.getColor(value)] }
         })
       })
-      if (this.sorter) {
-        const index = rows.findIndex(r => r.id === this.sorter)
-          rows = sortBy(rows.slice(), r => r.diffs[index].value)
-        rows.forEach(s1 => {
-          s1.diffs = rows.map(s2 => {
-            const value = s1.dhash.filter((v,i) => s2.dhash[i] !== v).length
-            return { value, class: ['_cell', this.getColor(value)] }
-          })
-        })
-      }
-      console.log(new Date().valueOf() - start)
-      return rows
+      return sprites
     },
   },
   methods: {
     getColor(value) {
-      if (this.mode === 'dhash') {
-        if (! value) {
-          return "-green"
-        } else if (value < 10) {
-          return "-yellow"
-        } else if (value < 20) {
-          return '-orange'
-        }
-        return '-red'
+      const { mode } = this
+      if (mode === 'dhash') {
+        value = value / 8
+      } else if (mode === 'color') {
+        value = value / 8
       }
-    }
-  }
+
+      if (!value) {
+        return '-green'
+      } else if (value < 1) {
+        return '-yellow'
+      } else if (value < 2) {
+        return '-orange'
+      }
+      return '-red'
+    },
+  },
 }
 </script>
