@@ -89,10 +89,10 @@
 .sm-plm-enemies {
   @apply absolute inset-0 overflow-scroll;
   &__top {
-    @apply inline-flex gap-4 left-0 p-2  sticky top-0;
+    @apply inline-flex gap-4 left-0 p-2 items-center sticky top-0;
     background: var(--bg-alt);
     z-index: 11; /* children are set between 0-10 */
-    div {
+    ._deleted {
       @apply flex gap-2;
     }
   }
@@ -118,5 +118,20 @@
   &__grid {
     @apply absolute inset-0;
     pointer-events: none;
+  }
+}
+
+.plm-snap {
+  @apply absolute inset-0;
+  z-index: 11; /* images can be 0-10 */
+  &__dragging {
+    @apply absolute border border-white;
+  }
+  &__preview {
+    @apply fixed top-0 right-0;
+    img {
+      @apply bg-black border border-white;
+      image-rendering: pixelated;
+    }
   }
 }

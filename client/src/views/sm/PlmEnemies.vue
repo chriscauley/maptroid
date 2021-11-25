@@ -6,7 +6,21 @@
           {{ room.data.plm_enemies?.length || '☹️' }} {{ room.name.slice(0, 30) }}
         </option>
       </select>
-      <div v-for="plm in plms.filter((p) => p._plm.deleted)" :key="plm.src">
+      <div class="btn-group">
+        <div
+          :class="['btn', mode === 'arrange' ? '-primary' : '-secondary']"
+          @click="mode = 'arrange'"
+        >
+          Arrange
+        </div>
+        <div
+          :class="['btn', mode === 'sprite' ? '-primary' : '-secondary']"
+          @click="mode = 'sprite'"
+        >
+          Sprite
+        </div>
+      </div>
+      <div v-for="plm in plms.filter((p) => p._plm.deleted)" :key="plm.src" class="_deleted">
         <i class="fa fa-trash" @click="undelete(plm)" />
         <a class="fa fa-question-circle-o" :href="plm.src" target="_blank" />
       </div>
@@ -25,6 +39,13 @@
           <img :src="plm.src" />
         </unrest-draggable>
         <div class="sm-plm-enemies__grid" :style="grid_style" />
+        <plm-snap
+          v-if="mode === 'sprite'"
+          :key="current_room_index"
+          :room="current_room"
+          :plms="plms"
+          :img="$refs.img"
+        />
       </div>
     </div>
   </div>
@@ -32,17 +53,21 @@
 
 <script>
 import Mousetrap from '@unrest/vue-mousetrap'
+
+import PlmSnap from './PlmSnap.vue'
+
 const clamp = (number, lower, upper) => Math.max(lower, Math.min(number, upper))
 const grid_cache = {}
-const grid_colors = ['white', 'black', 'transparent']
+const grid_colors = ['#888', 'black', 'transparent']
 
 export default {
   __route: {
     path: '/sm-plm-enemies/:world_slug/',
   },
+  components: { PlmSnap },
   mixins: [Mousetrap.Mixin],
   data() {
-    return { selected_room_index: 0, zIndexes: {} }
+    return { mode: 'arrange', zIndexes: {} }
   },
   computed: {
     mousetrap() {
