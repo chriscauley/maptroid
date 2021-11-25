@@ -76,18 +76,17 @@ class Character(models.Model):
   image = models.ImageField(upload_to="smile_characters")
 
 
-class Sprite(models.Model):
+class SmileSprite(models.Model):
   """
   A sprite from the smile imports used to match various blocks.
   """
-  TYPES = _choices(['item', 'map', 'unknown'])
-  layers = models.JSONField(default=list)
-  worlds = models.ManyToManyField(World)
   name = models.CharField(max_length=32, null=True, blank=True)
-  # TODO is dhash always a number? if so might be better as big int
   dhash = models.CharField(max_length=24)
+  color_sum = models.IntegerField()
   image = models.ImageField(upload_to="smile_sprites")
-  type = models.CharField(max_length=16, choices=TYPES, default='unknown')
+  LAYERS = _choices(['bts', 'plm', 'tile', 'unknown'])
+  layer = models.CharField(max_length=16, choices=LAYERS, default='unknown')
+  type = models.CharField(max_length=32, blank=True, default='')
 
 
 class Entity(models.Model):
