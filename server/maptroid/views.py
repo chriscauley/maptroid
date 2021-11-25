@@ -1,14 +1,19 @@
+from django.core.files.base import ContentFile
 from django.conf import settings
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
+from io import BytesIO
+import imagehash
 import json
 import math
+import numpy as np
 import os
 from PIL import Image, ImageDraw
 import sys
+import urllib
 
 from maptroid.utils import mkdir
-from maptroid.models import World, Zone, Screenshot, Room
+from maptroid.models import World, Zone, Screenshot, Room, SmileSprite
 
 with open(os.path.join(settings.BASE_DIR, '../../client/src/lib/dread_colors.json'), 'r') as f:
     colors = json.load(f)
@@ -113,3 +118,42 @@ def smile_ocr(request):
     with open(cache_path, 'r') as f:
         letter_cache = json.load(f)
     return JsonResponse({ 'letter_cache': letter_cache })
+
+
+def save_sprite(request):
+    data = json.loads(request.body.decode("utf-8"))
+    with urllib.request.urlopen(data['data_url']) as response:
+        with open('/tmp/sprite.png', 'wb') as f:
+            f.write(response.read())
+    image = Image.open('/tmp/sprite.png')
+    image.save(os.path.join(settings.MEDIA_ROOT, 'trash.png'))
+    array = np.array(image)
+    if np.sum(array) == 0:
+        return JsonResponse({'message': 'Error: Sprite is empty'})
+    x = y = 0
+    x1, y1 = image.size
+    while np.sum(array[y:y+1]) == 0:
+        y += 1
+    while np.sum(array[:,x:x+1]) == 0:
+        x +=1
+    while np.sum(array[:,x1-1:x1]) == 0:
+        x1 -= 1
+    while np.sum(array[y1-1:y1]) == 0:
+        y1 -= 1
+
+    cropped = image.crop((x,y,x1,y1))
+    dhash = str(imagehash.dhash(cropped))
+    color_sum = np.sum(array)
+    if SmileSprite.objects.filter(dhash=dhash, color_sum=color_sum):
+        message = "Sprite already exists"
+    else:
+        img_io = BytesIO()
+        cropped.save(img_io, format="png")
+        sprite = SmileSprite.objects.create(
+            color_sum=color_sum,
+            layer="plm",
+            image=ContentFile(img_io.getvalue(), f'{dhash}__{color_sum}.png'),
+            dhash=dhash,
+        )
+        message = "Sprite created"
+    return JsonResponse({ 'message': message })

@@ -3,7 +3,7 @@ from django.urls import include, path, re_path
 from unrest.views import index
 from main.views import list_dir, delete_file
 
-from maptroid.views import replace_svg_color, smile_ocr
+from maptroid.views import replace_svg_color, smile_ocr, save_sprite
 import maptroid.forms
 import unrest.user.forms
 import contact.forms
@@ -15,6 +15,7 @@ urlpatterns = [
     path('api/delete-file/', delete_file),
     path('api/replace-svg-color/', replace_svg_color),
     path('api/smile-ocr/', smile_ocr),
+    path('api/save-sprite/', save_sprite),
     path('', include('social_django.urls', namespace='social')),
     path('', include('unrest.urls')),
 ]

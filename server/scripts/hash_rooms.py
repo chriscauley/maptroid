@@ -1,3 +1,5 @@
+# DEPRECATED this was my first attempt at serializing rooms. Using numpy instead
+
 import _setup
 
 from django.core.files.base import ContentFile
