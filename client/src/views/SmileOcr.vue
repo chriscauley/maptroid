@@ -1,6 +1,6 @@
 <template>
   <div class="smile-ocr">
-    <div v-if="cache?.__missing.length">
+    <div v-if="cache?.__missing.length && index !== cache.__missing.length">
       <img :src="next_missing.url" />
       <form @submit.prevent="submit">
         <div class="smile-ocr__inputs">
@@ -23,7 +23,7 @@ export default {
   },
   computed: {
     next_missing() {
-      const [url, hashes] = this.cache.__missing[this.index]
+      const [url, hashes] = this.cache.__missing[this.index] || []
       return { url, hashes }
     },
   },
@@ -35,7 +35,9 @@ export default {
       this.status = null
       let misses = 0
       let hits = 0
+      const correct = []
       this.next_missing.hashes.forEach((hash, i) => {
+        correct.push(this.cache[hash] || '??')
         if (this.cache[hash]) {
           if (this.cache[hash] === this.answer[i]) {
             hits++
@@ -47,7 +49,7 @@ export default {
         }
       })
       if (misses) {
-        this.status = `ERROR: ${misses} characters do not match`
+        this.status = `ERROR: ${misses} characters do not match. ${correct}`
       } else {
         this.status = `${hits} characters matched!`
         this.index++

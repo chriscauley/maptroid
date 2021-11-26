@@ -7,7 +7,7 @@ from PIL import Image
 import urllib
 
 def _get_format(img):
-  if isinstance(np.ndarray):
+  if isinstance(img, np.ndarray):
     return "np"
   return "pil"
 
@@ -20,17 +20,15 @@ def _coerce(img, format_):
       with urllib.request.urlopen(img) as response:
         with open('/tmp/sprite.png', 'wb') as f:
           f.write(response.read())
-        img = Image.open('/tmp/sprite.png')
+        img = Image.open('/tmp/sprite.png', mode="RGBA")
 
     elif os.path.exists(img):
-      img = Image.open(img)
+      img = Image.open(img).convert('RGBA')
 
   if format_ == "np":
     return np.array(img)
 
   if format_ == "pil":
-    if isinstance(img, str):
-      return Image.open(img)
     if isinstance(img, Image.Image):
       return img
     if isinstance(img, np.ndarray):
@@ -48,8 +46,8 @@ def make_content_file(img, name):
   return ContentFile(img_io.getvalue(), name)
 
 def replace_color(image, color1, color2):
-  format_ = get_format(img)
-  array = _coerce_to_np(img)
+  format_ = _get_format(image)
+  array = _coerce(image, 'np')
   array[(array == color1).all(axis = -1)] = color2
   return _coerce(array, format_)
 
@@ -65,17 +63,19 @@ def get_or_create(image_name, function, path="", force=False):
 
 
 # ideally we should do something more like this: https://stackoverflow.com/a/43111221/266564
-def get_palette(img):
+def analyze_colors(img, ignore_clear=True):
   img = _coerce(img, 'np')
-  hist = defaultdict(int)
-  ignore_alpha_0 = img.shape[2] == 4
+  counts = defaultdict(int)
+  ignore_clear = ignore_clear and img.shape[2] == 4
+  all_colors = []
   for row in img:
     for color in row:
-      if ignore_alpha_0 and color[3] == 0:
+      if ignore_clear and color[3] == 0:
         continue
-      hist[tuple(color)] += 1
-  return hist
-
+      counts[tuple(color)] += 1
+      all_colors.append(color[:3])
+  average = np.round(np.sum(all_colors, axis=0) / len(all_colors))
+  return { 'counts': counts, 'average': average }
 
 def int_to_64bit_array(value):
   array = [int(i) for i in bin(value)[2:]]

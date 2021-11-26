@@ -18,7 +18,7 @@
             <img :src="row.url" style="height:32px" />
           </td>
           <td v-for="(cell, i) in row.cells" :key="i" align="center" :class="cell.class">
-            {{ cell.value }}
+            {{ displayValue(cell.value) }}
           </td>
         </tr>
       </tbody>
@@ -68,6 +68,15 @@ export default {
         return '-orange'
       }
       return '-red'
+    },
+    displayValue(value) {
+      if (!value) {
+        return value
+      }
+      if (value > 2) {
+        return Math.round(value)
+      }
+      return value.toFixed(1)
     },
   },
 }

@@ -78,25 +78,24 @@ class Character(models.Model):
   image = models.ImageField(upload_to="smile_characters")
 
 
-class ImageHashField(models.BigIntegerField):
+class ImageHashField(models.CharField):
+  def __init__(self, *args, **kwargs):
+    kwargs['max_length'] = 24
+    return super().__init__(*args, **kwargs)
   def get_db_prep_value(self, value, connection, prepared=False):
     if not value == None:
-      value = img.imagehash_to_int(value) # idempotent for int
+      return str(img.imagehash_to_int(value)) # idempotent for int
 
     return super().get_db_prep_value(value, connection, prepared)
 
   def from_db_value(self, value, expression, connection):
     if isinstance(value, str):
-      value = int(value, 16)
-    if isinstance(value, int):
-      value = img.int_to_imagehash(value)
+      value = img.int_to_imagehash(int(value, 16))
     return value
 
   def to_python(self, value):
     if isinstance(value, str):
-      value = int(value, 16)
-    if isinstance(value, int):
-      value = img.int_to_imagehash(value)
+      value = img.int_to_imagehash(int(value, 16))
     return value
 
 
@@ -107,13 +106,14 @@ class SmileSprite(models.Model):
   name = models.CharField(max_length=32, null=True, blank=True)
   dhash = ImageHashField()
   average_color = models.JSONField()
+  main_color = models.JSONField()
   image = models.ImageField(upload_to="smile_sprites")
   LAYERS = _choices(['bts', 'plm', 'tile', 'unknown'])
   layer = models.CharField(max_length=16, choices=LAYERS, default='unknown')
   type = models.CharField(max_length=32, blank=True, default='')
 
   def save(self, *args, **kwargs):
-    if not self.dhash or not self.average_color:
+    if not self.dhash or self.average_color is None or self.main_color is None:
       self.reprocess()
     return super().save(*args, **kwargs)
 
@@ -121,6 +121,9 @@ class SmileSprite(models.Model):
     image = img._coerce(self.image.path, 'np')
     self.average_color = [round(i) for i in image.mean(axis=0).mean(axis=0)]
     self.dhash = imagehash.dhash(img._coerce(image, 'pil'))
+    color_data = img.analyze_colors(image)
+    self.average_color = [int(i) for i in color_data['average']]
+    self.main_color = [int(i) for i in sorted(color_data['counts'].items(), key=lambda i: i[1])[-1][0]]
     self.save()
 
   @property

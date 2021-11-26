@@ -1,9 +1,9 @@
 <template>
-  <div class="sm-plm-enemies" v-if="world && rooms">
+  <div class="sm-plm-enemies" v-if="world && rooms && current_room">
     <div class="sm-plm-enemies__top">
       <select v-model="current_room_index">
-        <option v-for="(room, i) in rooms" :value="i" :key="i">
-          {{ room.data.plm_enemies?.length || '☹️' }} {{ room.name.slice(0, 30) }}
+        <option v-for="item in select_items" :value="item.id" :key="item.id">
+          {{ item.count }} - {{ item.name }}
         </option>
       </select>
       <div class="btn-group">
@@ -25,7 +25,7 @@
         <a class="fa fa-question-circle-o" :href="plm.src" target="_blank" />
       </div>
     </div>
-    <div class="sm-plm-enemies__workarea">
+    <div class="sm-plm-enemies__workarea" v-if="current_room">
       <div class="sm-plm-enemies__wrapper">
         <img :src="`/media/sm_room/${world.slug}/${current_room.key}`" ref="img" />
         <unrest-draggable
@@ -52,6 +52,7 @@
 </template>
 
 <script>
+import { sortBy } from 'lodash'
 import Mousetrap from '@unrest/vue-mousetrap'
 
 import PlmSnap from './PlmSnap.vue'
@@ -79,11 +80,11 @@ export default {
       }
     },
     current_room() {
-      return this.rooms[this.current_room_index]
+      return this.rooms.find((r) => r.id === this.current_room_index)
     },
     current_room_index: {
       get() {
-        return this.$store.local.state.plm_index || 0
+        return this.$store.local.state.plm_index
       },
       set(value) {
         this.$store.local.save({ plm_index: value })
@@ -112,6 +113,16 @@ export default {
       const world = this.world.id
       const rooms = this.$store.room2.getPage({ query: { per_page: 5000, world } })?.items
       return rooms?.filter((r) => r.data.plm_enemies)
+    },
+    select_items() {
+      const items = this.rooms.map((room) => {
+        return {
+          count: room.data.plm_enemies?.filter((i) => !i.deleted).length || '☹️',
+          name: room.name?.slice(0, 30),
+          id: room.id,
+        }
+      })
+      return sortBy(items, 'count').reverse()
     },
     plms() {
       return this.current_room.data.plm_enemies?.map((plm) => {
@@ -151,8 +162,8 @@ export default {
       if (!event.shiftKey) {
         const plm_img = this.$el.querySelector(`[src="${plm.src}"]`)
         const img = this.$refs.img
-        const x_max = img.width - plm_img.width - 2
-        const y_max = img.height - plm_img.height - 2
+        const x_max = img.width - plm_img.width - 1
+        const y_max = img.height - plm_img.height - 1
         plm._plm.xy[0] = clamp(plm._plm.xy[0], 0, x_max)
         plm._plm.xy[1] = clamp(plm._plm.xy[1], 0, y_max)
       }

@@ -1,24 +1,42 @@
 import _setup
 
+from collections import defaultdict
 from django.conf import settings
+from django.core.files.base import ContentFile
 import json
 import imagehash
+import math
 import np
 import os
+import unrest_image as img
 
 from PIL import Image
 import pytesseract
 
-from maptroid.models import Room
+from maptroid.models import Room, SmileSprite
 from maptroid.sm import set_transparency
 
 WORLD = "super_metroid"
+rooms = Room.objects.filter(world__slug=WORLD)
+BIN = 16
 
 SMILE_BG = (128, 128, 255, 255)
 coords = {
-  'workarea': (8, 132, 1031, 899),
-  'smile_id': (1066, 136, 1113, 148),
-  'event_name': (1135, 136, 1296, 148),
+  'batch1': {
+    'workarea': (8, 132, 1031, 899),
+    'smile_id': (1066, 136, 1113, 148),
+    'event_name': (1135, 136, 1296, 148),
+  },
+  'batch2': {
+    'workarea': (8, 141, 1031, 907),
+    'smile_id': (1066, 145, 1113, 157),
+    'event_name': (1135, 145, 1295, 157),
+  },
+  'batch3': {
+    'workarea': (0, 133, 1613, 989),
+    'smile_id': (1648, 138, 1695, 149),
+    'event_name': (1718, 138, 1879, 149),
+  },
 }
 
 SOURCE_DIR = os.path.join(settings.MEDIA_ROOT, 'plm_enemies')
@@ -58,21 +76,15 @@ class JsonCache(dict):
     with open(self._path, 'w') as f:
       f.write(json.dumps(self, indent=2))
 
-def replace_color(img, color1, color2):
-  data = np.array(img)
-  data[(data == color1).all(axis = -1)] = color2
-  return Image.fromarray(data, mode='RGB')
 
 def get_cached_image(image_name, dest_key, function, force=False):
-  target_path = os.path.join(DIRS[dest_key], image_name)
-  if not force and os.path.exists(target_path):
-    return Image.open(target_path)
-
-  image = Image.open(os.path.join(SOURCE_DIR, image_name))
-  print(f'writing {dest_key} for {image_name}')
-  image = function(image)
-  image.save(target_path)
+  def func2():
+    return function(Image.open(os.path.join(SOURCE_DIR, data['batch_name'], image_name)))
+  image, new = img.get_or_create(image_name, func2, DIRS[dest_key], force=force)
+  if new:
+    print(f"Created image {dest_key} {image_name}")
   return image
+
 
 data = {
   'room_keys': {},
@@ -90,9 +102,9 @@ def read_text(ss_name, type_, coords):
   def crop_text(image):
     cropped = image.crop(coords).convert("L").convert("RGB")
     bg_color = cropped.getpixel((0, 0))
-    cropped = replace_color(cropped, [0,0,0], [255,255,255])
-    cropped = replace_color(cropped, bg_color, [0,0,0])
-    cropped = replace_color(cropped, [128, 128, 128], [255, 255, 255])
+    cropped = img.replace_color(cropped, [0,0,0], [255,255,255])
+    cropped = img.replace_color(cropped, bg_color, [0,0,0])
+    cropped = img.replace_color(cropped, [128, 128, 128], [255, 255, 255])
     return cropped
 
   cropped_text = get_cached_image(ss_name, type_, crop_text)
@@ -128,7 +140,7 @@ def to_media_url(path, *args):
 
 
 def get_cropped_workarea(image):
-  image = image.crop(coords['workarea'])
+  image = image.crop(coords[data['batch_name']]['workarea'])
   x, y = image.size
   x -= 1
   y -= 1
@@ -138,8 +150,10 @@ def get_cropped_workarea(image):
     x -= 1
   return set_transparency(image.crop((0,0,x,y)))
 
-if __name__ == '__main__':
-  rooms = Room.objects.filter(world__slug=WORLD)
+
+def load_plms(batch_name):
+  print('processing', batch_name)
+  data['batch_name'] = batch_name
   processed = []
   for room in rooms:
     # uncomment this next line to reset all rooms
@@ -149,20 +163,21 @@ if __name__ == '__main__':
 
   hash_to_letter['__missing'] = []
 
-  for ss_name in os.listdir(SOURCE_DIR):
+  for ss_name in os.listdir(os.path.join(SOURCE_DIR, batch_name)):
     if not ss_name.endswith('png'):
       continue
 
     if ss_name in processed:
       continue
 
-    image = Image.open(os.path.join(SOURCE_DIR, ss_name))
+    image = Image.open(os.path.join(SOURCE_DIR, batch_name, ss_name))
     workarea = get_cached_image(ss_name, 'workarea', get_cropped_workarea)
-    smile_id = read_text(ss_name, 'smile_id', coords['smile_id'])
+    smile_id = read_text(ss_name, 'smile_id', coords[data['batch_name']]['smile_id'])
     if not smile_id:
       continue
+    print(f"'{smile_id}'")
 
-    event = read_text(ss_name, 'event_name', coords['event_name'])
+    event = read_text(ss_name, 'event_name', coords[data['batch_name']]['event_name'])
     if not event:
       continue
 
@@ -187,8 +202,66 @@ if __name__ == '__main__':
     room.save()
     print(f'Room #{room.id} plm #{len(room.data["plm_enemies"])} processed!')
 
+def get_plm_image(room):
+  if not 'plm_enemies' in room.data:
+    return
+  if len(room.data['plm_enemies']) > 1:
+    return # TODO handle composite plms
+  return Image.open(os.path.join(DIRS['processed'], room.data['plm_enemies'][0]['cropped']))
+
+
+def reduce_image_16(image):
+  image = np.array(image)
+  reduced = np.add.reduce(image, 2) # colors are now numbers
+  as_sprites = np.zeros(shape=[math.ceil(i/BIN) for i in reduced.shape], dtype=np.int32)
+  height, width = as_sprites.shape
+  for x in range(width):
+    for y in range(height):
+      as_sprites[y, x] = np.sum(reduced[y*BIN:(y+1)*BIN,x*BIN:(x+1)*BIN])
+  assert(np.sum(as_sprites) == np.sum(image)) # no data lost
+  return as_sprites
+
+def extract_icons():
+  sprite_cache = {}
+  sprite_counts = defaultdict(int)
+  for sprite in SmileSprite.objects.all():
+    sprite_cache[sprite.color_sum] = sprite
+  rooms = Room.objects.filter(world__slug=WORLD)[:1]
+  for room in rooms:
+    print(room.key)
+    plm_image = get_plm_image(room)
+    if not plm_image:
+        continue
+    reduced = reduce_image_16(plm_image.convert("RGB"))
+    height, width = reduced.shape
+    assert(height % BIN + width % BIN == 0)
+    for y in range(height):
+      for x in range(width):
+        color_sum = reduced[y, x]
+        if not color_sum:
+          continue
+        if not color_sum in sprite_cache:
+          pass
+          # sprite_image = plm_image.crop((x * 16, y * 16, (x+1)*16, (y+1)*16))
+          # dhash = str(imagehash.dhash(sprite_image))
+          # sprite = SmileSprite.objects.create(
+          #   color_sum=color_sum,
+          #   layer="plm",
+          #   image=make_content_file(sprite_image),
+          #   dhash=dhash,
+          # )
+          # sprite_cache[color_sum] = sprite
+          # print('sprite created:', color_sum)
+        sprite_counts[color_sum] += 1
+  print(len({k:v for k,v in sprite_counts.items() if v > 2}))
+
+if __name__ == '__main__':
+  for i in [3]:
+    load_plms(f'batch{i}')
   if data['missing_smile_id'] or data['missing_event_name']:
     print(f"missing {data['missing_smile_id']} smile_ids")
     print(f"missing {data['missing_event_name']} event names")
-  processed_count = Room.objects.filter(data__plm_enemies__isnull=False).count()
+  print(sorted([r.key or '' for r in rooms.filter(data__plm_enemies__isnull=True)]))
+  processed_count = rooms.filter(data__plm_enemies__isnull=False).count()
   print(f'{processed_count} / {rooms.count()} rooms have plm_enemies')
+  # extract_icons()
