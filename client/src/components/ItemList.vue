@@ -20,7 +20,7 @@
               <div v-if="item.data.reward">Reward: {{ item.data.reward }}</div>
             </div>
             <div
-              v-for="time in item.times_by_video_id[video.id]"
+              v-for="time in item.times_by_video_id?.[video.id]"
               :key="time.seconds"
               class="pill -primary"
             >
@@ -34,15 +34,12 @@
 </template>
 
 <script>
-import { sortBy } from 'lodash'
-
-import DreadItems from '@/models/DreadItems'
+// import { sortBy } from 'lodash'
 
 export default {
   inject: ['video'],
   props: {
-    zone_items: Object,
-    playthrough: Object,
+    items: Object,
   },
   emits: ['select-item'],
   computed: {
@@ -54,14 +51,16 @@ export default {
         this.$store.local.save({ item_list_collapsed: value })
       },
     },
-    items() {
-      const allowed_types = {}
-      DreadItems.items.forEach((type) => (allowed_types[type] = true))
-      return sortBy(
-        this.zone_items.filter((i) => allowed_types[i.data.type]),
-        (i) => (i.video_times || [{ seconds: Infinity }])[0].seconds,
-      )
-    },
+    // TODO dread was loading zone_items instead. Need to update dread to do this in parent component
+    // import DreadItems from '@/models/DreadItems'
+    // items() {
+    //   const allowed_types = {}
+    //   DreadItems.items.forEach((type) => (allowed_types[type] = true))
+    //   return sortBy(
+    //     this.zone_items.filter((i) => allowed_types[i.data.type]),
+    //     (i) => (i.video_times || [{ seconds: Infinity }])[0].seconds,
+    //   )
+    // },
   },
 }
 </script>

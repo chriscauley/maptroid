@@ -19,37 +19,61 @@
   .unrest-draggable {
     @apply absolute cursor-pointer inset-0;
   }
+  .sm-item:before {
+    @apply absolute bg-black;
+    outline: 1px solid white;
+    .-zoom-0 & {
+      inset: -200%;
+    }
+  }
 }
 
 .sm-item {
-  background-size: 100% auto;
-  display: inline-block;
+  @apply relative inline-block;
   height: 1em;
-  image-rendering: pixelated;
   width: 1em;
+  &:before {
+    @apply absolute inset-0;
+    background-size: 100% auto;
+    content: "";
+    image-rendering: pixelated;
+  }
 }
 
 $items: morph-ball bomb screw-attack missile super-missile energy-tank energy2-tank varia-suit space-jump power-bomb high-jump speed-booster pedastool reserve-tank x-ray spring-ball grappling-hook charge-beam spazer wave-beam ice-beam plasma-beam gravity-suit;
 
 .sm-item {
-  background-image: url("/sm/items.png");
+  &:before {
+    background-image: url("/static/sm/items.png");
+  }
   @for $i from 0 to length($items) {
     $name: nth($items, $i + 1);
-    &.-#{"" + $name} {
+    &.-#{"" + $name}:before {
       background-position: 0 $i * 2 * -100%;
     }
-    &.-#{"" + $name}-alt {
+    &.-#{"" + $name}-alt:before {
       background-position: 0 ($i * 2 + 1) * -100%;
     }
   }
-  &.-confused {
-    background-image: url("/sm/confused.png");
+  &.-confused:before {
+    background-image: url("/static/sm/confused.png");
     background-position: unset;
   }
 }
 
+$ascent-items: weapons-tank shinespark boost-ball;
+.sm-item {
+  @for $i from 0 to length($ascent-items) {
+    $name: nth($ascent-items, $i + 1);
+    &.-#{"" + $name}:before {
+      background-image: url("/static/sm/ascent-items.png");
+      background-position: 0 $i * -100%;
+    }
+  }
+}
+
 /* everything below here is from the old editor and will eventually be removed */
-.sm-item, .sm-room, .sm-map, .sm-chozo, .sm-door {
+.sm-room, .sm-map, .sm-chozo, .sm-door {
   background-size: 100% auto;
   display: inline-block;
   height: 1em;
@@ -58,23 +82,12 @@ $items: morph-ball bomb screw-attack missile super-missile energy-tank energy2-t
 }
 
 .sm-chozo {
-  background-image: url("/sm/chozo.png");
-}
-
-$ascent-items: weapons-tank shinespark boost-ball;
-.sm-item {
-  @for $i from 0 to length($ascent-items) {
-    $name: nth($ascent-items, $i + 1);
-    &.-#{"" + $name} {
-      background-image: url("/sm/ascent-items.png");
-      background-position: 0 $i * -100%;
-    }
-  }
+  background-image: url("/static/sm/chozo.png");
 }
 
 .sm-map {
   $icons: save map energy missile boss elevator;
-  background-image: url("/sm/map_icons.png");
+  background-image: url("/static/sm/map_icons.png");
   background-size: auto 100%;
   @for $i from 0 to length($icons) {
     $name: nth($icons, $i + 1);
@@ -166,7 +179,7 @@ $zone-colors: (
     border: 0;
   }
   &.-elevator {
-    background: url("/sm/elevator.png");
+    background: url("/static/sm/elevator.png");
     border: 0;
     background-size: 100% auto;
     opacity: 0.5;

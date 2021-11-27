@@ -3,6 +3,7 @@
     <img :src="src" ref="img" @load="draw" style="display:none" />
     <canvas ref="canvas" />
     <unrest-draggable @drag="drag" />
+    <div v-for="item in room_items" :key="item.id" v-bind="item" />
   </div>
 </template>
 
@@ -15,6 +16,7 @@ export default {
   props: {
     room: Object,
     mode: String,
+    items: Array,
   },
   data() {
     return { drag_xy: [0, 0], drag_raw_xy: [0, 0], backgroundImage: '' }
@@ -47,6 +49,27 @@ export default {
         width: `${width * 100}%`,
         zIndex,
       }
+    },
+    room_items() {
+      const width = this.room.data.zone.bounds[2] * 16
+      const height = this.room.data.zone.bounds[3] * 16
+      return this.items
+        .filter((i) => i.room === this.room.id)
+        .map((item) => {
+          const [x, y] = item.data.room_xy
+          return {
+            id: `sm-item__${item.id}`,
+            class: item.icon,
+            title: item.name,
+            style: {
+              position: 'absolute',
+              top: `${(100 * y) / height}%`,
+              left: `${(100 * x) / width}%`,
+              height: `${100 / height}%`,
+              width: `${100 / width}%`,
+            },
+          }
+        })
     },
   },
   methods: {

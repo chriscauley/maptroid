@@ -1,31 +1,32 @@
 <template>
-  <div class="app-body -full-screen">
-    <template v-if="ready">
-      <base-viewer :osd_store="osd_store" @viewer-bound="loadImages" />
-      <template v-if="osd_store.viewer">
-        <html-overlay :viewer="osd_store.viewer">
-          <template v-if="viewer_mode === 'zones'">
-            <zone-box v-for="zone in zones" :key="zone.id" :zone="zone" :world_rooms="rooms" />
-          </template>
-          <template v-if="viewer_mode === 'rooms'">
-            <room-box v-for="room in zone_rooms" :key="room.id" :room="room" />
-          </template>
-        </html-overlay>
-      </template>
+  <div :class="wrapper_class" v-if="ready">
+    <base-viewer :osd_store="osd_store" @viewer-bound="loadImages" />
+    <template v-if="osd_store.viewer">
+      <html-overlay :viewer="osd_store.viewer">
+        <template v-if="viewer_mode === 'zones'">
+          <zone-box v-for="zone in zones" :key="zone.id" :zone="zone" :world_rooms="rooms" />
+        </template>
+        <template v-if="viewer_mode === 'rooms'">
+          <room-box v-for="room in zone_rooms" :key="room.id" :room="room" :items="items" />
+        </template>
+      </html-overlay>
     </template>
-    <admin-popup v-if="ready" :rooms="zone_rooms" />
+    <item-list v-if="items.length" :items="items" />
+    <admin-popup :rooms="zone_rooms" class="-left" />
   </div>
 </template>
 
 <script>
-import { computed } from 'vue'
+import { startCase } from 'lodash'
 import Openseadragon from 'openseadragon'
+import { computed } from 'vue'
 
 import AdminPopup from './AdminPopup.vue'
 import BaseViewer from '@/components/BaseViewer'
 import HtmlOverlay from '@/vue-openseadragon/HtmlOverlay.vue'
 import OsdStore from './OsdStore'
 import RoomBox from './RoomBox.vue'
+import ItemList from '@/components/ItemList.vue'
 import ZoneBox from './ZoneBox.vue'
 
 const { Rect } = Openseadragon
@@ -34,9 +35,10 @@ export default {
   __route: {
     path: '/sm/:world_slug/:zone_slug?/',
   },
-  components: { AdminPopup, BaseViewer, HtmlOverlay, RoomBox, ZoneBox },
+  components: { AdminPopup, BaseViewer, HtmlOverlay, RoomBox, ItemList, ZoneBox },
   provide() {
     return {
+      video: () => null,
       osd_store: computed(() => this.osd_store),
     }
   },
@@ -61,6 +63,22 @@ export default {
       const world_id = this.world.id
       return { query: { per_page: 5000, world: world_id } }
     },
+    items() {
+      const q = { query: { per_page: 5000, zone__world_id: this.world.id } }
+      let items = this.$store.item2.getPage(q)?.items || []
+      if (this.viewer_mode === 'rooms') {
+        const zone = this.zones.find((z) => z.slug === this.$route.params.zone_slug)
+        items = items.filter((i) => i.zone === zone?.id)
+      }
+      return items.map((item) => {
+        return {
+          ...item,
+          name: startCase(item.data.type),
+          icon: `sm-item -${item.data.type}`,
+          room_xy: item.data.room_xy,
+        }
+      })
+    },
     zones() {
       return this.$store.zone.getPage(this.world_params)?.items || []
     },
@@ -74,10 +92,9 @@ export default {
       }
       return null
     },
-    css() {
-      return {
-        wrapper: ['app-sm'],
-      }
+    wrapper_class() {
+      const zoom = Math.round(this.osd_store.state.zoom)
+      return `app-body -full-screen -zoom-${zoom}`
     },
   },
   methods: {
