@@ -50,7 +50,7 @@ export default {
       return this.$store.zone.getPage(q)?.items?.filter((z) => !z.data.hidden)
     },
     items() {
-      const q = { query: { per_page: 5000, world: WORLD } }
+      const q = { query: { per_page: 5000, zone__world_id: WORLD } }
       let items = this.$store.item2.getPage(q)?.items || []
       items = sortBy(items, (i) => this.video.times_by_id[i.id]?.[0].seconds || Infinity)
       return DreadItems.prepDisplayItems(items, this.videos)

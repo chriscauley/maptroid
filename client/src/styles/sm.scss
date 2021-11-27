@@ -21,17 +21,12 @@
   }
 }
 
-/* everything below here is from the old editor and will eventually be removed */
-.sm-item, .sm-room, .sm-map, .sm-chozo, .sm-door {
+.sm-item {
   background-size: 100% auto;
   display: inline-block;
   height: 1em;
   image-rendering: pixelated;
   width: 1em;
-}
-
-.sm-chozo {
-  background-image: url("/sm/chozo.png");
 }
 
 $items: morph-ball bomb screw-attack missile super-missile energy-tank energy2-tank varia-suit space-jump power-bomb high-jump speed-booster pedastool reserve-tank x-ray spring-ball grappling-hook charge-beam spazer wave-beam ice-beam plasma-beam gravity-suit;
@@ -51,6 +46,19 @@ $items: morph-ball bomb screw-attack missile super-missile energy-tank energy2-t
     background-image: url("/sm/confused.png");
     background-position: unset;
   }
+}
+
+/* everything below here is from the old editor and will eventually be removed */
+.sm-item, .sm-room, .sm-map, .sm-chozo, .sm-door {
+  background-size: 100% auto;
+  display: inline-block;
+  height: 1em;
+  image-rendering: pixelated;
+  width: 1em;
+}
+
+.sm-chozo {
+  background-image: url("/sm/chozo.png");
 }
 
 $ascent-items: weapons-tank shinespark boost-ball;

@@ -1,6 +1,6 @@
 <template>
   <div class="app-body -full-screen">
-    <template v-if="world && zones.length">
+    <template v-if="ready">
       <base-viewer :osd_store="osd_store" @viewer-bound="loadImages" />
       <template v-if="osd_store.viewer">
         <html-overlay :viewer="osd_store.viewer">
@@ -13,12 +13,13 @@
         </html-overlay>
       </template>
     </template>
-    <admin-popup :rooms="zone_rooms" />
+    <admin-popup v-if="ready" :rooms="zone_rooms" />
   </div>
 </template>
 
 <script>
 import { computed } from 'vue'
+import Openseadragon from 'openseadragon'
 
 import AdminPopup from './AdminPopup.vue'
 import BaseViewer from '@/components/BaseViewer'
@@ -26,6 +27,8 @@ import HtmlOverlay from '@/vue-openseadragon/HtmlOverlay.vue'
 import OsdStore from './OsdStore'
 import RoomBox from './RoomBox.vue'
 import ZoneBox from './ZoneBox.vue'
+
+const { Rect } = Openseadragon
 
 export default {
   __route: {
@@ -44,6 +47,12 @@ export default {
   computed: {
     viewer_mode() {
       return this.$route.params.zone_slug ? 'rooms' : 'zones'
+    },
+    ready() {
+      if (this.viewer_mode === 'rooms') {
+        return this.world && this.zones.length && this.rooms.length
+      }
+      return this.world && this.zones.length
     },
     world() {
       return this.$store.world2.getFromRoute(this.$route).current
@@ -73,23 +82,35 @@ export default {
   },
   methods: {
     loadImages() {
-      this.loadCorners()
+      let x_max = 10
+      let y_max = 10
       if (this.viewer_mode === 'zones') {
         this.zones.forEach((zone) => {
-          const [x, y, width] = zone.data.world.bounds
+          const [x, y, width, height] = zone.data.world.bounds
           const tileSource = zone.data.dzi
           this.osd_store.viewer.addTiledImage({ tileSource, width: width, x, y })
+          x_max = Math.max(x_max, x + width)
+          y_max = Math.max(y_max, y + height)
+        })
+      } else {
+        this.zone_rooms.forEach((room) => {
+          const [x, y, width, height] = room.data.zone.bounds
+          x_max = Math.max(x_max, x + width)
+          y_max = Math.max(y_max, y + height)
         })
       }
+      this.osd_store.viewer.addOnceHandler('tile-loaded', () =>
+        this.osd_store.viewer.viewport.fitBounds(new Rect(0, 0, x_max, y_max), true),
+      )
+      this.loadCorners(x_max, y_max)
     },
-    loadCorners() {
+    loadCorners(x_max, y_max) {
       const url = '/static/corner_64.png'
-      const W = 128 // arbitrary number that will hopefully fit entire map
       const corners = [
         [0, 0, 0],
-        [0, W, 270],
-        [W, W, 180],
-        [W, 0, 90],
+        [0, y_max, 270],
+        [x_max, y_max, 180],
+        [x_max, 0, 90],
       ]
       corners.forEach(([x, y, degrees]) => {
         this.osd_store.viewer.addSimpleImage({ url, x, y, width: 1, opacity: 1, degrees })

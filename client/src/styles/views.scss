@@ -155,7 +155,7 @@
 
 .admin-smile-sprite {
   &__cards {
-    @apply cursor-pointer flex flex-wrap gap-2 p-2;
+    @apply cursor-pointer flex flex-wrap gap-2 p-2 select-none;
   }
   &__card {
     @apply border flex gap-2 items-center rounded-lg;
@@ -165,5 +165,9 @@
     background: no-repeat center;
     background-size: contain;
     image-rendering: pixelated;
+  }
+  &__last {
+    @apply fixed bottom-0 p-2 right-0;
+    background: var(--bg-alt);
   }
 }

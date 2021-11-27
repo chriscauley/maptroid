@@ -15,7 +15,7 @@ import SmileSprite from './SmileSprite/index.vue'
 import SpriteGallery from './SpriteGallery.vue'
 import SuperMetroid from './sm/index.vue'
 import SmAssignZone from './sm/AssignZone.vue'
-import SmPlmEnemies from './sm/PlmEnemies.vue'
+import SmPlmAlign from './sm/PlmAlign.vue'
 import Tracer from './Tracer.vue'
 import Viewer from './Viewer/index.vue'
 import WorldTiles from './WorldTiles/index.vue'
@@ -38,7 +38,7 @@ export default {
   SpriteGallery,
   SuperMetroid,
   SmAssignZone,
-  SmPlmEnemies,
+  SmPlmAlign,
   Tracer,
   Viewer,
   WorldTiles,
