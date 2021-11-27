@@ -221,40 +221,6 @@ def reduce_image_16(image):
   assert(np.sum(as_sprites) == np.sum(image)) # no data lost
   return as_sprites
 
-def extract_icons():
-  sprite_cache = {}
-  sprite_counts = defaultdict(int)
-  for sprite in SmileSprite.objects.all():
-    sprite_cache[sprite.color_sum] = sprite
-  rooms = Room.objects.filter(world__slug=WORLD)[:1]
-  for room in rooms:
-    print(room.key)
-    plm_image = get_plm_image(room)
-    if not plm_image:
-        continue
-    reduced = reduce_image_16(plm_image.convert("RGB"))
-    height, width = reduced.shape
-    assert(height % BIN + width % BIN == 0)
-    for y in range(height):
-      for x in range(width):
-        color_sum = reduced[y, x]
-        if not color_sum:
-          continue
-        if not color_sum in sprite_cache:
-          pass
-          # sprite_image = plm_image.crop((x * 16, y * 16, (x+1)*16, (y+1)*16))
-          # dhash = str(imagehash.dhash(sprite_image))
-          # sprite = SmileSprite.objects.create(
-          #   color_sum=color_sum,
-          #   layer="plm",
-          #   image=make_content_file(sprite_image),
-          #   dhash=dhash,
-          # )
-          # sprite_cache[color_sum] = sprite
-          # print('sprite created:', color_sum)
-        sprite_counts[color_sum] += 1
-  print(len({k:v for k,v in sprite_counts.items() if v > 2}))
-
 if __name__ == '__main__':
   for i in [3]:
     load_plms(f'batch{i}')

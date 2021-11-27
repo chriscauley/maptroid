@@ -1,5 +1,5 @@
 from django.contrib import admin
-from maptroid.models import Zone, Item,  Room, World, Screenshot, Video, Channel
+from maptroid.models import Zone, Item,  Room, World, Screenshot, Video, Channel, SmileSprite
 
 
 @admin.register(Zone)
@@ -47,3 +47,8 @@ class WorldAdmin(admin.ModelAdmin):
 @admin.register(Screenshot)
 class ScreenshotAdmin(admin.ModelAdmin):
     list_display = ["id", "world", "zone"]
+
+
+@admin.register(SmileSprite)
+class SmileSpriteAdmin(admin.ModelAdmin):
+    pass

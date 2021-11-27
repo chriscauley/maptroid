@@ -3,7 +3,7 @@
     <div class="sm-plm-enemies__top">
       <select v-model="current_room_index">
         <option v-for="item in select_items" :value="item.id" :key="item.id">
-          {{ item.count }} - {{ item.name }}
+          {{ item.text }}
         </option>
       </select>
       <div class="btn-group">
@@ -116,13 +116,11 @@ export default {
     },
     select_items() {
       const items = this.rooms.map((room) => {
-        return {
-          count: room.data.plm_enemies?.filter((i) => !i.deleted).length || '☹️',
-          name: room.name?.slice(0, 30),
-          id: room.id,
-        }
+        const count = room.data.plm_enemies?.filter((i) => !i.deleted).length || '☹️'
+        const name = room.name?.slice(0, 30)
+        return { count, name, id: room.id, text: `${count} - ${name} #${room.id}` }
       })
-      return sortBy(items, 'count').reverse()
+      return sortBy(items, 'text').reverse()
     },
     plms() {
       return this.current_room.data.plm_enemies?.map((plm) => {

@@ -158,9 +158,9 @@ def save_sprite(request):
         message = "Sprite created"
     return JsonResponse({ 'message': message })
 
-
+import json
 def sprite_distances(request):
-    attrs = ['dhash', 'average_color', 'main_color', 'id', 'url']
+    attrs = ['id', 'url', 'params']
     items = []
     for sprite in SmileSprite.objects.all():
         items.append({ attr: getattr(sprite,attr) for attr in attrs })
@@ -168,17 +168,21 @@ def sprite_distances(request):
     for item in items:
         item['distances'] = {}
         for item2 in items:
-            color = [ abs(a - b) for a, b in zip(item['main_color'], item2['main_color'])]
+            color1 = np.array(item['params']['main_color'])
+            color2 = np.array(item2['params']['main_color'])
+            color = np.abs(color1 - color2)
+
             distances = item['distances'][item2['id']] = {
-                'dhash': item['dhash'] - item2['dhash'],
-                'color_diff': color,
-                'color': sum(color),
+                'dhash': int(item['params']['dhash'] - item2['params']['dhash']),
+                'color_diff': [int(c) for c in color],
+                'color': int(np.sum(color)),
                 'both': 0,
             }
+
             if distances['color'] > 8:
                 distances['both'] += (distances['color']-8)/8
             if distances['dhash'] > 8:
                 distances['both'] += (distances['dhash']-8)/8
     for item in items:
-        item.pop('dhash') # not serializable
+        item.pop('params')
     return JsonResponse({ 'items': items })

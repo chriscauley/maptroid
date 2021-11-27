@@ -1,10 +1,13 @@
 from django.conf import settings
 from django.db import models
 import imagehash
+import numpy as np
 import os
+from unrest.decorators import cached_property
 import unrest_image as img
 
 from maptroid.dread import process_screenshot
+from maptroid.utils import mkdir
 
 _choices = lambda l: zip(l,l)
 
@@ -85,7 +88,6 @@ class ImageHashField(models.CharField):
   def get_db_prep_value(self, value, connection, prepared=False):
     if not value == None:
       return str(img.imagehash_to_int(value)) # idempotent for int
-
     return super().get_db_prep_value(value, connection, prepared)
 
   def from_db_value(self, value, expression, connection):
@@ -104,27 +106,11 @@ class SmileSprite(models.Model):
   A sprite from the smile imports used to match various blocks.
   """
   name = models.CharField(max_length=32, null=True, blank=True)
-  dhash = ImageHashField()
-  average_color = models.JSONField()
-  main_color = models.JSONField()
   image = models.ImageField(upload_to="smile_sprites")
   LAYERS = _choices(['bts', 'plm', 'tile', 'unknown'])
   layer = models.CharField(max_length=16, choices=LAYERS, default='unknown')
   type = models.CharField(max_length=32, blank=True, default='')
-
-  def save(self, *args, **kwargs):
-    if not self.dhash or self.average_color is None or self.main_color is None:
-      self.reprocess()
-    return super().save(*args, **kwargs)
-
-  def reprocess(self):
-    image = img._coerce(self.image.path, 'np')
-    self.average_color = [round(i) for i in image.mean(axis=0).mean(axis=0)]
-    self.dhash = imagehash.dhash(img._coerce(image, 'pil'))
-    color_data = img.analyze_colors(image)
-    self.average_color = [int(i) for i in color_data['average']]
-    self.main_color = [int(i) for i in sorted(color_data['counts'].items(), key=lambda i: i[1])[-1][0]]
-    self.save()
+  __str__ = lambda self: self.name or self.image.path.split('/')[-1]
 
   @property
   def url(self):
@@ -134,6 +120,56 @@ class SmileSprite(models.Model):
   def binary_dhash(self):
     return bin(int(str(self.dhash), 16))[2:]
 
+  @cached_property
+  def params(self):
+    return SmileSprite.get_params(self.image.path)
+
+  @staticmethod
+  def get_params(image):
+    nparray = img._coerce(image, 'np')
+    color_data = img.analyze_colors(image)
+    pil = img._coerce(image, 'pil')
+    main_color = sorted(color_data['counts'].items(), key=lambda i: i[1])[-1][0]
+    return {
+      'average_color': [int(i) for i in color_data['average']],
+      'main_color': [int(i) for i in main_color],
+      'dhash': imagehash.dhash(pil),
+      'size': pil.size,
+    }
+
+class SpriteMatcher():
+  _cache = None
+  def __init__(self):
+    self._cache = list(SmileSprite.objects.all())
+  def get_or_create_from_image(self, image, layer):
+    new_params = SmileSprite.get_params(image)
+    for sprite in self._cache:
+      if sprite.params['size'] != new_params['size']:
+        continue
+      if sprite.params['dhash'] - new_params['dhash'] > 8:
+        continue
+      _md = img.color_distance(new_params['main_color'], sprite.params['main_color'])
+      if _md > 8:
+        continue
+      _ad = img.color_distance(new_params['average_color'], sprite.params['average_color'])
+      if _ad > 8:
+        continue
+
+      # it's a match!
+      if not np.array_equal(image, img._coerce(sprite.image.path, 'np')):
+        print('duplicated!')
+        duplicates_path = mkdir(settings.MEDIA_ROOT, 'plm_enemies/duplicates')
+        duplicate_path = os.path.join(duplicates_path, f'{sprite.id}.png')
+        if os.path.exists(duplicate_path):
+          dupe = img._coerce(duplicate_path, 'np')
+        else:
+          dupe = img._coerce(sprite.image.path, 'np')
+        img._coerce(np.concatenate((dupe, image), axis=1), 'pil').save(duplicate_path)
+      return sprite, False
+    content_file = img.make_content_file(image, f'{hash(str(new_params))}.png')
+    sprite = SmileSprite.objects.create(layer=layer, image=content_file)
+    self._cache.append(sprite)
+    return sprite, True
 
 class Entity(models.Model):
   TYPES = _choices(['item', 'environment', 'enemy', 'door', 'station', 'unknown'])

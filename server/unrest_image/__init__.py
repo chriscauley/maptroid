@@ -1,4 +1,5 @@
 from collections import defaultdict
+from django.core.files.base import ContentFile
 from io import BytesIO
 import imagehash
 import numpy as np
@@ -22,7 +23,7 @@ def _coerce(img, format_):
           f.write(response.read())
         img = Image.open('/tmp/sprite.png', mode="RGBA")
 
-    elif os.path.exists(img):
+    else:
       img = Image.open(img).convert('RGBA')
 
   if format_ == "np":
@@ -99,3 +100,7 @@ def imagehash_to_int(value):
     for boolean in row:
       res = (res << 1) | int(boolean)
   return res
+
+
+def color_distance(color1, color2):
+  return np.sum(np.abs(np.array(color1) - np.array(color2)))
