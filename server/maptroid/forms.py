@@ -59,6 +59,7 @@ class ZoneForm(forms.ModelForm):
 @schema.register
 class ItemForm(forms.ModelForm):
   user_can_GET = user_can_LIST = 'ALL'
+  filter_fields = ['zone__world_id']
   class Meta:
     model = Item
     fields = ['room', 'zone', 'data']
@@ -79,4 +80,4 @@ class SmileSprite(forms.ModelForm):
   readonly_fields = ['url']
   class Meta:
     model = SmileSprite
-    fields = ['name', 'layer', 'type']
+    fields = ['type', 'category', 'modifier', 'color', 'layer']

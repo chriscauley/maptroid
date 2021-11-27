@@ -62,7 +62,7 @@ def media_url_to_path(url):
 
 def main():
   rooms = Room.objects.filter(world__slug=WORLD)
-  rooms = rooms.filter(id=19)
+  # rooms = rooms.filter(id=19)
   fails = 0
   matcher = SpriteMatcher()
   for room in rooms:
@@ -71,8 +71,6 @@ def main():
       room.data['trash'] = True
       room.save()
       continue
-    # DANGER ZONE: uncomment next line to wipe all
-    room.data['plm_sprites'] = []
     if room.data.get('plm_sprites') or room.data.get('trash'):
       continue
     smile_id = room.key.split("_")[-1].split('.')[0]

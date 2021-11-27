@@ -1,3 +1,5 @@
+# stitches dread screenshots into pngs and dzis. Resizes large pngs to downloadable sizes
+
 import _setup
 
 import datetime

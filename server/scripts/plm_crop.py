@@ -199,34 +199,15 @@ def load_plms(batch_name):
       'cropped': processed_fname,
       'xy': [0, 0],
     })
+    room.data.pop('plm_sprites', None) # force reprocess spirtes
     room.save()
     print(f'Room #{room.id} plm #{len(room.data["plm_enemies"])} processed!')
-
-def get_plm_image(room):
-  if not 'plm_enemies' in room.data:
-    return
-  if len(room.data['plm_enemies']) > 1:
-    return # TODO handle composite plms
-  return Image.open(os.path.join(DIRS['processed'], room.data['plm_enemies'][0]['cropped']))
-
-
-def reduce_image_16(image):
-  image = np.array(image)
-  reduced = np.add.reduce(image, 2) # colors are now numbers
-  as_sprites = np.zeros(shape=[math.ceil(i/BIN) for i in reduced.shape], dtype=np.int32)
-  height, width = as_sprites.shape
-  for x in range(width):
-    for y in range(height):
-      as_sprites[y, x] = np.sum(reduced[y*BIN:(y+1)*BIN,x*BIN:(x+1)*BIN])
-  assert(np.sum(as_sprites) == np.sum(image)) # no data lost
-  return as_sprites
 
 if __name__ == '__main__':
   for i in [3]:
     load_plms(f'batch{i}')
   if data['missing_smile_id'] or data['missing_event_name']:
-    print(f"missing {data['missing_smile_id']} smile_ids")
-    print(f"missing {data['missing_event_name']} event names")
+    print(f"missing {data['missing_smile_id']} smile_ids and {data['missing_event_name']} event names")
   print(sorted([r.key or '' for r in rooms.filter(data__plm_enemies__isnull=True)]))
   processed_count = rooms.filter(data__plm_enemies__isnull=False).count()
   print(f'{processed_count} / {rooms.count()} rooms have plm_enemies')

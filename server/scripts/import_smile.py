@@ -1,3 +1,5 @@
+# creates the world and rooms from layer exports
+
 import os
 import django
 os.environ['DJANGO_SETTINGS_MODULE'] = 'main.settings'
@@ -33,13 +35,11 @@ for world_slug in os.listdir(SMILE_DIR):
     if missing:
       print(f'{key} missing in: {missing}')
     room, new = Room.objects.get_or_create(key=key, world=world)
-    print(key, room.data)
     if new:
       print(f'New Room: {room}')
-    width, height = Image.open(os.path.join(world_dir, 'layer-1', key)).size
-    room.data['zone'] = {
-      'bounds': [0, 0, width / 256, height / 256],
-      'raw': [0, 0, width / 256, height / 256],
-    }
-    print(room.data)
-    room.save()
+      width, height = Image.open(os.path.join(world_dir, 'layer-1', key)).size
+      room.data['zone'] = {
+        'bounds': [0, 0, width / 256, height / 256],
+        'raw': [0, 0, width / 256, height / 256],
+      }
+      room.save()

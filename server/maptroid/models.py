@@ -101,16 +101,23 @@ class ImageHashField(models.CharField):
     return value
 
 
+colors = ['black', 'gold', 'gray', 'green', 'orange', 'blue', 'pink', 'purple', 'red', 'white']
+
 class SmileSprite(models.Model):
   """
   A sprite from the smile imports used to match various blocks.
   """
-  name = models.CharField(max_length=32, null=True, blank=True)
   image = models.ImageField(upload_to="smile_sprites")
   LAYERS = _choices(['bts', 'plm', 'tile', 'unknown'])
   layer = models.CharField(max_length=16, choices=LAYERS, default='unknown')
   type = models.CharField(max_length=32, blank=True, default='')
-  __str__ = lambda self: self.name or self.image.path.split('/')[-1]
+  MODIFIERS = _choices(['composite', 'inblock', 'inegg'])
+  modifier = models.CharField(max_length=16, choices=MODIFIERS, null=True, blank=True)
+  CATEGORIES = _choices(['item', 'enemy', 'obstacle', 'door', 'station', 'animation', 'trash'])
+  category = models.CharField(max_length=16, choices=CATEGORIES, null=True, blank=True)
+  COLORS = _choices(colors)
+  color = models.CharField(max_length=16, choices=COLORS, null=True, blank=True)
+  __str__ = lambda self: self.type or self.image.path.split('/')[-1]
 
   @property
   def url(self):
