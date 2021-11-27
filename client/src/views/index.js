@@ -11,6 +11,7 @@ import ScreenshotUpload from './ScreenshotUpload.vue'
 import ScreenshotViewer from './ScreenshotViewer.vue'
 import SmileCompare from './SmileCompare.vue'
 import SmileOcr from './SmileOcr.vue'
+import SmileSprite from './SmileSprite/index.vue'
 import SpriteGallery from './SpriteGallery.vue'
 import SuperMetroid from './sm/index.vue'
 import SmAssignZone from './sm/AssignZone.vue'
@@ -33,6 +34,7 @@ export default {
   ScreenshotViewer,
   SmileCompare,
   SmileOcr,
+  SmileSprite,
   SpriteGallery,
   SuperMetroid,
   SmAssignZone,

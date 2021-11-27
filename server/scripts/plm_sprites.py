@@ -32,7 +32,7 @@ def extract_sprites(image, smile_id):
       _s = 4
       x2 = x1 + _s
       y2 = y1 + _s
-      while x2 < x_max and y2 < y_max:
+      while x2 < x_max+4 and y2 < y_max+4:
         if np.sum(image[y2:y2+_s,x1:x2]):
           y2 += _s
         elif np.sum(image[y1:y2,x2:x2+_s]):
@@ -41,6 +41,16 @@ def extract_sprites(image, smile_id):
           x1 -= _s
         else:
           break
+
+      _count = len(sprites)
+      while np.sum(image[y1:y1+1,x1:x2]) == 0:
+        y1 += 1
+      while np.sum(image[y2-1:y2,x1:x2]) == 0:
+        y2 -= 1
+      while np.sum(image[y1:y2,x1:x1+1]) == 0:
+        x1 += 1
+      while np.sum(image[y1:y2,x2-1:x2]) == 0:
+        x2 -= 1
       sprites.append(img._coerce(image[y1:y2,x1:x2], 'np'))
       xys.append([x1, y1])
       image[y1:y2,x1:x2] = [0,0,0,0]
@@ -52,16 +62,17 @@ def media_url_to_path(url):
 
 def main():
   rooms = Room.objects.filter(world__slug=WORLD)
+  rooms = rooms.filter(id=19)
   fails = 0
   matcher = SpriteMatcher()
   for room in rooms:
-    if '7E82C' in room.key:
+    if '7E82C' in room.key: # force skip junk room by adding them to here
       print('skipping', room)
       room.data['trash'] = True
       room.save()
       continue
     # DANGER ZONE: uncomment next line to wipe all
-    # room.data['plm_sprites'] = []
+    room.data['plm_sprites'] = []
     if room.data.get('plm_sprites') or room.data.get('trash'):
       continue
     smile_id = room.key.split("_")[-1].split('.')[0]

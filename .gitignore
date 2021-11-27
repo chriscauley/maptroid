@@ -11,3 +11,6 @@ server/dist
 server/main/settings/local.py
 .static
 .media
+
+_backups
+_cache

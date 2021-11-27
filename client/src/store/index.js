@@ -9,6 +9,7 @@ import playthrough from './playthrough'
 import room from './room'
 import room2 from './room2'
 import smile from './smile'
+import smilesprite from './smilesprite'
 import screenshot from './screenshot'
 import video from './video'
 import viewer from './viewer'
@@ -29,6 +30,7 @@ const modules = {
   room,
   room2,
   smile,
+  smilesprite,
   screenshot,
   video,
   viewer,

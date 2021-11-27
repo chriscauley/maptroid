@@ -1,3 +1,7 @@
+.admin-smile-sprite, .smile-compare, .sm-plm-enemies, .smile-ocr, .app-sm-assign, .app-downloads, .app-screenshotupload {
+  @apply mt-20;
+}
+
 .app-sm-assign {
   &__zones {
     @apply fixed bottom-0 flex gap-2 left-0 p-2;
@@ -48,10 +52,6 @@
   p {
     max-width: 650px;
   }
-}
-
-.smile-compare, .sm-plm-enemies, .smile-ocr, .app-sm-assign, .app-downloads, .app-screenshotupload {
-  @apply mt-20;
 }
 
 .app-contact {
@@ -150,5 +150,20 @@
       @apply bg-black border border-white;
       image-rendering: pixelated;
     }
+  }
+}
+
+.admin-smile-sprite {
+  &__cards {
+    @apply cursor-pointer flex flex-wrap gap-2 p-2;
+  }
+  &__card {
+    @apply border flex gap-2 items-center rounded-lg;
+  }
+  &__img {
+    @apply h-16 w-16;
+    background: no-repeat center;
+    background-size: contain;
+    image-rendering: pixelated;
   }
 }
