@@ -19,5 +19,18 @@ const fromServer = (video) => {
 
 export default () => {
   const storage = RestStorage('schema/video', { collection_slug: 'schema/video', fromServer })
+  const { state } = storage.api
+
+  storage.setWorld = (world) => {
+    state.world = world
+    state.videos = null
+    const q = { query: { per_page: 5000, world: world.id } }
+    storage.fetchPage(q).then(({ items }) => state.videos = items)
+  }
+
+  storage.getWorldVideos = () => {
+    return state.videos || []
+  }
+
   return storage
 }

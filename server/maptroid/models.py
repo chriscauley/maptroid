@@ -16,6 +16,25 @@ class World(models.Model):
   slug = models.CharField(max_length=128)
   __str__ = lambda self: self.name
 
+  def normalize(self):
+    zones = self.zone_set.all()
+    x_max = y_max = -1e20
+    x_min = y_min = 1e20
+    for zone in zones:
+      x, y, width, height = zone.data['world']['bounds']
+      x_min = min(x, x_min)
+      y_min = min(y, y_min)
+      x_max = max(x + width, x_max)
+      y_max = max(y + height, y_max)
+
+    if x_min or y_min:
+      for zone in zones:
+        zone.data['world']['bounds'][0] -= x_min
+        zone.data['world']['bounds'][1] -= y_min
+        zone.save()
+
+    self.save()
+
 
 def default_data():
   return { 'world': { 'bounds': [0, 0, 1, 1] } }
