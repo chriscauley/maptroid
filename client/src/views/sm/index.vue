@@ -80,7 +80,8 @@ export default {
       })
     },
     zones() {
-      return this.$store.zone.getPage(this.world_params)?.items || []
+      const zones = this.$store.zone.getPage(this.world_params)?.items || []
+      return zones.filter(z => !z.data.hidden)
     },
     rooms() {
       return this.$store.room2.getPage(this.world_params)?.items || []
