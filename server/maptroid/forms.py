@@ -12,12 +12,12 @@ class WorldForm(forms.ModelForm):
   user_can_GET = user_can_LIST = 'ALL'
   class Meta:
     model = World
-    fields = ('name', 'slug')
+    fields = ('name', 'slug', 'hidden')
 
 @schema.register
 class RoomForm(forms.ModelForm):
   user_can_GET = user_can_LIST = 'ALL'
-  filter_fields = ['zone__slug']
+  filter_fields = ['zone__slug', 'world__slug'] # TODO use world__slug and remove zone__slug
   class Meta:
     model = Room
     fields = ['name', 'key', 'world', 'zone', 'data']
@@ -51,6 +51,7 @@ class ScreenshotForm(forms.ModelForm):
 @schema.register
 class ZoneForm(forms.ModelForm):
   user_can_GET = user_can_LIST = 'ALL'
+  filter_fields = ['world__slug']
   class Meta:
     model = Zone
     fields = ['name', 'slug', 'data', 'world']

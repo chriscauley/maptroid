@@ -76,7 +76,7 @@ import ScreenshotOverlay from './ScreenshotOverlay.vue'
 import HtmlOverlay from '@/vue-openseadragon/HtmlOverlay.vue'
 import ToolStorage from './ToolStorage'
 import OsdStore from './OsdStore'
-import VideoPlayer from '@/components/Video.vue'
+import VideoPlayer from '@/components/Video/index.vue'
 
 const WORLD = 3 // hardcoded for now since this interface is dread only
 const WORLD_QUERY = { query: { world_id: WORLD, per_page: 5000 } }
@@ -86,7 +86,7 @@ const allowed_by_type = Object.fromEntries(allowed_types.map((t) => [t, true]))
 
 export default {
   __route: {
-    path: '/dread/:zone_slug/',
+    path: '/maps/:world_slug/:zone_slug/',
     meta: {
       title: ({ params }) => startCase(params.zone_slug),
     },
@@ -110,12 +110,13 @@ export default {
         const match = (i) => i.data.type.match(/^(teleportal|transit)/)
         const items = this.world_items.filter(match).map((i) => {
           const zone = this.zones.find((z) => z.id === i.zone)
+          const link = this.$store.route.getZoneLink('dread', zone.slug)
           return {
             id: i.id,
             type: i.data.type,
             zone_id: i.zone,
             _target: i.data.transit_target_id,
-            to: `/dread/${zone.slug}/?item=${i.id}`,
+            to: `${link}?item=${i.id}`,
             name: i.data.name || `${DreadItems.getName(i)} - ${zone.name}`,
           }
         })
@@ -239,7 +240,8 @@ export default {
     },
     gotoItem(item) {
       this.osd_store.gotoItem(item)
-      this.$router.replace(`/dread/${this.zone.slug}/?item=${item.id}`)
+      const link = this.$store.route.getZoneLink('dread', this.zone.slug)
+      this.$router.replace(`${link}?item=${item.id}`)
     },
   },
 }

@@ -58,8 +58,9 @@ export default {
   computed: {
     to_zone() {
       if (this.room.data.to_zone) {
+        const { world_slug } = this.$route.params
         const zone = this.zones.find((z) => z.id === this.room.data.to_zone)
-        return zone && `/dread/${zone.slug}/`
+        return zone && `/maps/${world_slug}/${zone.slug}/`
       }
       return undefined
     },

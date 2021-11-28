@@ -1,59 +1,62 @@
 <template>
-  <unrest-dropdown class="floating-nav">
-    <div class="floating-nav__title link">{{ title }}</div>
-    <template #content>
-      <div class="dropdown-items">
-        <router-link class="dropdown-item" to="/dread/">
-          Metroid Dread
-        </router-link>
-        <router-link v-for="link in zone_links" :key="link.to" class="dropdown-item" :to="link.to">
-          - {{ link.text }}
-        </router-link>
-        <router-link class="dropdown-item" to="/downloads/">
-          Download Maps + Icons
-        </router-link>
-        <router-link class="dropdown-item" to="/about/">
-          About
-        </router-link>
-        <router-link class="dropdown-item" to="/contact/">
-          Contact
-        </router-link>
-        <template v-if="$auth.user?.is_superuser">
-          <router-link class="dropdown-item" to="/dread-sprites/">Sprites</router-link>
-          <router-link class="dropdown-item" to="/screenshotupload/"
-            >Upload Screenshots</router-link
-          >
-        </template>
-      </div>
+  <div class="app-nav">
+    <unrest-dropdown :items="home_links">
+      <div class="link">Project Maptroid</div>
+    </unrest-dropdown>
+    <template v-if="world">
+      <span>/</span>
+      <unrest-dropdown :items="world_links">
+        <div class="link">{{ world.name }}</div>
+      </unrest-dropdown>
     </template>
-  </unrest-dropdown>
+    <template v-if="zone">
+      <span>/</span>
+      <unrest-dropdown :items="zone_links">
+        <div class="link">{{ zone.name }}</div>
+      </unrest-dropdown>
+    </template>
+  </div>
 </template>
 
 <script>
-const WORLD = 3
-
 export default {
   computed: {
-    zones() {
-      const q = { query: { world_id: WORLD, per_page: 5000 } }
-      return this.$store.zone.getPage(q)?.items || []
+    home_links() {
+      const links = [
+        ...this.world_links,
+        { text: 'Download Maps + Icons', to: '/downloads/' },
+        { text: 'About', to: '/about/' },
+        { text: 'Contact', to: '/contact/' },
+      ]
+      if (this.$auth.user?.is_superuser) {
+        links.push({ text: 'Sprites', to: '/dread-sprites/' })
+        links.push({ text: 'Upload Screenshots', to: '/screenshotupload/' })
+      }
+      return links
     },
     zone_links() {
-      return this.zones
+      const { world_slug } = this.$route.params
+      return this.$store.route.zones
         .filter((z) => !z.data.hidden)
         .map((zone) => ({
           text: zone.name,
-          to: `/dread/${zone.slug}/`,
+          to: this.$store.route.getZoneLink(world_slug, zone.slug),
         }))
     },
+    world_links() {
+      const worlds = this.$store.route.worlds.filter((w) => !w.hidden)
+      return worlds.map((world) => {
+        const to = this.$store.route.getWorldLink(world.slug)
+        return { text: world.name, to }
+      })
+    },
+    world() {
+      return this.$store.route.world
+    },
+    zone() {
+      return this.$store.route.zone
+    },
     title() {
-      const zone = this.zones.find((z) => z.slug === this.$route.params.zone_slug)
-      if (zone) {
-        return `Maptroid: ${zone.name}`
-      }
-      if (this.$route.fullPath.startsWith('/dread')) {
-        return 'Maptroid: Dread'
-      }
       return 'Project Maptroid'
     },
   },

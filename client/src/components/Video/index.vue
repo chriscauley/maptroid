@@ -29,7 +29,7 @@
 
 <script>
 import DreadItems from '@/models/DreadItems'
-import VideoPicker from './VideoPicker.vue'
+import VideoPicker from './Picker.vue'
 
 const VISIBLE_LIST = DreadItems.items.slice(0, -1)
 const VISIBLE = {}
@@ -37,7 +37,6 @@ VISIBLE_LIST.forEach((t) => (VISIBLE[t] = true))
 
 export default {
   components: { VideoPicker },
-  inject: ['video'],
   props: {
     world_items: Array,
   },
@@ -46,6 +45,9 @@ export default {
     return { player: null, open: null, player_id, current_time: '' }
   },
   computed: {
+    video() {
+      return this.$store.video.current_video
+    },
     start_at() {
       return this.$auth.user?.is_superuser ? this.video.max_event || 1 : null
     },

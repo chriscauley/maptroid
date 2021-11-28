@@ -8,7 +8,7 @@ export default {
     path: '/',
   },
   mounted() {
-    this.$router.replace('/dread/')
+    this.$router.replace('/maps/dread/')
   },
 }
 </script>

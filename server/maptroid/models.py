@@ -14,6 +14,7 @@ _choices = lambda l: zip(l,l)
 class World(models.Model):
   name = models.CharField(max_length=128)
   slug = models.CharField(max_length=128)
+  hidden = models.BooleanField(default=False)
   __str__ = lambda self: self.name
 
   def normalize(self):
@@ -94,6 +95,7 @@ class Item(models.Model):
   room = models.ForeignKey(Room, models.CASCADE)
   zone = models.ForeignKey(Zone, models.SET_NULL, null=True, blank=True)
   data = models.JSONField(default=default_zone_data, blank=True)
+  __str__ = lambda self: str(self.data)
 
 class Character(models.Model):
   letter = models.CharField(max_length=1, blank=True, default='')

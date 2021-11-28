@@ -17,20 +17,18 @@ const fromServer = (video) => {
   return video
 }
 
-export default () => {
+export default ({ store }) => {
   const storage = RestStorage('schema/video', { collection_slug: 'schema/video', fromServer })
-  const { state } = storage.api
 
-  storage.setWorld = (world) => {
-    state.world = world
-    state.videos = null
-    const q = { query: { per_page: 5000, world: world.id } }
-    storage.fetchPage(q).then(({ items }) => state.videos = items)
-  }
-
-  storage.getWorldVideos = () => {
-    return state.videos || []
-  }
+  Object.assign(storage, {
+    getCurrentVideo() {
+      const { current_video_id } = store.local.state
+      return store.route.world_videos.find((v) => v.world === current_video_id)
+    },
+    setCurrentVideo(value) {
+      store.local.save({ current_video_id: value?.id })
+    },
+  })
 
   return storage
 }

@@ -81,7 +81,7 @@ export default {
     },
     zones() {
       const zones = this.$store.zone.getPage(this.world_params)?.items || []
-      return zones.filter(z => !z.data.hidden)
+      return zones.filter((z) => !z.data.hidden)
     },
     rooms() {
       return this.$store.room2.getPage(this.world_params)?.items || []

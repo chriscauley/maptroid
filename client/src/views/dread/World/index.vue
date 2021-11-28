@@ -22,7 +22,7 @@ import BaseViewer from '@/components/BaseViewer.vue'
 import DreadItems from '@/models/DreadItems'
 import ItemList from '@/components/ItemList.vue'
 import OsdStore from './OsdStore'
-import VideoPlayer from '@/components/Video.vue'
+import VideoPlayer from '@/components/Video/index.vue'
 import ZoneBox from './ZoneBox.vue'
 
 const WORLD = 3 // hardcoded to dread
@@ -30,7 +30,7 @@ const WORLD_QUERY = { query: { world_id: WORLD, per_page: 5000 } }
 
 export default {
   __route: {
-    path: '/dread/',
+    path: '/maps/:world_slug/',
   },
   components: { BaseViewer, HtmlOverlay, ItemList, VideoPlayer, ZoneBox },
   provide() {
@@ -68,7 +68,8 @@ export default {
   methods: {
     gotoItem(item) {
       const zone = this.zones.find((z) => z.id === item.zone)
-      this.$router.push(`/dread/${zone.slug}/?item=${item.id}`)
+      const link = this.$store.route.getZoneLink('dread', zone.slug)
+      this.$router.push(`${link}?item=${item.id}`)
     },
     open() {
       const url = '/static/dread/zone_shapes/world-clean_short.png'

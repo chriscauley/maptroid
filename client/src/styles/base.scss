@@ -379,8 +379,8 @@ body {
   @apply flex flex-wrap gap-2;
 }
 
-.floating-nav {
-  @apply absolute left-0 p-4 top-0 select-none;
+.app-nav {
+  @apply border-b flex gap-2 left-0 p-2 relative select-none;
   background: var(--bg);
   &__title {
     font-weight: bold;
