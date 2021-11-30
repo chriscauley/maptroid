@@ -23,5 +23,7 @@ def get_world_from_argv():
 def get_world_zones_from_argv():
     world = get_world_from_argv()
     zones = world.zone_set.all()
-    filtered_zones = [z for z in zones if z.slug in sys.argv]
-    return world, filtered_zones or zones
+    for i, s in enumerate(sys.argv):
+        if s in ['-z', '--zones', '--zone']:
+            zones = zones.filter(slug__in=sys.argv[i+1].split(','))
+    return world, zones

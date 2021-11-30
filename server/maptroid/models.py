@@ -84,7 +84,7 @@ class Room(models.Model):
   name = models.CharField(max_length=128, null=True, blank=True)
   key = models.CharField(max_length=128, null=True, blank=True)
   sprite_ids = models.JSONField(default=list, blank=True)
-  data = models.JSONField(default=dict, blank=True)
+  data = models.JSONField(default=dict, blank=True, encoder=img.NpEncoder)
   __str__ = lambda self: f'{self.name or "unnamed"} - ({self.key})'
 
 
@@ -171,22 +171,27 @@ class SpriteMatcher():
     self._cache = list(SmileSprite.objects.all())
   def get_or_create_from_image(self, image, layer):
     new_params = SmileSprite.get_params(image)
-    for sprite in self._cache:
+    threshold = 8
+    layer_sprites = [s for s in self._cache if s.layer == layer]
+    if layer == 'bts':
+      # bts has nearly identical sprites, unfortunately
+      threshold = 1
+    for sprite in layer_sprites:
       if sprite.params['size'] != new_params['size']:
         continue
-      if sprite.params['dhash'] - new_params['dhash'] > 8:
+      if sprite.params['dhash'] - new_params['dhash'] > threshold:
         continue
       _md = img.color_distance(new_params['main_color'], sprite.params['main_color'])
-      if _md > 8:
+      if _md > threshold:
         continue
       _ad = img.color_distance(new_params['average_color'], sprite.params['average_color'])
-      if _ad > 8:
+      if _ad > threshold:
         continue
 
       # it's a match!
       if not np.array_equal(image, img._coerce(sprite.image.path, 'np')):
         print('duplicated!')
-        duplicates_path = mkdir(settings.MEDIA_ROOT, 'plm_enemies/duplicates')
+        duplicates_path = mkdir(settings.MEDIA_ROOT, f'plm_enemies/duplicates/{layer}')
         duplicate_path = os.path.join(duplicates_path, f'{sprite.id}.png')
         if os.path.exists(duplicate_path):
           dupe = img._coerce(duplicate_path, 'np')

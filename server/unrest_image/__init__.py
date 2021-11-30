@@ -1,11 +1,14 @@
 from collections import defaultdict
 from django.core.files.base import ContentFile
-from io import BytesIO
 import imagehash
+from io import BytesIO
+import json
 import numpy as np
 import os
 from PIL import Image
 import urllib
+
+from .max_rect import max_rect
 
 def _get_format(img):
   if isinstance(img, np.ndarray):
@@ -104,3 +107,14 @@ def imagehash_to_int(value):
 
 def color_distance(color1, color2):
   return np.sum(np.abs(np.array(color1) - np.array(color2)))
+
+
+class NpEncoder(json.JSONEncoder):
+  def default(self, obj):
+    if isinstance(obj, np.integer):
+      return int(obj)
+    if isinstance(obj, np.floating):
+      return float(obj)
+    if isinstance(obj, np.ndarray):
+      return obj.tolist()
+    return super().default(obj)
