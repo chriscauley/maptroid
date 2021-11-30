@@ -14,9 +14,9 @@
       <div class="list-group">
         <template v-for="item in items" :key="item.id">
           <div class="list-group-item" @click="$emit('select-item', item)">
-            <i :class="item.icon" />
+            <i :class="item.class" />
             <div class="flex-grow truncate">
-              {{ item.name }}
+              {{ item.title }}
               <div v-if="item.data.reward">Reward: {{ item.data.reward }}</div>
             </div>
             <div

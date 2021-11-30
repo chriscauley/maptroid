@@ -18,14 +18,13 @@
       </div>
       <div v-if="last" class="admin-smile-sprite__last">{{ last.category }} {{ last.type }}</div>
     </div>
-    <unrest-modal v-if="selected_sprite" @close="selected_sprite = null">
-      <smile-sprite-form
-        :sprite="selected_sprite"
-        @refetch="refetch"
-        @close="selected_sprite = null"
-      />
-      <template #actions>{{ ' ' }}</template>
-    </unrest-modal>
+    <smile-sprite-form
+      v-if="selected_sprite"
+      :sprite="selected_sprite"
+      @refetch="refetch"
+      @close="selected_sprite = null"
+      @select-dindex="selectDindex"
+    />
   </div>
 </template>
 
@@ -74,6 +73,12 @@ export default {
           this.last = items.find((s) => s.id === last)
         }
       })
+    },
+    selectDindex(dindex) {
+      const matchSprite = (s) => s === this.selected_sprite
+      const group_sprites = Object.values(this.sprite_groups).find((gs) => gs.find(matchSprite))
+      const new_index = group_sprites.findIndex(matchSprite) + dindex
+      this.selected_sprite = group_sprites[new_index % group_sprites.length]
     },
   },
 }

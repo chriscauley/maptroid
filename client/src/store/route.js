@@ -21,7 +21,8 @@ export default ({ store }) => {
       return page?.items || []
     },
     get zone() {
-      return route.zones.find((w) => w.slug === route.params.zone_slug)
+      const { zone_slug } = route.params
+      return zone_slug && route.zones.find((w) => w.slug === zone_slug)
     },
 
     get world_rooms() {

@@ -1,27 +1,73 @@
 <template>
   <div :style="style" :class="css" :title="`${room.id} - ${room.name}`">
-    <img :src="src" ref="img" @load="draw" style="display:none" />
-    <canvas ref="canvas" />
-    <unrest-draggable @drag="drag" />
-    <div v-for="item in room_items" :key="item.id" v-bind="item" />
+    <template v-if="mode">
+      <img :src="src" ref="img" @load="draw" style="display:none" />
+      <canvas ref="canvas" />
+      <unrest-draggable @drag="drag" />
+    </template>
+    <div v-for="attrs in items" :key="attrs.id" v-bind="attrs" />
+    <svg v-if="show_bts" :viewBox="viewBox">
+      <path v-for="(shape, i) in shapes" :key="i" :d="shape" />
+      <rect v-for="(r, i) in rectangles" :key="i" v-bind="r" />
+    </svg>
   </div>
 </template>
 
 <script>
 import vec from '@/lib/vec'
+import prepItem from './prepItem'
+
 const WORLD = 'super_metroid'
+
+const getPoints = (type) => {
+  return type
+    .slice(2)
+    .split('')
+    .map((i) => parseInt(i))
+    .map((i) => [(i % 3) / 2, Math.floor(i / 3) / 2])
+}
 
 export default {
   inject: ['osd_store'],
   props: {
     room: Object,
     mode: String,
-    items: Array,
   },
   data() {
-    return { drag_xy: [0, 0], drag_raw_xy: [0, 0], backgroundImage: '' }
+    return { drag_xy: [0, 0], drag_raw_xy: [0, 0], backgroundImage: '', show_bts: false }
   },
   computed: {
+    viewBox() {
+      const [_x, _y, width, height] = this.room.data.zone.bounds
+      if (width > height) {
+        return `0 0 100 ${(100 * height) / width}`
+      }
+      return `0 0 ${(100 * width) / height} 100`
+    },
+    shapes() {
+      const [_x, _y, width, height] = this.room.data.zone.bounds
+      let _percent = 100 / (height * 16)
+      if (width > height) {
+        _percent = 100 / (width * 16)
+      }
+      return this.room.data.bts.shapes.map(([type, xy]) => {
+        let points = getPoints(type).map((p) => [p[0] + xy[0], p[1] + xy[1]])
+        points = points.map((p) => [p[0] * _percent, p[1] * _percent])
+        const ls = points.map((p) => `L ${p}`)
+        return `M ${points[points.length - 1]} ${ls}`
+      })
+    },
+    rectangles() {
+      const [_x, _y, width, height] = this.room.data.zone.bounds
+      const x_percent = 100 / (width * 16)
+      const y_percent = 100 / (height * 16)
+      return this.room.data.bts.rectangles.map(([x, y, width, height]) => ({
+        x: `${x * x_percent}%`,
+        y: `${y * y_percent}%`,
+        width: `${width * x_percent}%`,
+        height: `${height * y_percent}%`,
+      }))
+    },
     css() {
       const { zoom } = this.osd_store.state
       // 0.2 is based off observation
@@ -42,7 +88,7 @@ export default {
       }
       const zIndex = 100 - width * height
       return {
-        backgroundImage: this.backgroundImage,
+        backgroundImage: `url("${this.src}")`,
         height: `${height * 100}%`,
         left: `${x * 100}%`,
         top: `${y * 100}%`,
@@ -50,26 +96,9 @@ export default {
         zIndex,
       }
     },
-    room_items() {
-      const width = this.room.data.zone.bounds[2] * 16
-      const height = this.room.data.zone.bounds[3] * 16
-      return this.items
-        .filter((i) => i.room === this.room.id)
-        .map((item) => {
-          const [x, y] = item.data.room_xy
-          return {
-            id: `sm-item__${item.id}`,
-            class: item.icon,
-            title: item.name,
-            style: {
-              position: 'absolute',
-              top: `${(100 * y) / height}%`,
-              left: `${(100 * x) / width}%`,
-              height: `${100 / height}%`,
-              width: `${100 / width}%`,
-            },
-          }
-        })
+    items() {
+      const items = this.$store.route.world_items.filter((i) => i.room === this.room.id)
+      return items.map((i) => prepItem(i, this.room))
     },
   },
   methods: {
@@ -80,8 +109,12 @@ export default {
         const xy = [x - box.x, y - box.y].map((i) => Math.floor(i / 64))
         this[event.shiftKey ? 'removeHole' : 'addHole'](xy)
       } else {
-        this.osd_store.dragRoom(this.room, event._drag.last_dxy)
-        this.$store.room2.bounceSave(this.room)
+        if (event.ctrlKey) {
+          this.show_bts = !this.show_bts
+        } else {
+          this.osd_store.dragRoom(this.room, event._drag.last_dxy)
+          this.$store.room2.bounceSave(this.room)
+        }
       }
     },
     draw() {

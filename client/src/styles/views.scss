@@ -156,6 +156,12 @@
   &__card {
     @apply border flex gap-2 items-center rounded-lg;
   }
+  &__preview {
+    @apply flex gap-2 items-center mb-2;
+    svg {
+      overflow:visible;
+    }
+  }
   &__img {
     @apply h-16 w-16;
     background: no-repeat center;
@@ -165,5 +171,16 @@
   &__last {
     @apply fixed bottom-0 p-2 right-0;
     background: var(--bg-alt);
+  }
+  .modal-footer {
+    @apply justify-between;
+    .fa {
+      @apply cursor-pointer flex items-center justify-center rounded-full h-8 w-8;
+      background: var(--bg-alt);
+    }
+  }
+  &__room-list {
+    max-height: 300px;
+    overflow-y: auto;
   }
 }

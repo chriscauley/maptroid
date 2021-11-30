@@ -8,10 +8,28 @@
     width: 100%;
     height: 100%;
   }
+  .sm-item {
+    @apply absolute
+  }
+  svg {
+    @apply absolute h-full w-full;
+    pointer-events: none;
+    rect, path {
+      vector-effect: non-scaling-stroke;
+    }
+    path {
+      fill: rgba(0,255,0,0.2);
+      stroke: #0f0;
+    }
+    rect {
+      fill: rgba(255,0,0,0.2);
+      stroke: red;
+    }
+  }
 }
 
 .sm-zone-box {
-  @apply border;
+  outline: 1px solid gray;
 }
 
 .sm-zone-box, .sm-room-box {
