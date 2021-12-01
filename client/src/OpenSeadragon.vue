@@ -26,12 +26,21 @@ export default {
     options.element = this.$el
     window.viewer_jawn = this.viewer = new OpenSeadragon(options)
 
-    const viewport = this.viewer.viewport
+    const { viewport } = this.viewer
     viewport.centerSpringY.animationTime = 0.25
     viewport.centerSpringX.animationTime = 0.25
     viewport.zoomSpring.animationTime = 0.25
     this.bindEvents()
     this.callback?.(this.viewer)
+    if (this.pixelated) {
+      const onZoom = () => {
+        const { drawer, viewport } = this.viewer
+        const viewport_zoom = viewport.getZoom()
+        drawer.context.imageSmoothingEnabled = viewport_zoom < 0.5
+      }
+      this.viewer.addHandler('zoom', onZoom)
+      this.viewer.addOnceHandler('tile-loaded', onZoom)
+    }
   },
 
   methods: {
