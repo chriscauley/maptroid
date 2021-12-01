@@ -6,6 +6,7 @@
         <label v-for="item in group.items" :key="item.name">
           <input type="checkbox" @input="toggle(item)" :checked="item.checked" />
           {{ item.name }}
+          <i v-if="item.help_text" class="fa fa-question-circle" :title="item.help_text" />
         </label>
       </div>
     </div>
@@ -17,10 +18,10 @@ import { startCase } from 'lodash'
 
 const groups = {
   layers: {
-    ['layer-1']: true,
-    bts: true,
+    'layer-1': true,
     rooms: true,
-    svg: true,
+    bts: false,
+    svg: false,
   },
   entities: {
     items: true,
@@ -28,6 +29,16 @@ const groups = {
     // doors: true,
     route: true,
   },
+}
+
+const help_texts = {
+  'layer-1':
+    'This is actually a combination of layer-1 and layer-2. I had trouble getting SMILE to export layer-2 for almost every room.',
+  rooms: 'Shape of rooms (manually defined where not a rectangle)',
+  bts:
+    'This is the room geometry and special tiles according to smile. I know somethings are missing. I am sorry.',
+  svg: 'My room geometry, reverse engineered from bts.',
+  route: 'Route taken by selected video',
 }
 
 export default {
@@ -43,6 +54,7 @@ export default {
           slug: item_slug,
           name: startCase(item_slug),
           checked: this.storage.state[`show_${item_slug}`],
+          help_text: help_texts[item_slug],
         })),
       }))
     },
