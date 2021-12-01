@@ -31,7 +31,7 @@ export default {
       }
     },
     rooms() {
-      return this.$store.route.world_rooms.filter((r) => r.zone === this.zone.id)
+      return this.$store.route.world_rooms.filter((r) => !r.data.hidden && r.zone === this.zone.id)
     },
   },
   methods: {

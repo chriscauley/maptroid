@@ -3,12 +3,20 @@ import Openseadragon from 'openseadragon'
 
 const { Point } = Openseadragon
 
-export default (_component) => {
+export default (component) => {
   const osd_store = OsdStore()
   const { state } = osd_store
   const raw_bounds = {
     zone: {},
     room: {},
+  }
+
+  osd_store.getWorldXY = (event) => {
+    const { clientX, clientY } = event
+    const box = component.$el.getBoundingClientRect()
+    const pixel = new Point(clientX - box.x, clientY - box.y)
+    const { x, y } = state._viewer.viewport.pointFromPixel(pixel)
+    return [Math.floor(x), Math.floor(y)]
   }
 
   osd_store.dragZone = (zone, client_delta) => {

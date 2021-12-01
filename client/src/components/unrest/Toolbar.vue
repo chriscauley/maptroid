@@ -36,13 +36,11 @@ export default {
       return this.storage.listTools()
     },
     selected_tool() {
-      const { selected_tool, selected_variant } = this.storage.state
-      if (selected_variant) {
-        return this.tools.find(
-          (t) => t.slug === selected_tool && t.variants.includes(selected_variant),
-        )
+      const { tool, variant } = this.storage.state.selected
+      if (variant) {
+        return this.tools.find((t) => t.slug === tool && t.variants.includes(variant))
       }
-      return this.tools.find((t) => t.slug === selected_tool)
+      return this.tools.find((t) => t.slug === tool)
     },
   },
 }

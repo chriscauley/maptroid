@@ -2,10 +2,8 @@ import ToolStorage from '@/components/unrest/ToolStorage'
 
 /*
   TODO
-  ability to toggle layers
   ability to open room popup
-  only show rendered room canvas on room edit
-  toggle moving zones
+  elevator tool (and render)
 */
 
 export default (component) => {
@@ -23,6 +21,11 @@ export default (component) => {
         ...tools,
         { slug: 'select', icon: 'fa fa-mouse-pointer' },
         { slug: 'move_zone', icon: 'fa fa-object-group' },
+        {
+          slug: 'elevator',
+          icon: (_t, v) => `sm-elevator -${v}`,
+          variants: ['brinstar', 'tourian', 'maridia', 'norfair'],
+        },
         {
           slug: 'links',
           icon: 'fa fa-map-marked',

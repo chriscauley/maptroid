@@ -1,6 +1,6 @@
 <template>
   <div :class="wrapper_class" v-if="ready">
-    <base-viewer :osd_store="osd_store" @viewer-bound="loadImages" />
+    <base-viewer :osd_store="osd_store" @viewer-bound="loadImages" @click="click" />
     <template v-if="osd_store.viewer">
       <unrest-toolbar :storage="tool_storage" class="-topleft">
         <config-popper v-if="tool_storage.state.settings_open" :storage="tool_storage" />
@@ -17,6 +17,7 @@
         <template v-else>
           <zone-box v-for="zone in zones" :key="zone.id" :zone="zone" />
         </template>
+        <div v-for="(e, i) in elevators" :key="i" v-bind="e" />
       </html-overlay>
     </template>
     <item-list v-if="items.length" :items="items" />
@@ -77,12 +78,44 @@ export default {
       const zoom = Math.round(this.osd_store.state.zoom)
       return `app-body -full-screen -zoom-${zoom}`
     },
+    elevators() {
+      const { elevators = {} } = this.$store.route.world.data
+      return Object.entries(elevators).map(([xy, variant]) => {
+        const [x, y] = xy.split(',').map((i) => parseInt(i))
+        return {
+          class: `sm-elevator -${variant}`,
+          style: {
+            left: `${x * 100}%`,
+            top: `${y * 100}%`,
+            position: 'absolute',
+            width: '100%',
+            height: '100%',
+          },
+        }
+      })
+    },
   },
   watch: {
     'tool_storage.state.show_bts': 'syncImages',
     'tool_storage.state.show_layer-1': 'syncImages',
   },
   methods: {
+    click(event) {
+      const { selected } = this.tool_storage.state
+      if (selected.tool === 'elevator') {
+        const xy = this.osd_store.getWorldXY(event)
+        const { world } = this.$store.route
+        if (!world.data.elevators) {
+          world.data.elevators = {}
+        }
+        if (event.shiftKey) {
+          delete world.data.elevators[xy]
+        } else {
+          world.data.elevators[xy] = selected.variant
+        }
+        this.$store.world2.save(world).then(this.$store.route.refetchWorlds)
+      }
+    },
     loadImages() {
       let x_max = 10
       let y_max = 10
