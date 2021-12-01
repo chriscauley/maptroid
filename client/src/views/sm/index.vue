@@ -2,6 +2,9 @@
   <div :class="wrapper_class" v-if="ready">
     <base-viewer :osd_store="osd_store" @viewer-bound="loadImages" />
     <template v-if="osd_store.viewer">
+      <unrest-toolbar :storage="tool_storage" class="-topleft">
+        <config-popper v-if="tool_storage.state.settings_open" :storage="tool_storage" />
+      </unrest-toolbar>
       <html-overlay :viewer="osd_store.viewer">
         <template v-if="$store.route.zone">
           <room-box
@@ -28,10 +31,12 @@ import { computed } from 'vue'
 import AdminPopup from './AdminPopup.vue'
 import BaseViewer from '@/components/BaseViewer'
 import HtmlOverlay from '@/vue-openseadragon/HtmlOverlay.vue'
+import ItemList from '@/components/ItemList.vue'
 import OsdStore from './OsdStore'
 import prepItem from './prepItem'
 import RoomBox from './RoomBox.vue'
-import ItemList from '@/components/ItemList.vue'
+import ConfigPopper from './ConfigPopper.vue'
+import ToolStorage from './ToolStorage'
 import ZoneBox from './ZoneBox.vue'
 
 const { Rect } = Openseadragon
@@ -40,16 +45,18 @@ export default {
   __route: {
     path: '/sm/:world_slug/:zone_slug?/',
   },
-  components: { AdminPopup, BaseViewer, HtmlOverlay, RoomBox, ItemList, ZoneBox },
+  components: { AdminPopup, BaseViewer, ConfigPopper, HtmlOverlay, RoomBox, ItemList, ZoneBox },
   provide() {
     return {
-      video: () => null,
-      osd_store: computed(() => this.osd_store),
+      video: () => null, // TODO deprecated in favor of $store.local and $store.route
+      osd_store: computed(() => this.osd_store), // TODO osd_storage, not osd_store
+      tool_storage: computed(() => this.tool_storage),
     }
   },
   data() {
     const osd_store = OsdStore(this)
-    return { osd_store }
+    const tool_storage = ToolStorage(this)
+    return { osd_store, tool_storage }
   },
   computed: {
     ready() {
@@ -71,6 +78,10 @@ export default {
       return `app-body -full-screen -zoom-${zoom}`
     },
   },
+  watch: {
+    'tool_storage.state.show_bts': 'syncImages',
+    'tool_storage.state.show_layer-1': 'syncImages',
+  },
   methods: {
     loadImages() {
       let x_max = 10
@@ -85,15 +96,20 @@ export default {
       } else {
         this.zones.forEach((zone) => {
           const [x, y, width, height] = zone.data.world.bounds
-          const tileSource = zone.data.dzi
+
+          let tileSource = zone.data.dzi
+          this.osd_store.viewer.addTiledImage({ tileSource, width: width, x, y })
+
+          tileSource = zone.data.bts_dzi
           this.osd_store.viewer.addTiledImage({ tileSource, width: width, x, y })
           x_max = Math.max(x_max, x + width)
           y_max = Math.max(y_max, y + height)
         })
       }
-      this.osd_store.viewer.addOnceHandler('tile-loaded', () =>
+      this.osd_store.viewer.addOnceHandler('tile-loaded', () => {
         this.osd_store.viewer.viewport.fitBounds(new Rect(0, 0, x_max, y_max), true),
-      )
+          this.syncImages()
+      })
       this.loadCorners(x_max, y_max)
     },
     loadCorners(x_max, y_max) {
@@ -108,6 +124,17 @@ export default {
       ]
       corners.forEach(([x, y, degrees]) => {
         this.osd_store.viewer.addSimpleImage({ url, x, y, width: 1, opacity: 1, degrees })
+      })
+    },
+    syncImages() {
+      const world_re = new RegExp(`/media/sm_zone/${this.$route.params.world_slug}/`)
+      this.osd_store.viewer.world._items.forEach((i) => {
+        const url = i.source.tilesUrl || ''
+        if (url.match(world_re)) {
+          const layer = url.includes('/bts/') ? 'bts' : 'layer-1'
+          const opacity = this.tool_storage.state[`show_${layer}`] ? 1 : 0
+          i.setOpacity(opacity)
+        }
       })
     },
   },

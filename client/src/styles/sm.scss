@@ -29,7 +29,9 @@
 }
 
 .sm-zone-box {
-  outline: 1px solid gray;
+  &__move {
+    outline: 1px solid gray;
+  }
 }
 
 .sm-zone-box, .sm-room-box {
@@ -229,5 +231,13 @@ $zone-colors: (
   }
   &.-style-mini {
     background: transparent;
+  }
+}
+
+.sm-config-popper {
+  @apply border p-2;
+  background: var(--bg);
+  label {
+    @apply block;
   }
 }

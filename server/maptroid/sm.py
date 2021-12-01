@@ -60,7 +60,6 @@ def process_zone(zone):
                 room_image = make_holes(room_image, room.data['holes'])
             img._coerce(room_image, 'pil').save(os.path.join(layers_dir, room.key))
             zone_image.paste(room_image, (x * 256, y * 256), mask=room_image)
-        dest = os.path.join(ZONE_DIR, f'{zone.slug}.png')
         zone_image.save(dest)
         zone_image.close()
         png_to_dzi(dest)
@@ -68,7 +67,7 @@ def process_zone(zone):
 
     zone.normalize()
 
-    make_layered_zone_image(zone, ['layer-1'], os.path.join(ZONE_DIR, f'{zone.slug}.png'))
+    make_layered_zone_image(zone, ['layer-2', 'layer-1'], os.path.join(ZONE_DIR, f'{zone.slug}.png'))
     zone.data['dzi'] = os.path.join(settings.MEDIA_URL, f'sm_zone/{world.slug}/{zone.slug}.dzi')
 
     make_layered_zone_image(zone, ['bts'], os.path.join(BTS_DIR, f'{zone.slug}.png'))

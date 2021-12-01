@@ -6,7 +6,7 @@
       <unrest-draggable @drag="drag" />
     </template>
     <div v-for="attrs in items" :key="attrs.id" v-bind="attrs" />
-    <svg v-if="show_bts" :viewBox="viewBox">
+    <svg v-if="tool_storage.state.show_svg" :viewBox="viewBox">
       <path v-for="(shape, i) in shapes" :key="i" :d="shape" />
       <rect v-for="(r, i) in rectangles" :key="i" v-bind="r" />
     </svg>
@@ -28,13 +28,13 @@ const getPoints = (type) => {
 }
 
 export default {
-  inject: ['osd_store'],
+  inject: ['osd_store', 'tool_storage'],
   props: {
     room: Object,
     mode: String,
   },
   data() {
-    return { drag_xy: [0, 0], drag_raw_xy: [0, 0], backgroundImage: '', show_bts: false }
+    return { drag_xy: [0, 0], drag_raw_xy: [0, 0], backgroundImage: '' }
   },
   computed: {
     viewBox() {
@@ -86,14 +86,11 @@ export default {
           width: `${width * 64}px`,
         }
       }
-      const zIndex = 100 - width * height
       return {
-        backgroundImage: `url("${this.src}")`,
         height: `${height * 100}%`,
         left: `${x * 100}%`,
         top: `${y * 100}%`,
         width: `${width * 100}%`,
-        zIndex,
       }
     },
     items() {

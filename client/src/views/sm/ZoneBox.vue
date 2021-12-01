@@ -1,6 +1,6 @@
 <template>
   <div class="sm-zone-box" :style="style" :title="zone.name">
-    <unrest-draggable @drag="drag" />
+    <unrest-draggable @drag="drag" v-if="move_zones" class="sm-zone-box__move" />
     <room-box v-for="room in rooms" :key="room.id" :room="room" />
   </div>
 </template>
@@ -10,7 +10,7 @@ import RoomBox from './RoomBox.vue'
 
 export default {
   components: { RoomBox },
-  inject: ['osd_store'],
+  inject: ['osd_store', 'tool_storage'],
   props: {
     zone: Object,
   },
@@ -18,8 +18,11 @@ export default {
     return { raw_bounds: this.zone.data.world.bounds.slice() }
   },
   computed: {
+    move_zones() {
+      return this.tool_storage.state.selected.tool === 'move_zone'
+    },
     style() {
-      const [x, y, width, height] = this.zone.data.world.bounds
+      const [x, y] = this.zone.data.world.bounds
       return {
         height: `${100}%`,
         left: `${x * 100}%`,

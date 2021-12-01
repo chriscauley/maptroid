@@ -1,15 +1,14 @@
 <template>
   <div class="ur-toolbar">
     <div class="ur-toolbar__row btn-group">
-      <div
-        v-for="tool in tools"
-        :key="tool.name"
-        :title="tool.name"
-        @click="tool.click"
-        :class="tool.class"
-      >
-        <i :class="tool.icon" />
-      </div>
+      <template v-for="tool in tools" :key="tool.name">
+        <unrest-dropdown v-if="tool.items" :items="tool.items" :class="tool.class">
+          <i :class="tool.icon" />
+        </unrest-dropdown>
+        <div v-else :title="tool.name" @click="tool.click" :class="tool.class">
+          <i :class="tool.icon" />
+        </div>
+      </template>
       <slot name="buttons" />
     </div>
     <div class="ur-toolbar__row btn-group" v-if="selected_tool?.children">
