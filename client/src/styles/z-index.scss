@@ -39,6 +39,10 @@
   z-index: 4
 }
 
+.osd-html__overlay .sm-item {
+  z-index: 100;
+}
+
 .html-overlay__screen-mask.-void {
   z-index: 0;
   background: red !important;

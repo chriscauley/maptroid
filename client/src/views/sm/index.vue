@@ -80,6 +80,9 @@ export default {
       return `app-body -full-screen -zoom-${zoom} -tool-${tool} -variant-${variant}`
     },
     elevators() {
+      if (!this.tool_storage.state['show_layer-1']) {
+        return []
+      }
       const { elevators = {} } = this.$store.route.world.data
       return Object.entries(elevators).map(([xy, variant]) => {
         const [x, y] = xy.split(',').map((i) => parseInt(i))

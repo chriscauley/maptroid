@@ -5,7 +5,12 @@
       <div v-for="(hole, i) in holes" :key="i" :style="hole" />
       <unrest-draggable @drag="drag" />
     </template>
-    <div v-for="attrs in items" :key="attrs.id" v-bind="attrs" />
+    <div
+      v-show="tool_storage.state.show_items"
+      v-for="attrs in items"
+      :key="attrs.id"
+      v-bind="attrs"
+    />
     <svg :viewBox="viewBox2" class="sm-room-svg">
       <path v-for="(shape, i) in shapes.outer" :d="shape" class="-outer" :key="i" />
       <path v-for="(shape, i) in shapes.inner" :d="shape" class="-inner" :key="i" />
