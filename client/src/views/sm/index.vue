@@ -18,6 +18,7 @@
           <zone-box v-for="zone in zones" :key="zone.id" :zone="zone" />
         </template>
         <div v-for="(e, i) in elevators" :key="i" v-bind="e" />
+        <svg-overlay v-if="is_world" />
       </html-overlay>
     </template>
     <item-list v-if="items.length" :items="items" />
@@ -30,13 +31,14 @@ import Openseadragon from 'openseadragon'
 import { computed } from 'vue'
 
 import BaseViewer from '@/components/BaseViewer'
+import ConfigPopper from './ConfigPopper.vue'
 import HtmlOverlay from '@/vue-openseadragon/HtmlOverlay.vue'
 import ItemList from '@/components/ItemList.vue'
 import OsdStore from './OsdStore'
-import prepItem from './prepItem'
-import RoomBox from './RoomBox.vue'
-import ConfigPopper from './ConfigPopper.vue'
 import OverlapFixer from './OverlapFixer.vue'
+import prepItem from './prepItem'
+import SvgOverlay from './SvgOverlay.vue'
+import RoomBox from './RoomBox.vue'
 import ToolStorage from './ToolStorage'
 import ZoneBox from './ZoneBox.vue'
 
@@ -46,7 +48,16 @@ export default {
   __route: {
     path: '/sm/:world_slug/:zone_slug?/',
   },
-  components: { BaseViewer, ConfigPopper, HtmlOverlay, OverlapFixer, RoomBox, ItemList, ZoneBox },
+  components: {
+    BaseViewer,
+    ConfigPopper,
+    HtmlOverlay,
+    OverlapFixer,
+    SvgOverlay,
+    RoomBox,
+    ItemList,
+    ZoneBox,
+  },
   provide() {
     return {
       video: () => null, // TODO deprecated in favor of $store.local and $store.route
@@ -60,6 +71,9 @@ export default {
     return { osd_store, tool_storage }
   },
   computed: {
+    is_world() {
+      return !this.$route.params.zone_slug
+    },
     ready() {
       const { world, world_rooms } = this.$store.route
       return world && this.zones.length && world_rooms.length
@@ -80,7 +94,7 @@ export default {
       return `app-body -full-screen -zoom-${zoom} -tool-${tool} -variant-${variant}`
     },
     elevators() {
-      if (!this.tool_storage.state['show_layer-1']) {
+      if (!this.tool_storage.state['show_layer-1'] || !this.is_world) {
         return []
       }
       const { elevators = {} } = this.$store.route.world.data

@@ -13,21 +13,6 @@
   .sm-item {
     @apply absolute
   }
-  svg {
-    @apply absolute h-full w-full overflow-visible;
-    pointer-events: none;
-    rect, path {
-      vector-effect: non-scaling-stroke;
-    }
-    path {
-      fill: rgba(0,255,0,0.2);
-      stroke: #0f0;
-    }
-    rect {
-      fill: rgba(255,0,0,0.2);
-      stroke: red;
-    }
-  }
   .-tool-edit_room &:hover {
     outline: 2px solid white;
   }
@@ -43,6 +28,7 @@
   @apply absolute;
   .unrest-draggable {
     @apply absolute cursor-pointer inset-0;
+    background-size: 100% auto;
   }
   .sm-item:before {
     @apply absolute bg-black;
@@ -149,15 +135,34 @@ $zone-colors: (
 );
 
 .sm-room-svg {
+  @apply overflow-visible relative;
+  /* pointer-events: none; */
+  rect, path {
+    vector-effect: non-scaling-stroke;
+  }
+  path {
+    fill: rgba(0,255,0,0.2);
+    stroke: #0f0;
+  }
+}
+
+.sm-room-svg {
   @each $name, $color in $zone-colors {
-    .-zone-#{$name} & path {
+    path.-zone-#{$name} {
       stroke: $color;
-      fill: color.change($color, $alpha: 0.75)
+      fill: color.change($color, $alpha: 0.75);
     }
   }
+  path.-inner {
+    pointer-events: none;
+  }
   path.-outer {
-    fill: none;
+    fill: transparent;
     stroke-width: 3px;
+    &:hover {
+      stroke-width: 6px;
+      stroke: white;
+    }
   }
 }
 

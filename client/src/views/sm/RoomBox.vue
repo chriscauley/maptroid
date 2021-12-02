@@ -1,20 +1,15 @@
 <template>
   <div :style="style" :class="css" :title="`${room.id} - ${room.name}`" @click="click">
     <template v-if="mode">
-      <img :src="src" ref="img" style="position: absolute" />
-      <div v-for="(hole, i) in holes" :key="i" :style="hole" />
-      <unrest-draggable @drag="drag" />
+      <unrest-draggable @drag="drag" :style="`background-image: url(${src})`" />
     </template>
+    <div v-for="(hole, i) in holes" :key="i" :style="hole" />
     <div
       v-show="tool_storage.state.show_items"
       v-for="attrs in items"
       :key="attrs.id"
       v-bind="attrs"
     />
-    <svg :viewBox="viewBox2" class="sm-room-svg">
-      <path v-for="(shape, i) in shapes.outer" :d="shape" class="-outer" :key="i" />
-      <path v-for="(shape, i) in shapes.inner" :d="shape" class="-inner" :key="i" />
-    </svg>
   </div>
 </template>
 
@@ -31,41 +26,21 @@ export default {
     mode: String,
   },
   data() {
-    return { drag_xy: [0, 0], drag_raw_xy: [0, 0], backgroundImage: '' }
+    return { drag_xy: [0, 0], drag_raw_xy: [0, 0] }
   },
   computed: {
-    viewBox() {
-      const [_x, _y, width, height] = this.room.data.zone.bounds
-      if (width > height) {
-        return `0 0 100 ${(100 * height) / width}`
-      }
-      return `0 0 ${(100 * width) / height} 100`
-    },
-    viewBox2() {
-      const [_x, _y, width, height] = this.room.data.zone.bounds
-      return `0 0 ${width} ${height}`
-    },
-    shapes() {
-      const { outer, inner } = this.room.data.geometry
-      return {
-        outer: outer.map(this.getD),
-        inner: inner.map(this.getD),
-      }
-    },
     css() {
       const { zoom } = this.osd_store.state
       // 0.2 is based off observation
       return [`sm-room-box -mode-${this.mode}`, zoom > 0.2 && 'pixelated']
     },
     src() {
-      const { sm_layer } = this.$store.local.state
-      return `/media/smile_exports/${WORLD}/${sm_layer}/${this.room.key}`
+      return `/media/sm_cache/${WORLD}/layer-1/${this.room.key}`
     },
     style() {
       const [x, y, width, height] = this.room.data.zone.bounds
       if (this.mode === 'overlap') {
         return {
-          backgroundImage: this.backgroundImage,
           height: `${height * 64}px`,
           width: `${width * 64}px`,
         }
@@ -75,6 +50,7 @@ export default {
         left: `${x * 100}%`,
         top: `${y * 100}%`,
         width: `${width * 100}%`,
+        zIndex: 100 - width * height,
       }
     },
     items() {
@@ -82,6 +58,9 @@ export default {
       return items.map((i) => prepItem(i, this.room))
     },
     holes() {
+      if (this.mode !== 'overlap') {
+        return []
+      }
       const s = 64
       return this.room.data.holes?.map(([x, y]) => ({
         left: `${x * s}px`,
@@ -125,17 +104,10 @@ export default {
     },
     removeHole(xy) {
       const { data } = this.room
-      if (find((xy2) => vec.isEqual(xy, xy2))) {
+      if (data.holes.find((xy2) => vec.isEqual(xy, xy2))) {
         data.holes = data.holes.filter((xy2) => !vec.isEqual(xy, xy2))
         this.$store.room2.bounceSave(this.room)
       }
-    },
-    getD(shape) {
-      const _d = (points) => {
-        const ls = points.map((p) => `L ${p}`)
-        return `M ${points[points.length - 1]} ${ls}`
-      }
-      return `${_d(shape.exterior)} ${shape.interiors.map(_d).join(' ')}`
     },
   },
 }

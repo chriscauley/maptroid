@@ -39,8 +39,20 @@
   z-index: 4
 }
 
-.osd-html__overlay .sm-item {
-  z-index: 100;
+.osd-html__overlay {
+  .sm-room-svg {
+    z-index: 100;
+  }
+  .sm-item {
+    z-index: 120;
+  }
+}
+
+.sm-room-box.-mode-arrange {
+  z-index: 110; /* above svg */
+  &:hover {
+    outline: 4px white solid;
+  }
 }
 
 .html-overlay__screen-mask.-void {

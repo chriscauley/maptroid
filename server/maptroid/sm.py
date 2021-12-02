@@ -48,10 +48,10 @@ def process_zone(zone):
                 layer_image = img._coerce(path, 'pil')
                 layer_image = layer_image.convert('RGBA')
                 layer_image = img.replace_color(path, (0,0,0,255),(0,0,0,0))
+                if room.data.get('holes'):
+                    layer_image = img.make_holes(layer_image, room.data['holes'])
                 layer_image.save(layer_path)
                 room_image.paste(layer_image, (0,0), mask=layer_image)
-            if 'holes' in room.data:
-                room_image = img.make_holes(room_image, room.data['holes'])
             img._coerce(room_image, 'pil').save(os.path.join(layers_dir, room.key))
             zone_image.paste(room_image, (x * 256, y * 256), mask=room_image)
         zone_image.save(dest)
