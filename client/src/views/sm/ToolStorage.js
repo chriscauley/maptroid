@@ -21,6 +21,7 @@ export default (component) => {
         ...tools,
         { slug: 'select', icon: 'fa fa-mouse-pointer' },
         { slug: 'move_zone', icon: 'fa fa-object-group' },
+        { slug: 'edit_room', icon: 'fa fa-edit' },
         {
           slug: 'elevator',
           icon: (_t, v) => `sm-elevator -${v}`,

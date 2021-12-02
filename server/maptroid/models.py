@@ -6,6 +6,7 @@ import os
 from unrest.decorators import cached_property
 import unrest_image as img
 
+from maptroid.shapes import get_room_shapes
 from maptroid.dread import process_screenshot
 from maptroid.utils import mkdir
 
@@ -79,6 +80,7 @@ class Zone(models.Model):
     self.data['world']['bounds'][3] = y_max - y_min
     self.save()
 
+
 class Room(models.Model):
   world = models.ForeignKey(World, models.SET_NULL, null=True, blank=True)
   zone = models.ForeignKey(Zone, models.SET_NULL, null=True, blank=True)
@@ -87,6 +89,14 @@ class Room(models.Model):
   sprite_ids = models.JSONField(default=list, blank=True)
   data = models.JSONField(default=dict, blank=True, encoder=img.NpEncoder)
   __str__ = lambda self: f'{self.name or "unnamed"} - ({self.key})'
+
+  def save(self, *args, **kwargs):
+    # TODO needs default room data
+    if not 'holes' in self.data:
+      self.data['holes'] = []
+    if self.world_id != 3: # TODO this doesn't work for dread yet
+      self.data['shapes'] = get_room_shapes(self)
+    super().save(*args, **kwargs)
 
 
 def default_zone_data():

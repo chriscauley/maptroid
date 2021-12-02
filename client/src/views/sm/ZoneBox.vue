@@ -1,5 +1,5 @@
 <template>
-  <div class="sm-zone-box" :style="style" :title="zone.name">
+  <div :class="css" :style="style" :title="zone.name">
     <unrest-draggable @drag="drag" v-if="move_zones" class="sm-zone-box__move" />
     <room-box v-for="room in rooms" :key="room.id" :room="room" />
   </div>
@@ -20,6 +20,9 @@ export default {
   computed: {
     move_zones() {
       return this.tool_storage.state.selected.tool === 'move_zone'
+    },
+    css() {
+      return `sm-zone-box -zone-${this.zone.slug}`
     },
     style() {
       const [x, y] = this.zone.data.world.bounds

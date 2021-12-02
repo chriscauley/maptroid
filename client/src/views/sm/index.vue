@@ -21,7 +21,7 @@
       </html-overlay>
     </template>
     <item-list v-if="items.length" :items="items" />
-    <admin-popup class="-left" />
+    <overlap-fixer />
   </div>
 </template>
 
@@ -29,7 +29,6 @@
 import Openseadragon from 'openseadragon'
 import { computed } from 'vue'
 
-import AdminPopup from './AdminPopup.vue'
 import BaseViewer from '@/components/BaseViewer'
 import HtmlOverlay from '@/vue-openseadragon/HtmlOverlay.vue'
 import ItemList from '@/components/ItemList.vue'
@@ -37,6 +36,7 @@ import OsdStore from './OsdStore'
 import prepItem from './prepItem'
 import RoomBox from './RoomBox.vue'
 import ConfigPopper from './ConfigPopper.vue'
+import OverlapFixer from './OverlapFixer.vue'
 import ToolStorage from './ToolStorage'
 import ZoneBox from './ZoneBox.vue'
 
@@ -46,7 +46,7 @@ export default {
   __route: {
     path: '/sm/:world_slug/:zone_slug?/',
   },
-  components: { AdminPopup, BaseViewer, ConfigPopper, HtmlOverlay, RoomBox, ItemList, ZoneBox },
+  components: { BaseViewer, ConfigPopper, HtmlOverlay, OverlapFixer, RoomBox, ItemList, ZoneBox },
   provide() {
     return {
       video: () => null, // TODO deprecated in favor of $store.local and $store.route
@@ -76,7 +76,8 @@ export default {
     },
     wrapper_class() {
       const zoom = Math.round(this.osd_store.state.zoom)
-      return `app-body -full-screen -zoom-${zoom}`
+      const { tool, variant } = this.tool_storage.state.selected
+      return `app-body -full-screen -zoom-${zoom} -tool-${tool} -variant-${variant}`
     },
     elevators() {
       const { elevators = {} } = this.$store.route.world.data

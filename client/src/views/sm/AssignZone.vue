@@ -18,18 +18,14 @@
         </div>
       </div>
     </div>
-    <admin-popup />
   </div>
 </template>
 
 <script>
-import AdminPopup from './AdminPopup.vue'
-
 export default {
   __route: {
     path: '/sm-assign/:world_slug/:zone_slug?',
   },
-  components: { AdminPopup },
   data() {
     return { selected: {} }
   },
