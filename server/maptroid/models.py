@@ -6,7 +6,7 @@ import os
 from unrest.decorators import cached_property
 import unrest_image as img
 
-from maptroid.shapes import get_room_shapes
+from maptroid.shapes import get_room_walls
 from maptroid.dread import process_screenshot
 from maptroid.utils import mkdir
 
@@ -94,8 +94,10 @@ class Room(models.Model):
     # TODO needs default room data
     if not 'holes' in self.data:
       self.data['holes'] = []
+    if not 'geometry' in self.data:
+      self.data['geometry'] = {}
     if self.world_id != 3: # TODO this doesn't work for dread yet
-      self.data['shapes'] = get_room_shapes(self)
+      self.data['geometry']['outer'] = get_room_walls(self)
     super().save(*args, **kwargs)
 
 

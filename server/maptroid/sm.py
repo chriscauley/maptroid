@@ -22,12 +22,6 @@ def set_transparency(image, dest=None, bg_color=(0, 0, 0)):
         result.save(dest, "PNG")
     return result
 
-def make_holes(image, holes, color=(0,0,0,0)):
-    format_ = img._get_format(image)
-    image = img._coerce(image, 'np')
-    for x, y in holes:
-        image[y*256:(y+1) * 256,x*256:(x+1) * 256,:] = [0,0,0,0]
-    return img._coerce(image, format_)
 
 def process_zone(zone):
     world = zone.world
@@ -57,7 +51,7 @@ def process_zone(zone):
                 layer_image.save(layer_path)
                 room_image.paste(layer_image, (0,0), mask=layer_image)
             if 'holes' in room.data:
-                room_image = make_holes(room_image, room.data['holes'])
+                room_image = img.make_holes(room_image, room.data['holes'])
             img._coerce(room_image, 'pil').save(os.path.join(layers_dir, room.key))
             zone_image.paste(room_image, (x * 256, y * 256), mask=room_image)
         zone_image.save(dest)

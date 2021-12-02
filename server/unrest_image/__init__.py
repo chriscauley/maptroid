@@ -118,3 +118,11 @@ class NpEncoder(json.JSONEncoder):
     if isinstance(obj, np.ndarray):
       return obj.tolist()
     return super().default(obj)
+
+
+def make_holes(image, holes, color=(0,0,0,0)):
+    format_ = _get_format(image)
+    image = _coerce(image, 'np')
+    for x, y in holes:
+        image[y*256:(y+1) * 256,x*256:(x+1) * 256,:] = [0,0,0,0]
+    return _coerce(image, format_)

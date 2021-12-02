@@ -152,12 +152,10 @@ $zone-colors: (
   @each $name, $color in $zone-colors {
     .-zone-#{$name} & path {
       stroke: $color;
-      .-inner {
-        fill: color.change($color, $alpha: 0.5)
-      }
+      fill: color.change($color, $alpha: 0.75)
     }
   }
-  &.-outer path {
+  path.-outer {
     fill: none;
     stroke-width: 3px;
   }

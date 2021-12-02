@@ -6,12 +6,9 @@
       <unrest-draggable @drag="drag" />
     </template>
     <div v-for="attrs in items" :key="attrs.id" v-bind="attrs" />
-    <svg v-if="tool_storage.state.show_svg" :viewBox="viewBox" class="sm-room-svg">
-      <path v-for="(shape, i) in shapes" :key="i" :d="shape" />
-      <rect v-for="(r, i) in rectangles" :key="i" v-bind="r" />
-    </svg>
-    <svg :viewBox="viewBox2" class="sm-room-svg -outer">
-      <path v-for="(shape, i) in room.data.shapes.outer" :d="getD(shape)" :key="i" />
+    <svg :viewBox="viewBox2" class="sm-room-svg">
+      <path v-for="(shape, i) in shapes.outer" :d="shape" class="-outer" :key="i" />
+      <path v-for="(shape, i) in shapes.inner" :d="shape" class="-inner" :key="i" />
     </svg>
   </div>
 </template>
@@ -21,14 +18,6 @@ import vec from '@/lib/vec'
 import prepItem from './prepItem'
 
 const WORLD = 'super_metroid'
-
-const getPoints = (type) => {
-  return type
-    .slice(2)
-    .split('')
-    .map((i) => parseInt(i))
-    .map((i) => [(i % 3) / 2, Math.floor(i / 3) / 2])
-}
 
 export default {
   inject: ['osd_store', 'tool_storage'],
@@ -52,28 +41,11 @@ export default {
       return `0 0 ${width} ${height}`
     },
     shapes() {
-      const [_x, _y, width, height] = this.room.data.zone.bounds
-      let _percent = 100 / (height * 16)
-      if (width > height) {
-        _percent = 100 / (width * 16)
+      const { outer, inner } = this.room.data.geometry
+      return {
+        outer: outer.map(this.getD),
+        inner: inner.map(this.getD),
       }
-      return this.room.data.bts.shapes.map(([type, xy]) => {
-        let points = getPoints(type).map((p) => [p[0] + xy[0], p[1] + xy[1]])
-        points = points.map((p) => [p[0] * _percent, p[1] * _percent])
-        const ls = points.map((p) => `L ${p}`)
-        return `M ${points[points.length - 1]} ${ls}`
-      })
-    },
-    rectangles() {
-      const [_x, _y, width, height] = this.room.data.zone.bounds
-      const x_percent = 100 / (width * 16)
-      const y_percent = 100 / (height * 16)
-      return this.room.data.bts.rectangles.map(([x, y, width, height]) => ({
-        x: `${x * x_percent}%`,
-        y: `${y * y_percent}%`,
-        width: `${width * x_percent}%`,
-        height: `${height * y_percent}%`,
-      }))
     },
     css() {
       const { zoom } = this.osd_store.state
