@@ -13,7 +13,7 @@
     </div>
     <div class="sm-plm-enemies__workarea" v-if="current_room">
       <div class="sm-plm-enemies__wrapper">
-        <img :src="`/media/sm_room/${world.slug}/${current_room.key}`" ref="img" />
+        <img :src="`/media/sm_cache/${world.slug}/layer-1/${current_room.key}`" ref="img" />
         <unrest-draggable
           v-for="plm in plms.filter((p) => !p._plm.deleted)"
           :key="plm.src"

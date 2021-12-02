@@ -83,7 +83,7 @@
 }
 
 .sm-plm-enemies {
-  @apply absolute inset-0 overflow-scroll;
+  @apply overflow-scroll;
   &__top {
     @apply inline-flex gap-4 left-0 p-2 items-center sticky top-0;
     background: var(--bg-alt);

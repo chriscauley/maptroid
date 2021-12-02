@@ -68,10 +68,11 @@ def main():
   for room in rooms:
     if '7E82C' in room.key: # force skip junk room by adding them to here
       print('skipping', room)
-      room.data['trash'] = True
+      room.data['hidden'] = True
       room.save()
       continue
-    if room.data.get('plm_sprites') or room.data.get('trash'):
+    # if room.data.get('plm_sprites') or room.data.get('hidden'):
+    if not room.id == 66:
       continue
     smile_id = room.key.split("_")[-1].split('.')[0]
     plms = [plm for plm in room.data['plm_enemies'] if not plm.get('deleted')]
@@ -84,10 +85,12 @@ def main():
       print('FAIL: room has confusing plms:', room.name)
       continue
 
-    room.data['plm_sprites'] = []
-    path = os.path.join(settings.MEDIA_ROOT, f'sm_room/{WORLD}/{room.key}')
+    # make an empty canvas of the right size
+    path = os.path.join(settings.MEDIA_ROOT, f'sm_cache/{WORLD}/layer-1/{room.key}')
     sprite_canvas = img._coerce(path, 'np')
     sprite_canvas[:,:,:] = 0
+
+    room.data['plm_sprites'] = []
     for plm in plms:
       cropped_path = media_url_to_path(os.path.join(plm['root_url'], plm['cropped']))
       cropped_data = img._coerce(cropped_path, 'np')
@@ -101,6 +104,7 @@ def main():
       if new:
         print("new sprite", sprite)
     room.save()
+    print(room.name,'done', room.data['plm_sprites'])
 
 if __name__ == "__main__":
   main()

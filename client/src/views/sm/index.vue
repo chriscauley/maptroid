@@ -91,7 +91,12 @@ export default {
     wrapper_class() {
       const zoom = Math.round(this.osd_store.state.zoom)
       const { tool, variant } = this.tool_storage.state.selected
-      return `app-body -full-screen -zoom-${zoom} -tool-${tool} -variant-${variant}`
+      const layers = this.tool_storage.getVisibleLayers()
+      return [
+        'app-body -full-screen',
+        `-zoom-${zoom} -tool-${tool} -variant-${variant}`,
+        layers.map((l) => `-layer-${l}`),
+      ]
     },
     elevators() {
       if (!this.tool_storage.state['show_layer-1'] || !this.is_world) {

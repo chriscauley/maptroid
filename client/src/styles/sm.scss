@@ -141,27 +141,41 @@ $zone-colors: (
     vector-effect: non-scaling-stroke;
   }
   path {
-    fill: rgba(0,255,0,0.2);
-    stroke: #0f0;
+    fill: transparent;
+    stroke: transparent;
+    &.-inner {
+      display: none;
+      pointer-events: none;
+    }
+    &.-outer {
+      stroke-width: 3px;
+      &:hover {
+        stroke-width: 6px;
+        stroke: white;
+      }
+    }
   }
 }
 
-.sm-room-svg {
+.-layer-rooms .sm-room-svg path.-outer {
+  stroke: #0f0;
   @each $name, $color in $zone-colors {
-    path.-zone-#{$name} {
+    &.-zone-#{$name} {
       stroke: $color;
-      fill: color.change($color, $alpha: 0.75);
+      &:hover {
+        stroke: white;
+      }
     }
   }
-  path.-inner {
-    pointer-events: none;
-  }
-  path.-outer {
-    fill: transparent;
-    stroke-width: 3px;
-    &:hover {
-      stroke-width: 6px;
-      stroke: white;
+}
+
+.-layer-walls .sm-room-svg path.-inner {
+  display: unset;
+  fill: rgba(128, 255, 128, 0.75);
+  @each $name, $color in $zone-colors {
+    &.-zone-#{$name} {
+      stroke: $color;
+      fill: color.change($color, $alpha: 0.75);
     }
   }
 }

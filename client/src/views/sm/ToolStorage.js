@@ -1,4 +1,5 @@
 import ToolStorage from '@/components/unrest/ToolStorage'
+import { LAYER_NAMES } from './ConfigPopper.vue'
 
 /*
   TODO
@@ -40,6 +41,7 @@ export default (component) => {
     return tools
   }
   const storage = ToolStorage('tools__dread', { tools: getTools })
+  storage.getVisibleLayers = () => LAYER_NAMES.filter((n) => storage.state[`show_${n}`])
 
   return storage
 }

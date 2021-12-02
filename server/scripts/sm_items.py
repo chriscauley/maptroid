@@ -22,6 +22,6 @@ def populate_items(room):
 if __name__ == "__main__":
     world = get_world_from_argv()
     for room in world.room_set.all():
-        if room.data.get('trash'):
+        if room.data.get('hidden'):
             continue
         populate_items(room)

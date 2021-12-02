@@ -14,14 +14,14 @@
 </template>
 
 <script>
-import { startCase } from 'lodash'
+import { flatten, startCase } from 'lodash'
 
 const groups = {
   layers: {
     'layer-1': true,
     rooms: true,
+    walls: false,
     bts: false,
-    svg: false,
   },
   entities: {
     items: true,
@@ -30,6 +30,8 @@ const groups = {
     route: true,
   },
 }
+
+export const LAYER_NAMES = flatten(Object.values(groups).map((g) => Object.keys(g)))
 
 const help_texts = {
   'layer-1':
