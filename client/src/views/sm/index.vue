@@ -23,7 +23,7 @@
       </html-overlay>
     </template>
     <item-list v-if="items.length" :items="items" />
-    <overlap-fixer />
+    <edit-room />
   </div>
 </template>
 
@@ -37,7 +37,7 @@ import HtmlOverlay from '@/vue-openseadragon/HtmlOverlay.vue'
 import ItemList from '@/components/ItemList.vue'
 import ItemOverlay from './ItemOverlay.vue'
 import OsdStore from './OsdStore'
-import OverlapFixer from './OverlapFixer.vue'
+import EditRoom from './EditRoom.vue'
 import prepItem from './prepItem'
 import SvgOverlay from './SvgOverlay.vue'
 import RoomBox from './RoomBox.vue'
@@ -56,7 +56,7 @@ export default {
     HtmlOverlay,
     ItemList,
     ItemOverlay,
-    OverlapFixer,
+    EditRoom,
     SvgOverlay,
     RoomBox,
     ZoneBox,

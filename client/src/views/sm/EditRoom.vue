@@ -1,6 +1,6 @@
 <template>
   <teleport to="body" v-if="room">
-    <unrest-modal @close="$store.local.save({ overlap_room: null })">
+    <unrest-modal @close="$store.local.save({ editing_room: null })">
       <unrest-toolbar :storage="item_storage" class="-relative" />
       <room-box :mode="selected.tool" :variant="selected.variant" :room="room" />
     </unrest-modal>
@@ -29,7 +29,7 @@ export default {
       return this.item_storage.state.selected
     },
     room() {
-      const room_id = this.$store.local.state.overlap_room
+      const room_id = this.$store.local.state.editing_room
       return room_id && this.$store.route.world_rooms.find((r) => r.id === room_id)
     },
   },

@@ -124,9 +124,9 @@ export default {
   methods: {
     click(event, room) {
       const { tool } = this.tool_storage.state.selected
-      const { overlap_room } = this.$store.local.state
-      if (overlap_room !== room.id && tool === 'edit_room') {
-        this.$store.local.save({ overlap_room: room.id })
+      const { editing_room } = this.$store.local.state
+      if (editing_room !== room.id && tool === 'edit_room') {
+        this.$store.local.save({ editing_room: room.id })
       }
       if (tool === 'video_path' && !this.$route.params.zone_slug) {
         const [x1, y1] = this.map_props.room_offsets[room.id]

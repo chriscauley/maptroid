@@ -82,9 +82,9 @@ export default {
   methods: {
     click() {
       const { tool } = this.tool_storage.state.selected
-      const { overlap_room } = this.$store.local.state
-      if (overlap_room !== this.room.id && tool === 'edit_room') {
-        this.$store.local.save({ overlap_room: this.room.id })
+      const { editing_room } = this.$store.local.state
+      if (editing_room !== this.room.id && tool === 'edit_room') {
+        this.$store.local.save({ editing_room: this.room.id })
       }
     },
     drag(event) {
