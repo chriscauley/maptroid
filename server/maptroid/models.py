@@ -251,6 +251,13 @@ class Channel(models.Model):
   __str__ = lambda self: self.name
 
 
+def default_video_data():
+  return {
+    'items': [],
+    'room_xys': [],
+  }
+
+
 class Video(models.Model):
   class Meta:
     ordering = ('order',)
@@ -261,7 +268,7 @@ class Video(models.Model):
   title = models.CharField(max_length=255)
   label = models.CharField(max_length=64)
   channel = models.ForeignKey(Channel, models.CASCADE)
-  data = models.JSONField(default=dict, blank=True)
+  data = models.JSONField(default=default_video_data, blank=True)
   world = models.ForeignKey(World, models.CASCADE)
   order = models.IntegerField(default=0)
   __str__ = lambda self: self.title

@@ -69,6 +69,7 @@ class ItemForm(forms.ModelForm):
 @schema.register
 class VideoForm(forms.ModelForm):
   user_can_GET = user_can_LIST = 'ALL'
+  filter_fields = ['world__slug']
   readonly_fields = ['channel_icon', 'channel_name', 'thumbnail_url']
   class Meta:
     model = Video
