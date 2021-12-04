@@ -18,7 +18,8 @@
           <zone-box v-for="zone in zones" :key="zone.id" :zone="zone" />
         </template>
         <div v-for="(e, i) in elevators" :key="i" v-bind="e" />
-        <svg-overlay v-if="is_world" />
+        <svg-overlay :map_props="map_props" />
+        <item-overlay :map_props="map_props" v-if="tool_storage.state.show_items" />
       </html-overlay>
     </template>
     <item-list v-if="items.length" :items="items" />
@@ -34,6 +35,7 @@ import BaseViewer from '@/components/BaseViewer'
 import ConfigPopper from './ConfigPopper.vue'
 import HtmlOverlay from '@/vue-openseadragon/HtmlOverlay.vue'
 import ItemList from '@/components/ItemList.vue'
+import ItemOverlay from './ItemOverlay.vue'
 import OsdStore from './OsdStore'
 import OverlapFixer from './OverlapFixer.vue'
 import prepItem from './prepItem'
@@ -52,10 +54,11 @@ export default {
     BaseViewer,
     ConfigPopper,
     HtmlOverlay,
+    ItemList,
+    ItemOverlay,
     OverlapFixer,
     SvgOverlay,
     RoomBox,
-    ItemList,
     ZoneBox,
   },
   provide() {
@@ -73,6 +76,43 @@ export default {
   computed: {
     is_world() {
       return !this.$route.params.zone_slug
+    },
+    map_props() {
+      const map_bounds = [0, 0, 0, 0]
+      const zone_offsets = {}
+
+      let zones = this.$store.route.zones
+      let items
+      if (this.$route.params.zone_slug) {
+        items = this.$store.route.zone_items
+        const { zone } = this.$store.route
+        zones = [zone]
+        const [_x, _y, width, height] = zone.data.world.bounds
+        map_bounds[2] = width
+        map_bounds[3] = height
+        zone_offsets[zone.id] = [0, 0]
+      } else {
+        items = this.$store.route.world_items
+        zones = zones.filter((z) => !z.data.hidden)
+        zones.forEach((zone) => {
+          const [x, y, width, height] = zone.data.world.bounds
+          map_bounds[2] = Math.max(width + x, map_bounds[2])
+          map_bounds[3] = Math.max(height + y, map_bounds[3])
+          zone_offsets[zone.id] = [x, y]
+        })
+      }
+
+      const rooms = this.$store.route.world_rooms
+      const room_offsets = {}
+      rooms
+        .filter((r) => zone_offsets[r.zone])
+        .forEach((r) => {
+          const [zone_x, zone_y] = zone_offsets[r.zone]
+          const [x, y] = r.data.zone.bounds.slice(0, 2)
+          room_offsets[r.id] = [zone_x + x, zone_y + y]
+        })
+
+      return { map_bounds, zones, rooms, zone_offsets, room_offsets, items }
     },
     ready() {
       const { world, world_rooms } = this.$store.route

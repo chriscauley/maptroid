@@ -24,7 +24,7 @@
     </p>
     <div class="flexy">
       <div
-        v-for="video in videos"
+        v-for="video in $store.route.world_videos"
         :key="video.id"
         class="video-picker__video"
         @click="select(video)"
@@ -33,7 +33,9 @@
         <div class="video-picker__thumbnail" :style="getBg(video)" />
         <div class="video-picker__title">{{ video.title }}</div>
         <div class="video-picker__by">
-          <img class="video-box__avatar" :src="video.channel_icon" />
+          <div>
+            <img class="video-box__avatar" :src="video.channel_icon" />
+          </div>
           by {{ video.channel_name }}
         </div>
       </div>
@@ -43,14 +45,13 @@
 
 <script>
 export default {
-  inject: ['videos'],
   emits: ['close'],
   methods: {
     getBg(video) {
       return { backgroundImage: `url("${video.thumbnail_url}")` }
     },
     select(video) {
-      this.$store.local.save({ selected_video_id: video.id })
+      this.$store.video.setCurrentVideo(video)
       this.$emit('close')
     },
   },

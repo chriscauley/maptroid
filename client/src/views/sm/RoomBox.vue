@@ -4,12 +4,6 @@
       <unrest-draggable @drag="drag" :style="`background-image: url(${src})`" />
     </template>
     <div v-for="(hole, i) in holes" :key="i" :style="hole" />
-    <div
-      v-show="tool_storage.state.show_items"
-      v-for="attrs in items"
-      :key="attrs.id"
-      v-bind="attrs"
-    />
   </div>
 </template>
 

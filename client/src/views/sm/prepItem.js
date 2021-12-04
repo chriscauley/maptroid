@@ -1,16 +1,15 @@
 import { startCase } from 'lodash'
 
-export default (item, room) => {
+export default (item, map_props) => {
   let style
-  if (room) {
+  if (map_props) {
+    const [room_x, room_y] = map_props.room_offsets[item.room]
     const [x, y] = item.data.room_xy
-    const width = room.data.zone.bounds[2] * 16
-    const height = room.data.zone.bounds[3] * 16
     style = {
-      top: `${(100 * y) / height}%`,
-      left: `${(100 * x) / width}%`,
-      height: `${100 / height}%`,
-      width: `${100 / width}%`,
+      left: `${100 * (x / 16 + room_x)}%`,
+      top: `${100 * (y / 16 + room_y)}%`,
+      width: `${100 / 16}%`,
+      height: `${100 / 16}%`,
     }
   }
   return {

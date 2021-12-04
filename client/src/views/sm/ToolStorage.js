@@ -36,6 +36,10 @@ export default (component) => {
             text: z.name,
           })),
         },
+        {
+          slug: 'video_path',
+          icon: 'fab fa-youtube',
+        },
       ]
     }
     return tools

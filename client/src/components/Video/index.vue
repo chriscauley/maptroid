@@ -1,22 +1,18 @@
 <template>
   <div class="video-box" v-if="video">
-    <div class="list-group-item cursor-pointer" @click="open = true">
-      Route:
-      <div class="flex-grow truncate">{{ video.label }}</div>
-      by {{ video.channel_name }}
-      <img :src="video.channel_icon" class="video-box__avatar" />
-      <span v-if="current_time">
-        {{ Math.floor(current_time / 60) }}m {{ current_time % 60 }}s
-        {{ Math.floor(getWindowTime() / 60) }}m {{ getWindowTime() % 60 }}s
-      </span>
-    </div>
-    <div v-if="start_at" class="video-box__player">
-      <div class="item-bar">
-        <i class="fa fa-youtube-play cursor-pointer" @click="toggleVideo" />
-        <span v-for="item in grouped_items" :key="item.type" class="item-bar__item">
-          <span :class="item.icon" /> {{ item.count }}
-        </span>
+    <div class="item-list__header cursor-pointer">
+      <div class="video-box__title" @click="open = true">
+        <div :style="`background-image: url(${video.channel_icon})`" class="video-box__avatar" />
+        {{ video.channel_name }}:
+        <div class="flex-grow truncate">{{ video.label }}</div>
       </div>
+      <div class="video-box__seperator" />
+      <div @click="togglePlayer">
+        <template v-if="expanded"> {{ visible_time }} <i class="fas fa-chevron-down" /> </template>
+        <template v-else> Expand Player <i class="fas fa-chevron-up" /> </template>
+      </div>
+    </div>
+    <div v-if="show_player" class="video-box__player">
       <div :id="player_id" />
     </div>
     <teleport to="body">
@@ -28,56 +24,39 @@
 </template>
 
 <script>
-import DreadItems from '@/models/DreadItems'
-import VideoPicker from './Picker.vue'
+import Mousetrap from '@unrest/vue-mousetrap'
 
-const VISIBLE_LIST = DreadItems.items.slice(0, -1)
-const VISIBLE = {}
-VISIBLE_LIST.forEach((t) => (VISIBLE[t] = true))
+import { hms } from '@/lib/time'
+import VideoPicker from './Picker.vue'
 
 export default {
   components: { VideoPicker },
-  props: {
-    world_items: Array,
-  },
+  mixins: [Mousetrap.Mixin],
   data() {
     const player_id = `_player_${Math.round(Math.random() * 1e6)}`
-    return { player: null, open: null, player_id, current_time: '' }
+    return { player: null, open: null, player_id }
   },
   computed: {
+    mousetrap() {
+      const { player } = this
+      return {
+        right: () => player.seekTo(player.getCurrentTime() + 5),
+        left: () => player.seekTo(player.getCurrentTime() - 5),
+        space: () => player[player.getPlayerState() === 1 ? 'stopVideo' : 'playVideo'](),
+      }
+    },
     video() {
-      return this.$store.video.current_video
+      return this.$store.video.getCurrentVideo()
     },
-    start_at() {
-      return this.$auth.user?.is_superuser ? this.video.max_event || 1 : null
+    expanded() {
+      return this.$store.local.state.show_video
     },
-    grouped_items() {
-      const bins = {}
-      const type_by_id = {}
-      this.world_items
-        .filter((i) => VISIBLE[i.data.type])
-        .forEach((i) => (type_by_id[i.id] = i.data.type))
-      this.video.data.actions.forEach((action) => {
-        const type = type_by_id[action[0]]
-        bins[type] = (bins[type] || 0) + 1
-      })
-
-      const items = VISIBLE_LIST.map((type) => ({
-        type,
-        count: bins[type],
-        icon: DreadItems.getClass(type),
-      }))
-      items.push({
-        type: 'missiles__computed',
-        count: 15 + 2 * (bins.missile__tank || 0) + 10 * (bins['missile__plus-tank'] || 0),
-        icon: DreadItems.getClass('missile__tank'),
-      })
-      items.push({
-        type: 'energy__tank',
-        count: (bins.energy__tank || 0) + Math.floor((bins.energy__part || 0) / 4),
-        icon: DreadItems.getClass('energy__tank'),
-      })
-      return items
+    show_player() {
+      return this.$store.route.world_videos.length && this.expanded
+    },
+    visible_time() {
+      const { current_time } = this.$store.local.state
+      return hms(current_time || 0)
     },
   },
   mounted() {
@@ -93,34 +72,30 @@ export default {
     }
   },
   methods: {
-    getWindowTime() {
-      return window.YT_PLAYER_TIME
-    },
-    toggleVideo() {
+    togglePlayer() {
       this.$store.local.save({ show_video: !this.$store.local.state.show_video })
-      // TODO right now killing/restoring video is unstable, so I just reload the page
-      window.location.reload()
     },
     loadVideo() {
-      const { show_video } = this.$store.local.state
-      if (!show_video || !this.start_at) {
+      if (!this.show_player) {
+        this.expanded && setTimeout(this.loadVideo, 200)
         return
       }
       const width = this.$el.clientWidth
       const height = (width * 360) / 640
       const { origin } = window.location
-      this.player = new window.YT.Player(this.player_id, {
+      const start = this.$store.local.state.current_time
+      this.player = window.__player = new window.YT.Player(this.player_id, {
         width,
         height,
         videoId: this.video.external_id,
-        playerVars: { start: this.start_at, origin, autoplay: 1 },
+        playerVars: { start, origin, autoplay: 1 },
       })
       this.interval = setInterval(this.setTime, 60)
     },
     setTime() {
       const new_time = Math.floor(this.player.playerInfo.currentTime)
-      if (new_time !== window.YT_PLAYER_TIME) {
-        this.current_time = window.YT_PLAYER_TIME = new_time
+      if (new_time !== this.$store.local.state.current_time) {
+        this.$store.local.save({ current_time: new_time })
       }
     },
   },

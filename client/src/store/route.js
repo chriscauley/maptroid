@@ -18,7 +18,7 @@ export default ({ store }) => {
 
     get zones() {
       const page = route.world && store.zone.getPage(route.world_query)
-      return page?.items || []
+      return (page?.items || []).filter((z) => !z.data.hidden)
     },
     get zone() {
       const { zone_slug } = route.params
@@ -27,7 +27,7 @@ export default ({ store }) => {
 
     get world_rooms() {
       const page = route.world && store.room2.getPage(route.world_query)
-      return page?.items || []
+      return (page?.items || []).filter((r) => !r.data.hidden)
     },
     get zone_rooms() {
       const zone_id = route.zone?.id
@@ -77,6 +77,16 @@ export default ({ store }) => {
     getWorldLink(world_slug) {
       const is_dread = world_slug === 'dread'
       return `/${is_dread ? 'maps' : 'sm'}/${world_slug}/`
+    },
+
+    get times_by_item_id() {
+      const video = store.video.getCurrentVideo()
+      const times_by_item_id = {}
+      if (video) {
+        video.data.items.forEach(([item_id, _time]) => (times_by_item_id[item_id] = []))
+        video.data.items.forEach(([item_id, time]) => times_by_item_id[item_id].push(time))
+      }
+      return times_by_item_id
     },
   }
 
