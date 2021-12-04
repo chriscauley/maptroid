@@ -1,15 +1,17 @@
 <template>
   <div :style="style" :class="css" :title="`${room.id} - ${room.name}`" @click="click">
     <template v-if="mode">
+      <div v-for="(hole, i) in holes" :key="i" :style="hole" />
       <unrest-draggable @drag="drag" :style="`background-image: url(${src})`" />
     </template>
-    <div v-for="(hole, i) in holes" :key="i" :style="hole" />
+    <template v-if="mode === 'item'">
+      <div v-for="item in items" v-bind="item.attrs" :key="item.id" @click="removeItem(item.id)" />
+    </template>
   </div>
 </template>
 
 <script>
 import vec from '@/lib/vec'
-import prepItem from './prepItem'
 
 const WORLD = 'super_metroid'
 
@@ -18,9 +20,7 @@ export default {
   props: {
     room: Object,
     mode: String,
-  },
-  data() {
-    return { drag_xy: [0, 0], drag_raw_xy: [0, 0] }
+    variant: String,
   },
   computed: {
     css() {
@@ -33,10 +33,10 @@ export default {
     },
     style() {
       const [x, y, width, height] = this.room.data.zone.bounds
-      if (this.mode === 'overlap') {
+      if (['item', 'overlap'].includes(this.mode)) {
         return {
-          height: `${height * 64}px`,
-          width: `${width * 64}px`,
+          height: `${height * 256}px`,
+          width: `${width * 256}px`,
         }
       }
       return {
@@ -49,13 +49,26 @@ export default {
     },
     items() {
       const items = this.$store.route.world_items.filter((i) => i.room === this.room.id)
-      return items.map((i) => prepItem(i, this.room))
+      return items.map((item) => ({
+        id: item.id,
+        attrs: {
+          id: `sm-room-box__item__${item.id}`,
+          class: `sm-item -${item.data.type}`,
+          style: {
+            height: '16px',
+            left: `${16 * item.data.room_xy[0]}px`,
+            position: 'absolute',
+            top: `${16 * item.data.room_xy[1]}px`,
+            width: '16px',
+          },
+        },
+      }))
     },
     holes() {
       if (this.mode !== 'overlap') {
         return []
       }
-      const s = 64
+      const s = 256
       return this.room.data.holes?.map(([x, y]) => ({
         left: `${x * s}px`,
         top: `${y * s}px`,
@@ -75,11 +88,14 @@ export default {
       }
     },
     drag(event) {
+      const box = this.$el.getBoundingClientRect()
+      const [x, y] = event._drag.xy
       if (this.mode === 'overlap') {
-        const box = this.$el.getBoundingClientRect()
-        const [x, y] = event._drag.xy
-        const xy = [x - box.x, y - box.y].map((i) => Math.floor(i / 64))
+        const xy = [x - box.x, y - box.y].map((i) => Math.floor(i / 256))
         this[event.shiftKey ? 'removeHole' : 'addHole'](xy)
+      } else if (this.mode) {
+        const xy = [x - box.x, y - box.y].map((i) => Math.floor(i / 16))
+        this.addItem(xy)
       } else {
         if (event.ctrlKey) {
           this.show_bts = !this.show_bts
@@ -102,6 +118,17 @@ export default {
         data.holes = data.holes.filter((xy2) => !vec.isEqual(xy, xy2))
         this.$store.room2.bounceSave(this.room)
       }
+    },
+    addItem(xy) {
+      const data = {
+        room: this.room.id,
+        zone: this.room.zone,
+        data: { room_xy: xy, type: this.variant },
+      }
+      this.$store.item2.save(data).then(this.$store.route.refetchItems)
+    },
+    removeItem(id) {
+      this.$store.item2.delete({ id }).then(this.$store.route.refetchItems)
     },
   },
 }

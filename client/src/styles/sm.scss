@@ -2,7 +2,7 @@
 
 .sm-room-box {
   background-size: cover;
-  &.-mode-overlap {
+  &.-mode-overlap, &.-mode-item {
     position: relative;
   }
   canvas {

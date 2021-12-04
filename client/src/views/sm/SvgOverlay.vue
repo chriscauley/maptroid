@@ -25,7 +25,7 @@ export default {
     raw_lines() {
       // combine item and room_xy times into an in order list
       const video = this.$store.video.getCurrentVideo()
-      if (!video) {
+      if (!video || this.$route.params.zone_slug) {
         return []
       }
       const xy_times = video.data.room_xys.map(([room_id, screen_xy, time]) => {
@@ -128,7 +128,7 @@ export default {
       if (overlap_room !== room.id && tool === 'edit_room') {
         this.$store.local.save({ overlap_room: room.id })
       }
-      if (tool === 'video_path') {
+      if (tool === 'video_path' && !this.$route.params.zone_slug) {
         const [x1, y1] = this.map_props.room_offsets[room.id]
         const [x2, y2] = this.osd_store.getWorldXY(event)
         const video = this.$store.video.getCurrentVideo()

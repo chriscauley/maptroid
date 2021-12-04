@@ -64,6 +64,12 @@ export default ({ store }) => {
       return store.room2.fetchPage(route.world_query)
     },
 
+    refetchItems() {
+      const world_id = route.world?.id
+      store.item2.api.markStale()
+      return store.item2.fetchPage(Query({ zone__world_id: world_id }))
+    },
+
     refetchVideos() {
       store.video.api.markStale()
       return store.video.fetchPage(route.world_query)
