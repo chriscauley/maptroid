@@ -81,6 +81,9 @@ export default {
       }
 
       this.$store.route.world_rooms.forEach((room) => {
+        if (!room.data.geometry?.inner) {
+          return // room needs to be processed server side
+        }
         if (!zone_offsets[room.zone] || room.data.hidden) {
           return
         }

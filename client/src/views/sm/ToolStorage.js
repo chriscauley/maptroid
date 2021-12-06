@@ -22,6 +22,7 @@ export default (component) => {
         ...tools,
         { slug: 'select', icon: 'fa fa-mouse-pointer' },
         { slug: 'move_zone', icon: 'fa fa-object-group' },
+        { slug: 'move_room', icon: 'fa fa-chess-board' },
         { slug: 'edit_room', icon: 'fa fa-edit' },
         {
           slug: 'elevator',

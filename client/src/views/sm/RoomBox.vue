@@ -5,15 +5,19 @@
       <unrest-draggable @drag="drag" :style="`background-image: url(${src})`" />
     </template>
     <template v-if="mode === 'item'">
-      <div v-for="item in items" v-bind="item.attrs" :key="item.id" @click="removeItem(item.id)" />
+      <div
+        v-for="item in items"
+        v-bind="item.attrs"
+        :key="item.id"
+        @click.stop="removeItem(item.id)"
+      />
     </template>
   </div>
 </template>
 
 <script>
+import { debounce, inRange } from 'lodash'
 import vec from '@/lib/vec'
-
-const WORLD = 'super_metroid'
 
 export default {
   inject: ['osd_store', 'tool_storage'],
@@ -29,7 +33,8 @@ export default {
       return [`sm-room-box -mode-${this.mode}`, zoom > 0.2 && 'pixelated']
     },
     src() {
-      return `/media/sm_cache/${WORLD}/layer-1/${this.room.key}`
+      const { world } = this.$store.route
+      return `/media/sm_cache/${world.slug}/layer-1/${this.room.key}`
     },
     style() {
       const [x, y, width, height] = this.room.data.zone.bounds
@@ -76,33 +81,40 @@ export default {
         height: s + 'px',
         position: 'absolute',
         background: 'rgba(255,0,0,0.25)',
+        zIndex: 1,
+        pointerEvents: 'none',
       }))
     },
   },
   methods: {
-    click() {
+    click(event) {
       const { tool } = this.tool_storage.state.selected
       const { editing_room } = this.$store.local.state
       if (editing_room !== this.room.id && tool === 'edit_room') {
         this.$store.local.save({ editing_room: this.room.id })
+      } else if (this.mode === 'item') {
+        const box = this.$el.getBoundingClientRect()
+        const { clientX, clientY } = event
+        const xy = [clientX - box.x, clientY - box.y].map((i) => Math.floor(i / 256))
+        this.addItem(xy)
       }
     },
+    bounceSave: debounce(function() {
+      this.$store.room2.save(this.room).then(this.$store.route.refetchRooms)
+    }, 500),
     drag(event) {
-      const box = this.$el.getBoundingClientRect()
-      const [x, y] = event._drag.xy
       if (this.mode === 'overlap') {
-        const xy = [x - box.x, y - box.y].map((i) => Math.floor(i / 256))
-        this[event.shiftKey ? 'removeHole' : 'addHole'](xy)
-      } else if (this.mode) {
-        const xy = [x - box.x, y - box.y].map((i) => Math.floor(i / 16))
-        this.addItem(xy)
-      } else {
-        if (event.ctrlKey) {
-          this.show_bts = !this.show_bts
-        } else {
-          this.osd_store.dragRoom(this.room, event._drag.last_dxy)
-          this.$store.room2.bounceSave(this.room)
+        const box = this.$el.getBoundingClientRect()
+        const [x, y] = event._drag.xy
+        if (inRange(x - box.x, 0, box.width) && inRange(y - box.y, 0, box.height)) {
+          const xy = [x - box.x, y - box.y].map((i) => Math.floor(i / 256))
+          this[event.shiftKey ? 'removeHole' : 'addHole'](xy)
         }
+      } else if (this.mode === 'item') {
+        // handled in click
+      } else {
+        this.osd_store.dragRoom(this.room, event._drag.last_dxy)
+        this.bounceSave()
       }
     },
     addHole(xy) {

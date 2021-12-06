@@ -61,6 +61,8 @@ class Zone(models.Model):
 
   def normalize(self):
     rooms = self.room_set.all()
+    if not rooms:
+      return
     x_max = y_max = -1e20
     x_min = y_min = 1e20
     for room in rooms:

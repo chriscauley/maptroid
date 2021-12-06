@@ -166,6 +166,11 @@ $zone-colors: (
   }
 }
 
+.-tool-move_room .sm-room-svg,
+.-tool-edit_room .sm-room-svg {
+  display:none;
+}
+
 .-layer-rooms .sm-room-svg path.-outer {
   stroke: #0f0;
   @each $name, $color in $zone-colors {

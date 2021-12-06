@@ -24,6 +24,8 @@ def set_transparency(image, dest=None, bg_color=(0, 0, 0)):
 
 
 def process_zone(zone):
+    if zone.data.get("hidden"):
+        return
     world = zone.world
     CACHE_DIR = mkdir(settings.MEDIA_ROOT, f'sm_cache/{world.slug}')
     ROOM_DIR = mkdir(settings.MEDIA_ROOT, f'sm_room/{world.slug}')
@@ -52,11 +54,17 @@ def process_zone(zone):
                     layer_image = img.make_holes(layer_image, room.data['holes'])
                 layer_image.save(layer_path)
                 room_image.paste(layer_image, (0,0), mask=layer_image)
-            img._coerce(room_image, 'pil').save(os.path.join(layers_dir, room.key))
+                layer_image.close()
+            room_image = img._coerce(room_image, 'pil')
+            room_image.save(os.path.join(layers_dir, room.key))
             zone_image.paste(room_image, (x * 256, y * 256), mask=room_image)
+            room_image.close()
         zone_image.save(dest)
         zone_image.close()
-        png_to_dzi(dest)
+        if zw > 70 or zh > 70:
+            print(f'WARNING: skippind dzi for {zone.name} because bounds are too large: {zw}x{zh}')
+        else:
+            png_to_dzi(dest)
 
 
     zone.normalize()

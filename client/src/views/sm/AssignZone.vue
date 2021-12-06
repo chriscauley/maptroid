@@ -42,10 +42,10 @@ export default {
     rooms() {
       const zone_id = this.zones.find((z) => z.slug === this.$route.params.zone_slug)?.id
       const rooms = this.$store.room2.getPage(this.world_query)?.items || []
-      if (this.zone_id) {
+      if (zone_id) {
         return rooms.filter((i) => i.zone === zone_id)
       }
-      return rooms.filter((i) => !i.zone)
+      return rooms.filter((i) => !i.zone).reverse()
     },
   },
   methods: {
