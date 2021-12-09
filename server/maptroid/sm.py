@@ -23,6 +23,22 @@ def set_transparency(image, dest=None, bg_color=(0, 0, 0)):
     return result
 
 
+def get_occupied_world_xys(target_zone):
+    occupied_xy_map = {}
+    for zone in target_zone.world.zone_set.all():
+        if zone.data.get('hidden'):
+            continue
+        zone_x, zone_y, _, _ = zone.data['world']['bounds']
+        for room in zone.room_set.all():
+            holes = room.data.get('holes') or []
+            room_x, room_y, width, height = room.data['zone']['bounds']
+            for dx in range(width):
+                for dy in range(height):
+                    if not [dx, dy] in holes:
+                        zone_xy = f'{zone_x + room_x+dx},{zone_y + room_y+dy}'
+                        occupied_xy_map[zone_xy] = room.id
+    return occupied_xy_map
+
 def process_zone(zone):
     if zone.data.get("hidden"):
         return
@@ -36,28 +52,42 @@ def process_zone(zone):
     x_min = min([r.data['zone']['bounds'][0] for r in rooms])
     y_min = min([r.data['zone']['bounds'][1] for r in rooms])
 
+    # Make note of which xys to punch out in the holes
+    occupied_xy_map = get_occupied_world_xys(zone)
+
     def make_layered_zone_image(zone, layers, dest):
-        _, _, zw, zh = zone.data['world']['bounds']
+        zone_x, zone_y, zw, zh = zone.data['world']['bounds']
         zone_image = Image.new('RGBA', ((zw) * 256, (zh) * 256), (0, 0, 0, 0))
         layers_dir = mkdir(CACHE_DIR, '+'.join(layers))
+
         for room in rooms:
-            x, y, width, height = room.data['zone']['bounds']
-            room_image = Image.new('RGBA', (int(width) * 256, int(height) * 256), (0, 0, 0, 0))
+            room_x, room_y, width, height = room.data['zone']['bounds']
+            room_image = Image.new('RGBA', (int(width) * 256, int(height) * 256), (0, 0, 0, 255))
+
+            # this allows the clear_holes preference to be set from the top down
+            zone_clear_holes = world.data.get('clear_holes') or zone.data.get('clear_holes')
+            room_clear_holes = zone_clear_holes or room.data.get('clear_holes')
+
             for layer in layers:
                 path = os.path.join(settings.MEDIA_ROOT, f'smile_exports/{world.slug}/{layer}/{room.key}')
                 layer_dir = mkdir(CACHE_DIR, layer)
                 layer_path = os.path.join(layer_dir, room.key)
                 layer_image = img._coerce(path, 'pil')
                 layer_image = layer_image.convert('RGBA')
-                layer_image = img.replace_color(path, (0,0,0,255),(0,0,0,0))
-                if room.data.get('holes'):
-                    layer_image = img.make_holes(layer_image, room.data['holes'])
+                layer_image = img.replace_color(path, (0, 0, 0, 255),(0, 0, 0, 0))
                 layer_image.save(layer_path)
-                room_image.paste(layer_image, (0,0), mask=layer_image)
+                room_image.paste(layer_image, (0, 0), mask=layer_image)
                 layer_image.close()
+                holes = []
+
+                for [dx, dy] in room.data.get('holes') or []:
+                    zone_xy = f'{zone_x + room_x + dx},{zone_y + room_y + dy}'
+                    if room_clear_holes or zone_xy in occupied_xy_map:
+                        holes.append([dx, dy])
+                room_image = img.make_holes(room_image, holes)
             room_image = img._coerce(room_image, 'pil')
             room_image.save(os.path.join(layers_dir, room.key))
-            zone_image.paste(room_image, (x * 256, y * 256), mask=room_image)
+            zone_image.paste(room_image, (room_x * 256, room_y * 256), mask=room_image)
             room_image.close()
         zone_image.save(dest)
         zone_image.close()
