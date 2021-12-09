@@ -40,6 +40,12 @@
   }
 }
 
+.-tool-move_zone {
+  .sm-room-box {
+    display: none;
+  }
+}
+
 .sm-elevator, .sm-item {
   @apply relative inline-block;
   height: 1em;
@@ -105,7 +111,6 @@ $zone-colors: (
   "maridia": #283888,
   "norfair": #d42020,
   "tourian": #991b8c,
-  "void": #000000,
 
   /* Super Zero Mission */
   "ridley": #5c152b,
@@ -116,7 +121,9 @@ $zone-colors: (
   /* Ascent */
   "zone-1": #d83890,
   "zone-2": #d1b102,
-  "zone-3": #d42020,
+  "zone-3a": #283888,
+  "zone-3b": #d42020,
+  "void": #991b8c,
 
   /* Vitality */
   "pendulu-moda": #017e13,
