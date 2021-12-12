@@ -90,6 +90,7 @@ class Room(models.Model):
   key = models.CharField(max_length=128, null=True, blank=True)
   sprite_ids = models.JSONField(default=list, blank=True)
   data = models.JSONField(default=dict, blank=True, encoder=img.NpEncoder)
+  smile_data = models.JSONField(default=dict, blank=True, encoder=img.NpEncoder)
   __str__ = lambda self: f'{self.name or "unnamed"} - ({self.key})'
 
   def save(self, *args, **kwargs):
@@ -103,13 +104,10 @@ class Room(models.Model):
     super().save(*args, **kwargs)
 
 
-def default_zone_data():
-  return { 'world': { 'xy': [0,0] } }
-
 class Item(models.Model):
   room = models.ForeignKey(Room, models.CASCADE)
   zone = models.ForeignKey(Zone, models.SET_NULL, null=True, blank=True)
-  data = models.JSONField(default=default_zone_data, blank=True)
+  data = models.JSONField(default=dict, blank=True)
   __str__ = lambda self: str(self.data)
 
 class Character(models.Model):

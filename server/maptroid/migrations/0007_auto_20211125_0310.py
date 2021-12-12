@@ -26,7 +26,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='item',
             name='data',
-            field=models.JSONField(blank=True, default=maptroid.models.default_zone_data),
+            field=models.JSONField(blank=True, default=dict),
         ),
         migrations.AlterField(
             model_name='room',
