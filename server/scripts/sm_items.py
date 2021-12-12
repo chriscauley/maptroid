@@ -3,8 +3,6 @@ from _setup import get_world_from_argv
 from maptroid.models import SmileSprite, Room, Item
 
 def populate_items(room):
-    room.data.pop("_editor", None)
-    room.save()
     for sprite_id, xy in room.data['plm_sprites']:
         sprite = SmileSprite.objects.get(id=sprite_id)
         if sprite.category != 'item':
@@ -23,5 +21,8 @@ if __name__ == "__main__":
     world = get_world_from_argv()
     for room in world.room_set.all():
         if room.data.get('hidden'):
+            continue
+        if 'plm_sprites' not in room.data:
+            print(f'room #{room.id} missing plm_sprites')
             continue
         populate_items(room)

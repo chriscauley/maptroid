@@ -1,4 +1,4 @@
-import _setup
+from _setup import get_world_from_argv
 import os
 from django.conf import settings
 import imagehash
@@ -7,12 +7,6 @@ import unrest_image as img
 
 from maptroid.models import Room, SmileSprite, SpriteMatcher
 from maptroid.utils import mkdir
-
-BASE_DIR = mkdir(settings.MEDIA_ROOT,'plm_enemies/sprites')
-WORLD = 'super_metroid'
-
-_dirs = ['outline']
-DIRS = { k: mkdir(BASE_DIR, 'k') for k in _dirs }
 
 def extract_sprites(image, smile_id):
   pixels = 0
@@ -61,20 +55,20 @@ def media_url_to_path(url):
   return os.path.join(settings.MEDIA_ROOT, url.split(settings.MEDIA_URL)[-1])
 
 def main():
-  rooms = Room.objects.filter(world__slug=WORLD)
+  world = get_world_from_argv()
+  OUTPUT_DIR = mkdir(settings.MEDIA_ROOT,f'plm_enemies/{world.slug}/')
+
+  rooms = Room.objects.filter(world=world)
   # rooms = rooms.filter(id=19)
   fails = 0
   matcher = SpriteMatcher()
   for room in rooms:
-    if '7E82C' in room.key: # force skip junk room by adding them to here
-      print('skipping', room)
-      room.data['hidden'] = True
-      room.save()
-      continue
-    # if room.data.get('plm_sprites') or room.data.get('hidden'):
-    if not room.id == 66:
+    if room.data.get('hidden'):
       continue
     smile_id = room.key.split("_")[-1].split('.')[0]
+    if not 'plm_enemies' in room.data:
+      print('missing plm_enemies:', room.id)
+      continue
     plms = [plm for plm in room.data['plm_enemies'] if not plm.get('deleted')]
     if len(plms) != len(set([str(p['xy']) for p in plms])):
       fails += 1
@@ -86,7 +80,7 @@ def main():
       continue
 
     # make an empty canvas of the right size
-    path = os.path.join(settings.MEDIA_ROOT, f'sm_cache/{WORLD}/layer-1/{room.key}')
+    path = os.path.join(settings.MEDIA_ROOT, f'sm_cache/{world.slug}/layer-1/{room.key}')
     sprite_canvas = img._coerce(path, 'np')
     sprite_canvas[:,:,:] = 0
 
@@ -97,6 +91,7 @@ def main():
       x, y = plm['xy'] or [0, 0]
       height, width, _ = cropped_data.shape
       sprite_canvas[y:y+height, x:x+width] = cropped_data
+    img._coerce(sprite_canvas, 'pil').save(os.path.join(OUTPUT_DIR, room.key))
     sprites, xys = extract_sprites(sprite_canvas, smile_id)
     for s, xy in zip(sprites, xys):
       sprite, new = matcher.get_or_create_from_image(s, 'plm')

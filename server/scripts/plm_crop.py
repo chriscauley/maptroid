@@ -1,4 +1,4 @@
-import _setup
+from _setup import get_world_from_argv
 
 from collections import defaultdict
 from django.conf import settings
@@ -16,8 +16,9 @@ import pytesseract
 from maptroid.models import Room, SmileSprite
 from maptroid.sm import set_transparency
 
-WORLD = "super_metroid"
-rooms = Room.objects.filter(world__slug=WORLD)
+
+world = get_world_from_argv()
+rooms = Room.objects.filter(world=world)
 BIN = 16
 
 SMILE_BG = (128, 128, 255, 255)
@@ -39,7 +40,7 @@ coords = {
   },
 }
 
-SOURCE_DIR = os.path.join(settings.MEDIA_ROOT, 'plm_enemies')
+SOURCE_DIR = os.path.join(settings.MEDIA_ROOT, 'plm_enemies', world.slug)
 
 def get_dir(name, wipe=False):
   out = os.path.join(SOURCE_DIR, name)
@@ -160,7 +161,7 @@ def load_plms(batch_name):
     # room.data.pop('plm_enemies', None); room.save()
     for plm in room.data.get('plm_enemies', []):
       processed.append(plm['source'])
-
+  print(f'skipping {len(processed)} screenshots fond in plm_enemies[:].source')
   hash_to_letter['__missing'] = []
 
   for ss_name in os.listdir(os.path.join(SOURCE_DIR, batch_name)):
@@ -175,7 +176,6 @@ def load_plms(batch_name):
     smile_id = read_text(ss_name, 'smile_id', coords[data['batch_name']]['smile_id'])
     if not smile_id:
       continue
-    print(f"'{smile_id}'")
 
     event = read_text(ss_name, 'event_name', coords[data['batch_name']]['event_name'])
     if not event:
