@@ -25,7 +25,7 @@
         <item-overlay :map_props="map_props" v-if="tool_storage.state.show_items" />
       </html-overlay>
     </template>
-    <item-list v-if="items.length" :items="items" />
+    <viewer-panel :items="items" />
     <edit-room />
   </div>
 </template>
@@ -37,7 +37,7 @@ import { computed } from 'vue'
 import BaseViewer from '@/components/BaseViewer'
 import ConfigPopper from './ConfigPopper.vue'
 import HtmlOverlay from '@/vue-openseadragon/HtmlOverlay.vue'
-import ItemList from '@/components/ItemList.vue'
+import ViewerPanel from '@/components/ViewerPanel/index.vue'
 import ItemOverlay from './ItemOverlay.vue'
 import OsdStore from './OsdStore'
 import OverlapDropdown from './OverlapDropdown.vue'
@@ -58,7 +58,7 @@ export default {
     BaseViewer,
     ConfigPopper,
     HtmlOverlay,
-    ItemList,
+    ViewerPanel,
     ItemOverlay,
     EditRoom,
     OverlapDropdown,
