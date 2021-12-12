@@ -17,9 +17,12 @@ export default ({ store }) => {
     },
 
     get zones() {
-      const page = route.world && store.zone.getPage(route.world_query)
-      return (page?.items || []).filter((z) => !z.data.hidden)
+      return route.all_zones.filter((z) => !z.data.hidden)
     },
+    get all_zones() {
+      return (route.world && store.zone.getPage(route.world_query)?.items) || []
+    },
+
     get zone() {
       const { zone_slug } = route.params
       return zone_slug && route.zones.find((w) => w.slug === zone_slug)

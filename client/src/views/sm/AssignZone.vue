@@ -1,20 +1,31 @@
 <template>
   <div v-if="world" class="app-sm-assign">
-    <div class="app-sm-assign__zones">
-      <div v-for="zone in zones" :key="zone.id" class="btn -primary" @click="setRoomZone(zone.id)">
+    <div class="btn-group">
+      <router-link
+        v-for="zone in prepped_zones"
+        :key="zone.id"
+        :to="zone.to"
+        :class="zone.class(zone.slug, $route.params.zone_slug)"
+      >
         {{ zone.name }}
-      </div>
-      <div class="btn -primary" @click="setRoomZone(null)">
-        No Zone
-      </div>
+      </router-link>
     </div>
     <div v-if="zones">
       {{ rooms?.length }} remaining
       <div v-for="room in rooms.slice(0, 64)" :key="room.id" class="app-sm-assign__image">
         <img :src="getLayerImage(room)" />
         <div class="app-sm-assign__image-bar">
-          <input type="checkbox" v-model="selected[room.id]" />
           {{ room.key }}
+          <div class="btn-group">
+            <div
+              v-for="zone in prepped_zones"
+              :key="zone.name"
+              :class="zone.class(room.zone, zone.id)"
+              @click="setRoomZone(room, zone.id)"
+            >
+              {{ zone.name }}
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -30,6 +41,21 @@ export default {
     return { selected: {} }
   },
   computed: {
+    prepped_zones() {
+      const zones = this.zones?.map((z) => ({
+        to: `/sm-assign/${this.world.slug}/${z.slug}/`,
+        name: z.name,
+        slug: z.slug,
+        id: z.id,
+        class: (a, b) => ['btn', a === b ? '-primary' : '-secondary'],
+      }))
+      zones?.push({
+        to: `/sm-assign/${this.world.slug}/`,
+        name: 'No Zone',
+        class: (a, b) => ['btn', (a || 0) === (b || 0) ? '-primary' : '-secondary'],
+      })
+      return zones
+    },
     world() {
       return this.$store.world2.getFromRoute(this.$route).current
     },
@@ -53,17 +79,12 @@ export default {
       const { sm_layer } = this.$store.local.state
       return `/media/smile_exports/${this.world.slug}/${sm_layer}/${room.key}`
     },
-    async setRoomZone(zone_id) {
-      await Promise.all(
-        this.rooms
-          .filter((r) => this.selected[r.id])
-          .map((r) => {
-            r.zone = zone_id
-            this.$store.room2.save(r)
-          }),
-      )
-      this.$store.room2.getPage(this.world_query) // refetches rooms
-      this.selected = {}
+    setRoomZone(room, zone_id) {
+      room.zone = zone_id
+      this.$store.room2.save(room).then(() => {
+        this.$store.room2.getPage(this.world_query) // refetches rooms
+        this.selected = {}
+      })
     },
   },
 }

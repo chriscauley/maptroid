@@ -115,6 +115,9 @@ export default {
         room_offsets[r.id] = [zone_x + x, zone_y + y]
       })
 
+      // Only show items for which a room is visible
+      items = items.filter((i) => !!room_offsets[i.room])
+
       return { map_bounds, zones, rooms, zone_offsets, room_offsets, items }
     },
     ready() {

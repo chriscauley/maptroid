@@ -2,13 +2,17 @@
   <div class="sm-plm-enemies" v-if="world && rooms && current_room">
     <div class="sm-plm-enemies__top">
       <select v-model="current_room_index">
-        <option v-for="item in select_items" :value="item.id" :key="item.id">
+        <option v-for="item in select_items.bad" :value="item.id" :key="item.id">
+          :( {{ item.text }}
+        </option>
+        <option>----</option>
+        <option v-for="item in select_items.good" :value="item.id" :key="item.id">
           {{ item.text }}
         </option>
       </select>
       <div v-for="plm in plms.filter((p) => p._plm.deleted)" :key="plm.src" class="_deleted">
-        <i class="fa fa-trash" @click="undelete(plm)" />
-        <a class="fa fa-question-circle-o" :href="plm.src" target="_blank" />
+        <i class="fas fa-trash" @click="undelete(plm)" />
+        <a class="far fa-question-circle" :href="plm.src" target="_blank" />
       </div>
     </div>
     <div class="sm-plm-enemies__workarea" v-if="current_room">
@@ -45,7 +49,7 @@ export default {
   },
   computed: {
     current_room() {
-      return this.rooms.find((r) => r.id === this.current_room_index)
+      return this.rooms.find((r) => r.id === this.current_room_index) || this.rooms[0]
     },
     current_room_index: {
       get() {
@@ -64,16 +68,21 @@ export default {
       return rooms?.filter((r) => r.data.plm_enemies)
     },
     select_items() {
-      const items = this.rooms.map((room) => {
+      const bad = []
+      const good = []
+      this.rooms.forEach((room) => {
         const valid_plms = room.data.plm_enemies?.filter((i) => !i.deleted)
         const count = valid_plms.length || '☹️'
         const name = room.name?.slice(0, 30)
         const coords = new Set(valid_plms.map((p) => p.xy.toString()))
         const fail = coords.size !== valid_plms.length
-        const text = `${fail ? '!! ' : ''}${count} - ${name} #${room.id}`
-        return { count, name, id: room.id, text }
+        const text = `${count} - ${name} #${room.id}`
+        ;(fail ? bad : good).push({ count, name, id: room.id, text })
       })
-      return sortBy(items, 'text').reverse()
+      return {
+        bad: sortBy(bad, 'count').reverse(),
+        good: sortBy(good, 'count').reverse(),
+      }
     },
     plms() {
       return this.current_room.data.plm_enemies?.map((plm) => {
