@@ -25,7 +25,7 @@
         <item-overlay :map_props="map_props" v-if="tool_storage.state.show_items" />
       </html-overlay>
     </template>
-    <viewer-panel :items="items" />
+    <viewer-panel :items="items" :tool="tool_storage.state.selected.tool" />
     <edit-room />
   </div>
 </template>

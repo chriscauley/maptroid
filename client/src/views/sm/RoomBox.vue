@@ -95,7 +95,7 @@ export default {
       } else if (this.mode === 'item') {
         const box = this.$el.getBoundingClientRect()
         const { clientX, clientY } = event
-        const xy = [clientX - box.x, clientY - box.y].map((i) => Math.floor(i / 256))
+        const xy = [clientX - box.x, clientY - box.y].map((i) => Math.floor(i / 16))
         this.addItem(xy)
       }
     },

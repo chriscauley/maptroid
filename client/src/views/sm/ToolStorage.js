@@ -41,6 +41,10 @@ export default (component) => {
           slug: 'video_path',
           icon: 'fab fa-youtube',
         },
+        {
+          slug: 'run_path',
+          icon: 'fas fa-dice',
+        },
       ]
     }
     return tools

@@ -52,6 +52,11 @@ export default ({ store }) => {
       return page?.items || []
     },
 
+    get world_runs() {
+      const page = route.world && store.run.getPage(route.world_query)
+      return page?.items || []
+    },
+
     refetchWorlds() {
       store.zone.api.markStale()
       return store.world2.fetchPage(Query())?.items || []

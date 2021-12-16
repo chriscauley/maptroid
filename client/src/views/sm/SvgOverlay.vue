@@ -4,10 +4,20 @@
       <marker id="arrowhead" markerWidth="5" markerHeight="3.5" refX="3" refY="1.75" orient="auto">
         <polygon points="0 0, 5 1.75, 0 3.5" fill="#0f0" />
       </marker>
+      <marker
+        id="red-arrowhead"
+        markerWidth="7.5"
+        markerHeight="5.25"
+        refX="3"
+        refY="1.75"
+        orient="auto"
+      >
+        <polygon points="0 0, 5 1.75, 0 3.5" fill="#f00" />
+      </marker>
     </defs>
     <path v-for="path in svg.paths" v-bind="path" :key="path.id" />
     <path v-if="hovering" v-bind="hovering" />
-    <line v-for="(line, i) in lines" :key="i" v-bind="line" marker-end="url(#arrowhead)" />
+    <line v-for="(line, i) in lines" :key="i" v-bind="line" />
   </svg>
 </template>
 
@@ -46,18 +56,54 @@ export default {
       })
       return sortBy(xy_times, 'time')
     },
+
+    raw_run_lines() {
+      // combine item and room_xy times into an in order list
+      const run = this.$store.run.getCurrentRun()
+      if (!run || this.$route.params.zone_slug) {
+        return []
+      }
+      const items_by_id = {}
+      this.$store.route.world_items.forEach((i) => (items_by_id[i.id] = i))
+      const xy_times = []
+      run.data.actions.forEach((args) => {
+        if (args[0] === 'item') {
+          const item_id = args[1]
+          const item = items_by_id[item_id]
+          if (!item) {
+            return
+          }
+          const room_xy = this.map_props.room_offsets[item.room]
+          const item_xy = items_by_id[item_id].data.room_xy.map((i) => Math.floor(i / 16))
+          xy_times.push({ xy: [room_xy[0] + item_xy[0], room_xy[1] + item_xy[1]] })
+        } else {
+          const [_action, room_id, screen_xy] = args
+          const room_xy = this.map_props.room_offsets[room_id]
+          xy_times.push({ xy: [room_xy[0] + screen_xy[0], room_xy[1] + screen_xy[1]] })
+        }
+      })
+
+      return xy_times.filter(Boolean)
+    },
+
     lines() {
-      if (!this.raw_lines?.length) {
+      let { raw_lines } = this
+      if (this.tool_storage.state.selected.tool === 'run_path') {
+        raw_lines = this.raw_run_lines
+      }
+      if (!raw_lines?.length) {
         return
       }
-      let last_xy = this.raw_lines[0].xy
-      return this.raw_lines.slice(1).map(({ xy, _time }) => {
+      let last_xy = raw_lines[0].xy
+      const active_index = this.$store.local.state.insert_run_action_after || raw_lines.length - 1
+      return raw_lines.slice(1).map(({ xy, _time }, i) => {
         const shift = Math.sign(xy[0] - last_xy[0] || xy[1] - last_xy[1]) / 16
         const path = {
           x1: last_xy[0] + 0.5 + shift,
           x2: xy[0] + 0.5 + shift,
           y1: last_xy[1] + 0.5 + shift,
           y2: xy[1] + 0.5 + shift,
+          class: i === active_index && '-highlight',
         }
         last_xy = xy
         return path
@@ -152,6 +198,17 @@ export default {
           this.$store.video.api.markStale()
           this.$store.video.getCurrentVideo()
         })
+      }
+      if (tool === 'run_path' && !this.$route.params.zone_slug) {
+        const [x1, y1] = this.map_props.room_offsets[room.id]
+        const [x2, y2] = this.osd_store.getWorldXY(event)
+        const x = x2 - x1
+        const y = y2 - y1
+        if (event.shiftKey) {
+          this.$store.run.removeLastActionAtXY([x, y], room)
+        } else {
+          this.$store.run.addAction(['room_xy', room.id, [x, y]])
+        }
       }
     },
     hover(path) {

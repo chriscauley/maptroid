@@ -9,6 +9,7 @@ import playthrough from './playthrough'
 import room from './room'
 import room2 from './room2'
 import route from './route'
+import run from './run'
 import smile from './smile'
 import smilesprite from './smilesprite'
 import screenshot from './screenshot'
@@ -30,6 +31,7 @@ const modules = {
   playthrough,
   room,
   room2,
+  run,
   smile,
   smilesprite,
   screenshot,

@@ -19,7 +19,7 @@ export default {
   },
   methods: {
     selectItem(item) {
-      console.log('TODO')
+      console.log('TODO', item)
     },
   },
 }

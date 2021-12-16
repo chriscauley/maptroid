@@ -20,7 +20,15 @@
 import RoomBox from './RoomBox.vue'
 import ToolStorage from '@/components/unrest/ToolStorage'
 
-const items = ['missile', 'super-missile', 'energy-tank', 'power-bomb']
+const items = [
+  'missile',
+  'super-missile',
+  'energy-tank',
+  'power-bomb',
+  'morph-ball',
+  'ice-beam',
+  'spazer-beam',
+]
 const tools = [
   { slug: 'item', variants: items, icon: (_, v) => `sm-item -${v}` },
   { slug: 'overlap', icon: 'fa fa-layer-group' },

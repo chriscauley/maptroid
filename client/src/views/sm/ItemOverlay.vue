@@ -14,15 +14,22 @@ export default {
   },
   computed: {
     items() {
+      const matched = {}
+      this.$store.run.getCurrentRun()?.data.actions.forEach((a) => {
+        if (a[0] === 'item') {
+          matched[a[1]] = true
+        }
+      })
       return this.map_props.items.map((item) => ({
-        attrs: prepItem(item, this.map_props),
+        attrs: prepItem(item, this.map_props, matched),
         id: item.id,
       }))
     },
   },
   methods: {
     click(event, item) {
-      if (this.tool_storage.state.selected.tool === 'video_path') {
+      const { tool } = this.tool_storage.state.selected
+      if (tool === 'video_path') {
         const video = this.$store.video.getCurrentVideo()
         if (event.shiftKey) {
           video.data.items = video.data.items.filter((i) => i[0] !== item.id)
@@ -33,6 +40,15 @@ export default {
           this.$store.video.api.markStale()
           this.$store.video.getCurrentVideo()
         })
+      } else if (tool === 'run_path') {
+        const run = this.$store.run.getCurrentRun()
+        run.data.actions = run.data.actions || []
+        if (event.shiftKey) {
+          run.data.actions = run.data.actions.filter((i) => !(i[0] === 'item' && i[1] === item.id))
+          this.$store.run.save(run).then(this.$store.run.refetch)
+        } else {
+          this.$store.run.addAction(['item', item.id])
+        }
       }
     },
   },
