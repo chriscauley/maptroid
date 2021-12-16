@@ -5,7 +5,7 @@ import urllib
 import os
 from unrest import schema
 
-from .models import World, Room, Screenshot, Zone, Item, Video, SmileSprite
+from .models import World, Room, Screenshot, Zone, Item, Video, SmileSprite, Run
 
 @schema.register
 class WorldForm(forms.ModelForm):
@@ -74,6 +74,15 @@ class VideoForm(forms.ModelForm):
   class Meta:
     model = Video
     fields = ['source', 'external_id', 'title', 'label', 'data']
+
+
+@schema.register
+class RunForm(forms.ModelForm):
+  user_can_GET = user_can_LIST = 'ALL'
+  filter_fields = ['world__slug', 'user_id']
+  class Meta:
+    model = Run
+    fields = ['data', 'user', 'world']
 
 
 @schema.register

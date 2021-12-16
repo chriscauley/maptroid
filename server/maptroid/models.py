@@ -284,3 +284,15 @@ class Video(models.Model):
   @property
   def thumbnail_url(self):
     return self.thumbnail.url
+
+
+def default_run_data():
+  return {
+    'actions': [],
+  }
+
+
+class Run(models.Model):
+  user = models.ForeignKey(settings.AUTH_USER_MODEL, models.CASCADE)
+  data = models.JSONField(default=default_run_data, blank=True)
+  world = models.ForeignKey(World, models.CASCADE)

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from maptroid.models import Zone, Item,  Room, World, Screenshot, Video, Channel, SmileSprite
+from maptroid.models import Zone, Item, Room, Run, World, Screenshot, Video, Channel, SmileSprite
 
 
 @admin.register(Zone)
@@ -19,7 +19,7 @@ class ZoneAdmin(admin.ModelAdmin):
 
 @admin.register(Item)
 class ItemAdmin(admin.ModelAdmin):
-    pass
+    list_filter = ['zone']
 
 
 @admin.register(Room)
@@ -32,6 +32,11 @@ class RoomAdmin(admin.ModelAdmin):
 class VideoAdmin(admin.ModelAdmin):
     list_display = ['__str__', 'order']
     list_editable = ['order']
+
+
+@admin.register(Run)
+class RunAdmin(admin.ModelAdmin):
+    pass
 
 
 @admin.register(Channel)

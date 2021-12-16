@@ -71,7 +71,7 @@ def main():
         if room.data.get('trash'):
             continue
         if 'bts' in room.data:
-            pass # continue
+            continue
         # if room.id != 230:
         #     continue
         room.data.pop('shapes', None)
