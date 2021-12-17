@@ -48,7 +48,7 @@ export default ({ store }) => {
       // Hide all items in hidden rooms
       const visible_rooms = {}
       route.world_rooms.forEach((r) => (visible_rooms[r.id] = true))
-      return items.filter((i) => visible_rooms[i.room])
+      return items.filter((i) => visible_rooms[i.room] && !i.data.hidden)
     },
     get zone_items() {
       const zone_id = route.zone?.id

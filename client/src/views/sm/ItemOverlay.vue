@@ -49,6 +49,8 @@ export default {
         } else {
           this.$store.run.addAction(['item', item.id])
         }
+      } else if (tool === 'edit_room') {
+        window.open(`/djadmin/maptroid/item/${item.id}/`)
       }
     },
   },
