@@ -30,7 +30,10 @@ export default ({ store }) => {
 
     get world_rooms() {
       const page = route.world && store.room2.getPage(route.world_query)
-      return (page?.items || []).filter((r) => !r.data.hidden)
+
+      const visible_zones = {}
+      route.zones.forEach((z) => (visible_zones[z.id] = true))
+      return (page?.items || []).filter((r) => !r.data.hidden && visible_zones[r.zone])
     },
     get zone_rooms() {
       const zone_id = route.zone?.id
@@ -40,7 +43,12 @@ export default ({ store }) => {
     get world_items() {
       const world_id = route.world?.id
       const page = world_id && store.item2.getPage(Query({ zone__world_id: world_id }))
-      return page?.items || []
+      const items = page?.items || []
+
+      // Hide all items in hidden rooms
+      const visible_rooms = {}
+      route.world_rooms.forEach((r) => (visible_rooms[r.id] = true))
+      return items.filter((i) => visible_rooms[i.room])
     },
     get zone_items() {
       const zone_id = route.zone?.id

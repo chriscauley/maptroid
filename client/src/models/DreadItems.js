@@ -130,6 +130,9 @@ const getName = (item) => {
   return name_cache[type]
 }
 
+const _visible = {}
+items.forEach((i) => (_visible[i] = true))
+
 export default {
   all,
   colors,
@@ -138,6 +141,7 @@ export default {
   transit,
   blocks,
   doors,
+  _visible,
   getName,
   getClass,
   type_map: { items, stations, transit, blocks, doors },
@@ -149,5 +153,34 @@ export default {
       icon: getClass(item.data.type),
       times_by_video_id: Object.fromEntries(videos.map((v) => [v.id, v.times_by_id[item.id]])),
     }))
+  },
+  groupItems(world_items, actions) {
+    const bins = {}
+    const type_by_id = {}
+
+    world_items
+      .filter((i) => _visible[i.data.type])
+      .forEach((i) => (type_by_id[i.id] = i.data.type))
+    actions.forEach((action) => {
+      const type = type_by_id[action[0]]
+      bins[type] = (bins[type] || 0) + 1
+    })
+
+    const items = _visible.map((type) => ({
+      type,
+      count: bins[type],
+      icon: getClass(type),
+    }))
+    items.push({
+      type: 'missiles__computed',
+      count: 15 + 2 * (bins.missile__tank || 0) + 10 * (bins['missile__plus-tank'] || 0),
+      icon: getClass('missile__tank'),
+    })
+    items.push({
+      type: 'energy__tank',
+      count: (bins.energy__tank || 0) + Math.floor((bins.energy__part || 0) / 4),
+      icon: getClass('energy__tank'),
+    })
+    return items
   },
 }

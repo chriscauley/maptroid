@@ -11,6 +11,7 @@
         <div class="flex-grow" />
         <i class="fas fa-times cursor-pointer" @click="collapsed = true" />
       </div>
+      <inventory />
       <run-list v-if="tool === 'run_path'" />
       <item-list v-else :items="items" />
     </div>
@@ -18,12 +19,12 @@
 </template>
 
 <script>
-// import { sortBy } from 'lodash'
 import ItemList from './ItemList.vue'
+import Inventory from '../Inventory'
 import RunList from './RunList.vue'
 
 export default {
-  components: { ItemList, RunList },
+  components: { ItemList, Inventory, RunList },
   props: {
     items: Object,
     tool: String,

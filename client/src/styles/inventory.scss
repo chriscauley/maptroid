@@ -1,0 +1,9 @@
+.inventory2 {
+  &__row {
+    @apply flex flex-wrap gap-2 mb-2;
+  }
+  &__item {
+    @apply flex gap-1 items-center;
+  }
+}
+
