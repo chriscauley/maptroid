@@ -17,7 +17,7 @@
     </defs>
     <path v-for="path in svg.paths" v-bind="path" :key="path.id" />
     <path v-if="hovering" v-bind="hovering" />
-    <line v-for="(line, i) in lines" :key="i" v-bind="line" />
+    <line v-for="(line, i) in run_lines" :key="i" v-bind="line" />
   </svg>
 </template>
 
@@ -86,7 +86,7 @@ export default {
       return xy_times.filter(Boolean)
     },
 
-    lines() {
+    run_lines() {
       let { raw_lines } = this
       if (this.tool_storage.state.selected.tool === 'run_path') {
         raw_lines = this.raw_run_lines
@@ -103,14 +103,14 @@ export default {
           x2: xy[0] + 0.5 + shift,
           y1: last_xy[1] + 0.5 + shift,
           y2: xy[1] + 0.5 + shift,
-          class: i === active_index && '-highlight',
+          class: ['run', i === active_index && '-highlight'],
         }
         last_xy = xy
         return path
       })
     },
     svg() {
-      const { map_bounds, zone_offsets, zones } = this.map_props
+      const { zone_offsets, zones } = this.map_props
 
       const zone_slugs = {}
       zones.forEach((zone) => (zone_slugs[zone.id] = zone.slug))
@@ -160,12 +160,8 @@ export default {
       return {
         paths,
         attrs: {
+          ...this.map_props.svg,
           class: 'sm-room-svg',
-          viewBox: map_bounds.join(' '),
-          style: {
-            height: `${100 * map_bounds[3]}%`,
-            width: `${100 * map_bounds[2]}%`,
-          },
         },
       }
     },

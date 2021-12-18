@@ -72,6 +72,10 @@
   }
 }
 
+.sm-elevator.-line:before {
+  background: linear-gradient(to left, transparent 25%, #ccc 25%, #ccc 75%, transparent 75%);
+}
+
 $items: morph-ball bomb screw-attack missile super-missile energy-tank energy2-tank varia-suit space-jump power-bomb hi-jump-boots speed-booster pedastool reserve-tank x-ray spring-ball grappling-hook charge-beam spazer-beam wave-beam ice-beam plasma-beam gravity-suit;
 
 .sm-item {
@@ -159,11 +163,11 @@ $zone-colors: (
       stroke-width: 3px;
       &:hover {
         stroke-width: 6px;
-        stroke: white;
+        stroke: #ccc;
       }
     }
   }
-  line {
+  line.run {
     stroke: #0f0;
     stroke-width: 0.0625;
     pointer-events: none;
@@ -173,6 +177,16 @@ $zone-colors: (
       stroke-width: 0.25;
       marker-end: url(#red-arrowhead);
     }
+  }
+}
+
+.sm-elevator-svg {
+  @apply absolute left-0 overflow-visible top-0;
+  line.elevator {
+    stroke: #ccc;
+    stroke-linecap: round;
+    stroke-width: 0.25;
+    pointer-events: none;
   }
 }
 
@@ -187,7 +201,7 @@ $zone-colors: (
     &.-zone-#{$name} {
       stroke: $color;
       &:hover {
-        stroke: white;
+        stroke: #ccc;
       }
     }
   }

@@ -1,12 +1,6 @@
 import ToolStorage from '@/components/unrest/ToolStorage'
 import { LAYER_NAMES } from './ConfigPopper.vue'
 
-/*
-  TODO
-  ability to open room popup
-  elevator tool (and render)
-*/
-
 export default (component) => {
   const getTools = () => {
     const tools = [
@@ -27,7 +21,7 @@ export default (component) => {
         {
           slug: 'elevator',
           icon: (_t, v) => `sm-elevator -${v}`,
-          variants: ['brinstar', 'tourian', 'maridia', 'norfair'],
+          variants: ['brinstar', 'tourian', 'maridia', 'norfair', 'line'],
         },
         {
           slug: 'links',

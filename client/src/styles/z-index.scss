@@ -1,3 +1,7 @@
+.sm-elevator-svg {
+  z-index: -1;
+}
+
 .viewer-toolbar__children,
 .html-overlay__screen-mask,
 .osd__svg {
@@ -61,6 +65,14 @@
   background: red !important;
 }
 
+.osd-mousetrap {
+  z-index: 190;
+}
+.osd-mousetrap__cursor {
+  z-index: 191;
+}
+
+.edit-elevator,
 .admin-popup__root,
 .app-nav,
 .unrest-floating-actions,

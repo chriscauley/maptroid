@@ -66,7 +66,7 @@ export default ({ store }) => {
     },
 
     refetchWorlds() {
-      store.zone.api.markStale()
+      store.world2.api.markStale()
       return store.world2.fetchPage(Query())?.items || []
     },
 
