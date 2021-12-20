@@ -14,12 +14,13 @@
 
 <script>
 export default {
+  inject: ['map_props', 'osd_store'],
   props: {
     items: Object,
   },
   methods: {
     selectItem(item) {
-      console.log('TODO', item)
+      this.osd_store.gotoItem(item, this.map_props)
     },
   },
 }

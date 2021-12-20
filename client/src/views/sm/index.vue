@@ -70,9 +70,9 @@ export default {
   },
   provide() {
     return {
-      video: () => null, // TODO deprecated in favor of $store.local and $store.route
       osd_store: computed(() => this.osd_store), // TODO osd_storage, not osd_store
       tool_storage: computed(() => this.tool_storage),
+      map_props: computed(() => this.map_props),
     }
   },
   data() {
@@ -110,11 +110,11 @@ export default {
       }
 
       const rooms = this.$store.route.world_rooms.filter((r) => zone_offsets[r.zone])
-      const room_offsets = {}
+      const room_offsets = {} // TODO remanme room_bounds
       rooms.forEach((r) => {
         const [zone_x, zone_y] = zone_offsets[r.zone]
-        const [x, y] = r.data.zone.bounds.slice(0, 2)
-        room_offsets[r.id] = [zone_x + x, zone_y + y]
+        const [x, y, w, h] = r.data.zone.bounds
+        room_offsets[r.id] = [zone_x + x, zone_y + y, w, h]
       })
 
       // Only show items for which a room is visible

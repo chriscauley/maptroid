@@ -89,6 +89,14 @@ body {
   }
 }
 
+.osd-panel {
+  @apply border-l;
+}
+
+.osd-wrapper {
+  background: #111;
+}
+
 .html-overlay__target-number {
   position: relative;
   top: 1rem;

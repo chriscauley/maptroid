@@ -1,14 +1,18 @@
 <template>
-  <div v-for="item in items" :key="item.id" v-bind="item.attrs" @click="(e) => click(e, item)" />
+  <div v-for="item in items" :key="item.id" v-bind="item.attrs" @click="(e) => click(e, item)">
+    <item-popper v-if="item.id === osd_store.state.selected_item_id" />
+  </div>
 </template>
 
 <script>
 import prepItem from './prepItem'
+import ItemPopper from './ItemPopper.vue'
 
 const _percent = (i, room_i) => `${100 * (i / 16 + room_i)}%`
 
 export default {
-  inject: ['tool_storage'],
+  components: { ItemPopper },
+  inject: ['tool_storage', 'osd_store'],
   props: {
     map_props: Object,
   },

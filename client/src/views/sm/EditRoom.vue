@@ -56,8 +56,9 @@ export default {
       return this.$store.route.all_zones.map((z) => ({
         text: z.name,
         click: () => {
-          this.room.zone = z.id
-          this.$store.room2.save(this.room)
+          const room = this.room
+          room.zone = z.id
+          this.$store.room2.save(room)
         },
       }))
     },

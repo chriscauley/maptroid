@@ -10,7 +10,7 @@
       <div class="btn -primary" @click="save">Save</div>
     </div>
   </div>
-  <svg class="sm-elevator-svg" v-bind="map_props.svg">
+  <svg class="sm-elevator-svg" v-if="!$route.params.zone_slug" v-bind="map_props.svg">
     <line v-for="(line, i) in lines" :key="i" v-bind="line" />
   </svg>
 </template>

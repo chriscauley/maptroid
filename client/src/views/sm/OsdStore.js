@@ -1,7 +1,7 @@
 import OsdStore from '@/vue-openseadragon/Store'
 import Openseadragon from 'openseadragon'
 
-const { Point } = Openseadragon
+const { Point, Rect } = Openseadragon
 
 export default (component) => {
   const osd_store = OsdStore()
@@ -50,6 +50,25 @@ export default (component) => {
       xy,
       raw_xy.map((i) => Math.floor(i)),
     )
+  }
+
+  osd_store.gotoItem = (item, map_bounds) => {
+    const [x, y, w, h] = map_bounds.room_offsets[item.room]
+    const b = 1
+    state._viewer.viewport.fitBounds(new Rect(x - b, y - b, w + 2 * b, h + 2 * b))
+
+    const f = () => osd_store.selectItem(item)
+    const timeout = setTimeout(f, 100)
+    state._viewer.addOnceHandler('animation-finish', f)
+    state._viewer.addOnceHandler('animation-start', () => clearTimeout(timeout))
+  }
+
+  osd_store.selectItem = (item) => {
+    if (!item) {
+      delete state.selected_item_id
+    } else {
+      state.selected_item_id = parseInt(item.id.split('__')[1])
+    }
   }
 
   return osd_store
