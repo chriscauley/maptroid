@@ -42,6 +42,7 @@ def get_occupied_world_xys(target_zone):
 def process_zone(zone):
     if zone.data.get("hidden"):
         return
+    zone.normalize()
     world = zone.world
     CACHE_DIR = mkdir(settings.MEDIA_ROOT, f'sm_cache/{world.slug}')
     ROOM_DIR = mkdir(settings.MEDIA_ROOT, f'sm_room/{world.slug}')
@@ -72,19 +73,22 @@ def process_zone(zone):
                 path = os.path.join(settings.MEDIA_ROOT, f'smile_exports/{world.slug}/{layer}/{room.key}')
                 layer_dir = mkdir(CACHE_DIR, layer)
                 layer_path = os.path.join(layer_dir, room.key)
-                layer_image = img._coerce(path, 'pil')
-                layer_image = layer_image.convert('RGBA')
-                layer_image = img.replace_color(path, (0, 0, 0, 255),(0, 0, 0, 0))
-                layer_image.save(layer_path)
-                room_image.paste(layer_image, (0, 0), mask=layer_image)
-                layer_image.close()
+                if not os.path.exists(path):
+                    print(f'skipping {room.key} {layer} because file DNE')
+                else:
+                    layer_image = img._coerce(path, 'pil')
+                    layer_image = layer_image.convert('RGBA')
+                    layer_image = img.replace_color(path, (0, 0, 0, 255),(0, 0, 0, 0))
+                    layer_image.save(layer_path)
+                    room_image.paste(layer_image, (0, 0), mask=layer_image)
+                    layer_image.close()
                 holes = []
 
-                for [dx, dy] in room.data.get('holes') or []:
-                    zone_xy = f'{zone_x + room_x + dx},{zone_y + room_y + dy}'
-                    if room_clear_holes or zone_xy in occupied_xy_map:
-                        holes.append([dx, dy])
-                room_image = img.make_holes(room_image, holes)
+            for [dx, dy] in room.data.get('holes') or []:
+                zone_xy = f'{zone_x + room_x + dx},{zone_y + room_y + dy}'
+                if room_clear_holes or zone_xy in occupied_xy_map:
+                    holes.append([dx, dy])
+            room_image = img.make_holes(room_image, holes)
             room_image = img._coerce(room_image, 'pil')
             room_image.save(os.path.join(layers_dir, room.key))
             zone_image.paste(room_image, (room_x * 256, room_y * 256), mask=room_image)

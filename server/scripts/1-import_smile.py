@@ -35,11 +35,12 @@ def main(world_slug: str):
     missing = []
     for room_slice in ROOM_SLICES:
       if not os.path.exists(os.path.join(world_dir, room_slice, key)):
-        missing.push(room_slice)
+        missing.append(room_slice)
     if missing:
       print(f'{key} missing in: {missing}')
+      continue
     room, new = Room.objects.get_or_create(key=key, world=world)
-    if new:
+    if new or 'zone' not in room.data:
       print(f'New Room: {room}')
       width, height = Image.open(os.path.join(world_dir, 'layer-1', key)).size
       room.data['zone'] = {

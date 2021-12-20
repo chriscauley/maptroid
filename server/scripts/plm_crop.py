@@ -193,15 +193,30 @@ def load_plms(batch_name):
     processed_dest = os.path.join(DIRS['processed'], processed_fname)
     image.save(og_dest)
     workarea.save(processed_dest)
+
     room.data['plm_enemies'].append({
       'root_url': to_media_url(DIRS['processed']),
       'source': ss_name,
       'cropped': processed_fname,
-      'xy': [0, 0],
+      'xy': guess_xy(workarea, room),
     })
     room.data.pop('plm_sprites', None) # force reprocess spirtes
     room.save()
     print(f'Room #{room.id} plm #{len(room.data["plm_enemies"])} processed!')
+
+def guess_xy(workarea, room):
+  wa_x, wa_y, wa_w, wa_h = coords[data['batch_name']]['workarea']
+  xy = [0, 0]
+  _x, _y, room_width, room_height = [i*256 for i in room.data['zone']['bounds']]
+  workarea_width, workarea_height = workarea.size
+  if workarea_width != room_width-1:
+    if workarea_width != wa_w-wa_x-1:
+      xy[0] = room_width - workarea_width - 1
+  if workarea_height < room_height-1:
+    if workarea_height < wa_h-wa_y-1:
+      xy[1] = room_height - workarea_height - 1
+  return xy
+
 
 if __name__ == '__main__':
   for i in [3]:
