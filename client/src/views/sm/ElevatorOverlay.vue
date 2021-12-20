@@ -19,10 +19,7 @@
 import vec from '@/lib/vec'
 
 export default {
-  inject: ['tool_storage', 'osd_store'],
-  props: {
-    map_props: Object,
-  },
+  inject: ['map_props', 'tool_storage', 'osd_store'],
   data() {
     return { editing: null, mouse: [0, 0] }
   },

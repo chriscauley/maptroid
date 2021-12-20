@@ -12,10 +12,7 @@ const _percent = (i, room_i) => `${100 * (i / 16 + room_i)}%`
 
 export default {
   components: { ItemPopper },
-  inject: ['tool_storage', 'osd_store'],
-  props: {
-    map_props: Object,
-  },
+  inject: ['map_props', 'tool_storage', 'osd_store'],
   computed: {
     items() {
       const matched = {}

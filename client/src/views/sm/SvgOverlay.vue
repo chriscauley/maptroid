@@ -24,10 +24,7 @@
 <script>
 import { sortBy } from 'lodash'
 export default {
-  inject: ['osd_store', 'tool_storage'],
-  props: {
-    map_props: Object,
-  },
+  inject: ['map_props', 'osd_store', 'tool_storage'],
   data() {
     return { hovering: null }
   },
@@ -39,7 +36,7 @@ export default {
         return []
       }
       const xy_times = video.data.room_xys.map(([room_id, screen_xy, time]) => {
-        const room_xy = this.map_props.room_offsets[room_id]
+        const room_xy = this.map_props.room_bounds[room_id]
         return { xy: [room_xy[0] + screen_xy[0], room_xy[1] + screen_xy[1]], time }
       })
 
@@ -50,7 +47,7 @@ export default {
         if (!item) {
           return
         }
-        const room_xy = this.map_props.room_offsets[item.room]
+        const room_xy = this.map_props.room_bounds[item.room]
         const item_xy = items_by_id[item_id].data.room_xy.map((i) => Math.floor(i / 16))
         xy_times.push({ xy: [room_xy[0] + item_xy[0], room_xy[1] + item_xy[1]], time })
       })
@@ -73,12 +70,12 @@ export default {
           if (!item) {
             return
           }
-          const room_xy = this.map_props.room_offsets[item.room]
+          const room_xy = this.map_props.room_bounds[item.room]
           const item_xy = items_by_id[item_id].data.room_xy.map((i) => Math.floor(i / 16))
           xy_times.push({ xy: [room_xy[0] + item_xy[0], room_xy[1] + item_xy[1]] })
         } else {
           const [_action, room_id, screen_xy] = args
-          const room_xy = this.map_props.room_offsets[room_id]
+          const room_xy = this.map_props.room_bounds[room_id]
           xy_times.push({ xy: [room_xy[0] + screen_xy[0], room_xy[1] + screen_xy[1]] })
         }
       })
@@ -174,7 +171,7 @@ export default {
         this.$store.local.save({ editing_room: room.id })
       }
       if (tool === 'video_path' && !this.$route.params.zone_slug) {
-        const [x1, y1] = this.map_props.room_offsets[room.id]
+        const [x1, y1] = this.map_props.room_bounds[room.id]
         const [x2, y2] = this.osd_store.getWorldXY(event)
         const video = this.$store.video.getCurrentVideo()
         const x = x2 - x1
@@ -196,7 +193,7 @@ export default {
         })
       }
       if (tool === 'run_path' && !this.$route.params.zone_slug) {
-        const [x1, y1] = this.map_props.room_offsets[room.id]
+        const [x1, y1] = this.map_props.room_bounds[room.id]
         const [x2, y2] = this.osd_store.getWorldXY(event)
         const x = x2 - x1
         const y = y2 - y1

@@ -53,7 +53,7 @@ export default (component) => {
   }
 
   osd_store.gotoItem = (item, map_bounds) => {
-    const [x, y, w, h] = map_bounds.room_offsets[item.room]
+    const [x, y, w, h] = map_bounds.room_bounds[item.room]
     const b = 1
     state._viewer.viewport.fitBounds(new Rect(x - b, y - b, w + 2 * b, h + 2 * b))
 

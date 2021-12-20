@@ -3,7 +3,7 @@ import { startCase } from 'lodash'
 export default (item, map_props, matched = {}) => {
   let style
   if (map_props) {
-    const [room_x, room_y] = map_props.room_offsets[item.room]
+    const [room_x, room_y] = map_props.room_bounds[item.room]
     const [x, y] = item.data.room_xy
     style = {
       left: `${100 * (x / 16 + room_x)}%`,

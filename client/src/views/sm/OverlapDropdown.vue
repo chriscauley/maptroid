@@ -8,10 +8,7 @@
 import { sortBy } from 'lodash'
 
 export default {
-  inject: ['tool_storage'],
-  props: {
-    map_props: Object,
-  },
+  inject: ['map_props', 'tool_storage'],
   computed: {
     overlap_items() {
       if (this.tool_storage.state.selected.tool !== 'edit_room') {

@@ -5,7 +5,7 @@
       <unrest-toolbar :storage="tool_storage" class="-topleft">
         <config-popper v-if="tool_storage.state.settings_open" :storage="tool_storage" />
         <template #buttons>
-          <overlap-dropdown :map_props="map_props" />
+          <overlap-dropdown />
         </template>
       </unrest-toolbar>
       <html-overlay :viewer="osd_store.viewer">
@@ -20,9 +20,9 @@
         <template v-else>
           <zone-box v-for="zone in zones" :key="zone.id" :zone="zone" />
         </template>
-        <svg-overlay :map_props="map_props" />
-        <item-overlay :map_props="map_props" v-if="tool_storage.state.show_items" />
-        <elevator-overlay :map_props="map_props" />
+        <svg-overlay />
+        <item-overlay v-if="tool_storage.state.show_items" />
+        <elevator-overlay />
       </html-overlay>
     </template>
     <viewer-panel :items="items" :tool="tool_storage.state.selected.tool" />
@@ -110,15 +110,15 @@ export default {
       }
 
       const rooms = this.$store.route.world_rooms.filter((r) => zone_offsets[r.zone])
-      const room_offsets = {} // TODO remanme room_bounds
+      const room_bounds = {} // TODO remanme room_bounds
       rooms.forEach((r) => {
         const [zone_x, zone_y] = zone_offsets[r.zone]
         const [x, y, w, h] = r.data.zone.bounds
-        room_offsets[r.id] = [zone_x + x, zone_y + y, w, h]
+        room_bounds[r.id] = [zone_x + x, zone_y + y, w, h]
       })
 
       // Only show items for which a room is visible
-      items = items.filter((i) => !!room_offsets[i.room])
+      items = items.filter((i) => !!room_bounds[i.room])
 
       const svg = {
         viewBox: map_bounds.join(' '),
@@ -128,7 +128,7 @@ export default {
         },
       }
 
-      return { map_bounds, zones, rooms, zone_offsets, room_offsets, items, svg }
+      return { map_bounds, zones, rooms, zone_offsets, room_bounds, items, svg }
     },
     ready() {
       const { world, world_rooms } = this.$store.route
