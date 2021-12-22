@@ -26,6 +26,7 @@
       </html-overlay>
     </template>
     <viewer-panel :items="items" :tool="tool_storage.state.selected.tool" />
+    <video-player v-if="show_player" />
     <edit-room />
   </div>
 </template>
@@ -47,6 +48,7 @@ import prepItem from './prepItem'
 import SvgOverlay from './SvgOverlay.vue'
 import RoomBox from './RoomBox.vue'
 import ToolStorage from './ToolStorage'
+import VideoPlayer from '@/components/Video/index.vue'
 import ZoneBox from './ZoneBox.vue'
 
 const { Rect } = Openseadragon
@@ -66,6 +68,7 @@ export default {
     OverlapDropdown,
     SvgOverlay,
     RoomBox,
+    VideoPlayer,
     ZoneBox,
   },
   provide() {
@@ -81,6 +84,10 @@ export default {
     return { osd_store, tool_storage }
   },
   computed: {
+    show_player() {
+      const { tool } = this.tool_storage.state.selected
+      return tool === 'video_path' || !tool
+    },
     is_world() {
       return !this.$route.params.zone_slug
     },
