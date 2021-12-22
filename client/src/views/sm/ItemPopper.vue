@@ -1,7 +1,7 @@
 <template>
   <unrest-popper placement="bottom" :watchme="osd_store.state.zoom">
     <div class="item-popper">
-      {{ item.title }}
+      <div class="item-popper__name">{{ item.title }}</div>
     </div>
   </unrest-popper>
 </template>

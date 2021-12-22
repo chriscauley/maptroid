@@ -213,31 +213,6 @@ body.theme-dark_mode {
   @apply gap-2;
 }
 
-.inventory {
-  font-size: 1.8rem;
-  .inventory__row {
-    display: flex;
-    gap: 0.25rem;
-    margin-bottom: 0.5rem;
-    .sm-item {
-      position: relative;
-      filter: grayscale(1);
-      opacity: 0.5;
-      &.has {
-        filter: unset;
-        opacity: unset;
-      }
-      .flaire {
-        background: black;
-        bottom: 0;
-        font-size: 0.4em;
-        position: absolute;
-        right: 0;
-      }
-    }
-  }
-}
-
 .sprite-gallery {
   font-size: 3rem;
   .modal-content {

@@ -1,7 +1,7 @@
 <template>
-  <div class="inventory2">
-    <div v-for="group in groups" :key="group.name" class="inventory2__row">
-      <span v-for="item in group.items" :key="item.type" class="inventory2__item">
+  <div class="inventory">
+    <div v-for="group in groups" :key="group.name" class="inventory__row">
+      <span v-for="item in group.items" :key="item.type" class="inventory__item">
         <span :class="item.icon" /> {{ item.text }}
       </span>
     </div>
