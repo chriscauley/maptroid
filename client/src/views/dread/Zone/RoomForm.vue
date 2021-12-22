@@ -40,7 +40,7 @@ export default {
     submit() {
       this.room.name = this.state.name // eslint-disable-line
       this.room.data.to_zone = this.state.to_zone // eslint-disable-line
-      this.$store.room2.save(this.room)
+      this.$store.room.save(this.room)
       this.state = null
     },
   },

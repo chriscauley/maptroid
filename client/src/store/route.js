@@ -10,7 +10,7 @@ export default ({ store }) => {
       return Query({ world__slug: route.params.world_slug })
     },
     get worlds() {
-      return store.world2.getPage(Query())?.items || []
+      return store.world.getPage(Query())?.items || []
     },
     get world() {
       return this.worlds.find((w) => w.slug === route.params.world_slug)
@@ -29,7 +29,7 @@ export default ({ store }) => {
     },
 
     get world_rooms() {
-      const page = route.world && store.room2.getPage(route.world_query)
+      const page = route.world && store.room.getPage(route.world_query)
 
       const visible_zones = {}
       route.zones.forEach((z) => (visible_zones[z.id] = true))
@@ -42,7 +42,7 @@ export default ({ store }) => {
 
     get world_items() {
       const world_id = route.world?.id
-      const page = world_id && store.item2.getPage(Query({ zone__world_id: world_id }))
+      const page = world_id && store.item.getPage(Query({ zone__world_id: world_id }))
       const items = page?.items || []
 
       // Hide all items in hidden rooms
@@ -66,8 +66,8 @@ export default ({ store }) => {
     },
 
     refetchWorlds() {
-      store.world2.api.markStale()
-      return store.world2.fetchPage(Query())?.items || []
+      store.world.api.markStale()
+      return store.world.fetchPage(Query())?.items || []
     },
 
     refetchZones() {
@@ -76,14 +76,14 @@ export default ({ store }) => {
     },
 
     refetchRooms() {
-      store.room2.api.markStale()
-      return store.room2.fetchPage(route.world_query)
+      store.room.api.markStale()
+      return store.room.fetchPage(route.world_query)
     },
 
     refetchItems() {
       const world_id = route.world?.id
-      store.item2.api.markStale()
-      return store.item2.fetchPage(Query({ zone__world_id: world_id }))
+      store.item.api.markStale()
+      return store.item.fetchPage(Query({ zone__world_id: world_id }))
     },
 
     refetchVideos() {

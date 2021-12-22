@@ -1,17 +1,17 @@
 import unrest from '@unrest/vue'
 
 import admin_options from './admin'
-import item2 from './item2'
+import item from './item'
 import local from './local'
 import osd from './osd'
-import room2 from './room2'
+import room from './room'
 import route from './route'
 import run from './run'
 import smile from './smile'
 import smilesprite from './smilesprite'
 import screenshot from './screenshot'
 import video from './video'
-import world2 from './world2'
+import world from './world'
 import zone from './zone'
 
 import _migrations from './migrations'
@@ -19,16 +19,16 @@ import _migrations from './migrations'
 const store = {}
 
 const modules = {
-  item2,
+  item,
   local,
   osd,
-  room2,
+  room,
   run,
   smile,
   smilesprite,
   screenshot,
   video,
-  world2,
+  world,
   zone,
   route, // must come last
 }

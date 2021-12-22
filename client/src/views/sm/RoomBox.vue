@@ -100,7 +100,7 @@ export default {
       }
     },
     bounceSave: debounce(function() {
-      this.$store.room2.save(this.room).then(this.$store.route.refetchRooms)
+      this.$store.room.save(this.room).then(this.$store.route.refetchRooms)
     }, 500),
     drag(event) {
       if (this.mode === 'overlap') {
@@ -121,14 +121,14 @@ export default {
       const { holes } = this.room.data
       if (!holes.find((xy2) => vec.isEqual(xy, xy2))) {
         holes.push(xy)
-        this.$store.room2.bounceSave(this.room)
+        this.$store.room.bounceSave(this.room)
       }
     },
     removeHole(xy) {
       const { data } = this.room
       if (data.holes.find((xy2) => vec.isEqual(xy, xy2))) {
         data.holes = data.holes.filter((xy2) => !vec.isEqual(xy, xy2))
-        this.$store.room2.bounceSave(this.room)
+        this.$store.room.bounceSave(this.room)
       }
     },
     addItem(xy) {
@@ -137,10 +137,10 @@ export default {
         zone: this.room.zone,
         data: { room_xy: xy, type: this.variant },
       }
-      this.$store.item2.save(data).then(this.$store.route.refetchItems)
+      this.$store.item.save(data).then(this.$store.route.refetchItems)
     },
     removeItem(id) {
-      this.$store.item2.delete({ id }).then(this.$store.route.refetchItems)
+      this.$store.item.delete({ id }).then(this.$store.route.refetchItems)
     },
   },
 }

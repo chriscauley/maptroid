@@ -247,7 +247,7 @@ export default {
     _drag(mode, event) {
       this.osd_store.dragRoom(mode, this.room, event._drag.last_dxy)
       this.$emit('debug', this.room.data.zone_bounds.map((i) => i.toFixed(1)).join(', '))
-      this.$store.room2.bounceSave(this.room)
+      this.$store.room.bounceSave(this.room)
       // this.draw()
     },
     clickColor(event, index) {
@@ -259,7 +259,7 @@ export default {
       // TODO somehow when deleting colors, corrupted data can be added.
       colors = colors.filter((c) => c.bounds)
       this.room.data.colors = colors // eslint-disable-line vue/no-mutating-props
-      this.$store.room2.save(this.room)
+      this.$store.room.save(this.room)
     },
   },
 }

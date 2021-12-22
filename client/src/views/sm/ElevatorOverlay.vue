@@ -84,7 +84,7 @@ export default {
       this.mouse = this.osd_store.getWorldXY(event)
     },
     save() {
-      this.$store.world2.save(this.$store.route.world).then(this.$store.route.refetchWorlds)
+      this.$store.world.save(this.$store.route.world).then(this.$store.route.refetchWorlds)
       this.editing = null
     },
     cancel() {

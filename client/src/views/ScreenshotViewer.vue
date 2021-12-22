@@ -27,10 +27,10 @@ export default {
       return ['bts', 'layer-1', 'layer-2', 'plm_enemies']
     },
     rooms() {
-      return this.$store.room2.getPage()?.items
+      return this.$store.room.getPage()?.items
     },
     worlds() {
-      return this.$store.world2.getPage()?.items
+      return this.$store.world.getPage()?.items
     },
   },
   methods: {

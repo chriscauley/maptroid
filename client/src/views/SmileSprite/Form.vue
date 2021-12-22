@@ -28,7 +28,7 @@ export default {
   emits: ['refetch', 'close', 'select-dindex'],
   computed: {
     rooms() {
-      const rooms = this.$store.room2.getPage({ query: { per_page: 5000 } })?.items || []
+      const rooms = this.$store.room.getPage({ query: { per_page: 5000 } })?.items || []
       if (this.sprite.layer === 'bts') {
         return rooms.filter((r) => r.data.bts?.sprites.find((s) => s === this.sprite.id))
       }

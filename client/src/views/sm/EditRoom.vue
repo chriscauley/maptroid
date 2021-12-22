@@ -52,7 +52,7 @@ export default {
         click: () => {
           const room = this.room
           room.zone = z.id
-          this.$store.room2.save(room)
+          this.$store.room.save(room)
         },
       }))
     },

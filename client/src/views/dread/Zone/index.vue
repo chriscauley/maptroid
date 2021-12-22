@@ -156,7 +156,7 @@ export default {
       return { query: { zone: this.zone.id, per_page: 5000 } }
     },
     world_items() {
-      const items = this.$store.item2.getPage(WORLD_QUERY)?.items || []
+      const items = this.$store.item.getPage(WORLD_QUERY)?.items || []
       if (this.videos.length) {
         const video = this.video || this.videos[0]
         return sortBy(items, (i) => video.times_by_id[i.id]?.[0].seconds || Infinity)
@@ -171,7 +171,7 @@ export default {
       return DreadItems.prepDisplayItems(zone_items, this.videos)
     },
     rooms() {
-      return this.$store.room2.getPage(this.room_params)?.items
+      return this.$store.room.getPage(this.room_params)?.items
     },
     videos() {
       return this.$store.video.getPage(WORLD_QUERY)?.items || []
@@ -206,18 +206,18 @@ export default {
       this.debug = value
     },
     refetchItems() {
-      this.$store.item2.api.markStale()
-      this.$store.item2.getPage(WORLD_QUERY)
+      this.$store.item.api.markStale()
+      this.$store.item.getPage(WORLD_QUERY)
     },
     refetchRooms() {
-      this.$store.room2.api.markStale()
-      this.$store.room2.getPage(this.room_params)
+      this.$store.room.api.markStale()
+      this.$store.room.getPage(this.room_params)
     },
     deleteRoom(room) {
-      this.$store.room2.delete(room).then(this.refetchRooms)
+      this.$store.room.delete(room).then(this.refetchRooms)
     },
     deleteItem(item) {
-      this.$store.item2.delete(item).then(this.refetchItems)
+      this.$store.item.delete(item).then(this.refetchItems)
     },
     newRoom() {
       const { x, y } = this.osd_store.viewer.viewport.getCenter()
@@ -229,11 +229,11 @@ export default {
           zone_bounds: [scale(x), scale(y), 10, 10],
         },
       }
-      this.$store.room2.save(room).then(this.refetchRooms)
+      this.$store.room.save(room).then(this.refetchRooms)
     },
     addItem(item) {
       item.zone = this.zone.id
-      this.$store.item2.save(item).then(this.refetchItems)
+      this.$store.item.save(item).then(this.refetchItems)
     },
     blurItem() {
       this.osd_store.selectItem(null)

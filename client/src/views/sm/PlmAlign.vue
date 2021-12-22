@@ -60,11 +60,11 @@ export default {
       },
     },
     world() {
-      return this.$store.world2.getFromRoute(this.$route).current
+      return this.$store.world.getFromRoute(this.$route).current
     },
     rooms() {
       const world = this.world.id
-      const rooms = this.$store.room2.getPage({ query: { per_page: 5000, world } })?.items
+      const rooms = this.$store.room.getPage({ query: { per_page: 5000, world } })?.items
       return rooms?.filter((r) => r.data.plm_enemies)
     },
     select_items() {
@@ -103,12 +103,12 @@ export default {
   methods: {
     undelete(plm) {
       delete plm._plm.deleted
-      this.$store.room2.bounceSave(this.current_room)
+      this.$store.room.bounceSave(this.current_room)
     },
     click(event, plm) {
       if (event.ctrlKey && event.shiftKey) {
         plm._plm.deleted = true
-        this.$store.room2.bounceSave(this.current_room)
+        this.$store.room.bounceSave(this.current_room)
       }
       if (event.shiftKey) {
         const { cropped } = plm._plm
@@ -127,7 +127,7 @@ export default {
         plm._plm.xy[0] = clamp(plm._plm.xy[0], 0, x_max)
         plm._plm.xy[1] = clamp(plm._plm.xy[1], 0, y_max)
       }
-      this.$store.room2.bounceSave(this.current_room)
+      this.$store.room.bounceSave(this.current_room)
     },
   },
 }

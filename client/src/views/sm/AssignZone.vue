@@ -57,7 +57,7 @@ export default {
       return zones
     },
     world() {
-      return this.$store.world2.getFromRoute(this.$route).current
+      return this.$store.world.getFromRoute(this.$route).current
     },
     world_query() {
       return { query: { world: this.world.id, per_page: 5000 } }
@@ -67,7 +67,7 @@ export default {
     },
     rooms() {
       const zone_id = this.zones.find((z) => z.slug === this.$route.params.zone_slug)?.id
-      const rooms = this.$store.room2.getPage(this.world_query)?.items || []
+      const rooms = this.$store.room.getPage(this.world_query)?.items || []
       if (zone_id) {
         return rooms.filter((i) => i.zone === zone_id)
       }
@@ -81,8 +81,8 @@ export default {
     },
     setRoomZone(room, zone_id) {
       room.zone = zone_id
-      this.$store.room2.save(room).then(() => {
-        this.$store.room2.getPage(this.world_query) // refetches rooms
+      this.$store.room.save(room).then(() => {
+        this.$store.room.getPage(this.world_query) // refetches rooms
         this.selected = {}
       })
     },
