@@ -1,4 +1,3 @@
-import assert from 'assert'
+import _assert from 'assert'
 
-export default {
-}
+export default {}

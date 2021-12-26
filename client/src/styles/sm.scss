@@ -20,7 +20,12 @@
   &:before {
     @apply absolute bg-black;
     outline: 1px solid white;
-    .-zoom-0 & {
+  }
+  .-zoom-0 & {
+    .ur-popper {
+      padding-top: 200%;
+    }
+    &:before {
       inset: -200%;
     }
   }

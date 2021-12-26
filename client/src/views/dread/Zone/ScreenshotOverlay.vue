@@ -14,11 +14,9 @@
 const no_drag = ['ss_group', 'ss_trash']
 
 export default {
+  inject: ['tool_storage', 'osd_store'],
   props: {
     screenshot: Object,
-    tool_storage: Object,
-    osd_store: Object,
-    zone: Object,
   },
   data() {
     return { dragging: false }
@@ -30,7 +28,7 @@ export default {
     },
     style() {
       const { xy } = this.screenshot.data.zone
-      const { width, height } = this.zone.data.screenshot
+      const { width, height } = this.$store.route.zone.data.screenshot
       return {
         width: `${(100 * width) / width}%`,
         height: `${(100 * height) / width}%`,

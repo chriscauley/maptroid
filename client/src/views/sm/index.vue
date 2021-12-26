@@ -25,7 +25,7 @@
         <elevator-overlay />
       </html-overlay>
     </template>
-    <viewer-panel :items="items" :tool="tool_storage.state.selected.tool" />
+    <viewer-panel :items="visible_items" :tool="tool_storage.state.selected.tool" />
     <video-player v-if="show_player" />
     <edit-room />
   </div>
@@ -40,18 +40,18 @@ import ConfigPopper from './ConfigPopper.vue'
 import ElevatorOverlay from './ElevatorOverlay.vue'
 import HtmlOverlay from '@/vue-openseadragon/HtmlOverlay.vue'
 import ViewerPanel from '@/components/ViewerPanel/index.vue'
+import ItemMixin from '@/store/ItemMixin'
 import ItemOverlay from './ItemOverlay.vue'
 import OsdStore from './OsdStore'
 import OverlapDropdown from './OverlapDropdown.vue'
 import EditRoom from './EditRoom.vue'
-import prepItem from './prepItem'
 import SvgOverlay from './SvgOverlay.vue'
 import RoomBox from './RoomBox.vue'
 import ToolStorage from './ToolStorage'
-import VideoPlayer from '@/components/Video/index.vue'
 import ZoneBox from './ZoneBox.vue'
 
 const { Rect } = Openseadragon
+window.Rect = Rect
 
 export default {
   __route: {
@@ -68,9 +68,9 @@ export default {
     OverlapDropdown,
     SvgOverlay,
     RoomBox,
-    VideoPlayer,
     ZoneBox,
   },
+  mixins: [ItemMixin],
   provide() {
     return {
       osd_store: computed(() => this.osd_store), // TODO osd_storage, not osd_store
@@ -141,12 +141,9 @@ export default {
       const { world, world_rooms } = this.$store.route
       return world && this.zones.length && world_rooms.length
     },
-    items() {
+    visible_items() {
       const { zone, zone_items, world_items } = this.$store.route
-      return (zone ? zone_items : world_items).map((item) => ({
-        ...item,
-        ...prepItem(item),
-      }))
+      return zone ? zone_items : world_items
     },
     zones() {
       return this.$store.route.zones.filter((z) => !z.data.hidden)

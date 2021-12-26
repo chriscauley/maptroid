@@ -133,6 +133,10 @@ const getName = (item) => {
 const _visible = {}
 items.forEach((i) => (_visible[i] = true))
 
+// Display a lmimited subset of items for non-superuser
+const allowed_types = [...items, ...stations, ...transit]
+const allowed_by_type = Object.fromEntries(allowed_types.map((t) => [t, true]))
+
 export default {
   all,
   colors,
@@ -146,12 +150,18 @@ export default {
   getClass,
   type_map: { items, stations, transit, blocks, doors },
   makeCss,
-  prepDisplayItems(display_items, videos = []) {
+  filterDisplayItems: (items, user) => {
+    // TODO normalize dread
+    if (!user?.is_superuser) {
+      return items.filter((i) => allowed_by_type[i.data.type])
+    }
+    return items
+  },
+  prepDisplayItems(display_items) {
     return display_items.map((item) => ({
       ...item,
-      name: getName(item),
-      icon: getClass(item.data.type),
-      times_by_video_id: Object.fromEntries(videos.map((v) => [v.id, v.times_by_id[item.id]])),
+      title: getName(item),
+      class: getClass(item.data.type),
     }))
   },
   groupItems(world_items, actions) {

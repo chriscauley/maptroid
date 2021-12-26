@@ -32,7 +32,7 @@
 </template>
 
 <script>
-import prepItem from '@/views/sm/prepItem'
+const MISSING_ITEM = { title: '?? Item missing' }
 
 export default {
   data() {
@@ -68,16 +68,14 @@ export default {
       this.$store.local.save({ insert_run_action_after: index })
     },
     prepAction(action) {
-      const missing_item = { title: '?? Item missing' }
       if (action[0] === 'item') {
-        const item = this.items_by_id[action[1]]
-        return !item ? missing_item : prepItem(item)
+        return this.items_by_id[action[1]]?.attrs || MISSING_ITEM
       } else if (action[0] === 'room_xy') {
         return {
           title: `Room #${action[1]} @${action[2]}`,
         }
       }
-      return missing_item
+      return MISSING_ITEM
     },
     startRun() {
       const { insert_run_action_after } = this.$store.local.state

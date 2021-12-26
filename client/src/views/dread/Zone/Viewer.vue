@@ -12,14 +12,12 @@ const WORLD = 3 // hardcoded for now since this interface is dread only
 
 export default {
   components: { BaseViewer, ZoomControls },
-  props: {
-    zone: Object,
-    osd_store: Object,
-  },
+  inject: ['osd_store'],
   computed: {
     search_params() {
       // screenshots and zones search on same values
-      return { query: { world: WORLD, zone: this.zone.id, per_page: 5000 } }
+      const { zone } = this.$store.route
+      return { query: { world: WORLD, zone: zone.id, per_page: 5000 } }
     },
   },
   async mounted() {
@@ -49,8 +47,9 @@ export default {
       }
       this.osd_store.addScreenshots(items)
     } else {
-      const { min_x: x, min_y: y, width } = this.zone.data.output.ratio_bounds
-      const tileSource = this.zone.data.output.dzi
+      const { zone } = this.$store.route
+      const { min_x: x, min_y: y, width } = zone.data.output.ratio_bounds
+      const tileSource = zone.data.output.dzi
       this.osd_store.viewer.addTiledImage({ tileSource, width, x, y })
     }
   },

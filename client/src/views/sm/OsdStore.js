@@ -57,18 +57,10 @@ export default (component) => {
     const b = 1
     state._viewer.viewport.fitBounds(new Rect(x - b, y - b, w + 2 * b, h + 2 * b))
 
-    const f = () => osd_store.selectItem(item)
+    const f = () => component.$store.route.selectItem(item)
     const timeout = setTimeout(f, 100)
     state._viewer.addOnceHandler('animation-finish', f)
     state._viewer.addOnceHandler('animation-start', () => clearTimeout(timeout))
-  }
-
-  osd_store.selectItem = (item) => {
-    if (!item) {
-      delete state.selected_item_id
-    } else {
-      state.selected_item_id = parseInt(item.id.split('__')[1])
-    }
   }
 
   return osd_store

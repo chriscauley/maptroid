@@ -14,21 +14,25 @@
 export default {
   props: {
     room: Object,
-    zones: Array,
   },
   data() {
-    const schema = {
-      type: 'object',
-      properties: {
-        name: { type: 'string' },
-        to_zone: {
-          type: 'number',
-          enum: this.zones.map((r) => r.id),
-          enumNames: this.zones.map((z) => z.name),
+    return { state: null }
+  },
+  computed: {
+    schema() {
+      const { zones } = this.$store.route
+      return {
+        type: 'object',
+        properties: {
+          name: { type: 'string' },
+          to_zone: {
+            type: 'number',
+            enum: zones.map((r) => r.id),
+            enumNames: zones.map((z) => z.name),
+          },
         },
-      },
-    }
-    return { state: null, schema }
+      }
+    },
   },
   methods: {
     edit() {

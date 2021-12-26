@@ -2,7 +2,7 @@
   <unrest-popper placement="bottom" offset="0,10" :watchme="watchme">
     <div class="item-popper" @click.stop>
       <div v-if="can_edit">
-        {{ item.name }}
+        {{ item.attrs.title }}
         <input v-model="name_override" @input="saveItem" placeholder="Name Override" />
         <input v-model="reward" @input="saveItem" placeholder="Reward" />
         <select
@@ -24,7 +24,7 @@
         </div>
       </div>
       <div v-else>
-        <div class="item-popper__name">{{ item.name }}</div>
+        <div class="item-popper__name">{{ item.attrs.title }}</div>
         <div v-if="reward" class="item-popper__reward">
           <i class="fa fa-plus" />
           {{ reward }}
@@ -48,7 +48,7 @@
 
 <script>
 export default {
-  inject: ['video', 'transit_choices'],
+  inject: ['transit_choices'],
   props: {
     item: Object,
     watchme: Number,
@@ -83,10 +83,7 @@ export default {
       return this.$auth.user?.is_superuser
     },
     video_times() {
-      if (!this.video) {
-        return []
-      }
-      return this.item.times_by_video_id[this.video.id]
+      return this.$store.video.times_by_item_id[this.item.id] || []
     },
   },
   methods: {
@@ -97,13 +94,14 @@ export default {
         delete this.item.data.transit_target
         this.item.data.transit_target_id = this.transit_target_id // eslint-disable-line
       }
-      this.$store.item2.bounceSave(this.item)
+      this.$store.item.bounceSave(this.item)
     },
     addTime() {
       if (window.YT_PLAYER_TIME === undefined) {
         throw 'Unable to find current player time'
       }
-      this.video.data.actions.push([this.item.id, window.YT_PLAYER_TIME])
+      const video = this.$store.video.getCurrentVideo()
+      video.data.actions.push([this.item.id, window.YT_PLAYER_TIME])
       this.saveVideo()
     },
     deleteTime(event, time) {
@@ -111,18 +109,18 @@ export default {
         this.$ui.alert('Hold shift and control to delete event')
         return
       }
+      const video = this.$store.video.getCurrentVideo()
       const match = (a) => !(a[0] === this.item.id && a[1] === time.seconds)
-      this.video.data.actions = this.video.data.actions.filter(match)
+      video.data.actions = video.data.actions.filter(match)
       this.saveVideo()
     },
     saveVideo() {
-      const WORLD = 3
-      this.$store.video
-        .save(this.video)
-        .then(() => this.$store.video.getPage({ query: { world_id: WORLD, per_page: 5000 } }))
+      const video = this.$store.video.getCurrentVideo()
+      this.$store.video.save(video).then(this.$store.route.refetchVideos)
     },
     getVideoUrl(time) {
-      return `https://youtu.be/${this.video.external_id}?t=${time.seconds - 10}`
+      const video = this.$store.video.getCurrentVideo()
+      return `https://youtu.be/${video.external_id}?t=${time.seconds - 10}`
     },
   },
 }

@@ -13,7 +13,7 @@ export default (component) => {
   const { state } = osd_store
   state.selected_item = null
 
-  const getGeometry = () => component.zone.data.screenshot
+  const getGeometry = () => component.$store.route.zone.data.screenshot
 
   const _roundDreadPixel = (fraction) => {
     const geo = getGeometry()
@@ -160,7 +160,7 @@ export default (component) => {
   const gotoItem = (item) => {
     const geo = getGeometry()
     const scale = geo.width / geo.px_per_block
-    const room = component.rooms.find((r) => r.id === item.room)
+    const room = component.$store.route.world_rooms.find((r) => r.id === item.room)
     const [x, y, w, h] = room.data.zone_bounds.map((i) => i / scale)
     const b = 0.2
     state._viewer.viewport.fitBounds(new Rect(x - b, y - b, w + 2 * b, h + 2 * b))

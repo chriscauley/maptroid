@@ -1,7 +1,7 @@
 <template>
   <div class="app-body -full-screen">
-    <div :class="css.wrapper" v-if="zones && zone">
-      <unrest-toolbar v-if="$route.query.mode" :storage="tool_storage" class="-topleft">
+    <div :class="css.wrapper" v-if="$store.route.zone">
+      <unrest-toolbar v-if="$route.query.mode" class="-topleft">
         <template #buttons>
           <div
             v-if="$route.query.mode === 'screenshots'"
@@ -19,7 +19,7 @@
           </div>
         </template>
       </unrest-toolbar>
-      <dread-viewer :zone="zone" :osd_store="osd_store" />
+      <dread-viewer />
       <template v-if="osd_store.viewer">
         <html-overlay :viewer="osd_store.viewer">
           <template v-if="$route.query.mode === 'screenshots'">
@@ -27,35 +27,24 @@
               v-for="screenshot in osd_store.state.screenshots"
               :key="screenshot.id"
               :screenshot="screenshot"
-              :tool_storage="tool_storage"
-              :osd_store="osd_store"
-              :zone="zone"
             />
           </template>
           <room-canvas
-            v-for="room in rooms"
+            v-for="room in $store.route.zone_rooms"
             :key="room.id"
             :room="room"
-            :tool_storage="tool_storage"
-            :osd_store="osd_store"
             @debug="setDebug"
             @delete="deleteRoom"
             @delete-item="deleteItem"
             @add-item="addItem"
-            :zone_items="zone_items"
-            :zones="zones"
             @select-item="gotoItem"
           />
         </html-overlay>
       </template>
-      <group-manager
-        v-if="managing_groups"
-        @close="managing_groups = null"
-        :osd_store="osd_store"
-      />
+      <group-manager v-if="managing_groups" @close="managing_groups = null" />
     </div>
-    <video-player v-if="video" :world_items="world_items" />
-    <item-list v-if="zone" :zone_items="zone_items" @select-item="gotoItem" />
+    <video-player />
+    <item-list :items="items" @select-item="gotoItem" />
     <div v-if="debug" class="dread-debug">{{ debug }}</div>
     <admin-popup />
   </div>
@@ -70,19 +59,13 @@ import AdminPopup from './AdminPopup.vue'
 import DreadItems from '@/models/DreadItems'
 import DreadViewer from './Viewer.vue'
 import GroupManager from './GroupManager.vue'
+import ItemMixin from '@/store/ItemMixin'
 import ItemList from '@/components/ItemList.vue'
 import RoomCanvas from './RoomCanvas.vue'
 import ScreenshotOverlay from './ScreenshotOverlay.vue'
 import HtmlOverlay from '@/vue-openseadragon/HtmlOverlay.vue'
 import ToolStorage from './ToolStorage'
 import OsdStore from './OsdStore'
-import VideoPlayer from '@/components/Video/index.vue'
-
-const WORLD = 3 // hardcoded for now since this interface is dread only
-const WORLD_QUERY = { query: { world_id: WORLD, per_page: 5000 } }
-
-const allowed_types = [...DreadItems.items, ...DreadItems.stations, ...DreadItems.transit]
-const allowed_by_type = Object.fromEntries(allowed_types.map((t) => [t, true]))
 
 export default {
   __route: {
@@ -99,17 +82,16 @@ export default {
     ItemList,
     RoomCanvas,
     ScreenshotOverlay,
-    VideoPlayer,
   },
-  mixins: [Mousetrap.Mixin],
+  mixins: [Mousetrap.Mixin, ItemMixin],
   provide() {
     return {
-      video: computed(() => this.video),
-      videos: computed(() => this.videos),
+      tool_storage: computed(() => this.tool_storage),
+      osd_store: computed(() => this.osd_store),
       transit_choices: computed(() => {
         const match = (i) => i.data.type.match(/^(teleportal|transit)/)
-        const items = this.world_items.filter(match).map((i) => {
-          const zone = this.zones.find((z) => z.id === i.zone)
+        const items = this.$store.route.world_items.filter(match).map((i) => {
+          const { zone } = this.$store.route
           const link = this.$store.route.getZoneLink('dread', zone.slug)
           return {
             id: i.id,
@@ -126,7 +108,7 @@ export default {
   },
   data() {
     return {
-      mousetrap: { g: this.toggleGrid, esc: this.blurItem },
+      mousetrap: { g: this.toggleGrid, esc: this.$store.route.blurItem },
       debug: '',
       managing_groups: false,
       osd_store: OsdStore(this),
@@ -134,6 +116,10 @@ export default {
     }
   },
   computed: {
+    items() {
+      const items = DreadItems.filterDisplayItems(this.$store.route.zone_items, this.$auth.user)
+      return DreadItems.prepDisplayItems(items)
+    },
     css() {
       const m = this.$route.query.mode
       const { selected_tool: _t, selected_variant: _v, hide_grid: _g } = this.tool_storage.state
@@ -146,56 +132,6 @@ export default {
         grid_toggle: `btn -${_g ? 'danger' : 'secondary'}`,
       }
     },
-    zones() {
-      return this.$store.zone.getPage(WORLD_QUERY)?.items
-    },
-    zone() {
-      return this.zones?.find((z) => z.slug === this.$route.params.zone_slug)
-    },
-    room_params() {
-      return { query: { zone: this.zone.id, per_page: 5000 } }
-    },
-    world_items() {
-      const items = this.$store.item.getPage(WORLD_QUERY)?.items || []
-      if (this.videos.length) {
-        const video = this.video || this.videos[0]
-        return sortBy(items, (i) => video.times_by_id[i.id]?.[0].seconds || Infinity)
-      }
-      return items
-    },
-    zone_items() {
-      let zone_items = this.world_items.filter((i) => i.zone === this.zone.id)
-      if (!this.$auth.user?.is_superuser) {
-        zone_items = zone_items.filter((i) => allowed_by_type[i.data.type])
-      }
-      return DreadItems.prepDisplayItems(zone_items, this.videos)
-    },
-    rooms() {
-      return this.$store.room.getPage(this.room_params)?.items
-    },
-    videos() {
-      return this.$store.video.getPage(WORLD_QUERY)?.items || []
-    },
-    video() {
-      const { selected_video_id } = this.$store.local.state
-      return this.videos.find((v) => v.id === selected_video_id) || this.videos[0]
-    },
-  },
-  mounted() {
-    document.addEventListener('click', this.blurItem)
-    if (this.$route.query.item) {
-      const item_id = parseInt(this.$route.query.item)
-      const interval = setInterval(() => {
-        const item = this.zone && this.zone_items.find((i) => i.id === item_id)
-        if (item && this.osd_store.viewer?.isOpen()) {
-          this.gotoItem(item)
-          clearInterval(interval)
-        }
-      }, 100)
-    }
-  },
-  unmounted() {
-    document.removeEventListener('click', this.blurItem)
   },
   methods: {
     toggleGrid() {
@@ -205,14 +141,6 @@ export default {
     setDebug(value) {
       this.debug = value
     },
-    refetchItems() {
-      this.$store.item.api.markStale()
-      this.$store.item.getPage(WORLD_QUERY)
-    },
-    refetchRooms() {
-      this.$store.room.api.markStale()
-      this.$store.room.getPage(this.room_params)
-    },
     deleteRoom(room) {
       this.$store.room.delete(room).then(this.refetchRooms)
     },
@@ -220,27 +148,25 @@ export default {
       this.$store.item.delete(item).then(this.refetchItems)
     },
     newRoom() {
+      const { zone, world } = this.$store.route
       const { x, y } = this.osd_store.viewer.viewport.getCenter()
-      const scale = (i) => Math.floor((i * 1280) / this.zone.data.screenshot.px_per_block)
+      const scale = (i) => Math.floor((i * 1280) / zone.data.screenshot.px_per_block)
       const room = {
-        world: WORLD,
-        zone: this.zone.id,
+        world: world.id,
+        zone: zone.id,
         data: {
           zone_bounds: [scale(x), scale(y), 10, 10],
         },
       }
-      this.$store.room.save(room).then(this.refetchRooms)
+      this.$store.room.save(room).then(this.$store.route.refetchRooms)
     },
     addItem(item) {
-      item.zone = this.zone.id
-      this.$store.item.save(item).then(this.refetchItems)
-    },
-    blurItem() {
-      this.osd_store.selectItem(null)
+      item.zone = this.$store.route.zone.id
+      this.$store.item.save(item).then(this.$store.route.refetchItems)
     },
     gotoItem(item) {
       this.osd_store.gotoItem(item)
-      const link = this.$store.route.getZoneLink('dread', this.zone.slug)
+      const link = this.$store.route.getZoneLink('dread', this.$store.route.zone.slug)
       this.$router.replace(`${link}?item=${item.id}`)
     },
   },

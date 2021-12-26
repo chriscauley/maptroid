@@ -14,7 +14,7 @@
       <unrest-draggable class="room-canvas__move btn -mini -primary" @drag="move">
         <i class="fa fa-arrows" />
       </unrest-draggable>
-      <room-form :room="room" :zones="zones" />
+      <room-form :room="room" :zones="$store.route.zones" />
     </template>
     <div
       v-for="item in items"
@@ -43,13 +43,9 @@ const grids = {}
 
 export default {
   components: { ItemPopper, RoomForm },
-  inject: ['video', 'transit_choices'],
+  inject: ['transit_choices', 'osd_store', 'tool_storage'],
   props: {
-    osd_store: Object,
     room: Object,
-    tool_storage: Object,
-    zone_items: Array,
-    zones: Array,
   },
   emits: ['debug', 'delete', 'add-item', 'delete-item', 'select-item'],
   data() {
@@ -59,7 +55,7 @@ export default {
     to_zone() {
       if (this.room.data.to_zone) {
         const { world_slug } = this.$route.params
-        const zone = this.zones.find((z) => z.id === this.room.data.to_zone)
+        const { zone } = this.$store.route.zone
         return zone && `/maps/${world_slug}/${zone.slug}/`
       }
       return undefined
@@ -135,7 +131,9 @@ export default {
       }
     },
     room_items() {
-      return this.zone_items.filter((i) => i.room === this.room.id)
+      const { zone_items } = this.$store.route
+      const room_items = zone_items.filter((i) => i.room === this.room.id)
+      return DreadItems.filterDisplayItems(room_items, this.$store.auth)
     },
     items() {
       const [_x, _y, W, H] = this.room.data.zone_bounds

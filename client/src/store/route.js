@@ -1,6 +1,60 @@
+import { computed } from 'vue'
+
 const Query = (q = {}) => ({ query: { per_page: 5000, ...q } })
 
 export default ({ store }) => {
+  const _computed = {
+    worlds: computed(() => {
+      return store.world.getPage(Query())?.items || []
+    }),
+    world: computed(() => {
+      return route.worlds.find((w) => w.slug === route.params.world_slug)
+    }),
+    zones: computed(() => route.all_zones.filter((z) => !z.data.hidden)),
+    all_zones: computed(() => (route.world && store.zone.getPage(route.world_query)?.items) || []),
+    zone: computed(() => {
+      const { zone_slug } = route.params
+      return zone_slug && route.zones.find((w) => w.slug === zone_slug)
+    }),
+    zone_rooms: computed(() => {
+      const zone_id = route.zone?.id
+      return route.world_rooms.filter((r) => r.zone === zone_id)
+    }),
+
+    world_items: computed(() => {
+      const world_id = route.world?.id
+      const query = Query({ zone__world_id: world_id })
+      const page = world_id && store.item.getPage(query)
+      let items = page?.items || []
+
+      // Hide all items in hidden rooms
+      const visible_rooms = {}
+      route.world_rooms.forEach((r) => (visible_rooms[r.id] = true))
+      return items.filter((i) => visible_rooms[i.room] && !i.data.hidden)
+    }),
+
+    world_rooms: computed(() => {
+      const page = route.world && store.room.getPage(route.world_query)
+
+      const visible_zones = {}
+      route.zones.forEach((z) => (visible_zones[z.id] = true))
+      return (page?.items || []).filter((r) => !r.data.hidden && visible_zones[r.zone])
+    }),
+
+    zone_items: computed(() => {
+      const zone_id = route.zone?.id
+      return route.world_items.filter((r) => r.zone === zone_id)
+    }),
+    world_videos: computed(() => {
+      const page = route.world && store.video.getPage(route.world_query)
+      return page?.items || []
+    }),
+    world_runs: computed(() => {
+      const page = route.world && store.run.getPage(route.world_query)
+      return page?.items || []
+    }),
+  }
+
   const route = {
     // getters here are arranged by dependency order. This is effectively a saga.
     get params() {
@@ -10,59 +64,45 @@ export default ({ store }) => {
       return Query({ world__slug: route.params.world_slug })
     },
     get worlds() {
-      return store.world.getPage(Query())?.items || []
+      return _computed.worlds.value
     },
     get world() {
-      return this.worlds.find((w) => w.slug === route.params.world_slug)
+      return _computed.world.value
     },
 
     get zones() {
-      return route.all_zones.filter((z) => !z.data.hidden)
+      return _computed.zones.value
     },
+
     get all_zones() {
-      return (route.world && store.zone.getPage(route.world_query)?.items) || []
+      return _computed.all_zones.value
     },
 
     get zone() {
-      const { zone_slug } = route.params
-      return zone_slug && route.zones.find((w) => w.slug === zone_slug)
+      return _computed.zone.value
     },
 
     get world_rooms() {
-      const page = route.world && store.room.getPage(route.world_query)
-
-      const visible_zones = {}
-      route.zones.forEach((z) => (visible_zones[z.id] = true))
-      return (page?.items || []).filter((r) => !r.data.hidden && visible_zones[r.zone])
+      return _computed.world_rooms.value
     },
+
     get zone_rooms() {
-      const zone_id = route.zone?.id
-      return route.world_rooms.filter((r) => r.zone === zone_id)
+      return _computed.zone_rooms.value
     },
 
     get world_items() {
-      const world_id = route.world?.id
-      const page = world_id && store.item.getPage(Query({ zone__world_id: world_id }))
-      const items = page?.items || []
-
-      // Hide all items in hidden rooms
-      const visible_rooms = {}
-      route.world_rooms.forEach((r) => (visible_rooms[r.id] = true))
-      return items.filter((i) => visible_rooms[i.room] && !i.data.hidden)
+      return _computed.world_items.value
     },
     get zone_items() {
-      const zone_id = route.zone?.id
-      return route.world_items.filter((r) => r.zone === zone_id)
+      return _computed.zone_items.value
     },
 
     get world_videos() {
-      const page = route.world && store.video.getPage(route.world_query)
-      return page?.items || []
+      return _computed.world_videos.value
     },
 
     get world_runs() {
-      const page = route.world && store.run.getPage(route.world_query)
-      return page?.items || []
+      return _computed.world_runs.value
     },
 
     refetchWorlds() {
@@ -109,6 +149,20 @@ export default ({ store }) => {
         video.data.items.forEach(([item_id, time]) => times_by_item_id[item_id].push(time))
       }
       return times_by_item_id
+    },
+
+    selectItem(item) {
+      const { $route, $router } = store._app.config.globalProperties
+      const query = { ...$route.query }
+      if (!item) {
+        delete query.item_id
+      } else {
+        query.item_id = item.id
+      }
+      $router.push({ path: $route.path, query })
+    },
+    blurItem() {
+      route.selectItem(null)
     },
   }
 
