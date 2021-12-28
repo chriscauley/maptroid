@@ -135,7 +135,7 @@ class ImageHashField(models.CharField):
     return value
 
 
-colors = ['black', 'gold', 'gray', 'green', 'orange', 'blue', 'pink', 'purple', 'red', 'white']
+colors = ['black', 'blue', 'eye', 'gold', 'gray', 'green', 'orange', 'pink', 'purple', 'red', 'white']
 
 class SmileSprite(models.Model):
   """
@@ -147,7 +147,7 @@ class SmileSprite(models.Model):
   type = models.CharField(max_length=32, blank=True, default='')
   MODIFIERS = _choices(['composite', 'inblock', 'inegg'])
   modifier = models.CharField(max_length=16, choices=MODIFIERS, null=True, blank=True)
-  CATEGORIES = _choices(['geo', 'item', 'enemy', 'obstacle', 'door', 'station', 'animation', 'trash'])
+  CATEGORIES = _choices(['block', 'geo', 'hex', 'item', 'enemy', 'obstacle', 'door', 'station', 'animation', 'trash'])
   category = models.CharField(max_length=16, choices=CATEGORIES, null=True, blank=True)
   COLORS = _choices(colors)
   color = models.CharField(max_length=16, choices=COLORS, null=True, blank=True)

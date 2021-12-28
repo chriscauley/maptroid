@@ -8,9 +8,12 @@
         </svg>
       </div>
       <unrest-schema-form :form_name="`schema/smile-sprite/${sprite.id}`" :success="success" />
-      <div v-for="room in rooms" :key="room.id" class="admin-smile-sprite__room-list">
-        <hr />
-        {{ room.name }}
+      <div class="admin-smile-sprite__room-list list-group">
+        <template v-for="room in rooms" :key="room.id">
+          <a :href="`/room/${room.id}/`" target="_blank" class="list-group-item">
+            #{{ room.id }}{{ room.name }}
+          </a>
+        </template>
       </div>
     </div>
     <template #actions>
