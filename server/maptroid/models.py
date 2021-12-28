@@ -110,6 +110,12 @@ class Item(models.Model):
   data = models.JSONField(default=dict, blank=True)
   __str__ = lambda self: str(self.data)
 
+
+class Door(models.Model):
+  room = models.ForeignKey(Room, models.CASCADE)
+  data = models.JSONField(default=dict, blank=True)
+  __str__ = lambda self: f'{self.room} {self.data}'
+
 class Character(models.Model):
   letter = models.CharField(max_length=1, blank=True, default='')
   image = models.ImageField(upload_to="smile_characters")

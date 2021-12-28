@@ -4,6 +4,7 @@ import dread from './dread/index'
 import Downloads from './Downloads.vue'
 import FileBrowser from './FileBrowser.vue'
 import Home from './Home.vue'
+import Play from './Play.vue'
 import ProcessDread from './ProcessDread.vue'
 import ScreenshotAnalyzer from './ScreenshotAnalyzer/index.vue'
 import ScreenshotUpload from './ScreenshotUpload.vue'
@@ -23,6 +24,7 @@ export default {
   Downloads,
   FileBrowser,
   Home,
+  Play,
   ProcessDread,
   ScreenshotAnalyzer,
   ScreenshotUpload,
