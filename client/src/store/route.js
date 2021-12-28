@@ -3,6 +3,8 @@ import { computed } from 'vue'
 const Query = (q = {}) => ({ query: { per_page: 5000, ...q } })
 
 export default ({ store }) => {
+  // TODO this elaborat system of compute/etc is happening because triggering route changes (via selectItem) causes a lag spike and fps drop
+  // Need to find a way to make none of these change when selected item is modified, probably through an intermediate route state
   const _computed = {
     worlds: computed(() => {
       return store.world.getPage(Query())?.items || []
