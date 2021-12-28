@@ -4,6 +4,7 @@ from django.conf import settings
 import numpy as np
 from shapely.geometry import Polygon, MultiPolygon
 from shapely.ops import unary_union
+import sys
 import unrest_image as img
 
 from maptroid.models import Room, SmileSprite, SpriteMatcher
@@ -70,10 +71,8 @@ def main():
         room = Room.objects.get(world__slug=world.slug, key=key)
         if room.data.get('trash'):
             continue
-        if 'bts' in room.data:
+        if 'bts' in room.data and not '-f' in sys.argv:
             continue
-        # if room.id != 230:
-        #     continue
         room.data.pop('shapes', None)
         room.save()
         image = img._coerce(os.path.join(BTS_DIR, key), 'np')
