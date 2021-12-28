@@ -147,7 +147,7 @@ class SmileSprite(models.Model):
   type = models.CharField(max_length=32, blank=True, default='')
   MODIFIERS = _choices(['composite', 'inblock', 'inegg'])
   modifier = models.CharField(max_length=16, choices=MODIFIERS, null=True, blank=True)
-  CATEGORIES = _choices(['item', 'enemy', 'obstacle', 'door', 'station', 'animation', 'trash'])
+  CATEGORIES = _choices(['geo', 'item', 'enemy', 'obstacle', 'door', 'station', 'animation', 'trash'])
   category = models.CharField(max_length=16, choices=CATEGORIES, null=True, blank=True)
   COLORS = _choices(colors)
   color = models.CharField(max_length=16, choices=COLORS, null=True, blank=True)
@@ -204,7 +204,7 @@ class SpriteMatcher():
       # it's a match!
       if not np.array_equal(image, img._coerce(sprite.image.path, 'np')):
         print('duplicated!')
-        duplicates_path = mkdir(settings.MEDIA_ROOT, f'plm_enemies/duplicates/{layer}')
+        duplicates_path = mkdir(settings.MEDIA_ROOT, f'smile_exports/plm_enemies/duplicates/{layer}')
         duplicate_path = os.path.join(duplicates_path, f'{sprite.id}.png')
         if os.path.exists(duplicate_path):
           dupe = img._coerce(duplicate_path, 'np')

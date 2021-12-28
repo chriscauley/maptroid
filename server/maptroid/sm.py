@@ -39,6 +39,9 @@ def get_occupied_world_xys(target_zone):
                         occupied_xy_map[zone_xy] = room.id
     return occupied_xy_map
 
+def to_media_url(path, *args):
+    return os.path.join(settings.MEDIA_URL, path.split('/.media/')[-1], *args)
+
 def process_zone(zone):
     if zone.data.get("hidden"):
         return
@@ -46,8 +49,9 @@ def process_zone(zone):
     world = zone.world
     CACHE_DIR = mkdir(settings.MEDIA_ROOT, f'sm_cache/{world.slug}')
     ROOM_DIR = mkdir(settings.MEDIA_ROOT, f'sm_room/{world.slug}')
-    ZONE_DIR = mkdir(settings.MEDIA_ROOT, f'sm_zone/{world.slug}')
+    LAYER_DIR = mkdir(settings.MEDIA_ROOT, f'sm_zone/{world.slug}/layer-1')
     BTS_DIR = mkdir(settings.MEDIA_ROOT, f'sm_zone/{world.slug}/bts')
+    PLM_DIR = mkdir(settings.MEDIA_ROOT, f'sm_zone/{world.slug}/plm_enemies')
 
     rooms = zone.room_set.all()
     x_min = min([r.data['zone']['bounds'][0] for r in rooms])
@@ -66,6 +70,7 @@ def process_zone(zone):
             room_image = Image.new('RGBA', (int(width) * 256, int(height) * 256), (0, 0, 0, 255))
 
             # this allows the clear_holes preference to be set from the top down
+            # some maps (eg ascent) look better if filled in a bit more
             zone_clear_holes = world.data.get('clear_holes') or zone.data.get('clear_holes')
             room_clear_holes = zone_clear_holes or room.data.get('clear_holes')
 
@@ -100,15 +105,15 @@ def process_zone(zone):
         else:
             png_to_dzi(dest)
 
-
     zone.normalize()
 
-    make_layered_zone_image(zone, ['layer-2', 'layer-1'], os.path.join(ZONE_DIR, f'{zone.slug}.png'))
-    zone.data['dzi'] = os.path.join(settings.MEDIA_URL, f'sm_zone/{world.slug}/{zone.slug}.dzi')
+    # removing old dzi keys as they are no longer used
+    for key in list(zone.data.keys()):
+        if key.endswith('dzi'):
+            zone.data.pop(key)
 
+    make_layered_zone_image(zone, ['layer-2', 'layer-1'], os.path.join(LAYER_DIR, f'{zone.slug}.png'))
     make_layered_zone_image(zone, ['bts'], os.path.join(BTS_DIR, f'{zone.slug}.png'))
-    zone.data['bts_dzi'] = os.path.join(settings.MEDIA_URL, f'sm_zone/{world.slug}/bts/{zone.slug}.dzi')
+    make_layered_zone_image(zone, ['plm_enemies'], os.path.join(PLM_DIR, f'{zone.slug}.png'))
 
     zone.save()
-
-

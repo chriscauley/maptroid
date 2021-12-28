@@ -14,7 +14,7 @@ from PIL import Image
 import pytesseract
 
 from maptroid.models import Room, SmileSprite
-from maptroid.sm import set_transparency
+from maptroid.sm import set_transparency, to_media_url
 
 
 world = get_world_from_argv()
@@ -40,7 +40,7 @@ coords = {
   },
 }
 
-SOURCE_DIR = os.path.join(settings.MEDIA_ROOT, 'plm_enemies', world.slug)
+SOURCE_DIR = os.path.join(settings.MEDIA_ROOT, f'smile_exports/{world.slug}/plm_enemies')
 
 def get_dir(name, wipe=False):
   out = os.path.join(SOURCE_DIR, name)
@@ -134,10 +134,6 @@ def read_text(ss_name, type_, coords):
     data['missing_' + type_] += 1
     return
   return matched_letters.replace(' ','')
-
-
-def to_media_url(path, *args):
-  return os.path.join(settings.MEDIA_URL, path.split('/.media/')[-1], *args)
 
 
 def get_cropped_workarea(image):

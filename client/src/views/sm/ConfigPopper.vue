@@ -22,6 +22,7 @@ const groups = {
     rooms: true,
     walls: false,
     bts: false,
+    plm_enemies: false,
   },
   entities: {
     items: true,
@@ -32,6 +33,7 @@ const groups = {
 }
 
 export const LAYER_NAMES = flatten(Object.values(groups).map((g) => Object.keys(g)))
+export const DZI_LAYERS = ['layer-1', 'bts', 'plm_enemies']
 
 const help_texts = {
   'layer-1':

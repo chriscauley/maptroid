@@ -36,7 +36,7 @@ import Openseadragon from 'openseadragon'
 import { computed } from 'vue'
 
 import BaseViewer from '@/components/BaseViewer'
-import ConfigPopper from './ConfigPopper.vue'
+import ConfigPopper, { DZI_LAYERS } from './ConfigPopper.vue'
 import ElevatorOverlay from './ElevatorOverlay.vue'
 import HtmlOverlay from '@/vue-openseadragon/HtmlOverlay.vue'
 import ViewerPanel from '@/components/ViewerPanel/index.vue'
@@ -162,12 +162,13 @@ export default {
   watch: {
     'tool_storage.state.show_bts': 'syncImages',
     'tool_storage.state.show_layer-1': 'syncImages',
+    'tool_storage.state.show_plm_enemies': 'syncImages',
   },
   methods: {
     loadImages() {
       let x_max = 10
       let y_max = 10
-      const { zone, zone_rooms } = this.$store.route
+      const { zone, zone_rooms, world } = this.$store.route
       if (zone) {
         zone_rooms.forEach((room) => {
           const [x, y, width, height] = room.data.zone.bounds
@@ -177,12 +178,13 @@ export default {
       } else {
         this.zones.forEach((zone) => {
           const [x, y, width, height] = zone.data.world.bounds
+          const visible_layers = this.tool_storage.getVisibleLayers()
+          DZI_LAYERS.forEach((layer) => {
+            const tileSource = `/media/sm_zone/${world.slug}/${layer}/${zone.slug}.dzi`
+            const opacity = visible_layers.includes(layer) ? 1 : 0
+            this.osd_store.viewer.addTiledImage({ tileSource, width, x, y, opacity })
+          })
 
-          let tileSource = zone.data.dzi
-          this.osd_store.viewer.addTiledImage({ tileSource, width: width, x, y })
-
-          tileSource = zone.data.bts_dzi
-          this.osd_store.viewer.addTiledImage({ tileSource, width: width, x, y })
           x_max = Math.max(x_max, x + width)
           y_max = Math.max(y_max, y + height)
         })
@@ -209,11 +211,12 @@ export default {
     },
     syncImages() {
       const world_re = new RegExp(`/media/sm_zone/${this.$route.params.world_slug}/`)
+      const visible_layers = this.tool_storage.getVisibleLayers()
       this.osd_store.viewer.world._items.forEach((i) => {
         const url = i.source.tilesUrl || ''
         if (url.match(world_re)) {
-          const layer = url.includes('/bts/') ? 'bts' : 'layer-1'
-          const opacity = this.tool_storage.state[`show_${layer}`] ? 1 : 0
+          const layer = DZI_LAYERS.find((l) => url.includes(`/${l}/`))
+          const opacity = visible_layers.includes(layer) ? 1 : 0
           i.setOpacity(opacity)
         }
       })

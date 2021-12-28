@@ -45,6 +45,7 @@ export default (component) => {
   }
   const storage = ToolStorage('tools__dread', { tools: getTools })
   storage.getVisibleLayers = () => LAYER_NAMES.filter((n) => storage.state[`show_${n}`])
+  storage.all_layers = LAYER_NAMES
 
   return storage
 }

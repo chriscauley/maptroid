@@ -56,7 +56,7 @@ def media_url_to_path(url):
 
 def main():
   world = get_world_from_argv()
-  OUTPUT_DIR = mkdir(settings.MEDIA_ROOT,f'plm_enemies/{world.slug}/')
+  OUTPUT_DIR = mkdir(settings.MEDIA_ROOT,f'smile_exports/{world.slug}/plm_enemies/')
 
   rooms = Room.objects.filter(world=world)
   # rooms = rooms.filter(id=19)
