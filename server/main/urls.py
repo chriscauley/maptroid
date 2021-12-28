@@ -4,7 +4,7 @@ from django.http import HttpResponseRedirect
 from unrest.views import index
 from main.views import list_dir, delete_file
 
-from maptroid.views import replace_svg_color, smile_ocr, save_sprite, sprite_distances
+from maptroid.views import replace_svg_color, smile_ocr, save_sprite, sprite_distances, goto_room
 import maptroid.forms
 import unrest.user.forms
 import contact.forms
@@ -22,6 +22,7 @@ urlpatterns = [
     path('api/smile-ocr/', smile_ocr),
     path('api/save-sprite/', save_sprite),
     path('api/sprite-distances/', sprite_distances),
+    path('room/<room_id>/', goto_room),
     path('', include('social_django.urls', namespace='social')),
     path('', include('unrest.urls')),
 ]

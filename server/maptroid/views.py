@@ -1,6 +1,6 @@
 from django.core.files.base import ContentFile
 from django.conf import settings
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404
 from io import BytesIO
 import imagehash
@@ -186,3 +186,8 @@ def sprite_distances(request):
     for item in items:
         item.pop('params')
     return JsonResponse({ 'items': items })
+
+
+def goto_room(request, room_id):
+    room = get_object_or_404(Room, id=room_id)
+    return HttpResponseRedirect(f'/sm/{room.world.slug}/?room={room.id}')

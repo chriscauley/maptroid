@@ -155,13 +155,13 @@ export default ({ store }) => {
 
     selectItem(item) {
       const { $route, $router } = store._app.config.globalProperties
-      const query = { ...$route.query }
       if (!item) {
+        const query = { ...$route.query }
         delete query.item_id
+        $router.replace({ path: $route.path, query })
       } else {
-        query.item_id = item.id
+        $router.replace({ path: $route.path, query: { item_id: item.id } })
       }
-      $router.push({ path: $route.path, query })
     },
     blurItem() {
       route.selectItem(null)

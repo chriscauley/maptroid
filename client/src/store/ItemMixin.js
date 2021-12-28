@@ -11,6 +11,16 @@ export default {
         }
       }, 100)
     }
+    const room_id = parseInt(this.$route.query.room)
+    if (room_id) {
+      const interval = setInterval(() => {
+        const room = this.$store.route.world_rooms.find((i) => i.id === room_id)
+        if (room && this.osd_store.viewer?.isOpen()) {
+          this.gotoRoom(room)
+          clearInterval(interval)
+        }
+      }, 100)
+    }
   },
   unmounted() {
     document.removeEventListener('click', this.$store.route.blurItem)

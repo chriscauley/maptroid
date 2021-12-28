@@ -52,15 +52,23 @@ export default (component) => {
     )
   }
 
-  osd_store.gotoItem = (item, map_bounds) => {
-    const [x, y, w, h] = map_bounds.room_bounds[item.room]
+  osd_store._gotoBounds = (bounds) => {
+    const [x, y, w, h] = bounds
     const b = 1
     state._viewer.viewport.fitBounds(new Rect(x - b, y - b, w + 2 * b, h + 2 * b))
+  }
+
+  osd_store.gotoItem = (item, map_bounds) => {
+    osd_store._gotoBounds(map_bounds.room_bounds[item.room])
 
     const f = () => component.$store.route.selectItem(item)
     const timeout = setTimeout(f, 100)
     state._viewer.addOnceHandler('animation-finish', f)
     state._viewer.addOnceHandler('animation-start', () => clearTimeout(timeout))
+  }
+
+  osd_store.gotoRoom = (room, map_bounds) => {
+    osd_store._gotoBounds(map_bounds.room_bounds[room.id])
   }
 
   return osd_store

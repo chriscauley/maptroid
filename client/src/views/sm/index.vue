@@ -190,8 +190,11 @@ export default {
         })
       }
       this.osd_store.viewer.addOnceHandler('tile-loaded', () => {
-        this.osd_store.viewer.viewport.fitBounds(new Rect(0, 0, x_max, y_max), true),
+        const { item, room } = this.$route.query
+        if (!item && !room) {
+          this.osd_store.viewer.viewport.fitBounds(new Rect(0, 0, x_max, y_max), true)
           this.syncImages()
+        }
       })
       this.loadCorners(x_max, y_max)
     },
@@ -220,6 +223,9 @@ export default {
           i.setOpacity(opacity)
         }
       })
+    },
+    gotoRoom(room) {
+      this.osd_store.gotoRoom(room, this.map_props)
     },
   },
 }
