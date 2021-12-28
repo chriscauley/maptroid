@@ -1,0 +1,11 @@
+@import './unrest-toolbar.scss';
+
+.game-editor {
+   @apply absolute;
+  .mouse-text {
+    @apply absolute;
+    color: white;
+    text-shadow: 0 0 4px black;
+    pointer-events: none;
+  }
+}
