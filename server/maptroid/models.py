@@ -6,7 +6,7 @@ import os
 from unrest.decorators import cached_property
 import unrest_image as img
 
-from maptroid.shapes import get_room_walls
+from maptroid.shapes import get_room_walls, get_screens
 from maptroid.dread import process_screenshot
 from maptroid.utils import mkdir
 

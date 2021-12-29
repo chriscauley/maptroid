@@ -2,7 +2,6 @@ import p2 from 'p2'
 
 import Player from './Player'
 import { SCENERY_GROUP, BULLET_GROUP, PLAYER_GROUP, PLAYER_ACTIONS } from './constants'
-import Brick from './Brick'
 import { fromString } from './Room'
 
 // Collision groups
@@ -31,7 +30,7 @@ export default class Game extends p2.EventEmitter {
     // Init canvas
     Object.assign(this, {
       cameraPos: [0, 0],
-      zoom: 50,
+      zoom: 25,
       entities: {},
       background_entities: [],
       TIMEOUT_ID: 1,
@@ -57,20 +56,19 @@ export default class Game extends p2.EventEmitter {
       e.bodyA._entity?.impact?.(e)
     })
 
-    options.room.json.static_boxes.forEach(({ x, y, width, height, angle }) => {
-      this.addStaticBox(x, y, width, height, angle)
-    })
-    options.room.json.bricks.forEach(({ x, y, type }) => {
-      new Brick({ game: this, x, y, type })
-    })
-
-    this.addStaticBox(-5, 0, 1, 10, -Math.PI / 4)
+    options.room.bindGame(this)
 
     // Create the character controller
     if (options.room.json.start) {
       this.player = new Player({ game: this, world: this.world, start: options.room.json.start })
       this.world.on('postStep', () => {
         this.player.update(this.world.lastTimeStep)
+        const { aabb } = this.player.body
+        options.room.edges.forEach((body) => {
+          if (body.aabb.overlaps(aabb)) {
+            // TODO load nearby room
+          }
+        })
       })
       this.player?.on('collide', (_result) => {
         // console.log(_result)
@@ -143,25 +141,36 @@ export default class Game extends p2.EventEmitter {
     var body = new p2.Body({ position: [x, y], angle: angle })
     body.addShape(new p2.Circle({ collisionGroup: SCENERY_GROUP, radius }))
     this.world.addBody(body)
+    return body
   }
 
-  addStaticBox(x, y, width, height, angle = 0) {
+  addStaticBox([x, y, width, height, angle = 0], options) {
     const collisionMask = PLAYER_GROUP | BULLET_GROUP
-    var shape = new p2.Box({ collisionGroup: SCENERY_GROUP, collisionMask, width, height })
-    var body = new p2.Body({
+    const shape = new p2.Box({ collisionGroup: SCENERY_GROUP, collisionMask, width, height })
+    Object.assign(shape, options)
+    const body = new p2.Body({
       position: [x, y],
       angle: angle,
     })
     body.addShape(shape)
     this.world.addBody(body)
+    return body
+  }
+
+  addStaticShape(coords, options) {
+    const body = new p2.Body({ position: [0, 0] })
+    body.fromPolygon(coords)
+    body.shapes.forEach((s) => Object.assign(s, options))
+    this.world.addBody(body)
+    return body
   }
 
   drawBody(body) {
     this.ctx.lineWidth = 0
     this.ctx.strokeStyle = 'none'
-    this.ctx.fillStyle = 'white'
     const [x, y] = body.interpolatedPosition
     const s = body.shapes[0]
+    this.ctx.fillStyle = s._color || 'white'
     this.ctx.save()
     this.ctx.translate(x, y) // Translate to the center of the box
     this.ctx.rotate(body.interpolatedAngle) // Rotate to the box body frame
@@ -175,6 +184,19 @@ export default class Game extends p2.EventEmitter {
       this.ctx.arc(0, 0, s.radius, 0, 2 * Math.PI)
       this.ctx.fill()
       this.ctx.closePath()
+    } else {
+      body.shapes.forEach((shape) => {
+        this.ctx.fillStyle = shape._color || 'white'
+        const [x0, y0] = shape.position
+        this.ctx.beginPath()
+        const [x, y] = shape.vertices[shape.vertices.length - 1]
+        this.ctx.moveTo(x + x0, y + y0)
+        shape.vertices.forEach((xy) => {
+          this.ctx.lineTo(xy[0] + x0, xy[1] + y0)
+        })
+        this.ctx.fill()
+        this.ctx.closePath()
+      })
     }
 
     this.ctx.restore()
@@ -215,7 +237,7 @@ export default class Game extends p2.EventEmitter {
       const x = mouse_x - (0.5 * width) / zoom - this.cameraPos[0]
       const y = mouse_y + (0.5 * height) / zoom - this.cameraPos[1]
       this.mouse._world_xy = [x, y]
-      this.mouse.world_xy = [Math.floor(x + 0.5) - 0.5, Math.floor(y + 0.5) - 0.5]
+      this.mouse.world_xy = [Math.floor(x), Math.floor(y)]
     }
 
     this.ui.forEach((item) => {

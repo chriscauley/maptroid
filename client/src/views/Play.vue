@@ -10,12 +10,14 @@ import Mousetrap from '@unrest/vue-mousetrap'
 import DebugGame from '@/components/DebugGame'
 import GameCanvas from '@/components/Game'
 
+import { fromDb } from '@/game/Room'
 import Game from '@/game/Game'
 import _games from '@/game/_games'
 
 export default {
   __route: {
-    path: '/play/:type/:room_id/',
+    path: '/play/string_room/:string_room_id/',
+    alias: ['/play/:world_slug/:room_id/'],
   },
   components: { DebugGame, GameCanvas },
   mixins: [Mousetrap.Mixin],
@@ -41,11 +43,17 @@ export default {
       return mousetrap
     },
   },
-  mounted() {
+  async mounted() {
     const options = {}
-    const { type, room_id } = this.$route.params
-    if (type === 'string_room') {
-      options.string_room = _games.strings[room_id]
+    const { string_room_id } = this.$route.params
+    const room_id = parseInt(this.$route.params.room_id)
+    if (string_room_id) {
+      options.string_room = _games.strings[string_room_id]
+    } else {
+      // room_id
+      await this.$store.route.fetchReady()
+      const room = this.$store.route.world_rooms.find((r) => r.id === room_id)
+      options.room = fromDb(room)
     }
     this.game = new Game(document.getElementById('game-canvas'), options)
     this.game.on('draw', this.draw)

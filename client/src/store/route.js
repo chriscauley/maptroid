@@ -1,4 +1,4 @@
-import { computed } from 'vue'
+import { computed, watch } from 'vue'
 
 const Query = (q = {}) => ({ query: { per_page: 5000, ...q } })
 
@@ -105,6 +105,20 @@ export default ({ store }) => {
 
     get world_runs() {
       return _computed.world_runs.value
+    },
+
+    get ready() {
+      const { world, zones, world_rooms } = route
+      return world && zones.length && world_rooms.length
+    },
+
+    fetchReady() {
+      return new Promise((resolve) =>
+        watch(
+          () => route.ready,
+          (value) => value && resolve(),
+        ),
+      )
     },
 
     refetchWorlds() {
