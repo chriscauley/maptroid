@@ -2,7 +2,7 @@ import p2 from 'p2'
 
 import Player from './Player'
 import { SCENERY_GROUP, BULLET_GROUP, PLAYER_GROUP, PLAYER_ACTIONS } from './constants'
-import { fromString } from './Room'
+import WorldController from './WorldController'
 
 // Collision groups
 const FIXED_DELTA_TIME = 1 / 60
@@ -19,7 +19,7 @@ export default class Game extends p2.EventEmitter {
     this.canvas = canvas
     this.resize()
 
-    this.init(options)
+    this.init()
     requestAnimationFrame(this.animate)
   }
 
@@ -27,7 +27,7 @@ export default class Game extends p2.EventEmitter {
     this.ctx = this.canvas.getContext('2d')
   }
 
-  init(options) {
+  init() {
     // Init canvas
     Object.assign(this, {
       cameraPos: [0, 0],
@@ -44,9 +44,6 @@ export default class Game extends p2.EventEmitter {
       paused: true,
     })
 
-    if (options.string_room) {
-      options.room = fromString(options.string_room)
-    }
     this.ctx.lineWidth = 1 / this.zoom
 
     // Init world
@@ -57,17 +54,20 @@ export default class Game extends p2.EventEmitter {
       e.bodyA._entity?.impact?.(e)
     })
 
-    options.room.bindGame(this)
+    const { world, rooms, zones, room_id } = this.options
+    this.world_controller = new WorldController({ world, rooms, zones, game: this })
+    this.current_room = this.world_controller.room_by_id[room_id]
+    this.current_room.bindGame(this)
 
     // Create the character controller
     this.player = new Player({ game: this, p2_world: this.p2_world, start: [0, 0] })
-    options.room.positionPlayer(this.player)
+    this.current_room.positionPlayer(this.player)
     this.p2_world.on('postStep', () => {
       this.player.update(this.p2_world.lastTimeStep)
       const { aabb } = this.player.body
-      options.room.edges.forEach((body) => {
+      this.current_room.edges.forEach((body) => {
         if (body.aabb.overlaps(aabb)) {
-          // TODO load nearby room
+          console.log(body.position.toString())
         }
       })
     })

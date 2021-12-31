@@ -4,6 +4,7 @@ import { vector } from '@unrest/geo'
 import Brick from './Brick'
 import { SCENERY_GROUP, BULLET_GROUP, PLAYER_GROUP, DXYS } from './constants'
 
+// DEPRECATED this is an old way to load rooms from string. Might be useful in tests
 export const fromString = (string, options = {}) => {
   options = cloneDeep(options)
   options.json = {
@@ -32,29 +33,10 @@ export const fromString = (string, options = {}) => {
   return new Room(options)
 }
 
-export const fromDb = (room) => {
-  const shapes = []
-  room.data.geometry.inner.forEach((geo) => {
-    if (geo.interiors?.length) {
-      throw `Room #{room.id} has interiors!`
-    }
-    shapes.push({
-      exterior: geo.exterior.map((p) => p.slice()),
-    })
-  })
-  return new Room({
-    json: {
-      bricks: [],
-      static_boxes: [],
-      shapes,
-      screens: cloneDeep(room.data.geometry.screens),
-    },
-  })
-}
-
+// TODO needs yflip(?)
 const EDGE_BOUNDS = {
-  '1,0': [15.1, 0, 0.9, 16],
-  '-1,0': [0, 0, 0.9, 16],
+  '1,0': [15.1, -16, 0.9, 0],
+  '-1,0': [0, -16, 0.9, 0],
   '0,1': [0, 15.1, 16, 0.9],
   '0,-1': [0, 0, 16, 0.9],
 }
@@ -66,17 +48,34 @@ const EDGE_STARTS = {
   '0,-1': [8, -14.5], // YFLIP
 }
 
-class Room {
-  constructor(options) {
-    this.options = options
-    this.json = options.json
-    const _screens = {}
-    this.json.screens.forEach((xy) => (_screens[xy] = true))
-    this.screens = this.json.screens.map((room_xy) => {
+const _yflip = (xy) => [xy[0], -xy[1]] // YFLIP
+
+export default class Room {
+  constructor(json, world_controller) {
+    this.json = json
+    this.id = this.json.id
+    this.world_controller = world_controller
+
+    // YFLIP all coordinates and set the coordinates to world_coordinates
+    const _transform = (xy) => vector.add(_yflip(xy), this.world_xy0)
+    this.world_xy0 = this.world_controller.xy0_by_room_id[this.json.id]
+    const screen_xys = json.data.geometry.screens.map(_transform)
+    const _screen_exists = {}
+    screen_xys.forEach((xy) => (_screen_exists[xy] = true))
+    this.screens = screen_xys.map((world_xy) => {
       return {
-        room_xy,
-        edges: DXYS.filter((dxy) => !_screens[vector.add(dxy, room_xy)]),
+        world_xy,
+        edges: DXYS.slice(0, 1).filter((dxy) => !_screen_exists[vector.add(dxy, world_xy)]),
       }
+    })
+    this.static_shapes = []
+    json.data.geometry.inner.forEach((geo) => {
+      if (geo.interiors?.length) {
+        // TODO there are examples of this in pink maridia. Do they ever matter?
+      }
+      this.static_shapes.push({
+        exterior: geo.exterior.map((xy) => _transform([xy[0] * 16, xy[1] * 16])),
+      })
     })
   }
 
@@ -84,14 +83,11 @@ class Room {
     this.game = game
     this.bodies = []
     this.edges = []
+    this.bricks = []
 
-    // Add static boxes (only in string_room's for now)
-    this.json.static_boxes.forEach(({ x, y, width, height, angle }) => {
-      this.bodies.push(game.addStaticBox(x, y, width, height, angle))
-    })
-
+    // TODO populate bricks from json
     // Add bricks
-    this.json.bricks.forEach(({ x, y, type }) => {
+    this.bricks.forEach(({ x, y, type }) => {
       const brick = new Brick({ game, x, y, type })
       this.bodies.push(brick.body)
     })
@@ -99,19 +95,18 @@ class Room {
     const collisionMask = PLAYER_GROUP | BULLET_GROUP
     const shape_options = { collisionMask, collisionGroup: SCENERY_GROUP }
     // Add bts shapes
-    this.json.shapes?.forEach((s) => {
-      const exterior = s.exterior.map((p) => this.screenToWorldXY(p))
-      this.bodies.push(game.addStaticShape(exterior, shape_options))
+    this.static_shapes.forEach((shape) => {
+      this.bodies.push(game.addStaticShape(shape.exterior, shape_options))
     })
 
     // Add edges
     this.screens.forEach((screen) => {
       const options = { _color: 'rgba(255, 128, 128, 0.5)', collisionResponse: false }
-      const [x, y] = this.screenToWorldXY(screen.room_xy)
+      const [x, y] = screen.world_xy
       screen.edges.forEach((dxy) => {
         const [edge_x, edge_y, width, height] = EDGE_BOUNDS[dxy]
         const center_x = x + edge_x + width / 2
-        const center_y = y - (edge_y + height / 2) // YFLIP
+        const center_y = y + edge_y + height / 2
 
         const body = game.addStaticBox([center_x, center_y, width, height], options)
         this.bodies.push(body)
@@ -123,10 +118,9 @@ class Room {
   positionPlayer(player) {
     this.game.p2_world.bodies.forEach((b) => b.updateAABB())
     for (let screen of this.screens) {
-      const world_xy = this.screenToWorldXY(screen.room_xy)
       for (let dxy of screen.edges) {
         dxy = EDGE_STARTS[dxy]
-        player.body.position = vector.add(world_xy, dxy)
+        player.body.position = vector.add(screen.world_xy, dxy)
         player.body.updateAABB()
         const collided_with = this.bodies.find((body) => body.aabb.overlaps(player.body.aabb))
         if (!collided_with) {
@@ -135,10 +129,5 @@ class Room {
       }
     }
     throw 'Unable to find initial player placement'
-  }
-
-  screenToWorldXY(screen_xy) {
-    // YFLIP and multiply
-    return [16 * screen_xy[0], -16 * screen_xy[1]]
   }
 }
