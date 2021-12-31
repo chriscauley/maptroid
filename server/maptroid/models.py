@@ -100,6 +100,7 @@ class Room(models.Model):
     if not 'geometry' in self.data:
       self.data['geometry'] = {}
     if self.world_id != 3 and 'zone' in self.data: # TODO this doesn't work for dread yet
+      self.data['geometry']['screens'] = get_screens(self)
       self.data['geometry']['outer'] = get_room_walls(self)
     super().save(*args, **kwargs)
 

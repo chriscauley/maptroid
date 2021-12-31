@@ -9,17 +9,21 @@ def _square(x, y):
         [x, y+1],
     ])
 
-def get_room_walls(room):
+def get_screens(room):
+    screens = []
     _x, _y, width, height = room.data['zone']['bounds']
     if type(width) == float:
         room.data['zone']['bounds'] = [int(i) for i in room.data['zone']['bounds']]
         _x, _y, width, height = room.data['zone']['bounds']
-    polygons = []
     for x in range(width):
         for y in range(height):
             holes = room.data.get('holes') or []
             if not [x, y] in holes:
-                polygons.append(_square(x, y))
+                screens.append([x, y])
+    return screens
+
+def get_room_walls(room):
+    polygons = [_square(x, y) for x, y in get_screens(room)]
     return polygons_to_geometry(polygons)
 
 def polygons_to_geometry(polygons):
@@ -34,3 +38,13 @@ def polygons_to_geometry(polygons):
         for polygon in multipolygon.geoms
     ]
 
+# TODO I tried to reduce polygons by removing redundant points, bus p2js didn't seem to like it.
+def reduce_polygon(points):
+    if not points:
+        return points
+    polygon = Polygon(points)
+    starting_area = polygon.area
+    polygon = polygon.simplify(0.001)
+    assert(starting_area == polygon.area)
+    print(len(points), len(polygon.exterior.coords))
+    return [list(p) for p in polygon.exterior.coords]
