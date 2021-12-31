@@ -15,6 +15,7 @@ const { vec2 } = p2
 export default class Game extends p2.EventEmitter {
   constructor(canvas, options) {
     super()
+    this.options = options
     this.canvas = canvas
     this.resize()
 
@@ -59,28 +60,27 @@ export default class Game extends p2.EventEmitter {
     options.room.bindGame(this)
 
     // Create the character controller
-    if (options.room.json.start) {
-      this.player = new Player({ game: this, world: this.world, start: options.room.json.start })
-      this.world.on('postStep', () => {
-        this.player.update(this.world.lastTimeStep)
-        const { aabb } = this.player.body
-        options.room.edges.forEach((body) => {
-          if (body.aabb.overlaps(aabb)) {
-            // TODO load nearby room
-          }
-        })
-      })
-      this.player?.on('collide', (_result) => {
-        // console.log(_result)
-      })
-      // Set up key listeners
-      PLAYER_ACTIONS.forEach((a) => {
-        this.actions[a] = {
-          keydown: () => this.player.press(a),
-          keyup: () => this.player.release(a),
+    this.player = new Player({ game: this, world: this.world, start: [0, 0] })
+    options.room.positionPlayer(this.player)
+    this.world.on('postStep', () => {
+      this.player.update(this.world.lastTimeStep)
+      const { aabb } = this.player.body
+      options.room.edges.forEach((body) => {
+        if (body.aabb.overlaps(aabb)) {
+          // TODO load nearby room
         }
       })
-    }
+    })
+    this.player?.on('collide', (_result) => {
+      // console.log(_result)
+    })
+    // Set up key listeners
+    PLAYER_ACTIONS.forEach((a) => {
+      this.actions[a] = {
+        keydown: () => this.player.press(a),
+        keyup: () => this.player.release(a),
+      }
+    })
 
     // Update the character controller after each physics tick.
     this.world.on('postStep', () => {

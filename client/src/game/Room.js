@@ -2,7 +2,7 @@ import { cloneDeep } from 'lodash'
 import { vector } from '@unrest/geo'
 
 import Brick from './Brick'
-import { SCENERY_GROUP, BULLET_GROUP, PLAYER_GROUP } from './constants'
+import { SCENERY_GROUP, BULLET_GROUP, PLAYER_GROUP, DXYS } from './constants'
 
 export const fromString = (string, options = {}) => {
   options = cloneDeep(options)
@@ -33,15 +33,13 @@ export const fromString = (string, options = {}) => {
 }
 
 export const fromDb = (room) => {
-  const start = [5, -3]
   const shapes = []
   room.data.geometry.inner.forEach((geo) => {
     if (geo.interiors?.length) {
       throw `Room #{room.id} has interiors!`
     }
-    // YFLIP and multiply by 16 to convert from map coords to game coords
     shapes.push({
-      exterior: geo.exterior.map((p) => [16 * p[0], -16 * p[1]]),
+      exterior: geo.exterior.map((p) => p.slice()),
     })
   })
   return new Room({
@@ -49,24 +47,23 @@ export const fromDb = (room) => {
       bricks: [],
       static_boxes: [],
       shapes,
-      start,
       screens: cloneDeep(room.data.geometry.screens),
     },
   })
 }
-
-const DXYS = [
-  [1, 0],
-  [-1, 0],
-  [0, 1],
-  [0, -1],
-]
 
 const EDGE_BOUNDS = {
   '1,0': [15.1, 0, 0.9, 16],
   '-1,0': [0, 0, 0.9, 16],
   '0,1': [0, 15.1, 16, 0.9],
   '0,-1': [0, 0, 16, 0.9],
+}
+
+const EDGE_STARTS = {
+  '1,0': [14.5, -8], // YFLIP
+  '-1,0': [1.5, -8], // YFLIP
+  '0,1': [8, -1.5], // YFLIP
+  '0,-1': [8, -14.5], // YFLIP
 }
 
 class Room {
@@ -84,6 +81,7 @@ class Room {
   }
 
   bindGame(game) {
+    this.game = game
     this.bodies = []
     this.edges = []
 
@@ -102,23 +100,45 @@ class Room {
     const shape_options = { collisionMask, collisionGroup: SCENERY_GROUP }
     // Add bts shapes
     this.json.shapes?.forEach((s) => {
-      this.bodies.push(game.addStaticShape(s.exterior, shape_options))
+      const exterior = s.exterior.map((p) => this.screenToWorldXY(p))
+      this.bodies.push(game.addStaticShape(exterior, shape_options))
     })
 
     // Add edges
     this.screens.forEach((screen) => {
       const options = { _color: 'rgba(255, 128, 128, 0.5)', collisionResponse: false }
-      const [x, y] = screen.room_xy
+      const [x, y] = this.screenToWorldXY(screen.room_xy)
       screen.edges.forEach((dxy) => {
         const [edge_x, edge_y, width, height] = EDGE_BOUNDS[dxy]
-        const center_x = x * 16 + edge_x + width / 2
-        const center_y = y * 16 + edge_y + height / 2
+        const center_x = x + edge_x + width / 2
+        const center_y = y - (edge_y + height / 2) // YFLIP
 
-        // YFLIP
-        const body = game.addStaticBox([center_x, -center_y, width, height], options)
+        const body = game.addStaticBox([center_x, center_y, width, height], options)
         this.bodies.push(body)
         this.edges.push(body)
       })
     })
+  }
+
+  positionPlayer(player) {
+    this.game.world.bodies.forEach((b) => b.updateAABB())
+    for (let screen of this.screens) {
+      const world_xy = this.screenToWorldXY(screen.room_xy)
+      for (let dxy of screen.edges) {
+        dxy = EDGE_STARTS[dxy]
+        player.body.position = vector.add(world_xy, dxy)
+        player.body.updateAABB()
+        const collided_with = this.bodies.find((body) => body.aabb.overlaps(player.body.aabb))
+        if (!collided_with) {
+          return
+        }
+      }
+    }
+    throw 'Unable to find initial player placement'
+  }
+
+  screenToWorldXY(screen_xy) {
+    // YFLIP and multiply
+    return [16 * screen_xy[0], -16 * screen_xy[1]]
   }
 }

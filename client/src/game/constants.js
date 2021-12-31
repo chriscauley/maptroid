@@ -9,6 +9,13 @@ export const DIRECTIONS = [
   [0, -1],
 ]
 
+export const DXYS = [
+  [1, 0],
+  [-1, 0],
+  [0, 1],
+  [0, -1],
+]
+
 export const PLAYER_ACTIONS = [
   'up',
   'down',
