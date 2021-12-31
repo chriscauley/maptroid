@@ -40,7 +40,7 @@ export default class Player extends Controller {
         collisionGroup: PLAYER_GROUP,
       }),
     )
-    options.world.addBody(options.body)
+    options.p2_world.addBody(options.body)
 
     super(options)
     this.game = options.game
@@ -282,7 +282,7 @@ export default class Player extends Controller {
 
     this._blast_velocity.forEach((blast_count, i) => {
       if (blast_count) {
-        this._last_blast = this.world.time
+        this._last_blast = this.p2_world.time
         const sign = Math.sign(blast_count)
         blast_count = Math.min(Math.abs(blast_count), 2) // cannot be moved up more than 2 squares
         if (i === 0) {

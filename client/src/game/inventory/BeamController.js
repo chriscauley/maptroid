@@ -25,10 +25,10 @@ export default class BeamController {
       vec2.add(ray.from, this.player.body.position, from)
       vec2.add(ray.to, this.player.body.position, to)
       ray.update()
-      this.player.world.raycast(raycastResult, ray)
+      this.player.p2_world.raycast(raycastResult, ray)
       if (raycastResult.body) {
         let ray_to_hit = raycastResult.getHitDistance(ray)
-        if (this.player.world.hitTest(ray.from, [raycastResult.body]).length) {
+        if (this.player.p2_world.hitTest(ray.from, [raycastResult.body]).length) {
           ray_to_hit = 0
         }
         const player_to_ray = vec2.distance(start, from)
@@ -44,7 +44,7 @@ export default class BeamController {
     })
     hits = sortBy(hits, 'distance')
     if (hits.length) {
-      this.player.world.emit({
+      this.player.p2_world.emit({
         type: 'damage',
         damage: {
           type: 'beam',

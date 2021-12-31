@@ -18,7 +18,7 @@ export default class RaycastController extends EventEmitter {
   constructor(options = {}) {
     super(options)
 
-    this.world = options.world
+    this.p2_world = options.p2_world
     this.body = options.body
     this.id = options.body.id
 

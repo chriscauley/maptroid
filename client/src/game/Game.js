@@ -50,9 +50,9 @@ export default class Game extends p2.EventEmitter {
     this.ctx.lineWidth = 1 / this.zoom
 
     // Init world
-    this.world = new p2.World()
+    this.p2_world = new p2.World()
     window._GAME = this
-    this.world.on('impact', (e) => {
+    this.p2_world.on('impact', (e) => {
       // non-player collisions
       e.bodyA._entity?.impact?.(e)
     })
@@ -60,10 +60,10 @@ export default class Game extends p2.EventEmitter {
     options.room.bindGame(this)
 
     // Create the character controller
-    this.player = new Player({ game: this, world: this.world, start: [0, 0] })
+    this.player = new Player({ game: this, p2_world: this.p2_world, start: [0, 0] })
     options.room.positionPlayer(this.player)
-    this.world.on('postStep', () => {
-      this.player.update(this.world.lastTimeStep)
+    this.p2_world.on('postStep', () => {
+      this.player.update(this.p2_world.lastTimeStep)
       const { aabb } = this.player.body
       options.room.edges.forEach((body) => {
         if (body.aabb.overlaps(aabb)) {
@@ -83,19 +83,19 @@ export default class Game extends p2.EventEmitter {
     })
 
     // Update the character controller after each physics tick.
-    this.world.on('postStep', () => {
-      const now = this.world.time
+    this.p2_world.on('postStep', () => {
+      const now = this.p2_world.time
       const do_now = this._timeouts.filter((t) => t.when <= now)
       this._timeouts = this._timeouts.filter((t) => t.when > now)
       do_now.forEach((t) => t.action())
     })
 
-    this.world.on('damage', (result) => {
+    this.p2_world.on('damage', (result) => {
       const { damage } = result
       this.entities[damage.body_id]?.damage?.(result.damage)
       // console.log(_result)
     })
-    this.world.step(FIXED_DELTA_TIME, FIXED_DELTA_TIME, MAX_SUB_STEPS)
+    this.p2_world.step(FIXED_DELTA_TIME, FIXED_DELTA_TIME, MAX_SUB_STEPS)
   }
 
   click() {
@@ -120,7 +120,7 @@ export default class Game extends p2.EventEmitter {
   }
 
   setTimeout(action, delay) {
-    const created = this.world.time
+    const created = this.p2_world.time
     const when = created + delay
     const id = this.TIMEOUT_ID
     const timeout = { action, when, created, id }
@@ -140,7 +140,7 @@ export default class Game extends p2.EventEmitter {
   addStaticCircle(x, y, radius, angle = 0) {
     var body = new p2.Body({ position: [x, y], angle: angle })
     body.addShape(new p2.Circle({ collisionGroup: SCENERY_GROUP, radius }))
-    this.world.addBody(body)
+    this.p2_world.addBody(body)
     return body
   }
 
@@ -153,7 +153,7 @@ export default class Game extends p2.EventEmitter {
       angle: angle,
     })
     body.addShape(shape)
-    this.world.addBody(body)
+    this.p2_world.addBody(body)
     return body
   }
 
@@ -161,7 +161,7 @@ export default class Game extends p2.EventEmitter {
     const body = new p2.Body({ position: [0, 0] })
     body.fromPolygon(coords)
     body.shapes.forEach((s) => Object.assign(s, options))
-    this.world.addBody(body)
+    this.p2_world.addBody(body)
     return body
   }
 
@@ -229,7 +229,7 @@ export default class Game extends p2.EventEmitter {
 
     // Draw all bodies
     this.background_entities.forEach((e) => this.drawBody(e.body))
-    this.world.bodies.forEach((body) => this.drawBody(body))
+    this.p2_world.bodies.forEach((body) => this.drawBody(body))
 
     if (this.mouse.canvas_xy) {
       const zoom = this.zoom
@@ -284,7 +284,7 @@ export default class Game extends p2.EventEmitter {
     deltaTime = Math.min(1 / 10, deltaTime)
 
     // Move physics bodies forward in time
-    !this.paused && this.world.step(FIXED_DELTA_TIME, deltaTime, MAX_SUB_STEPS)
+    !this.paused && this.p2_world.step(FIXED_DELTA_TIME, deltaTime, MAX_SUB_STEPS)
     this.frame++
   }
 
@@ -296,22 +296,22 @@ export default class Game extends p2.EventEmitter {
     entity.id = entity.body.id
     entity.body._entity = entity
     this.entities[entity.id] = entity
-    this.world.addBody(entity.body)
+    this.p2_world.addBody(entity.body)
   }
 
   removeEntity(entity) {
     delete this.entities[entity.id]
-    this.world.removeBody(entity.body)
+    this.p2_world.removeBody(entity.body)
   }
 
   backgroundEntity(entity) {
-    // moves an entity to the background so it can still be renedered without being in the world
+    // moves an entity to the background so it can still be renedered without being in the p2_world
     this.background_entities.push(entity)
-    this.world.removeBody(entity.body)
+    this.p2_world.removeBody(entity.body)
   }
 
   foregroundEntity(entity) {
     this.background_entities = this.background_entities.filter((e) => e.id !== entity.id)
-    this.world.addBody(entity.body)
+    this.p2_world.addBody(entity.body)
   }
 }

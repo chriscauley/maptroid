@@ -247,7 +247,7 @@ export default class Controller extends RaycastController {
     vec2.copy(ray.from, from)
     vec2.copy(ray.to, to)
     ray.update()
-    this.world.raycast(this.raycastResult, ray)
+    this.p2_world.raycast(this.raycastResult, ray)
 
     // store ray for rendering
     this.last_rays.push([from, to])

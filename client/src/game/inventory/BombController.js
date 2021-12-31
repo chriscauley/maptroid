@@ -12,8 +12,8 @@ class Bomb {
     this.makeShape()
     const [x, y] = this.player.body.position
     this.xy = [Math.floor(x), Math.floor(y)]
-    this.created = this.player.world.time
-    this.detonate_at = this.player.world.time + 1
+    this.created = this.player.p2_world.time
+    this.detonate_at = this.player.p2_world.time + 1
   }
 
   detonate() {
@@ -23,7 +23,7 @@ class Bomb {
       from: position,
       callback: (result) => {
         result.body &&
-          this.player.world.emit({
+          this.player.p2_world.emit({
             damage: {
               type: 'bomb',
               player_id: this.player.id,
@@ -40,7 +40,7 @@ class Bomb {
       result.reset()
       ray.to = [ray.from[0] + dxy[0] * BLAST_RADIUS, ray.from[1] + dxy[1] * BLAST_RADIUS]
       ray.update()
-      this.player.world.raycast(result, ray)
+      this.player.p2_world.raycast(result, ray)
     })
     this.blastPlayer(this.player) // should this target other players?
     this.player.game.removeEntity(this)
@@ -72,7 +72,7 @@ class Bomb {
   }
 
   draw(ctx) {
-    const dt = this.detonate_at - this.player.world.time
+    const dt = this.detonate_at - this.player.p2_world.time
     let colors = ['white', 'red']
     if (dt > 1) {
       colors = ['gray', 'white']
@@ -94,11 +94,11 @@ export default class BombController {
   constructor({ player }) {
     Object.assign(this, { player })
     this.bombs = []
-    this.player.world.on('preSolve', this.tick)
+    this.player.p2_world.on('preSolve', this.tick)
   }
   tick = () => {
     this.bombs.forEach((bomb) => {
-      const dt = bomb.detonate_at - this.player.world.time
+      const dt = bomb.detonate_at - this.player.p2_world.time
       if (dt < 0.3) {
         bomb.flash = dt > 0.15
       }
@@ -135,7 +135,7 @@ export default class BombController {
     const last_bomb = this.bombs[this.bombs.length - 1]
     if (last_bomb) {
       if (this.player.tech.bomb_triggered) {
-        last_bomb.detonate_at = this.player.world.time + 1
+        last_bomb.detonate_at = this.player.p2_world.time + 1
       }
       if (this.player.tech.bomb_linked) {
         this.bombs.forEach((b) => (b.detonate_at = last_bomb.detonate_at))

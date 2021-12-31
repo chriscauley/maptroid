@@ -52,9 +52,9 @@ export default class Brick {
     const { width, height } = this.body.shapes[0]
     if (this.hp <= 0) {
       ctx.globalAlpha = 0.25
-      const respawn_in = this._death_timeout?.when - this.game.world.time
+      const respawn_in = this._death_timeout?.when - this.game.p2_world.time
       if (respawn_in < 1) {
-        ctx.globalAlpha = Math.floor(this.game.world.time * 10) % 2 ? 0.5 : 0.25
+        ctx.globalAlpha = Math.floor(this.game.p2_world.time * 10) % 2 ? 0.5 : 0.25
       }
     }
     ctx.fillStyle = this._type.color

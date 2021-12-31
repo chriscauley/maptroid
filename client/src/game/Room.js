@@ -121,7 +121,7 @@ class Room {
   }
 
   positionPlayer(player) {
-    this.game.world.bodies.forEach((b) => b.updateAABB())
+    this.game.p2_world.bodies.forEach((b) => b.updateAABB())
     for (let screen of this.screens) {
       const world_xy = this.screenToWorldXY(screen.room_xy)
       for (let dxy of screen.edges) {
