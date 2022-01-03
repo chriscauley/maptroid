@@ -35,10 +35,10 @@ export const fromString = (string, options = {}) => {
 
 // TODO needs yflip(?)
 const EDGE_BOUNDS = {
-  '1,0': [15.1, -16, 0.9, 0],
-  '-1,0': [0, -16, 0.9, 0],
-  '0,1': [0, 15.1, 16, 0.9],
-  '0,-1': [0, 0, 16, 0.9],
+  '1,0': [15.1, -16, 0.9, 16], // YFLIP
+  '-1,0': [0, -16, 0.9, 16], // YFLIP
+  '0,1': [0, -16, 16, 0.9], // YFLIP
+  '0,-1': [0, -0.9, 16, 0.9], // YFLIP
 }
 
 const EDGE_STARTS = {
@@ -57,24 +57,27 @@ export default class Room {
     this.world_controller = world_controller
 
     // YFLIP all coordinates and set the coordinates to world_coordinates
-    const _transform = (xy) => vector.add(_yflip(xy), this.world_xy0)
     this.world_xy0 = this.world_controller.xy0_by_room_id[this.json.id]
-    const screen_xys = json.data.geometry.screens.map(_transform)
+    const screen_xys = json.data.geometry.screens.map((room_xy) =>
+      vector.add(_yflip(room_xy), this.world_xy0),
+    )
     const _screen_exists = {}
     screen_xys.forEach((xy) => (_screen_exists[xy] = true))
     this.screens = screen_xys.map((world_xy) => {
       return {
         world_xy,
-        edges: DXYS.slice(0, 1).filter((dxy) => !_screen_exists[vector.add(dxy, world_xy)]),
+        edges: DXYS.filter((dxy) => !_screen_exists[vector.add(dxy, world_xy)]),
       }
     })
     this.static_shapes = []
+    const _xy16 = [16 * this.world_xy0[0], 16 * this.world_xy0[1]]
     json.data.geometry.inner.forEach((geo) => {
       if (geo.interiors?.length) {
         // TODO there are examples of this in pink maridia. Do they ever matter?
       }
+      const _transform = (xy) => vector.times(vector.add(_yflip(xy), this.world_xy0), 16)
       this.static_shapes.push({
-        exterior: geo.exterior.map((xy) => _transform([xy[0] * 16, xy[1] * 16])),
+        exterior: geo.exterior.map(_transform),
       })
     })
   }
@@ -105,8 +108,8 @@ export default class Room {
       const [x, y] = screen.world_xy
       screen.edges.forEach((dxy) => {
         const [edge_x, edge_y, width, height] = EDGE_BOUNDS[dxy]
-        const center_x = x + edge_x + width / 2
-        const center_y = y + edge_y + height / 2
+        const center_x = 16 * x + edge_x + width / 2
+        const center_y = 16 * y + edge_y + height / 2
 
         const body = game.addStaticBox([center_x, center_y, width, height], options)
         this.bodies.push(body)
@@ -120,7 +123,7 @@ export default class Room {
     for (let screen of this.screens) {
       for (let dxy of screen.edges) {
         dxy = EDGE_STARTS[dxy]
-        player.body.position = vector.add(screen.world_xy, dxy)
+        player.body.position = vector.add(vector.times(screen.world_xy, 16), dxy)
         player.body.updateAABB()
         const collided_with = this.bodies.find((body) => body.aabb.overlaps(player.body.aabb))
         if (!collided_with) {

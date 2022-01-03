@@ -67,7 +67,7 @@ export default class Game extends p2.EventEmitter {
       const { aabb } = this.player.body
       this.current_room.edges.forEach((body) => {
         if (body.aabb.overlaps(aabb)) {
-          console.log(body.position.toString())
+          // console.log(body.position.toString())
         }
       })
     })
@@ -159,7 +159,7 @@ export default class Game extends p2.EventEmitter {
 
   addStaticShape(coords, options) {
     const body = new p2.Body({ position: [0, 0] })
-    body.fromPolygon(coords)
+    body.fromPolygon(coords.slice()) // NOTE p2 consumes coords so make a copy
     body.shapes.forEach((s) => Object.assign(s, options))
     this.p2_world.addBody(body)
     return body

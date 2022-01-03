@@ -31,7 +31,7 @@ export default {
           .map(this.pprint)
           .join(',')
       } else if (typeof i === 'number') {
-        return i.toFixed(2)
+        return Math.abs(i) % 1 > 0.1 ? i.toFixed(2) : Math.round(i)
       }
       return i
     },

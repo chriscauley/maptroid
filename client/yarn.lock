@@ -1315,10 +1315,10 @@
     eslint-plugin-vue "^7.0.0-0"
     prettier "^1.18.2"
 
-"@unrest/geo@^0.0.2":
-  version "0.0.2"
-  resolved "https://registry.yarnpkg.com/@unrest/geo/-/geo-0.0.2.tgz#deadb2d08ec477573175938bac07a44f3b5752ec"
-  integrity sha512-/t77p0xwIqo7jOoRKmBaTcSUqFe2mok/aKvNLi4ZQKVF+Cd0mA0uoMQxz6MmOaBfil+HwbfHgbff0+Ok6fxy/w==
+"@unrest/geo@^0.0.3":
+  version "0.0.3"
+  resolved "https://registry.yarnpkg.com/@unrest/geo/-/geo-0.0.3.tgz#094a03ca2b8948666af08d802e52aedc796161c9"
+  integrity sha512-ntnV2y8DgDOi5xFCDUVj2kcsCYZfLw21wM+VKeqeIrqstoUg5OqvMPKDrAaJjdwXLG69vpBkbhUs8VgNevlVTw==
   dependencies:
     xorshift "^1.1.1"
 
