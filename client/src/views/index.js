@@ -6,6 +6,7 @@ import FileBrowser from './FileBrowser.vue'
 import Home from './Home.vue'
 import Play from './Play.vue'
 import ProcessDread from './ProcessDread.vue'
+import Trainer from './Trainer.vue'
 import ScreenshotAnalyzer from './ScreenshotAnalyzer/index.vue'
 import ScreenshotUpload from './ScreenshotUpload.vue'
 import ScreenshotViewer from './ScreenshotViewer.vue'
@@ -26,6 +27,7 @@ export default {
   Home,
   Play,
   ProcessDread,
+  Trainer,
   ScreenshotAnalyzer,
   ScreenshotUpload,
   ScreenshotViewer,

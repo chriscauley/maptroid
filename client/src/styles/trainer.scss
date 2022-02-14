@@ -1,0 +1,50 @@
+@use "sass:list";
+$button_size: 68px;
+
+
+.trainer {
+  @apply flex relative;
+  height: 100%;
+}
+
+.trainer-stats {
+  @apply absolute right-0 top-0;
+}
+
+.trainer-column {
+  @apply border relative;
+  width: $button_size;
+}
+
+.trainer-column__icon {
+  background: url("/static/Xbox360PixelPad.png");
+  background-size: auto 100%;
+  height: $button_size;
+  image-rendering: pixelated;
+  width: $button_size;
+  $buttons: [b, x, y, a, up, down, right, left, select, start, r, l, r2, l2, sys, r3, l3, dpad];
+  @for $i from 1 to list.length($buttons) {
+    $button: list.nth($buttons, $i);
+    &.--#{$button} {
+      $x: - ($i - 1) * $button_size;
+      background-position: $x 0px;
+    }
+  }
+  &.-pressed {
+    filter: invert(1) hue-rotate(180deg);
+  }
+}
+
+.trainer-column__bars {
+  @apply absolute inset-0 overflow-hidden;
+  top: $button-size;
+}
+
+.trainer-column__bar {
+  @apply absolute w-full;;
+}
+
+.trainer-column__note {
+  @apply absolute w-full;
+  background: var(--border);
+}
