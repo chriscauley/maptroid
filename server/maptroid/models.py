@@ -1,5 +1,6 @@
 from django.conf import settings
 from django.db import models
+from django.utils.text import slugify
 import imagehash
 import numpy as np
 import os
@@ -11,6 +12,13 @@ from maptroid.dread import process_screenshot
 from maptroid.utils import mkdir
 
 _choices = lambda l: zip(l,l)
+
+def default_world_data():
+  return {
+    'clear_holes': True,
+    'elevators': [],
+  }
+
 
 class World(models.Model):
   name = models.CharField(max_length=128)
@@ -37,6 +45,11 @@ class World(models.Model):
         zone.save()
 
     self.save()
+
+  def save(self, *args, **kwargs):
+    if not self.slug:
+      self.slug = slugify(self.name)
+    super().save(*args, **kwargs)
 
 
 def default_data():
@@ -82,6 +95,11 @@ class Zone(models.Model):
     self.data['world']['bounds'][3] = y_max - y_min
     self.save()
 
+  def save(self, *args, **kwargs):
+    if not self.slug:
+      self.slug = slugify(self.name)
+    super().save(*args, **kwargs)
+
 
 class Room(models.Model):
   world = models.ForeignKey(World, models.SET_NULL, null=True, blank=True)
@@ -112,10 +130,10 @@ class Item(models.Model):
   __str__ = lambda self: str(self.data)
 
 
-class Door(models.Model):
-  room = models.ForeignKey(Room, models.CASCADE)
-  data = models.JSONField(default=dict, blank=True)
-  __str__ = lambda self: f'{self.room} {self.data}'
+# class Door(models.Model):
+#   room = models.ForeignKey(Room, models.CASCADE)
+#   data = models.JSONField(default=dict, blank=True)
+#   __str__ = lambda self: f'{self.room} {self.data}'
 
 class Character(models.Model):
   letter = models.CharField(max_length=1, blank=True, default='')
@@ -152,7 +170,7 @@ class SmileSprite(models.Model):
   LAYERS = _choices(['bts', 'plm', 'tile', 'unknown'])
   layer = models.CharField(max_length=16, choices=LAYERS, default='unknown')
   type = models.CharField(max_length=32, blank=True, default='')
-  MODIFIERS = _choices(['composite', 'inblock', 'inegg'])
+  MODIFIERS = _choices(['composite', 'inblock', 'inegg', 'repspawn'])
   modifier = models.CharField(max_length=16, choices=MODIFIERS, null=True, blank=True)
   CATEGORIES = _choices(['block', 'geo', 'hex', 'item', 'enemy', 'obstacle', 'door', 'station', 'animation', 'trash'])
   category = models.CharField(max_length=16, choices=CATEGORIES, null=True, blank=True)

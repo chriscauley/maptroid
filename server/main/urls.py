@@ -10,7 +10,7 @@ import unrest.user.forms
 import contact.forms
 
 def dread_redirect(request, *args, **kwargs):
-  return HttpResponseRedirect('/maps'+request.path)
+  return HttpResponseRedirect('/maps'+request.get_full_path())
 
 urlpatterns = [
     path('djadmin/', admin.site.urls),

@@ -18,10 +18,7 @@ ROOM_SLICES = ['layer-1', 'bts', 'layer-2']
 app = typer.Typer()
 
 def main(world_slug: str):
-  name = world_slug.replace('_', ' ').title()
-  world, new = World.objects.get_or_create(name=name, slug=world_slug)
-  if new:
-    print(f'New World: {world}')
+  world = World.objects.get(slug=world_slug)
   world_dir = os.path.join(SMILE_DIR, world_slug)
   os.listdir(world_dir)
 

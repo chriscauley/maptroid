@@ -157,7 +157,7 @@ def load_plms(batch_name):
     # room.data.pop('plm_enemies', None); room.save()
     for plm in room.data.get('plm_enemies', []):
       processed.append(plm['source'])
-  print(f'skipping {len(processed)} screenshots fond in plm_enemies[:].source')
+  print(f'skipping {len(processed)} screenshots found in plm_enemies[:].source')
   hash_to_letter['__missing'] = []
 
   for ss_name in os.listdir(os.path.join(SOURCE_DIR, batch_name)):
