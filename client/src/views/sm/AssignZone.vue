@@ -33,7 +33,10 @@
 </template>
 
 <script>
+import Mousetrap from '@unrest/vue-mousetrap'
+
 export default {
+  mixins: [Mousetrap.Mixin],
   __route: {
     path: '/sm-assign/:world_slug/:zone_slug?',
   },
@@ -41,6 +44,22 @@ export default {
     return { selected: {} }
   },
   computed: {
+    mousetrap() {
+      const keymap = {}
+      if (this.world) {
+        this.zones?.forEach((zone) => {
+          const key = zone.slug[0]
+          if (keymap[key]) {
+            keymap[key] = () => {
+              throw 'Redundant keymap, rename zone'
+            }
+          } else {
+            keymap[key] = () => this.setRoomZone(this.rooms[0], zone.id)
+          }
+        })
+      }
+      return keymap
+    },
     prepped_zones() {
       const zones = this.zones?.map((z) => ({
         to: `/sm-assign/${this.world.slug}/${z.slug}/`,
