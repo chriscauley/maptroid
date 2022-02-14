@@ -23,10 +23,10 @@ export default (component) => {
     raw_bounds.zone[zone.id] = raw_bounds.zone[zone.id] || zone.data.world.bounds.slice()
     osd_store.dragXY(zone.data.world.bounds, raw_bounds.zone[zone.id], client_delta)
 
-    const tilesUrl = zone.data.dzi.slice(0, -4) + '_files/'
-    const osd_item = state._viewer.world._items.find((i) => tilesUrl === i.source.tilesUrl)
+    const _files = `${zone.slug}_files/`
+    const items = state._viewer.world._items.filter((i) => i.source.tilesUrl?.includes(_files))
     const [x, y] = zone.data.world.bounds
-    osd_item.setPosition(new Point(x, y), true)
+    items.forEach((osd_item) => osd_item.setPosition(new Point(x, y), true))
   }
 
   osd_store.dragRoom = (room, client_delta) => {

@@ -37,8 +37,8 @@ export const fromString = (string, options = {}) => {
 const EDGE_BOUNDS = {
   '1,0': [15.1, -16, 0.9, 16], // YFLIP
   '-1,0': [0, -16, 0.9, 16], // YFLIP
-  '0,1': [0, -16, 16, 0.9], // YFLIP
-  '0,-1': [0, -0.9, 16, 0.9], // YFLIP
+  '0,1': [0, -0.9, 16, 0.9], // YFLIP
+  '0,-1': [0, -16, 16, 0.9], // YFLIP
 }
 
 const EDGE_STARTS = {
