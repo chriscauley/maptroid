@@ -1,10 +1,20 @@
 @use "sass:list";
 $button_size: 68px;
-
+$now_offset: 120px;
 
 .trainer {
   @apply flex relative;
   height: 100%;
+  padding-left: 2 * $button_size;
+}
+
+.trainer__now {
+  @apply absolute;
+  top: $now-offset + $button_size;
+  height: 5px;
+  left: 1.75 *  $button_size;
+  width: 10.5 * $button_size;
+  background: var(--border);
 }
 
 .trainer-stats {
@@ -41,7 +51,8 @@ $button_size: 68px;
 }
 
 .trainer-column__bar {
-  @apply absolute w-full;;
+  @apply absolute w-full;
+  margin-top: $now_offset;
 }
 
 .trainer-column__note {

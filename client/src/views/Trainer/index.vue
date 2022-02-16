@@ -3,13 +3,14 @@
     <div class="trainer-stats">
       {{ time / 1000 }}
     </div>
+    <div class="trainer__now" />
     <div v-for="column in columns" class="trainer-column" :key="column.slug">
       <div class="trainer-column__header">
         <div :class="column.header_icon" />
       </div>
       <div class="trainer-column__bars">
         <div class="trainer-column__bar" :style="bar_style">
-          <template v-for="action, i in column.actions" :key="i">
+          <template v-for="(action, i) in column.actions" :key="i">
             <div v-bind="action.attrs" />
           </template>
         </div>
@@ -20,10 +21,9 @@
 
 <script>
 import { startCase, invert } from 'lodash'
+import tracks from './tracks'
 
-const BUTTONS = [
-   'up', 'down', 'left', 'right', 'a', 'b', 'x', 'y', 'l', 'r',
-]
+const BUTTONS = ['up', 'down', 'left', 'right', 'a', 'b', 'x', 'y', 'l', 'r']
 
 const BUTTON_TO_ACTION = {
   up: 'up',
@@ -38,7 +38,7 @@ const BUTTON_TO_ACTION = {
   y: 'shot',
 }
 
-const ACTION_TO_BUTTON = invert(BUTTON_TO_ACTION);
+const ACTION_TO_BUTTON = invert(BUTTON_TO_ACTION)
 
 const CONTROLLER = {
   up: 'up',
@@ -70,84 +70,54 @@ const BUTTON_TO_KEY = {
 
 const KEY_TO_BUTTON = invert(BUTTON_TO_KEY)
 
-const Trick = (action_list, { fps=60 }={}) => {
-  const frame_offset = Math.min(...action_list.map(a => a[1]))
-  let last_time = 0
-  const actions = action_list.map(([verb, start_frame, end_frame]) => {
-    const start = 1000 * (start_frame - frame_offset) / fps
-    const end = 1000 * (end_frame - frame_offset) / fps
-    last_time = Math.max(last_time, end)
-    return { verb, start, end }
-  })
-  return { actions, last_time }
-}
-
-const stutter4tap = Trick([
-  // ['shot', 0, 62],
-  // ['aim-up', 0, 62],
-  // ['left', 2, 6],
-  // ['left', 12, 18],
-  // ['left', 30, 34],
-  ['right', 84, 90],
-  ['right', 94, 172],
-  ['dash', 108, 112],
-  ['dash', 134, 140],
-  ['dash', 156, 160],
-  ['dash', 166, 210],
-  ['down', 172, 180],
-  // ['right', 178, 194],
-  // ['left', 214, 252],
-  // ['jump', 232, 254],
-  // ['up', 256, 258],
-  // ['left', 258, 266],
-  // ['jump', 260, 264],
-  // ['item-select', 386, 388],
-  // ['item-select', 394, 400],
-  // ['up', 394, 436],
-  // ['shot', 422, 428],
-])
-
-const test_action = Trick([
-  ['right', 0, 60],
-  ['left', 60, 120],
-  ['right', 120, 180],
-  ['left', 180, 240],
-])
-
 export default {
   data() {
-    return { pressed: {}, px_per_ms: 0.5, time: 0, trick: test_action, rate: 0.5 }
+    return {
+      pressed: {},
+      px_per_ms: 0.5,
+      time: 0,
+      track: tracks.stutter_4_tap,
+      rate: 0.5,
+      player_actions: [],
+    }
   },
   computed: {
     columns() {
-      return BUTTONS.map(slug => ({
+      return BUTTONS.map((slug) => ({
         header_icon: [`trainer-column__icon --${slug}`, { '-pressed': this.pressed[slug] }],
         name: startCase(slug),
         slug,
-        actions: this.actions.filter(a => a.button === slug),
+        actions: this.actions.filter((a) => a.button === slug),
       }))
     },
     bar_style() {
       return { top: `-${this.time * this.px_per_ms}px` }
     },
     actions() {
-      return this.trick.actions.map(({ verb, start, end }) => {
-        const button = ACTION_TO_BUTTON[verb]
-        const duration = end - start
+      const prep = (button, start, end, cls) => {
+        const duration = (end || this.time) - start
         return {
           button,
-          verb,
+          start,
+          end,
           duration,
           attrs: {
-            class: `trainer-column__note --${verb}`,
+            class: [`trainer-column__note --${button}`, cls],
             style: {
               top: `${this.px_per_ms * start}px`,
               height: `${this.px_per_ms * duration}px`,
-            },
-          },
+            }
+          }
         }
+      }
+      const actions = this.track.actions.map(({ verb, start, end }) => {
+        const button = ACTION_TO_BUTTON[verb]
+        const action = prep(button, start, end, '-track')
+        return action
       })
-    }
+      this.player_actions.forEach(({ button, start, end }) => prep(button, start, end, '-player'))
+      return actions
+    },
   },
   mounted() {
     document.addEventListener('keydown', this.keydown)
@@ -161,8 +131,12 @@ export default {
   methods: {
     keydown(event) {
       const button = KEY_TO_BUTTON[event.key]
-      if (button) {
-        this.pressed[button] = true
+      if (button && !this.pressed[button]) {
+        this.pressed[button] = {
+          button,
+          start: this.time,
+        }
+        this.player_actions.push(this.pressed[button])
         if (!this.time) {
           this.start()
         }
@@ -170,20 +144,27 @@ export default {
     },
     keyup(event) {
       const button = KEY_TO_BUTTON[event.key]
-      if (button) {
+      if (button && this.pressed[button]) {
+        this.pressed[button].end = this.time
         delete this.pressed[button]
       }
     },
     start() {
       this.start_time = new Date().valueOf()
+      this.time = 0
+      this.last_time = this.time
+      this.player_actions = []
       this.tick()
     },
     stop() {
       window.cancelAnimationFrame(this._frame)
+      Object.values(this.pressed).forEach((action) => {
+        action.end = this.time
+      })
     },
     tick() {
       this.time = this.rate * (new Date().valueOf() - this.start_time)
-      if (this.time > this.trick.last_time + 1000) {
+      if (this.time > this.track.last_time + 1000) {
         this.stop()
       } else {
         this._frame = requestAnimationFrame(this.tick)
