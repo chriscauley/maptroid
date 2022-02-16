@@ -20,12 +20,12 @@
 </template>
 
 <script>
-import { startCase, invert } from 'lodash'
+import { startCase, invert, cloneDeep } from 'lodash'
 import tracks from './tracks'
 
 const BUTTONS = ['up', 'down', 'left', 'right', 'a', 'b', 'x', 'y', 'l', 'r']
 
-const BUTTON_TO_ACTION = {
+const BUTTON_TO_VERB = {
   up: 'up',
   down: 'down',
   left: 'left',
@@ -38,7 +38,7 @@ const BUTTON_TO_ACTION = {
   y: 'shot',
 }
 
-const ACTION_TO_BUTTON = invert(BUTTON_TO_ACTION)
+const VERB_TO_BUTTON = invert(BUTTON_TO_VERB)
 
 const CONTROLLER = {
   up: 'up',
@@ -72,16 +72,26 @@ const KEY_TO_BUTTON = invert(BUTTON_TO_KEY)
 
 export default {
   data() {
+    window._TRACK = this
     return {
       pressed: {},
       px_per_ms: 0.5,
       time: 0,
-      track: tracks.stutter_4_tap,
       rate: 0.5,
       player_actions: [],
+      grade: {},
     }
   },
   computed: {
+    track() {
+      const track = cloneDeep(tracks.stutter_4_tap)
+      track.actions.forEach((action) => {
+        action.duration = action.end - action.start
+        action.button = VERB_TO_BUTTON[action.verb]
+      })
+      track.actions = track.actions.filter((a) => a.button === 'right')
+      return track
+    },
     columns() {
       return BUTTONS.map((slug) => ({
         header_icon: [`trainer-column__icon --${slug}`, { '-pressed': this.pressed[slug] }],
@@ -94,7 +104,7 @@ export default {
       return { top: `-${this.time * this.px_per_ms}px` }
     },
     actions() {
-      const prep = (button, start, end, cls) => {
+      const prep = ({ button, start, end, cls }) => {
         const duration = (end || this.time) - start
         return {
           button,
@@ -106,16 +116,17 @@ export default {
             style: {
               top: `${this.px_per_ms * start}px`,
               height: `${this.px_per_ms * duration}px`,
-            }
-          }
+            },
+          },
         }
       }
       const actions = this.track.actions.map(({ verb, start, end }) => {
-        const button = ACTION_TO_BUTTON[verb]
-        const action = prep(button, start, end, '-track')
-        return action
+        const button = VERB_TO_BUTTON[verb]
+        return prep({ button, start, end, cls: '-track' })
       })
-      this.player_actions.forEach(({ button, start, end }) => prep(button, start, end, '-player'))
+      Object.values(this.grade).forEach(({ button, start, end, value }) => {
+        actions.push(prep({ button, start, end, cls: `-grade -value-${value}` }))
+      })
       return actions
     },
   },
@@ -154,6 +165,8 @@ export default {
       this.time = 0
       this.last_time = this.time
       this.player_actions = []
+      this.grade = {}
+      BUTTONS.forEach((button) => (this.grade[button] = []))
       this.tick()
     },
     stop() {
@@ -162,9 +175,38 @@ export default {
         action.end = this.time
       })
     },
+    markGrade(button, value) {
+      const grade_track = this.grade[button]
+      let grade_note = grade_track[grade_track.length - 1]
+      if (grade_note?.value !== value || grade_note?.end !== this.last_time) {
+        grade_note = { button, value, start: this.time }
+        grade_track.push(grade_note)
+      }
+      grade_note.end = this.time
+    },
     tick() {
+      this.last_time = this.time
       this.time = this.rate * (new Date().valueOf() - this.start_time)
-      if (this.time > this.track.last_time + 1000) {
+      const should_press = {}
+      this.track.actions.forEach((action) => {
+        if (action.start <= this.time && action.end >= this.time) {
+          should_press[action.button] = true
+        }
+      })
+      if (this.time) {
+        BUTTONS.forEach((button) => {
+          if (this.pressed[button]) {
+            if (should_press[button]) {
+              this.markGrade(button, 'score')
+            } else {
+              this.markGrade(button, 'error')
+            }
+          } else if (should_press[button]) {
+            this.markGrade(button, 'miss')
+          }
+        })
+      }
+      if (this.time > this.track.last_time) {
         this.stop()
       } else {
         this._frame = requestAnimationFrame(this.tick)
