@@ -1,19 +1,28 @@
 <template>
   <div class="admin-smile-sprite" v-if="sprites">
-    <div v-for="(group_sprites, group_name) in sprite_groups" :key="group_name">
-      <h2>{{ group_name }} {{ group_sprites.length }}</h2>
-      <div class="admin-smile-sprite__cards">
-        <div
-          v-for="sprite in group_sprites"
-          :key="sprite.id"
-          class="admin-smile-sprite__card"
-          @click="(e) => click(e, sprite)"
-        >
-          <div class="admin-smile-sprite__img" :style="`background-image: url('${sprite.url}')`" />
-          <div>
-            <div>#{{ sprite.id }} {{ sprite.color || sprite.modifier }}</div>
-            <div>{{ sprite.type || '???' }}</div>
-          </div>
+    <div class="admin-smile-sprite__groups btn-group">
+      <router-link
+        v-for="(count, name) in group_counts"
+        :key="name"
+        :class="`btn -${name === $route.params.category ? 'primary' : 'secondary'}`"
+        :to="`/smilesprite/${name}`"
+      >
+        {{ name }}
+        {{ count }}
+      </router-link>
+    </div>
+    <h2>{{ $route.params.category }}</h2>
+    <div class="admin-smile-sprite__cards">
+      <div
+        v-for="sprite in current_sprites"
+        :key="sprite.id"
+        class="admin-smile-sprite__card"
+        @click="(e) => click(e, sprite)"
+      >
+        <div class="admin-smile-sprite__img" :style="`background-image: url('${sprite.url}')`" />
+        <div>
+          <div>#{{ sprite.id }} {{ sprite.color || sprite.modifier }}</div>
+          <div>{{ sprite.type || '???' }}</div>
         </div>
       </div>
       <div v-if="last" class="admin-smile-sprite__last">{{ last.category }} {{ last.type }}</div>
@@ -35,7 +44,7 @@ import SmileSpriteForm from './Form.vue'
 
 export default {
   __route: {
-    path: '/smilesprite/',
+    path: '/smilesprite/:category?',
   },
   components: { SmileSpriteForm },
   data() {
@@ -45,14 +54,19 @@ export default {
     sprites() {
       return this.$store.smilesprite.getPage({ query: { per_page: 5000 } })?.items
     },
-    sprite_groups() {
-      const groups = { null: [] }
-      this.sprites.forEach((s) => {
-        groups[s.category] = groups[s.category] || []
-        groups[s.category].push(s)
-      })
-      Object.entries(groups).forEach(([key, sprites]) => (groups[key] = sortBy(sprites, 'type')))
+    group_counts() {
+      const groups = { null: 0 }
+      this.sprites.forEach((s) => (groups[s.category] = (groups[s.category] || 0) + 1))
       return groups
+    },
+    current_sprites() {
+      let category = this.$route.params.category || null
+      category = category === 'null' ? null : category
+      const sprites = this.sprites.filter((s) => s.category === category)
+      return sortBy(sprites, 'type')
+    },
+    current_group() {
+      return this.groups.find((g) => g.category === this.$route.params.category)
     },
   },
   methods: {
