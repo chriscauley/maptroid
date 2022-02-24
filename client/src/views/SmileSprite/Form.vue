@@ -2,12 +2,18 @@
   <unrest-modal @close="$emit('close')">
     <div>
       <div class="admin-smile-sprite__preview">
-        <div class="admin-smile-sprite__img" :style="`background-image: url('${sprite.url}')`" />
+        <div id="geo-box">
+          <div class="admin-smile-sprite__img" :style="`background-image: url('${sprite.url}')`" />
+        </div>
         <svg v-if="svg_path" width="64" height="64">
           <path :d="svg_path" stroke="#0F0" stroke-width="4" />
         </svg>
       </div>
-      <unrest-schema-form :form_name="`schema/smile-sprite/${sprite.id}`" :success="success" />
+      <unrest-schema-form
+        :form_name="`schema/smile-sprite/${sprite.id}`"
+        :success="success"
+        :ui="ui"
+      />
       <div class="admin-smile-sprite__room-list list-group">
         <template v-for="room in rooms" :key="room.id">
           <a :href="`/room/${room.id}/`" target="_blank" class="list-group-item">
@@ -24,12 +30,17 @@
 </template>
 
 <script>
+import GeoBox from './GeoBox.vue'
+
 export default {
   props: {
     sprite: Object,
   },
   emits: ['refetch', 'close', 'select-dindex'],
   computed: {
+    ui() {
+      return { type: { tagName: GeoBox } }
+    },
     rooms() {
       const rooms = this.$store.room.getPage({ query: { per_page: 5000 } })?.items || []
       if (this.sprite.layer === 'bts') {

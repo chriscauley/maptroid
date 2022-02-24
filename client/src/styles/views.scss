@@ -145,6 +145,28 @@
   }
 }
 
+#geo-box {
+  @apply relative;
+  height: 80px;
+  width: 80px;
+  .admin-smile-sprite__img {
+    @apply absolute;
+    pointer-events: none;
+    top: 8px;
+    left: 8px;
+    z-index: 1;
+  }
+  &:hover .admin-smile-sprite__img {
+    display: none;
+  }
+  .geo-box__buttons {
+    @apply absolute;
+    left: 100%;
+    top: 0;
+    width: 150px;
+  }
+}
+
 .admin-smile-sprite {
   &__cards {
     @apply cursor-pointer flex flex-wrap gap-2 p-2 select-none;
