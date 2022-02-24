@@ -78,17 +78,28 @@ def process_zone(zone):
                 path = os.path.join(settings.MEDIA_ROOT, f'smile_exports/{world.slug}/{layer}/{room.key}')
                 layer_dir = mkdir(CACHE_DIR, layer)
                 layer_path = os.path.join(layer_dir, room.key)
+
+                cutout_bg = layer == 'layer-2'
+                if room.data.get('invert_layers'):
+                    # "fire flea" rooms have their layers switched in smile
+                    cutout_bg = layer == 'layer-1'
+
                 if not os.path.exists(path):
                     print(f'skipping {room.key} {layer} because file DNE')
                 else:
                     layer_image = img._coerce(path, 'pil')
                     layer_image = layer_image.convert('RGBA')
-                    layer_image = img.replace_color(path, (0, 0, 0, 255),(0, 0, 0, 0))
+                    if cutout_bg:
+                        draw = ImageDraw.Draw(layer_image)
+                        for polygon in room.data['geometry']['inner']:
+                            xys = [(p[0]*256, p[1]*256) for p in polygon['exterior']]
+                            draw.polygon(xys, fill="black")
+                    layer_image = img.replace_color(layer_image, (0, 0, 0, 255),(0, 0, 0, 0))
                     layer_image.save(layer_path)
                     room_image.paste(layer_image, (0, 0), mask=layer_image)
                     layer_image.close()
-                holes = []
 
+            holes = []
             for [dx, dy] in room.data.get('holes') or []:
                 zone_xy = f'{zone_x + room_x + dx},{zone_y + room_y + dy}'
                 if room_clear_holes or zone_xy in occupied_xy_map:

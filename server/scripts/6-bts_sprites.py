@@ -89,22 +89,14 @@ def main():
                 sprite, new = sprite_matcher.get_or_create_from_image(cropped, 'bts')
                 if new:
                     print('New sprite', sprite)
-                if sprite.type.startswith('b_'):
+                if sprite.type.startswith('b25_') or sprite.type.startswith('b16_'):
                     shape_x_ys.append([sprite, x, y])
                 else:
                     special_x_ys.append([sprite, x, y])
 
 
 
-        polygons = []
-        for shape, x, y in shape_x_ys:
-            # type is a series of indexes 0-8 indicating points on a 2d grid
-            # x(0,3,6)=0,  x(1,4,7)=0.5, x(2,5,8)=1
-            # y(0,1,2)=0,  y(3,4,5)=0.5, y(6,7,8)=1
-            indexes = [int(i) for i in shape.type[2:]]
-            points = [[x + (i % 3) / 2, y + int(i / 3) / 2] for i in indexes]
-            points = [[x / 16, y / 16] for x, y in points]
-            polygons.append(Polygon(points))
+        polygons = [Polygon(sprite_to_xys(shape, x, y)) for shape, x, y in shape_x_ys]
 
         room.data['geometry']['inner'] = polygons_to_geometry(polygons)
 
@@ -113,5 +105,34 @@ def main():
         }
         room.save()
         print('saving', room.name)
+
+"""
+b16_
+0123
+4567
+89ab
+cdef
+
+b25_
+01234
+56789
+abcde
+fghij
+klmno
+"""
+
+def sprite_to_xys(sprite, x, y):
+    _hex = '0123456789abcdefghijklmno'
+    prefix, hexes = sprite.type.split('_')
+    indexes = [_hex.index(h) for h in hexes]
+    if prefix == 'b25':
+        points = [[x + (i % 5) / 4, y + int(i / 5) / 4] for i in indexes]
+    elif prefix == 'b16':
+        points = [[x + (i % 4) / 3, y + int(i / 4) / 3] for i in indexes]
+    else:
+        raise ValueError('unknown prefix: '+prefix)
+    return [[x / 16, y / 16] for x, y in points]
+
+
 if __name__ == "__main__":
     main()

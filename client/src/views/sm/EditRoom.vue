@@ -3,6 +3,9 @@
     <unrest-modal @close="$store.local.save({ editing_room: null })">
       <unrest-toolbar :storage="item_storage" class="-relative">
         <template #buttons>
+          <div :class="invertClass" title="invert" @click="toggleInvert">
+            <i class="fa fa-file-image" />
+          </div>
           <unrest-dropdown :items="zone_items" class="btn -info">
             {{ room_zone }}
           </unrest-dropdown>
@@ -36,6 +39,10 @@ export default {
     }
   },
   computed: {
+    invertClass() {
+      const { invert_layers } = this.room.data
+      return ['btn', invert_layers ? '-primary' : '-secondary']
+    },
     selected() {
       return this.item_storage.state.selected
     },
@@ -75,7 +82,22 @@ export default {
         text: 'plm_enemies',
         href: `/media/plm_enemies/${world}/${key}`,
       })
+      items.unshift({
+        text: 'admin',
+        href: `/djadmin/maptroid/room/${this.room.id}/`,
+      })
       return items
+    },
+  },
+  methods: {
+    toggleInvert() {
+      const { room } = this
+      if (!room.data.invert_layers) {
+        room.data.invert_layers = true
+      } else {
+        delete room.data.invert_layers
+      }
+      this.$store.room.save(room)
     },
   },
 }
