@@ -16,7 +16,7 @@
         <ellipse :cx="hover_xy[0]" :cy="hover_xy[1]" rx="8" zy="8" style="fill: red" />
       </svg>
     </div>
-    <div class="geo-box__buttons btn-group">
+    <div class="geo-box__buttons btn-group" v-if="show_buttons">
       <button class="btn -primary -mini" @click="$emit('update:modelValue', 'b16_')">b16_</button>
       <button class="btn -primary -mini" @click="$emit('update:modelValue', 'b25_')">b25_</button>
       <button class="btn -primary -mini" @click="$emit('update:modelValue', '')">clear</button>
@@ -47,6 +47,9 @@ export default {
     return { hover_xy: [0, 0], value: this.modelValue }
   },
   computed: {
+    show_buttons() {
+      return !this.modelValue || ['b25_', 'b16_'].includes(this.prefix)
+    },
     modulo() {
       return this.prefix === 'b25_' ? 5 : 4
     },

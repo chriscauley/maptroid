@@ -161,6 +161,12 @@
   }
   .geo-box__buttons {
     @apply absolute;
+    bottom: 0;
+    left: 100%;
+    width: 150px;
+  }
+  .admin-smile-sprite__buttons {
+    @apply absolute;
     left: 100%;
     top: 0;
     width: 150px;

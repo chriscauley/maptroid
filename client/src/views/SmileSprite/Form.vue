@@ -4,6 +4,11 @@
       <div class="admin-smile-sprite__preview">
         <div id="geo-box">
           <div class="admin-smile-sprite__img" :style="`background-image: url('${sprite.url}')`" />
+          <div class="admin-smile-sprite__buttons">
+            <a :href="sprite.url" target="_blank" class="btn -primary -mini">
+              <i class="fa fa-file-image" />
+            </a>
+          </div>
         </div>
         <svg v-if="svg_path" width="64" height="64">
           <path :d="svg_path" stroke="#0F0" stroke-width="4" />
