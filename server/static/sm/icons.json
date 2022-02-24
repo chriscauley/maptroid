@@ -1,0 +1,54 @@
+{
+  "block": {
+    "size": [16, 16],
+    "icons": [
+      "shot",
+      "crumble",
+      "bomb",
+      "missile",
+      "super-missile",
+      "power-bomb",
+      "speed-booster",
+      "grapple-break",
+      "grapple",
+      "spike-up",
+      "spike-down",
+      "spike-right",
+      "spike-left",
+      "conveyor-down",
+      "conveyor-up",
+      "conveyor-right",
+      "conveyor-left",
+      "enemy",
+      "enemy-break"
+    ]
+  },
+  "items": {
+    "size": [16, 16],
+    "icons": [
+      "morph-ball",
+      "bomb",
+      "screw-attack",
+      "missile",
+      "super-missile",
+      "energy-tank",
+      "energy2-tank",
+      "varia-suit",
+      "space-jump",
+      "power-bomb",
+      "hi-jump-boots",
+      "speed-booster",
+      "pedastool",
+      "reserve-tank",
+      "x-ray",
+      "spring-ball",
+      "grappling-hook",
+      "charge-beam",
+      "spazer-beam",
+      "wave-beam",
+      "ice-beam",
+      "plasma-beam",
+      "gravity-suit"
+    ]
+  }
+}

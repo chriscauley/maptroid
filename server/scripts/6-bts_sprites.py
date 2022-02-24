@@ -1,12 +1,14 @@
 from _setup import get_world_from_argv
-import os
+from collections import defaultdict
 from django.conf import settings
 import numpy as np
+import os
 from shapely.geometry import Polygon, MultiPolygon
 from shapely.ops import unary_union
 import sys
 import unrest_image as img
 
+from maptroid.icons import get_icons
 from maptroid.models import Room, SmileSprite, SpriteMatcher
 from maptroid.shapes import polygons_to_geometry
 from maptroid.utils import mkdir
@@ -103,6 +105,10 @@ def main():
         room.data['bts'] = {
             'sprites': list(set([s.id for s, x, y in (shape_x_ys + special_x_ys)])),
         }
+        room.data['cre'] = defaultdict(list)
+        for sprite, x, y in special_x_ys:
+            if sprite.category == 'block':
+                room.data['cre'][sprite.type].append([x, y])
         room.save()
         print('saving', room.name)
 
