@@ -1,5 +1,6 @@
-from _setup import get_world_from_argv
+from _setup import get_world_zones_from_argv
 from collections import defaultdict
+import cv2
 from django.conf import settings
 import numpy as np
 import os
@@ -8,7 +9,7 @@ from shapely.ops import unary_union
 import sys
 import unrest_image as img
 
-from maptroid.icons import get_icons
+from maptroid.cre import scan_for_cre
 from maptroid.models import Room, SmileSprite, SpriteMatcher
 from maptroid.shapes import polygons_to_geometry
 from maptroid.utils import mkdir
@@ -65,12 +66,15 @@ def filter_interior_walls(shape_x_ys):
 
 
 def main():
-    world = get_world_from_argv()
+    world, zones = get_world_zones_from_argv()
+    zone_ids = [z.id for z in zones]
     BTS_DIR = os.path.join(settings.MEDIA_ROOT, f'smile_exports/{world.slug}/bts')
     sprite_matcher = SpriteMatcher()
     keys = os.listdir(BTS_DIR)
     for key in keys:
         room = Room.objects.get(world__slug=world.slug, key=key)
+        if room.zone_id not in zone_ids:
+            continue
         if room.data.get('trash'):
             continue
         if 'bts' in room.data and not '-f' in sys.argv:
@@ -109,6 +113,7 @@ def main():
         for sprite, x, y in special_x_ys:
             if sprite.category == 'block':
                 room.data['cre'][sprite.type].append([x, y])
+        scan_for_cre(room)
         room.save()
         print('saving', room.name)
 

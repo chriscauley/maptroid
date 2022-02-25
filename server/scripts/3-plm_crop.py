@@ -149,7 +149,6 @@ def get_cropped_workarea(image):
 
 
 def load_plms(batch_name):
-  print('processing', batch_name)
   data['batch_name'] = batch_name
   processed = []
   for room in rooms:
@@ -215,7 +214,7 @@ def guess_xy(workarea, room):
 
 
 if __name__ == '__main__':
-  for i in [3]:
+  for i in [1, 2, 3]:
     load_plms(f'batch{i}')
   if data['missing_smile_id'] or data['missing_event_name']:
     print(f"missing {data['missing_smile_id']} smile_ids and {data['missing_event_name']} event names")

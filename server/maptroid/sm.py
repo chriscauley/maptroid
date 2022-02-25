@@ -5,7 +5,7 @@ import os
 from PIL import Image, ImageDraw
 
 from maptroid.dzi import png_to_dzi
-from maptroid.icons import get_icons
+from maptroid.icons import get_icons, MAP_OPERATIONS
 from maptroid.utils import mkdir
 import unrest_image as img
 import urcv
@@ -115,7 +115,6 @@ def process_zone(zone):
             room_image.close()
         zone_image.save(dest)
         zone_image.close()
-        make_walls_image(zone, os.path.join(WALLS_DIR, f'{zone.slug}.png'))
         if zw > 70 or zh > 70:
             print(f'WARNING: skippind dzi for {zone.name} because bounds are too large: {zw}x{zh}')
         else:
@@ -131,7 +130,10 @@ def process_zone(zone):
     make_layered_zone_image(zone, ['layer-2', 'layer-1'], os.path.join(LAYER_DIR, f'{zone.slug}.png'))
     make_layered_zone_image(zone, ['bts'], os.path.join(BTS_DIR, f'{zone.slug}.png'))
     make_layered_zone_image(zone, ['plm_enemies'], os.path.join(PLM_DIR, f'{zone.slug}.png'))
-    make_walls_image(zone, os.path.join(WALLS_DIR, f'{zone.slug}.png'))
+
+    walls_dest = os.path.join(WALLS_DIR, f'{zone.slug}.png')
+    make_walls_image(zone, walls_dest)
+    png_to_dzi(walls_dest)
 
     zone.save()
 
@@ -141,7 +143,7 @@ def make_walls_image(zone, dest):
     zone_image = np.zeros((zh * 256, zw * 256, 4), dtype=np.uint8)
     color = (128, 128, 128, 255)
     color_alpha = (128, 128, 128, 128)
-    icons = get_icons()
+    icons = get_icons('block', operations=MAP_OPERATIONS)
     for room in zone.room_set.all():
         room_x, room_y, room_w, room_h = room.data['zone']['bounds']
         def room_xy_to_zone_xy(xy):
@@ -161,5 +163,6 @@ def make_walls_image(zone, dest):
             for x, y in xys:
                 x = 16 * (x + room_x * 16)
                 y = 16 * (y + room_y * 16)
-                urcv.draw.paste(zone_image, icons['block'][category], x, y)
+                urcv.draw.paste_alpha(zone_image, icons[category], x, y)
+    print(dest)
     cv2.imwrite(dest, zone_image)
