@@ -11,21 +11,29 @@
       "speed-booster",
       "grapple-break",
       "grapple",
-      "grapple-a",
-      "spike-up",
-      "spike-down",
-      "spike-right",
-      "spike-left",
-      "conveyor-down",
-      "conveyor-up",
-      "conveyor-right",
-      "conveyor-left",
+      "grapple_mirror",
+      "spike_up",
+      "spike_down",
+      "spike_right",
+      "spike_left",
+      "conveyor_down",
+      "conveyor_up",
+      "conveyor_right",
+      "conveyor_left",
       "enemy",
-      "enemy-break",
-      "ws-spike-a-up",
-      "ws-spike-b-up",
-      "kraid-spike-a-up",
-      "kraid-spike-b-up"
+      "enemy-break"
+    ]
+  },
+  "block-2x1": [
+    "size": [32, 16],
+    "icons": [
+      'spike_kraid_up',
+      'spike_kraid_up_mirror',
+      'spike_kraid_down',
+      'spike_kraid_down_mirror',
+      'spike_brinstar_up',
+      'spike_brinstar_down',
+      'spike_wrecked-ship_up'
     ]
   },
   "items": {
