@@ -24,16 +24,19 @@
       "enemy-break"
     ]
   },
-  "block-2x1": {
+  "misc-spikes": {
     "size": [32, 16],
     "icons": [
-      "?spike_kraid_up",
-      "?spike_kraid_up_mirror",
-      "?spike_kraid_down",
-      "?spike_kraid_down_mirror",
-      "spike_brinstar_up",
-      "spike_brinstar_down",
-      "spike_wrecked-ship_up"
+      "spike_brinstar_up_a",
+      "spike_brinstar_down_a",
+      "spike_brinstar_up_mirror_a",
+      "spike_brinstar_down_mirror_a",
+      "spike_wrecked-ship_up_a",
+      "spike_brinstar_up_b",
+      "spike_brinstar_down_b",
+      "spike_brinstar_up_mirror_b",
+      "spike_brinstar_down_mirror_b",
+      "spike_wrecked-ship_up_b"
     ]
   },
   "items": {
