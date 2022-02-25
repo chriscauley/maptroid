@@ -20,7 +20,9 @@
       "conveyor-right",
       "conveyor-left",
       "enemy",
-      "enemy-break"
+      "enemy-break",
+      "ws-spike-a-up",
+      "ws-spike-b-up",
     ]
   },
   "items": {
