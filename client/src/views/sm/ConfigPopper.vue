@@ -33,7 +33,7 @@ const groups = {
 }
 
 export const LAYER_NAMES = flatten(Object.values(groups).map((g) => Object.keys(g)))
-export const DZI_LAYERS = ['layer-1', 'bts', 'plm_enemies']
+export const DZI_LAYERS = ['layer-1', 'bts', 'plm_enemies', 'walls']
 
 const help_texts = {
   'layer-1':

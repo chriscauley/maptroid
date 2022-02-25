@@ -160,6 +160,7 @@ export default {
     },
   },
   watch: {
+    'tool_storage.state.show_walls': 'syncImages',
     'tool_storage.state.show_bts': 'syncImages',
     'tool_storage.state.show_layer-1': 'syncImages',
     'tool_storage.state.show_plm_enemies': 'syncImages',
