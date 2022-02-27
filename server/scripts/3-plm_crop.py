@@ -149,6 +149,10 @@ def get_cropped_workarea(image):
 
 
 def load_plms(batch_name):
+  batch_dir = os.path.join(SOURCE_DIR, batch_name)
+  if not os.path.exists(batch_dir):
+    print(f'no {batch_name} directory')
+    return
   data['batch_name'] = batch_name
   processed = []
   for room in rooms:
@@ -159,7 +163,7 @@ def load_plms(batch_name):
   print(f'skipping {len(processed)} screenshots found in plm_enemies[:].source')
   hash_to_letter['__missing'] = []
 
-  for ss_name in os.listdir(os.path.join(SOURCE_DIR, batch_name)):
+  for ss_name in os.listdir(batch_dir):
     if not ss_name.endswith('png'):
       continue
 
@@ -218,7 +222,9 @@ if __name__ == '__main__':
     load_plms(f'batch{i}')
   if data['missing_smile_id'] or data['missing_event_name']:
     print(f"missing {data['missing_smile_id']} smile_ids and {data['missing_event_name']} event names")
-  print(sorted([r.key or '' for r in rooms.filter(data__plm_enemies__isnull=True)]))
+  missing_rooms = sorted([r.key or '' for r in rooms.filter(data__plm_enemies__isnull=True)])
+  if missing_rooms:
+    print('missing rooms', missing_rooms)
   processed_count = rooms.filter(data__plm_enemies__isnull=False).count()
   print(f'{processed_count} / {rooms.count()} rooms have plm_enemies')
   # extract_icons()

@@ -4,7 +4,8 @@ from maptroid.models import Zone, Item, Room, Run, World, Screenshot, Video, Cha
 
 @admin.register(Zone)
 class ZoneAdmin(admin.ModelAdmin):
-    list_display = ['name', 'world']
+    list_display = ['name', 'slug', 'world']
+    list_editable = ['slug']
     list_filter = ['world']
 
     def _screenshot_count(self, obj):

@@ -93,7 +93,7 @@ def process_zone(zone):
                 else:
                     layer_image = img._coerce(path, 'pil')
                     layer_image = layer_image.convert('RGBA')
-                    if cutout_bg:
+                    if cutout_bg and 'inner' in room.data['geometry']:
                         draw = ImageDraw.Draw(layer_image)
                         for polygon in room.data['geometry']['inner']:
                             xys = [(p[0]*256, p[1]*256) for p in polygon['exterior']]
@@ -141,6 +141,7 @@ def process_zone(zone):
 def make_walls_image(zone, dest):
     zone_x, zone_y, zw, zh = zone.data['world']['bounds']
     zone_image = np.zeros((zh * 256, zw * 256, 4), dtype=np.uint8)
+
     color = (128, 128, 128, 255)
     color_alpha = (128, 128, 128, 128)
     icons = {
@@ -148,6 +149,8 @@ def make_walls_image(zone, dest):
         **get_icons('misc-spikes', operations=MAP_OPERATIONS),
     }
     for room in zone.room_set.all():
+        if 'inner' not in room.data['geometry']:
+            continue
         room_x, room_y, room_w, room_h = room.data['zone']['bounds']
         def room_xy_to_zone_xy(xy):
             return [256 * (room_x + xy[0]), 256 * (room_y + xy[1])]

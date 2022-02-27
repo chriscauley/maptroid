@@ -4,6 +4,9 @@ from maptroid.models import SmileSprite, Room, Item
 
 def populate_items(room):
     for sprite_id, xy in room.data['plm_sprites']:
+        XY = [int(xy[0]/16), int(xy[1]/16)]
+        if XY in room.data['holes']:
+            continue
         sprite = SmileSprite.objects.get(id=sprite_id)
         if sprite.category != 'item':
             continue
