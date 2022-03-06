@@ -1,5 +1,4 @@
 from collections import OrderedDict
-from django.conf import settings
 import json
 import numpy as np
 from pathlib import Path
@@ -7,7 +6,7 @@ import cv2
 
 import urcv
 
-SM_DIR = settings.BASE_DIR / '../static/sm/'
+SM_DIR = Path(__file__).parent / '../static/sm/'
 
 MAP_OPERATIONS = {
     'shot': dict(brightness=40, contrast=20),
