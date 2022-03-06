@@ -143,7 +143,10 @@ def make_walls_image(zone, dest):
     zone_image = np.zeros((zh * 256, zw * 256, 4), dtype=np.uint8)
     color = (128, 128, 128, 255)
     color_alpha = (128, 128, 128, 128)
-    icons = get_icons('block', operations=MAP_OPERATIONS)
+    icons = {
+        **get_icons('block', operations=MAP_OPERATIONS),
+        **get_icons('misc-spikes', operations=MAP_OPERATIONS),
+    }
     for room in zone.room_set.all():
         room_x, room_y, room_w, room_h = room.data['zone']['bounds']
         def room_xy_to_zone_xy(xy):
@@ -164,5 +167,4 @@ def make_walls_image(zone, dest):
                 x = 16 * (x + room_x * 16)
                 y = 16 * (y + room_y * 16)
                 urcv.draw.paste_alpha(zone_image, icons[category], x, y)
-    print(dest)
     cv2.imwrite(dest, zone_image)

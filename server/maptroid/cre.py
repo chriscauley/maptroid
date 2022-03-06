@@ -9,27 +9,32 @@ import os
 # These seem to be left out of bts layer and need to be scanned
 SCAN_TEMPLATES = [
     'grapple',
-    'grapple-a',
-    'spike-up',
-    'spike-down',
-    'spike-left',
-    'spike-right',
-    'ws-spike-a-up',
-    'ws-spike-b-up',
-    'kraid-spike-a-up',
-    'kraid-spike-b-up',
+    'spike',
 ]
 
-def scan_for_cre(room, templates=SCAN_TEMPLATES):
-    threshold = 0.8
-    icons = get_icons('block', _cvt=cv2.COLOR_BGRA2GRAY)
-    r = 'layer-2' if room.data.get('invert_layers') else 'layer-1'
-    room_layer_1 = os.path.join(settings.MEDIA_ROOT, f'smile_exports/super_metroid/{r}/{room.key}')
+def scan_for_cre(room, _classes=SCAN_TEMPLATES, layer=None):
+    # threshold = 0.8 places kraid spikes on doors
+    # threshold = 0.9 misses some of the brinstar spikes
+    threshold = 0.85
+    icons = {
+        **get_icons('block', _cvt=cv2.COLOR_BGRA2GRAY),
+        **get_icons('misc-spikes', _cvt=cv2.COLOR_BGRA2GRAY),
+    }
+    if not layer:
+        layer = 'layer-2' if room.data.get('invert_layers') else 'layer-1'
+    room_layer_1 = os.path.join(
+        settings.MEDIA_ROOT,
+        f'smile_exports/{room.world.slug}/{layer}/{room.key}',
+    )
     image = cv2.imread(room_layer_1)
     gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
     results = defaultdict(list)
+    count = 0
 
-    for template_name in templates:
+    for template_name in icons.keys():
+        _class = template_name.split('_')[0]
+        if _class not in _classes:
+            continue
         template = icons[template_name]
         result = cv2.matchTemplate(gray, template, cv2.TM_CCOEFF_NORMED)
         (yCoords, xCoords) = np.where(result >= threshold)
@@ -41,4 +46,9 @@ def scan_for_cre(room, templates=SCAN_TEMPLATES):
         results[template_name] = []
         for (x, y, _w, _h) in rects:
             results[template_name].append([round(x/16), round(y/16)])
+            count += 1
     room.data['cre'].update(results)
+
+    if layer == 'layer-2' and count == 0:
+        # red brinstar fireflee room has it's spikes in layer-1 even though it's inverted
+        scan_for_cre(room, _classes=_classes, layer='layer-1')

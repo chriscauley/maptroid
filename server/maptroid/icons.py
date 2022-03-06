@@ -17,19 +17,9 @@ MAP_OPERATIONS = {
     'power-bomb': dict(brightness=50, multiply=(0,0.5,1,1), contrast=40),
     'speed-booster': dict(brightness=50, multiply=(0, 1.5, 0, 1), contrast=20),
     'grapple': dict(multiply=(1, 1, 0, 1)),
-    'spike-up': dict(multiply=(0,0,1,1)),
-    'conveyor-up': dict(brightness=150, multiply=(0, 1, 1, 1), contrast=50, alpha=0.75),
-    'ws-spike-a-up': dict(multiply=(0,0,1,1)),
-    'ws-spike-b-up': dict(multiply=(0,0,1,1)),
+    'spike': dict(multiply=(0,0,1,1)),
+    'conveyor': dict(brightness=150, multiply=(0, 1, 1, 1), contrast=50, alpha=0.75),
 }
-
-
-MAP_OPERATIONS['grapple-break'] = MAP_OPERATIONS['grapple']
-for d in ['down', 'left', 'right']:
-  MAP_OPERATIONS['spike-'+d] = MAP_OPERATIONS['spike-up']
-  MAP_OPERATIONS['conveyor-'+d] = MAP_OPERATIONS['conveyor-up']
-  MAP_OPERATIONS['ws-spike-a-'+d] = MAP_OPERATIONS['ws-spike-a-up']
-  MAP_OPERATIONS['ws-spike-b-'+d] = MAP_OPERATIONS['ws-spike-b-up']
 
 
 def apply_brightness_contrast(image, brightness = 0, contrast = 0):
@@ -90,9 +80,10 @@ def get_icons(category, _cvt=None, operations={}, scale=1):
     if _cvt is not None:
         png = cv2.cvtColor(png, _cvt)
     for i, slug in enumerate(details['icons']):
+        _class = slug.split("_")[0]
         icon_map[slug] = urcv.transform.crop(png, [0, i * h, w, h])
-        if slug in operations:
-            icon_map[slug] = _process(icon_map[slug], **operations[slug])
+        if _class in operations:
+            icon_map[slug] = _process(icon_map[slug], **operations[_class])
     return icon_map
 
 def recombine(icon_map):

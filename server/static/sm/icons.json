@@ -25,7 +25,7 @@
     ]
   },
   "misc-spikes": {
-    "size": [32, 16],
+    "size": [16, 16],
     "icons": [
       "spike_brinstar_up_a",
       "spike_brinstar_down_a",
@@ -36,7 +36,11 @@
       "spike_brinstar_down_b",
       "spike_brinstar_up_mirror_b",
       "spike_brinstar_down_mirror_b",
-      "spike_wrecked-ship_up_b"
+      "spike_wrecked-ship_up_b",
+      "spike_kraid_down_a",
+      "spike_kraid_up_a",
+      "spike_kraid_down_b",
+      "spike_kraid_up_b"
     ]
   },
   "items": {
