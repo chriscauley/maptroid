@@ -54,7 +54,7 @@
     "world_id": 1
   },
   "4": {
-    "type": "grappling-hook",
+    "type": "grappling-beam",
     "width": 1,
     "height": 1,
     "id": 4,
@@ -12739,7 +12739,7 @@
     "width": 1,
     "height": 1,
     "class": "item",
-    "type": "grappling-hook",
+    "type": "grappling-beam",
     "id": 727
   },
   "728": {
@@ -15939,7 +15939,7 @@
     "width": 1,
     "height": 1,
     "class": "item",
-    "type": "grappling-hook",
+    "type": "grappling-beam",
     "id": 939
   },
   "940": {
@@ -18291,7 +18291,7 @@
     "width": 1,
     "height": 1,
     "class": "item",
-    "type": "grappling-hook",
+    "type": "grappling-beam",
     "id": 1088
   },
   "1090": {
@@ -20124,7 +20124,7 @@
     "width": 1,
     "height": 1,
     "class": "item",
-    "type": "grappling-hook",
+    "type": "grappling-beam",
     "id": 1206
   },
   "1207": {
@@ -21269,7 +21269,7 @@
     "width": 1,
     "height": 1,
     "class": "item",
-    "type": "grappling-hook",
+    "type": "grappling-beam",
     "id": 1279
   },
   "1280": {
@@ -24171,7 +24171,7 @@
     "width": 1,
     "height": 1,
     "class": "item",
-    "type": "grappling-hook",
+    "type": "grappling-beam",
     "id": 1468
   },
   "1469": {
@@ -24858,7 +24858,7 @@
     "width": 1,
     "height": 1,
     "class": "item",
-    "type": "grappling-hook",
+    "type": "grappling-beam",
     "id": 1511
   },
   "1512": {
@@ -25322,7 +25322,7 @@
     "width": 1,
     "height": 1,
     "class": "item",
-    "type": "grappling-hook",
+    "type": "grappling-beam",
     "id": 1540
   },
   "1541": {

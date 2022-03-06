@@ -21,7 +21,7 @@ const beams = [
   'spazer-beam',
   'plasma-beam',
   'x-ray',
-  'grappling-hook',
+  'grappling-beam',
 ]
 
 const misc = ['pedastool', 'energy2-tank']

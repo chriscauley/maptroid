@@ -85,7 +85,7 @@
   background: linear-gradient(to left, transparent 25%, #ccc 25%, #ccc 75%, transparent 75%);
 }
 
-$items: morph-ball bomb screw-attack missile super-missile energy-tank energy2-tank varia-suit space-jump power-bomb hi-jump-boots speed-booster pedastool reserve-tank x-ray spring-ball grappling-hook charge-beam spazer-beam wave-beam ice-beam plasma-beam gravity-suit;
+$items: morph-ball bomb screw-attack missile super-missile energy-tank energy2-tank varia-suit space-jump power-bomb hi-jump-boots speed-booster pedastool reserve-tank x-ray spring-ball grappling-beam charge-beam spazer-beam wave-beam ice-beam plasma-beam gravity-suit;
 
 .sm-item {
   &:before {
@@ -94,10 +94,10 @@ $items: morph-ball bomb screw-attack missile super-missile energy-tank energy2-t
   @for $i from 0 to length($items) {
     $name: nth($items, $i + 1);
     &.-#{"" + $name}:before {
-      background-position: 0 $i * 2 * -100%;
+      background-position: 0 $i * -100%;
     }
-    &.-#{"" + $name}-alt:before {
-      background-position: 0 ($i * 2 + 1) * -100%;
+    &.-alt:before {
+      background-image: url("/static/sm/items-alt.png");
     }
   }
   &.-confused:before {
