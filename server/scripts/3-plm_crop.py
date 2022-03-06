@@ -9,6 +9,7 @@ import math
 import np
 import os
 import unrest_image as img
+import sys
 
 from PIL import Image
 import pytesseract
@@ -156,8 +157,9 @@ def load_plms(batch_name):
   data['batch_name'] = batch_name
   processed = []
   for room in rooms:
-    # uncomment this next line to reset all rooms
-    # room.data.pop('plm_enemies', None); room.save()
+    if '-f' in sys.argv:
+      room.data.pop('plm_enemies', None)
+      room.save()
     for plm in room.data.get('plm_enemies', []):
       processed.append(plm['source'])
   print(f'skipping {len(processed)} screenshots found in plm_enemies[:].source')

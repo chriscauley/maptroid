@@ -75,6 +75,7 @@ export default {
         event.preventDefault()
         sprite.type = this.last.type
         sprite.category = this.last.category
+        sprite.modifier = this.last.modifier
         this.$store.smilesprite.save(sprite).then(() => this.refetch())
       } else {
         this.selected_sprite = sprite

@@ -12,6 +12,7 @@ import unrest_image as img
 from maptroid.cre import scan_for_cre
 from maptroid.models import Room, SmileSprite, SpriteMatcher
 from maptroid.shapes import polygons_to_geometry
+from maptroid.rectangle import xys_to_rectangles
 from maptroid.utils import mkdir
 
 def extract_sprites(image):
@@ -101,7 +102,6 @@ def main():
                     special_x_ys.append([sprite, x, y])
 
 
-
         polygons = [Polygon(sprite_to_xys(shape, x, y)) for shape, x, y in shape_x_ys]
 
         room.data['geometry']['inner'] = polygons_to_geometry(polygons)
@@ -109,13 +109,24 @@ def main():
         room.data['bts'] = {
             'sprites': list(set([s.id for s, x, y in (shape_x_ys + special_x_ys)])),
         }
-        room.data['cre'] = defaultdict(list)
+        hex_xys = defaultdict(list)
+        cre_xys = defaultdict(list)
         for sprite, x, y in special_x_ys:
             if sprite.category == 'block':
-                room.data['cre'][sprite.type].append([x, y])
-        scan_for_cre(room)
+                cre_xys[sprite.type].append([x, y])
+            if sprite.category == 'hex':
+                hex_xys[sprite.type].append([x, y])
+        cre_xys.update(scan_for_cre(room))
+        room.data['cre'] = {}
+        for key, xys in cre_xys.items():
+            if xys:
+                room.data['cre'][key] = xys_to_rectangles(xys)
+        room.data['cre_hex'] = {}
+        for key, xys in hex_xys.items():
+            if xys:
+                room.data['cre_hex'][key] = xys_to_rectangles(xys)
         room.save()
-        print('saving', room.name)
+        print(f'saving #{room.id} - {room.name}')
 
 """
 b16_

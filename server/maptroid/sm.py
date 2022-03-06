@@ -147,6 +147,7 @@ def make_walls_image(zone, dest):
     icons = {
         **get_icons('block', operations=MAP_OPERATIONS),
         **get_icons('misc-spikes', operations=MAP_OPERATIONS),
+        **get_icons('cre-hex', operations=MAP_OPERATIONS),
     }
     for room in zone.room_set.all():
         if 'inner' not in room.data['geometry']:
@@ -165,9 +166,19 @@ def make_walls_image(zone, dest):
                 stroke=color,
                 interiors=interiors,
             )
-        for category, xys in room.data.get('cre', {}).items():
-            for x, y in xys:
-                x = 16 * (x + room_x * 16)
-                y = 16 * (y + room_y * 16)
-                urcv.draw.paste_alpha(zone_image, icons[category], x, y)
+        stamp_map = {}
+        def reverse_rectangles(cre_map):
+            out = {}
+            for category, bounds_list in cre_map.items():
+                for x0, y0, w, h in bounds_list:
+                    for dx in range(w):
+                        for dy in range(h):
+                            x = 16 * (x0 + dx + room_x * 16)
+                            y = 16 * (y0 + dy + room_y * 16)
+                            out[tuple([x, y])] = category
+            return out
+        stamp_map.update(reverse_rectangles(room.data.get('cre', {})))
+        stamp_map.update(reverse_rectangles(room.data.get('cre_hex', {})))
+        for (x, y), category in stamp_map.items():
+            urcv.draw.paste_alpha(zone_image, icons[category], x, y)
     cv2.imwrite(dest, zone_image)

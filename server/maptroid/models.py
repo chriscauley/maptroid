@@ -170,7 +170,7 @@ class SmileSprite(models.Model):
   LAYERS = _choices(['bts', 'plm', 'tile', 'unknown'])
   layer = models.CharField(max_length=16, choices=LAYERS, default='unknown')
   type = models.CharField(max_length=32, blank=True, default='')
-  MODIFIERS = _choices(['composite', 'inblock', 'inegg', 'repspawn'])
+  MODIFIERS = _choices(['composite', 'inblock', 'inegg', 'respawn'])
   modifier = models.CharField(max_length=16, choices=MODIFIERS, null=True, blank=True)
   CATEGORIES = _choices(['block', 'geo', 'hex', 'item', 'enemy', 'obstacle', 'door', 'station', 'animation', 'trash'])
   category = models.CharField(max_length=16, choices=CATEGORIES, null=True, blank=True)

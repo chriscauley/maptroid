@@ -47,8 +47,10 @@ def scan_for_cre(room, _classes=SCAN_TEMPLATES, layer=None):
         for (x, y, _w, _h) in rects:
             results[template_name].append([round(x/16), round(y/16)])
             count += 1
-    room.data['cre'].update(results)
-
     if layer == 'layer-2' and count == 0:
         # red brinstar fireflee room has it's spikes in layer-1 even though it's inverted
-        scan_for_cre(room, _classes=_classes, layer='layer-1')
+        results2 = scan_for_cre(room, _classes=_classes, layer='layer-1')
+        for key, value in results2.items():
+            results[key] = results.get(key, []) + value
+    return results
+
