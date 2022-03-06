@@ -59,21 +59,25 @@
       "screw-attack",
       "missile",
       "super-missile",
+
       "energy-tank",
       "energy2-tank",
       "varia-suit",
       "space-jump",
       "power-bomb",
+
       "hi-jump-boots",
       "speed-booster",
       "pedastool",
       "reserve-tank",
       "x-ray",
+
       "spring-ball",
-      "grappling-hook",
+      "grappling-beam",
       "charge-beam",
       "spazer-beam",
       "wave-beam",
+
       "ice-beam",
       "plasma-beam",
       "gravity-suit"
