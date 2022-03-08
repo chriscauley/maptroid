@@ -24,10 +24,15 @@ import RoomBox from './RoomBox.vue'
 import ToolStorage from '@/components/unrest/ToolStorage'
 import Item from '@/models/Item'
 
+const Block = {
+  all: ['shot', 'crumble', 'bomb', 'empty'],
+}
+
 const tools = [
   { slug: 'item', variants: Item.packs, icon: (_, v) => `sm-item -${v}` },
   { slug: 'item', variants: Item.beams, icon: (_, v) => `sm-item -${v}` },
   { slug: 'item', variants: Item.abilities, icon: (_, v) => `sm-item -${v}` },
+  { slug: 'block', variants: Block.all, icon: (_, v) => `sm-block -${v}` },
   { slug: 'overlap', icon: 'fa fa-layer-group' },
 ]
 

@@ -22,7 +22,7 @@
       "conveyor_left",
       "enemy",
       "enemy-break",
-      "null"
+      "empty"
     ]
   },
   "misc-spikes": {

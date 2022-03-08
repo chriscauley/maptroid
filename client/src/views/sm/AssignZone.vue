@@ -7,7 +7,7 @@
         :to="zone.to"
         :class="zone.class(zone.slug, $route.params.zone_slug)"
       >
-        {{ zone.name.slice(0,10) }}
+        {{ zone.name.slice(0, 10) }}
       </router-link>
     </div>
     <div v-if="zones">
@@ -23,7 +23,7 @@
               :class="zone.class(room.zone, zone.id)"
               @click="setRoomZone(room, zone.id)"
             >
-              {{ zone.name.slice(0,10) }}
+              {{ zone.name.slice(0, 10) }}
             </div>
           </div>
         </div>

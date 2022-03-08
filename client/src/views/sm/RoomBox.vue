@@ -2,7 +2,7 @@
   <div :style="style" :class="css" :title="`${room.id} - ${room.name}`" @click="click">
     <template v-if="mode">
       <div v-for="(hole, i) in holes" :key="i" :style="hole" />
-      <unrest-draggable class="doot" @drag="drag" :style="`background-image: url(${src})`" />
+      <unrest-draggable @drag="drag" :style="`background-image: url(${src})`" />
     </template>
     <template v-if="mode === 'item'">
       <div
@@ -12,11 +12,21 @@
         @click.stop="removeItem(item.id)"
       />
     </template>
+    <template v-if="mode == 'block'">
+      <div v-for="block in blocks" v-bind="block.attrs" :key="block.id" />
+      <div
+        v-for="override in cre_overrides"
+        v-bind="override"
+        :key="override.id"
+        @click.stop="deleteOverride(override.id)"
+      />
+    </template>
+    <div v-if="drag_bounds" v-bind="drag_bounds_attrs" />
   </div>
 </template>
 
 <script>
-import { debounce, inRange } from 'lodash'
+import { debounce, inRange, range } from 'lodash'
 import vec from '@/lib/vec'
 
 export default {
@@ -25,6 +35,9 @@ export default {
     room: Object,
     mode: String,
     variant: String,
+  },
+  data() {
+    return { drag_bounds: null }
   },
   computed: {
     css() {
@@ -38,7 +51,7 @@ export default {
     },
     style() {
       const [x, y, width, height] = this.room.data.zone.bounds
-      if (['item', 'overlap'].includes(this.mode)) {
+      if (['item', 'overlap', 'block'].includes(this.mode)) {
         return {
           height: `${height * 256}px`,
           width: `${width * 256}px`,
@@ -50,6 +63,19 @@ export default {
         top: `${y * 100}%`,
         width: `${width * 100}%`,
         zIndex: 100 - width * height,
+      }
+    },
+    drag_bounds_attrs() {
+      const [x, y, w, h] = this.drag_bounds
+      return {
+        class: 'sm-room-box__drag-bounds',
+        style: {
+          height: `${16 * h}px`,
+          left: `${16 * x}px`,
+          position: 'absolute',
+          top: `${16 * y}px`,
+          width: `${16 * w}px`,
+        },
       }
     },
     items() {
@@ -66,6 +92,57 @@ export default {
             top: `${16 * item.data.room_xy[1]}px`,
             width: '16px',
           },
+        },
+      }))
+    },
+    blocks() {
+      const room_width = this.room.data.zone.bounds[2] * 16
+      const block_map = {}
+      Object.entries(this.room.data.cre_hex).forEach(([name, rects]) => {
+        const _class = `sm-cre-hex -${name}`
+        rects.forEach(([x, y, w, h]) => {
+          range(w).forEach((dx) => {
+            range(h).forEach((dy) => {
+              block_map[[x + dx, y + dy]] = _class
+            })
+          })
+        })
+      })
+      this.room.data.cre_overrides?.forEach(([x, y, w, h, name]) => {
+        const _class = `sm-block -${name}`
+        range(w).forEach((dx) => {
+          range(h).forEach((dy) => (block_map[[x + dx, y + dy]] = _class))
+        })
+      })
+      return Object.entries(block_map).map(([xy, _class]) => {
+        const [x, y] = xy.split(',').map((i) => Number(i))
+        const id = room_width * y + x
+        return {
+          id,
+          attrs: {
+            id: `sm-room-box__block__${id}`,
+            class: _class,
+            style: {
+              height: '16px',
+              left: `${16 * x}px`,
+              position: 'absolute',
+              top: `${16 * y}px`,
+              width: '16px',
+            },
+          },
+        }
+      })
+    },
+    cre_overrides() {
+      return this.room.data.cre_overrides?.map(([x, y, w, h, _name, respawn], id) => ({
+        id,
+        class: ['sm-room-box__override', { '-respawn': respawn }],
+        style: {
+          height: `${16 * h}px`,
+          left: `${16 * x}px`,
+          position: 'absolute',
+          top: `${16 * y}px`,
+          width: `${16 * w}px`,
         },
       }))
     },
@@ -87,16 +164,23 @@ export default {
     },
   },
   methods: {
+    _getMouseXY(clientX, clientY) {
+      const box = this.$el.getBoundingClientRect()
+      return [clientX - box.x, clientY - box.y].map((i) => Math.floor(i / 16))
+    },
     click(event) {
       const { tool } = this.tool_storage.state.selected
       const { editing_room } = this.$store.local.state
       if (editing_room !== this.room.id && tool === 'edit_room') {
         this.$store.local.save({ editing_room: this.room.id })
       } else if (this.mode === 'item') {
-        const box = this.$el.getBoundingClientRect()
-        const { clientX, clientY } = event
-        const xy = [clientX - box.x, clientY - box.y].map((i) => Math.floor(i / 16))
-        this.addItem(xy)
+        this.addItem(this._getMouseXY(event.clientX, event.clientY))
+      } else if (this.mode === 'block') {
+        const [x, y, w, h] = this.drag_bounds
+        const { data } = this.room
+        data.cre_overrides = data.cre_overrides || []
+        data.cre_overrides.push([x, y, w, h, this.variant])
+        this.drag_bounds = null
       }
     },
     bounceSave: debounce(function() {
@@ -112,6 +196,15 @@ export default {
         }
       } else if (this.mode === 'item') {
         // handled in click
+      } else if (this.mode === 'block') {
+        const [x1, y1] = this._getMouseXY(...event._drag.xy_start)
+        const [x2, y2] = this._getMouseXY(...event._drag.xy)
+        const x = Math.min(x1, x2)
+        const y = Math.min(y1, y2)
+        const w = Math.abs(x2 - x1) + 1
+        const h = Math.abs(y2 - y1) + 1
+        this.drag_bounds = [x, y, w, h]
+        this.bounceSave()
       } else {
         this.osd_store.dragRoom(this.room, event._drag.last_dxy)
         this.bounceSave()
@@ -141,6 +234,11 @@ export default {
     },
     removeItem(id) {
       this.$store.item.delete({ id }).then(this.$store.route.refetchItems)
+      this.bounceSave()
+    },
+    deleteOverride(id) {
+      const { data } = this.room
+      data.cre_overrides = data.cre_overrides.filter((_, oid) => oid !== id)
     },
   },
 }
