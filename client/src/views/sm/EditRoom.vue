@@ -1,7 +1,7 @@
 <template>
   <teleport to="body" v-if="room">
-    <unrest-modal @close="$store.local.save({ editing_room: null })">
-      <unrest-toolbar :storage="item_storage" class="-relative">
+    <unrest-modal @close="$store.local.save({ editing_room: null })" class="edit-room">
+      <unrest-toolbar :storage="item_storage" class="-topleft">
         <template #buttons>
           <div :class="invertClass" title="invert" @click="toggleInvert">
             <i class="fa fa-file-image" />

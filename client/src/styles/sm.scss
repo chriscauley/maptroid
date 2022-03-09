@@ -1,5 +1,21 @@
 @use "sass:color";
 
+.edit-room .modal-content {
+  padding-top: 3rem; /* for toolbar */
+  position: relative;
+  .modal-body {
+    height: 100%;
+    overflow: auto;
+    width: 100%;
+  }
+  .ur-toolbar__row:last-child {
+    display:none;
+  }
+  .ur-toolbar:hover .ur-toolbar__row:last-child {
+    display: flex;
+  }
+}
+
 .sm-room-box {
   background-size: cover;
   &.-mode-overlap, &.-mode-item, &.-mode-block {
