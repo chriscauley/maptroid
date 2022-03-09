@@ -125,7 +125,7 @@ $cre-hex: respawn block exit;
   }
 }
 
-$block: shot crumble bomb missile super-missile power-bomb speed-booster grapple_break grapple grapple_mirror spike_up spike_down spike_right spike_left conveyor_down conveyor_up conveyor_right conveyor_left enemy enemy-break empty;
+$block: shot crumble bomb missile super-missile power-bomb speed-booster grapple_break grapple grapple_mirror spike_up spike_down spike_right spike_left conveyor_down conveyor_up conveyor_right conveyor_left enemy enemy-break empty block;
 
 .sm-block {
   &:before {

@@ -25,7 +25,7 @@ import ToolStorage from '@/components/unrest/ToolStorage'
 import Item from '@/models/Item'
 
 const Block = {
-  all: ['shot', 'crumble', 'bomb', 'empty'],
+  all: ['shot', 'crumble', 'bomb', 'empty', 'block', 'grapple', 'speed-booster', "enemy-break"],
 }
 
 const tools = [

@@ -12,7 +12,7 @@
     </div>
     <div v-if="zones">
       {{ rooms?.length }} remaining
-      <div v-for="room in rooms.slice(0, 64)" :key="room.id" class="app-sm-assign__image">
+      <div v-for="room in rooms.slice(0, 100)" :key="room.id" class="app-sm-assign__image">
         <img :src="getLayerImage(room)" />
         <div class="app-sm-assign__image-bar">
           {{ room.key }}

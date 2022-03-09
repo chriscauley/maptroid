@@ -22,7 +22,8 @@
       "conveyor_left",
       "enemy",
       "enemy-break",
-      "empty"
+      "empty",
+      "block"
     ]
   },
   "misc-spikes": {
@@ -48,7 +49,7 @@
     "size": [16, 16],
     "icons": [
       "respawn",
-      "block",
+      "unknown",
       "exit"
     ]
   },

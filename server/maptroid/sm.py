@@ -175,10 +175,18 @@ def make_walls_image(zone, dest):
                         for dy in range(h):
                             x = 16 * (x0 + dx + room_x * 16)
                             y = 16 * (y0 + dy + room_y * 16)
-                            out[tuple([x, y])] = category
+                            out[(x, y)] = category
             return out
-        stamp_map.update(reverse_rectangles(room.data.get('cre', {})))
         stamp_map.update(reverse_rectangles(room.data.get('cre_hex', {})))
+        stamp_map.update(reverse_rectangles(room.data.get('cre', {})))
+        for [x0, y0, w, h, category] in room.data.get('cre_overrides', []):
+            for dx in range(w):
+                for dy in range(h):
+                    x = 16 * (x0 + dx + room_x * 16)
+                    y = 16 * (y0 + dy + room_y * 16)
+                    stamp_map[(x, y)] = category
+
+        stamp_map = { k: v for k, v in stamp_map.items() if v != 'empty' }
         for (x, y), category in stamp_map.items():
             urcv.draw.paste_alpha(zone_image, icons[category], x, y)
     cv2.imwrite(dest, zone_image)

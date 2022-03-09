@@ -118,11 +118,15 @@ def main():
                 hex_xys[sprite.type].append([x, y])
         cre_xys.update(scan_for_cre(room))
         room.data['cre'] = {}
+        taken_xys = []
         for key, xys in cre_xys.items():
             if xys:
                 room.data['cre'][key] = xys_to_rectangles(xys)
+                for xy in xys:
+                    taken_xys.append(xy)
         room.data['cre_hex'] = {}
         for key, xys in hex_xys.items():
+            xys = [xy for xy in xys if not xy in taken_xys]
             if xys:
                 room.data['cre_hex'][key] = xys_to_rectangles(xys)
         room.save()
