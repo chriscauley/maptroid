@@ -9,13 +9,13 @@ import urcv
 SM_DIR = Path(__file__).parent / '../static/sm/'
 
 MAP_OPERATIONS = {
-    'shot': dict(brightness=40, contrast=20),
-    'crumble': dict(brightness=20, contrast=40),
+    'shot': dict(brightness=50, contrast=20),
+    'crumble': dict(brightness=30, contrast=50),
     'bomb': dict(brightness=20, multiply=(2,0.5,0.5,1)),
     'missile': dict(brightness=20, multiply=(1,1,2,1), contrast=20),
-    'super-missile': dict(multiply=(0,1,0,1)),
-    'power-bomb': dict(brightness=50, multiply=(0,0.5,1,1), contrast=40),
-    'speed-booster': dict(brightness=50, multiply=(0, 1.5, 0, 1), contrast=20),
+    'super-missile': dict(multiply=(0.5,2,0.5,1)),
+    'power-bomb': dict(brightness=50, multiply=(0,1,1.5,1), contrast=40),
+    'speed-booster': dict(brightness=50, multiply=(1.5, 0, 1.5, 1), contrast=20),
     'grapple': dict(multiply=(1, 1, 0, 1)),
     'spike': dict(multiply=(0,0,1,1)),
     'conveyor': dict(brightness=150, multiply=(0, 1, 1, 1), contrast=50, alpha=0.75),
