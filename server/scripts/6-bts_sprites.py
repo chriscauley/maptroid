@@ -102,6 +102,13 @@ def main():
                     special_x_ys.append([sprite, x, y])
 
 
+        BLOCK_SPRITE = SmileSprite.objects.filter(type='b25_04ok0')[0]
+        for [x, y, w, h, shape] in room.data.get('cre_overrides', []):
+            if shape != 'block':
+                continue
+            for dx in range(w):
+                for dy in range(h):
+                    shape_x_ys.append([BLOCK_SPRITE, x+dx, y+dy])
         polygons = [Polygon(sprite_to_xys(shape, x, y)) for shape, x, y in shape_x_ys]
 
         room.data['geometry']['inner'] = polygons_to_geometry(polygons)

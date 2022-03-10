@@ -4,6 +4,7 @@ import numpy as np
 import os
 from PIL import Image, ImageDraw
 
+from maptroid.doors import draw_doors, get_can_icons
 from maptroid.dzi import png_to_dzi
 from maptroid.icons import get_icons, MAP_OPERATIONS
 from maptroid.utils import mkdir
@@ -79,6 +80,7 @@ def process_zone(zone):
             room_clear_holes = zone_clear_holes or room.data.get('clear_holes')
 
             for layer in layers:
+                is_door_layer = layer == 'layer-1' and 'doors' in room.data
                 path = os.path.join(settings.MEDIA_ROOT, f'smile_exports/{world.slug}/{layer}/{room.key}')
                 layer_dir = mkdir(CACHE_DIR, layer)
                 layer_path = os.path.join(layer_dir, room.key)
@@ -91,17 +93,26 @@ def process_zone(zone):
                 if not os.path.exists(path):
                     print(f'skipping {room.key} {layer} because file DNE')
                 else:
-                    layer_image = img._coerce(path, 'pil')
-                    layer_image = layer_image.convert('RGBA')
+                    layer_image = cv2.imread(path, cv2.IMREAD_UNCHANGED)
+                    layer_image = urcv.force_alpha(layer_image)
                     if cutout_bg and 'inner' in room.data['geometry']:
-                        draw = ImageDraw.Draw(layer_image)
                         for polygon in room.data['geometry']['inner']:
                             xys = [(p[0]*256, p[1]*256) for p in polygon['exterior']]
-                            draw.polygon(xys, fill="black")
-                    layer_image = img.replace_color(layer_image, (0, 0, 0, 255),(0, 0, 0, 0))
-                    layer_image.save(layer_path)
-                    room_image.paste(layer_image, (0, 0), mask=layer_image)
-                    layer_image.close()
+                            interiors = polygon['interiors']
+                            interiors = [[(p[0]*256, p[1]*256) for p in shape] for shape in interiors]
+                            urcv.draw.polygon(
+                                layer_image,
+                                xys,
+                                fill=(0,0,0,0),
+                                interiors=interiors,
+                            )
+                    urcv.remove_color_alpha(layer_image, (0, 0, 0))
+                    if is_door_layer:
+                        draw_doors(layer_image, room.data['doors'], cans=get_can_icons())
+                    cv2.imwrite(layer_path, layer_image)
+                    _image = Image.fromarray(cv2.cvtColor(layer_image, cv2.COLOR_BGRA2RGBA))
+                    room_image.paste(_image, (0, 0), mask=_image)
+                    _image.close()
 
             holes = []
             for [dx, dy] in room.data.get('holes') or []:
@@ -136,6 +147,14 @@ def process_zone(zone):
     png_to_dzi(walls_dest)
 
     zone.save()
+
+
+DOOR_DELTAS = {
+    'left': list(zip((0,0,0,0), range(4))),
+    'right': list(zip((0,0,0,0), range(4))),
+    'up': list(zip(range(4), (0,0,0,0))),
+    'down': list(zip(range(4), (0,0,0,0))),
+}
 
 
 def make_walls_image(zone, dest):
@@ -186,7 +205,19 @@ def make_walls_image(zone, dest):
                     y = 16 * (y0 + dy + room_y * 16)
                     stamp_map[(x, y)] = category
 
-        stamp_map = { k: v for k, v in stamp_map.items() if v != 'empty' }
+        doors = []
+        for x, y, orientation, alpha in room.data.get('doors', []):
+            for dx, dy in DOOR_DELTAS[orientation]:
+                zx = 16 * (x + dx + room_x * 16)
+                zy = 16 * (y + dy + room_y * 16)
+                stamp_map.pop((zx, zy), None)
+            doors.append([x+room_x*16, y+room_y*16, orientation, alpha])
+
+        cans = get_can_icons()
+        zone_image = draw_doors(zone_image, doors, cans=cans)
+
+        skip = ['empty', 'block']
+        stamp_map = { k: v for k, v in stamp_map.items() if v not in skip }
         for (x, y), category in stamp_map.items():
             urcv.draw.paste_alpha(zone_image, icons[category], x, y)
     cv2.imwrite(dest, zone_image)

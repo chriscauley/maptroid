@@ -98,5 +98,15 @@
       "door_right",
       "door_left"
     ]
+  },
+  "door_caps": {
+    "size": [16, 64],
+    "icons": [
+      "cap_red",
+      "cap_orange",
+      "cap_brown",
+      "cap_green",
+      "cap_blue"
+    ]
   }
 }
