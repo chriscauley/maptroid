@@ -25,14 +25,39 @@ import ToolStorage from '@/components/unrest/ToolStorage'
 import Item from '@/models/Item'
 
 const Block = {
-  all: ['shot', 'crumble', 'bomb', 'empty', 'block', 'grapple', 'speed-booster', "enemy-break"],
+  weapon: [
+    "shot",
+    "crumble",
+    "bomb",
+    "missile",
+    "super-missile",
+    "power-bomb",
+    "speed-booster",
+    "grapple_break",
+    "grapple",
+  ],
+  misc: [
+    "spike_up",
+    "spike_down",
+    "spike_right",
+    "spike_left",
+    "conveyor_down",
+    "conveyor_up",
+    "conveyor_right",
+    "conveyor_left",
+    "enemy",
+    "enemy-break",
+    "empty",
+    "block"
+  ],
 }
 
 const tools = [
   { slug: 'item', variants: Item.packs, icon: (_, v) => `sm-item -${v}` },
   { slug: 'item', variants: Item.beams, icon: (_, v) => `sm-item -${v}` },
   { slug: 'item', variants: Item.abilities, icon: (_, v) => `sm-item -${v}` },
-  { slug: 'block', variants: Block.all, icon: (_, v) => `sm-block -${v}` },
+  { slug: 'block', variants: Block.weapon, icon: (_, v) => `sm-block -${v}` },
+  { slug: 'block', variants: Block.misc, icon: (_, v) => `sm-block -${v}` },
   { slug: 'overlap', icon: 'fa fa-layer-group' },
 ]
 

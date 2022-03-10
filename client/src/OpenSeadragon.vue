@@ -35,8 +35,7 @@ export default {
     if (this.pixelated) {
       const onZoom = () => {
         const { drawer, viewport } = this.viewer
-        const viewport_zoom = viewport.getZoom()
-        drawer.context.imageSmoothingEnabled = viewport_zoom < 0.5
+        drawer.context.imageSmoothingEnabled = viewport.getZoom() < 0.5
       }
       this.viewer.addHandler('zoom', onZoom)
       this.viewer.addOnceHandler('tile-loaded', onZoom)
