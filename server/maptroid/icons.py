@@ -50,7 +50,15 @@ def apply_brightness_contrast(image, brightness = 0, contrast = 0):
     return buf
 
 
-def _process(image, brightness=0, contrast=0, grayscale=0, multiply=None, alpha=1):
+ROTATIONS = {
+    90: cv2.ROTATE_90_CLOCKWISE,
+    180: cv2.ROTATE_180,
+    270: cv2.ROTATE_90_COUNTERCLOCKWISE,
+    -90: cv2.ROTATE_90_COUNTERCLOCKWISE,
+}
+
+
+def _process(image, brightness=0, contrast=0, grayscale=0, multiply=None, alpha=1, rotate=None):
     alpha_channel = None
     if image.shape[2] == 4:
         alpha_channel = image[:,:,3]
@@ -65,6 +73,8 @@ def _process(image, brightness=0, contrast=0, grayscale=0, multiply=None, alpha=
     if alpha_channel is not None:
         image = cv2.cvtColor(image, cv2.COLOR_BGR2BGRA)
         image[:,:,3] = alpha * alpha_channel
+    if rotate:
+        image = cv2.rotate(image, ROTATIONS[rotate])
     return image
 
 def get_icons(category, _cvt=None, operations={}, scale=1):
@@ -84,6 +94,8 @@ def get_icons(category, _cvt=None, operations={}, scale=1):
         icon_map[slug] = urcv.transform.crop(png, [0, i * h, w, h])
         if _class in operations:
             icon_map[slug] = _process(icon_map[slug], **operations[_class])
+        if "*" in operations:
+            icon_map[slug] = _process(icon_map[slug], **operations["*"])
     return icon_map
 
 def recombine(icon_map):
