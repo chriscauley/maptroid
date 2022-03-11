@@ -107,10 +107,10 @@
       "cap_brown",
       "cap_green",
       "cap_blue"
-    ],
+    ]
   },
   "blue_doors": {
-    "size" [32, 64],
+    "size": [32, 64],
     "icons": [
       "super_metroid",
       "ypx",
@@ -123,7 +123,7 @@
     ]
   },
   "blue_caps": {
-    "size" [8, 64],
+    "size": [8, 64],
     "icons": [
       "super_metroid",
       "ypx",
