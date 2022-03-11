@@ -107,6 +107,32 @@
       "cap_brown",
       "cap_green",
       "cap_blue"
+    ],
+  },
+  "blue_doors": {
+    "size" [32, 64],
+    "icons": [
+      "super_metroid",
+      "ypx",
+      "ancient-chozo",
+      "nature",
+      "lost-world",
+      "airy",
+      "exercise",
+      "varia"
+    ]
+  },
+  "blue_caps": {
+    "size" [8, 64],
+    "icons": [
+      "super_metroid",
+      "ypx",
+      "ancient-chozo",
+      "nature",
+      "lost-world",
+      "airy",
+      "exercise",
+      "varia"
     ]
   }
 }
