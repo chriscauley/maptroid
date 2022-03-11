@@ -59,8 +59,6 @@ def process_zone(zone):
     PLM_DIR = mkdir(settings.MEDIA_ROOT, f'sm_zone/{world.slug}/plm_enemies')
 
     rooms = zone.room_set.all()
-    x_min = min([r.data['zone']['bounds'][0] for r in rooms])
-    y_min = min([r.data['zone']['bounds'][1] for r in rooms])
 
     # Make note of which xys to punch out in the holes
     occupied_xy_map = get_occupied_world_xys(zone)
@@ -94,6 +92,10 @@ def process_zone(zone):
                     print(f'skipping {room.key} {layer} because file DNE')
                 else:
                     layer_image = cv2.imread(path, cv2.IMREAD_UNCHANGED)
+                    if np.sum(layer_image) == 0:
+                        # blank images don't need to be processed
+                        # they also cause errors because they are grayscale
+                        continue
                     layer_image = urcv.force_alpha(layer_image)
                     if cutout_bg and 'inner' in room.data['geometry']:
                         for polygon in room.data['geometry']['inner']:

@@ -14,8 +14,9 @@ print(f'processing {len(zones)} zones')
 for zone in zones:
     print('processing', zone.name)
     for room in zone.room_set.all():
-        if not room.data.get('doors'):
-            print(f'redoing doors for room #{room.id} - {room.key}')
+        if 'doors' not in room.data or '--doors' in sys.argv:
+            if 'doors' not in room.data:
+                print(f'redoing doors for room #{room.id} - {room.key}')
             populate_room_doors(room)
             room.save()
     process_zone(zone)

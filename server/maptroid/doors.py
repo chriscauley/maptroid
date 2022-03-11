@@ -111,5 +111,10 @@ def populate_room_doors(room):
             print(f'skipping {layer_name} for {room.key}')
             continue
         matched_doors.update(find_doors(layer))
-
-    room.data['doors'] = list(matched_doors.values())
+    all_doors = list(matched_doors.values())
+    room.data['doors'] = []
+    for door in all_doors:
+        room_x = door[0] // 16
+        room_y = door[1] // 16
+        if [room_x, room_y] not in room.data.get('holes', []):
+            room.data['doors'].append(door)
