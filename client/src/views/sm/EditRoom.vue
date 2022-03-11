@@ -96,7 +96,7 @@ export default {
     png_items() {
       const { key } = this.room
       const world = this.$store.route.world.slug
-      const layers = ['layer-1', 'layer-2', 'bts']
+      const layers = ['layer-1', 'layer-2', 'bts', 'plm_enemies']
       const items = layers.map((layer) => ({
         href: `/media/smile_exports/${world}/${layer}/${key}`,
         text: `smile ${layer}`,
@@ -108,10 +108,6 @@ export default {
           text: `sm_cache ${layer}`,
         }),
       )
-      items.push({
-        text: 'plm_enemies',
-        href: `/media/plm_enemies/${world}/${key}`,
-      })
       items.unshift({
         text: 'admin',
         href: `/djadmin/maptroid/room/${this.room.id}/`,
