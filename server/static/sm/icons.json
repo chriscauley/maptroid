@@ -85,21 +85,18 @@
       "gravity-suit"
     ]
   },
-  "doors_up-down": {
-    "size": [64, 16],
+  "colored-doors": {
+    "size": [32, 64],
     "icons": [
-      "door_up",
-      "door_down"
-    ]
-  },
-  "doors_right-left": {
-    "size": [16, 64],
-    "icons": [
-      "door_right",
-      "door_left"
+      "red",
+      "orange",
+      "brown",
+      "green",
+      "blue"
     ]
   },
   "door_caps": {
+    "note": "Used to get colors palette for colored-doors generation",
     "size": [16, 64],
     "icons": [
       "cap_red",
@@ -110,6 +107,7 @@
     ]
   },
   "blue_doors": {
+    "note": "Used to regenerate colored-doors",
     "size": [32, 64],
     "icons": [
       "super_metroid",
@@ -123,6 +121,7 @@
     ]
   },
   "blue_caps": {
+    "note": "Used to get blue palette for colored-doors generation",
     "size": [8, 64],
     "icons": [
       "super_metroid",

@@ -4,7 +4,7 @@ import numpy as np
 import os
 from PIL import Image, ImageDraw
 
-from maptroid.doors import draw_doors, get_can_icons
+from maptroid.doors import draw_doors
 from maptroid.dzi import png_to_dzi
 from maptroid.icons import get_icons, MAP_OPERATIONS
 from maptroid.utils import mkdir
@@ -110,7 +110,7 @@ def process_zone(zone):
                             )
                     urcv.remove_color_alpha(layer_image, (0, 0, 0))
                     if is_door_layer:
-                        draw_doors(layer_image, room.data['doors'], cans=get_can_icons())
+                        draw_doors(layer_image, room.data['doors'], zone.world.slug)
                     cv2.imwrite(layer_path, layer_image)
                     _image = Image.fromarray(cv2.cvtColor(layer_image, cv2.COLOR_BGRA2RGBA))
                     room_image.paste(_image, (0, 0), mask=_image)
@@ -215,8 +215,7 @@ def make_walls_image(zone, dest):
                 stamp_map.pop((zx, zy), None)
             doors.append([x+room_x*16, y+room_y*16, orientation, alpha])
 
-        cans = get_can_icons()
-        zone_image = draw_doors(zone_image, doors, cans=cans)
+        zone_image = draw_doors(zone_image, doors, zone.world.slug)
 
         skip = ['empty', 'block']
         stamp_map = { k: v for k, v in stamp_map.items() if v not in skip }

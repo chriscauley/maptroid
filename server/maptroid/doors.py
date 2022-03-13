@@ -1,63 +1,74 @@
 import cv2
 import functools
 import numpy as np
+import os
 import urcv
 
 from maptroid.icons import get_icons, SM_DIR
 
 @functools.lru_cache
-def get_cap_icons():
+def list_worlds():
+    return [
+        f.stem
+        for f in (SM_DIR / 'world_doors').iterdir()
+    ]
+
+@functools.lru_cache
+def get_door_icons(world, style):
+    if not world in list_worlds():
+        return get_door_icons('super_metroid', style)
+    left = get_icons('colored-doors', source=f"world_doors/{world}.png")
+    if not style in ['cap', 'half', 'halfcan', 'can', 'full']:
+        raise ValueError(f"unrecognized door style: {style}")
+
+    # cut in half for any of these
+    if style in ['cap', 'half', 'halfcan']:
+        left = {
+            color: icon[:,0:16].copy()
+            for color, icon in left.items()
+        }
+
+    # blackout can for caps
+    if style == 'cap':
+        for icon in left.values():
+            icon[:, 8:] = [0,0,0,0]
+
+    # black out cap for cans
+    if style in ['can', 'halfcan']:
+        for icon in left.values():
+            icon[:, :8] = [0,0,0,0]
+
+    def _rotate(angle):
+        return {
+            color: cv2.rotate(icon, angle)
+            for color, icon in left.items()
+        }
     return {
-        'left': get_icons('door_caps'),
-        'right': get_icons('door_caps', operations={"*": {"rotate": 180 }}),
-        'up': get_icons('door_caps', operations={"*": {"rotate": 90 }}),
-        'down': get_icons('door_caps', operations={"*": {"rotate": 270 }}),
+        'left': left,
+        'right': _rotate(cv2.ROTATE_180),
+        'up': _rotate(cv2.ROTATE_90_CLOCKWISE),
+        'down': _rotate(cv2.ROTATE_90_COUNTERCLOCKWISE),
     }
 
 @functools.lru_cache
-def get_can_icons():
-    left = cv2.imread(str(SM_DIR / 'door_can.png'), cv2.IMREAD_UNCHANGED)
+def get_gray_door_icons(world):
+    icons = get_door_icons(world, 'half')
     return {
-        'left': [left, 0, 0],
-        'right': [cv2.rotate(left, cv2.ROTATE_180), -1, 0],
-        'up': [cv2.rotate(left, cv2.ROTATE_90_CLOCKWISE), 0, 0],
-        'down': [cv2.rotate(left, cv2.ROTATE_90_COUNTERCLOCKWISE), 0, -1],
+        orientation: cv2.cvtColor(icons_by_color['blue'], cv2.COLOR_BGR2GRAY)
+        for orientation, icons_by_color in icons.items()
     }
 
-@functools.lru_cache
-def get_halfcan_icons():
-    can_icons = get_can_icons()
-    out = {}
-    for orientation, value in can_icons.items():
-        icon = value[0].copy()
-        if orientation == 'right':
-            icon = icon[:,16:]
-        elif orientation == 'left':
-            icon = icon[:,:16]
-        elif orientation == 'down':
-            icon = icon[16:]
-        else:
-            icon = icon[:16]
-        out[orientation] = [icon, 0, 0]
-    return out
 
 @functools.lru_cache
-def get_door_colors():
-    cap_icons = get_cap_icons()
+def get_door_colors(world):
+    cap_icons = get_door_icons(world, 'cap')
     color_map = {}
     for color, icon in cap_icons['left'].items():
         color_map[color.replace('cap_', '')] = urcv.top_color(icon)
     return color_map
 
-@functools.lru_cache
-def get_gray_door_icons():
-    return {
-        **get_icons('doors_right-left', _cvt=cv2.COLOR_BGRA2GRAY),
-        **get_icons('doors_up-down', _cvt=cv2.COLOR_BGRA2GRAY),
-    }
-
-def match_door_color(image):
-    door_colors = get_door_colors()
+def match_door_color(image, world):
+    door_colors = get_door_colors(world)
     top_color = urcv.top_color(image, exclude=((0,0,0),(21,21,21)))
     max_distance = 255*3
     match = None
@@ -68,8 +79,8 @@ def match_door_color(image):
             match = name
     return match
 
-def find_doors(image):
-    gray_icons = get_gray_door_icons()
+def find_doors(image, world):
+    gray_icons = get_gray_door_icons(world)
     matched_doors = {}
     gray = cv2.cvtColor(image, cv2.COLOR_BGRA2GRAY)
     for key, template in gray_icons.items():
@@ -80,37 +91,39 @@ def find_doors(image):
             x = x * 16
             y = y * 16
             door = image[y:y+th,x:x+tw]
-            color = match_door_color(door)
+            color = match_door_color(door, world)
 
             matched_doors[(x, y)] = [int(x/16), int(y/16), orientation, color]
     return matched_doors
 
-def draw_doors(image, doors, offset=[0, 0], cans=None):
-    rotated_caps = get_cap_icons()
+def draw_doors(image, doors, world, offset=[0, 0]):
+    rotated_caps = get_door_icons(world, 'full')
     image = urcv.force_alpha(image)
 
     for x, y, orientation, color in doors:
-        cap = rotated_caps[orientation]['cap_'+color]
-        urcv.draw.paste_alpha(image, cap, 16*(x+offset[0]), 16*(y+offset[1]))
-        if cans is not None:
-            can, dx, dy = cans[orientation]
-            urcv.draw.paste_alpha(
-                image,
-                can,
-                16*(x+offset[0]+dx),
-                16*(y+offset[1]+dy)
-            )
+        dx = dy = 0
+        if orientation == 'right':
+            dx = -1
+        if orientation == 'down':
+            dy = -1
+        cap = rotated_caps[orientation][color]
+        urcv.draw.paste_alpha(image, cap, 16*(x+offset[0]+dx), 16*(y+offset[1]+dy))
     return image
 
 def populate_room_doors(room):
-    world = room.world.slug
+    world = room.world
     matched_doors = {}
     for layer_name in ['layer-1', 'plm_enemies']:
-        layer = cv2.imread(f'.media/smile_exports/{world}/{layer_name}/{room.key}')
+
+        layer = cv2.imread(f'.media/smile_exports/{world.slug}/{layer_name}/{room.key}')
         if layer is None:
             print(f'skipping {layer_name} for {room.key}')
             continue
-        matched_doors.update(find_doors(layer))
+
+        # plm_enemies will have vanilla door caps
+        world_slug = world.slug if layer_name == 'layer-1' else 'super_metroid'
+
+        matched_doors.update(find_doors(layer, world=world_slug))
     all_doors = list(matched_doors.values())
     room.data['doors'] = []
     for door in all_doors:

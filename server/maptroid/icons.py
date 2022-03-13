@@ -77,12 +77,13 @@ def _process(image, brightness=0, contrast=0, grayscale=0, multiply=None, alpha=
         image = cv2.rotate(image, ROTATIONS[rotate])
     return image
 
-def get_icons(category, _cvt=None, operations={}, scale=1):
+def get_icons(category, _cvt=None, operations={}, scale=1, source=None):
+    source = source or f'{category}.png'
     cat_map = json.loads((SM_DIR / 'icons.json').read_text())
     icon_map = OrderedDict()
     details = cat_map[category]
     w, h = details['size']
-    png = cv2.imread(str(SM_DIR / f'{category}.png'), cv2.IMREAD_UNCHANGED)
+    png = cv2.imread(str(SM_DIR / source), cv2.IMREAD_UNCHANGED)
     if scale != 1:
         png = urcv.transform.scale(png, scale)
         w = int(w * scale)
