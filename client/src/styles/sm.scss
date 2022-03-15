@@ -1,6 +1,7 @@
 @use "sass:color";
 
 .edit-room .modal-content {
+  min-width: 650px;
   padding-top: 3rem; /* for toolbar */
   position: relative;
   .modal-body {
