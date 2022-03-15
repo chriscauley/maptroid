@@ -21,9 +21,18 @@
       "conveyor_right",
       "conveyor_left",
       "enemy",
-      "enemy-break",
+      "enemy-break"
+    ]
+  },
+  "block-alt": {
+    "size": [16, 16],
+    "icons": [
       "empty",
-      "block"
+      "block",
+      "spike_misc",
+      "spark",
+      "exit",
+      "switch_shot"
     ]
   },
   "misc-spikes": {

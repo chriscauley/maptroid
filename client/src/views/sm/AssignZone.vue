@@ -9,6 +9,12 @@
       >
         {{ zone.name.slice(0, 10) }}
       </router-link>
+      <select v-model="filter_w" class="btn -primary">
+        <option v-for="option in wh_options" :key="option" :value="option">w={{ option }}</option>
+      </select>
+      <select v-model="filter_h" class="btn -primary">
+        <option v-for="option in wh_options" :key="option" :value="option">h={{ option }}</option>
+      </select>
     </div>
     <div v-if="zones">
       {{ rooms?.length }} remaining
@@ -33,6 +39,8 @@
 </template>
 
 <script>
+import { sortBy } from 'lodash'
+
 import Mousetrap from '@unrest/vue-mousetrap'
 
 export default {
@@ -41,7 +49,8 @@ export default {
     path: '/sm-assign/:world_slug/:zone_slug?',
   },
   data() {
-    return { selected: {} }
+    const wh_options = ["", 1, 2, 3, 4, 5,">5"]
+    return { selected: {}, filter_w: '', filter_h: '', wh_options }
   },
   computed: {
     mousetrap() {
@@ -85,12 +94,29 @@ export default {
       return this.$store.zone.getPage(this.world_query)?.items
     },
     rooms() {
+      let { filter_h, filter_w } = this
       const zone_id = this.zones.find((z) => z.slug === this.$route.params.zone_slug)?.id
-      const rooms = this.$store.room.getPage(this.world_query)?.items || []
+      let rooms = this.$store.room.getPage(this.world_query)?.items || []
       if (zone_id) {
-        return rooms.filter((i) => i.zone === zone_id)
+        rooms = rooms.filter((i) => i.zone === zone_id)
+      } else {
+        rooms = rooms.filter((i) => !i.zone)
       }
-      return rooms.filter((i) => !i.zone).reverse()
+      if (filter_h == '>5') {
+        rooms = rooms.filter(r => r.data.zone.bounds[3] > 5)
+      } else if (filter_h) {
+        filter_h = parseInt(filter_h)
+        rooms = rooms.filter(r => r.data.zone.bounds[3] === filter_h)
+      }
+      if (filter_w == '>5') {
+        rooms = rooms.filter(r => r.data.zone.bounds[2] > 5)
+      } else if (filter_w) {
+        console.log(filter_w)
+        filter_w = parseInt(filter_w)
+        console.log(filter_w)
+        rooms = rooms.filter(r => r.data.zone.bounds[2] === filter_w)
+      }
+      return sortBy(rooms, 'key')
     },
   },
   methods: {

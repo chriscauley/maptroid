@@ -98,7 +98,7 @@ export default {
     blocks() {
       const room_width = this.room.data.zone.bounds[2] * 16
       const block_map = {}
-      Object.entries(this.room.data.cre_hex).forEach(([name, rects]) => {
+      Object.entries(this.room.data.cre_hex || {}).forEach(([name, rects]) => {
         const _class = `sm-cre-hex -${name}`
         rects.forEach(([x, y, w, h]) => {
           range(w).forEach((dx) => {

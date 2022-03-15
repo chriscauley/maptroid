@@ -126,15 +126,25 @@ $cre-hex: respawn block exit;
   }
 }
 
-$block: shot crumble bomb missile super-missile power-bomb speed-booster grapple_break grapple grapple_mirror spike_up spike_down spike_right spike_left conveyor_down conveyor_up conveyor_right conveyor_left enemy enemy-break empty block;
+$block: shot crumble bomb missile super-missile power-bomb speed-booster grapple_break grapple grapple_mirror spike_up spike_down spike_right spike_left conveyor_down conveyor_up conveyor_right conveyor_left enemy enemy-break;
 
 .sm-block {
-  &:before {
-    background-image: url("/static/sm/block.png");
-  }
   @for $i from 0 to length($block) {
     $name: nth($block, $i + 1);
     &.-#{"" + $name}:before {
+      background-image: url("/static/sm/block.png");
+      background-position: 0 $i * -100%;
+    }
+  }
+}
+
+$block: empty block spike_misc spark exit switch_shot;
+
+.sm-block {
+  @for $i from 0 to length($block) {
+    $name: nth($block, $i + 1);
+    &.-#{"" + $name}:before {
+      background-image: url("/static/sm/block-alt.png");
       background-position: 0 $i * -100%;
     }
   }

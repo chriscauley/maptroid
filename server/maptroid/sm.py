@@ -167,6 +167,7 @@ def make_walls_image(zone, dest):
     color_alpha = (128, 128, 128, 128)
     icons = {
         **get_icons('block', operations=MAP_OPERATIONS),
+        **get_icons('block-alt', operations=MAP_OPERATIONS),
         **get_icons('misc-spikes', operations=MAP_OPERATIONS),
         **get_icons('cre-hex', operations=MAP_OPERATIONS),
     }

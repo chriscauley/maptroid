@@ -115,10 +115,11 @@ def populate_room_doors(room):
     matched_doors = {}
     for layer_name in ['layer-1', 'plm_enemies']:
 
-        layer = cv2.imread(f'.media/smile_exports/{world.slug}/{layer_name}/{room.key}')
-        if layer is None:
+        path = f'.media/smile_exports/{world.slug}/{layer_name}/{room.key}'
+        if not os.path.exists(path):
             print(f'skipping {layer_name} for {room.key}')
             continue
+        layer = cv2.imread(path)
 
         # plm_enemies will have vanilla door caps
         world_slug = world.slug if layer_name == 'layer-1' else 'super_metroid'

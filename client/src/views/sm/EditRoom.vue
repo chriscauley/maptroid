@@ -37,6 +37,16 @@ const Block = {
     "grapple",
   ],
   misc: [
+    "empty",
+    "block",
+    "spike_misc",
+    "spark",
+    "exit",
+    "enemy",
+    "enemy-break",
+    "switch_shot",
+  ],
+  directional: [
     "spike_up",
     "spike_down",
     "spike_right",
@@ -45,10 +55,6 @@ const Block = {
     "conveyor_up",
     "conveyor_right",
     "conveyor_left",
-    "enemy",
-    "enemy-break",
-    "empty",
-    "block"
   ],
 }
 
@@ -58,6 +64,7 @@ const tools = [
   { slug: 'item', variants: Item.abilities, icon: (_, v) => `sm-item -${v}` },
   { slug: 'block', variants: Block.weapon, icon: (_, v) => `sm-block -${v}` },
   { slug: 'block', variants: Block.misc, icon: (_, v) => `sm-block -${v}` },
+  { slug: 'block', variants: Block.directional, icon: (_, v) => `sm-block -${v}` },
   { slug: 'overlap', icon: 'fa fa-layer-group' },
 ]
 
