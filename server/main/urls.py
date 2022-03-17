@@ -11,7 +11,6 @@ from sprite.views import power_suit
 import maptroid.forms
 import unrest.user.forms
 import contact.forms
-import sprite.forms
 
 def dread_redirect(request, *args, **kwargs):
   return HttpResponseRedirect('/maps'+request.get_full_path())
