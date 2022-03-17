@@ -96,7 +96,11 @@ def process_zone(zone):
                         # blank images don't need to be processed
                         # they also cause errors because they are grayscale
                         continue
-                    layer_image = urcv.force_alpha(layer_image)
+                    try:
+                        layer_image = urcv.force_alpha(layer_image)
+                    except IndexError:
+                        print("unable to load layer", layer, room.key)
+                        continue
                     if cutout_bg and 'inner' in room.data['geometry']:
                         for polygon in room.data['geometry']['inner']:
                             xys = [(p[0]*256, p[1]*256) for p in polygon['exterior']]

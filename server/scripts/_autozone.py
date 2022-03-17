@@ -43,12 +43,16 @@ for zone in zones:
         print(f'WARNING: {zone.slug} missing')
         continue
     zone_image = cv2.cvtColor(cv2.imread(str(_path)), cv2.COLOR_BGR2GRAY)
+    old_size = zone_image.size
     zone_image = autocrop(zone_image)
+    if old_size != zone_image.size:
+        cv2.imwrite(str(_path), zone_image)
     zone_images.append([zone, zone_image])
-    cv2.imwrite(f'.media/trash/{zone.slug}.png', zone_image)
 
 input("Press enter to continue or ctrl+c to halt")
-print('z')
+
+success = 0
+fails = 0
 
 for room in world.room_set.filter(zone__isnull=True): # TODO filter zone__isnull when done
     room_path = LAYER_1 / room.key
@@ -75,10 +79,15 @@ for room in world.room_set.filter(zone__isnull=True): # TODO filter zone__isnull
             room.data['zone']['bounds'][0] = x // 128
             room.data['zone']['bounds'][1] = y // 128
             room.data['zone']['raw'] = room.data['zone']['bounds']
+            success += 1
             print('yay!', zone.slug, room.key, room.data['zone']['bounds'], len(matches))
             room.save()
             break
     if not room.zone:
+        fails += 1
         room.zone = UNKNOWN
         room.save()
         print('no match', room.key)
+
+
+print(f"{success} matched\n{fails} failed")

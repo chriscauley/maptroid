@@ -81,6 +81,9 @@ def main():
 
     # make an empty canvas of the right size
     path = os.path.join(settings.MEDIA_ROOT, f'sm_cache/{world.slug}/layer-1/{room.key}')
+    if not os.path.exists(path):
+      print("WARNING unable to find layer-1 for", room.key)
+      continue
     sprite_canvas = img._coerce(path, 'np')
     sprite_canvas[:,:,:] = 0
 
@@ -99,7 +102,6 @@ def main():
       if new:
         print("new sprite", sprite)
     room.save()
-    print(room.name,'done', room.data['plm_sprites'])
 
 if __name__ == "__main__":
   main()
