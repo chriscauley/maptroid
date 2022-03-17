@@ -109,6 +109,8 @@ def process(zone, world):
 
 
 def smile_ocr(request):
+    if not request.user.is_superuser:
+        raise NotImplementedError()
     cache_path = os.path.join(settings.BASE_DIR, '../static/smile/hash_to_letter.json')
     if request.method == 'POST':
         data = json.loads(request.body.decode("utf-8"))
@@ -121,6 +123,8 @@ def smile_ocr(request):
 
 
 def save_sprite(request):
+    if not request.user.is_superuser:
+        raise NotImplementedError()
     data = json.loads(request.body.decode("utf-8"))
     with urllib.request.urlopen(data['data_url']) as response:
         with open('/tmp/sprite.png', 'wb') as f:
@@ -158,7 +162,6 @@ def save_sprite(request):
         message = "Sprite created"
     return JsonResponse({ 'message': message })
 
-import json
 def sprite_distances(request):
     attrs = ['id', 'url', 'params']
     items = []

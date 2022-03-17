@@ -13,7 +13,7 @@ from sprite.models import PowerSuit
 def load_power_suit():
     sm = Path(settings.BASE_DIR / '../static/sm/')
     rects = json.loads((sm / 'power-suit.json').read_text())
-    image = cv2.imread(str(sm / 'power-suit.png'))
+    image = cv2.imread(str(sm / 'power-suit.png'), cv2.IMREAD_UNCHANGED)
     return rects, image
 
 @schema.register
@@ -22,13 +22,16 @@ class PowerSuitForm(forms.ModelForm):
         model = PowerSuit
         fields = ['name', 'data']
     def save(self, *args, **kwargs):
+        # todo this should be a regenreate function. Maybe on the model
         sprite = super().save(*args, **kwargs)
         rects, image = load_power_suit()
         rects = [rects[i] for i in sprite.data['indexes']]
+        if not rects:
+            return sprite
         w = max([r[2] for r in rects])
         h = max([r[3] for r in rects])
 
-        new_image = np.zeros((h * len(rects), w, 3), np.uint8)
+        new_image = np.zeros((h * len(rects), w, 4), np.uint8)
         for i, rect in enumerate(rects):
             sx, sy, sw, sh = rect
             dx = 0
@@ -38,5 +41,6 @@ class PowerSuitForm(forms.ModelForm):
 
         cv2.imwrite(str(Path(settings.MEDIA_ROOT) / f'trash/{sprite.name}.png'), new_image)
         sprite.data['size'] = (w, h)
+        sprite.data['frames'] = len(rects)
         sprite.save()
         return sprite

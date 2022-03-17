@@ -26,4 +26,4 @@ cv2.imwrite('.media/trash/gray_power-suite.png', gray)
 cv2.imwrite('.media/trash/thresh_power-suite.png', thresh)
 cv2.imwrite('.media/trash/result_power-suite.png', image)
 with open('static/sm/power-suit.json', 'w') as f:
-    f.write(json.dumps(result))
+    f.write(json.dumps({ 'rects': result, 'animations': {}, 'frames': {} }))

@@ -4,7 +4,19 @@
 
 .power-suit__rect {
   @apply absolute cursor-pointer;
+  border-radius: 1px;
   &.-green {
     @apply border border-green-100;
   }
+  &:hover {
+    box-shadow: 0 0 0 2px white;
+  }
+}
+
+.power-suit__frames {
+  @apply flex;
+}
+
+.power-suit__sprite img {
+  image-rendering: pixelated;
 }
