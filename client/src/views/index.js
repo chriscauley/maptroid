@@ -5,6 +5,7 @@ import Downloads from './Downloads.vue'
 import FileBrowser from './FileBrowser.vue'
 import Home from './Home.vue'
 import Play from './Play.vue'
+import PowerSuit from './PowerSuit.vue'
 import ProcessDread from './ProcessDread.vue'
 import Trainer from './Trainer'
 import ScreenshotAnalyzer from './ScreenshotAnalyzer/index.vue'
@@ -26,6 +27,7 @@ export default {
   FileBrowser,
   Home,
   Play,
+  PowerSuit,
   ProcessDread,
   Trainer,
   ScreenshotAnalyzer,

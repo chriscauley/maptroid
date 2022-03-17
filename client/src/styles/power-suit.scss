@@ -1,0 +1,10 @@
+.power-suit__wrapper {
+  @apply absolute inset-0;
+}
+
+.power-suit__rect {
+  @apply absolute cursor-pointer;
+  &.-green {
+    @apply border border-green-100;
+  }
+}

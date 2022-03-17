@@ -65,8 +65,6 @@ for room in world.room_set.filter(zone__isnull=True): # TODO filter zone__isnull
     inverted = np.invert(gray)
     inverted = urcv.force_alpha(cv2.cvtColor(inverted, cv2.COLOR_GRAY2BGR))
     inverted[:,:,3] = 128
-    cv2.imwrite(f'.media/trash/{room.key}', gray)
-    cv2.imwrite(f'.media/trash/invert_{room.key}', inverted)
     for zone, zone_image in zone_images:
         gh, gw = gray.shape
         zh, zw = zone_image.shape

@@ -21,6 +21,7 @@ INSTALLED_APPS = [
     'mailer',
 
     'maptroid',
+    'sprite',
     'contact',
 ]
 

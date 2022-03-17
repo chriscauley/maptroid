@@ -2,11 +2,12 @@
 @import "./filebrowser";
 @import "./inventory";
 @import "./sm";
-@import './osd';
-@import './trainer';
+@import "./osd";
+@import "./power-suit";
+@import "./trainer";
 @import "./unrest-breadcrumbs";
 @import "./unrest/mouse-tracker";
-@import './views';
+@import "./views";
 @import "./z-index";
 
 body {
@@ -46,9 +47,11 @@ body {
     max-height: 6rem;
     overflow: scroll;
   }
-  .list-group-item.-selected {
-    background: var(--bg-alt);
-  }
+}
+
+/* TODO mode into tailwind */
+.list-group-item.-selected {
+  background: var(--bg-alt);
 }
 
 .btn-group .btn {
