@@ -49,7 +49,7 @@ export default {
     path: '/sm-assign/:world_slug/:zone_slug?',
   },
   data() {
-    const wh_options = ["", 1, 2, 3, 4, 5,">5"]
+    const wh_options = ['', 1, 2, 3, 4, 5, '>5']
     return { selected: {}, filter_w: '', filter_h: '', wh_options }
   },
   computed: {
@@ -103,18 +103,16 @@ export default {
         rooms = rooms.filter((i) => !i.zone)
       }
       if (filter_h == '>5') {
-        rooms = rooms.filter(r => r.data.zone.bounds[3] > 5)
+        rooms = rooms.filter((r) => r.data.zone.bounds[3] > 5)
       } else if (filter_h) {
         filter_h = parseInt(filter_h)
-        rooms = rooms.filter(r => r.data.zone.bounds[3] === filter_h)
+        rooms = rooms.filter((r) => r.data.zone.bounds[3] === filter_h)
       }
       if (filter_w == '>5') {
-        rooms = rooms.filter(r => r.data.zone.bounds[2] > 5)
+        rooms = rooms.filter((r) => r.data.zone.bounds[2] > 5)
       } else if (filter_w) {
-        console.log(filter_w)
         filter_w = parseInt(filter_w)
-        console.log(filter_w)
-        rooms = rooms.filter(r => r.data.zone.bounds[2] === filter_w)
+        rooms = rooms.filter((r) => r.data.zone.bounds[2] === filter_w)
       }
       return sortBy(rooms, 'key')
     },
