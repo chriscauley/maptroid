@@ -6,5 +6,6 @@ from pathlib import Path
 def power_suit(request):
     path = Path(settings.BASE_DIR / '../static/sm/power-suit.json')
     if request.method == "POST":
-        path.write_text(request.body.decode('utf-8'))
+        data = json.loads(request.body.decode('utf-8'))
+        path.write_text(json.dumps(data, indent=2))
     return HttpResponse(path.read_text())

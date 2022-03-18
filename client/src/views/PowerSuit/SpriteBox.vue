@@ -1,9 +1,12 @@
 <template>
   <div class="power-suit__sprite">
     <div class="power-suit__frames">
-      <img v-for="(frame, i) in frames" :src="frame" :key="i" />
+      <div v-for="(frame, i) in frames" :key="i" :class="frameClass(i)">
+        <img :src="frame" />
+      </div>
     </div>
-    <img :src="frames[frame_no % frames.length]" width="300" />
+    <img :src="getFrame(0)" width="100" />
+    <!-- <unrest-modal>foo</unrest-modal> -->
   </div>
 </template>
 
@@ -15,8 +18,7 @@ export default {
     img: Object,
   },
   data() {
-    const interval = setInterval(() => this.frame_no++, 1000)
-    return { frame_no: 0, interval }
+    return { frame_no: 0, interval: 250, timeout: null }
   },
   computed: {
     frames() {
@@ -29,13 +31,32 @@ export default {
       const ctx = canvas.getContext('2d')
       return rects.map(([sx, sy, sw, sh]) => {
         ctx.clearRect(0, 0, W, H)
-        ctx.drawImage(this.img, sx, sy, sw, sh, 0, 0, sw, sh)
+        const dx = Math.floor((W - sw) / 2)
+        const dy = Math.floor((H - sh) / 2)
+        ctx.drawImage(this.img, sx, sy, sw, sh, dx, dy, sw, sh)
         return canvas.toDataURL()
       })
     },
   },
+  mounted() {
+    this.tick()
+  },
   unmounted() {
-    clearInterval(this.interval)
+    clearTimeout(this.timeout)
+  },
+  methods: {
+    tick() {
+      clearTimeout(this.timeout)
+      this.frame_no++
+      this.timeout = setTimeout(this.tick, this.interval)
+    },
+    frameClass(i) {
+      return ['power-suit__frame', this.frame_no % this.frames.length === i && '-active']
+    },
+    getFrame(di) {
+      const i = (this.frame_no + di) % (this.frames.length || 1)
+      return this.frames[i]
+    },
   },
 }
 </script>

@@ -16,14 +16,17 @@ thresh = cv2.threshold(gray, 0, 255, cv2.THRESH_BINARY)[1]
 cnts = cv2.findContours(thresh, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
 cnts = cnts[0] if len(cnts) == 2 else cnts[1]
 
-result = []
+rects = []
 for c in cnts:
     x, y, w, h = cv2.boundingRect(c)
     cv2.rectangle(image, (x, y), (x + w, y + h), (36,255,12), 1)
-    result.append([x, y, w, h])
+    rects.append([x, y, w, h])
 
 cv2.imwrite('.media/trash/gray_power-suite.png', gray)
 cv2.imwrite('.media/trash/thresh_power-suite.png', thresh)
 cv2.imwrite('.media/trash/result_power-suite.png', image)
+with open('static/sm/power-suit.json', 'r') as f:
+    result = json.loads(f.read())
+result['rects'] = rects
 with open('static/sm/power-suit.json', 'w') as f:
-    f.write(json.dumps({ 'rects': result, 'animations': {}, 'frames': {} }))
+    f.write(json.dumps(result))

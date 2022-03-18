@@ -1,15 +1,23 @@
-.power-suit__wrapper {
-  @apply absolute inset-0;
+.power-suit__inner {
+  @apply absolute flex inset-0;
 }
 
 .power-suit__rect {
   @apply absolute cursor-pointer;
   border-radius: 1px;
-  &.-green {
-    @apply border border-green-100;
+  &.-in-sprite {
+    @apply border border-green-400;
+  }
+  &.-used {
+    @apply border-2 border-gray-600;
   }
   &:hover {
     box-shadow: 0 0 0 2px white;
+  }
+  &:before {
+    @apply absolute;
+    left: 100%;
+    content: attr(data-i);
   }
 }
 
@@ -19,4 +27,21 @@
 
 .power-suit__sprite img {
   image-rendering: pixelated;
+}
+
+.power-suit__frame {
+  @apply border cursor-pointer;
+  border-color: transparent;
+  &.-active {
+    @apply border-white;
+  }
+}
+
+.power-suit__left {
+  height: 100%;
+  overflow-y: scroll;
+}
+
+.power-suit__spritesheet {
+  @apply relative mx-8;
 }

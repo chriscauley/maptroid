@@ -1,26 +1,8 @@
 <template>
   <div class="app-body -full-screen power-suit">
-    <div class="power-suit__left">
-      <img src="/static/sm/power-suit.png" ref="img" />
-      <div
-        v-for="rect in rects"
-        :key="rect.index"
-        :style="rect.style"
-        :class="rectClass(rect)"
-        @click="clickRect(rect)"
-      />
-    </div>
-    <div class="power-suit__right">
-      <div class="list-group">
-        <template v-if="selected">
-          <div class="list-group-item list-group-item-action" @click="selected = null">
-            &lt;&lt;
-          </div>
-          <div class="list-group-item">
-            <sprite-box :sprite="selected" :rects="state.rects" :img="$refs.img" />
-          </div>
-        </template>
-        <template v-else>
+    <div class="power-suit__inner">
+      <div class="power-suit__left">
+        <div class="list-group">
           <div
             v-for="animation in state.animations"
             :class="animationListClass(animation)"
@@ -28,11 +10,36 @@
             @click="selected = animation"
           >
             {{ animation.name }}
+            <input type="checkbox" v-model="compare[animation.name]" @click.stop />
           </div>
-          <animation-form @save="save" />
-        </template>
+          <div class="list-group-item">
+            <animation-form @save="save" />
+          </div>
+        </div>
       </div>
-      x
+      <div class="power-suit__left">
+        <div class="power-suit__spritesheet">
+          <img src="/static/sm/power-suit.png" ref="img" />
+          <div
+            v-for="rect in rects"
+            :key="rect.index"
+            :style="rect.style"
+            :class="rectClass(rect)"
+            @click="clickRect(rect)"
+            :data-i="getRectOrder(rect)"
+          />
+        </div>
+      </div>
+      <div class="power-suit__right">
+        <div class="list-group" v-if="selected">
+          <div class="list-group-item">
+            <div v-for="sprite in compare_sprites" :key="sprite.name">
+              <sprite-box :sprite="sprite" :rects="state.rects" :img="$refs.img" :compare="true" />
+            </div>
+            <sprite-box :sprite="selected" :rects="state.rects" :img="$refs.img" />
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -51,7 +58,7 @@ export default {
   },
   components: { SpriteBox, AnimationForm },
   data() {
-    return { state: {}, selected: null }
+    return { state: {}, selected: null, compare: {} }
   },
   computed: {
     rects() {
@@ -65,6 +72,16 @@ export default {
         },
       }))
     },
+    used() {
+      const used = {}
+      Object.values(this.state.animations || {}).forEach((a) =>
+        a.indexes.forEach((i) => (used[i] = true)),
+      )
+      return used
+    },
+    compare_sprites() {
+      return Object.values(this.state.animations).filter((a) => this.compare[a.name])
+    },
   },
   mounted() {
     client.get('/power-suit/').then((data) => (this.state = data))
@@ -72,7 +89,12 @@ export default {
   methods: {
     rectClass(rect) {
       const indexes = this.selected?.indexes || []
-      return ['power-suit__rect', indexes.includes(rect.index) && '-green']
+      const selected = indexes.includes(rect.index)
+      return [
+        'power-suit__rect',
+        selected && '-in-sprite',
+        !selected && this.used[rect.index] && '-used',
+      ]
     },
     clickRect(rect) {
       if (!this.selected) {
@@ -104,6 +126,10 @@ export default {
         this.state.animations[name] = sprite
       }
       client.post('/power-suit/', this.state)
+    },
+    getRectOrder(rect) {
+      const order = ((this.selected || {}).indexes || []).indexOf(rect.index)
+      return order > -1 ? order : ''
     },
   },
 }
