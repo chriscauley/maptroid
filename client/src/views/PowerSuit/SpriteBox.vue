@@ -1,41 +1,46 @@
 <template>
   <div class="power-suit__sprite">
+    <i class="fa fa-edit cursor-pointer" @click="editing = true" />
     <div class="power-suit__frames">
       <div v-for="(frame, i) in frames" :key="i" :class="frameClass(i)">
-        <img :src="frame" />
+        <img :src="frame.src" />
       </div>
     </div>
-    <img :src="getFrame(0)" width="100" />
-    <!-- <unrest-modal>foo</unrest-modal> -->
+    <img v-bind="getFrame(0)" />
+    <unrest-modal v-if="editing" @close="editing = null">
+      <div v-for="frame in frames" :key="frame.index" class="power-suit__frame -editing">
+        <img :src="frame.src" :width="frame.width * 4" />
+        <unrest-draggable
+          @drag="(e) => dragbox(e, frame)"
+          @dragend="dragend"
+          class="power-suit__frame-hitbox"
+          :style="getHitboxStyle(frame)"
+        />
+      </div>
+    </unrest-modal>
   </div>
 </template>
 
 <script>
+import store from './store'
+
 export default {
   props: {
     sprite: Object,
-    rects: Array,
     img: Object,
   },
   data() {
-    return { frame_no: 0, interval: 250, timeout: null }
+    return {
+      frame_no: 0,
+      interval: 250,
+      timeout: null,
+      editing: false,
+      drag: null,
+    }
   },
   computed: {
     frames() {
-      const rects = this.sprite.indexes.map((i) => this.rects[i])
-      const W = Math.max(...rects.map((r) => r[2]))
-      const H = Math.max(...rects.map((r) => r[3]))
-      const canvas = document.createElement('canvas')
-      canvas.width = W
-      canvas.height = H
-      const ctx = canvas.getContext('2d')
-      return rects.map(([sx, sy, sw, sh]) => {
-        ctx.clearRect(0, 0, W, H)
-        const dx = Math.floor((W - sw) / 2)
-        const dy = Math.floor((H - sh) / 2)
-        ctx.drawImage(this.img, sx, sy, sw, sh, dx, dy, sw, sh)
-        return canvas.toDataURL()
-      })
+      return store.getAnimation(this.sprite.name).frames
     },
   },
   mounted() {
@@ -55,7 +60,41 @@ export default {
     },
     getFrame(di) {
       const i = (this.frame_no + di) % (this.frames.length || 1)
-      return this.frames[i]
+      const frame = this.frames[i]
+      return {
+        src: frame.src,
+        width: frame.width * 4,
+        style: {
+          marginLeft: `${100 - frame.offset[0] * 4}px`,
+          marginTop: `${frame.offset[1] * 4}px`,
+        },
+      }
+    },
+    getHitboxStyle(frame) {
+      let [dx, dy] = frame.offset
+      if (this.drag?.index == frame.index) {
+        dx += this.drag.dx
+        dy += this.drag.dy
+      }
+      return {
+        left: `${dx * 4}px`,
+        top: `${dy * 4}px`,
+      }
+    },
+    dragbox(e, frame) {
+      const [x0, y0] = e._drag.xy_start
+      const [x1, y1] = e._drag.xy
+      const dx = parseInt((x1 - x0) / 4)
+      const dy = parseInt((y1 - y0) / 4)
+      this.drag = { dx, dy, index: frame.index }
+    },
+    dragend() {
+      const { dx, dy, index } = this.drag
+      const { offsets } = this.sprite
+      const [dx0, dy0] = offsets[index] || [0, 0]
+      offsets[index] = [dx0 + dx, dy0 + dy]
+      this.drag = null
+      store.save()
     },
   },
 }

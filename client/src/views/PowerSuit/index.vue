@@ -4,7 +4,7 @@
       <div class="power-suit__left">
         <div class="list-group">
           <div
-            v-for="animation in state.animations"
+            v-for="animation in animations"
             :class="animationListClass(animation)"
             :key="animation"
             @click="selected = animation"
@@ -13,7 +13,7 @@
             <input type="checkbox" v-model="compare[animation.name]" @click.stop />
           </div>
           <div class="list-group-item">
-            <animation-form @save="save" />
+            <animation-form @save="store.addAnimation" />
           </div>
         </div>
       </div>
@@ -34,9 +34,9 @@
         <div class="list-group" v-if="selected">
           <div class="list-group-item">
             <div v-for="sprite in compare_sprites" :key="sprite.name">
-              <sprite-box :sprite="sprite" :rects="state.rects" :img="$refs.img" :compare="true" />
+              <sprite-box :sprite="sprite" :rects="rects" :img="$refs.img" :compare="true" />
             </div>
-            <sprite-box :sprite="selected" :rects="state.rects" :img="$refs.img" />
+            <sprite-box :sprite="selected" :img="$refs.img" />
           </div>
         </div>
       </div>
@@ -45,12 +45,10 @@
 </template>
 
 <script>
-import { getClient } from '@unrest/vue-storage'
-
 import AnimationForm from './Form.vue'
 import SpriteBox from './SpriteBox.vue'
 
-const client = getClient()
+import store from './store'
 
 export default {
   __route: {
@@ -58,11 +56,17 @@ export default {
   },
   components: { SpriteBox, AnimationForm },
   data() {
-    return { state: {}, selected: null, compare: {} }
+    return { selected: null, compare: {}, store }
   },
   computed: {
     rects() {
-      return this.state.rects?.map(([x, y, w, h], index) => ({
+      return store.use()?.rects
+    },
+    animations() {
+      return store.use()?.animations || {}
+    },
+    rects() {
+      return this.store.use()?.rects.map(([x, y, w, h], index) => ({
         index,
         style: {
           left: `${x}px`,
@@ -74,17 +78,12 @@ export default {
     },
     used() {
       const used = {}
-      Object.values(this.state.animations || {}).forEach((a) =>
-        a.indexes.forEach((i) => (used[i] = true)),
-      )
+      Object.values(this.animations).forEach((a) => a.indexes.forEach((i) => (used[i] = true)))
       return used
     },
     compare_sprites() {
-      return Object.values(this.state.animations).filter((a) => this.compare[a.name])
+      return Object.values(this.animations).filter((a) => this.compare[a.name])
     },
-  },
-  mounted() {
-    client.get('/power-suit/').then((data) => (this.state = data))
   },
   methods: {
     rectClass(rect) {
@@ -107,25 +106,13 @@ export default {
       } else {
         indexes.push(index)
       }
-      this.save()
+      store.save()
     },
     selectSprite(sprite) {
       this.selected = sprite
     },
     animationListClass(sprite) {
       return ['list-group-item', this.selected === sprite && '-selected']
-    },
-    save(sprite) {
-      if (sprite) {
-        const { name } = sprite
-        sprite = {
-          indexes: [],
-          offsets: {},
-          ...sprite,
-        }
-        this.state.animations[name] = sprite
-      }
-      client.post('/power-suit/', this.state)
     },
     getRectOrder(rect) {
       const order = ((this.selected || {}).indexes || []).indexOf(rect.index)

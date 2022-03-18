@@ -37,6 +37,15 @@
   }
 }
 
+.power-suit__frame.-editing {
+  @apply relative cursor-default;
+  .power-suit__frame-hitbox {
+    @apply absolute border border-white;
+    height: 40px;
+    width: 40px;
+  }
+}
+
 .power-suit__left {
   height: 100%;
   overflow-y: scroll;
