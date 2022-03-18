@@ -25,7 +25,7 @@ const addAnimation = ({ name }) => {
   }
   state.data.animations[name] = {
     name,
-    indexes: [],
+    sprite_ids: [],
     offsets: {},
   }
   save()
@@ -33,10 +33,10 @@ const addAnimation = ({ name }) => {
 
 const getAnimation = (name) => {
   const sprite = state.data.animations[name]
-  const frames = sprite.indexes.map((index) => {
-    const offset = sprite.offsets[index] || [0, 0]
+  const frames = sprite.sprite_ids.map((sprite_id) => {
+    const offset = sprite.offsets[sprite_id] || [0, 0]
     const canvas = document.createElement('canvas')
-    const [sx, sy, sw, sh] = state.data.rects[index]
+    const [sx, sy, sw, sh] = state.data.rects[sprite_id]
     canvas.width = sw
     canvas.height = sh
     const ctx = canvas.getContext('2d')
@@ -46,7 +46,7 @@ const getAnimation = (name) => {
       width: sw,
       height: sh,
       offset,
-      index,
+      sprite_id,
       canvas,
       src: canvas.toDataURL(),
     }

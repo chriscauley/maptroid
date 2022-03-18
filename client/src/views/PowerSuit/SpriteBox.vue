@@ -8,7 +8,7 @@
     </div>
     <img v-bind="getFrame(0)" />
     <unrest-modal v-if="editing" @close="editing = null">
-      <div v-for="frame in frames" :key="frame.index" class="power-suit__frame -editing">
+      <div v-for="frame in frames" :key="frame.sprite_id" class="power-suit__frame -editing">
         <img :src="frame.src" :width="frame.width * 4" />
         <unrest-draggable
           @drag="(e) => dragbox(e, frame)"
@@ -72,7 +72,7 @@ export default {
     },
     getHitboxStyle(frame) {
       let [dx, dy] = frame.offset
-      if (this.drag?.index == frame.index) {
+      if (this.drag?.sprite_id == frame.sprite_id) {
         dx += this.drag.dx
         dy += this.drag.dy
       }
@@ -86,13 +86,13 @@ export default {
       const [x1, y1] = e._drag.xy
       const dx = parseInt((x1 - x0) / 4)
       const dy = parseInt((y1 - y0) / 4)
-      this.drag = { dx, dy, index: frame.index }
+      this.drag = { dx, dy, sprite_id: frame.sprite_id }
     },
     dragend() {
-      const { dx, dy, index } = this.drag
+      const { dx, dy, sprite_id } = this.drag
       const { offsets } = this.sprite
-      const [dx0, dy0] = offsets[index] || [0, 0]
-      offsets[index] = [dx0 + dx, dy0 + dy]
+      const [dx0, dy0] = offsets[sprite_id] || [0, 0]
+      offsets[sprite_id] = [dx0 + dx, dy0 + dy]
       this.drag = null
       store.save()
     },

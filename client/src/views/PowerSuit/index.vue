@@ -22,7 +22,7 @@
           <img src="/static/sm/power-suit.png" ref="img" />
           <div
             v-for="rect in rects"
-            :key="rect.index"
+            :key="rect.sprite_id"
             :style="rect.style"
             :class="rectClass(rect)"
             @click="clickRect(rect)"
@@ -59,15 +59,12 @@ export default {
     return { selected: null, compare: {}, store }
   },
   computed: {
-    rects() {
-      return store.use()?.rects
-    },
     animations() {
       return store.use()?.animations || {}
     },
     rects() {
-      return this.store.use()?.rects.map(([x, y, w, h], index) => ({
-        index,
+      return this.store.use()?.rects.map(([x, y, w, h], sprite_id) => ({
+        sprite_id,
         style: {
           left: `${x}px`,
           top: `${y}px`,
@@ -78,7 +75,7 @@ export default {
     },
     used() {
       const used = {}
-      Object.values(this.animations).forEach((a) => a.indexes.forEach((i) => (used[i] = true)))
+      Object.values(this.animations).forEach((a) => a.sprite_ids.forEach((i) => (used[i] = true)))
       return used
     },
     compare_sprites() {
@@ -87,24 +84,24 @@ export default {
   },
   methods: {
     rectClass(rect) {
-      const indexes = this.selected?.indexes || []
-      const selected = indexes.includes(rect.index)
+      const sprite_ids = this.selected?.sprite_ids || []
+      const selected = sprite_ids.includes(rect.sprite_id)
       return [
         'power-suit__rect',
         selected && '-in-sprite',
-        !selected && this.used[rect.index] && '-used',
+        !selected && this.used[rect.sprite_id] && '-used',
       ]
     },
     clickRect(rect) {
       if (!this.selected) {
         return
       }
-      const { index } = rect
-      const { indexes } = this.selected
-      if (indexes.includes(index)) {
-        indexes.splice(indexes.indexOf(index), 1)
+      const { sprite_id } = rect
+      const { sprite_ids } = this.selected
+      if (sprite_ids.includes(sprite_id)) {
+        sprite_ids.splice(sprite_ids.indexOf(sprite_id), 1)
       } else {
-        indexes.push(index)
+        sprite_ids.push(sprite_id)
       }
       store.save()
     },
@@ -115,7 +112,7 @@ export default {
       return ['list-group-item', this.selected === sprite && '-selected']
     },
     getRectOrder(rect) {
-      const order = ((this.selected || {}).indexes || []).indexOf(rect.index)
+      const order = ((this.selected || {}).sprite_ids || []).indexOf(rect.sprite_id)
       return order > -1 ? order : ''
     },
   },

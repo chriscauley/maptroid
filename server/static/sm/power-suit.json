@@ -1942,7 +1942,7 @@
   "animations": {
     "turn_standing": {
       "name": "turn_standing",
-      "indexes": [
+      "sprite_ids": [
         316,
         321,
         319,
@@ -1951,7 +1951,7 @@
       ]
     },
     "rolling": {
-      "indexes": [
+      "sprite_ids": [
         84,
         83,
         82,
@@ -1965,7 +1965,7 @@
       "name": "rolling"
     },
     "rolling-right": {
-      "indexes": [
+      "sprite_ids": [
         80,
         79,
         78,
@@ -1979,7 +1979,7 @@
       "name": "rolling-right"
     },
     "spacejump_left": {
-      "indexes": [
+      "sprite_ids": [
         49,
         50,
         51,
@@ -1989,7 +1989,7 @@
       "name": "spacejump_left"
     },
     "spacejump_right": {
-      "indexes": [
+      "sprite_ids": [
         48,
         47,
         46,
@@ -1999,7 +1999,7 @@
       "name": "spacejump_right"
     },
     "walk-left": {
-      "indexes": [
+      "sprite_ids": [
         164,
         165,
         167,
@@ -2056,7 +2056,7 @@
       "name": "walk-left"
     },
     "walk_right": {
-      "indexes": [
+      "sprite_ids": [
         163,
         162,
         159,
@@ -2113,7 +2113,7 @@
       "name": "walk_right"
     },
     "walk_left_aimup": {
-      "indexes": [
+      "sprite_ids": [
         139,
         140,
         131,
@@ -2170,7 +2170,7 @@
       "name": "walk_left_aimup"
     },
     "walk_right_aimup": {
-      "indexes": [
+      "sprite_ids": [
         134,
         133,
         130,
@@ -2227,7 +2227,7 @@
       "name": "walk_right_aimup"
     },
     "walk_left_aim": {
-      "indexes": [
+      "sprite_ids": [
         120,
         111,
         112,
@@ -2284,7 +2284,7 @@
       "name": "walk_left_aim"
     },
     "walk_right_aim": {
-      "indexes": [
+      "sprite_ids": [
         114,
         110,
         109,
@@ -2341,7 +2341,7 @@
       "name": "walk_right_aim"
     },
     "walk_left_aimdown": {
-      "indexes": [
+      "sprite_ids": [
         98,
         99,
         100,
@@ -2398,7 +2398,7 @@
       "name": "walk_left_aimdown"
     },
     "walk_right_aimdown": {
-      "indexes": [
+      "sprite_ids": [
         90,
         89,
         104,
@@ -2455,7 +2455,7 @@
       "name": "walk_right_aimdown"
     },
     "spinjump_left": {
-      "indexes": [
+      "sprite_ids": [
         60,
         58,
         62,
@@ -2490,7 +2490,7 @@
       "name": "spinjump_left"
     },
     "spinjump_right": {
-      "indexes": [
+      "sprite_ids": [
         59,
         57,
         61,
@@ -2504,7 +2504,7 @@
       "name": "spinjump_right"
     },
     "stand_left": {
-      "indexes": [
+      "sprite_ids": [
         264,
         263,
         262
@@ -2513,7 +2513,7 @@
       "name": "stand_left"
     },
     "stand_right": {
-      "indexes": [
+      "sprite_ids": [
         261,
         260,
         259
@@ -2522,7 +2522,7 @@
       "name": "stand_right"
     },
     "crouch_left": {
-      "indexes": [
+      "sprite_ids": [
         248,
         247,
         246
@@ -2531,7 +2531,7 @@
       "name": "crouch_left"
     },
     "crouch_right": {
-      "indexes": [
+      "sprite_ids": [
         245,
         244,
         243
@@ -2540,7 +2540,7 @@
       "name": "crouch_right"
     },
     "jump_left_aimup": {
-      "indexes": [
+      "sprite_ids": [
         229,
         227,
         223,
@@ -2550,7 +2550,7 @@
       "name": "jump_left_aimup"
     },
     "jump_right_aimup": {
-      "indexes": [
+      "sprite_ids": [
         228,
         224,
         225,
@@ -2560,7 +2560,7 @@
       "name": "jump_right_aimup"
     },
     "jump_left_aimdown": {
-      "indexes": [
+      "sprite_ids": [
         220,
         218,
         217,
@@ -2570,7 +2570,7 @@
       "name": "jump_left_aimdown"
     },
     "jump_right_aimdown": {
-      "indexes": [
+      "sprite_ids": [
         219,
         215,
         216,
@@ -2580,7 +2580,7 @@
       "name": "jump_right_aimdown"
     },
     "morphing_left": {
-      "indexes": [
+      "sprite_ids": [
         88,
         86,
         84
@@ -2589,7 +2589,7 @@
       "name": "morphing_left"
     },
     "morphing_right": {
-      "indexes": [
+      "sprite_ids": [
         87,
         85,
         80
@@ -2598,7 +2598,7 @@
       "name": "morphing_right"
     },
     "grappling_left": {
-      "indexes": [
+      "sprite_ids": [
         1,
         2,
         7,
@@ -2617,7 +2617,7 @@
       "name": "grappling_left"
     },
     "grappling_right": {
-      "indexes": [
+      "sprite_ids": [
         0,
         3,
         4,
@@ -2635,7 +2635,7 @@
       "name": "grappling_right"
     },
     "jump_left": {
-      "indexes": [
+      "sprite_ids": [
         289,
         291,
         293,
@@ -2645,7 +2645,7 @@
       "name": "jump_left"
     },
     "jump_right": {
-      "indexes": [
+      "sprite_ids": [
         288,
         290,
         292,
@@ -2655,7 +2655,7 @@
       "name": "jump_right"
     },
     "falling_left": {
-      "indexes": [
+      "sprite_ids": [
         269,
         272,
         273
@@ -2664,7 +2664,7 @@
       "name": "falling_left"
     },
     "falling_right": {
-      "indexes": [
+      "sprite_ids": [
         268,
         271,
         270
@@ -2673,7 +2673,7 @@
       "name": "falling_right"
     },
     "sparking_left": {
-      "indexes": [
+      "sprite_ids": [
         279,
         280,
         282,
@@ -2683,7 +2683,7 @@
       "name": "sparking_left"
     },
     "sparking_right": {
-      "indexes": [
+      "sprite_ids": [
         281,
         278,
         277,
@@ -2693,7 +2693,7 @@
       "name": "sparking_right"
     },
     "turn_crouching": {
-      "indexes": [
+      "sprite_ids": [
         301,
         299,
         298
