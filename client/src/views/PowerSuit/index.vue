@@ -10,6 +10,9 @@
             @click="selected = animation"
           >
             {{ animation.name }}
+            {{ Object.keys(animation.offsets).length }}
+            /
+            {{ animation.sprite_ids.length }}
             <input type="checkbox" v-model="compare[animation.name]" @click.stop />
           </div>
           <div class="list-group-item">
