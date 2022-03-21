@@ -3,11 +3,11 @@ from django.utils.text import slugify
 
 from maptroid.models import Zone, World
 
-NAME = 'Cliffhanger Redux'
+NAME = 'Y-Faster'
 
-ZONE_NAMES = ['Crateria', 'Brinstar', 'Norfair', 'Maridia', 'Wrecked Ship', 'Maridia', 'Tourian']
+ZONE_NAMES = ['Crateria', 'Brinstar', 'Norfair', 'Maridia', 'Wrecked Ship', 'Maridia', 'Tourian', 'Ridley', 'Kraid']
 
-ZONE_NAMES = ['surripere', 'Juolbrin', 'Keruarn', 'Eldridge', 'Melfad', 'Melkabah']
+ZONE_NAMES = ['Orangestar', 'Goldstar', 'Northstar', 'Darkstar', 'Zaristar', 'Finalstar']
 
 ZONE_NAMES.append('unknown-'+slugify(NAME))
 ZONE_NAMES.append('ztrash-'+slugify(NAME))
@@ -15,6 +15,8 @@ ZONE_NAMES.append('ztrash-'+slugify(NAME))
 world, new = World.objects.get_or_create(name=NAME)
 if new:
   print("New world", NAME)
+  world.data['clear_holes'] = True
+  world.save()
 else:
   raise ValueError("World exists", world)
 

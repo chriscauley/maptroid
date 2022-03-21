@@ -22,7 +22,7 @@
       </div>
       <div class="power-suit__left">
         <div class="power-suit__spritesheet">
-          <img src="/static/sm/power-suit.png" ref="img" />
+          <img src="/static/sm/power-suit.png" />
           <div
             v-for="rect in rects"
             :key="rect.sprite_id"
@@ -37,9 +37,9 @@
         <div class="list-group" v-if="selected">
           <div class="list-group-item">
             <div v-for="sprite in compare_sprites" :key="sprite.name">
-              <sprite-box :sprite="sprite" :rects="rects" :img="$refs.img" :compare="true" />
+              <sprite-box :sprite="sprite" :rects="rects" :compare="true" />
             </div>
-            <sprite-box :sprite="selected" :img="$refs.img" />
+            <sprite-box :sprite="selected" :key="selected.name" />
           </div>
         </div>
       </div>

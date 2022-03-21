@@ -29,6 +29,8 @@ def main(world_slug: str):
   keys = list(set(keys))
   print('\n\nAnalyzing world: ', world, len(keys), Room.objects.filter(world=world).count())
   for key in keys:
+    if not key.endswith('png'):
+      raise ValueError('Bad key:', key)
     missing = []
     for room_slice in ROOM_SLICES:
       if not os.path.exists(os.path.join(world_dir, room_slice, key)):

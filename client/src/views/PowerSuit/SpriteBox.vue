@@ -1,25 +1,29 @@
 <template>
   <div class="power-suit__sprite">
-    <i class="fa fa-edit cursor-pointer" @click="editing = true" />
+    <div class="btn -primary" @click="aligning = true">
+      <i class="fa fa-object-group cursor-pointer" />
+    </div>
+    <div class="btn -primary" @click="editing = true">
+      <i class="fa fa-edit cursor-pointer" />
+    </div>
     <img :src="animation.src" />
     <canvas ref="canvas" :width="4 * animation.width" :height="4 * animation.height" />
     <unrest-modal v-if="editing" @close="editing = null">
+      <unrest-form :schema="schema" :state="form_state" @submit="save" />
+    </unrest-modal>
+    <unrest-modal v-if="aligning" @close="aligning = null">
       <div>
         <label v-for="value in presets" :key="value">
           <input type="radio" :value="value" v-model="preset" />
           {{ value || 'None' }}
         </label>
       </div>
-      <div
-        v-for="frame in animation.frames"
-        :key="frame.sprite_id"
-        class="power-suit__frame -editing"
-      >
-        <img :src="frame.src" :width="frame.width * 4" />
+      <div v-for="frame in animation.frames" :key="frame.sprite_id" class="power-suit__align-frame">
+        <img :src="getFrameSrc(frame)" :width="frame.width * 4" />
         <unrest-draggable
           @drag="(e) => dragbox(e, frame)"
           @dragend="dragend"
-          class="power-suit__frame-hitbox"
+          class="power-suit__align-hitbox"
           :style="getHitboxStyle(frame)"
         />
       </div>
@@ -29,20 +33,23 @@
 
 <script>
 import store from './store'
+import { schema } from './Form.vue'
 
 export default {
   props: {
     sprite: Object,
-    img: Object,
   },
   data() {
     return {
+      drag: null,
+      aligning: false,
+      editing: false,
+      form_state: { name: this.sprite.name },
       frame_no: 0,
       interval: 250,
-      timeout: null,
-      editing: false,
-      drag: null,
       presets: ['', 'global', 'center', 'clear'],
+      schema,
+      timeout: null,
     }
   },
   computed: {
@@ -75,14 +82,17 @@ export default {
   methods: {
     tick() {
       clearTimeout(this.timeout)
-      this.frame_no++
       this.timeout = setTimeout(this.tick, this.interval)
+      const { animation } = this
+      if (!animation.canvas) {
+        return
+      }
+      this.frame_no++
       const { canvas } = this.$refs
       const ctx = canvas.getContext('2d')
       ctx.clearRect(0, 0, canvas.width, canvas.height)
       ctx.imageSmoothingEnabled = false
       const i = this.frame_no % this.animation.frames.length
-      const { animation } = this
       ctx.drawImage(
         animation.canvas,
         i * animation.width,
@@ -137,6 +147,19 @@ export default {
       offsets[sprite_id] = [dx0 + dx, dy0 + dy]
       this.drag = null
       store.save()
+    },
+    save() {
+      store.renameAnimation(this.sprite.name, this.form_state.name)
+      this.editing = false
+    },
+    getFrameSrc(frame) {
+      const canvas = document.createElement('canvas')
+      const [sx, sy, sw, sh] = store.state.data.rects[frame.sprite_id]
+      canvas.width = sw
+      canvas.height = sh
+      const ctx = canvas.getContext('2d')
+      ctx.drawImage(store.state.img, sx, sy, sw, sh, 0, 0, sw, sh)
+      return canvas.toDataURL()
     },
   },
 }

@@ -22,25 +22,22 @@
 }
 
 .power-suit__frames {
-  @apply flex;
+  @apply flex flex-wrap;
 }
 
-.power-suit__sprite img {
-  image-rendering: pixelated;
-}
-
-.power-suit__frame {
-  @apply border cursor-pointer;
-  border-color: transparent;
-  &.-active {
-    @apply border-white;
+.power-suit__sprite, .power-suit__spritesheet {
+  max-width: 450px;
+  overflow: auto;
+  img {
+    image-rendering: pixelated;
+    max-width: unset;
   }
 }
 
-.power-suit__frame.-editing {
-  @apply relative cursor-default;
-  .power-suit__frame-hitbox {
-    @apply absolute border border-white;
+.power-suit__align-frame {
+  @apply relative;
+  .power-suit__align-hitbox {
+    @apply absolute border border-white cursor-pointer;
     height: 40px;
     width: 40px;
   }

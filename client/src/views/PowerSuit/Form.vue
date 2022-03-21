@@ -3,7 +3,7 @@
 </template>
 
 <script>
-const schema = {
+export const schema = {
   type: 'object',
   required: ['name'],
   properties: {

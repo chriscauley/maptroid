@@ -1,6 +1,7 @@
 <template>
   <unrest-dropdown class="btn -danger" v-if="overlap_items.length" :items="overlap_items">
     <i class="fa fa-exclamation-circle" />
+    {{ overlap_items.length }}
   </unrest-dropdown>
 </template>
 

@@ -1,4 +1,4 @@
-import { debounce } from 'lodash'
+import { debounce, sortBy } from 'lodash'
 import { getClient } from '@unrest/vue-storage'
 import { reactive } from 'vue'
 
@@ -22,7 +22,10 @@ const use = () => {
   return state.data
 }
 
-const save = debounce(() => client.post('/power-suit/', state.data), 1000)
+const save = debounce(() => {
+  state.data.animations = Object.fromEntries(sortBy(Object.entries(state.data.animations)))
+  client.post('/power-suit/', state.data)
+}, 1000)
 
 const addAnimation = ({ name }) => {
   if (state.data.animations[name]) {
@@ -86,10 +89,19 @@ const getAnimation = (name) => {
   }
 }
 
+const renameAnimation = (old_name, new_name) => {
+  const a = state.data.animations[old_name]
+  delete state.data.animations[old_name]
+  state.data.animations[new_name] = a
+  a.name = new_name
+  save()
+}
+
 export default {
   state,
   use,
-  getAnimation,
   save,
   addAnimation,
+  getAnimation,
+  renameAnimation,
 }

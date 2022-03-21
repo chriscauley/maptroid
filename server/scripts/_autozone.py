@@ -25,7 +25,9 @@ def autocrop(image):
         dy += 1
     while np.sum(zone_image[:,:(dx+1)*16]) == 0:
         dx += 1
-    image = image[dy*16:-dh*16,dx*16:-dw*16]
+    last_x = -dw*16 if dw else None
+    last_y = -dh*16 if dh else None
+    image = image[dy*16:last_y,dx*16:last_x]
     return image
 
 UNKNOWN = None
@@ -45,6 +47,7 @@ for zone in zones:
     zone_image = cv2.cvtColor(cv2.imread(str(_path)), cv2.COLOR_BGR2GRAY)
     old_size = zone_image.size
     zone_image = autocrop(zone_image)
+    print(_path, old_size, zone_image.shape)
     if old_size != zone_image.size:
         cv2.imwrite(str(_path), zone_image)
     zone_images.append([zone, zone_image])
