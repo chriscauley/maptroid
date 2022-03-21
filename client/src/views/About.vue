@@ -18,6 +18,11 @@
           else could work on it. Feel free to <router-link to="/about/">contact me</router-link>
           if you'd like to know more.
         </p>
+        <p>
+          <a href="https://www.flaticon.com/free-icons/portal" title="portal icon">
+            Portal icon created by Freepik - Flaticon
+          </a>
+        </p>
         <legal-stuff />
       </div>
     </div>
