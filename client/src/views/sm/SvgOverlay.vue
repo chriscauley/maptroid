@@ -143,15 +143,6 @@ export default {
           onClick: (event) => this.click(event, room),
         }
         paths.push(path)
-
-        // const inner_ds = room.data.geometry.inner.map((shape) =>
-        //   getD(shape, room.data.zone.bounds[0] + dx, room.data.zone.bounds[1] + dy),
-        // )
-        // paths.push({
-        //   id: `room-inner__${room.id}`,
-        //   class: `-inner -zone-${zone_slugs[room.zone]}`,
-        //   d: inner_ds.join(' '),
-        // })
       })
 
       return {

@@ -23,6 +23,7 @@
         <svg-overlay />
         <item-overlay v-if="tool_storage.state.show_items" />
         <elevator-overlay />
+        <div v-for="(portal, i) in portals" :key="i" :class="portal.class" :style="portal.style" />
       </html-overlay>
     </template>
     <viewer-panel :items="visible_items" :tool="tool_storage.state.selected.tool" />
@@ -149,7 +150,10 @@ export default {
       return this.$store.route.zones.filter((z) => !z.data.hidden)
     },
     wrapper_class() {
-      const zoom = Math.round(this.osd_store.state.zoom)
+      const image_zoom = this.osd_store.viewer?.world
+        .getItemAt(0)
+        ?.viewportToImageZoom(this.osd_store.state.zoom)
+      const zoom = Math.ceil(Math.log2(image_zoom))
       const { tool, variant } = this.tool_storage.state.selected
       const layers = this.tool_storage.getVisibleLayers()
       return [
@@ -157,6 +161,21 @@ export default {
         `-zoom-${zoom} -tool-${tool} -variant-${variant}`,
         layers.map((l) => `-layer-${l}`),
       ]
+    },
+    portals() {
+      const { portals } = this.$store.route.world.data
+      return Object.entries(portals).map(([xy, value]) => {
+        const [x, y] = xy.split(',').map(Number)
+        return {
+          style: {
+            left: `${x * 100}%`,
+            top: `${y * 100}%`,
+            width: '100%',
+            height: '100%',
+          },
+          class: `sm-portal -${value}`,
+        }
+      })
     },
   },
   watch: {

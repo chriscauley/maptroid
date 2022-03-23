@@ -1,5 +1,5 @@
 <template>
-  <template v-if="tool_storage.state.selected.tool === 'elevator'">
+  <template v-if="is_selected">
     <div :style="style" class="osd-mousetrap" @click="click" @mousemove="mousemove" />
     <div class="osd-mousetrap__cursor" :style="cursor_style" />
   </template>
@@ -24,6 +24,9 @@ export default {
     return { editing: null, mouse: [0, 0] }
   },
   computed: {
+    is_selected() {
+      return ['elevator', 'portal'].includes(this.tool_storage.state.selected.tool)
+    },
     style() {
       const { _contentSize, _contentFactor } = this.osd_store.viewer.world
       return {
@@ -38,7 +41,7 @@ export default {
       }
     },
     lines() {
-      const { elevators = [] } = this.$store.route.world.data
+      const { elevators } = this.$store.route.world.data
       const lines = []
       elevators
         .filter((e) => e.variant === 'line')
@@ -59,8 +62,20 @@ export default {
     },
   },
   methods: {
+    clickPortal(xy) {
+      const { portals } = this.$store.route.world.data
+      if (portals[xy]) {
+        delete portals[xy]
+      } else {
+        portals[xy] = this.tool_storage.state.selected.variant
+      }
+    },
     click(event) {
       const xy = this.osd_store.getWorldXY(event)
+      if (this.tool_storage.state.selected.tool === 'portal') {
+        this.clickPortal(xy)
+        return
+      }
       const { world } = this.$store.route
       if (!this.editing) {
         const matched = world.data.elevators.find((e) => e.xys.find((xy2) => vec.isEqual(xy, xy2)))

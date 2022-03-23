@@ -1,4 +1,5 @@
 @use "sass:color";
+@import "./variables.scss";
 
 .edit-room .modal-content {
   min-width: 650px;
@@ -78,7 +79,7 @@
   }
 }
 
-.sm-elevator, .sm-item, .sm-block, .sm-cre-hex {
+.sm-elevator, .sm-item, .sm-block, .sm-cre-hex, .sm-portal {
   @apply relative inline-block;
   height: 1em;
   width: 1em;
@@ -182,6 +183,22 @@ $ascent-items: weapons-tank shinespark boost-ball;
   }
 }
 
+.sm-portal {
+  &:before {
+    image-rendering: unset;
+  }
+  @each $name, $_color in $portal-colors {
+    &.-#{$name}:before {
+      background-image: url("/static/sm/portal/#{$name}.png")
+    }
+  }
+}
+
+.osd-html__overlay .sm-portal {
+  @apply absolute;
+}
+
+
 $zone-colors: (
   "crateria": #d83890,
   "brinstar": #017e13,
@@ -189,6 +206,14 @@ $zone-colors: (
   "maridia": #283888,
   "norfair": #d42020,
   "tourian": #991b8c,
+
+  /* y-faster */
+  "orangestar": #d83890,
+  "goldstar": #017e13,
+  "darkstar": #d1b102,
+  "zaristar": #283888,
+  "northstar": #d42020,
+  "finalstar": #991b8c,
 
   /* Super Zero Mission */
   "ridley": #5c152b,

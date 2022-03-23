@@ -19,8 +19,8 @@
           if you'd like to know more.
         </p>
         <p>
-          <a href="https://www.flaticon.com/free-icons/portal" title="portal icon">
-            Portal icon created by Freepik - Flaticon
+          <a href="https://thenounproject.com/icon/portal-4647674/" title="portal icon">
+            Portal icon adapted from the noun project
           </a>
         </p>
         <legal-stuff />
