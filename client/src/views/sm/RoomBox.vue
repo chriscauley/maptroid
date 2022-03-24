@@ -35,6 +35,7 @@ export default {
     room: Object,
     mode: String,
     variant: String,
+    layer: String,
   },
   data() {
     return { drag_bounds: null }
@@ -47,7 +48,8 @@ export default {
     },
     src() {
       const { world } = this.$store.route
-      return `/media/sm_cache/${world.slug}/layer-2+layer-1/${this.room.key}`
+      const { layer = 'layer-2+layer-1' } = this
+      return `/media/sm_cache/${world.slug}/${layer}/${this.room.key}`
     },
     style() {
       const [x, y, width, height] = this.room.data.zone.bounds

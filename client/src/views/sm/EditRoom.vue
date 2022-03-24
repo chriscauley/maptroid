@@ -12,9 +12,13 @@
           <unrest-dropdown :items="png_items" class="btn -info">
             <i class="fa fa-link" />
           </unrest-dropdown>
+          <unrest-dropdown class="btn -info" :items="layer_items">
+            <i class="fa fa-layer-group" />
+            {{ layer }}
+          </unrest-dropdown>
         </template>
       </unrest-toolbar>
-      <room-box :mode="selected.tool" :variant="selected.variant" :room="room" />
+      <room-box :mode="selected.tool" :variant="selected.variant" :room="room" :layer="layer" />
     </unrest-modal>
   </teleport>
 </template>
@@ -64,6 +68,7 @@ export default {
   data() {
     return {
       item_storage: ToolStorage('tools__sm-item', { tools }),
+      layer: 'layer-2+layer-1',
     }
   },
   computed: {
@@ -89,6 +94,12 @@ export default {
           room.zone = z.id
           this.$store.room.save(room)
         },
+      }))
+    },
+    layer_items() {
+      return ['layer-2+layer-1', 'layer-1', 'layer-2', 'bts', 'plm_enemies'].map((name) => ({
+        click: () => (this.layer = name),
+        text: name,
       }))
     },
     png_items() {
