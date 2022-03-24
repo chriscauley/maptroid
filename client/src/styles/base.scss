@@ -339,11 +339,8 @@ body.theme-dark_mode {
   }
   &__row {
     @apply flex;
-    .btn > .fa {
-      line-height: 1.5;
-    }
-    .sm-item, .sm-block  {
-      margin: 0.25em 0;
+    .btn > .fa, .btn {
+      line-height: 1rem;
     }
   }
 }

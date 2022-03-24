@@ -33,6 +33,7 @@
 </template>
 
 <script>
+import { clamp } from 'lodash'
 import Openseadragon from 'openseadragon'
 import { computed } from 'vue'
 
@@ -153,7 +154,7 @@ export default {
       const image_zoom = this.osd_store.viewer?.world
         .getItemAt(0)
         ?.viewportToImageZoom(this.osd_store.state.zoom)
-      const zoom = Math.ceil(Math.log2(image_zoom))
+      const zoom = clamp(Math.ceil(Math.log2(image_zoom)), -4, 4)
       const { tool, variant } = this.tool_storage.state.selected
       const layers = this.tool_storage.getVisibleLayers()
       return [

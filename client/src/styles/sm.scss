@@ -48,15 +48,25 @@
   &:before {
     @apply absolute bg-black;
     outline: 1px solid white;
+    transition: inset 0.25s;
   }
-  .-zoom-0 & {
-    .ur-popper {
-      padding-top: 200%;
-    }
-    &:before {
-      inset: -200%;
+  @mixin item-zoom($zoom, $ratio) {
+    .-zoom-#{$zoom} & {
+      .ur-popper {
+        padding-top: $ratio * 100%;
+      }
+      &:before {
+        inset: $ratio * -100%;
+      }
     }
   }
+  @include item-zoom(-4, 16);
+  @include item-zoom(-3, 12);
+  @include item-zoom(-2, 8);
+  @include item-zoom(-1, 6);
+  @include item-zoom(0, 4);
+  @include item-zoom(1, 2);
+  @include item-zoom(2, 1);
 }
 
 .sm-zone-box {
@@ -103,9 +113,6 @@
   }
   .btn &:before {
     inset: -50%;
-  }
-  .-zoom-0 .osd-html__overlay &:before {
-    image-rendering: unset;
   }
 }
 
@@ -260,9 +267,11 @@ $zone-colors: (
     }
     &.-outer {
       stroke-width: 3px;
+      transition: 0.25s;
       &:hover {
         stroke-width: 6px;
         stroke: #ccc;
+        fill: transparent;
       }
     }
   }
@@ -306,13 +315,13 @@ $zone-colors: (
   }
 }
 
-.-layer-walls .sm-room-svg path.-inner {
-  display: unset;
-  fill: rgba(128, 255, 128, 0.75);
-  @each $name, $color in $zone-colors {
-    &.-zone-#{$name} {
-      stroke: $color;
-      fill: color.change($color, $alpha: 0.75);
+.app-body.-zoom--3, .app-body.-zoom--4 {
+  .sm-room-svg path.-outer {
+    @each $name, $color in $zone-colors {
+      &.-zone-#{$name} {
+        $color_a: color.change($color,$alpha: 0.85);
+        fill: color.adjust($color_a, $blackness: 25%);
+      }
     }
   }
 }

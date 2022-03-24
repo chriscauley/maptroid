@@ -110,7 +110,7 @@ export default {
       const { zone_offsets, zones } = this.map_props
 
       const zone_slugs = {}
-      zones.forEach((zone) => (zone_slugs[zone.id] = zone.slug))
+      zones.forEach((zone) => (zone_slugs[zone.id] = zone.slug.split('__')[0]))
 
       const paths = []
       const getD = (shape, dx, dy) => {
