@@ -38,10 +38,14 @@ results = []
 for world, cap in blue_caps.items():
     world_caps = []
     cap_colors = get_sorted_colors(cap)
-    for weapon_colors in replacements:
+    for ir, weapon_colors in enumerate(replacements):
         recolored_icon = blue_doors[world].copy()
-        for i_color, weapon_color in enumerate(weapon_colors):
-            urcv.replace_color(recolored_icon, cap_colors[i_color], weapon_color)
+        if world == 'ypr' and ir == 4:
+            # ypr caps look dark blue in smile_export
+            pass
+        else:
+            for i_color, weapon_color in enumerate(weapon_colors):
+                urcv.replace_color(recolored_icon, cap_colors[i_color], weapon_color)
         world_caps.append(recolored_icon)
     world_caps = np.vstack(world_caps)
     results.append(world_caps)
