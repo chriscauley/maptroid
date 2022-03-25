@@ -7,17 +7,63 @@ const state = reactive({
   loading: false,
 })
 
+const waiting = []
+
+const _loadData = () =>
+  client.get('/power-suit/').then((data) => {
+    state.data = data
+    Object.values(data.animations).forEach((animation) => {
+      animation.offsets = animation.offsets || {}
+    })
+  })
+
+const _loadImage = () =>
+  new Promise((resolve) => {
+    const img = document.createElement('img')
+    img.onload = () => {
+      state.img = img
+      resolve()
+    }
+    img.src = '/static/sm/power-suit.png'
+  })
+
+const _flipImage = () => {
+  const { data, img } = state
+  const canvas = (state.flipped = document.createElement('canvas'))
+  canvas.width = img.width
+  canvas.height = img.height
+  const ctx = canvas.getContext('2d')
+  ctx.scale(1, -1)
+  ctx.translate(0, -canvas.height)
+  Object.values(data.animations).forEach((animation) => {
+    animation.sprite_ids.forEach((_sprite_id, index) => {
+      const { sx, sy, sw, sh } = getAnimationParams(animation.name, index)
+      ctx.drawImage(img, sx, sy, sw, sh, sx, img.height - sy - sh, sw, sh)
+    })
+  })
+}
+
+const load = () => {
+  if (state.data && state.image) {
+    return Promise.resolve()
+  }
+  if (state.loading) {
+    return new Promise((resolve) => waiting.push(resolve))
+  }
+  state.loading = true
+  return Promise.all([_loadData(), _loadImage()])
+    .then(() => {
+      while (waiting.length) {
+        waiting.pop()()
+      }
+      state.loading = false
+    })
+    .then(_flipImage)
+}
+
 const use = () => {
   if (!state.data && !state.loading) {
-    client.get('/power-suit/').then((data) => {
-      state.data = data
-      Object.values(data.animations).forEach((animation) => {
-        animation.offsets = animation.offsets || {}
-      })
-    })
-    const img = document.createElement('img')
-    img.onload = () => (state.img = img)
-    img.src = '/static/sm/power-suit.png'
+    load()
   }
   return state.data
 }
@@ -37,6 +83,16 @@ const addAnimation = ({ name }) => {
     offsets: {},
   }
   save()
+}
+
+const getAnimationParams = (name, index, flip) => {
+  const animation = state.data.animations[name]
+  if (!animation) {
+    throw `Unable to find animation for ${name}`
+  }
+  const sprite_id = animation.sprite_ids[index]
+  const [sx, sy, sw, sh] = state.data.rects[sprite_id]
+  return { img: flip ? state.flipped : state.img, sx, sy, sw, sh }
 }
 
 const getAnimation = (name) => {
@@ -104,4 +160,6 @@ export default {
   addAnimation,
   getAnimation,
   renameAnimation,
+  getAnimationParams,
+  load,
 }

@@ -88,8 +88,6 @@ def find_doors(image, world):
         xys = urcv.template.match(gray, template, threshold=0.85)
         th, tw = template.shape
         for x,y in xys:
-            x = x * 16
-            y = y * 16
             door = image[y:y+th,x:x+tw]
             color = match_door_color(door, world)
 

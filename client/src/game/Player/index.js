@@ -7,6 +7,7 @@ import { PLAYER_GROUP, SCENERY_GROUP, POSTURE } from '../constants'
 import inventory from '../inventory'
 import drawRay from '../drawRay'
 import getBeamRays from './getBeamRays'
+import PowerSuit from '@/views/PowerSuit/store'
 
 window.p2 = p2
 
@@ -15,6 +16,11 @@ const { vec2 } = p2
 // math helpers
 function lerp(factor, start, end) {
   return start + (end - start) * factor
+}
+
+// animation helper
+const getFrame = (time, count, duration) => {
+  return parseInt((count * (time % duration)) / duration)
 }
 
 export default class Player extends Controller {
@@ -62,7 +68,7 @@ export default class Player extends Controller {
     const {
       accelerationTimeAirborne = 0,
       accelerationTimeGrounded = 0.1,
-      moveSpeed = 6,
+      moveSpeed = 12,
       wallSlideSpeedMax = 3,
       wallStickTime = 0.25,
       wallJumpClimb = [20, 20], // holding towards wall
@@ -73,7 +79,7 @@ export default class Player extends Controller {
       maxJumpHeight = 4.2,
       minJumpHeight = 1,
       velocityXSmoothing = 0.2,
-      velocityXMin = 0.0001,
+      velocityXMin = 0.5,
     } = cloneDeep(options)
 
     Object.assign(this, {
@@ -118,6 +124,7 @@ export default class Player extends Controller {
       aimup: 0,
       aimdown: 0,
     }
+    this._last_pressed_at = {}
     this.heal(Infinity)
   }
 
@@ -128,6 +135,7 @@ export default class Player extends Controller {
 
   press(key) {
     const { posture } = this.state
+    this._last_pressed_at[key] = new Date().valueOf()
     this.keys[key] = 1
     if (key === 'jump') {
       this._requestJump = true
@@ -309,11 +317,76 @@ export default class Player extends Controller {
     this.beam_rays = getBeamRays(this)
   }
 
+  _getSprite() {
+    const { pointing } = this.state
+    const breath_time = 16700 / 20
+    const [dx, _dy] = this.scaledVelocity
+    const dir = this.collisions.faceDir === -1 ? 'left' : 'right'
+    if (this.state.posture === POSTURE.ball) {
+      return ['ball_' + dir, getFrame(new Date().valueOf(), 8, 24000 / 30)]
+    } else if (this.state.posture === POSTURE.crouch) {
+      if (pointing === 'zenith') {
+        return ['_poses_' + dir, 4]
+      } else if (pointing === 'upward') {
+        return ['_poses_' + dir, 5]
+      } else if (pointing === 'downward') {
+        return ['_poses_' + dir, 6]
+      }
+      const frame = getFrame(new Date().valueOf(), 3, breath_time)
+      return ['crouch_' + dir, frame]
+    }
+    if (this.collisions.below) {
+      // on ground
+      if (Math.abs(dx) < 0.1) {
+        const frame = getFrame(new Date().valueOf(), 3, breath_time)
+        return ['stand' + '_' + dir, frame]
+      } else {
+        let aim = ''
+        if (pointing === 'zenith') {
+          // TODO this is just not allowed in vanilla so I need to make a sprite for it
+        } else if (pointing === 'upward') {
+          aim = '_aimup'
+        } else if (pointing === 'downward') {
+          aim = '_aimdown'
+        } else if (this.keys['shoot1'] || this.keys['shoot2']) {
+          aim = '_aim'
+        } else if (pointing === 'down') {
+          // TODO Vanilla only has shoot down while jumping
+        }
+
+        const cycle_time = 500
+        const frame = getFrame(new Date().valueOf(), 10, cycle_time)
+        return ['walk' + aim + '_' + dir, frame]
+      }
+    }
+    return ['crouch_left', 0]
+  }
+
+  drawSprite(ctx) {
+    const scale_factor = 1.6
+    const { _width, height } = this.body.shapes[0]
+    const [name, frame] = this._getSprite()
+    const { img, sx, sy, sw, sh } = PowerSuit.getAnimationParams(name, frame, true)
+    const dw = (sw * scale_factor) / this.game.zoom
+    const dh = (sh * scale_factor) / this.game.zoom
+    const base_y = -height / 2
+    const base_x = -dw / 2
+    ctx.fillStyle = 'green'
+    ctx.fillRect(base_x, base_y, dw, dh)
+    ctx.drawImage(img, sx, sy, sw, sh, base_x, base_y, dw, dh)
+
+    const _ise = ctx.imageSmoothingEnabled
+    ctx.imageSmoothingEnabled = true
+    ctx.imageSmoothingEnabled = _ise
+  }
+
   draw = (ctx) => {
+    this.drawSprite(ctx)
     const [x, y] = this.body.position
     const { width, height } = this.body.shapes[0]
-    ctx.fillStyle = '#888800'
-    ctx.fillRect(-width / 2, -height / 2, width, height)
+    ctx.lineWidth = 2 / this.game.zoom
+    ctx.strokeStyle = 'gray'
+    ctx.strokeRect(-width / 2, -height / 2, width, height)
 
     ctx.strokeStyle = 'red'
     ctx.lineWidth = 1 / this.game.zoom

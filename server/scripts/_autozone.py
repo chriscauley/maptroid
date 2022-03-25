@@ -73,7 +73,7 @@ for room in world.room_set.filter(zone__isnull=True): # TODO filter zone__isnull
         zh, zw = zone_image.shape
         if zh < gh or zw < gw:
             continue
-        matches = urcv.template.match(zone_image, gray, scale=1, threshold=0.8)
+        matches = urcv.template.match(zone_image, gray, threshold=0.8)
         if len(matches):
             room.zone = zone
             x, y = matches[0]

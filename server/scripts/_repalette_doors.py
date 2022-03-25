@@ -9,7 +9,7 @@ from maptroid.icons import get_icons
 caps = get_icons('door_caps')
 blue_caps = get_icons('blue_caps')
 blue_doors = get_icons('blue_doors')
-opening = cv2.imread('static/sm/door_opening.png')
+opening = cv2.imread('static/sm/door_opening.png', cv2.IMREAD_UNCHANGED)
 
 def get_sorted_colors(image):
     out = []
@@ -53,12 +53,12 @@ for world, cap in blue_caps.items():
 
 # color anmiations
 animations = []
+opening_colors = get_sorted_colors(opening)
 for ir, weapon_colors in enumerate(replacements):
     recolored = opening.copy()
     for i_color, weapon_color in enumerate(weapon_colors):
-        urcv.replace_color(recolored, cap_colors[i_color], weapon_color)
+        urcv.replace_color(recolored, opening_colors[i_color], weapon_color)
     animations.append(recolored)
 
 cv2.imwrite('.media/trash/rainbow_caps.png', np.hstack(results))
-cv2.imwrite('.media/trash/rainbow_opening.png', np.hstack(animations))
-print('.media/trash/rainbow_caps.png')
+cv2.imwrite('static/build/rainbow_opening.png', np.hstack(animations))

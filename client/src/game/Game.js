@@ -1,5 +1,6 @@
 import p2 from 'p2'
 
+import useAssets from './useAssets'
 import Player from './Player'
 import { SCENERY_GROUP, BULLET_GROUP, PLAYER_GROUP, PLAYER_ACTIONS } from './constants'
 import WorldController from './WorldController'
@@ -20,7 +21,9 @@ export default class Game extends p2.EventEmitter {
     this.resize()
 
     this.init()
-    requestAnimationFrame(this.animate)
+    useAssets().then(() => {
+      requestAnimationFrame(this.animate)
+    })
   }
 
   resize() {
@@ -272,7 +275,7 @@ export default class Game extends p2.EventEmitter {
     cancelAnimationFrame(this._frame)
     this._frame = requestAnimationFrame(this.animate)
 
-    this.tick(time) // moe game froward in time
+    this.tick(time) // move game froward in time
     this.render() // draw to canvas
     this.emit({ type: 'draw', ctx: this.ctx })
     this.lastTime = time
