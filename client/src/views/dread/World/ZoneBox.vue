@@ -2,7 +2,7 @@
   <div :class="css" :style="style" :title="zone.name">
     <img :src="`/static/dread/zone_shapes/${zone.slug}.png`" @load="onload" ref="img" />
     <unrest-draggable v-if="$route.query.mode === 'edit'" @drag="drag" @dragend="dragend" />
-    <router-link v-else :to="$store.route.getZoneLink('dread', zone.slug)" />
+    <router-link v-else :to="getZoneLink(zone.slug)" />
   </div>
 </template>
 
@@ -48,6 +48,9 @@ export default {
     },
     dragend() {
       this.dragging = false
+    },
+    getZoneLink(zone_slug) {
+      return { name: 'dread_map', params: { world_slug: 'dread', zone_slug } }
     },
   },
 }

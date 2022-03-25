@@ -12,7 +12,6 @@ export default (component) => {
       },
     ]
     if (component.$auth.user?.is_superuser) {
-      const { route } = component.$store
       return [
         ...tools,
         { slug: 'select', icon: 'fa fa-mouse-pointer' },
@@ -28,14 +27,6 @@ export default (component) => {
           slug: 'portal',
           icon: (_t, v) => `sm-portal -${v}`,
           variants: Object.keys(portal_colors),
-        },
-        {
-          slug: 'links',
-          icon: 'fa fa-map-marked',
-          items: route.zones.map((z) => ({
-            to: route.getZoneLink(route.world?.slug, z.slug),
-            text: z.name,
-          })),
         },
         {
           slug: 'video_path',

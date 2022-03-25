@@ -29,6 +29,9 @@ export default {
       })
       items = items.filter((i) => i.count)
       items = sortBy(items, 'count')
+      if (!items.length) {
+        return []
+      }
       return [
         {
           text: 'Highlght',

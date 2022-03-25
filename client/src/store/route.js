@@ -155,16 +155,6 @@ export default ({ store }) => {
       return store.video.fetchPage(route.world_query)
     },
 
-    getZoneLink(world_slug, zone_slug) {
-      const is_dread = world_slug === 'dread'
-      return `/${is_dread ? 'maps' : 'sm'}/${world_slug}/${zone_slug}/`
-    },
-
-    getWorldLink(world_slug) {
-      const is_dread = world_slug === 'dread'
-      return `/${is_dread ? 'maps' : 'sm'}/${world_slug}/`
-    },
-
     get times_by_item_id() {
       const video = store.video.getCurrentVideo()
       const times_by_item_id = {}

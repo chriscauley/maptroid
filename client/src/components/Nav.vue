@@ -8,12 +8,12 @@
       <unrest-dropdown :items="world_links">
         <div class="link">{{ world.name }}</div>
       </unrest-dropdown>
-    </template>
-    <template v-if="zone">
-      <span>/</span>
-      <unrest-dropdown :items="zone_links">
-        <div class="link">{{ zone.name }}</div>
-      </unrest-dropdown>
+      <template v-if="zone_links">
+        <span>/</span>
+        <unrest-dropdown :items="zone_links">
+          <div class="link">{{ zone?.name || 'Overworld' }}</div>
+        </unrest-dropdown>
+      </template>
     </template>
   </div>
 </template>
@@ -35,20 +35,29 @@ export default {
       return links
     },
     zone_links() {
-      const { world_slug } = this.$route.params
-      return this.$store.route.zones
+      const { world_slug, zone_slug } = this.$route.params
+      if (zone_slug === undefined) {
+        return null
+      }
+      const { name } = this.$route
+      const links = this.$store.route.zones
         .filter((z) => !z.data.hidden)
         .map((zone) => ({
           text: zone.name,
-          to: this.$store.route.getZoneLink(world_slug, zone.slug),
+          to: { name, params: { world_slug, zone_slug: zone.slug } },
         }))
+      return [{ text: 'Overworld', to: { name, params: { world_slug } } }, ...links]
     },
     world_links() {
-      const worlds = this.$store.route.worlds.filter((w) => !w.hidden)
-      return worlds.map((world) => {
-        const to = this.$store.route.getWorldLink(world.slug)
-        return { text: world.name, to }
-      })
+      let worlds = this.$store.route.worlds
+      if (!this.$auth.user?.is_superuser) {
+        worlds = worlds.filter((w) => !w.hidden)
+      }
+      const { name } = this.$route
+      return worlds.map((world) => ({
+        text: `${world.name} ${world.hidden ? '(hidden)' : ''}`,
+        to: { name, params: { world_slug: world.slug } },
+      }))
     },
     world() {
       return this.$store.route.world

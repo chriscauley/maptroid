@@ -60,6 +60,7 @@ window.Rect = Rect
 
 export default {
   __route: {
+    name: 'map_viewer',
     path: '/sm/:world_slug/:zone_slug?/',
   },
   components: {

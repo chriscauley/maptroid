@@ -45,8 +45,11 @@ export default {
   methods: {
     gotoItem(item) {
       const zone = this.$store.route.zones.find((z) => z.id === item.zone)
-      const link = this.$store.route.getZoneLink('dread', zone.slug)
-      this.$router.push(`${link}?item=${item.id}`)
+      this.$router.push({
+        name: 'dread_map',
+        params: { world_slug: 'dread', zone_slug: zone.slug },
+        query: { item: item.id },
+      })
     },
     open() {
       const url = '/static/dread/zone_shapes/world-clean_short.png'

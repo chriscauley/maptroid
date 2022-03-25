@@ -69,6 +69,7 @@ import OsdStore from './OsdStore'
 
 export default {
   __route: {
+    name: 'dread_map',
     path: '/maps/:world_slug/:zone_slug/',
     meta: {
       title: ({ params }) => startCase(params.zone_slug),
@@ -92,13 +93,16 @@ export default {
         const match = (i) => i.data.type.match(/^(teleportal|transit)/)
         const items = this.$store.route.world_items.filter(match).map((i) => {
           const { zone } = this.$store.route
-          const link = this.$store.route.getZoneLink('dread', zone.slug)
           return {
             id: i.id,
             type: i.data.type,
             zone_id: i.zone,
             _target: i.data.transit_target_id,
-            to: `${link}?item=${i.id}`,
+            to: {
+              name: 'dread_map',
+              params: { world_slug: 'dread', zone_slug: zone.slug },
+              query: { item: i.id },
+            },
             name: i.data.name || `${DreadItems.getName(i)} - ${zone.name}`,
           }
         })
@@ -166,8 +170,12 @@ export default {
     },
     gotoItem(item) {
       this.osd_store.gotoItem(item)
-      const link = this.$store.route.getZoneLink('dread', this.$store.route.zone.slug)
-      this.$router.replace(`${link}?item=${item.id}`)
+      const { slug } = this.$store.route.zone
+      this.$router.replace({
+        name: 'dread_map',
+        params: { zone_slug: slug, world_slug: 'dread' },
+        query: { item: item.id },
+      })
     },
   },
 }
