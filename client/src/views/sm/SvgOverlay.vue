@@ -25,6 +25,9 @@
 import { sortBy } from 'lodash'
 export default {
   inject: ['map_props', 'osd_store', 'tool_storage'],
+  props: {
+    highlighted_rooms: Array,
+  },
   data() {
     return { hovering: null }
   },
@@ -136,7 +139,10 @@ export default {
         )
         const path = {
           id: `room-outer__${room.id}`,
-          class: `-outer -zone-${zone_slugs[room.zone]}`,
+          class: [
+            `-outer -zone-${zone_slugs[room.zone]}`,
+            this.highlighted_rooms.includes(room.id) && '-highlight',
+          ],
           d: outer_ds.join(' '),
           onMouseenter: () => this.hover(path),
           onMouseleave: () => this.blur(path),

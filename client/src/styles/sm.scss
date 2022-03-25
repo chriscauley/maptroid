@@ -41,6 +41,9 @@
   &__override {
     @apply absolute border-2 border-white cursor-pointer;
   }
+  &.-highlight {
+    @apply border-4 border-red-300
+  }
 }
 
 .osd-html__overlay .sm-item {
@@ -273,15 +276,19 @@ $zone-colors: (
         stroke: #ccc;
         fill: transparent;
       }
+      &.-highlight, &.-highlight:hover {
+        fill: theme('colors.red.800');
+        stroke: theme('colors.red.400');
+      }
     }
   }
   line.run {
-    stroke: #0f0;
+    stroke: theme('colors.green.500');
     stroke-width: 0.0625;
     pointer-events: none;
     marker-end: url(#arrowhead);
     &.-highlight {
-      stroke: #f00;
+      stroke: theme('colors.red.800');
       stroke-width: 0.25;
       marker-end: url(#red-arrowhead);
     }

@@ -26,7 +26,7 @@
 </template>
 
 <script>
-import { debounce, inRange, range } from 'lodash'
+import { debounce, inRange } from 'lodash'
 import vec from '@/lib/vec'
 
 export default {
@@ -36,6 +36,7 @@ export default {
     mode: String,
     variant: String,
     layer: String,
+    highlight: Boolean,
   },
   data() {
     return { drag_bounds: null }
@@ -44,7 +45,11 @@ export default {
     css() {
       const { zoom } = this.osd_store.state
       // 0.2 is based off observation
-      return [`sm-room-box -mode-${this.mode}`, zoom > 0.2 && 'pixelated']
+      return [
+        `sm-room-box -mode-${this.mode}`,
+        zoom > 0.2 && 'pixelated',
+        this.highlight && '-highlight',
+      ]
     },
     src() {
       const { world } = this.$store.route
@@ -99,23 +104,7 @@ export default {
     },
     blocks() {
       const room_width = this.room.data.zone.bounds[2] * 16
-      const block_map = {}
-      Object.entries(this.room.data.cre_hex || {}).forEach(([name, rects]) => {
-        const _class = `sm-cre-hex -${name}`
-        rects.forEach(([x, y, w, h]) => {
-          range(w).forEach((dx) => {
-            range(h).forEach((dy) => {
-              block_map[[x + dx, y + dy]] = _class
-            })
-          })
-        })
-      })
-      this.room.data.cre_overrides?.forEach(([x, y, w, h, name]) => {
-        const _class = `sm-block -${name}`
-        range(w).forEach((dx) => {
-          range(h).forEach((dy) => (block_map[[x + dx, y + dy]] = _class))
-        })
-      })
+      const block_map = this.$store.route.getRoomBlocks(this.room)
       return Object.entries(block_map).map(([xy, _class]) => {
         const [x, y] = xy.split(',').map((i) => Number(i))
         const id = room_width * y + x

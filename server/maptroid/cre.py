@@ -27,6 +27,8 @@ def scan_for_cre(room, _classes=SCAN_TEMPLATES, layer=None):
         f'smile_exports/{room.world.slug}/{layer}/{room.key}',
     )
     image = cv2.imread(room_layer_1)
+    for x, y in room.data.get('holes', []):
+        image[y*256:(y+1)*256, x*256:(x+1)*256, :] = 0
     gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
     results = defaultdict(list)
     count = 0

@@ -12,7 +12,7 @@ export default {
   inject: ['map_props', 'tool_storage'],
   computed: {
     overlap_items() {
-      if (this.tool_storage.state.selected.tool !== 'edit_room') {
+      if (!['move_room', 'edit_room'].includes(this.tool_storage.state.selected.tool)) {
         return []
       }
       const { rooms } = this.map_props

@@ -4,8 +4,9 @@
     <template v-if="osd_store.viewer">
       <unrest-toolbar :storage="tool_storage" class="-topleft">
         <config-popper v-if="tool_storage.state.settings_open" :storage="tool_storage" />
-        <template #buttons>
+        <template v-if="$store.route.zone" #buttons>
           <overlap-dropdown />
+          <cre-dropdown @highlight="(h) => (highlighted_rooms = h)" />
         </template>
       </unrest-toolbar>
       <html-overlay :viewer="osd_store.viewer">
@@ -15,12 +16,13 @@
             :key="room.id"
             :room="room"
             mode="arrange"
+            :highlight="highlighted_rooms.includes(room.id)"
           />
         </template>
         <template v-else>
           <zone-box v-for="zone in zones" :key="zone.id" :zone="zone" />
         </template>
-        <svg-overlay />
+        <svg-overlay :highlighted_rooms="highlighted_rooms" />
         <item-overlay v-if="tool_storage.state.show_items" />
         <elevator-overlay />
         <div v-for="(portal, i) in portals" :key="i" :class="portal.class" :style="portal.style" />
@@ -38,6 +40,7 @@ import Openseadragon from 'openseadragon'
 import { computed } from 'vue'
 
 import BaseViewer from '@/components/BaseViewer'
+import CreDropdown from './CreDropdown.vue'
 import ConfigPopper, { DZI_LAYERS } from './ConfigPopper.vue'
 import ElevatorOverlay from './ElevatorOverlay.vue'
 import HtmlOverlay from '@/vue-openseadragon/HtmlOverlay.vue'
@@ -61,6 +64,7 @@ export default {
   },
   components: {
     BaseViewer,
+    CreDropdown,
     ConfigPopper,
     HtmlOverlay,
     ViewerPanel,
@@ -81,9 +85,11 @@ export default {
     }
   },
   data() {
-    const osd_store = OsdStore(this)
-    const tool_storage = ToolStorage(this)
-    return { osd_store, tool_storage }
+    return {
+      osd_store: OsdStore(this),
+      tool_storage: ToolStorage(this),
+      highlighted_rooms: [],
+    }
   },
   computed: {
     show_player() {
