@@ -2210,6 +2210,103 @@
       "offsets": {},
       "name": "grappling_right"
     },
+    "jump_aimdown_left": {
+      "sprite_ids": [
+        220,
+        218,
+        217,
+        214
+      ],
+      "offsets": {
+        "220": [
+          11,
+          0
+        ]
+      },
+      "name": "jump_aimdown_left",
+      "preset": "global"
+    },
+    "jump_aimdown_right": {
+      "sprite_ids": [
+        219,
+        215,
+        216,
+        213
+      ],
+      "offsets": {
+        "213": [
+          5,
+          0
+        ],
+        "215": [
+          7,
+          0
+        ],
+        "216": [
+          4,
+          0
+        ],
+        "219": [
+          9,
+          0
+        ]
+      },
+      "name": "jump_aimdown_right"
+    },
+    "jump_aimup_left": {
+      "sprite_ids": [
+        229,
+        227,
+        226,
+        223
+      ],
+      "offsets": {
+        "223": [
+          12,
+          5
+        ],
+        "226": [
+          12,
+          5
+        ],
+        "227": [
+          15,
+          7
+        ],
+        "229": [
+          15,
+          7
+        ]
+      },
+      "name": "jump_aimup_left"
+    },
+    "jump_aimup_right": {
+      "sprite_ids": [
+        228,
+        224,
+        225,
+        222
+      ],
+      "offsets": {
+        "222": [
+          4,
+          5
+        ],
+        "224": [
+          4,
+          5
+        ],
+        "225": [
+          3,
+          5
+        ],
+        "228": [
+          7,
+          6
+        ]
+      },
+      "name": "jump_aimup_right"
+    },
     "jump_left": {
       "sprite_ids": [
         289,
@@ -2237,49 +2334,6 @@
       },
       "name": "jump_left"
     },
-    "jump_left_aimdown": {
-      "sprite_ids": [
-        220,
-        218,
-        217,
-        214
-      ],
-      "offsets": {
-        "220": [
-          11,
-          0
-        ]
-      },
-      "name": "jump_left_aimdown",
-      "preset": "global"
-    },
-    "jump_left_aimup": {
-      "sprite_ids": [
-        229,
-        227,
-        226,
-        223
-      ],
-      "offsets": {
-        "223": [
-          12,
-          5
-        ],
-        "226": [
-          12,
-          5
-        ],
-        "227": [
-          15,
-          7
-        ],
-        "229": [
-          15,
-          7
-        ]
-      },
-      "name": "jump_left_aimup"
-    },
     "jump_right": {
       "sprite_ids": [
         288,
@@ -2306,60 +2360,6 @@
         ]
       },
       "name": "jump_right"
-    },
-    "jump_right_aimdown": {
-      "sprite_ids": [
-        219,
-        215,
-        216,
-        213
-      ],
-      "offsets": {
-        "213": [
-          5,
-          0
-        ],
-        "215": [
-          7,
-          0
-        ],
-        "216": [
-          4,
-          0
-        ],
-        "219": [
-          9,
-          0
-        ]
-      },
-      "name": "jump_right_aimdown"
-    },
-    "jump_right_aimup": {
-      "sprite_ids": [
-        228,
-        224,
-        225,
-        222
-      ],
-      "offsets": {
-        "222": [
-          4,
-          5
-        ],
-        "224": [
-          4,
-          5
-        ],
-        "225": [
-          3,
-          5
-        ],
-        "228": [
-          7,
-          6
-        ]
-      },
-      "name": "jump_right_aimup"
     },
     "morphing_left": {
       "sprite_ids": [
@@ -2411,17 +2411,6 @@
       "name": "rolling_right",
       "preset": "center"
     },
-    "spacejump_lefto": {
-      "sprite_ids": [
-        49,
-        50,
-        51,
-        52
-      ],
-      "offsets": {},
-      "name": "spacejump_lefto",
-      "preset": "center"
-    },
     "spacejump_right": {
       "sprite_ids": [
         48,
@@ -2431,6 +2420,17 @@
       ],
       "offsets": {},
       "name": "spacejump_right",
+      "preset": "center"
+    },
+    "spacejumpo_left": {
+      "sprite_ids": [
+        49,
+        50,
+        51,
+        52
+      ],
+      "offsets": {},
+      "name": "spacejumpo_left",
       "preset": "center"
     },
     "sparking_left": {
@@ -2651,7 +2651,7 @@
       },
       "name": "walk-left"
     },
-    "walk_left_aim": {
+    "walk_aim_left": {
       "sprite_ids": [
         120,
         111,
@@ -2670,10 +2670,67 @@
           0
         ]
       },
-      "name": "walk_left_aim",
+      "name": "walk_aim_left",
       "preset": "global"
     },
-    "walk_left_aimdown": {
+    "walk_aim_right": {
+      "sprite_ids": [
+        114,
+        110,
+        109,
+        125,
+        124,
+        123,
+        122,
+        117,
+        116,
+        115
+      ],
+      "offsets": {
+        "109": [
+          11,
+          0
+        ],
+        "110": [
+          8,
+          0
+        ],
+        "114": [
+          4,
+          0
+        ],
+        "115": [
+          13,
+          0
+        ],
+        "116": [
+          14,
+          0
+        ],
+        "117": [
+          11,
+          0
+        ],
+        "122": [
+          7,
+          0
+        ],
+        "123": [
+          5,
+          0
+        ],
+        "124": [
+          12,
+          0
+        ],
+        "125": [
+          13,
+          0
+        ]
+      },
+      "name": "walk_aim_right"
+    },
+    "walk_aimdown_left": {
       "sprite_ids": [
         98,
         99,
@@ -2692,10 +2749,67 @@
           0
         ]
       },
-      "name": "walk_left_aimdown",
+      "name": "walk_aimdown_left",
       "preset": "global"
     },
-    "walk_left_aimup": {
+    "walk_aimdown_right": {
+      "sprite_ids": [
+        90,
+        89,
+        104,
+        103,
+        102,
+        101,
+        96,
+        95,
+        94,
+        93
+      ],
+      "offsets": {
+        "89": [
+          9,
+          0
+        ],
+        "90": [
+          5,
+          0
+        ],
+        "93": [
+          14,
+          0
+        ],
+        "94": [
+          15,
+          0
+        ],
+        "95": [
+          12,
+          0
+        ],
+        "96": [
+          8,
+          0
+        ],
+        "101": [
+          6,
+          0
+        ],
+        "102": [
+          13,
+          0
+        ],
+        "103": [
+          14,
+          0
+        ],
+        "104": [
+          12,
+          0
+        ]
+      },
+      "name": "walk_aimdown_right"
+    },
+    "walk_aimup_left": {
       "sprite_ids": [
         139,
         140,
@@ -2714,8 +2828,65 @@
           5
         ]
       },
-      "name": "walk_left_aimup",
+      "name": "walk_aimup_left",
       "preset": "global"
+    },
+    "walk_aimup_right": {
+      "sprite_ids": [
+        134,
+        133,
+        130,
+        129,
+        144,
+        143,
+        142,
+        141,
+        136,
+        135
+      ],
+      "offsets": {
+        "129": [
+          14,
+          5
+        ],
+        "130": [
+          12,
+          5
+        ],
+        "133": [
+          9,
+          5
+        ],
+        "134": [
+          5,
+          5
+        ],
+        "135": [
+          14,
+          5
+        ],
+        "136": [
+          15,
+          5
+        ],
+        "141": [
+          12,
+          5
+        ],
+        "142": [
+          8,
+          5
+        ],
+        "143": [
+          6,
+          5
+        ],
+        "144": [
+          13,
+          5
+        ]
+      },
+      "name": "walk_aimup_right"
     },
     "walk_right": {
       "sprite_ids": [
@@ -2773,177 +2944,6 @@
         ]
       },
       "name": "walk_right"
-    },
-    "walk_right_aim": {
-      "sprite_ids": [
-        114,
-        110,
-        109,
-        125,
-        124,
-        123,
-        122,
-        117,
-        116,
-        115
-      ],
-      "offsets": {
-        "109": [
-          11,
-          0
-        ],
-        "110": [
-          8,
-          0
-        ],
-        "114": [
-          4,
-          0
-        ],
-        "115": [
-          13,
-          0
-        ],
-        "116": [
-          14,
-          0
-        ],
-        "117": [
-          11,
-          0
-        ],
-        "122": [
-          7,
-          0
-        ],
-        "123": [
-          5,
-          0
-        ],
-        "124": [
-          12,
-          0
-        ],
-        "125": [
-          13,
-          0
-        ]
-      },
-      "name": "walk_right_aim"
-    },
-    "walk_right_aimdown": {
-      "sprite_ids": [
-        90,
-        89,
-        104,
-        103,
-        102,
-        101,
-        96,
-        95,
-        94,
-        93
-      ],
-      "offsets": {
-        "89": [
-          9,
-          0
-        ],
-        "90": [
-          5,
-          0
-        ],
-        "93": [
-          14,
-          0
-        ],
-        "94": [
-          15,
-          0
-        ],
-        "95": [
-          12,
-          0
-        ],
-        "96": [
-          8,
-          0
-        ],
-        "101": [
-          6,
-          0
-        ],
-        "102": [
-          13,
-          0
-        ],
-        "103": [
-          14,
-          0
-        ],
-        "104": [
-          12,
-          0
-        ]
-      },
-      "name": "walk_right_aimdown"
-    },
-    "walk_right_aimup": {
-      "sprite_ids": [
-        134,
-        133,
-        130,
-        129,
-        144,
-        143,
-        142,
-        141,
-        136,
-        135
-      ],
-      "offsets": {
-        "129": [
-          14,
-          5
-        ],
-        "130": [
-          12,
-          5
-        ],
-        "133": [
-          9,
-          5
-        ],
-        "134": [
-          5,
-          5
-        ],
-        "135": [
-          14,
-          5
-        ],
-        "136": [
-          15,
-          5
-        ],
-        "141": [
-          12,
-          5
-        ],
-        "142": [
-          8,
-          5
-        ],
-        "143": [
-          6,
-          5
-        ],
-        "144": [
-          13,
-          5
-        ]
-      },
-      "name": "walk_right_aimup"
     }
   },
   "frames": {}
