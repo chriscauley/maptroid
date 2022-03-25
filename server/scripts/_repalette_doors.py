@@ -1,5 +1,4 @@
 #run once to regenerate all the different door sprites
-
 import _setup
 import cv2
 import numpy as np
@@ -10,6 +9,7 @@ from maptroid.icons import get_icons
 caps = get_icons('door_caps')
 blue_caps = get_icons('blue_caps')
 blue_doors = get_icons('blue_doors')
+opening = cv2.imread('static/sm/door_opening.png')
 
 def get_sorted_colors(image):
     out = []
@@ -51,5 +51,14 @@ for world, cap in blue_caps.items():
     results.append(world_caps)
     cv2.imwrite(f'static/sm/world_doors/{world}.png', world_caps)
 
+# color anmiations
+animations = []
+for ir, weapon_colors in enumerate(replacements):
+    recolored = opening.copy()
+    for i_color, weapon_color in enumerate(weapon_colors):
+        urcv.replace_color(recolored, cap_colors[i_color], weapon_color)
+    animations.append(recolored)
+
 cv2.imwrite('.media/trash/rainbow_caps.png', np.hstack(results))
+cv2.imwrite('.media/trash/rainbow_opening.png', np.hstack(animations))
 print('.media/trash/rainbow_caps.png')

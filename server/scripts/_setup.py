@@ -1,9 +1,11 @@
 import os
 import django
+import sys
+
+sys.path.append('.')
+
 os.environ['DJANGO_SETTINGS_MODULE'] = 'main.settings'
 django.setup()
-
-import sys
 
 from maptroid.models import World
 
