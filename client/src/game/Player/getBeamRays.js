@@ -13,11 +13,23 @@ const anglesByPointing = {
   undefined: Math.PI / 2,
 }
 
+const offsets_by_posture_pointing = {
+  [POSTURE.stand]: {
+    undefined: 0.4,
+    downward: 0.75,
+    upward: 0.75,
+    zenith: 0.8,
+  },
+  [POSTURE.crouch]: {
+    undefined: 0.1,
+    downward: 0.35,
+    upward: 0.5,
+    zenith: 0.55,
+  },
+}
+
 const getArmOffset = (player) => {
-  if (player.state.pointing === undefined) {
-    return player.state.posture === POSTURE.stand ? 3 / 16 : -0.5 + 1 / 16
-  }
-  return player.state.posture === POSTURE.stand ? 0.6 : 0.3
+  return offsets_by_posture_pointing[player.state.posture][player.state.pointing]
 }
 
 const getSpreadOffsets = (player) => {

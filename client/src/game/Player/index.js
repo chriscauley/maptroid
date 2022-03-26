@@ -338,6 +338,15 @@ export default class Player extends Controller {
     if (this.collisions.below) {
       // on ground
       if (Math.abs(dx) < 0.1) {
+        if (pointing === 'zenith') {
+          return ['_poses_' + dir, 1]
+        } else if (pointing === 'upward') {
+          return ['_poses_' + dir, 2]
+        } else if (pointing === 'downward') {
+          return ['_poses_' + dir, 3]
+        } else if (pointing === 'down') {
+          // TODO need to be able to shoot down from stainging
+        }
         const frame = getFrame(new Date().valueOf(), 3, breath_time)
         return ['stand' + '_' + dir, frame]
       } else {
@@ -363,6 +372,8 @@ export default class Player extends Controller {
   }
 
   drawSprite(ctx) {
+    const _ise = ctx.imageSmoothingEnabled
+    ctx.imageSmoothingEnabled = false
     const scale_factor = 1.6
     const { _width, height } = this.body.shapes[0]
     const [name, frame] = this._getSprite()
@@ -375,8 +386,6 @@ export default class Player extends Controller {
     ctx.fillRect(base_x, base_y, dw, dh)
     ctx.drawImage(img, sx, sy, sw, sh, base_x, base_y, dw, dh)
 
-    const _ise = ctx.imageSmoothingEnabled
-    ctx.imageSmoothingEnabled = true
     ctx.imageSmoothingEnabled = _ise
   }
 
