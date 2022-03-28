@@ -40,7 +40,7 @@ const BUTTON_TO_VERB = {
 
 const VERB_TO_BUTTON = invert(BUTTON_TO_VERB)
 
-const CONTROLLER = {
+const _CONTROLLER = {
   up: 'up',
   down: 'down',
   left: 'left',

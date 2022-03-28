@@ -2,12 +2,13 @@
 
 import p2 from 'p2'
 import { cloneDeep } from 'lodash'
+
 import Controller from './Controller'
+import drawSprite from './drawSprite'
 import { PLAYER_GROUP, SCENERY_GROUP, POSTURE } from '../constants'
 import inventory from '../inventory'
 import drawRay from '../drawRay'
 import getBeamRays from './getBeamRays'
-import PowerSuit from '@/views/PowerSuit/store'
 
 window.p2 = p2
 
@@ -16,11 +17,6 @@ const { vec2 } = p2
 // math helpers
 function lerp(factor, start, end) {
   return start + (end - start) * factor
-}
-
-// animation helper
-const getFrame = (time, count, duration) => {
-  return parseInt((count * (time % duration)) / duration)
 }
 
 export default class Player extends Controller {
@@ -317,77 +313,8 @@ export default class Player extends Controller {
     this.beam_rays = getBeamRays(this)
   }
 
-  _getSprite() {
-    const { pointing } = this.state
-    const breath_time = 16700 / 20
-    const [dx, _dy] = this.scaledVelocity
-    const dir = this.collisions.faceDir === -1 ? 'left' : 'right'
-    if (this.state.posture === POSTURE.ball) {
-      return ['ball_' + dir, getFrame(new Date().valueOf(), 8, 24000 / 30)]
-    } else if (this.state.posture === POSTURE.crouch) {
-      if (pointing === 'zenith') {
-        return ['_poses_' + dir, 4]
-      } else if (pointing === 'upward') {
-        return ['_poses_' + dir, 5]
-      } else if (pointing === 'downward') {
-        return ['_poses_' + dir, 6]
-      }
-      const frame = getFrame(new Date().valueOf(), 3, breath_time)
-      return ['crouch_' + dir, frame]
-    }
-    if (this.collisions.below) {
-      // on ground
-      if (Math.abs(dx) < 0.1) {
-        if (pointing === 'zenith') {
-          return ['_poses_' + dir, 1]
-        } else if (pointing === 'upward') {
-          return ['_poses_' + dir, 2]
-        } else if (pointing === 'downward') {
-          return ['_poses_' + dir, 3]
-        } else if (pointing === 'down') {
-          // TODO need to be able to shoot down from stainging
-        }
-        const frame = getFrame(new Date().valueOf(), 3, breath_time)
-        return ['stand' + '_' + dir, frame]
-      } else {
-        let aim = ''
-        if (pointing === 'zenith') {
-          // TODO this is just not allowed in vanilla so I need to make a sprite for it
-        } else if (pointing === 'upward') {
-          aim = '_aimup'
-        } else if (pointing === 'downward') {
-          aim = '_aimdown'
-        } else if (this.keys['shoot1'] || this.keys['shoot2']) {
-          aim = '_aim'
-        } else if (pointing === 'down') {
-          // TODO Vanilla only has shoot down while jumping
-        }
-
-        const cycle_time = 500
-        const frame = getFrame(new Date().valueOf(), 10, cycle_time)
-        return ['walk' + aim + '_' + dir, frame]
-      }
-    }
-    return ['crouch_left', 0]
-  }
-
-  drawSprite(ctx) {
-    const _ise = ctx.imageSmoothingEnabled
-    ctx.imageSmoothingEnabled = false
-    const { _width, height } = this.body.shapes[0]
-    const [name, frame] = this._getSprite()
-    const { img, sx, sy, sw, sh, offset_x } = PowerSuit.getAnimationParams(name, frame, true)
-    const dw = sw / 16
-    const dh = sh / 16
-    const base_y = -height / 2
-    const base_x = -offset_x / 16
-    ctx.drawImage(img, sx, sy, sw, sh, base_x, base_y, dw, dh)
-
-    ctx.imageSmoothingEnabled = _ise
-  }
-
   draw = (ctx) => {
-    this.drawSprite(ctx)
+    drawSprite(this, ctx)
     const [x, y] = this.body.position
     const { width, height } = this.body.shapes[0]
     ctx.lineWidth = 2 / this.game.zoom
