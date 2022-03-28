@@ -374,16 +374,13 @@ export default class Player extends Controller {
   drawSprite(ctx) {
     const _ise = ctx.imageSmoothingEnabled
     ctx.imageSmoothingEnabled = false
-    const scale_factor = 1.6
     const { _width, height } = this.body.shapes[0]
     const [name, frame] = this._getSprite()
-    const { img, sx, sy, sw, sh } = PowerSuit.getAnimationParams(name, frame, true)
-    const dw = (sw * scale_factor) / this.game.zoom
-    const dh = (sh * scale_factor) / this.game.zoom
+    const { img, sx, sy, sw, sh, offset_x } = PowerSuit.getAnimationParams(name, frame, true)
+    const dw = sw / 16
+    const dh = sh / 16
     const base_y = -height / 2
-    const base_x = -dw / 2
-    ctx.fillStyle = 'green'
-    ctx.fillRect(base_x, base_y, dw, dh)
+    const base_x = -offset_x / 16
     ctx.drawImage(img, sx, sy, sw, sh, base_x, base_y, dw, dh)
 
     ctx.imageSmoothingEnabled = _ise

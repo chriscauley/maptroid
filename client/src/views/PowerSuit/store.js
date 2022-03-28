@@ -92,23 +92,28 @@ const getAnimationParams = (name, index, flip) => {
   }
   const sprite_id = animation.sprite_ids[index]
   const [sx, sy, sw, sh] = state.data.rects[sprite_id]
-  return { img: flip ? state.flipped : state.img, sx, sy, sw, sh }
+  const offset_x = getOffset(animation, sprite_id)[0] + 5 // 5 px is from the 10px box used in aligning
+  return { img: flip ? state.flipped : state.img, sx, sy, sw, sh, offset_x }
+}
+
+const getOffset = (animation, sprite_id) => {
+  if (animation.preset === 'global') {
+    return animation.offsets[animation.sprite_ids[0]] || [0, 0]
+  } else if (animation.preset === 'center') {
+    const [_sx, _sy, width, height] = state.data.rects[sprite_id]
+    return [parseInt(width / 2 - 5), parseInt(height / 2 - 5)]
+  }
+  return animation.offsets[sprite_id] || [0, 0]
 }
 
 const getAnimation = (name) => {
   const sprite = state.data.animations[name]
   const frames = sprite.sprite_ids.map((sprite_id) => {
-    let offset = sprite.offsets[sprite_id] || [0, 0]
     const [_sx, _sy, width, height] = state.data.rects[sprite_id]
-    if (sprite.preset === 'global') {
-      offset = sprite.offsets[sprite.sprite_ids[0]] || [0, 0]
-    } else if (sprite.preset === 'center') {
-      offset = [parseInt(width / 2 - 5), parseInt(height / 2 - 5)]
-    }
     return {
       width,
       height,
-      offset,
+      offset: getOffset(sprite, sprite_id),
       sprite_id,
     }
   })

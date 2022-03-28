@@ -2000,6 +2000,10 @@
           4,
           11
         ],
+        "275": [
+          0,
+          0
+        ],
         "296": [
           5,
           0
@@ -2157,7 +2161,8 @@
           0
         ]
       },
-      "name": "crouch_right"
+      "name": "crouch_right",
+      "preset": "global"
     },
     "falling_left": {
       "sprite_ids": [
