@@ -160,9 +160,17 @@ export default {
       return [clientX - box.x, clientY - box.y].map((i) => Math.floor(i / 16))
     },
     click(event) {
-      const { tool } = this.tool_storage.state.selected
+      const { tool, variant } = this.tool_storage.state.selected
       const { editing_room } = this.$store.local.state
-      if (editing_room !== this.room.id && tool === 'edit_room') {
+      if (tool === 'rezone') {
+        if (!(event.shiftKey && event.ctrlKey)) {
+          this.$ui.alert('Error: you must hold shift + ctrl to use this tool')
+        } else {
+          const room = this.room
+          room.zone = variant
+          this.$store.room.save(room)
+        }
+      } else if (editing_room !== this.room.id && tool === 'edit_room') {
         this.$store.local.save({ editing_room: this.room.id })
       } else if (this.mode === 'item') {
         this.addItem(this._getMouseXY(event.clientX, event.clientY))
@@ -178,7 +186,9 @@ export default {
       this.$store.room.save(this.room).then(this.$store.route.refetchRooms)
     }, 500),
     drag(event) {
-      if (this.mode === 'overlap') {
+      if (this.tool_storage.state.selected.tool === 'rezone') {
+        return
+      } else if (this.mode === 'overlap') {
         const box = this.$el.getBoundingClientRect()
         const [x, y] = event._drag.xy
         if (inRange(x - box.x, 0, box.width) && inRange(y - box.y, 0, box.height)) {

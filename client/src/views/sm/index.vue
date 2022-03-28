@@ -4,9 +4,10 @@
     <template v-if="osd_store.viewer">
       <unrest-toolbar :storage="tool_storage" class="-topleft">
         <config-popper v-if="tool_storage.state.settings_open" :storage="tool_storage" />
-        <template v-if="$store.route.zone" #buttons>
+        <template #buttons>
           <overlap-dropdown />
           <cre-dropdown @highlight="(h) => (highlighted_rooms = h)" />
+          <rezone-dropdown :storage="tool_storage" />
         </template>
       </unrest-toolbar>
       <html-overlay :viewer="osd_store.viewer">
@@ -51,6 +52,7 @@ import OsdStore from './OsdStore'
 import OverlapDropdown from './OverlapDropdown.vue'
 import EditRoom from './EditRoom.vue'
 import SvgOverlay from './SvgOverlay.vue'
+import RezoneDropdown from './RezoneDropdown.vue'
 import RoomBox from './RoomBox.vue'
 import ToolStorage from './ToolStorage'
 import ZoneBox from './ZoneBox.vue'
@@ -74,6 +76,7 @@ export default {
     EditRoom,
     OverlapDropdown,
     SvgOverlay,
+    RezoneDropdown,
     RoomBox,
     ZoneBox,
   },

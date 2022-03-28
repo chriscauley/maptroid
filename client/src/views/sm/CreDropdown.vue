@@ -1,7 +1,7 @@
 <template>
   <unrest-dropdown class="btn -danger" v-if="items.length" :items="items">
     <i class="fa fa-exclamation-circle" />
-    {{ items.length }}
+    {{ items.length - 1 }}
   </unrest-dropdown>
 </template>
 
@@ -25,12 +25,22 @@ export default {
       let items = rooms.map((room) => {
         const block_map = this.$store.route.getRoomBlocks(room)
         const count = Object.values(block_map).filter((k) => MATCHES.includes(k)).length
-        return { count, room, id: room.id }
+        return { count, room, id: room.id, zone_id: room.zone }
       })
       items = items.filter((i) => i.count)
       items = sortBy(items, 'count')
       if (!items.length) {
         return []
+      }
+      if (!this.$store.route.zone) {
+        const count_by_zone = {}
+        items.forEach((i) => {
+          count_by_zone[i.zone_id] = (count_by_zone[i.zone_id] || 0) + 1
+        })
+        return this.$store.route.zones.map((zone) => ({
+          text: `${count_by_zone[zone.id]} - ${zone.name}`,
+          to: { params: { zone_slug: zone.slug } },
+        }))
       }
       return [
         {

@@ -314,9 +314,12 @@ $zone-colors: (
   }
 }
 
-.-tool-move_room .sm-room-svg,
-.-tool-edit_room .sm-room-svg {
-  display:none;
+.-tool-move_room,
+.-tool-edit_room,
+.-tool-rezone {
+  .sm-room-svg {
+    display:none;
+  }
 }
 
 .-layer-rooms .sm-room-svg path.-outer {
