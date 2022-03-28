@@ -32,6 +32,8 @@ def autocrop(image):
 
 UNKNOWN = None
 
+zone_xys = {}
+
 for zone in zones:
     if zone.slug.startswith('unknown'):
         UNKNOWN = zone
@@ -48,6 +50,7 @@ for zone in zones:
     old_size = zone_image.size
     zone_image = autocrop(zone_image)
     print(_path, old_size, zone_image.shape)
+    zone_xys[zone.slug] = {}
     if old_size != zone_image.size:
         cv2.imwrite(str(_path), zone_image)
     zone_images.append([zone, zone_image])
@@ -58,6 +61,7 @@ success = 0
 fails = 0
 
 for room in world.room_set.filter(zone__isnull=True): # TODO filter zone__isnull when done
+    room.zone = None
     room_path = LAYER_1 / room.key
     if not room_path.exists():
         print('skipping room', room.key)
@@ -73,12 +77,29 @@ for room in world.room_set.filter(zone__isnull=True): # TODO filter zone__isnull
         zh, zw = zone_image.shape
         if zh < gh or zw < gw:
             continue
-        matches = urcv.template.match(zone_image, gray, threshold=0.8)
-        if len(matches):
+        matches = urcv.template.match(zone_image, gray, threshold=0.85)
+        if len(matches) > 10:
+            new_matches = urcv.template.match(zone_image, gray, threshold=0.9)
+            if new_matches:
+                print('downmatching', room.key)
+                matches = new_matches
+        if len(matches) > 1:
+            copy = zone_image.copy()
+            urcv.draw.paste(copy, gray, 0, 0)
+            copy = cv2.cvtColor(copy, cv2.COLOR_GRAY2BGR)
+            for x, y, x2, y2 in matches:
+                cv2.rectangle(copy, (x, y), (x2, y2), (0,0,255), 3)
+            cv2.imwrite(f'.media/trash/overmatched__{room.key}', copy)
+        for match in matches:
+            x, y, x2, y2 = match
+            x = round(x / 128)
+            y = round(y / 128)
+            if (x, y) in zone_xys[zone.slug]:
+                continue # already used
+            zone_xys[zone.slug][(x, y)] = True
             room.zone = zone
-            x, y = matches[0]
-            room.data['zone']['bounds'][0] = x // 128
-            room.data['zone']['bounds'][1] = y // 128
+            room.data['zone']['bounds'][0] = x
+            room.data['zone']['bounds'][1] = y
             room.data['zone']['raw'] = room.data['zone']['bounds']
             success += 1
             print('yay!', zone.slug, room.key, room.data['zone']['bounds'], len(matches))

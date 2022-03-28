@@ -85,13 +85,13 @@ def find_doors(image, world):
     gray = cv2.cvtColor(image, cv2.COLOR_BGRA2GRAY)
     for key, template in gray_icons.items():
         orientation = key.replace("door_", "")
-        xys = urcv.template.match(gray, template, threshold=0.85)
+        xywhs = urcv.template.match(gray, template, threshold=0.85)
         th, tw = template.shape
-        for x,y in xys:
+        for x, y, w, h in xywhs:
             door = image[y:y+th,x:x+tw]
             color = match_door_color(door, world)
 
-            matched_doors[(x, y)] = [int(x/16), int(y/16), orientation, color]
+            matched_doors[(x, y)] = [round(x/16), round(y/16), orientation, color]
     return matched_doors
 
 def draw_doors(image, doors, world, offset=[0, 0]):

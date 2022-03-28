@@ -132,10 +132,7 @@ def process_zone(zone):
             room_image.close()
         zone_image.save(dest)
         zone_image.close()
-        if zw > 70 or zh > 70:
-            print(f'WARNING: skippind dzi for {zone.name} because bounds are too large: {zw}x{zh}')
-        else:
-            png_to_dzi(dest)
+        png_to_dzi(dest)
 
     zone.normalize()
 
@@ -144,13 +141,17 @@ def process_zone(zone):
         if key.endswith('dzi'):
             zone.data.pop(key)
 
-    make_layered_zone_image(zone, ['layer-2', 'layer-1'], os.path.join(LAYER_DIR, f'{zone.slug}.png'))
-    make_layered_zone_image(zone, ['bts'], os.path.join(BTS_DIR, f'{zone.slug}.png'))
-    make_layered_zone_image(zone, ['plm_enemies'], os.path.join(PLM_DIR, f'{zone.slug}.png'))
+    zone_x, zone_y, zw, zh = zone.data['world']['bounds']
+    if zw > 70 or zh > 70:
+        print(f'WARNING: skipping dzis for {zone.name} because bounds are too large: {zw}x{zh}')
+    else:
+        make_layered_zone_image(zone, ['layer-2', 'layer-1'], os.path.join(LAYER_DIR, f'{zone.slug}.png'))
+        make_layered_zone_image(zone, ['bts'], os.path.join(BTS_DIR, f'{zone.slug}.png'))
+        make_layered_zone_image(zone, ['plm_enemies'], os.path.join(PLM_DIR, f'{zone.slug}.png'))
 
-    walls_dest = os.path.join(WALLS_DIR, f'{zone.slug}.png')
-    make_walls_image(zone, walls_dest)
-    png_to_dzi(walls_dest)
+        walls_dest = os.path.join(WALLS_DIR, f'{zone.slug}.png')
+        make_walls_image(zone, walls_dest)
+        png_to_dzi(walls_dest)
 
     zone.save()
 
