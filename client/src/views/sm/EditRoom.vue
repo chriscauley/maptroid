@@ -50,6 +50,8 @@ const Block = {
     'conveyor_up',
     'conveyor_right',
     'conveyor_left',
+    'samus-eater',
+    'samus-eater-flipped',
   ],
 }
 

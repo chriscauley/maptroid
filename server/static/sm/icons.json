@@ -146,5 +146,11 @@
       "y-faster",
       "ypr"
     ]
+  },
+  "samus_eaters": {
+    "size": [64, 32],
+    "icons": [
+      "samus_eater"
+    ]
   }
 }

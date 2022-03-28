@@ -198,7 +198,7 @@ export default ({ store }) => {
           range(h).forEach((dy) => (block_map[[x + dx, y + dy]] = _class))
         })
       })
-      Object.values(room.data.doors).forEach(([x, y, direction]) => {
+      Object.values(room.data.doors || {}).forEach(([x, y, direction]) => {
         doors_direction_to_dxys[direction].forEach(([dx, dy]) => {
           delete block_map[[x + dx, y + dy]]
         })

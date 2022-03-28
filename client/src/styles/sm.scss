@@ -42,7 +42,7 @@
     @apply absolute border-2 border-white cursor-pointer;
   }
   &.-highlight {
-    @apply border-4 border-red-300
+    outline: 4px solid red;
   }
 }
 
@@ -147,6 +147,15 @@ $block: shot crumble bomb missile super-missile power-bomb speed-booster grapple
       background-position: 0 $i * -100%;
     }
   }
+}
+
+.sm-block.-samus-eater, .sm-block.-samus-eater-flipped {
+  background-image: url('/static/sm/samus_eaters.png');
+  height: 2em;
+  width: 4em;
+}
+.sm-block.-samus-eater-flipped {
+  transform: scale(1, -1);
 }
 
 $block: empty block spike_misc spark exit switch_shot;
