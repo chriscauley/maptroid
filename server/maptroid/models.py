@@ -176,6 +176,7 @@ class SmileSprite(models.Model):
   category = models.CharField(max_length=16, choices=CATEGORIES, null=True, blank=True)
   COLORS = _choices(colors)
   color = models.CharField(max_length=16, choices=COLORS, null=True, blank=True)
+  template = models.BooleanField(default=False)
   __str__ = lambda self: self.type or self.image.path.split('/')[-1]
 
   @property

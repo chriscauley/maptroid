@@ -91,4 +91,4 @@ class SmileSprite(forms.ModelForm):
   readonly_fields = ['url']
   class Meta:
     model = SmileSprite
-    fields = ['type', 'category', 'modifier', 'color', 'layer']
+    fields = ['type', 'category', 'modifier', 'color', 'layer', 'template']
