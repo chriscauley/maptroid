@@ -119,16 +119,19 @@ export default class Room {
   }
 
   positionPlayer(player) {
-    this.game.p2_world.bodies.forEach((b) => b.updateAABB())
-    for (let screen of this.screens) {
-      for (let dxy of screen.edges) {
-        dxy = EDGE_STARTS[dxy]
-        player.body.position = vector.add(vector.times(screen.world_xy, 16), dxy)
-        player.body.updateAABB()
-        const collided_with = this.bodies.find((body) => body.aabb.overlaps(player.body.aabb))
-        if (!collided_with) {
-          return
-        }
+    const setPosition = (sxy, offset) => {
+      let dxy = sxy.split(',').map(Number)
+      dxy = [dxy[0], -dxy[1]]
+      dxy = vector.add(dxy, offset)
+      player.body.position = vector.add(vector.times(this.world_xy0, 16), dxy)
+      player.body.updateAABB()
+    }
+    for (let [sxy, type] of Object.entries(this.json.data.plm_overrides)) {
+      if (type === 'ship') {
+        return setPosition(sxy, [6, 1])
+      }
+      if (type === 'save-station') {
+        return setPosition(sxy, [1, 1.5])
       }
     }
     throw 'Unable to find initial player placement'
