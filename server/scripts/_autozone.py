@@ -67,6 +67,11 @@ for room in world.room_set.filter(zone__isnull=True): # TODO filter zone__isnull
         print('skipping room', room.key)
         continue
     raw_image = cv2.imread(str(room_path))
+    if np.sum(raw_image) == 0:
+        # some rooms are empty and this causes the match template function to eat up all the ram
+        room.zone = UNKNOWN
+        room.save()
+        continue
     scaled = urcv.transform.scale(raw_image, 0.5, interpolation= cv2.INTER_LINEAR)
     gray = cv2.cvtColor(scaled, cv2.COLOR_BGR2GRAY)
     inverted = np.invert(gray)
@@ -80,7 +85,7 @@ for room in world.room_set.filter(zone__isnull=True): # TODO filter zone__isnull
         matches = urcv.template.match(zone_image, gray, threshold=0.85)
         if len(matches) > 10:
             new_matches = urcv.template.match(zone_image, gray, threshold=0.9)
-            if new_matches:
+            if len(new_matches):
                 print('downmatching', room.key)
                 matches = new_matches
         if len(matches) > 1:

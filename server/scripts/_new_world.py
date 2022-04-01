@@ -3,9 +3,9 @@ from django.utils.text import slugify
 
 from maptroid.models import Zone, World
 
-NAME = 'Searching For Items'
+NAME = 'Mini'
 
-ZONE_NAMES = ['Crateria', 'Brinstar', 'Norfair', 'Maridia', 'Wrecked Ship', 'Maridia', 'Tourian']
+ZONE_NAMES = ['Crateria', 'Brinstar', 'Norfair', 'Wrecked Ship', 'Maridia', 'Tourian']
 
 # ZONE_NAMES = ['Krateia', 'Pinstar', 'Nerfair', 'Secret Base', 'Waridia', 'Unknown']
 
