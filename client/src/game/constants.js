@@ -33,5 +33,6 @@ export const POSTURE = {
   ball: 0,
   crouch: 1,
   stand: 2,
-  _heights: [14 / 16, 30 / 16, 42 / 16],
+  spin: 3,
+  _heights: [14 / 16, 30 / 16, 42 / 16, 24 / 16],
 }

@@ -69,9 +69,12 @@ export default (function() {
   const cache = {}
 
   return (player, _origin) => {
-    const { pointing } = player.state
+    const { pointing, posture } = player.state
     const key = `${pointing}.${player.state.posture}.${player.collisions.faceDir}.${_origin}`
     if (!cache[key]) {
+      if (posture === POSTURE.ball || posture === POSTURE.spin) {
+        return []
+      }
       const angle = player.collisions.faceDir * anglesByPointing[pointing]
       const arm_offset = getArmOffset(player)
       // const [x_offset, y_offset] = [0.1*Math.cos(angle), 0.1*Math.sin(angle)]

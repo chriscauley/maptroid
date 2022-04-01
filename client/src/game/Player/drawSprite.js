@@ -4,43 +4,50 @@ import { POSTURE } from '../constants'
 import PowerSuit from '@/views/PowerSuit/store'
 
 // animation helper
-const getFrame = (time, count, duration) => {
+const getFrame = (time, count, factor = 1) => {
+  const duration = (count * factor * 1000) / 24
   return parseInt((count * (time % duration)) / duration)
 }
 
+const _poses = {
+  zenith: 1,
+  upward: 2,
+  downward: 3,
+  down: undefined, // TODO need to be able to shoot down from stainging
+}
+
 const _getSprite = (player) => {
-  const { pointing } = player.state
-  const breath_time = 16700 / 20
+  const { pointing, posture } = player.state
   const [dx, _dy] = player.scaledVelocity
-  const dir = player.collisions.faceDir === -1 ? 'left' : 'right'
-  if (player.state.posture === POSTURE.ball) {
-    return ['ball_' + dir, getFrame(new Date().valueOf(), 8, 24000 / 30)]
-  } else if (player.state.posture === POSTURE.crouch) {
+  const dir = player.collisions.faceDir === -1 ? '_left' : '_right'
+  if (posture === POSTURE.ball) {
+    return ['ball' + dir, getFrame(new Date().valueOf(), 8)]
+  } else if (posture === POSTURE.crouch) {
     if (pointing === 'zenith') {
-      return ['_poses_' + dir, 4]
+      return ['_poses' + dir, 4]
     } else if (pointing === 'upward') {
-      return ['_poses_' + dir, 5]
+      return ['_poses' + dir, 5]
     } else if (pointing === 'downward') {
-      return ['_poses_' + dir, 6]
+      return ['_poses' + dir, 6]
     }
-    const frame = getFrame(new Date().valueOf(), 3, breath_time)
-    return ['crouch_' + dir, frame]
+
+    // crouching + breathing
+    const frame = getFrame(new Date().valueOf(), 3)
+    return ['crouch' + dir, frame]
   }
   if (player.collisions.below) {
     // on ground
     if (Math.abs(dx) < 0.1) {
-      if (pointing === 'zenith') {
-        return ['_poses_' + dir, 1]
-      } else if (pointing === 'upward') {
-        return ['_poses_' + dir, 2]
-      } else if (pointing === 'downward') {
-        return ['_poses_' + dir, 3]
-      } else if (pointing === 'down') {
-        // TODO need to be able to shoot down from stainging
+      // not moving
+      if (pointing) {
+        return ['_poses' + dir, _poses[pointing]]
       }
-      const frame = getFrame(new Date().valueOf(), 3, breath_time)
-      return ['stand' + '_' + dir, frame]
+
+      // standing + breathing
+      const frame = getFrame(new Date().valueOf(), 3)
+      return ['stand' + dir, frame]
     } else {
+      // running
       let aim = ''
       if (pointing === 'zenith') {
         // TODO this is just not allowed in vanilla so I need to make a sprite for it
@@ -54,10 +61,25 @@ const _getSprite = (player) => {
         // TODO Vanilla only has shoot down while jumping
       }
 
-      const cycle_time = 500
-      const frame = getFrame(new Date().valueOf(), 10, cycle_time)
-      return ['walk' + aim + '_' + dir, frame]
+      const frame = getFrame(new Date().valueOf(), 10)
+      return ['walk' + aim + dir, frame]
     }
+  } else {
+    if (posture === POSTURE.spin) {
+      const frame = getFrame(new Date().valueOf(), 8)
+      return ['spinjump' + dir, frame]
+    }
+    if (pointing === 'downward') {
+      return ['jump_aimdown' + dir, 3]
+    } else if (pointing === 'upward') {
+      return ['jump_aimup' + dir, 3]
+    } else if (pointing === 'down') {
+      return ['_poses' + dir, 8]
+    } else if (pointing === 'zenith') {
+      return ['_poses' + dir, 9]
+    }
+    // in air
+    return ['falling' + dir, 2]
   }
   return ['crouch_left', 0]
 }
@@ -67,11 +89,14 @@ export default (player, ctx) => {
   ctx.imageSmoothingEnabled = false
   const { _width, height } = player.body.shapes[0]
   const [name, frame] = _getSprite(player)
-  const { img, sx, sy, sw, sh, offset_x } = PowerSuit.getAnimationParams(name, frame, true)
+  const { img, sx, sy, sw, sh, offset_x, center } = PowerSuit.getAnimationParams(name, frame, true)
   const dw = sw / 16
   const dh = sh / 16
-  const base_y = -height / 2
   const base_x = -offset_x / 16
+  let base_y = -height / 2
+  if (center) {
+    base_y = -sh / 16 / 2
+  }
   ctx.drawImage(img, sx, sy, sw, sh, base_x, base_y, dw, dh)
   ctx.imageSmoothingEnabled = _ise
 }

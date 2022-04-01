@@ -64,15 +64,15 @@ export default class Player extends Controller {
     const {
       accelerationTimeAirborne = 0,
       accelerationTimeGrounded = 0.1,
-      moveSpeed = 12,
+      moveSpeed = 10.2,
       wallSlideSpeedMax = 3,
       wallStickTime = 0.25,
       wallJumpClimb = [20, 20], // holding towards wall
       wallLeap = [20, 20], // holding away from wall
       wallJumpOff = [20, 20], // holding neither
-      timeToJumpApex = 0.4,
+      timeToJumpApex = 1.533 / 2,
       tech = { bomb_linked: true, bomb_triggered: true, e_tanks: 0 },
-      maxJumpHeight = 4.2,
+      maxJumpHeight = 7,
       minJumpHeight = 1,
       velocityXSmoothing = 0.2,
       velocityXMin = 0.5,
@@ -157,6 +157,9 @@ export default class Player extends Controller {
   }
 
   setPosture(posture) {
+    if (posture === this.state.posture) {
+      return
+    }
     this.state.posture = posture
     const height = POSTURE._heights[posture]
     const old_height = this.body.shapes[0].height
@@ -168,8 +171,8 @@ export default class Player extends Controller {
         collisionGroup: PLAYER_GROUP,
       }),
     )
-    if (height > old_height) {
-      this.body.position[1] += height - old_height
+    if (this.collisions.below) {
+      this.body.position[1] += (height - old_height) / 2
     }
   }
 
@@ -204,7 +207,7 @@ export default class Player extends Controller {
   }
 
   isWallsliding() {
-    if (this.state.posture !== POSTURE.stand) {
+    if (this.state.posture !== POSTURE.spin) {
       return false
     }
     const { collisions, velocity } = this
@@ -227,16 +230,6 @@ export default class Player extends Controller {
     }
 
     const wallDirX = collisions.left ? -1 : 1
-    const targetVelocityX = input[0] * this.moveSpeed // TODO issue #1
-
-    let smoothing = this.velocityXSmoothing
-    smoothing *= collisions.below ? this.accelerationTimeGrounded : this.accelerationTimeAirborne
-    const factor = 1 - Math.pow(smoothing, deltaTime)
-    velocity[0] = lerp(factor, velocity[0], targetVelocityX)
-    if (Math.abs(velocity[0]) < this.velocityXMin) {
-      velocity[0] = 0
-    }
-
     const wallSliding = this.isWallsliding()
 
     if (wallSliding) {
@@ -274,6 +267,15 @@ export default class Player extends Controller {
       } else if (collisions.below) {
         // can only jump if standing on something
         velocity[1] = this.maxJumpVelocity
+        if (keys.right && !collisions.right) {
+          this.setPosture(POSTURE.spin)
+        } else if (keys.left && !collisions.left) {
+          this.setPosture(POSTURE.spin)
+        }
+      }
+    } else if (collisions.below || keys.up || keys.down) {
+      if (this.state.posture === POSTURE.spin) {
+        this.setPosture(POSTURE.stand)
       }
     }
 
@@ -282,6 +284,19 @@ export default class Player extends Controller {
       if (velocity[1] > this.minJumpVelocity) {
         velocity[1] = this.minJumpVelocity
       }
+    }
+
+    let targetVelocityX = input[0] * this.moveSpeed // TODO issue #1
+    if (this.state.posture === POSTURE.spin && targetVelocityX === 0) {
+      targetVelocityX = velocity[0]
+    }
+
+    let smoothing = this.velocityXSmoothing
+    smoothing *= collisions.below ? this.accelerationTimeGrounded : this.accelerationTimeAirborne
+    const factor = 1 - Math.pow(smoothing, deltaTime)
+    velocity[0] = lerp(factor, velocity[0], targetVelocityX)
+    if (Math.abs(velocity[0]) < this.velocityXMin) {
+      velocity[0] = 0
     }
 
     this._blast_velocity.forEach((blast_count, i) => {

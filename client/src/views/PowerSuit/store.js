@@ -90,10 +90,14 @@ const getAnimationParams = (name, index, flip) => {
   if (!animation) {
     throw `Unable to find animation for ${name}`
   }
+  if (index > animation.sprite_ids.length) {
+    throw `index=${index} out of range for animation name=${name}`
+  }
   const sprite_id = animation.sprite_ids[index]
   const [sx, sy, sw, sh] = state.data.rects[sprite_id]
   const offset_x = getOffset(animation, sprite_id)[0] + 5 // 5 px is from the 10px box used in aligning
-  return { img: flip ? state.flipped : state.img, sx, sy, sw, sh, offset_x }
+  const center = animation.preset === 'center'
+  return { img: flip ? state.flipped : state.img, sx, sy, sw, sh, offset_x, center }
 }
 
 const getOffset = (animation, sprite_id) => {
