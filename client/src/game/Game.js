@@ -181,7 +181,7 @@ export default class Game extends p2.EventEmitter {
     if (body._entity?.draw) {
       body._entity.draw(this.ctx)
     } else if (s instanceof p2.Box) {
-      this.ctx.fillRect(-s.width / 2, -s.height / 2, s.width, s.height)
+      this.ctx.fillRect(-s.width / 2, -s.height / 2, s.width, s.height) // yflip
     } else if (s instanceof p2.Circle) {
       this.ctx.beginPath()
       this.ctx.arc(0, 0, s.radius, 0, 2 * Math.PI)
@@ -215,7 +215,7 @@ export default class Game extends p2.EventEmitter {
     // goes from top to bottom, while physics does the opposite.
     this.ctx.save()
     this.ctx.translate(width / 2, height / 2) // Translate to the center
-    this.ctx.scale(this.zoom, -this.zoom) // Zoom in and flip y axis
+    this.ctx.scale(this.zoom, -this.zoom) // Zoom in and flip y axis // yflip
 
     if (this.player) {
       const { body } = this.player
@@ -238,7 +238,7 @@ export default class Game extends p2.EventEmitter {
       const zoom = this.zoom
       const [mouse_x, mouse_y] = this.mouse.canvas_xy
       const x = mouse_x - (0.5 * width) / zoom - this.cameraPos[0]
-      const y = mouse_y + (0.5 * height) / zoom - this.cameraPos[1]
+      const y = mouse_y + (0.5 * height) / zoom - this.cameraPos[1] // yflip
       this.mouse._world_xy = [x, y]
       this.mouse.world_xy = [Math.floor(x), Math.floor(y)]
     }

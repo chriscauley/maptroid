@@ -164,6 +164,7 @@ export default class Controller extends RaycastController {
           velocity[0] = (velocity[1] / Math.tan(collisions.slopeAngle)) * sign(velocity[0])
         }
 
+        // yflip
         if (directionY === -1) {
           this.debounceCollision([0, -1])
           collisions.below = true
@@ -200,6 +201,7 @@ export default class Controller extends RaycastController {
     const moveDistance = Math.abs(velocity[0])
     const climbVelocityY = Math.sin(slopeAngle) * moveDistance
 
+    // yflip
     if (velocity[1] <= climbVelocityY) {
       velocity[1] = climbVelocityY
       velocity[0] = Math.cos(slopeAngle) * moveDistance * sign(velocity[0])
@@ -228,7 +230,7 @@ export default class Controller extends RaycastController {
             const moveDistance = Math.abs(velocity[0])
             const descendVelocityY = Math.sin(slopeAngle) * moveDistance
             velocity[0] = Math.cos(slopeAngle) * moveDistance * sign(velocity[0])
-            velocity[1] -= descendVelocityY
+            velocity[1] -= descendVelocityY // yflip
 
             collisions.slopeAngle = slopeAngle
             collisions.descendingSlope = true

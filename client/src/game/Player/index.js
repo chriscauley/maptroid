@@ -95,6 +95,7 @@ export default class Player extends Controller {
       velocityXMin,
     })
 
+    // yflip
     this._gravity = this.gravity = -(2 * maxJumpHeight) / Math.pow(timeToJumpApex, 2)
     this.maxJumpVelocity = Math.abs(this.gravity) * timeToJumpApex
     this.minJumpVelocity = Math.sqrt(2 * Math.abs(this.gravity) * minJumpHeight)
@@ -211,12 +212,14 @@ export default class Player extends Controller {
       return false
     }
     const { collisions, velocity } = this
+    // yflip
     return (collisions.left || collisions.right) && !collisions.below && velocity[1] < 0
   }
 
   update(deltaTime) {
     const { collisions, velocity, keys } = this
     const input = [(keys.right ? 1 : 0) - (keys.left ? 1 : 0), 0]
+    // yflip
     if (this.terminalVelocity && velocity[1] < this.terminalVelocity) {
       // deltaTime was spent falling faster than terminalVelocity
       this.body.position[1] += deltaTime * this.terminalVelocity - deltaTime * velocity[1]
@@ -225,14 +228,14 @@ export default class Player extends Controller {
     }
     this._lastY = this.body.position[1]
 
-    if (velocity[1] > this.terminalVelocity) {
+    if (velocity[1] > this.terminalVelocity) { // yflip
       this.gravity = this._gravity
     }
 
     const wallDirX = collisions.left ? -1 : 1
     const wallSliding = this.isWallsliding()
 
-    if (wallSliding) {
+    if (wallSliding) { // yflip
       if (velocity[1] < -this.wallSlideSpeedMax) {
         velocity[1] = -this.wallSlideSpeedMax
       }
@@ -253,7 +256,7 @@ export default class Player extends Controller {
     if (this._requestJump) {
       this._requestJump = false
 
-      if (wallSliding) {
+      if (wallSliding) { // yflip
         if (wallDirX === input[0]) {
           velocity[0] = -wallDirX * this.wallJumpClimb[0]
           velocity[1] = this.wallJumpClimb[1]
@@ -281,6 +284,7 @@ export default class Player extends Controller {
 
     if (this._requestUnJump) {
       this._requestUnJump = false
+      // yflip
       if (velocity[1] > this.minJumpVelocity) {
         velocity[1] = this.minJumpVelocity
       }
@@ -309,7 +313,7 @@ export default class Player extends Controller {
           // because it's trying to match the arrows for motion, x blasts get super damped out
           blast_count *= 2
         }
-        const new_v = sign * Math.sqrt((blast_count + 0.2) * -2 * this.gravity)
+        const new_v = sign * Math.sqrt((blast_count + 0.2) * -2 * this.gravity) // yflip
         const old_v = velocity[i]
         if (Math.sign(old_v) !== Math.sign(new_v) || Math.abs(new_v) > Math.abs(old_v)) {
           velocity[i] = new_v
@@ -318,6 +322,7 @@ export default class Player extends Controller {
     })
     this._blast_velocity = [0, 0]
 
+    // yflip
     velocity[1] += this.gravity * deltaTime
     vec2.scale(this.scaledVelocity, velocity, deltaTime)
     this.move(this.scaledVelocity, input)

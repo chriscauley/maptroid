@@ -121,7 +121,7 @@ export default class Room {
   positionPlayer(player) {
     const setPosition = (sxy, offset) => {
       let dxy = sxy.split(',').map(Number)
-      dxy = [dxy[0], -dxy[1]]
+      dxy = [dxy[0], -dxy[1]] // yflip
       dxy = vector.add(dxy, offset)
       player.body.position = vector.add(vector.times(this.world_xy0, 16), dxy)
       player.body.updateAABB()
