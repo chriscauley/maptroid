@@ -1,1 +1,32 @@
-{"template_32": {"width": 32, "heights": [16], "icons": ["save-station"]}}
+{
+  "template_188": [
+    [
+      "ship",
+      188,
+      80,
+      0
+    ]
+  ],
+  "template_64": [
+    [
+      "samus-eater",
+      64,
+      32,
+      0
+    ],
+    [
+      "samus-eater_flipped",
+      64,
+      32,
+      32
+    ]
+  ],
+  "template_32": [
+    [
+      "save-station",
+      32,
+      16,
+      0
+    ]
+  ]
+}

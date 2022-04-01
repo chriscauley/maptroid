@@ -192,6 +192,15 @@ export default ({ store }) => {
           })
         })
       })
+
+      // Samus eaters are recorded in the cre from smile exports
+      Object.entries(room.data.plm_overrides || {}).map(([sxy, value]) => {
+        if (value.startsWith('samus-eater')) {
+          const [x, y] = sxy.split(',').map(Number)
+          range(4).forEach((dx) => range(2).forEach((dy) => delete block_map[[x + dx, y + dy]]))
+        }
+      })
+
       room.data.cre_overrides?.forEach(([x, y, w, h, name]) => {
         const _class = `sm-block -${name}`
         range(w).forEach((dx) => {

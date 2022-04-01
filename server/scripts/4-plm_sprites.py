@@ -8,6 +8,8 @@ import unrest_image as img
 from maptroid.models import Room, SmileSprite, SpriteMatcher
 from maptroid.utils import mkdir
 
+template_sprites = SmileSprite.objects.filter(template=True).values_list('type', flat=True)
+
 def extract_sprites(image, smile_id):
   pixels = 0
   x_max = len(image[0])
@@ -99,6 +101,11 @@ def main():
     for s, xy in zip(sprites, xys):
       sprite, new = matcher.get_or_create_from_image(s, 'plm')
       room.data['plm_sprites'].append([sprite.id, [round(i / 16) for i in xy]])
+      if sprite.type in template_sprites:
+        if 'plm' not in room.data:
+          room.data['plm_overrides'] = {}
+        x , y = [round(i / 16) for i in xy]
+        room.data['plm_overrides'][f'{x},{y}'] = sprite.type
       if new:
         print("new sprite", sprite)
     room.save()

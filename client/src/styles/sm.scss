@@ -1,4 +1,6 @@
+@use "sass:math";
 @use "sass:color";
+@use "sass:list";
 @import "./variables.scss";
 
 .edit-room .modal-content {
@@ -20,7 +22,7 @@
 
 .sm-room-box {
   background-size: cover;
-  &.-mode-overlap, &.-mode-item, &.-mode-block {
+  &.-mode-overlap, &.-mode-item, &.-mode-block, &.-mode-plm {
     position: relative;
   }
   canvas {
@@ -39,7 +41,8 @@
     pointer-events: none;
   }
   &__override {
-    @apply absolute border-2 border-white cursor-pointer;
+    @apply absolute cursor-pointer;
+    outline: 2px solid white;
   }
   &.-highlight {
     outline: 4px solid red;
@@ -149,13 +152,20 @@ $block: shot crumble bomb missile super-missile power-bomb speed-booster grapple
   }
 }
 
-.sm-block.-samus-eater, .sm-block.-samus-eater-flipped {
-  background-image: url('/static/sm/samus_eaters.png');
-  height: 2em;
-  width: 4em;
-}
-.sm-block.-samus-eater-flipped {
-  transform: scale(1, -1);
+@each $template-name, $sprites in $template_sprites {
+  $y_offset: 0;
+  @each $tuple in $sprites {
+    $name: list.nth($tuple, 1);
+    $width: list.nth($tuple, 2);
+    $height: list.nth($tuple, 3);
+    $y_offset: list.nth($tuple, 4);
+    .sm-block.-#{$name} {
+      background-image: url("/static/sm/icons/#{$template-name}.png");
+      background-position: 0 #{$y_offset}px;
+      height: math.div(1em * $height, 16);
+      width: math.div(1em * $width, 16);
+    }
+  }
 }
 
 $block: empty block spike_misc spark exit switch_shot;

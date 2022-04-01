@@ -21,6 +21,14 @@
         @click.stop="deleteOverride(override.id)"
       />
     </template>
+    <template v-if="mode == 'plm'">
+      <div
+        v-for="block in plm_blocks"
+        v-bind="block.attrs"
+        :key="block.id"
+        @click.stop="deletePlm(block.xy)"
+      />
+    </template>
     <div v-if="drag_bounds" v-bind="drag_bounds_attrs" />
   </div>
 </template>
@@ -28,6 +36,13 @@
 <script>
 import { debounce, inRange } from 'lodash'
 import vec from '@/lib/vec'
+import template_sprites from '@/../../server/static/sm/icons/template_sprites.json'
+
+export const plms = {}
+
+Object.values(template_sprites).forEach((sprite_list) => {
+  sprite_list.forEach(([type, width, height]) => (plms[type] = { type, width, height }))
+})
 
 export default {
   inject: ['osd_store', 'tool_storage'],
@@ -58,7 +73,7 @@ export default {
     },
     style() {
       const [x, y, width, height] = this.room.data.zone.bounds
-      if (['item', 'overlap', 'block'].includes(this.mode)) {
+      if (['item', 'overlap', 'block', 'plm'].includes(this.mode)) {
         return {
           height: `${height * 256}px`,
           width: `${width * 256}px`,
@@ -101,6 +116,25 @@ export default {
           },
         },
       }))
+    },
+    plm_blocks() {
+      const room_width = this.room.data.zone.bounds[2] * 16
+      return Object.entries(this.room.data.plm_overrides || {}).map(([xy, type]) => {
+        const [x, y] = xy.split(',').map((i) => Number(i))
+        const id = room_width * y + x
+        return {
+          id,
+          xy,
+          attrs: {
+            class: `sm-block -${type} sm-room-box__override`,
+            style: {
+              left: `${16 * x}px`,
+              position: 'absolute',
+              top: `${16 * y}px`,
+            },
+          },
+        }
+      })
     },
     blocks() {
       const room_width = this.room.data.zone.bounds[2] * 16
