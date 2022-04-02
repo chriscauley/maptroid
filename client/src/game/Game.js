@@ -45,6 +45,7 @@ export default class Game extends p2.EventEmitter {
       ui: [], // random crap to draw on canvas
       actions: {}, // input map
       paused: true,
+      active_rooms: [],
     })
 
     this.ctx.lineWidth = 1 / this.zoom
@@ -68,10 +69,18 @@ export default class Game extends p2.EventEmitter {
     this.p2_world.on('postStep', () => {
       this.player.update(this.p2_world.lastTimeStep)
       const { aabb } = this.player.body
-      this.current_room.edges.forEach((body) => {
-        if (body.aabb.overlaps(aabb)) {
-          // console.log(body.position.toString())
-        }
+      this.active_rooms.forEach((room) => {
+        room.edges.forEach((body) => {
+          if (body.aabb.overlaps(aabb)) {
+            const target_room = this.world_controller.room_map[body._target_xy]
+            if (target_room) {
+              target_room.bindGame(this)
+              window._target_room = target_room
+            } else {
+              console.error('no room at', body._target_xy)
+            }
+          }
+        })
       })
     })
     this.player?.on('collide', (_result) => {

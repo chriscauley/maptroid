@@ -44,7 +44,7 @@ const _getSprite = (player) => {
       }
 
       // standing + breathing
-      const frame = getFrame(new Date().valueOf(), 3)
+      const frame = getFrame(new Date().valueOf(), 3, 9)
       return ['stand' + dir, frame]
     } else {
       // running

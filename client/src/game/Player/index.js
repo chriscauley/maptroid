@@ -228,14 +228,16 @@ export default class Player extends Controller {
     }
     this._lastY = this.body.position[1]
 
-    if (velocity[1] > this.terminalVelocity) { // yflip
+    if (velocity[1] > this.terminalVelocity) {
+      // yflip
       this.gravity = this._gravity
     }
 
     const wallDirX = collisions.left ? -1 : 1
     const wallSliding = this.isWallsliding()
 
-    if (wallSliding) { // yflip
+    if (wallSliding) {
+      // yflip
       if (velocity[1] < -this.wallSlideSpeedMax) {
         velocity[1] = -this.wallSlideSpeedMax
       }
@@ -256,7 +258,8 @@ export default class Player extends Controller {
     if (this._requestJump) {
       this._requestJump = false
 
-      if (wallSliding) { // yflip
+      if (wallSliding) {
+        // yflip
         if (wallDirX === input[0]) {
           velocity[0] = -wallDirX * this.wallJumpClimb[0]
           velocity[1] = this.wallJumpClimb[1]

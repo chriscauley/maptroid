@@ -2,7 +2,7 @@ import { cloneDeep } from 'lodash'
 import { vector } from '@unrest/geo'
 
 import Brick from './Brick'
-import { SCENERY_GROUP, BULLET_GROUP, PLAYER_GROUP, DXYS } from './constants'
+import { SCENERY_GROUP, BULLET_GROUP, PLAYER_GROUP } from './constants'
 
 // DEPRECATED this is an old way to load rooms from string. Might be useful in tests
 export const fromString = (string, options = {}) => {
@@ -33,21 +33,6 @@ export const fromString = (string, options = {}) => {
   return new Room(options)
 }
 
-// TODO needs yflip(?)
-const EDGE_BOUNDS = {
-  '1,0': [15.1, -16, 0.9, 16], // YFLIP
-  '-1,0': [0, -16, 0.9, 16], // YFLIP
-  '0,1': [0, -0.9, 16, 0.9], // YFLIP
-  '0,-1': [0, -16, 16, 0.9], // YFLIP
-}
-
-const EDGE_STARTS = {
-  '1,0': [14.5, -8], // YFLIP
-  '-1,0': [1.5, -8], // YFLIP
-  '0,1': [8, -1.5], // YFLIP
-  '0,-1': [8, -14.5], // YFLIP
-}
-
 const _yflip = (xy) => [xy[0], -xy[1]] // YFLIP
 
 export default class Room {
@@ -61,14 +46,10 @@ export default class Room {
     const screen_xys = json.data.geometry.screens.map((room_xy) =>
       vector.add(_yflip(room_xy), this.world_xy0),
     )
-    const _screen_exists = {}
-    screen_xys.forEach((xy) => (_screen_exists[xy] = true))
-    this.screens = screen_xys.map((world_xy) => {
-      return {
-        world_xy,
-        edges: DXYS.filter((dxy) => !_screen_exists[vector.add(dxy, world_xy)]),
-      }
-    })
+
+    // TODO this used to be used to figure out exits
+    this.screens = screen_xys.map((world_xy) => ({ world_xy }))
+
     this.static_shapes = []
     const _xy16 = [16 * this.world_xy0[0], 16 * this.world_xy0[1]]
     json.data.geometry.inner.forEach((geo) => {
@@ -82,16 +63,50 @@ export default class Room {
     })
   }
 
-  bindGame(game) {
-    this.game = game
-    this.bodies = []
+  _addEdges() {
+    const [room_x, room_y] = this.world_xy0
     this.edges = []
+    this.json.data.cre_hex.exit.forEach(([x, y, width, height]) => {
+      let target_dxy
+      if (x % 16 === 15) {
+        x -= 3
+        width += 3
+        target_dxy = [1, 0]
+      } else if (x % 16 === 0) {
+        width += 3
+        target_dxy = [-1, 0]
+      } else if (y % 16 === 0) {
+        height += 3
+        target_dxy = [0, 1]
+      } else if (y % 16 === 15) {
+        y -= 3
+        height += 3
+        target_dxy = [0, -1]
+      } else {
+        console.warn('cannot place exit', x, y, width, height)
+        return
+      }
+      const edge_x = 16 * room_x + x
+      const edge_y = 16 * room_y - y - height // yflip
+      const center_x = edge_x + width / 2
+      const center_y = edge_y + height / 2
+      const options = { _color: 'rgba(255, 128, 128, 0.5)', collisionResponse: false }
+      const body = this.game.addStaticBox([center_x, center_y, width, height], options)
+      this.bodies.push(body)
+      const screen_xy = vector.add(this.world_xy0, [parseInt(x / 16), parseInt(-y / 16)])
+      body._target_xy = vector.add(screen_xy, target_dxy)
+      this.edges.push(body)
+    })
+  }
+
+  _addBodies() {
+    this.bodies = []
     this.bricks = []
 
     // TODO populate bricks from json
     // Add bricks
     this.bricks.forEach(({ x, y, type }) => {
-      const brick = new Brick({ game, x, y, type })
+      const brick = new Brick({ game: this.game, x, y, type })
       this.bodies.push(brick.body)
     })
 
@@ -99,23 +114,18 @@ export default class Room {
     const shape_options = { collisionMask, collisionGroup: SCENERY_GROUP }
     // Add bts shapes
     this.static_shapes.forEach((shape) => {
-      this.bodies.push(game.addStaticShape(shape.exterior, shape_options))
+      this.bodies.push(this.game.addStaticShape(shape.exterior, shape_options))
     })
+  }
 
-    // Add edges
-    this.screens.forEach((screen) => {
-      const options = { _color: 'rgba(255, 128, 128, 0.5)', collisionResponse: false }
-      const [x, y] = screen.world_xy
-      screen.edges.forEach((dxy) => {
-        const [edge_x, edge_y, width, height] = EDGE_BOUNDS[dxy]
-        const center_x = 16 * x + edge_x + width / 2
-        const center_y = 16 * y + edge_y + height / 2
-
-        const body = game.addStaticBox([center_x, center_y, width, height], options)
-        this.bodies.push(body)
-        this.edges.push(body)
-      })
-    })
+  bindGame(game) {
+    if (this.game) {
+      return
+    }
+    game.active_rooms.push(this)
+    this.game = game
+    this._addBodies()
+    this._addEdges()
   }
 
   positionPlayer(player) {
