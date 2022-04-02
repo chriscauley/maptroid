@@ -1,5 +1,5 @@
 <template>
-  <code id="debug" style="display: flex">
+  <code id="debug" class="debug-game">
     <div v-for="(column, ic) in state" :key="ic">
       <div v-for="(row, key) in column" :key="key">{{ key }}: {{ pprint(row) }}</div>
     </div>

@@ -34,7 +34,7 @@ export default class Game extends p2.EventEmitter {
     // Init canvas
     Object.assign(this, {
       cameraPos: [0, 0],
-      zoom: 25,
+      zoom: 32,
       entities: {},
       background_entities: [],
       TIMEOUT_ID: 1,
