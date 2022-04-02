@@ -35,6 +35,9 @@ export default {
           a: aimdown,
           z: shoot1,
           x: jump,
+          '+,=': () => this.game.adjustZoom(1),
+          '-,_': () => this.game.adjustZoom(-1),
+          0: () => (this.game.zoom = 32),
         })
       }
       return mousetrap

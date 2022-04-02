@@ -1,3 +1,4 @@
+import { clamp } from 'lodash'
 import p2 from 'p2'
 
 import useAssets from './useAssets'
@@ -325,5 +326,11 @@ export default class Game extends p2.EventEmitter {
   foregroundEntity(entity) {
     this.background_entities = this.background_entities.filter((e) => e.id !== entity.id)
     this.p2_world.addBody(entity.body)
+  }
+
+  adjustZoom(delta) {
+    const levels = [2, 4, 8, 16, 32, 64, 128]
+    const index = clamp(levels.indexOf(this.zoom) + delta, 0, levels.length - 1)
+    this.zoom = levels[index]
   }
 }
