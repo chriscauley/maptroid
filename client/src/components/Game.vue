@@ -1,8 +1,8 @@
 <template>
   <canvas
     id="game-canvas"
-    width="1024"
-    height="768"
+    width="1200"
+    height="800"
     ref="canvas"
     @click="click"
     @mousemove="mousemove"
