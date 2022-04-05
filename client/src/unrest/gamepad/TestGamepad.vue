@@ -80,6 +80,9 @@ const BIN_SIZE = 10
 const DEGREES = Array(360/BIN_SIZE).fill(undefined).map((_, i) => i * BIN_SIZE)
 
 export default {
+  __route: {
+    path: '/gamepad/test/'
+  },
   data() {
     const qdelta = {}
     return {

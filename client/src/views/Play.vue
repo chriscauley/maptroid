@@ -9,7 +9,7 @@
 import Mousetrap from '@unrest/vue-mousetrap'
 import DebugGame from '@/components/DebugGame'
 import GameCanvas from '@/components/Game'
-import gamepad from './Gamepad/gamepad'
+import gamepad from '@/unrest/gamepad/gamepad'
 
 import Game from '@/game/Game'
 

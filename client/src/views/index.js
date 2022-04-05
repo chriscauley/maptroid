@@ -3,7 +3,7 @@ import Contact from './Contact.vue'
 import dread from './dread/index'
 import Downloads from './Downloads.vue'
 import FileBrowser from './FileBrowser.vue'
-import Gamepad from './Gamepad/TestGamepad.vue'
+import TestGamepad from '@/unrest/gamepad/TestGamepad.vue'
 import Home from './Home.vue'
 import Play from './Play.vue'
 import PlayMenu from './PlayMenu.vue'
@@ -27,7 +27,7 @@ export default {
   Contact,
   Downloads,
   FileBrowser,
-  Gamepad,
+  TestGamepad,
   Home,
   Play,
   PlayMenu,
