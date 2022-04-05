@@ -71,15 +71,13 @@
 </template>
 
 <script>
-import { range } from 'lodash'
-
 import gamepad, { button_list, axis_list } from './gamepad'
 import svg from 'raw-loader!./xbox-controller.html'
 import './controller.css'
 
 const SIDES = ['left', 'right']
 const BIN_SIZE = 10
-const DEGREES = range(0, 360, 10)
+const DEGREES = Array(360/BIN_SIZE).fill(undefined).map((_, i) => i * BIN_SIZE)
 
 export default {
   data() {
