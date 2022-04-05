@@ -1,73 +1,59 @@
-// import Controller from '@/vendor/controller.js/unminified/Controller.js'
-
-// console.log(1)
-// Controller.search();
-
-// window.addEventListener('gc.controller.found', function(event) {
-//     var controller = event.detail.controller;
-//     console.log("Controller found at index " + controller.index + ".");
-//     console.log("'" + controller.name + "' is ready!");
-// }, false);
-
-// window.addEventListener('gc.button.press', function(event) {
-//   console.log(event.detail);
-// }, false);
-
-export const button_list = [
-  'a', // 0
-  'b', // 1
-  'x', // 2
-  'y', // 3
-  'l', // 4
-  'r', // 5
-  'lt', // 6
-  'rt', // 7
-  'select', // 8
-  'start', // 9
-  'lclick', // 10
-  'rclick', // 11
-  'up', // 12
-  'down', // 13
-  'left', // 14
-  'right', // 15
-  'home', // 16
-]
-
-export const axis_list = [
-  'left-x', // 0
-  'left-y', // 1
-  'right-x', // 2
-  'right-y', // 3
-]
+import { BUTTON_LIST, AXIS_LIST } from './constants'
+import store from './store'
 
 const noop = () => {}
+const button_state = {}
+const axis_state = {}
 
-export default function(options) {
+const poll = (options) => {
   const { buttonDown = noop, buttonUp = noop, setAxis = noop, callback = noop } = options
-  const button_state = {}
-  const axis_state = {}
-  const update = () => {
-    for (const gamepad of navigator.getGamepads()) {
-      if (!gamepad) continue
-      window.gamepad = gamepad
-      gamepad.buttons.forEach((button, index) => {
-        if (button.pressed && !button_state[index]) {
-          button_state[index] = true
-          buttonDown(button_list[index])
-        } else if (!button.pressed && button_state[index]) {
-          button_state[index] = false
-          buttonUp(button_list[index])
-        }
-      })
-      for (const [index, value] of gamepad.axes.entries()) {
-        if (axis_state[index] !== value) {
-          axis_state[index] = value
-          setAxis(axis_list[index], value)
-        }
+  for (const gamepad of navigator.getGamepads()) {
+    if (!gamepad) continue
+    window.gamepad = gamepad
+    gamepad.buttons.forEach((button, index) => {
+      const key = BUTTON_LIST[index]
+      if (button.pressed && !button_state[key]) {
+        button_state[key] = true
+        buttonDown(store.reversed[key] || key, key)
+      } else if (!button.pressed && button_state[key]) {
+        button_state[key] = false
+        buttonUp(store.reversed[key] || key, key)
+      }
+    })
+    for (const [index, value] of gamepad.axes.entries()) {
+      if (axis_state[index] !== value) {
+        axis_state[index] = value
+        setAxis(AXIS_LIST[index], value)
       }
     }
-    callback()
-    requestAnimationFrame(update)
   }
-  update()
+  callback()
+}
+
+export default {
+  poll,
+  watch: ({ throttle = 0, ...options }) => {
+    let frame
+    let last = new Date().valueOf()
+    let update = () => {
+      poll(options)
+      frame = requestAnimationFrame(update)
+    }
+    if (throttle) {
+      update = () => {
+        if (!throttle || throttle < new Date().valueOf() - last) {
+          poll(options)
+          last = new Date().valueOf()
+        }
+        frame = requestAnimationFrame(update)
+      }
+    }
+
+    update()
+    return {
+      button_state,
+      axis_state,
+      stop: () => cancelAnimationFrame(frame),
+    }
+  },
 }

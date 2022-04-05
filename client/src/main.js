@@ -6,6 +6,7 @@ import UnrestToolbar from '@/components/unrest/Toolbar.vue'
 import UnrestAdminPopup from '@/components/unrest/AdminPopup.vue'
 import VideoPlayer from '@/components/Video/index.vue'
 
+import gamepad from '@/unrest/gamepad'
 import unrest from '@unrest/vue'
 import auth from '@unrest/vue-auth'
 import form from '@unrest/vue-form'
@@ -19,12 +20,25 @@ auth.configure({
   AUTH_START: '/',
   oauth_providers: ['github'],
 })
+
+const gamepad_options = {
+  jump: 'a',
+  swap: 'b',
+  shoot1: 'x',
+  shoot2: 'y',
+  aimup: 'r',
+  aimdown: 'l',
+  run: 'lt',
+  __locked: ['up', 'down', 'left', 'right'],
+}
+
 const app = createApp(App)
   .component('OpenSeadragon', OpenSeadragon)
   .component('UnrestMouseTracker', UnrestMouseTracker)
   .component('UnrestToolbar', UnrestToolbar)
   .component('UnrestAdminPopup', UnrestAdminPopup)
   .component('VideoPlayer', VideoPlayer)
+  .use(gamepad, gamepad_options)
   .use(form.plugin)
   .use(store)
   .use(unrest.plugin)

@@ -3,7 +3,7 @@ import Contact from './Contact.vue'
 import dread from './dread/index'
 import Downloads from './Downloads.vue'
 import FileBrowser from './FileBrowser.vue'
-import TestGamepad from '@/unrest/gamepad/TestGamepad.vue'
+import gamepad from '@/unrest/gamepad'
 import Home from './Home.vue'
 import Play from './Play.vue'
 import PlayMenu from './PlayMenu.vue'
@@ -21,12 +21,15 @@ import SuperMetroid from './sm/index.vue'
 import SmAssignZone from './sm/AssignZone.vue'
 import SmPlmAlign from './sm/PlmAlign.vue'
 
+const { TestGamepad, ConfigureGamepad } = gamepad
+
 export default {
   ...dread,
   About,
   Contact,
   Downloads,
   FileBrowser,
+  ConfigureGamepad,
   TestGamepad,
   Home,
   Play,

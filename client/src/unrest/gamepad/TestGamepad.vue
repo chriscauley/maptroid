@@ -71,17 +71,20 @@
 </template>
 
 <script>
-import gamepad, { button_list, axis_list } from './gamepad'
+import { BUTTON_LIST, AXIS_LIST } from './constants'
+import gamepad from './gamepad'
 import svg from 'raw-loader!./xbox-controller.html'
 import './controller.css'
 
 const SIDES = ['left', 'right']
 const BIN_SIZE = 10
-const DEGREES = Array(360/BIN_SIZE).fill(undefined).map((_, i) => i * BIN_SIZE)
+const DEGREES = Array(360 / BIN_SIZE)
+  .fill(undefined)
+  .map((_, i) => i * BIN_SIZE)
 
 export default {
   __route: {
-    path: '/gamepad/test/'
+    path: '/gamepad/test/',
   },
   data() {
     const qdelta = {}
@@ -91,14 +94,15 @@ export default {
       values: {},
       qdelta,
       last: {},
+      stop: () => {},
     }
   },
   computed: {
     buttons() {
-      return button_list.map((name) => ({ name, value: this.values[name] }))
+      return BUTTON_LIST.map((name) => ({ name, value: this.values[name] }))
     },
     axes() {
-      return axis_list.map((name) => ({ name, value: this.values[name] }))
+      return AXIS_LIST.map((name) => ({ name, value: this.values[name] }))
     },
   },
   mounted() {
@@ -115,7 +119,10 @@ export default {
     })
     this.clear()
     const { buttonDown, buttonUp, setAxis, callback } = this
-    gamepad({ buttonDown, buttonUp, setAxis, callback })
+    this.stop = gamepad.watch({ buttonDown, buttonUp, setAxis, callback }).stop
+  },
+  unmonuted() {
+    this.stop()
   },
   methods: {
     clear() {
@@ -125,16 +132,16 @@ export default {
         })
       })
     },
-    buttonDown(name) {
-      this.values[name] = true
-      this.$el.querySelector(`#${name}-button`).style.fill = '#00FF00'
+    buttonDown(_alias, key) {
+      this.values[key] = true
+      this.$el.querySelector(`#${key}-button`).style.fill = '#00FF00'
     },
-    buttonUp(name) {
-      this.values[name] = false
-      this.$el.querySelector(`#${name}-button`).style.fill = '#888888'
+    buttonUp(_alias, key) {
+      this.values[key] = false
+      this.$el.querySelector(`#${key}-button`).style.fill = '#888888'
     },
-    setAxis(name, value) {
-      this.values[name] = value
+    setAxis(key, value) {
+      this.values[key] = value
     },
     callback() {
       SIDES.forEach((side) => {
