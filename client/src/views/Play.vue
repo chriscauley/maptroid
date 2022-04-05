@@ -9,7 +9,6 @@
 import Mousetrap from '@unrest/vue-mousetrap'
 import DebugGame from '@/components/DebugGame'
 import GameCanvas from '@/components/Game'
-import gamepad from '@/unrest/gamepad/gamepad'
 
 import Game from '@/game/Game'
 
@@ -20,8 +19,7 @@ export default {
   components: { DebugGame, GameCanvas },
   mixins: [Mousetrap.Mixin],
   data() {
-    const { buttonUp, buttonDown } = this
-    return { game: null, gamepad: gamepad({ buttonUp, buttonDown }) }
+    return { game: null }
   },
   computed: {
     mousetrap() {
@@ -69,8 +67,6 @@ export default {
     togglePause() {
       this.game.paused = !this.game.paused
     },
-    buttonUp(e) {},
-    buttonDown(e) {},
   },
 }
 </script>

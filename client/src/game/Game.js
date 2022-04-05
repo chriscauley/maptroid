@@ -5,6 +5,7 @@ import useAssets from './useAssets'
 import Player from './Player'
 import { SCENERY_GROUP, BULLET_GROUP, PLAYER_GROUP, PLAYER_ACTIONS } from './constants'
 import WorldController from './WorldController'
+import gamepad from '@/unrest/gamepad/gamepad'
 
 // Collision groups
 const FIXED_DELTA_TIME = 1 / 60
@@ -47,6 +48,10 @@ export default class Game extends p2.EventEmitter {
       actions: {}, // input map
       paused: true,
       active_rooms: [],
+      gamepad_options: {
+        buttonDown: (button) => this.player.press(button),
+        buttonUp: (button) => this.player.release(button),
+      },
     })
 
     this.ctx.lineWidth = 1 / this.zoom
@@ -284,6 +289,7 @@ export default class Game extends p2.EventEmitter {
   animate = (time) => {
     cancelAnimationFrame(this._frame)
     this._frame = requestAnimationFrame(this.animate)
+    gamepad.poll(this.gamepad_options)
 
     this.tick(time) // move game froward in time
     this.render() // draw to canvas
