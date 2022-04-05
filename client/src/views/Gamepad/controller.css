@@ -1,0 +1,17 @@
+#xbox-controller-svg {
+  margin: auto;
+  overflow: visible;
+}
+
+.test-gamepad {
+  display: flex;
+}
+
+.test-gamepad__left,
+.test-gamepad__right {
+  width: 50%;
+}
+
+.test-gamepad__right svg {
+  max-width: 100%;
+}

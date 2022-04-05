@@ -15,10 +15,29 @@ import contact.forms
 def dread_redirect(request, *args, **kwargs):
   return HttpResponseRedirect('/maps'+request.get_full_path())
 
+app_urls = [
+  "about",
+  "admin",
+  "auth",
+  "contact",
+  "downloads",
+  "editor",
+  "file-browser",
+  "gamepad",
+  "maps",
+  "play",
+  "screenshot",
+  "sm",
+  "sprite",
+  "trainer",
+  "viewer",
+  "world-tiles",
+]
+
 urlpatterns = [
     path('djadmin/', admin.site.urls),
     re_path('^dread', dread_redirect),
-    re_path('^(about|admin|auth|contact|maps|downloads|screenshot|editor|viewer|file-browser|sm|world-tiles|play|trainer|sprite)', index),
+    re_path(f'^({"|".join(app_urls)})', index),
     path('api/list-dir/', list_dir),
     path('api/delete-file/', delete_file),
     path('api/power-suit/', power_suit),
