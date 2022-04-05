@@ -5,13 +5,71 @@
 
 .test-gamepad {
   display: flex;
+  gap: 1rem;
+}
+
+.test-gamepad .table {
+  width: 100%;
 }
 
 .test-gamepad__left,
 .test-gamepad__right {
-  width: 50%;
+  flex-basis: 33.333%;
 }
 
 .test-gamepad__right svg {
+  max-height: 450px;
   max-width: 100%;
+}
+
+.test-gamepad__buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.test-gamepad__button {
+  @apply border-2 p-2 rounded;
+  min-width: 4rem;
+}
+
+.test-gamepad__button.-pressed {
+  @apply border-green-400
+}
+
+.circularity-test {
+  display: flex;
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.circularity-test__circle {
+  background: green;
+  border-radius: 100%;
+  position: relative;
+  height: 100px;
+  width: 100px;
+}
+
+.circularity-test__slice {
+  overflow: hidden;
+  height: 18px;
+  left: 50%;
+  top: calc(50% - 9px);
+  transform-origin: 0 9px;
+  position: absolute;
+}
+
+.circularity-test__slice:before {
+  border-color: transparent rgba(255, 255, 255, 0.5) transparent transparent;
+  border-style: solid;
+  border-width: 9px 100px 9px 0;
+  content: "";
+  display: block;
+  height: 0;
+  width: 0;
+}
+
+.circularity-test__slice.-last:before {
+  border-color: transparent rgba(255, 0, 0, 0.5) transparent transparent;
 }

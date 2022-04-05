@@ -42,7 +42,8 @@ export const axis_list = [
 
 const noop = () => {}
 
-export default function({ buttonDown = noop, buttonUp = noop, setAxis = noop }) {
+export default function(options) {
+  const { buttonDown = noop, buttonUp = noop, setAxis = noop, callback = noop } = options
   const button_state = {}
   const axis_state = {}
   const update = () => {
@@ -65,6 +66,7 @@ export default function({ buttonDown = noop, buttonUp = noop, setAxis = noop }) 
         }
       }
     }
+    callback()
     requestAnimationFrame(update)
   }
   update()
