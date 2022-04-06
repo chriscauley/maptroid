@@ -211,9 +211,9 @@ export default class Player extends Controller {
     if (this.state.posture !== POSTURE.spin) {
       return false
     }
-    const { collisions, velocity } = this
+    const { left, right, below, _collide_angle } = this.collisions
     // yflip
-    return (collisions.left || collisions.right) && !collisions.below && velocity[1] < 0
+    return (left || right) && !below && this.velocity[1] < 0 && _collide_angle % 90 < 1
   }
 
   update(deltaTime) {
