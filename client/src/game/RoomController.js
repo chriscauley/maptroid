@@ -4,6 +4,45 @@ import { vector } from '@unrest/geo'
 import Brick from './Brick'
 import { SCENERY_GROUP, BULLET_GROUP, PLAYER_GROUP } from './constants'
 
+const _yflip = (xy) => [xy[0], -xy[1]] // YFLIP
+
+const invertDoor = ([x, y, orientation, color]) => {
+  if (['left', 'right'].includes(orientation)) {
+    // yflip - have to flip door by subtracting height from y
+    return { x, y: y - 4, orientation, color, width: 1, height: 4 }
+  }
+  return { x, y, orientation, color, width: 4, height: 1 }
+}
+
+const invertBounds = ([x, y, width, height]) => {
+  return { x, y: y - height, width }
+}
+
+const invertXyMap = (object) => {
+  return Object.entries(object).map(([sxy, type]) => {
+    const [x, y] = sxy.split(',').map(Number)
+    return { x, y: -y, type }
+  })
+}
+
+const invertJson = (json) => {
+  const data = {
+    doors: json.data.doors.map(invertDoor),
+    exit: json.data.cre_hex.exit.map(invertBounds),
+    screens: json.data.geometry.screens.map(_yflip),
+    geometry: {
+      inner: json.data.geometry.inner.map((geo) => {
+        if (geo.interiors?.length) {
+          // TODO there are examples of this in the aquaduct. Do they ever matter?
+        }
+        return { exterior: geo.exterior.map(_yflip) }
+      }),
+    },
+    plm_overrides: invertXyMap(json.data.plm_overrides || {}),
+  }
+  return data
+}
+
 // DEPRECATED this is an old way to load rooms from string. Might be useful in tests
 export const fromString = (string, options = {}) => {
   options = cloneDeep(options)
@@ -33,30 +72,24 @@ export const fromString = (string, options = {}) => {
   return new Room(options)
 }
 
-const _yflip = (xy) => [xy[0], -xy[1]] // YFLIP
-
 export default class Room {
   constructor(json, world_controller) {
     this.json = json
+    this.data = invertJson(json)
     this.id = this.json.id
     this.world_controller = world_controller
 
-    // YFLIP all coordinates and set the coordinates to world_coordinates
     this.world_xy0 = this.world_controller.xy0_by_room_id[this.json.id]
-    const screen_xys = json.data.geometry.screens.map((room_xy) =>
-      vector.add(_yflip(room_xy), this.world_xy0),
-    )
+    const screen_xys = this.data.screens.map((room_xy) => vector.add(room_xy, this.world_xy0))
 
     // TODO this used to be used to figure out exits
     this.screens = screen_xys.map((world_xy) => ({ world_xy }))
 
     this.static_shapes = []
     const _xy16 = [16 * this.world_xy0[0], 16 * this.world_xy0[1]]
-    json.data.geometry.inner.forEach((geo) => {
-      if (geo.interiors?.length) {
-        // TODO there are examples of this in pink maridia. Do they ever matter?
-      }
-      const _transform = (xy) => vector.times(vector.add(_yflip(xy), this.world_xy0), 16)
+    this.data.geometry.inner.forEach((geo) => {
+      // TODO see comment in invert json about geo.inner
+      const _transform = (xy) => vector.times(vector.add(xy, this.world_xy0), 16)
       this.static_shapes.push({
         exterior: geo.exterior.map(_transform),
       })
@@ -66,7 +99,7 @@ export default class Room {
   _addEdges() {
     const [room_x, room_y] = this.world_xy0
     this.edges = []
-    this.json.data.cre_hex.exit.forEach(([x, y, width, height]) => {
+    this.data.exit.forEach(({ x, y, width, height }) => {
       let target_dxy
       if (x % 16 === 15) {
         x -= 3
@@ -87,7 +120,7 @@ export default class Room {
         return
       }
       const edge_x = 16 * room_x + x
-      const edge_y = 16 * room_y - y - height // yflip
+      const edge_y = 16 * room_y + y
       const center_x = edge_x + width / 2
       const center_y = edge_y + height / 2
       const options = { _color: 'rgba(255, 128, 128, 0.5)', collisionResponse: false }
@@ -129,19 +162,17 @@ export default class Room {
   }
 
   positionPlayer(player) {
-    const setPosition = (sxy, offset) => {
-      let dxy = sxy.split(',').map(Number)
-      dxy = [dxy[0], -dxy[1]] // yflip
-      dxy = vector.add(dxy, offset)
-      player.body.position = vector.add(vector.times(this.world_xy0, 16), dxy)
+    const setPosition = (room_xy, offset) => {
+      room_xy = vector.add(room_xy, offset)
+      player.body.position = vector.add(vector.times(this.world_xy0, 16), room_xy)
       player.body.updateAABB()
     }
-    for (let [sxy, type] of Object.entries(this.json.data.plm_overrides)) {
+    for (let { x, y, type } of this.data.plm_overrides) {
       if (type === 'ship') {
-        return setPosition(sxy, [6, 1])
+        return setPosition([x, y], [6, 1])
       }
       if (type === 'save-station') {
-        return setPosition(sxy, [1, 1.5])
+        return setPosition([x, y], [1, 1.5])
       }
     }
     throw 'Unable to find initial player placement'

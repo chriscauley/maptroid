@@ -130,7 +130,7 @@ export default class Controller extends RaycastController {
             velocity[1] = Math.tan(collisions.slopeAngle) * Math.abs(velocity[0])
           }
 
-          this.collisions._collide_angle = 180 * slopeAngle / Math.PI
+          this.collisions._collide_angle = (180 * slopeAngle) / Math.PI
           if (directionX === -1) {
             this.debounceCollision([-1, 0])
             collisions.left = true
