@@ -228,50 +228,69 @@ $ascent-items: weapons-tank shinespark boost-ball;
 }
 
 
+$pink: #d83890;
+$green: #017e13;
+$yellow: #d1b102;
+$blue: #283888;
+$red: #d42020;
+$maroon: #5c152b;
+$magenta: #991b8c;
+$gray: #585c65;
+$dark-green: #044f60;
+
+
 $zone-colors: (
-  "crateria": #d83890,
-  "brinstar": #017e13,
-  "wrecked-ship": #d1b102,
-  "maridia": #283888,
-  "norfair": #d42020,
-  "tourian": #991b8c,
+  "crateria": $pink,
+  "brinstar": $green,
+  "wrecked-ship": $yellow,
+  "maridia": $blue,
+  "norfair": $red,
+  "tourian": $magenta,
+
+  /* ypx */
+  "bringtea": $green,
+  "daridia": $blue,
+  "gorfair": $red,
+  "orateria": $pink,
+  "steamed-tofu": $yellow,
+  "tourist": $magenta,
 
   /* y-faster */
-  "orangestar": #d83890,
-  "goldstar": #017e13,
-  "darkstar": #d1b102,
-  "zaristar": #283888,
-  "northstar": #d42020,
-  "finalstar": #991b8c,
+  "orangestar": $pink,
+  "goldstar": $green,
+  "darkstar": $yellow,
+  "zaristar": $blue,
+  "northstar": $red,
+  "finalstar": $magenta,
 
   /* Super Zero Mission */
-  "ridley": #5c152b,
-  "chozodia": #d1b102,
-  "kraid": #044f60,
-  "pirate-ship": #283f63,
+  "ridley": $red,
+  "chozodia": $yellow,
+  "kraid": $dark-green,
+  "pirate-ship": $blue,
 
   /* Ascent */
-  "zone-1": #d83890,
-  "zone-2": #d1b102,
-  "zone-3a": #283888,
-  "zone-3b": #d42020,
-  "void": #991b8c,
+  "zone-1": $pink,
+  "zone-2": $yellow,
+  "zone-3a": $blue,
+  "zone-3b": $red,
+  "void": $magenta,
 
   /* Vitality */
-  "pendulu-moda": #017e13,
-  "tag-lacora": #283888,
-  "tchornobog": #044f60,
-  "akhlys": #d42020,
-  "andavald": #991b8c,
-  "elseq": #5c152b,
+  "pendulu-moda": $green,
+  "tag-lacora": $blue,
+  "tchornobog": $dark-green,
+  "akhlys": $red,
+  "andavald": $magenta,
+  "elseq": $maroon,
 
   /* Cliffhanger */
-  "eldridge": #585c65,
-  "surripere": #283888,
-  "melkabah": #991b8c,
-  "juolbrin": #017e13,
-  "melfad": #991b8c,
-  "keruarn": #5c152b,
+  "eldridge": $gray,
+  "surripere": $blue,
+  "melkabah": $magenta,
+  "juolbrin": $green,
+  "melfad": $magenta,
+  "keruarn": $maroon,
 );
 
 .sm-room-svg {
