@@ -30,22 +30,13 @@ kernel = cv2.getStructuringElement(cv2.MORPH_CROSS,(3,3))
 for width, sprites in sprites_by_width.items():
     heights = []
     results[f'template_{width}'] = []
-    y = 0
-    for type_, _img, width, height in sprites:
-        heights.append(height)
-        results[f'template_{width}'].append([type_, width, height, y])
-        y += height
-
-    canvas = np.zeros((sum(heights), width, 4), dtype=np.uint8)
-    y = 0
-    for _, img, _, _ in sprites:
-        black = img.copy()
-        black[:,:,:3] = 0
-        black = cv2.morphologyEx(black, cv2.MORPH_CLOSE, kernel)
-        urcv.draw.paste(canvas, black, 0, y)
-        urcv.draw.paste_alpha(canvas, img, 0, y)
-        y += img.shape[0]
-    cv2.imwrite(f'static/sm/icons/template_{width}.png', canvas)
+    for type_, img, width, height in sprites:
+        closed = img.copy()
+        closed[:,:,:3] = 0
+        closed = cv2.morphologyEx(closed, cv2.MORPH_CLOSE, kernel)
+        urcv.draw.paste_alpha(closed, img, 0, 0)
+        results[f'template_{width}'].append([type_, width, height])
+        cv2.imwrite(f'static/sm/icons/templates/{type_}.png', closed)
 
 with open(f'static/sm/icons/template_sprites.json', 'w') as f:
     f.write(json.dumps(results, indent=2))

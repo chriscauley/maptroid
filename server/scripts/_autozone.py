@@ -43,6 +43,8 @@ for zone in zones:
             rooms.update(zone=None)
         continue
     _path = WORLD / f'area_{zone.slug}.png'
+    if zone.startswith('ztrash'):
+        continue
     if not _path.exists():
         print(f'WARNING: {zone.slug} missing')
         continue

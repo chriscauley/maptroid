@@ -158,12 +158,16 @@ $block: shot crumble bomb missile super-missile power-bomb speed-booster grapple
     $name: list.nth($tuple, 1);
     $width: list.nth($tuple, 2);
     $height: list.nth($tuple, 3);
-    $y_offset: list.nth($tuple, 4);
     .sm-block.-#{$name} {
-      background-image: url("/static/sm/icons/#{$template-name}.png");
-      background-position: 0 #{$y_offset}px;
-      height: math.div(1em * $height, 16);
-      width: math.div(1em * $width, 16);
+      background-size: cover;
+      background-image: url("/static/sm/icons/templates/#{$name}.png");
+      width: math.div($width, $height) * 1em;
+      &:before {
+        /* This is a css hack to force the aspect ratio */
+        content: "";
+        display: block;
+        padding-top: math.div($height, $width) * 100%;
+      }
     }
   }
 }
