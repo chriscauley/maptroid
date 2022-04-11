@@ -1,14 +1,6 @@
-import { range } from 'lodash'
 import { computed, watch } from 'vue'
 
 const Query = (q = {}) => ({ query: { per_page: 5000, ...q } })
-
-const doors_direction_to_dxys = {
-  up: range(4).map((i) => [i, 0]),
-  down: range(4).map((i) => [i, 0]),
-  left: range(4).map((i) => [0, i]),
-  right: range(4).map((i) => [0, i]),
-}
 
 export default ({ store }) => {
   // TODO this elaborat system of compute/etc is happening because triggering route changes (via selectItem) causes a lag spike and fps drop
@@ -178,41 +170,6 @@ export default ({ store }) => {
 
     blurItem() {
       route.selectItem(null)
-    },
-
-    getRoomBlocks(room) {
-      const block_map = {}
-      Object.entries(room.data.cre_hex || {}).forEach(([name, rects]) => {
-        const _class = `sm-cre-hex -${name}`
-        rects.forEach(([x, y, w, h]) => {
-          range(w).forEach((dx) => {
-            range(h).forEach((dy) => {
-              block_map[[x + dx, y + dy]] = _class
-            })
-          })
-        })
-      })
-
-      // Samus eaters are recorded in the cre from smile exports
-      Object.entries(room.data.plm_overrides || {}).map(([sxy, value]) => {
-        if (value.startsWith('samus-eater')) {
-          const [x, y] = sxy.split(',').map(Number)
-          range(4).forEach((dx) => range(2).forEach((dy) => delete block_map[[x + dx, y + dy]]))
-        }
-      })
-
-      room.data.cre_overrides?.forEach(([x, y, w, h, name]) => {
-        const _class = `sm-block -${name}`
-        range(w).forEach((dx) => {
-          range(h).forEach((dy) => (block_map[[x + dx, y + dy]] = _class))
-        })
-      })
-      Object.values(room.data.doors || {}).forEach(([x, y, direction]) => {
-        doors_direction_to_dxys[direction].forEach(([dx, dy]) => {
-          delete block_map[[x + dx, y + dy]]
-        })
-      })
-      return block_map
     },
   }
 

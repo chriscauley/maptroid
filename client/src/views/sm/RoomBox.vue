@@ -36,6 +36,7 @@
 <script>
 import { debounce, inRange } from 'lodash'
 import vec from '@/lib/vec'
+import Room from '@/models/Room'
 import template_sprites from '@/../../server/static/sm/icons/template_sprites.json'
 
 export const plms = {}
@@ -138,7 +139,7 @@ export default {
     },
     blocks() {
       const room_width = this.room.data.zone.bounds[2] * 16
-      const block_map = this.$store.route.getRoomBlocks(this.room)
+      const block_map = Room.getBlocks(this.room)
       return Object.entries(block_map).map(([xy, _class]) => {
         const [x, y] = xy.split(',').map((i) => Number(i))
         const id = room_width * y + x

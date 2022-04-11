@@ -7,6 +7,7 @@
 
 <script>
 import { sortBy } from 'lodash'
+import Room from '@/models/Room'
 
 const MATCHES = ['sm-cre-hex -unknown', 'sm-cre-hex -respawn']
 
@@ -23,7 +24,7 @@ export default {
       }
       const { rooms } = this.map_props
       let items = rooms.map((room) => {
-        const block_map = this.$store.route.getRoomBlocks(room)
+        const block_map = Room.getBlocks(room)
         const count = Object.values(block_map).filter((k) => MATCHES.includes(k)).length
         return { count, room, id: room.id, zone_id: room.zone }
       })
