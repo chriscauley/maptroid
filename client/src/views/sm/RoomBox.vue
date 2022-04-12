@@ -12,7 +12,7 @@
         @click.stop="removeItem(item.id)"
       />
     </template>
-    <template v-if="mode == 'block'">
+    <template v-if="['block', 'plm'].includes(mode)">
       <div v-for="block in blocks" v-bind="block.attrs" :key="block.id" />
       <div
         v-for="override in cre_overrides"
@@ -20,8 +20,6 @@
         :key="override.id"
         @click.stop="deleteOverride(override.id)"
       />
-    </template>
-    <template v-if="mode == 'plm'">
       <div
         v-for="block in plm_blocks"
         v-bind="block.attrs"
@@ -230,6 +228,7 @@ export default {
           Object.values(rects).forEach(([x, y, w, h]) => {
             data.cre_overrides.push([x, y, w, h, this.variant])
           })
+          this.$ui.toast.info(`Added ${Object.keys(rects).length} ${this.variant}s`)
         } else {
           data.cre_overrides.push([x, y, w, h, this.variant])
         }
