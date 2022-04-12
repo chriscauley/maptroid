@@ -77,6 +77,15 @@ def _process(image, brightness=0, contrast=0, grayscale=0, multiply=None, alpha=
         image = cv2.rotate(image, ROTATIONS[rotate])
     return image
 
+def get_template_icons():
+    cat_map = json.loads((SM_DIR / 'icons/template_sprites.json').read_text())
+    results = {}
+    for sprite_list in cat_map.values():
+        for key, _width, _height in sprite_list:
+            path = str(SM_DIR / f'icons/templates/{key}.png')
+            results[key] = cv2.imread(path, cv2.IMREAD_UNCHANGED)
+    return results
+
 def get_icons(category, _cvt=None, operations={}, scale=1, source=None):
     source = source or f'{category}.png'
     cat_map = json.loads((SM_DIR / 'icons.json').read_text())

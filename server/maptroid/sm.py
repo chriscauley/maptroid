@@ -6,7 +6,7 @@ from PIL import Image, ImageDraw
 
 from maptroid.doors import draw_doors
 from maptroid.dzi import png_to_dzi
-from maptroid.icons import get_icons, MAP_OPERATIONS
+from maptroid.icons import get_icons, MAP_OPERATIONS, get_template_icons
 from maptroid.utils import mkdir
 import unrest_image as img
 import urcv
@@ -175,6 +175,7 @@ def make_walls_image(zone, dest):
         **get_icons('block-alt', operations=MAP_OPERATIONS),
         **get_icons('misc-spikes', operations=MAP_OPERATIONS),
         **get_icons('cre-hex', operations=MAP_OPERATIONS),
+        **get_template_icons(),
     }
     for room in zone.room_set.all():
         if 'inner' not in room.data['geometry']:
@@ -221,6 +222,15 @@ def make_walls_image(zone, dest):
                 stamp_map.pop((zx, zy), None)
             doors.append([x+room_x*16, y+room_y*16, orientation, alpha])
 
+        for sxy, type_ in room.data.get('plm_overrides', {}).items():
+            [x, y] = tuple([int(i) for i in sxy.split(',')])
+            h, w = [i // 16 for i in icons[type_].shape[:2]]
+            for dx in range(w):
+                for dy in range(h):
+                    zx = 16 * (x + dx + room_x * 16)
+                    zy = 16 * (y + dy + room_y * 16)
+            zxy = (16 * (x + room_x * 16), 16 * (y + room_y * 16))
+            stamp_map[zxy] = type_
         zone_image = draw_doors(zone_image, doors, zone.world.slug)
 
         skip = ['empty', 'block']
