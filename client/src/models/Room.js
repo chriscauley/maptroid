@@ -7,6 +7,68 @@ const doors_direction_to_dxys = {
   right: range(4).map((i) => [0, i]),
 }
 
+const sxy2xy = (sxy) => sxy.split(',').map(Number)
+
+const findHorizontalRects = (map) => {
+  const results = {}
+  map = { ...map }
+  const xys = Object.keys(map).map(sxy2xy)
+  sortBy(xys, [1, 0]).forEach(([x, y]) => {
+    if (!map[[x, y]]) {
+      return // value removed in previous loop
+    }
+    let width = 1
+    while (map[[x + width, y]]) {
+      delete map[[x + width, y]]
+      width++
+    }
+    results[[x, y]] = [x, y, width, 1]
+  })
+
+  // Group rects together if they are next to each other and of equal width
+  Object.values(results).forEach(([x, y, width, height]) => {
+    if (!results[[x, y]]) {
+      return // value removed in previous loop
+    }
+    while (results[[x, y + height]]?.[2] === width) {
+      delete results[[x, y + height]]
+      height += 1
+    }
+    results[[x, y]][3] = height
+  })
+  return results
+}
+
+const findVerticalRects = (map) => {
+  const results = {}
+  map = { ...map }
+  const xys = Object.keys(map).map(sxy2xy)
+  sortBy(xys, [1, 0]).forEach(([x, y]) => {
+    if (!map[[x, y]]) {
+      return // value removed in previous loop
+    }
+    let height = 1
+    while (map[[x, y + height]]) {
+      delete map[[x, y + height]]
+      height++
+    }
+    results[[x, y]] = [x, y, 1, height]
+  })
+
+  // Group rects together if they are next to each other and of equal width
+  Object.values(results).forEach(([x, y, width, height]) => {
+    if (!results[[x, y]]) {
+      return // value removed in previous loop
+    }
+    while (results[[x + width, y]]?.[3] === height) {
+      delete results[[x + width, y]]
+      width += 1
+    }
+    results[[x, y]][2] = width
+  })
+  return results
+}
+
 const getBlocks = (room) => {
   // Combines cre_hex, cre_overrides into a block_map { [xy]: type }
   // removes doors and samus-eaters (form plm_overrides)
@@ -101,4 +163,4 @@ const getGroupedBlocks = (room) => {
   })
 }
 
-export default { getBlocks, getGroupedBlocks }
+export default { getBlocks, getGroupedBlocks, findHorizontalRects, findVerticalRects }

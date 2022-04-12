@@ -4,7 +4,7 @@
   "license": "MIT",
   "scripts": {
     "build": "vue-cli-service build --dest ../server/dist",
-    "lint": "eslint \"src/**/*\"",
+    "lint": "eslint \"src/**/*\" \"__tests__/**/*\"",
     "serve": "VUE_APP_OFFLINE=1 vue-cli-service serve",
     "watch": "yarn build --watch"
   },

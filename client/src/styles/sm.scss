@@ -4,7 +4,7 @@
 @import "./variables.scss";
 
 .edit-room .modal-content {
-  min-width: 650px;
+  min-width: 900px;
   padding-top: 3rem; /* for toolbar */
   position: relative;
   .modal-body {
@@ -36,6 +36,9 @@
   &__drag-bounds {
     @apply absolute border-2 border-green-500;
     pointer-events: none;
+    &.-ctrl {
+      @apply border-yellow-400;
+    }
   }
   .sm-cre-hex {
     pointer-events: none;
@@ -161,11 +164,16 @@ $block: shot crumble bomb missile super-missile power-bomb speed-booster grapple
     .sm-block.-#{$name} {
       background-size: cover;
       background-image: url("/static/sm/icons/templates/#{$name}.png");
-      width: math.div($width, $height) * 1em;
+      height: unset; /* determined by padding in &:before */
+      width: math.div($width, 16) * 1em;
+      .ur-toolbar__row .btn & {
+        width: math.div($width, $height) * 1em;
+      }
       &:before {
         /* This is a css hack to force the aspect ratio */
         content: "";
         display: block;
+        position: relative;
         padding-top: math.div($height, $width) * 100%;
       }
     }

@@ -34,7 +34,7 @@
 </template>
 
 <script>
-import { debounce, inRange } from 'lodash'
+import { debounce, inRange, range } from 'lodash'
 import vec from '@/lib/vec'
 import Room from '@/models/Room'
 import template_sprites from '@/../../server/static/sm/icons/template_sprites.json'
@@ -55,7 +55,7 @@ export default {
     highlight: Boolean,
   },
   data() {
-    return { drag_bounds: null }
+    return { drag_bounds: null, ctrl_down: false }
   },
   computed: {
     css() {
@@ -91,7 +91,7 @@ export default {
     drag_bounds_attrs() {
       const [x, y, w, h] = this.drag_bounds
       return {
-        class: 'sm-room-box__drag-bounds',
+        class: ['sm-room-box__drag-bounds', this.ctrl_down && '-ctrl'],
         style: {
           height: `${16 * h}px`,
           left: `${16 * x}px`,
@@ -213,14 +213,41 @@ export default {
         const [x, y, w, h] = this.drag_bounds
         const { data } = this.room
         data.cre_overrides = data.cre_overrides || []
-        data.cre_overrides.push([x, y, w, h, this.variant])
+        if (this.ctrl_down) {
+          const block_map = Room.getBlocks(this.room)
+          const targets = {}
+          range(x, x + w + 1, 1).forEach((xt) => {
+            range(y, y + h + 1, 1).forEach((yt) => {
+              const key = `${xt},${yt}`
+              if (['sm-cre-hex -unknown', 'sm-cre-hex -respawn'].includes(block_map[key])) {
+                targets[key] = [xt, yt, key]
+              }
+            })
+          })
+          const _v = Room.findVerticalRects(targets)
+          const _h = Room.findHorizontalRects(targets)
+          const rects = Object.keys(_h).length > Object.keys(_v).length ? _v : _h
+          Object.values(rects).forEach(([x, y, w, h]) => {
+            data.cre_overrides.push([x, y, w, h, this.variant])
+          })
+        } else {
+          data.cre_overrides.push([x, y, w, h, this.variant])
+        }
+        this.bounceSave()
         this.drag_bounds = null
+      } else if (this.mode === 'plm') {
+        const [x, y] = this._getMouseXY(event.clientX, event.clientY)
+        const { data } = this.room
+        data.plm_overrides[[x, y]] = this.variant
+        this.bounceSave()
       }
+      this.ctrl_down = false
     },
     bounceSave: debounce(function() {
       this.$store.room.save(this.room).then(this.$store.route.refetchRooms)
     }, 500),
     drag(event) {
+      this.ctrl_down = event.ctrlKey
       if (this.tool_storage.state.selected.tool === 'rezone') {
         return
       } else if (this.mode === 'overlap') {
@@ -230,7 +257,7 @@ export default {
           const xy = [x - box.x, y - box.y].map((i) => Math.floor(i / 256))
           this[event.shiftKey ? 'removeHole' : 'addHole'](xy)
         }
-      } else if (this.mode === 'item') {
+      } else if (this.mode === 'item' || this.mode === 'plm') {
         // handled in click
       } else if (this.mode === 'block') {
         const [x1, y1] = this._getMouseXY(...event._drag.xy_start)
@@ -240,7 +267,6 @@ export default {
         const w = Math.abs(x2 - x1) + 1
         const h = Math.abs(y2 - y1) + 1
         this.drag_bounds = [x, y, w, h]
-        this.bounceSave()
       } else {
         this.osd_store.dragRoom(this.room, event._drag.last_dxy)
         this.bounceSave()
@@ -275,6 +301,11 @@ export default {
     deleteOverride(id) {
       const { data } = this.room
       data.cre_overrides = data.cre_overrides.filter((_, oid) => oid !== id)
+    },
+    deletePlm(xy) {
+      const { data } = this.room
+      delete data.plm_overrides[xy]
+      this.bounceSave()
     },
   },
 }
