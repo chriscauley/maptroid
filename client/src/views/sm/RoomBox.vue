@@ -300,6 +300,7 @@ export default {
     deleteOverride(id) {
       const { data } = this.room
       data.cre_overrides = data.cre_overrides.filter((_, oid) => oid !== id)
+      this.bounceSave()
     },
     deletePlm(xy) {
       const { data } = this.room

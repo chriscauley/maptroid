@@ -1,6 +1,7 @@
 import { cloneDeep } from 'lodash'
 import { vector } from '@unrest/geo'
 
+import Room from '@/models/Room'
 import Brick from './Brick'
 import { SCENERY_GROUP, BULLET_GROUP, PLAYER_GROUP } from './constants'
 
@@ -15,7 +16,7 @@ const invertDoor = ([x, y, orientation, color]) => {
 }
 
 const invertBounds = ([x, y, width, height]) => {
-  return { x, y: y - height, width }
+  return { x, y: -y - height, width, height }
 }
 
 const invertXyMap = (object) => {
@@ -26,6 +27,13 @@ const invertXyMap = (object) => {
 }
 
 const invertJson = (json) => {
+  const bricks = Room.getGroupedBlocks(json)
+    .filter((b) => !b.type.endsWith('-exit'))
+    .map((b) => {
+      b.type = b.type.split(' -').pop()
+      b.y = -b.y
+      return b
+    })
   const data = {
     doors: json.data.doors.map(invertDoor),
     exit: json.data.cre_hex.exit.map(invertBounds),
@@ -39,6 +47,7 @@ const invertJson = (json) => {
       }),
     },
     plm_overrides: invertXyMap(json.data.plm_overrides || {}),
+    bricks,
   }
   return data
 }
@@ -69,10 +78,10 @@ export const fromString = (string, options = {}) => {
     })
   })
 
-  return new Room(options)
+  return new RoomController(options)
 }
 
-export default class Room {
+export default class RoomController {
   constructor(json, world_controller) {
     this.json = json
     this.data = invertJson(json)
@@ -126,7 +135,7 @@ export default class Room {
       const options = { _color: 'rgba(255, 128, 128, 0.5)', collisionResponse: false }
       const body = this.game.addStaticBox([center_x, center_y, width, height], options)
       this.bodies.push(body)
-      const screen_xy = vector.add(this.world_xy0, [parseInt(x / 16), parseInt(-y / 16)])
+      const screen_xy = vector.add(this.world_xy0, [parseInt(x / 16), parseInt(y / 16)])
       body._target_xy = vector.add(screen_xy, target_dxy)
       this.edges.push(body)
     })
@@ -134,12 +143,13 @@ export default class Room {
 
   _addBodies() {
     this.bodies = []
-    this.bricks = []
 
     // TODO populate bricks from json
     // Add bricks
-    this.bricks.forEach(({ x, y, type }) => {
-      const brick = new Brick({ game: this.game, x, y, type })
+    this.data.bricks.forEach(({ x, y, width, height, type }) => {
+      x += this.world_xy0[0] * 16 + width / 2
+      y += this.world_xy0[1] * 16 - height / 2
+      const brick = new Brick({ game: this.game, x, y, width, height, type })
       this.bodies.push(brick.body)
     })
 

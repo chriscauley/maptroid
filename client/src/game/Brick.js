@@ -7,6 +7,12 @@ const TYPES = {
     color: 'green',
     regrow: 30,
   },
+  bomb: {
+    color: 'rgb(255, 33, 33)',
+  },
+  shot: {
+    color: 'rgb(200, 200, 200)',
+  },
 }
 
 export default class Brick {

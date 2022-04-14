@@ -110,35 +110,36 @@ const getGroupedBlocks = (room) => {
   /* makes a block_map and recombines it into a series of rects */
   const block_map = getBlocks(room)
   const results = []
-  const blocks = Object.entries(block_map).map((sxy, type) => {
+  const blocks = Object.entries(block_map).map(([sxy, type]) => {
     const [x, y] = sxy.split(',').map(Number)
-    return { x, y, type, sxy }
+    block_map[sxy] = { x, y, type, sxy }
+    return block_map[sxy]
   })
 
   const match = (block, includes, excludes = []) => {
     // check and see if blocks with same type match icludes and not excludes
     // if so, create a block of that type and remove them from block_map
+    const { x, y, type } = block
     const matched_blocks = [block]
     for (const dxy of includes) {
-      // make sure that all blocks of includes exist and are of correc type
-      const block2 = block_map[(block.x + dxy[0], block.y + dxy[1])]
-      if (block2?.type !== block.type) {
+      // make sure that all blocks of includes exist and are of correct type
+      const block2 = block_map[[x + dxy[0], y + dxy[1]]]
+      if (block2?.type !== type) {
         return false
       }
       matched_blocks.push(block2)
     }
     for (const dxy of excludes) {
       // make sure any blocks in excludes are not of same type
-      const block2 = block_map[(block.x + dxy[0], block.y + dxy[1])]
-      if (block2?.type === block.type) {
+      const block2 = block_map[(x + dxy[0], y + dxy[1])]
+      if (block2?.type === type) {
         return false
       }
     }
-    const { x, y, type } = block
-    const width = Math.min(...matched_blocks.map((b) => b.x - x + 1))
-    const height = Math.min(...matched_blocks.map((b) => b.y - y + 1))
+    const width = Math.max(...matched_blocks.map((b) => b.x)) - x + 1
+    const height = Math.max(...matched_blocks.map((b) => b.y)) - y + 1
     matched_blocks.forEach((b) => delete block_map[b.sxy])
-    results.push({ x, y, width, height, type })
+    results.push({ x, y, width, height, type, sxy: block.sxy })
     return true
   }
 
@@ -153,6 +154,7 @@ const getGroupedBlocks = (room) => {
     ], // 2x2
     [[[1, 0]], []], // 2x1
     [[[0, 1]], []], // 1x2
+    [[], []], // 1x1 (noop)
   ]
 
   sortBy(blocks, ['y', 'x']).forEach((block) => {
@@ -161,6 +163,7 @@ const getGroupedBlocks = (room) => {
     }
     geometries.find(([includes, excludes]) => match(block, includes, excludes))
   })
+  return results
 }
 
 export default { getBlocks, getGroupedBlocks, findHorizontalRects, findVerticalRects }
