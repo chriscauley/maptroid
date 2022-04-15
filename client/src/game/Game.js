@@ -189,6 +189,7 @@ export default class Game extends p2.EventEmitter {
     const [x, y] = body.interpolatedPosition
     const s = body.shapes[0]
     this.ctx.fillStyle = s._color || 'white'
+    this.ctx.strokeStyle = s._color || 'white'
     this.ctx.save()
     this.ctx.translate(x, y) // Translate to the center of the box
     this.ctx.rotate(body.interpolatedAngle) // Rotate to the box body frame
@@ -196,7 +197,7 @@ export default class Game extends p2.EventEmitter {
     if (body._entity?.draw) {
       body._entity.draw(this.ctx)
     } else if (s instanceof p2.Box) {
-      this.ctx.fillRect(-s.width / 2, -s.height / 2, s.width, s.height) // yflip
+      this.ctx.fillRect(-s.width / 2, -s.height / 2, s.width, s.height)
     } else if (s instanceof p2.Circle) {
       this.ctx.beginPath()
       this.ctx.arc(0, 0, s.radius, 0, 2 * Math.PI)
@@ -204,7 +205,6 @@ export default class Game extends p2.EventEmitter {
       this.ctx.closePath()
     } else {
       body.shapes.forEach((shape) => {
-        this.ctx.fillStyle = shape._color || 'white'
         const [x0, y0] = shape.position
         this.ctx.beginPath()
         const [x, y] = shape.vertices[shape.vertices.length - 1]
@@ -213,6 +213,8 @@ export default class Game extends p2.EventEmitter {
           this.ctx.lineTo(xy[0] + x0, xy[1] + y0)
         })
         this.ctx.fill()
+
+        this.ctx.stroke() // stroking here fixes gaps
         this.ctx.closePath()
       })
     }
