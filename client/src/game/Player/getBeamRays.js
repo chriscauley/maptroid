@@ -1,7 +1,6 @@
 // Taken from p2.js/examples/canvas/js/KinematicCharacterController.js
 import { POSTURE } from '../constants'
 
-const range = 6 // TODO range should vary by beam
 const starts = [0, 0.3333333, 0.6666666] // TODO dependant on beam having a "spazer"
 
 const anglesByPointing = {
@@ -72,6 +71,7 @@ export default (function() {
     const { pointing, posture } = player.state
     const key = `${pointing}.${player.state.posture}.${player.collisions.faceDir}.${_origin}`
     if (!cache[key]) {
+      const { range } = player.inventory.beam
       if (posture === POSTURE.ball || posture === POSTURE.spin) {
         return []
       }

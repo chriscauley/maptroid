@@ -9,6 +9,7 @@ const TYPES = {
   },
   bomb: {
     color: 'rgb(255, 33, 33)',
+    weak_to: ['bomb', 'speed', 'screw', 'beam'], // TODO remove beam
   },
   shot: {
     color: 'rgb(200, 200, 200)',
@@ -32,6 +33,9 @@ export default class Brick {
     body.addShape(shape)
   }
   damage(event) {
+    if (this._type.weak_to && !this._type.weak_to.includes(event.type)) {
+      return
+    }
     let amount = event.amount
     if (amount <= 0 || this.hp <= 0) {
       return
