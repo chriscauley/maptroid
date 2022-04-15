@@ -14,6 +14,21 @@ const TYPES = {
   shot: {
     color: 'rgb(200, 200, 200)',
   },
+  crumble: {
+    color: 'rgb(255, 200, 200)',
+  },
+  'power-bomb': {
+    color: 'rgb(255, 255, 128)',
+  },
+  'super-missile': {
+    color: 'rgb(128,255,128)',
+  },
+  'grapple': {
+    color: 'rgb(128, 255, 255)',
+  },
+  'grapple-break': {
+    color: 'rgb(0, 128, 128)',
+  },
 }
 
 export default class Brick {

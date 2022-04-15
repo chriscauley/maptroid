@@ -90,9 +90,9 @@ export default class Controller extends RaycastController {
     const directionX = collisions.faceDir
     let rayLength = Math.abs(velocity[0]) + skinWidth
 
-    // if (Math.abs(velocity[0]) < skinWidth) {
-    // rayLength = 2 * skinWidth;
-    // }
+    if (Math.abs(velocity[0]) < skinWidth) {
+      rayLength = 2 * skinWidth;
+    }
 
     for (let i = 0; i < this.horizontalRayCount; i++) {
       const from = raycastOrigins[directionX === -1 ? 'bottomLeft' : 'bottomRight'].slice()
