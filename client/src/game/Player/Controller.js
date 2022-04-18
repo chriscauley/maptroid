@@ -84,6 +84,27 @@ export default class Controller extends RaycastController {
     }
 
     vec2.add(this.body.position, this.body.position, velocity)
+    if (!collisions.below && collisions.last_below) {
+      const can_snap = !this.keys.jump
+      if (can_snap) {
+        this.snapToFloor()
+      }
+    }
+  }
+
+  snapToFloor() {
+    const { raycastOrigins, collisions, ray } = this
+    const distances = ['bottomRight', 'bottomLeft'].map((origin) => {
+      const from = raycastOrigins[origin]
+      const to = [from[0], from[1] - 0.5] // only checking 1/2 square away
+      this.castRay(from, to)
+      return this.raycastResult.getHitDistance(ray)
+    })
+    const distance = Math.min(...distances)
+    if (this.raycastResult.body) {
+      this.body.position[1] -= distance * 0.9 // 0.9 is because if it's too close it'll clip
+      this.verticalCollisions(this.velocity)
+    }
   }
 
   horizontalCollisions(velocity) {
