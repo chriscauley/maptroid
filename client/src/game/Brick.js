@@ -23,7 +23,7 @@ const TYPES = {
   'super-missile': {
     color: 'rgb(128,255,128)',
   },
-  'grapple': {
+  grapple: {
     color: 'rgb(128, 255, 255)',
   },
   'grapple-break': {

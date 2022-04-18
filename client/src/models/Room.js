@@ -69,10 +69,24 @@ const findVerticalRects = (map) => {
   return results
 }
 
-const getBlocks = (room) => {
+const getBlocks = (room, with_cre = false) => {
   // Combines cre_hex, cre_overrides into a block_map { [xy]: type }
   // removes doors and samus-eaters (form plm_overrides)
   const block_map = {}
+
+  if (with_cre) {
+    Object.entries(room.data.cre || {}).forEach(([name, rects]) => {
+      const _class = `sm-cre-hex -${name}`
+      rects.forEach(([x, y, w, h]) => {
+        range(w).forEach((dx) => {
+          range(h).forEach((dy) => {
+            block_map[[x + dx, y + dy]] = _class
+          })
+        })
+      })
+    })
+  }
+
   Object.entries(room.data.cre_hex || {}).forEach(([name, rects]) => {
     const _class = `sm-cre-hex -${name}`
     rects.forEach(([x, y, w, h]) => {
@@ -108,7 +122,7 @@ const getBlocks = (room) => {
 
 const getGroupedBlocks = (room) => {
   /* makes a block_map and recombines it into a series of rects */
-  const block_map = getBlocks(room)
+  const block_map = getBlocks(room, true)
   const results = []
   const blocks = Object.entries(block_map).map(([sxy, type]) => {
     const [x, y] = sxy.split(',').map(Number)

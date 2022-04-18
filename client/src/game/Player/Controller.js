@@ -54,6 +54,7 @@ export default class Controller extends RaycastController {
   resetCollisions(velocity) {
     const collisions = this.collisions
 
+    collisions.last_below = collisions.below
     collisions.above = collisions.below = false
     collisions.left = collisions.right = false
     collisions.climbingSlope = false
@@ -91,7 +92,7 @@ export default class Controller extends RaycastController {
     let rayLength = Math.abs(velocity[0]) + skinWidth
 
     if (Math.abs(velocity[0]) < skinWidth) {
-      rayLength = 2 * skinWidth;
+      rayLength = 2 * skinWidth
     }
 
     for (let i = 0; i < this.horizontalRayCount; i++) {
@@ -223,7 +224,9 @@ export default class Controller extends RaycastController {
     if (this.raycastResult.body) {
       const slopeAngle = angle(this.raycastResult.normal, UNIT_Y)
       if (slopeAngle !== 0 && slopeAngle <= this.maxDescendAngle) {
+        // on slope (up or down)
         if (sign(this.raycastResult.normal[0]) === directionX) {
+          // facing down slope
           if (
             this.raycastResult.getHitDistance(ray) - this.skinWidth <=
             Math.tan(slopeAngle) * Math.abs(velocity[0])
