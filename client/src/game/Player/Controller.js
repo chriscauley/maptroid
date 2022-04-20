@@ -93,7 +93,7 @@ export default class Controller extends RaycastController {
   }
 
   snapToFloor() {
-    const { raycastOrigins, collisions, ray } = this
+    const { raycastOrigins, ray } = this
     const distances = ['bottomRight', 'bottomLeft'].map((origin) => {
       const from = raycastOrigins[origin]
       const to = [from[0], from[1] - 0.5] // only checking 1/2 square away

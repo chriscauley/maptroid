@@ -55,10 +55,11 @@ export default class Player extends Controller {
     }
     this.inventory = {
       bomb: new inventory.BombController({ player: this }),
-      beam: new inventory.BeamController({ player: this }),
+      gun1: new inventory.BeamController({ player: this }),
+      gun2: new inventory.ProjectileController({ player: this }),
     }
     this.loadout = {
-      shoot1: this.inventory.beam,
+      shoot1: this.inventory.gun2,
       bomb: this.inventory.bomb,
     }
     const {
