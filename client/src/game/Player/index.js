@@ -57,6 +57,7 @@ export default class Player extends Controller {
       bomb: new inventory.BombController({ player: this }),
       gun1: new inventory.BeamController({ player: this }),
       gun2: new inventory.ProjectileController({ player: this }),
+      speedbooster: true, // TODO should this be a class
     }
     this.loadout = {
       shoot1: this.inventory.gun2,
@@ -65,7 +66,6 @@ export default class Player extends Controller {
     const {
       accelerationTimeAirborne = 0,
       accelerationTimeGrounded = 0.1,
-      moveSpeed = 10.2,
       wallSlideSpeedMax = 3,
       wallStickTime = 0.25,
       wallJumpClimb = [20, 20], // holding towards wall
@@ -73,8 +73,8 @@ export default class Player extends Controller {
       wallJumpOff = [20, 20], // holding neither
       timeToJumpApex = 1.533 / 2,
       tech = { bomb_linked: true, bomb_triggered: true, e_tanks: 0 },
-      maxJumpHeight = 7,
-      minJumpHeight = 1,
+      maxJumpHeight = 7.1,
+      minJumpHeight = 1.2,
       velocityXSmoothing = 0.2,
       velocityXMin = 0.5,
     } = cloneDeep(options)
@@ -82,7 +82,6 @@ export default class Player extends Controller {
     Object.assign(this, {
       accelerationTimeAirborne,
       accelerationTimeGrounded,
-      moveSpeed,
       wallSlideSpeedMax,
       wallStickTime,
       wallJumpClimb,
@@ -95,6 +94,12 @@ export default class Player extends Controller {
       velocityXSmoothing,
       velocityXMin,
     })
+
+    this.speed = {
+      walk: 10.2,
+      run: 18,
+      boost: 36,
+    }
 
     // yflip
     this._gravity = this.gravity = -(2 * maxJumpHeight) / Math.pow(timeToJumpApex, 2)
@@ -195,12 +200,12 @@ export default class Player extends Controller {
     const { up, down, aimup, aimdown, right, left } = this.keys
     if (aimup && aimdown) {
       this.state.pointing = 'zenith'
+    } else if (up) {
+      this.state.pointing = right ^ left ? 'upward' : 'zenith'
     } else if (aimup) {
       this.state.pointing = 'upward'
     } else if (aimdown) {
       this.state.pointing = 'downward'
-    } else if (up) {
-      this.state.pointing = right ^ left ? 'upward' : 'zenith'
     } else if (down) {
       this.state.pointing = 'down'
     } else {
@@ -258,8 +263,11 @@ export default class Player extends Controller {
 
     if (this._requestJump) {
       this._requestJump = false
+      const posture = this.state.posture
 
-      if (wallSliding) {
+      if (posture === POSTURE.ball) {
+        // TODO springball
+      } else if (wallSliding) {
         // yflip
         if (wallDirX === input[0]) {
           velocity[0] = -wallDirX * this.wallJumpClimb[0]
@@ -276,9 +284,13 @@ export default class Player extends Controller {
         velocity[1] = this.maxJumpVelocity
         if (keys.right && !collisions.right) {
           this.setPosture(POSTURE.spin)
+          velocity[1] *= 1.1
         } else if (keys.left && !collisions.left) {
           this.setPosture(POSTURE.spin)
+          velocity[1] *= 1.1
         }
+      } else if (posture !== POSTURE.spin) {
+        this.setPosture(POSTURE.spin)
       }
     } else if (collisions.below || keys.up || keys.down) {
       if (this.state.posture === POSTURE.spin) {
@@ -294,7 +306,13 @@ export default class Player extends Controller {
       }
     }
 
-    let targetVelocityX = input[0] * this.moveSpeed // TODO issue #1
+    let targetVelocityX = input[0] * this.getMoveSpeed() // TODO issue #1
+    if (
+      Math.sign(targetVelocityX) === Math.sign(velocity[0]) &&
+      Math.abs(targetVelocityX) < Math.abs(velocity[0])
+    ) {
+      targetVelocityX = velocity[0]
+    }
     if (this.state.posture === POSTURE.spin && targetVelocityX === 0) {
       targetVelocityX = velocity[0]
     }
@@ -335,6 +353,20 @@ export default class Player extends Controller {
       velocity[1] = 0
     }
     this.beam_rays = getBeamRays(this)
+  }
+
+  getMoveSpeed() {
+    if (this.state.posture === POSTURE.ball || !this.collisions.below) {
+      return this.speed.walk
+    }
+    if (this.keys.run) {
+      if (Math.abs(this.velocity[0]) < this.speed.run * 0.9) {
+        return this.speed.run
+      }
+      // TODO speedbooster in inventory
+      return this.inventory.speedbooster ? this.speed.boost : this.speed.run
+    }
+    return this.speed.walk
   }
 
   draw = (ctx) => {
