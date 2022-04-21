@@ -6,6 +6,10 @@ import { SCENERY_GROUP, POSTURE } from '../constants'
 let next_bullet_id = 0
 const RADIUS = 0.15
 
+const SPEED = 18
+const LIFETIME = 888 // Bullet should travel ~1 screen when fired at rest
+const root2over2 = Math.sqrt(2) / 2
+
 const aim = (player) => {
   const { body } = player
   const position = vec2.copy([0, 0], body.position) // start at player center
@@ -23,11 +27,13 @@ const aim = (player) => {
     dxy[1] = 1
     position[1] += body.shapes[0].height // top
   } else if (pointing === 'upward') {
-    dxy[1] = 1
+    dxy[0] *= root2over2
+    dxy[1] = root2over2
     position[1] += 2.5
     position[0] += dx * half_width
   } else if (pointing === 'downward') {
-    dxy[1] = -1
+    dxy[0] *= root2over2
+    dxy[1] = -root2over2
     position[1] += 1.5
     position[0] += dx * half_width
   } else {
@@ -44,39 +50,41 @@ const aim = (player) => {
 class Bullet {
   constructor(controller) {
     const { position, dxy } = aim(controller.player)
-    const velocity = vec2.scale(vec2.create(), dxy, 18)
-    this.reverse_velocity = vec2.scale(vec2.create(), velocity, -1 / 60)
-    vec2.add(velocity, velocity, controller.player.velocity)
+    const velocity = vec2.scale(vec2.create(), dxy, SPEED)
+    this.reverse_velocity = vec2.scale(vec2.create(), velocity, -1 / 30)
+    velocity[0] += controller.player.velocity[0]
     this.controller = controller
     this.id = next_bullet_id++
     this.body = new p2.Body({ position, velocity })
     this.body.addShape(new p2.Circle({ radius: RADIUS }))
-    this.player = controller.player
-    this.player.game.bindEntity(this)
+    this.controller.player.game.bindEntity(this)
+    this.start = new Date().valueOf()
   }
   tick = () => {
-    const { ray, raycastResult } = this.controller
+    const { ray, raycastResult, player } = this.controller
     vec2.copy(ray.from, this.body.position)
     vec2.add(ray.to, ray.from, [RADIUS, RADIUS])
     vec2.add(ray.from, ray.from, this.reverse_velocity)
     ray.update()
-    this.player.p2_world.raycast(raycastResult, ray)
+    player.p2_world.raycast(raycastResult, ray)
     if (raycastResult.body) {
-      this.player.p2_world.emit({
+      player.p2_world.emit({
         type: 'damage',
         damage: {
           type: 'beam',
-          player: this.player.id,
+          player: player.id,
           amount: 1,
           body_id: raycastResult.body.id,
         },
       })
       this.destroy()
+    } else if (new Date().valueOf() - this.start > LIFETIME) {
+      this.destroy()
     }
     raycastResult.reset()
   }
   destroy() {
-    this.player.game.removeEntity(this)
+    this.controller.player.game.removeEntity(this)
     delete this.controller.bullets[this.id]
   }
 }
