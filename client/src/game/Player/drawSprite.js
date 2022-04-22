@@ -1,7 +1,7 @@
 // Taken from p2.js/examples/canvas/js/KinematicCharacterController.js
 
 import { POSTURE } from '../constants'
-import PowerSuit from '@/views/PowerSuit/store'
+import SpriteSheet from '@/views/SpriteSheet/store'
 
 // animation helper
 const getFrame = (time, count, factor = 1) => {
@@ -89,7 +89,7 @@ export default (player, ctx) => {
   ctx.imageSmoothingEnabled = false
   const { _width, height } = player.body.shapes[0]
   const [name, frame] = _getSprite(player)
-  const spritesheet = PowerSuit('power-suit')
+  const spritesheet = SpriteSheet('power-suit')
   const { img, sx, sy, sw, sh, offset_x, center } = spritesheet.getAnimationParams(
     name,
     frame,

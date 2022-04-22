@@ -1,3 +1,3 @@
-import PowerSuit from '@/views/PowerSuit/store'
+import SpriteSheet from '@/views/SpriteSheet/store'
 
-export default () => Promise.all([PowerSuit('power-suit').load(), PowerSuit('weapons').load()])
+export default () => Promise.all([SpriteSheet('power-suit').load(), SpriteSheet('weapons').load()])

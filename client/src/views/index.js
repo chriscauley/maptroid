@@ -7,7 +7,7 @@ import gamepad from '@/unrest/gamepad'
 import Home from './Home.vue'
 import Play from './Play.vue'
 import PlayMenu from './PlayMenu.vue'
-import PowerSuit from './PowerSuit'
+import SpriteSheet from './SpriteSheet'
 import ProcessDread from './ProcessDread.vue'
 import Trainer from './Trainer'
 import ScreenshotAnalyzer from './ScreenshotAnalyzer/index.vue'
@@ -34,7 +34,7 @@ export default {
   Home,
   Play,
   PlayMenu,
-  PowerSuit,
+  SpriteSheet,
   ProcessDread,
   Trainer,
   ScreenshotAnalyzer,

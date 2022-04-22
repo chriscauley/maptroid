@@ -4,7 +4,7 @@ import { reactive } from 'vue'
 
 const client = getClient()
 
-const PowerSuit = (sheetname) => {
+const SpriteSheet = (sheetname) => {
   const state = reactive({
     loading: false,
   })
@@ -180,4 +180,4 @@ const PowerSuit = (sheetname) => {
   }
 }
 
-export default memoize(PowerSuit)
+export default memoize(SpriteSheet)
