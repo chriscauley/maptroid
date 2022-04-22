@@ -58,7 +58,7 @@ class Bullet {
     this.body = new p2.Body({ position, velocity })
     this.body.addShape(new p2.Circle({ radius: RADIUS }))
     this.controller.player.game.bindEntity(this)
-    this.start = new Date().valueOf()
+    this.start = controller.player.getNow()
   }
   tick = () => {
     const { ray, raycastResult, player } = this.controller
@@ -78,7 +78,7 @@ class Bullet {
         },
       })
       this.destroy()
-    } else if (new Date().valueOf() - this.start > LIFETIME) {
+    } else if (this.controller.player.getNow() - this.start > LIFETIME) {
       this.destroy()
     }
     raycastResult.reset()

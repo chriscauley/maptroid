@@ -41,7 +41,7 @@ export default class Controller extends RaycastController {
     this.lastCollisions = {}
     this.debounceCollision = (dxy) => {
       // this debouncing is mostly to stop it from colliding on all of the rays
-      const now = new Date().valueOf()
+      const now = this.getNow()
       const body = this.raycastResult.body
       if (now - this.lastCollisions[body.id] < 1000) {
         return

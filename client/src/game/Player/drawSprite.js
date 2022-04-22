@@ -17,11 +17,12 @@ const _poses = {
 }
 
 const _getSprite = (player) => {
+  const now = player.getNow()
   const { pointing, posture } = player.state
   const [dx, _dy] = player.scaledVelocity
   const dir = player.collisions.faceDir === -1 ? '_left' : '_right'
   if (posture === POSTURE.ball) {
-    return ['ball' + dir, getFrame(new Date().valueOf(), 8)]
+    return ['ball' + dir, getFrame(now, 8)]
   } else if (posture === POSTURE.crouch) {
     if (pointing === 'zenith') {
       return ['_poses' + dir, 4]
@@ -32,7 +33,7 @@ const _getSprite = (player) => {
     }
 
     // crouching + breathing
-    const frame = getFrame(new Date().valueOf(), 3)
+    const frame = getFrame(now, 3)
     return ['crouch' + dir, frame]
   }
   if (player.collisions.below) {
@@ -44,7 +45,7 @@ const _getSprite = (player) => {
       }
 
       // standing + breathing
-      const frame = getFrame(new Date().valueOf(), 3, 9)
+      const frame = getFrame(now, 3, 9)
       return ['stand' + dir, frame]
     } else {
       // running
@@ -61,12 +62,12 @@ const _getSprite = (player) => {
         // TODO Vanilla only has shoot down while jumping
       }
 
-      const frame = getFrame(new Date().valueOf(), 10)
+      const frame = getFrame(now, 10)
       return ['walk' + aim + dir, frame]
     }
   } else {
     if (posture === POSTURE.spin) {
-      const frame = getFrame(new Date().valueOf(), 8)
+      const frame = getFrame(now, 8)
       return ['spinjump' + dir, frame]
     }
     if (pointing === 'downward') {

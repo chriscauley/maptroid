@@ -147,7 +147,7 @@ export default class Player extends Controller {
     }
 
     // TODO there may be possible glitchiness with thes next line being after the pause logic
-    this._last_pressed_at[key] = new Date().valueOf()
+    this._last_pressed_at[key] = this.game.getNow()
     const { posture } = this.state
     if (key === 'jump') {
       this._requestJump = true
@@ -367,6 +367,10 @@ export default class Player extends Controller {
       velocity[1] = 0
     }
     this.beam_rays = getBeamRays(this)
+  }
+
+  getNow() {
+    return this.game.getNow()
   }
 
   getMoveSpeed() {

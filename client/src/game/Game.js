@@ -32,6 +32,10 @@ export default class Game extends p2.EventEmitter {
     this.ctx = this.canvas.getContext('2d')
   }
 
+  getNow() {
+    return parseInt(1000 * this.p2_world.time)
+  }
+
   init() {
     // Init canvas
     Object.assign(this, {
