@@ -56,6 +56,9 @@ export default class Game extends p2.EventEmitter {
         buttonDown: (button) => this.player.press(button),
         buttonUp: (button) => this.player.release(button),
       },
+      pausemenu: {
+        show: 'map',
+      },
     })
 
     this.ctx.lineWidth = 1 / this.zoom

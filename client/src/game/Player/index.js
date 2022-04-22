@@ -1,7 +1,8 @@
 // Taken from p2.js/examples/canvas/js/KinematicCharacterController.js
 
-import p2 from 'p2'
+import { reactive } from 'vue'
 import { cloneDeep } from 'lodash'
+import p2 from 'p2'
 
 import Controller from './Controller'
 import drawSprite from './drawSprite'
@@ -49,9 +50,12 @@ export default class Player extends Controller {
     this.game.bindEntity(this)
 
     this.input = vec2.create()
+    this.cheat = true
     this.state = {
       posture: POSTURE.stand,
       health: 0, // will be healed after this.tech is set
+      disabled: reactive({}),
+      collected: reactive({}),
     }
     this.inventory = {
       bomb: new inventory.BombController({ player: this }),
@@ -60,7 +64,7 @@ export default class Player extends Controller {
       speedbooster: true, // TODO should this be a class
     }
     this.loadout = {
-      shoot1: this.inventory.gun2,
+      shoot1: this.inventory.gun1,
       bomb: this.inventory.bomb,
     }
     const {
@@ -407,5 +411,9 @@ export default class Player extends Controller {
 
     // this.loadout.shoot1.draw(ctx)
     ctx.restore()
+  }
+
+  toggleItem(item) {
+    this.state.disabled[item.slug] = !this.state.disabled[item.slug]
   }
 }

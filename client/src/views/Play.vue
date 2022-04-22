@@ -2,12 +2,14 @@
   <div>
     <game-canvas :game="game" @click="click" />
     <debug-game :game="game" v-if="game" />
+    <pause-menu v-if="game?.paused" :game="game" />
   </div>
 </template>
 
 <script>
 import Mousetrap from '@unrest/vue-mousetrap'
 import DebugGame from '@/components/DebugGame'
+import PauseMenu from '@/components/PauseMenu.vue'
 import GameCanvas from '@/components/Game'
 
 import Game from '@/game/Game'
@@ -16,7 +18,7 @@ export default {
   __route: {
     path: '/play/:world_slug/:room_id/',
   },
-  components: { DebugGame, GameCanvas },
+  components: { DebugGame, GameCanvas, PauseMenu },
   mixins: [Mousetrap.Mixin],
   data() {
     return { game: null }

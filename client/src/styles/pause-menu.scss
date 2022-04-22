@@ -1,0 +1,22 @@
+.pause-menu {
+  &__inventory-section {
+    @apply border-2 rounded p-2;
+  }
+  &__inventory-row {
+    @apply h-6 mb-1;
+  }
+  &__inventory-row__inner {
+    @apply flex items-center;
+  }
+  &__inventory-toggle {
+    @apply border-4 h-4 mx-4 rounded-full w-4;
+  }
+}
+
+
+.pause-menu__inventory-row.-enabled {
+  @apply bg-green-400;
+  .pause-menu__inventory-toggle {
+    @apply bg-white;
+  }
+}

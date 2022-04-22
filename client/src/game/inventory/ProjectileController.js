@@ -1,6 +1,7 @@
 import p2 from 'p2'
 import { vec2, Ray, RaycastResult } from 'p2'
 
+import BaseController from './BaseController'
 import { SCENERY_GROUP, POSTURE } from '../constants'
 
 let next_bullet_id = 0
@@ -89,10 +90,9 @@ class Bullet {
   }
 }
 
-export default class ProjectileController {
-  constructor({ player }) {
-    this.player = player
-    this.range = 10
+export default class ProjectileController extends BaseController {
+  constructor(options) {
+    super(options)
     this.BULLET_SPEED = 25 // TODO 25 is totally arbitrary based of terminal velocity ~20
     this.ray = new Ray({ mode: Ray.CLOSEST, collisionMask: SCENERY_GROUP })
     this.raycastResult = new RaycastResult()
