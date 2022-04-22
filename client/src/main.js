@@ -29,7 +29,9 @@ const gamepad_options = {
   aimup: 'r',
   aimdown: 'l',
   run: 'lt',
-  __locked: ['up', 'down', 'left', 'right'],
+  pause: 'start',
+  // TODO __locked gets overridden by local storage
+  __locked: ['up', 'down', 'left', 'right', 'start'],
 }
 
 const app = createApp(App)

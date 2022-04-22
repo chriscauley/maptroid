@@ -30,12 +30,13 @@ export default {
   computed: {
     items() {
       const taken = {}
+      const { __locked = [] } = this.$gamepad.config
       const items = Object.entries(this.$gamepad.config).map(([key, value]) => {
         taken[value] = (taken[value] || 0) + 1
         return { key, value }
       })
       items.forEach((i) => (i.conflict = taken[i.value] > 1))
-      return items.filter((i) => i.key !== '__locked')
+      return items.filter((i) => i.key !== '__locked' && !__locked.includes(i.value))
     },
   },
   mounted() {

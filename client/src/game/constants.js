@@ -27,6 +27,7 @@ export const PLAYER_ACTIONS = [
   'run',
   'aimup',
   'aimdown',
+  'pause',
 ]
 
 export const POSTURE = {

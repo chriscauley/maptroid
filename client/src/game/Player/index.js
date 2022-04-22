@@ -137,9 +137,18 @@ export default class Player extends Controller {
   }
 
   press(key) {
-    const { posture } = this.state
-    this._last_pressed_at[key] = new Date().valueOf()
     this.keys[key] = 1
+    if (this.game.paused) {
+      if (key === 'pause') {
+        this.game.paused = false
+        this.updatePointing()
+      }
+      return
+    }
+
+    // TODO there may be possible glitchiness with thes next line being after the pause logic
+    this._last_pressed_at[key] = new Date().valueOf()
+    const { posture } = this.state
     if (key === 'jump') {
       this._requestJump = true
     } else if (key === 'shoot1') {
@@ -159,6 +168,8 @@ export default class Player extends Controller {
       } else if (posture === POSTURE.crouch) {
         this.setPosture(POSTURE.ball)
       }
+    } else if (key === 'pause') {
+      this.game.paused = true
     }
     this.updatePointing()
   }
@@ -185,6 +196,9 @@ export default class Player extends Controller {
 
   release(key) {
     this.keys[key] = 0
+    if (this.game.paused) {
+      return
+    }
     if (key === 'jump') {
       this._requestUnJump = true
     } else if (key === 'shoot1') {
