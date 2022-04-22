@@ -32,12 +32,12 @@
 </template>
 
 <script>
-import store from './store'
 import { schema } from './Form.vue'
 
 export default {
   props: {
     sprite: Object,
+    storage: Object,
   },
   data() {
     return {
@@ -54,7 +54,7 @@ export default {
   },
   computed: {
     animation() {
-      return store.getAnimation(this.sprite.name)
+      return this.storage.getAnimation(this.sprite.name)
     },
     preset: {
       get() {
@@ -69,7 +69,7 @@ export default {
         } else {
           sprite.preset = value
         }
-        store.save()
+        this.storage.save()
       },
     },
   },
@@ -84,7 +84,7 @@ export default {
       clearTimeout(this.timeout)
       this.timeout = setTimeout(this.tick, this.interval)
       const { animation } = this
-      if (!animation.canvas) {
+      if (!animation.canvas || !animation.frames.length) {
         return
       }
       this.frame_no++
@@ -92,7 +92,7 @@ export default {
       const ctx = canvas.getContext('2d')
       ctx.clearRect(0, 0, canvas.width, canvas.height)
       ctx.imageSmoothingEnabled = false
-      const i = this.frame_no % this.animation.frames.length
+      const i = this.frame_no % animation.frames.length
       ctx.drawImage(
         animation.canvas,
         i * animation.width,
@@ -146,19 +146,19 @@ export default {
       const [dx0, dy0] = offsets[sprite_id] || [0, 0]
       offsets[sprite_id] = [dx0 + dx, dy0 + dy]
       this.drag = null
-      store.save()
+      this.storage.save()
     },
     save() {
-      store.renameAnimation(this.sprite.name, this.form_state.name)
+      this.storage.renameAnimation(this.sprite.name, this.form_state.name)
       this.editing = false
     },
     getFrameSrc(frame) {
       const canvas = document.createElement('canvas')
-      const [sx, sy, sw, sh] = store.state.data.rects[frame.sprite_id]
+      const [sx, sy, sw, sh] = this.storage.state.data.rects[frame.sprite_id]
       canvas.width = sw
       canvas.height = sh
       const ctx = canvas.getContext('2d')
-      ctx.drawImage(store.state.img, sx, sy, sw, sh, 0, 0, sw, sh)
+      ctx.drawImage(this.storage.state.img, sx, sy, sw, sh, 0, 0, sw, sh)
       return canvas.toDataURL()
     },
   },

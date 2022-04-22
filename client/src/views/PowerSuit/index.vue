@@ -16,13 +16,13 @@
             <input type="checkbox" v-model="compare[animation.name]" @click.stop />
           </div>
           <div class="list-group-item">
-            <animation-form @save="store.addAnimation" />
+            <animation-form @save="storage.addAnimation" />
           </div>
         </div>
       </div>
       <div class="power-suit__left">
         <div class="power-suit__spritesheet">
-          <img src="/static/sm/power-suit.png" />
+          <img :src="storage.img_url" />
           <div
             v-for="rect in rects"
             :key="rect.sprite_id"
@@ -37,9 +37,9 @@
         <div class="list-group" v-if="selected">
           <div class="list-group-item">
             <div v-for="sprite in compare_sprites" :key="sprite.name">
-              <sprite-box :sprite="sprite" :rects="rects" :compare="true" />
+              <sprite-box :sprite="sprite" :rects="rects" :compare="true" :storage="storage" />
             </div>
-            <sprite-box :sprite="selected" :key="selected.name" />
+            <sprite-box :sprite="selected" :key="selected.name" :storage="storage" />
           </div>
         </div>
       </div>
@@ -51,22 +51,25 @@
 import AnimationForm from './Form.vue'
 import SpriteBox from './SpriteBox.vue'
 
-import store from './store'
+import Storage from './store' // TODO rename store.js to Storage.js
 
 export default {
   __route: {
-    path: '/sprite/power-suit/',
+    path: '/spritesheet/:sheetname/',
   },
   components: { SpriteBox, AnimationForm },
   data() {
-    return { selected: null, compare: {}, store }
+    return { selected: null, compare: {} }
   },
   computed: {
+    storage() {
+      return Storage(this.$route.params.sheetname)
+    },
     animations() {
-      return store.use()?.animations || {}
+      return this.storage.use()?.animations || {}
     },
     rects() {
-      return this.store.use()?.rects.map(([x, y, w, h], sprite_id) => ({
+      return this.storage.use()?.rects.map(([x, y, w, h], sprite_id) => ({
         sprite_id,
         style: {
           left: `${x}px`,
@@ -106,7 +109,7 @@ export default {
       } else {
         sprite_ids.push(sprite_id)
       }
-      store.save()
+      this.storage.save()
     },
     selectSprite(sprite) {
       this.selected = sprite

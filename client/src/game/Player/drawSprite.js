@@ -89,7 +89,12 @@ export default (player, ctx) => {
   ctx.imageSmoothingEnabled = false
   const { _width, height } = player.body.shapes[0]
   const [name, frame] = _getSprite(player)
-  const { img, sx, sy, sw, sh, offset_x, center } = PowerSuit.getAnimationParams(name, frame, true)
+  const spritesheet = PowerSuit('power-suit')
+  const { img, sx, sy, sw, sh, offset_x, center } = spritesheet.getAnimationParams(
+    name,
+    frame,
+    true,
+  )
   const dw = sw / 16
   const dh = sh / 16
   const base_x = -offset_x / 16

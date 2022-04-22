@@ -5,7 +5,7 @@ from unrest.views import index
 from main.views import list_dir, delete_file
 
 from maptroid.views import replace_svg_color, smile_ocr, save_sprite, sprite_distances, goto_room
-from sprite.views import power_suit
+from sprite.views import spritesheet
 
 # these views are registered using unrest.schema.register
 import maptroid.forms
@@ -40,7 +40,7 @@ urlpatterns = [
     re_path(f'^({"|".join(app_urls)})', index),
     path('api/list-dir/', list_dir),
     path('api/delete-file/', delete_file),
-    path('api/power-suit/', power_suit),
+    path('api/spritesheet/<name>/', spritesheet),
     path('api/replace-svg-color/', replace_svg_color),
     path('api/smile-ocr/', smile_ocr),
     path('api/save-sprite/', save_sprite),
