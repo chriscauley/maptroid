@@ -100,7 +100,7 @@ const SpriteSheet = (sheetname) => {
     }
     const sprite_id = animation.sprite_ids[index]
     const [sx, sy, sw, sh] = state.data.rects[sprite_id]
-    const offset_x = getOffset(animation, sprite_id)[0] + 5 // 5 px is from the 10px box used in aligning
+    const offset_x = getOffset(animation, sprite_id)[0] + 5 // add 5 because align box is 10 wide
     const center = animation.preset === 'center'
     return { img: flip ? state.flipped : state.img, sx, sy, sw, sh, offset_x, center }
   }

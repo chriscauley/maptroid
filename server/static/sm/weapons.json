@@ -1017,21 +1017,6 @@
       "offsets": {},
       "preset": "center"
     },
-    "bullets": {
-      "name": "bullets",
-      "sprite_ids": [
-        159,
-        158,
-        142,
-        133,
-        136,
-        134,
-        143,
-        160
-      ],
-      "offsets": {},
-      "preset": "center"
-    },
     "charging": {
       "name": "charging",
       "sprite_ids": [
@@ -1067,6 +1052,21 @@
       "sprite_ids": [
         71,
         73
+      ],
+      "offsets": {},
+      "preset": "center"
+    },
+    "missile": {
+      "name": "missile",
+      "sprite_ids": [
+        159,
+        158,
+        142,
+        133,
+        136,
+        134,
+        143,
+        160
       ],
       "offsets": {},
       "preset": "center"

@@ -59,12 +59,13 @@ export default class Player extends Controller {
     }
     this.inventory = {
       bomb: new inventory.BombController({ player: this }),
-      gun1: new inventory.BeamController({ player: this }),
+      gun1: new inventory.DustController({ player: this }),
       gun2: new inventory.ProjectileController({ player: this }),
       speedbooster: true, // TODO should this be a class
     }
     this.loadout = {
       shoot1: this.inventory.gun1,
+      shoot2: this.inventory.gun2,
       bomb: this.inventory.bomb,
     }
     const {
@@ -151,7 +152,7 @@ export default class Player extends Controller {
     }
 
     // TODO there may be possible glitchiness with thes next line being after the pause logic
-    this._last_pressed_at[key] = this.game.getNow()
+    this._last_pressed_at[key] = this.getNow()
     const { posture } = this.state
     if (key === 'jump') {
       this._requestJump = true
