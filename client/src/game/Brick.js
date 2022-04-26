@@ -29,11 +29,14 @@ const TYPES = {
   'grapple-break': {
     color: 'rgb(0, 128, 128)',
   },
+  default: {
+    color: 'rgb(255, 128, 128)',
+  },
 }
 
 export default class Brick {
   constructor(options) {
-    const _type = TYPES[options.type]
+    const _type = TYPES[options.type] || TYPES['default']
     const { max_hp = 1 } = _type
     const { game, x, y, width = 1, height = 1, type, hp = max_hp } = options
     Object.assign(this, { game, type, x, y, width, height, hp, _type, max_hp })
