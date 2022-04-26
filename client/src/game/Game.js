@@ -19,6 +19,7 @@ export default class Game extends p2.EventEmitter {
   constructor(canvas, options) {
     super()
     this.options = options
+    this.id = options.id
     this.canvas = canvas
     this.resize()
 
@@ -354,5 +355,14 @@ export default class Game extends p2.EventEmitter {
     const levels = [2, 4, 8, 16, 32, 64, 128]
     const index = clamp(levels.indexOf(this.zoom) + delta, 0, levels.length - 1)
     this.zoom = levels[index]
+  }
+
+  save() {
+    const options = {
+      world_id: this.world_controller.id,
+      room_id: this.current_room.id,
+      id: this.id,
+    }
+    this.emit({ type: 'save', options })
   }
 }

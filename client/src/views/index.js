@@ -5,8 +5,7 @@ import Downloads from './Downloads.vue'
 import FileBrowser from './FileBrowser.vue'
 import gamepad from '@/unrest/gamepad'
 import Home from './Home.vue'
-import Play from './Play.vue'
-import PlayMenu from './PlayMenu.vue'
+import play from './play'
 import SpriteSheet from './SpriteSheet'
 import ProcessDread from './ProcessDread.vue'
 import Trainer from './Trainer'
@@ -25,6 +24,7 @@ const { TestGamepad, ConfigureGamepad } = gamepad
 
 export default {
   ...dread,
+  ...play,
   About,
   Contact,
   Downloads,
@@ -32,8 +32,6 @@ export default {
   ConfigureGamepad,
   TestGamepad,
   Home,
-  Play,
-  PlayMenu,
   ProcessDread,
   Trainer,
   ScreenshotAnalyzer,

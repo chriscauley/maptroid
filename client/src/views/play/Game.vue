@@ -16,7 +16,7 @@ import Game from '@/game/Game'
 
 export default {
   __route: {
-    path: '/play/:world_slug/:room_id/',
+    path: '/play/:world_slug/:play_id/',
   },
   components: { DebugGame, GameCanvas, PauseMenu },
   mixins: [Mousetrap.Mixin],
@@ -47,12 +47,13 @@ export default {
   },
   async mounted() {
     await this.$store.route.fetchReady()
-    const room_id = parseInt(this.$route.params.room_id)
+    const play = await this.$store.play.fetchOne(this.$route.params.play_id)
     const { world, world_rooms: rooms, zones } = this.$store.route
-    const options = { world, rooms, zones, room_id }
+    const options = { world, rooms, zones, ...play }
 
     this.game = new Game(document.getElementById('game-canvas'), options)
     this.game.on('draw', this.draw)
+    this.game.on('save', (e) => this.$store.play.save(e.options))
     this.game.paused = false
   },
   unmounted() {

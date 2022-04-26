@@ -5,6 +5,7 @@ export default class WorldController {
   constructor(options) {
     const { world, rooms, zones, game } = options
     this.json = world
+    this.id = world.id
     Object.assign(this, { rooms, zones, game })
     this.zone_map = {}
     this.room_map = {}

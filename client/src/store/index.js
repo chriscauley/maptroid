@@ -4,6 +4,7 @@ import admin_options from './admin'
 import item from './item'
 import local from './local'
 import osd from './osd'
+import play from './play'
 import room from './room'
 import route from './route'
 import run from './run'
@@ -22,6 +23,7 @@ const modules = {
   item,
   local,
   osd,
+  play,
   room,
   run,
   smile,

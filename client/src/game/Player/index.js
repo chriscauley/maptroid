@@ -171,7 +171,8 @@ export default class Player extends Controller {
       if (posture === POSTURE.stand) {
         const type = this._last_collision?.body._type
         if (this.velocity[1] === 0 && ['ship', 'save-station'].includes(type)) {
-          // TODO save
+          this.game.save()
+          return
         } else {
           this.setPosture(POSTURE.crouch)
         }
