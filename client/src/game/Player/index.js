@@ -169,7 +169,12 @@ export default class Player extends Controller {
       }
     } else if (key === 'down') {
       if (posture === POSTURE.stand) {
-        this.setPosture(POSTURE.crouch)
+        const type = this._last_collision?.body._type
+        if (this.velocity[1] === 0 && ['ship', 'save-station'].includes(type)) {
+          // TODO save
+        } else {
+          this.setPosture(POSTURE.crouch)
+        }
       } else if (posture === POSTURE.crouch) {
         this.setPosture(POSTURE.ball)
       }

@@ -97,7 +97,7 @@ export default class Game extends p2.EventEmitter {
       })
     })
     this.player?.on('collide', (_result) => {
-      // console.log(_result)
+      this.player._last_collision = _result
     })
     // Set up key listeners
     PLAYER_ACTIONS.forEach((a) => {
@@ -186,6 +186,7 @@ export default class Game extends p2.EventEmitter {
     const body = new p2.Body({ position: [0, 0] })
     body.fromPolygon(coords.slice()) // NOTE p2 consumes coords so make a copy
     body.shapes.forEach((s) => Object.assign(s, options))
+    body._type = options._type
     this.p2_world.addBody(body)
     return body
   }

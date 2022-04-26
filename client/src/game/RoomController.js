@@ -98,13 +98,40 @@ export default class RoomController {
     const _xy16 = [16 * this.world_xy0[0], 16 * this.world_xy0[1]]
     this.data.geometry.inner.forEach((geo) => {
       // TODO see comment in invert json about geo.inner
-      const _transform = (xy) => vector.times(vector.add(xy, this.world_xy0), 16)
       this.static_shapes.push({
-        exterior: geo.exterior.map(_transform),
+        exterior: geo.exterior.map(this._room2world),
       })
     })
+    for (let { x, y, type } of this.data.plm_overrides) {
+      if (type === 'save-station') {
+        const exterior = [
+          [x, y],
+          [x + 2, y],
+          [x + 2, y - 0.5],
+          [x, y - 0.5],
+        ]
+        this.static_shapes.push({
+          color: 'red',
+          exterior: exterior.map((xy) => [xy[0] / 16, xy[1] / 16]).map(this._room2world),
+          type,
+        })
+      } else if (type === 'ship') {
+        const exterior = [
+          [x + 5, y - 0.5],
+          [x + 7, y - 0.5],
+          [x + 7, y - 1],
+          [x + 5, y - 1],
+        ]
+        this.static_shapes.push({
+          color: 'red',
+          exterior: exterior.map((xy) => [xy[0] / 16, xy[1] / 16]).map(this._room2world),
+          type,
+        })
+      }
+    }
   }
 
+  _room2world = (xy) => vector.times(vector.add(xy, this.world_xy0), 16)
   _addEdges() {
     const [room_x, room_y] = this.world_xy0
     this.edges = []
@@ -157,6 +184,8 @@ export default class RoomController {
     const shape_options = { collisionMask, collisionGroup: SCENERY_GROUP }
     // Add bts shapes
     this.static_shapes.forEach((shape) => {
+      shape_options._color = shape.color
+      shape_options._type = shape.type
       this.bodies.push(this.game.addStaticShape(shape.exterior, shape_options))
     })
   }

@@ -74,6 +74,8 @@ def main():
     keys = os.listdir(BTS_DIR)
     for key in keys:
         room = Room.objects.get(world__slug=world.slug, key=key)
+        if room.id not in [200, 49]:
+            continue
         if room.zone_id not in zone_ids:
             continue
         if room.data.get('trash'):
@@ -109,9 +111,21 @@ def main():
             for dx in range(w):
                 for dy in range(h):
                     shape_x_ys.append([BLOCK_SPRITE, x+dx, y+dy])
+
         polygons = [Polygon(sprite_to_xys(shape, x, y)) for shape, x, y in shape_x_ys]
 
-        room.data['geometry']['inner'] = polygons_to_geometry(polygons)
+        # cut out some plm_overrides
+        isolations = []
+        for sxy, slug in room.data.get('plm_overrides', {}).items():
+            x, y = [int(i) for i in sxy.split(',')]
+            if slug == 'save-station':
+                isolations.append([(x,y), (x+2,y), (x+2, y+0.5), (x,y+0.5)])
+            if slug == 'ship':
+                isolations.append([(x+5,y+0.5), (x+7,y+0.5), (x+7, y+1), (x+5,y+1)])
+        # scale the isolations
+        isolations = [[(x / 16, y / 16) for x, y in shape] for shape in isolations]
+
+        room.data['geometry']['inner'] = polygons_to_geometry(polygons, isolations)
 
         room.data['bts'] = {
             'sprites': list(set([s.id for s, x, y in (shape_x_ys + special_x_ys)])),

@@ -26,10 +26,12 @@ def get_room_walls(room):
     polygons = [_square(x, y) for x, y in get_screens(room)]
     return polygons_to_geometry(polygons)
 
-def polygons_to_geometry(polygons):
+def polygons_to_geometry(polygons, isolations=[]):
     multipolygon = unary_union(polygons)
     if isinstance(multipolygon, Polygon):
         multipolygon = MultiPolygon([multipolygon])
+    for shape in isolations:
+        multipolygon = multipolygon.difference(Polygon(shape))
     return [
         {
             'exterior': [list(p) for p in polygon.exterior.coords[:-1]],
