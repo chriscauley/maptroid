@@ -229,6 +229,7 @@ def make_walls_image(zone, dest):
                 for dy in range(h):
                     zx = 16 * (x + dx + room_x * 16)
                     zy = 16 * (y + dy + room_y * 16)
+                    stamp_map.pop((zx, zy), None)
             zxy = (16 * (x + room_x * 16), 16 * (y + room_y * 16))
             stamp_map[zxy] = type_
         zone_image = draw_doors(zone_image, doors, zone.world.slug)
