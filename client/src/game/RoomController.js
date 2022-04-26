@@ -1,5 +1,6 @@
 import { cloneDeep } from 'lodash'
-import { vector } from '@unrest/geo'
+import { vec2 } from 'p2'
+import { vector, mod } from '@unrest/geo'
 
 import Room from '@/models/Room'
 import Brick from './Brick'
@@ -137,18 +138,18 @@ export default class RoomController {
     this.edges = []
     this.data.exit.forEach(({ x, y, width, height }) => {
       let target_dxy
-      if (x % 16 === 15) {
+      if (mod(x, 16) === 15) {
         x -= 3
         width += 3
         target_dxy = [1, 0]
-      } else if (x % 16 === 0) {
+      } else if (mod(x, 16) === 0) {
         width += 3
         target_dxy = [-1, 0]
-      } else if (y % 16 === 0) {
+      } else if (mod(y, 16) === 15) {
+        y -= 3
         height += 3
         target_dxy = [0, 1]
-      } else if (y % 16 === 15) {
-        y -= 3
+      } else if (mod(y, 16) === 0) {
         height += 3
         target_dxy = [0, -1]
       } else {
@@ -163,6 +164,10 @@ export default class RoomController {
       const body = this.game.addStaticBox([center_x, center_y, width, height], options)
       this.bodies.push(body)
       const screen_xy = vector.add(this.world_xy0, [parseInt(x / 16), parseInt(y / 16)])
+      if (target_dxy[1] === -1) {
+        // Issue #182000795
+        screen_xy[1] ++
+      }
       body._target_xy = vector.add(screen_xy, target_dxy)
       this.edges.push(body)
     })
@@ -214,6 +219,11 @@ export default class RoomController {
         return setPosition([x, y], [1, 1.5])
       }
     }
-    throw 'Unable to find initial player placement'
+    const { entrance_number } = player.state
+    let edge = this.edges.find((e) => e._entrance_number == entrance_number)
+    if (!edge) {
+      edge = this.edges[0]
+    }
+    return (player.body.position = vec2.clone(edge.position))
   }
 }

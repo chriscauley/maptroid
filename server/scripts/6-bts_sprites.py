@@ -74,8 +74,6 @@ def main():
     keys = os.listdir(BTS_DIR)
     for key in keys:
         room = Room.objects.get(world__slug=world.slug, key=key)
-        if room.id not in [200, 49]:
-            continue
         if room.zone_id not in zone_ids:
             continue
         if room.data.get('trash'):

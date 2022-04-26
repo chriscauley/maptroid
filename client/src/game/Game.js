@@ -230,6 +230,11 @@ export default class Game extends p2.EventEmitter {
     this.ctx.restore()
   }
 
+  xy2screenxy(xy) {
+    // YFLIP double negative is because floor(-0.99) = -1
+    return [Math.floor(xy[0] / 16), -Math.floor(-xy[1] / 16)]
+  }
+
   render() {
     const { width, height } = this.canvas
     this.ctx.fillStyle = 'black'
@@ -265,6 +270,7 @@ export default class Game extends p2.EventEmitter {
       const x = mouse_x - (0.5 * width) / zoom - this.cameraPos[0]
       const y = mouse_y + (0.5 * height) / zoom - this.cameraPos[1] // yflip
       this.mouse._world_xy = [x, y]
+      this.mouse._world_screen = this.xy2screenxy([x,y])
       this.mouse.world_xy = [Math.floor(x), Math.floor(y)]
     }
 
