@@ -169,6 +169,8 @@ export default class RoomController {
         screen_xy[1]++
       }
       body._target_xy = vector.add(screen_xy, target_dxy)
+      body._room = this
+      body._entrance_number = `${x},${y}`
       this.edges.push(body)
     })
   }

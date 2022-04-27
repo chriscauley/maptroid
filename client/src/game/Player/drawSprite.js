@@ -13,7 +13,7 @@ const _poses = {
   zenith: 1,
   upward: 2,
   downward: 3,
-  down: undefined, // TODO need to be able to shoot down from stainging
+  down: 3, // TODO need to be able to shoot down from stainding
 }
 
 const _getSprite = (player) => {

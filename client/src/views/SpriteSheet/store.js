@@ -99,6 +99,10 @@ const SpriteSheet = (sheetname) => {
       throw `index=${index} out of range for animation name=${name}`
     }
     const sprite_id = animation.sprite_ids[index]
+    if (!state.data.rects[sprite_id]) {
+      console.warn('Offending animation:', animation)
+      throw `Animation "${name}@${index}" tried to access sprite_id${sprite_id}`
+    }
     const [sx, sy, sw, sh] = state.data.rects[sprite_id]
     const offset_x = getOffset(animation, sprite_id)[0] + 5 // add 5 because align box is 10 wide
     const center = animation.preset === 'center'
