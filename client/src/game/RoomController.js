@@ -166,7 +166,7 @@ export default class RoomController {
       const screen_xy = vector.add(this.world_xy0, [parseInt(x / 16), parseInt(y / 16)])
       if (target_dxy[1] === -1) {
         // Issue #182000795
-        screen_xy[1] ++
+        screen_xy[1]++
       }
       body._target_xy = vector.add(screen_xy, target_dxy)
       this.edges.push(body)

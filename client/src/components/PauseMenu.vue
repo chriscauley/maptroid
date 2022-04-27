@@ -60,6 +60,10 @@ export default {
           name: 'Beam',
           items: this.game.player.inventory.gun1.getItemList(),
         },
+        {
+          name: 'Dust Cannon',
+          items: this.game.player.inventory.gun2.getItemList(),
+        },
       ]
     },
   },

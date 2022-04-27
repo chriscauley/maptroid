@@ -27,16 +27,17 @@ export default {
     mousetrap() {
       const mousetrap = { enter: this.togglePause }
       if (this.game?.player && !this.game.paused) {
-        const { up, left, right, down, aimup, aimdown, shoot1, jump } = this.game.actions
+        const { up, left, right, down, aimup, aimdown, shoot1, jump, run } = this.game.actions
         Object.assign(mousetrap, {
-          up,
-          left,
-          right,
-          down,
-          q: aimup,
-          a: aimdown,
-          z: shoot1,
-          x: jump,
+          'up,shift+up': up,
+          'left,shift+left': left,
+          'right,shift+right': right,
+          'down,shift+down': down,
+          'q,Q': aimup,
+          'a,A': aimdown,
+          'z,Z': shoot1,
+          'x,X': jump,
+          shift: run,
           '+,=': () => this.game.adjustZoom(1),
           '-,_': () => this.game.adjustZoom(-1),
           0: () => (this.game.zoom = 32),
@@ -53,7 +54,7 @@ export default {
 
     this.game = new Game(document.getElementById('game-canvas'), options)
     this.game.on('draw', this.draw)
-    this.game.on('save', (e) => this.$store.play.save(e.options))
+    this.game.on('save', this.save)
     this.game.paused = false
   },
   unmounted() {
@@ -69,6 +70,10 @@ export default {
     },
     togglePause() {
       this.game.paused = !this.game.paused
+    },
+    save(event) {
+      this.$store.play.save(event.options)
+      this.$ui.toast.success('Game saved!')
     },
   },
 }

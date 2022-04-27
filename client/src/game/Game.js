@@ -11,8 +11,6 @@ import gamepad from '@/unrest/gamepad/gamepad'
 const FIXED_DELTA_TIME = 1 / 60
 const MAX_SUB_STEPS = 10
 
-window.p2 = p2
-
 const { vec2 } = p2
 
 export default class Game extends p2.EventEmitter {
@@ -58,7 +56,7 @@ export default class Game extends p2.EventEmitter {
         buttonUp: (button) => this.player.release(button),
       },
       pausemenu: {
-        show: 'map',
+        show: 'inventory',
       },
     })
 
@@ -78,7 +76,11 @@ export default class Game extends p2.EventEmitter {
     this.current_room.bindGame(this)
 
     // Create the character controller
-    this.player = new Player({ game: this, p2_world: this.p2_world, start: [0, 0] })
+    this.player = new Player({
+      game: this,
+      p2_world: this.p2_world,
+      state: this.options.player,
+    })
     this.current_room.positionPlayer(this.player)
     this.p2_world.on('postStep', () => {
       this.player.update(this.p2_world.lastTimeStep)
@@ -271,7 +273,7 @@ export default class Game extends p2.EventEmitter {
       const x = mouse_x - (0.5 * width) / zoom - this.cameraPos[0]
       const y = mouse_y + (0.5 * height) / zoom - this.cameraPos[1] // yflip
       this.mouse._world_xy = [x, y]
-      this.mouse._world_screen = this.xy2screenxy([x,y])
+      this.mouse._world_screen = this.xy2screenxy([x, y])
       this.mouse.world_xy = [Math.floor(x), Math.floor(y)]
     }
 
@@ -362,6 +364,7 @@ export default class Game extends p2.EventEmitter {
       world_id: this.world_controller.id,
       room_id: this.current_room.id,
       id: this.id,
+      player: this.player.getSaveJson(),
     }
     this.emit({ type: 'save', options })
   }

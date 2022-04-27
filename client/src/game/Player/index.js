@@ -22,16 +22,13 @@ function lerp(factor, start, end) {
 
 export default class Player extends Controller {
   constructor(options = {}) {
-    const { start = [0, 0] } = options
     Object.assign(options, {
       collisionMask: SCENERY_GROUP,
       velocityXSmoothing: 0.0001,
       skinWidth: 0.1,
     })
-    start[1] += 1
     options.body = new p2.Body({
       mass: 0,
-      position: start,
       fixedRotation: true,
       damping: 0,
       type: p2.Body.KINEMATIC,
@@ -51,7 +48,7 @@ export default class Player extends Controller {
 
     this.input = vec2.create()
     this.cheat = true
-    this.state = {
+    this.state = options.state || {
       posture: POSTURE.stand,
       health: 0, // will be healed after this.tech is set
       disabled: reactive({}),
@@ -59,8 +56,8 @@ export default class Player extends Controller {
     }
     this.inventory = {
       bomb: new inventory.BombController({ player: this }),
-      gun1: new inventory.DustController({ player: this }),
-      gun2: new inventory.ProjectileController({ player: this }),
+      gun1: new inventory.BeamController({ player: this }),
+      gun2: new inventory.DustController({ player: this }),
       speedbooster: true, // TODO should this be a class
     }
     this.loadout = {
@@ -422,5 +419,9 @@ export default class Player extends Controller {
 
   toggleItem(item) {
     this.state.disabled[item.slug] = !this.state.disabled[item.slug]
+  }
+
+  getSaveJson() {
+    return cloneDeep(this.state)
   }
 }
