@@ -18,10 +18,11 @@ export default class ProjectileController extends BaseController {
         this._shootBullet()
         this._shootBullet({ wave: 1 })
         this._shootBullet({ wave: -1 })
+      } else {
+        this._shootBullet()
+        this._shootBullet({ y_offset: 1 })
+        this._shootBullet({ y_offset: -1 })
       }
-      this._shootBullet()
-      this._shootBullet({ y_offset: 1 })
-      this._shootBullet({ y_offset: -1 })
     } else {
       if (this.enabled['wave-beam']) {
         this._shootBullet({ wave: 1 })

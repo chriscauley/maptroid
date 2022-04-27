@@ -31,4 +31,5 @@ export default () =>
     SpriteSheet('weapons').load(),
     load('wave-beam-bullets'),
     load('ice-beam-bullets'),
+    load('long-beam-bullets'),
   ])
