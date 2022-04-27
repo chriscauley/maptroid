@@ -150,7 +150,7 @@ export default class Bullet {
     const dy = shape_y - dh / 2
     ctx.drawImage(img, sx, sy, sw, sh, dx, dy, dw, dh)
     ctx.beginPath()
-    ctx.arc(0, 0, 0.2, 0, 2 * Math.PI)
+    ctx.arc(shape_x, shape_y, 0.2, 0, 2 * Math.PI)
     ctx.stroke()
     ctx.imageSmoothingEnabled = _ise
   }

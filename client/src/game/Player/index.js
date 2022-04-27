@@ -53,6 +53,8 @@ export default class Player extends Controller {
       disabled: reactive({}),
       collected: reactive({}),
     }
+    delete this.state.pointing // in case it was on saved state
+    this.state.posture = POSTURE.stand
     this.inventory = {
       bomb: new inventory.BombController({ player: this }),
       gun1: new inventory.BeamController({ player: this }),
@@ -407,6 +409,8 @@ export default class Player extends Controller {
   }
 
   getSaveJson() {
-    return cloneDeep(this.state)
+    const state = cloneDeep(this.state)
+    delete state.pointing
+    return state
   }
 }
