@@ -76,7 +76,8 @@ export default class Bullet {
     const { position, dxy } = aim(controller.player)
     this.dxy_frame = DXY_TO_FRAME[[Math.sign(dxy[0]), Math.sign(dxy[1])]]
     const velocity = vec2.scale(vec2.create(), dxy, SPEED)
-    this.reverse_velocity = vec2.scale(vec2.create(), velocity, -1 / 30)
+    this.forward_velocity = vec2.scale(vec2.create(), velocity, 1 / 60)
+    this.reverse_velocity = vec2.scale(vec2.create(), velocity, -1 / 60)
     this.wave = options.wave
     this.y_offset = options.y_offset || 0
 
@@ -90,6 +91,9 @@ export default class Bullet {
     }
 
     this.freq = controller.enabled['plasma-beam'] ? rad_per_ms / 2 : rad_per_ms
+    this.from = vec2.create()
+    this.to = vec2.create()
+    this.last_rays = [[this.from, this.to]]
 
     this.velocity0 = vec2.clone(velocity)
     this.controller = controller
@@ -101,19 +105,19 @@ export default class Bullet {
     this.controller.player.game.bindEntity(this)
     this.start = controller.player.getNow()
     this.setRenderer()
-    this.frame = 0
   }
   tick = () => {
-    this.frame++
     const { ray, raycastResult, player } = this.controller
     if (this.wave) {
       const dt = this.controller.player.getNow() - this.start
       this.body.shapes[0].position[1] = this.wave * Math.sin(this.freq * dt)
     }
     this.body.toWorldFrame(ray.from, this.body.shapes[0].position)
-    vec2.add(ray.to, ray.from, [RADIUS, RADIUS])
-    vec2.add(ray.from, ray.from, this.reverse_velocity)
+    vec2.add(ray.to, ray.from, this.reverse_velocity)
+    vec2.add(ray.from, ray.from, this.forward_velocity)
     ray.update()
+    vec2.copy(this.from, ray.from)
+    vec2.copy(this.to, ray.to)
     player.p2_world.raycast(raycastResult, ray)
     if (raycastResult.body) {
       player.p2_world.emit({
@@ -138,18 +142,16 @@ export default class Bullet {
   draw(ctx) {
     const _ise = ctx.imageSmoothingEnabled
     ctx.imageSmoothingEnabled = false
-    if (this._last && this.frame % 1) {
-      ctx.drawImage(...this._last)
-    } else {
-      const [shape_x, shape_y] = this.body.shapes[0].position
-      const { img, sx, sy, sw, sh } = this.renderer(this)
-      const dw = sw / 16
-      const dh = sh / 16
-      const dx = shape_x - dw / 2
-      const dy = shape_y - dh / 2
-      this._last = [img, sx, sy, sw, sh, dx, dy, dw, dh]
-      ctx.drawImage(img, sx, sy, sw, sh, dx, dy, dw, dh)
-    }
+    const [shape_x, shape_y] = this.body.shapes[0].position
+    const { img, sx, sy, sw, sh } = this.renderer(this)
+    const dw = sw / 16
+    const dh = sh / 16
+    const dx = shape_x - dw / 2
+    const dy = shape_y - dh / 2
+    ctx.drawImage(img, sx, sy, sw, sh, dx, dy, dw, dh)
+    ctx.beginPath()
+    ctx.arc(0, 0, 0.2, 0, 2 * Math.PI)
+    ctx.stroke()
     ctx.imageSmoothingEnabled = _ise
   }
 

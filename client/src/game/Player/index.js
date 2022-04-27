@@ -8,7 +8,6 @@ import Controller from './Controller'
 import drawSprite from './drawSprite'
 import { PLAYER_GROUP, SCENERY_GROUP, POSTURE } from '../constants'
 import inventory from '../inventory'
-import drawRay from '../drawRay'
 import getBeamRays from './getBeamRays'
 
 window.p2 = p2
@@ -397,24 +396,10 @@ export default class Player extends Controller {
 
   draw = (ctx) => {
     drawSprite(this, ctx)
-    const [x, y] = this.body.position
     const { width, height } = this.body.shapes[0]
     ctx.lineWidth = 2 / this.game.zoom
     ctx.strokeStyle = 'gray'
     ctx.strokeRect(-width / 2, -height / 2, width, height)
-
-    ctx.strokeStyle = 'red'
-    ctx.lineWidth = 1 / this.game.zoom
-    this.beam_rays.forEach((beam) => drawRay(ctx, beam))
-
-    ctx.save()
-    ctx.translate(-x, -y)
-    ctx.strokeStyle = 'red'
-    ctx.lineWidth = 1 / this.game.zoom
-    this.last_rays.forEach((debug) => drawRay(ctx, debug))
-
-    // this.loadout.shoot1.draw(ctx)
-    ctx.restore()
   }
 
   toggleItem(item) {

@@ -2,6 +2,7 @@ import { clamp } from 'lodash'
 import p2 from 'p2'
 
 import useAssets from './useAssets'
+import drawRay from './drawRay'
 import Player from './Player'
 import { SCENERY_GROUP, BULLET_GROUP, PLAYER_GROUP, PLAYER_ACTIONS } from './constants'
 import WorldController from './WorldController'
@@ -210,6 +211,14 @@ export default class Game extends p2.EventEmitter {
 
     if (body._entity?.draw) {
       body._entity.draw(this.ctx)
+      if (body._entity.last_rays) {
+        this.ctx.save()
+        this.ctx.strokeStyle = 'red'
+        this.ctx.lineWidth = 1 / this.zoom
+        this.ctx.translate(-body.position[0], -body.position[1])
+        body._entity.last_rays.forEach((debug) => drawRay(this.ctx, debug))
+        this.ctx.restore()
+      }
     } else if (s instanceof p2.Box) {
       this.ctx.fillRect(-s.width / 2, -s.height / 2, s.width, s.height)
     } else if (s instanceof p2.Circle) {
