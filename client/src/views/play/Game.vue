@@ -2,7 +2,7 @@
   <div>
     <game-canvas :game="game" @click="click" />
     <debug-game :game="game" v-if="game" />
-    <pause-menu v-if="game?.paused" :game="game" />
+    <pause-menu v-if="paused" :game="game" />
   </div>
 </template>
 
@@ -21,11 +21,11 @@ export default {
   components: { DebugGame, GameCanvas, PauseMenu },
   mixins: [Mousetrap.Mixin],
   data() {
-    return { game: null }
+    return { game: null, paused: false }
   },
   computed: {
     mousetrap() {
-      const mousetrap = { enter: this.togglePause }
+      const mousetrap = { enter: () => this.game?.togglePause() }
       if (this.game?.player && !this.game.paused) {
         const { up, left, right, down, aimup, aimdown, shoot1, jump, run } = this.game.actions
         Object.assign(mousetrap, {
@@ -55,6 +55,7 @@ export default {
     this.game = new Game(document.getElementById('game-canvas'), options)
     this.game.on('draw', this.draw)
     this.game.on('save', this.save)
+    this.game.on('pause', () => (this.paused = this.game.paused))
     this.game.paused = false
   },
   unmounted() {
@@ -67,9 +68,6 @@ export default {
     },
     draw(_event, _data) {
       this.game.ui = [{ type: 'box', xy: this.game.mouse.world_xy }]
-    },
-    togglePause() {
-      this.game.paused = !this.game.paused
     },
     save(event) {
       this.$store.play.save(event.options)

@@ -142,7 +142,7 @@ export default class Player extends Controller {
     this.keys[key] = 1
     if (this.game.paused) {
       if (key === 'pause') {
-        this.game.paused = false
+        this.game.togglePause()
         this.updatePointing()
       }
       return
@@ -177,7 +177,7 @@ export default class Player extends Controller {
         this.setPosture(POSTURE.ball)
       }
     } else if (key === 'pause') {
-      this.game.paused = true
+      this.game.togglePause()
     }
     this.updatePointing()
   }

@@ -70,11 +70,13 @@ const logVec = (...args) => console.log( // eslint-disable-line
 const _trash = vec2.create()
 
 export default class Bullet {
-  constructor(controller) {
+  constructor(controller, options) {
     const { position, dxy } = aim(controller.player)
     this.dxy_frame = DXY_TO_FRAME[[Math.sign(dxy[0]), Math.sign(dxy[1])]]
     const velocity = vec2.scale(vec2.create(), dxy, SPEED)
     this.reverse_velocity = vec2.scale(vec2.create(), velocity, -1 / 30)
+    this.wave = options.wave
+    this.y_offset = options.y_offset || 0
 
     // Add player's y velocity if they aren't pointing in the x direction
     if (!dxy[0]) {
@@ -91,10 +93,10 @@ export default class Bullet {
     const angle = Math.atan2(dxy[1], dxy[0])
     this.body = new p2.Body({ position, velocity, angle })
     this.body.addShape(new p2.Circle({ radius: RADIUS }))
+    this.body.shapes[0].position[1] = this.y_offset
     this.controller.player.game.bindEntity(this)
     this.start = controller.player.getNow()
     this.spritename = this.getSpriteName()
-    this.wave = 1
   }
   tick = () => {
     const { ray, raycastResult, player } = this.controller

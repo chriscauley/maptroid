@@ -88,6 +88,9 @@ export default class Game extends p2.EventEmitter {
       this.active_rooms.forEach((room) => {
         room.edges.forEach((body) => {
           if (body.aabb.overlaps(aabb)) {
+            this.current_room = body._room
+            this.player.state.entrance_number = body._entrance_number
+            this.player.state.room_id = body._entrance_number.room_id
             const target_room = this.world_controller.room_map[body._target_xy]
             if (target_room) {
               target_room.bindGame(this)
@@ -367,5 +370,9 @@ export default class Game extends p2.EventEmitter {
       player: this.player.getSaveJson(),
     }
     this.emit({ type: 'save', options })
+  }
+  togglePause() {
+    this.paused = !this.paused
+    this.emit({ type: 'pause', value: this.paused })
   }
 }
