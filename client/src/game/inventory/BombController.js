@@ -58,6 +58,9 @@ class Bomb {
     dxy[1] += 0.5 // bias vertical blasting to blast upwards
     const blast_velocity = dxy.map((i) => (Math.abs(i) < BLAST_RADIUS ? Math.sign(i) : 0))
     vec2.add(player._blast_velocity, player._blast_velocity, blast_velocity)
+
+    // This stops player from being snapped to ground
+    player.collisions.below = false
   }
 
   makeShape() {
