@@ -9,6 +9,8 @@ import drawSprite from './drawSprite'
 import { PLAYER_GROUP, SCENERY_GROUP, POSTURE } from '../constants'
 import inventory from '../inventory'
 import getBeamRays from './getBeamRays'
+import aim from './aim'
+import animate from './animate'
 
 window.p2 = p2
 
@@ -48,13 +50,16 @@ export default class Player extends Controller {
     this.input = vec2.create()
     this.cheat = true
     this.state = options.state || {
-      posture: POSTURE.stand,
       health: 0, // will be healed after this.tech is set
       disabled: reactive({}),
       collected: reactive({}),
     }
     delete this.state.pointing // in case it was on saved state
     this.state.posture = POSTURE.stand
+    this.aim = {
+      position: vec2.create(),
+      dxy: [0, 0],
+    }
     this.inventory = {
       bomb: new inventory.BombController({ player: this }),
       gun1: new inventory.BeamController({ player: this }),
@@ -246,6 +251,17 @@ export default class Player extends Controller {
   }
 
   update(deltaTime) {
+    this.aim = aim(this)
+    if (this.pointing === 'down' && this.collisions.below) {
+      this.pointing = undefined
+    }
+    if (
+      this.state.posture === POSTURE.crouch &&
+      this.collisions.below &&
+      !this.collisions.last_below
+    ) {
+      this.setPosture(POSTURE.stand)
+    }
     const { collisions, velocity, keys } = this
     const input = [(keys.right ? 1 : 0) - (keys.left ? 1 : 0), 0]
     // yflip
@@ -266,8 +282,8 @@ export default class Player extends Controller {
     const wallSliding = this.isWallsliding()
 
     if (wallSliding) {
-      // yflip
       if (velocity[1] < -this.wallSlideSpeedMax) {
+        // yflip
         velocity[1] = -this.wallSlideSpeedMax
       }
 

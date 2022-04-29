@@ -1,7 +1,6 @@
 import p2, { vec2 } from 'p2'
 import SpriteSheet from '@/views/SpriteSheet/store'
 
-import { POSTURE } from '../constants'
 import { getAsset } from '../useAssets'
 
 let next_bullet_id = 0
@@ -9,46 +8,8 @@ const RADIUS = 0.15
 
 const SPEED = 18
 const LIFETIME = 888 // Bullet should travel ~1 screen when fired at rest
-const root2over2 = Math.sqrt(2) / 2
 
 const BEAMS = ['plasma', 'spazer', 'wave', 'ice']
-
-const aim = (player) => {
-  const { body } = player
-  const position = vec2.copy([0, 0], body.position) // start at player center
-  position[1] = body.aabb.lowerBound[1] // bottom edge, center
-  const half_width = body.shapes[0].width / 2
-  const dx = player.collisions.faceDir
-  const dxy = [dx, 0]
-
-  const { pointing } = player.state
-  if (pointing === 'down') {
-    dxy[1] = -1
-    dxy[0] = 0
-  } else if (pointing === 'zenith') {
-    dxy[0] = 0
-    dxy[1] = 1
-    position[1] += body.shapes[0].height // top
-  } else if (pointing === 'upward') {
-    dxy[0] *= root2over2
-    dxy[1] = root2over2
-    position[1] += 2.5
-    position[0] += dx * half_width
-  } else if (pointing === 'downward') {
-    dxy[0] *= root2over2
-    dxy[1] = -root2over2
-    position[1] += 1.5
-    position[0] += dx * half_width
-  } else {
-    // pointing === null
-    position[1] += 1.5
-    position[0] += dx * half_width
-  }
-  if (player.state.posture === POSTURE.crouch) {
-    position[1]--
-  }
-  return { position, dxy }
-}
 
 const DXY_TO_FRAME = {
   '0,1': 0, // UP
@@ -73,7 +34,9 @@ const _trash = vec2.create()
 
 export default class Bullet {
   constructor(controller, options) {
-    const { position, dxy } = aim(controller.player)
+    const { dxy } = controller.player.aim
+    const position = vec2.clone(controller.player.aim.position)
+    vec2.add(position, controller.player.body.position, position)
     this.dxy_frame = DXY_TO_FRAME[[Math.sign(dxy[0]), Math.sign(dxy[1])]]
     const velocity = vec2.scale(vec2.create(), dxy, SPEED)
     this.forward_velocity = vec2.scale(vec2.create(), velocity, 1 / 60)
@@ -112,12 +75,12 @@ export default class Bullet {
       const dt = this.controller.player.getNow() - this.start
       this.body.shapes[0].position[1] = this.wave * Math.sin(this.freq * dt)
     }
-    this.body.toWorldFrame(ray.from, this.body.shapes[0].position)
-    vec2.add(ray.to, ray.from, this.reverse_velocity)
-    vec2.add(ray.from, ray.from, this.forward_velocity)
+    this.body.toWorldFrame(ray.to, this.body.shapes[0].position)
+    vec2.add(ray.from, ray.to, this.reverse_velocity)
+    vec2.add(ray.to, ray.to, this.forward_velocity)
     ray.update()
-    vec2.copy(this.from, ray.from)
     vec2.copy(this.to, ray.to)
+    vec2.copy(this.from, ray.from)
     player.p2_world.raycast(raycastResult, ray)
     if (raycastResult.body) {
       player.p2_world.emit({
@@ -168,17 +131,19 @@ export default class Bullet {
   }
 }
 
-const longRenderer = (index) => () => {
+const longRenderer = (index) => (bullet) => {
   const { img } = getAsset('long-beam-bullets')
   const sh = 7
-  return { img, sh, sw: 56, sx: 0, sy: index * sh }
+  const sw = bullet.controller.player.getNow() - bullet.start < 60 ? 28 : 56
+  return { img, sh, sw, sx: 0, sy: index * sh }
 }
 
 const chargedLongRenderer = (index) => (bullet) => {
   const { img } = getAsset('long-beam-bullets')
   const sh = 7
   const dy = Math.floor(bullet.controller.player.getNow() / 240) % 2 ? 0 : 1
-  return { img, sh, sw: 56, sx: 0, sy: (index + dy) * sh }
+  const sw = bullet.controller.player.getNow() - bullet.start < 60 ? 28 : 56
+  return { img, sh, sw, sx: 0, sy: (index + dy) * sh }
 }
 
 const weaponSheetRenderer = (spritename) => (bullet) => {
