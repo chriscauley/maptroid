@@ -30,6 +30,8 @@ const _getSprite = (player) => {
       return ['_poses' + dir, 5]
     } else if (pointing === 'downward') {
       return ['_poses' + dir, 6]
+    } else if (pointing === 'down') {
+      return ['_poses' + dir, 8]
     }
 
     // crouching + breathing

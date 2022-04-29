@@ -157,6 +157,9 @@ export default class Player extends Controller {
     // TODO there may be possible glitchiness with thes next line being after the pause logic
     this._last_pressed_at[key] = this.getNow()
     const { posture } = this.state
+    if (posture === POSTURE.spin && ['shoot1', 'shoot2'].includes(key)) {
+      this.setPosture(POSTURE.stand)
+    }
     if (key === 'jump') {
       this._requestJump = true
     } else if (key === 'shoot1') {
@@ -234,7 +237,7 @@ export default class Player extends Controller {
       this.state.pointing = 'upward'
     } else if (aimdown) {
       this.state.pointing = 'downward'
-    } else if (down) {
+    } else if (down && !this.collisions.below) {
       this.state.pointing = 'down'
     } else {
       this.state.pointing = undefined

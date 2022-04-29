@@ -52,6 +52,7 @@ export default class Game extends p2.EventEmitter {
       actions: {}, // input map
       paused: true,
       active_rooms: [],
+      animations: [],
       gamepad_options: {
         buttonDown: (button) => this.player.press(button),
         buttonUp: (button) => this.player.release(button),
@@ -201,7 +202,11 @@ export default class Game extends p2.EventEmitter {
   drawBody(body) {
     this.ctx.lineWidth = 0
     this.ctx.strokeStyle = 'none'
-    const [x, y] = body.interpolatedPosition
+
+    // NB for this next line, the p2.js tutorial I followed used interpolated position
+    // but that caused problems with rendering the charge ball and the bullet
+    const [x, y] = body.position
+
     const s = body.shapes[0]
     this.ctx.fillStyle = s._color || 'white'
     this.ctx.strokeStyle = s._color || 'white'
@@ -312,6 +317,7 @@ export default class Game extends p2.EventEmitter {
       }
     })
 
+    this.animations = this.animations.filter((a) => a())
     // Restore transform
     this.ctx.restore()
   }
