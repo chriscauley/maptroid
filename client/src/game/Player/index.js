@@ -79,13 +79,13 @@ export default class Player extends Controller {
       wallJumpClimb = [20, 20], // holding towards wall
       wallLeap = [20, 20], // holding away from wall
       wallJumpOff = [20, 20], // holding neither
-      timeToJumpApex = 1.533 / 2,
       tech = { bomb_linked: true, bomb_triggered: true, e_tanks: 0 },
-      maxJumpHeight = 7.1,
       minJumpHeight = 1.2,
       velocityXSmoothing = 0.2,
       velocityXMin = 0.5,
     } = cloneDeep(options)
+
+    this.setMaxJumpHeight(7.1, 1.533 / 2)
 
     Object.assign(this, {
       accelerationTimeAirborne,
@@ -95,9 +95,7 @@ export default class Player extends Controller {
       wallJumpClimb,
       wallJumpOff,
       wallLeap,
-      timeToJumpApex,
       tech,
-      maxJumpHeight,
       minJumpHeight,
       velocityXSmoothing,
       velocityXMin,
@@ -108,12 +106,6 @@ export default class Player extends Controller {
       run: 18,
       boost: 36,
     }
-
-    // yflip
-    this._gravity = this.gravity = -(2 * maxJumpHeight) / Math.pow(timeToJumpApex, 2)
-    this.maxJumpVelocity = Math.abs(this.gravity) * timeToJumpApex
-    this.minJumpVelocity = Math.sqrt(2 * Math.abs(this.gravity) * minJumpHeight)
-    this.terminalVelocity = -this.maxJumpVelocity
 
     this.velocity = vec2.create()
     this.scaledVelocity = vec2.create()
@@ -137,6 +129,16 @@ export default class Player extends Controller {
     }
     this._last_pressed_at = {}
     this.heal(Infinity)
+  }
+
+  setMaxJumpHeight(maxJumpHeight, timeToJumpApex) {
+    this.maxJumpHeight = maxJumpHeight
+    this.timeToJumpApex = timeToJumpApex
+    // yflip
+    this._gravity = this.gravity = -(2 * maxJumpHeight) / Math.pow(timeToJumpApex, 2)
+    this.maxJumpVelocity = Math.abs(this.gravity) * timeToJumpApex
+    this.minJumpVelocity = Math.sqrt(2 * Math.abs(this.gravity) * this.minJumpHeight)
+    this.terminalVelocity = -this.maxJumpVelocity
   }
 
   heal(amount) {
@@ -323,8 +325,12 @@ export default class Player extends Controller {
         }
       } else if (collisions.below) {
         // can only jump if standing on something
+        animate.pulseFeet(this.game, this.body, 'red')
         velocity[1] = this.maxJumpVelocity
-        if (keys.right && !collisions.right) {
+        if (this.state.speeding) {
+          this.setPosture(POSTURE.spin)
+          velocity[1] *= 1.55
+        } else if (keys.right && !collisions.right) {
           this.setPosture(POSTURE.spin)
           velocity[1] *= 1.1
         } else if (keys.left && !collisions.left) {
@@ -348,6 +354,18 @@ export default class Player extends Controller {
       }
     }
 
+    // check speed booster and set speeding
+    const x_speed = Math.abs(velocity[0])
+    if (this.keys.run && !this.state.speeding) {
+      if (Math.abs(x_speed - this.speed.boost) < 0.1) {
+        this.state.speeding = true
+        animate.pulseFeet(this.game, this.body, '#44ff44')
+      }
+    } else if (this.collisions.below && x_speed < this.speed.run) {
+      this.state.speeding = false
+    }
+
+    // determine new x velocity
     let targetVelocityX = input[0] * this.getMoveSpeed() // TODO issue #1
     if (
       Math.sign(targetVelocityX) === Math.sign(velocity[0]) &&
