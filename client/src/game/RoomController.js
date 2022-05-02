@@ -29,7 +29,7 @@ const invertXyMap = (object) => {
 
 const invertJson = (json) => {
   const bricks = Room.getGroupedBlocks(json)
-    .filter((b) => !b.type.endsWith('-exit'))
+    .filter((b) => !b.type.endsWith('-exit') && !b.type.endsWith('-empty'))
     .map((b) => {
       b.type = b.type.split(' -').pop()
       b.y = -b.y

@@ -318,10 +318,10 @@ export default class Game extends p2.EventEmitter {
       }
     })
 
-    this.active_rooms.forEach(r => {
+    this.active_rooms.forEach((r) => {
       this.ctx.save()
       this.ctx.imageSmoothingEnabled = false
-      this.ctx.scale(1/16, -1/16)
+      this.ctx.scale(1 / 16, -1 / 16)
       this.ctx.drawImage(r.img, 256 * r.world_xy0[0], -256 * r.world_xy0[1])
       this.ctx.restore()
     })
