@@ -15,7 +15,13 @@ const TYPES = {
     color: 'rgb(200, 200, 200)',
   },
   crumble: {
+    weak_to: 'crumble',
     color: 'rgb(255, 200, 200)',
+    onCollide(self, entity, result) {
+      if (entity.is_player && result.dxy[1] === -1) {
+        self.damage({ type: 'crumble', amount: 1 })
+      }
+    }
   },
   'power-bomb': {
     color: 'rgb(255, 255, 128)',
@@ -87,5 +93,8 @@ export default class Brick {
     }
     ctx.fillStyle = this._type.color
     ctx.fillRect(-width / 2, -height / 2, width, height)
+  }
+  onCollide(entity, result) {
+    this._type.onCollide?.(this, entity, result)
   }
 }

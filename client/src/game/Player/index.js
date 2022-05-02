@@ -48,6 +48,7 @@ export default class Player extends Controller {
     this.game.bindEntity(this)
 
     this.input = vec2.create()
+    this.is_player = true
     this.cheat = true
     this.state = options.state || {
       health: 0, // will be healed after this.tech is set

@@ -104,8 +104,9 @@ export default class Game extends p2.EventEmitter {
         })
       })
     })
-    this.player?.on('collide', (_result) => {
-      this.player._last_collision = _result
+    this.player.on('collide', (result) => {
+      this.player._last_collision = result
+      result.body._entity?.onCollide(this.player, result)
     })
     // Set up key listeners
     PLAYER_ACTIONS.forEach((a) => {

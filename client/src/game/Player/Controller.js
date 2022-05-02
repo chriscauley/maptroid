@@ -43,7 +43,7 @@ export default class Controller extends RaycastController {
       // this debouncing is mostly to stop it from colliding on all of the rays
       const now = this.getNow()
       const body = this.raycastResult.body
-      if (now - this.lastCollisions[body.id] < 1000) {
+      if (now - this.lastCollisions[body.id] < 50) {
         return
       }
       this.lastCollisions[body.id] = now
