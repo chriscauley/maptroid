@@ -171,10 +171,12 @@ export default class Player extends Controller {
     } else if (key === 'shoot2') {
       this.loadout.shoot2?.press()
     } else if (key === 'up') {
-      if (posture === POSTURE.ball) {
-        this.setPosture(POSTURE.crouch)
-      } else if (posture === POSTURE.crouch) {
-        this.setPosture(POSTURE.stand)
+      if (this.canStand() || this.canStand(-2)) {
+        if (posture === POSTURE.ball) {
+          this.setPosture(POSTURE.crouch)
+        } else if (posture === POSTURE.crouch) {
+          this.setPosture(POSTURE.stand)
+        }
       }
     } else if (key === 'down') {
       if (posture === POSTURE.stand) {
@@ -198,9 +200,18 @@ export default class Player extends Controller {
     if (posture === this.state.posture) {
       return
     }
-    this.state.posture = posture
     const height = POSTURE._heights[posture]
     const old_height = this.body.shapes[0].height
+
+    if (this.collisions.below) {
+      // add half height difference to keep player on ground
+      this.body.position[1] += (height - old_height) / 2
+    } else if (height > old_height && !this.canStand(-1)) {
+      // add half height difference to stop player from clipping through floor
+      this.body.position[1] += (height - old_height) / 2
+    }
+
+    this.state.posture = posture
     this.body.removeShape(this.body.shapes[0])
     this.body.addShape(
       new p2.Box({
@@ -209,9 +220,6 @@ export default class Player extends Controller {
         collisionGroup: PLAYER_GROUP,
       }),
     )
-    if (this.collisions.below) {
-      this.body.position[1] += (height - old_height) / 2
-    }
   }
 
   release(key) {
@@ -343,7 +351,7 @@ export default class Player extends Controller {
       }
     } else if (collisions.below || keys.up || keys.down) {
       if (this.state.posture === POSTURE.spin) {
-        this.setPosture(POSTURE.stand)
+        this.setPosture(this.canStand() ? POSTURE.stand : POSTURE.crouch)
       }
     }
 
@@ -367,24 +375,7 @@ export default class Player extends Controller {
     }
 
     // determine new x velocity
-    let targetVelocityX = input[0] * this.getMoveSpeed() // TODO issue #1
-    if (
-      Math.sign(targetVelocityX) === Math.sign(velocity[0]) &&
-      Math.abs(targetVelocityX) < Math.abs(velocity[0])
-    ) {
-      targetVelocityX = velocity[0]
-    }
-    if (this.state.posture === POSTURE.spin && targetVelocityX === 0) {
-      targetVelocityX = velocity[0]
-    }
-
-    let smoothing = this.velocityXSmoothing
-    smoothing *= collisions.below ? this.accelerationTimeGrounded : this.accelerationTimeAirborne
-    const factor = 1 - Math.pow(smoothing, deltaTime)
-    velocity[0] = lerp(factor, velocity[0], targetVelocityX)
-    if (Math.abs(velocity[0]) < this.velocityXMin) {
-      velocity[0] = 0
-    }
+    this._updateVelocityX(input, velocity, deltaTime, collisions)
 
     this._blast_velocity.forEach((blast_count, i) => {
       if (blast_count) {
@@ -416,11 +407,62 @@ export default class Player extends Controller {
     this.beam_rays = getBeamRays(this)
   }
 
+  _updateVelocityX(input, velocity, deltaTime, collisions) {
+    if (this.collisions.turning) {
+      this.collisions.turn_for--
+      if (this.collisions.turn_for < 0) {
+        this.collisions.faceDir = this.collisions.turning
+        delete this.collisions.turning
+        delete this.collisions.turn_for
+      } else {
+        // turn velocity guessed at 0.8, should move 2 pixels during this time
+        velocity[0] = this.collisions.turning * 0.8
+        return
+      }
+    }
+
+    // Turning logic (only applies to standing or crouching)
+    if ([POSTURE.crouch, POSTURE.stand].includes(this.state.posture) && input[0]) {
+      if (input[0] !== this.collisions.faceDir) {
+        // trying to move in opposite direction of facing, must turn
+        this.collisions.turning = input[0]
+        this.collisions.turn_for = 8
+        return
+      } else if (this.state.posture === POSTURE.crouch) {
+        if (this.canStand()) {
+          this.setPosture(POSTURE.stand)
+        }
+      }
+    }
+
+    let targetVelocityX = input[0] * this.getMoveSpeed() // TODO issue #1
+    if (
+      Math.sign(targetVelocityX) === Math.sign(velocity[0]) &&
+      Math.abs(targetVelocityX) < Math.abs(velocity[0])
+    ) {
+      targetVelocityX = velocity[0]
+    }
+    if (this.state.posture === POSTURE.spin && targetVelocityX === 0) {
+      targetVelocityX = velocity[0]
+    }
+
+    let smoothing = this.velocityXSmoothing
+    smoothing *= collisions.below ? this.accelerationTimeGrounded : this.accelerationTimeAirborne
+    const factor = 1 - Math.pow(smoothing, deltaTime)
+    velocity[0] = lerp(factor, velocity[0], targetVelocityX)
+    if (Math.abs(velocity[0]) < this.velocityXMin) {
+      velocity[0] = 0
+    }
+  }
+
   getNow() {
     return this.game.getNow()
   }
 
   getMoveSpeed() {
+    if (this.state.posture === POSTURE.crouch) {
+      return 0
+    }
     if (this.state.posture === POSTURE.ball || !this.collisions.below) {
       return this.speed.walk
     }

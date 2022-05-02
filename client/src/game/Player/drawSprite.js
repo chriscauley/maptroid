@@ -21,6 +21,14 @@ const _getSprite = (player) => {
   const { pointing, posture } = player.state
   const [dx, _dy] = player.scaledVelocity
   const dir = player.collisions.faceDir === -1 ? '_left' : '_right'
+  if (player.collisions.turn_for > 0) {
+    let index = Math.floor(player.collisions.turn_for / 2)
+    if (player.collisions.turning === 1) {
+      index = 4 - index
+    }
+    const pose = `turn_${posture === POSTURE.crouch ? 'crouch' : 'stand'}ing`
+    return [pose, index]
+  }
   if (posture === POSTURE.ball) {
     return ['ball' + dir, getFrame(now, 8)]
   } else if (posture === POSTURE.crouch) {

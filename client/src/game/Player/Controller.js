@@ -1,5 +1,6 @@
 import p2 from 'p2'
 import RaycastController from './RaycastController'
+import { POSTURE } from '../constants'
 
 const { vec2, Ray, RaycastResult } = p2
 
@@ -165,6 +166,31 @@ export default class Controller extends RaycastController {
 
       this.raycastResult.reset()
     }
+  }
+
+  canStand(dy = 1) {
+    let { posture } = this.state
+    if (posture === POSTURE.stand) {
+      return false
+    }
+    if (posture === POSTURE.spin) {
+      posture = POSTURE.crouch
+    }
+    const { _heights } = POSTURE
+    const distance = _heights[posture + 1] - _heights[posture]
+    const { raycastOrigins } = this
+    for (let i = 0; i < this.verticalRayCount; i++) {
+      const from = raycastOrigins[dy > 0 ? 'topLeft' : 'bottomLeft'].slice()
+      from[0] += this.verticalRaySpacing * i
+      const to = [from[0], from[1] + distance * dy]
+      this.castRay(from, to)
+      if (this.raycastResult.body) {
+        break
+      }
+    }
+    const can_stand = !this.raycastResult.body
+    this.raycastResult.reset()
+    return can_stand
   }
 
   verticalCollisions(velocity) {

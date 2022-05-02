@@ -2554,18 +2554,35 @@
     },
     "turn_crouching": {
       "sprite_ids": [
+        247,
         301,
         299,
-        298
+        298,
+        244
       ],
       "offsets": {
+        "244": [
+          2,
+          0
+        ],
+        "247": [
+          9,
+          0
+        ],
+        "298": [
+          6,
+          0
+        ],
+        "299": [
+          7,
+          0
+        ],
         "301": [
           7,
           0
         ]
       },
-      "name": "turn_crouching",
-      "preset": "global"
+      "name": "turn_crouching"
     },
     "turn_standing": {
       "name": "turn_standing",
