@@ -4,9 +4,10 @@ import ZoneController from './ZoneController'
 export default class WorldController {
   constructor(options) {
     const { world, rooms, zones, game } = options
+    const { name, slug } = world
     this.json = world
     this.id = world.id
-    Object.assign(this, { rooms, zones, game })
+    Object.assign(this, { rooms, zones, game, name, slug })
     this.zone_map = {}
     this.room_map = {}
     this.xys_by_room_id = {}

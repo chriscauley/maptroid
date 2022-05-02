@@ -62,6 +62,7 @@ def process_zone(zone):
 
     # Make note of which xys to punch out in the holes
     occupied_xy_map = get_occupied_world_xys(zone)
+    kernel3 = np.ones((3,3), dtype=np.uint8)
 
     def make_layered_zone_image(zone, layers, dest):
         zone_x, zone_y, zw, zh = zone.data['world']['bounds']
@@ -76,6 +77,12 @@ def process_zone(zone):
             # some maps (eg ascent) look better if filled in a bit more
             zone_clear_holes = world.data.get('clear_holes') or zone.data.get('clear_holes')
             room_clear_holes = zone_clear_holes or room.data.get('clear_holes')
+
+            holes = []
+            for [dx, dy] in room.data.get('holes') or []:
+                zone_xy = f'{zone_x + room_x + dx},{zone_y + room_y + dy}'
+                if room_clear_holes or zone_xy in occupied_xy_map:
+                    holes.append([dx, dy])
 
             for layer in layers:
                 is_door_layer = layer == 'layer-1' and 'doors' in room.data
@@ -113,19 +120,25 @@ def process_zone(zone):
                                 interiors=interiors,
                             )
                     urcv.remove_color_alpha(layer_image, (0, 0, 0))
+                    forced_front = room.data.get('invert_layers') and layer == 'layer-2'
+                    if layer == 'layer-1' or forced_front:
+                        mask = cv2.cvtColor(layer_image, cv2.COLOR_BGR2GRAY)
+                        _, mask = cv2.threshold(mask, 1, 255, cv2.THRESH_BINARY)
+
+                        mask = cv2.morphologyEx(mask, cv2.MORPH_CLOSE, kernel3, iterations=1)
+                        # mask = cv2.dilate(mask, kernel3, iterations=2)
+                        canvas = layer_image.copy()
+                        canvas[(mask==255)] = [0,0,0,255]
+                        urcv.draw.paste_alpha(canvas, layer_image, 0, 0)
+                        layer_image = canvas
                     if is_door_layer:
                         draw_doors(layer_image, room.data['doors'], zone.world.slug)
+                    layer_image = img.make_holes(layer_image, holes)
                     cv2.imwrite(layer_path, layer_image)
                     _image = Image.fromarray(cv2.cvtColor(layer_image, cv2.COLOR_BGRA2RGBA))
                     room_image.paste(_image, (0, 0), mask=_image)
                     _image.close()
 
-            holes = []
-            for [dx, dy] in room.data.get('holes') or []:
-                zone_xy = f'{zone_x + room_x + dx},{zone_y + room_y + dy}'
-                if room_clear_holes or zone_xy in occupied_xy_map:
-                    holes.append([dx, dy])
-            room_image = img.make_holes(room_image, holes)
             room_image = img._coerce(room_image, 'pil')
             room_image.save(os.path.join(layers_dir, room.key))
             zone_image.paste(room_image, (room_x * 256, room_y * 256), mask=room_image)

@@ -84,6 +84,8 @@ export const fromString = (string, options = {}) => {
 
 export default class RoomController {
   constructor(json, world_controller) {
+    this.img = document.createElement('img')
+    this.img.src = `/media/sm_cache/${world_controller.slug}/layer-1/${json.key}`
     this.json = json
     this.data = invertJson(json)
     this.id = this.json.id
