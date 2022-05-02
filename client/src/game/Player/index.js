@@ -17,8 +17,11 @@ window.p2 = p2
 const { vec2 } = p2
 
 // math helpers
-function lerp(factor, start, end) {
-  return start + (end - start) * factor
+function lerp(start, end, delta) {
+  if (Math.abs(end - start) < delta) {
+    return end
+  }
+  return start + delta * Math.sign(end - start)
 }
 
 export default class Player extends Controller {
@@ -73,8 +76,6 @@ export default class Player extends Controller {
       bomb: this.inventory.bomb,
     }
     const {
-      accelerationTimeAirborne = 0,
-      accelerationTimeGrounded = 0.1,
       wallSlideSpeedMax = 3,
       wallStickTime = 0.25,
       wallJumpClimb = [20, 20], // holding towards wall
@@ -89,8 +90,6 @@ export default class Player extends Controller {
     this.setMaxJumpHeight(7.1, 1.533 / 2)
 
     Object.assign(this, {
-      accelerationTimeAirborne,
-      accelerationTimeGrounded,
       wallSlideSpeedMax,
       wallStickTime,
       wallJumpClimb,
@@ -375,7 +374,7 @@ export default class Player extends Controller {
     }
 
     // determine new x velocity
-    this._updateVelocityX(input, velocity, deltaTime, collisions)
+    this._updateVelocityX(input, velocity, deltaTime)
 
     this._blast_velocity.forEach((blast_count, i) => {
       if (blast_count) {
@@ -407,7 +406,7 @@ export default class Player extends Controller {
     this.beam_rays = getBeamRays(this)
   }
 
-  _updateVelocityX(input, velocity, deltaTime, collisions) {
+  _updateVelocityX(input, velocity, deltaTime) {
     if (this.collisions.turning) {
       this.collisions.turn_for--
       if (this.collisions.turn_for < 0) {
@@ -446,10 +445,8 @@ export default class Player extends Controller {
       targetVelocityX = velocity[0]
     }
 
-    let smoothing = this.velocityXSmoothing
-    smoothing *= collisions.below ? this.accelerationTimeGrounded : this.accelerationTimeAirborne
-    const factor = 1 - Math.pow(smoothing, deltaTime)
-    velocity[0] = lerp(factor, velocity[0], targetVelocityX)
+    const x_step = this.getMoveAcceleration(input) * deltaTime
+    velocity[0] = lerp(velocity[0], targetVelocityX, x_step)
     if (Math.abs(velocity[0]) < this.velocityXMin) {
       velocity[0] = 0
     }
@@ -457,6 +454,16 @@ export default class Player extends Controller {
 
   getNow() {
     return this.game.getNow()
+  }
+
+  getMoveAcceleration(input) {
+    if (!input[0]) {
+      return 80 // at full speed, letting go should stop in ~8 blocks
+    }
+    if (this.keys.run) {
+      return Math.abs(this.velocity[0]) < 13 ? 68.4 : 17.5
+    }
+    return 53.6
   }
 
   getMoveSpeed() {
