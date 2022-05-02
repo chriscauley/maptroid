@@ -66,12 +66,12 @@ def process_zone(zone):
 
     def make_layered_zone_image(zone, layers, dest):
         zone_x, zone_y, zw, zh = zone.data['world']['bounds']
-        zone_image = Image.new('RGBA', ((zw) * 256, (zh) * 256), (0, 0, 0, 0))
+        zone_image = np.zeros((zh * 256, zw * 256, 4), dtype=np.uint8)
         layers_dir = mkdir(CACHE_DIR, '+'.join(layers))
 
         for room in rooms:
             room_x, room_y, width, height = room.data['zone']['bounds']
-            room_image = Image.new('RGBA', (int(width) * 256, int(height) * 256), (0, 0, 0, 255))
+            room_image = np.zeros((int(height) * 256, int(width) * 256, 4), dtype=np.uint8)
 
             # this allows the clear_holes preference to be set from the top down
             # some maps (eg ascent) look better if filled in a bit more
@@ -126,25 +126,20 @@ def process_zone(zone):
                         _, mask = cv2.threshold(mask, 1, 255, cv2.THRESH_BINARY)
 
                         mask = cv2.morphologyEx(mask, cv2.MORPH_CLOSE, kernel3, iterations=1)
-                        # mask = cv2.dilate(mask, kernel3, iterations=2)
                         canvas = layer_image.copy()
                         canvas[(mask==255)] = [0,0,0,255]
                         urcv.draw.paste_alpha(canvas, layer_image, 0, 0)
                         layer_image = canvas
                     if is_door_layer:
                         draw_doors(layer_image, room.data['doors'], zone.world.slug)
-                    layer_image = img.make_holes(layer_image, holes)
+                    for x, y in holes:
+                        layer_image[y*256:(y+1) * 256,x*256:(x+1) * 256,:] = [0,0,0,0]
                     cv2.imwrite(layer_path, layer_image)
-                    _image = Image.fromarray(cv2.cvtColor(layer_image, cv2.COLOR_BGRA2RGBA))
-                    room_image.paste(_image, (0, 0), mask=_image)
-                    _image.close()
+                    urcv.draw.paste_alpha(room_image, layer_image, 0, 0)
 
-            room_image = img._coerce(room_image, 'pil')
-            room_image.save(os.path.join(layers_dir, room.key))
-            zone_image.paste(room_image, (room_x * 256, room_y * 256), mask=room_image)
-            room_image.close()
-        zone_image.save(dest)
-        zone_image.close()
+            cv2.imwrite(os.path.join(layers_dir, room.key), room_image)
+            urcv.draw.paste_alpha(zone_image, room_image, room_x * 256, room_y * 256)
+        cv2.imwrite(dest, zone_image)
         png_to_dzi(dest)
 
     zone.normalize()
