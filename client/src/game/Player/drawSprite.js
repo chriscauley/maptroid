@@ -106,5 +106,12 @@ export default (player, ctx) => {
     base_y = -sh / 16 / 2
   }
   ctx.drawImage(img, sx, sy, sw, sh, base_x, base_y, dw, dh)
+
+  const { position } = player.aim
+  ctx.beginPath()
+  ctx.arc(position[0], position[1], 0.1, 0, 2 * Math.PI)
+  ctx.arc(player.body.position[0], player.body.position[1], 0.1, 0, 2 * Math.PI)
+  ctx.fill()
+
   ctx.imageSmoothingEnabled = _ise
 }

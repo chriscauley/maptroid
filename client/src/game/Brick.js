@@ -21,7 +21,7 @@ const TYPES = {
       if (entity.is_player && result.dxy[1] === -1) {
         self.damage({ type: 'crumble', amount: 1 })
       }
-    }
+    },
   },
   'power-bomb': {
     color: 'rgb(255, 255, 128)',

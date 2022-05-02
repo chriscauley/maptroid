@@ -3,7 +3,7 @@ from django.utils.text import slugify
 
 from maptroid.models import Zone, World
 
-NAME = 'Mini'
+NAME = 'Scm'
 
 ZONE_NAMES = ['Crateria', 'Brinstar', 'Norfair', 'Wrecked Ship', 'Maridia', 'Tourian']
 
