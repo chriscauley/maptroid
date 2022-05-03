@@ -217,7 +217,26 @@ export default class Game extends p2.EventEmitter {
 
     if (body._entity?.draw) {
       body._entity.draw(this.ctx)
-    } else if (s instanceof p2.Box) {
+    }
+    // TODO this should be in an x-ray layer
+    // TODO should also be available with debug enabled
+    // this.drawBts(body)
+
+    this.ctx.restore()
+
+    // TODO this should only be visible with debug
+    if (body._entity?.last_rays) {
+      this.ctx.save()
+      this.ctx.strokeStyle = 'red'
+      this.ctx.lineWidth = 1 / this.zoom
+      body._entity.last_rays.forEach((debug) => drawRay(this.ctx, debug))
+      this.ctx.restore()
+    }
+  }
+
+  drawBts(body) {
+    const s = body.shapes[0]
+    if (s instanceof p2.Box) {
       this.ctx.fillRect(-s.width / 2, -s.height / 2, s.width, s.height)
     } else if (s instanceof p2.Circle) {
       this.ctx.beginPath()
@@ -240,15 +259,6 @@ export default class Game extends p2.EventEmitter {
       })
     }
 
-    this.ctx.restore()
-
-    if (body._entity?.last_rays) {
-      this.ctx.save()
-      this.ctx.strokeStyle = 'red'
-      this.ctx.lineWidth = 1 / this.zoom
-      body._entity.last_rays.forEach((debug) => drawRay(this.ctx, debug))
-      this.ctx.restore()
-    }
   }
 
   xy2screenxy(xy) {
@@ -280,6 +290,15 @@ export default class Game extends p2.EventEmitter {
     }
 
     this.ctx.translate(this.cameraPos[0], this.cameraPos[1])
+
+    // draw layer-1
+    this.active_rooms.forEach((r) => {
+      this.ctx.save()
+      this.ctx.imageSmoothingEnabled = false
+      this.ctx.scale(1 / 16, -1 / 16)
+      this.ctx.drawImage(r.img, 256 * r.world_xy0[0], -256 * r.world_xy0[1])
+      this.ctx.restore()
+    })
 
     // Draw all bodies
     this.background_entities.forEach((e) => this.drawBody(e.body))
@@ -316,14 +335,6 @@ export default class Game extends p2.EventEmitter {
           this.ctx.setLineDash([])
         }
       }
-    })
-
-    this.active_rooms.forEach((r) => {
-      this.ctx.save()
-      this.ctx.imageSmoothingEnabled = false
-      this.ctx.scale(1 / 16, -1 / 16)
-      this.ctx.drawImage(r.img, 256 * r.world_xy0[0], -256 * r.world_xy0[1])
-      this.ctx.restore()
     })
 
     this.animations = this.animations.filter((a) => a())
