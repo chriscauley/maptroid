@@ -258,7 +258,6 @@ export default class Game extends p2.EventEmitter {
         this.ctx.closePath()
       })
     }
-
   }
 
   xy2screenxy(xy) {

@@ -67,6 +67,7 @@ export default class Bullet {
     this.body.shapes[0].position[1] = this.y_offset
     this.controller.player.game.bindEntity(this)
     this.start = controller.player.getNow()
+    this.charged = controller.is_charged
     this.setRenderer()
   }
   tick = () => {
@@ -121,7 +122,7 @@ export default class Bullet {
   setRenderer() {
     const { enabled } = this.controller
     let slug = BEAMS.filter((s) => enabled[s + '-beam']).join('_')
-    if (self.charged) {
+    if (this.charged) {
       slug = 'charged_' + slug
     }
     if (['', 'missile', 'super-missile'].includes(slug)) {

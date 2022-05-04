@@ -29,6 +29,7 @@ export default () =>
   Promise.all([
     SpriteSheet('power-suit').load(),
     SpriteSheet('weapons').load(),
+    load('charge-beam'),
     load('wave-beam-bullets'),
     load('ice-beam-bullets'),
     load('long-beam-bullets'),

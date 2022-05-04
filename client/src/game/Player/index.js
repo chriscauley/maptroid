@@ -64,6 +64,7 @@ export default class Player extends Controller {
       position: vec2.create(),
       dxy: [0, 0],
     }
+    this._charged = {}
     this.inventory = {
       bomb: new inventory.BombController({ player: this }),
       gun1: new inventory.BeamController({ player: this }),
@@ -146,7 +147,21 @@ export default class Player extends Controller {
     this.state.health = Math.min(this.state.health, 99 + 100 * this.tech.e_tanks)
   }
 
+  doMacro() {
+    // useful debug macros
+    if (this.keys.right) {
+      this.release('right')
+      this.press('left')
+    } else {
+      this.release('left')
+      this.press('right')
+    }
+  }
+
   press(key) {
+    if (key === 'special') {
+      this.doMacro()
+    }
     this.keys[key] = 1
     if (this.game.paused) {
       if (key === 'pause') {
@@ -233,6 +248,8 @@ export default class Player extends Controller {
       this.loadout[slot]?.release()
     } else if (key === 'shoot2') {
       this.loadout.shoot2?.release()
+    } else if (key === 'special') {
+      this.doMacro()
     }
     this.updatePointing()
   }
@@ -285,6 +302,7 @@ export default class Player extends Controller {
       this.gravity = 0
     }
     this._lastY = this.body.position[1]
+    this._lastX = this.body.position[0]
 
     if (velocity[1] > this.terminalVelocity) {
       // yflip
@@ -413,9 +431,13 @@ export default class Player extends Controller {
         this.collisions.faceDir = this.collisions.turning
         delete this.collisions.turning
         delete this.collisions.turn_for
+        velocity[0] = 0
+        return
       } else {
-        // turn velocity guessed at 0.8, should move 2 pixels during this time
-        velocity[0] = this.collisions.turning * 0.8
+        // turn velocity/acceleration guessed for 2 pixels walking, 2 blocks at full boost
+        const targetVelocityX = this.collisions.turning * 0.8
+        const x_step = 320 * deltaTime
+        velocity[0] = lerp(velocity[0], targetVelocityX, x_step)
         return
       }
     }
@@ -426,7 +448,6 @@ export default class Player extends Controller {
         // trying to move in opposite direction of facing, must turn
         this.collisions.turning = input[0]
         this.collisions.turn_for = 8
-        return
       } else if (this.state.posture === POSTURE.crouch) {
         if (this.canStand()) {
           this.setPosture(POSTURE.stand)

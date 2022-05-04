@@ -23,6 +23,7 @@ export const PLAYER_ACTIONS = [
   'right',
   'shoot1',
   'shoot2',
+  'special',
   'jump',
   'run',
   'aimup',
@@ -37,3 +38,5 @@ export const POSTURE = {
   spin: 3,
   _heights: [14 / 16, 30 / 16, 42 / 16, 24 / 16],
 }
+
+export const CHARGE_TIME = 1000

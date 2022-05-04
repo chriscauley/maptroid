@@ -45,4 +45,7 @@ export default class ProjectileController extends BaseController {
     Object.values(this.bullets).forEach((b) => b.tick())
   }
   release() {}
+  canCharge() {
+    return true // TODO
+  }
 }

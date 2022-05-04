@@ -27,7 +27,19 @@ export default {
     mousetrap() {
       const mousetrap = { enter: () => this.game?.togglePause() }
       if (this.game?.player && !this.game.paused) {
-        const { up, left, right, down, aimup, aimdown, shoot1, jump, run } = this.game.actions
+        const {
+          up,
+          left,
+          right,
+          down,
+          aimup,
+          aimdown,
+          shoot1,
+          shoot2,
+          jump,
+          run,
+          special,
+        } = this.game.actions
         Object.assign(mousetrap, {
           'up,shift+up': up,
           'left,shift+left': left,
@@ -36,7 +48,9 @@ export default {
           'q,Q': aimup,
           'a,A': aimdown,
           'z,Z': shoot1,
+          'w,W': shoot2,
           'x,X': jump,
+          'b,B': special,
           shift: run,
           '+,=': () => this.game.adjustZoom(1),
           '-,_': () => this.game.adjustZoom(-1),

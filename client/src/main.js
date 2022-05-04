@@ -23,13 +23,14 @@ auth.configure({
 
 const gamepad_options = {
   jump: 'a',
-  swap: 'b',
+  special: 'b',
   shoot1: 'x',
   shoot2: 'y',
   aimup: 'r',
   aimdown: 'l',
   run: 'lt',
   pause: 'start',
+  swap: 'select',
   // TODO __locked gets overridden by local storage
   __locked: ['up', 'down', 'left', 'right', 'start'],
 }
