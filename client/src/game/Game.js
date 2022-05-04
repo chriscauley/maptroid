@@ -350,16 +350,26 @@ export default class Game extends p2.EventEmitter {
     this.tick(time) // move game froward in time
     this.render() // draw to canvas
     this.emit({ type: 'draw', ctx: this.ctx })
+  }
+
+  getDeltaTime(time) {
+    return 1 / 60
+
+    // this is from the p2.js demo and I think is to mitigate lag spikes
+    // I think I'd rather just have the game step 1/60 seconds even if more/less time has passed
+    const deltaTime = this.lastTime ? (time - this.lastTime) / 1000 : 0
     this.lastTime = time
+    return Math.min(1 / 10, deltaTime)
   }
 
   tick(time) {
     // Compute elapsed time since last frame
-    let deltaTime = this.lastTime ? (time - this.lastTime) / 1000 : 0
-    deltaTime = Math.min(1 / 10, deltaTime)
+    const deltaTime = this.getDeltaTime(time)
 
     // Move physics bodies forward in time
-    !this.paused && this.p2_world.step(FIXED_DELTA_TIME, deltaTime, MAX_SUB_STEPS)
+    // uncomment to enable slow motion
+    const do_tick = !this.paused // && this.frame % 10 === 0
+    do_tick && this.p2_world.step(FIXED_DELTA_TIME, deltaTime, MAX_SUB_STEPS)
     this.frame++
   }
 

@@ -22,7 +22,7 @@ const _getSprite = (player) => {
   const { pointing, posture } = player.state
   const dir = player.collisions.faceDir === -1 ? '_left' : '_right'
   player._show_charge = false
-  if (player.collisions.turn_for > 0) {
+  if (player.collisions.turn_for >= 0) {
     let index = Math.floor(player.collisions.turn_for / 2)
     if (player.collisions.turning === 1) {
       index = 4 - index
@@ -50,7 +50,7 @@ const _getSprite = (player) => {
   }
   if (player.collisions.below) {
     // on ground
-    if (player._lastX === player.body.position[0]) {
+    if (Math.abs(player._lastX - player.body.position[0]) < 0.01) { // TODO player.state.moved_x(?)
       player._show_charge = true
       // not moving
       if (pointing) {
