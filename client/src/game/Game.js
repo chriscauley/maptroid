@@ -86,6 +86,8 @@ export default class Game extends p2.EventEmitter {
     this.current_room.positionPlayer(this.player)
     this.p2_world.on('postStep', () => {
       this.player.update(this.p2_world.lastTimeStep)
+
+      // this could all be in some kind of room.tick function
       const { aabb } = this.player.body
       this.active_rooms.forEach((room) => {
         room.edges.forEach((body) => {
@@ -96,12 +98,16 @@ export default class Game extends p2.EventEmitter {
             const target_room = this.world_controller.room_map[body._target_xy]
             if (target_room) {
               target_room.bindGame(this)
-              window._target_room = target_room
             } else {
               console.error('no room at', body._target_xy)
             }
           }
         })
+      })
+      this.current_room.doors.forEach((door) => {
+        if (door.needs_close && door.respawn_aabb.containsPoint(this.player.body.position)) {
+          door.closeDoors()
+        }
       })
     })
     this.player.on('collide', (result) => {
@@ -127,7 +133,6 @@ export default class Game extends p2.EventEmitter {
     this.p2_world.on('damage', (result) => {
       const { damage } = result
       this.entities[damage.body_id]?.damage?.(result.damage)
-      // console.log(_result)
     })
     this.p2_world.step(FIXED_DELTA_TIME, FIXED_DELTA_TIME, MAX_SUB_STEPS)
   }
@@ -295,7 +300,7 @@ export default class Game extends p2.EventEmitter {
       this.ctx.save()
       this.ctx.imageSmoothingEnabled = false
       this.ctx.scale(1 / 16, -1 / 16)
-      this.ctx.drawImage(r.img, 256 * r.world_xy0[0], -256 * r.world_xy0[1])
+      this.ctx.drawImage(r.fg_canvas, 256 * r.world_xy0[0], -256 * r.world_xy0[1])
       this.ctx.restore()
     })
 

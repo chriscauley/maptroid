@@ -3,17 +3,20 @@ import { vec2 } from 'p2'
 import { vector, mod } from '@unrest/geo'
 
 import Room from '@/models/Room'
-import Brick from './Brick'
+import Brick, { Door } from './Brick'
 import { SCENERY_GROUP, BULLET_GROUP, PLAYER_GROUP } from './constants'
 
 const _yflip = (xy) => [xy[0], -xy[1]] // YFLIP
 
 const invertDoor = ([x, y, orientation, color]) => {
-  if (['left', 'right'].includes(orientation)) {
-    // yflip - have to flip door by subtracting height from y
-    return { x, y: y - 4, orientation, color, width: 1, height: 4 }
+  if (orientation === 'left') {
+    return { x: x, y: -y, orientation, color, width: 0.5, height: 4 }
+  } else if (orientation === 'right') {
+    return { x: x + 0.5, y: -y, orientation, color, width: 0.5, height: 4 }
+  } else if (orientation === 'down') {
+    return { x, y: -y - 0.5, orientation, color, width: 4, height: 0.5 }
   }
-  return { x, y, orientation, color, width: 4, height: 1 }
+  return { x, y: -y, orientation, color, width: 4, height: 0.5 }
 }
 
 const invertBounds = ([x, y, width, height]) => {
@@ -32,7 +35,7 @@ const invertJson = (json) => {
     .filter((b) => !b.type.endsWith('-exit') && !b.type.endsWith('-empty'))
     .map((b) => {
       b.type = b.type.split(' -').pop()
-      b.y = -b.y
+      b.y = -b.y // y-flip
       return b
     })
   const data = {
@@ -84,8 +87,7 @@ export const fromString = (string, options = {}) => {
 
 export default class RoomController {
   constructor(json, world_controller) {
-    this.img = document.createElement('img')
-    this.img.src = `/media/sm_cache/${world_controller.slug}/layer-1/${json.key}`
+    this.fg_canvas = document.createElement('canvas')
     this.json = json
     this.data = invertJson(json)
     this.id = this.json.id
@@ -140,20 +142,26 @@ export default class RoomController {
     this.edges = []
     this.data.exit.forEach(({ x, y, width, height }) => {
       let target_dxy
+      let start_position
+      let orientation
       if (mod(x, 16) === 15) {
         x -= 3
         width += 3
         target_dxy = [1, 0]
+        start_position = [-2, 0]
       } else if (mod(x, 16) === 0) {
         width += 3
         target_dxy = [-1, 0]
+        start_position = [2, 0]
       } else if (mod(y, 16) === 15) {
         y -= 3
         height += 3
         target_dxy = [0, 1]
+        start_position = [0, -2]
       } else if (mod(y, 16) === 0) {
         height += 3
         target_dxy = [0, -1]
+        start_position = [0, 2.5]
       } else {
         console.warn('cannot place exit', x, y, width, height)
         return
@@ -173,6 +181,13 @@ export default class RoomController {
       body._target_xy = vector.add(screen_xy, target_dxy)
       body._room = this
       body._entrance_number = `${x},${y}`
+      body._entity = {
+        draw: (ctx) => {
+          const s = body.shapes[0]
+          ctx.fillRect(-s.width / 2, -s.height / 2, s.width, s.height)
+        },
+      }
+      body._start_position = start_position
       this.edges.push(body)
     })
   }
@@ -185,7 +200,7 @@ export default class RoomController {
     this.data.bricks.forEach(({ x, y, width, height, type }) => {
       x += this.world_xy0[0] * 16 + width / 2
       y += this.world_xy0[1] * 16 - height / 2
-      const brick = new Brick({ game: this.game, x, y, width, height, type })
+      const brick = new Brick({ x, y, width, height, type, room: this })
       this.bodies.push(brick.body)
     })
 
@@ -199,13 +214,29 @@ export default class RoomController {
     })
   }
 
+  _resetDoors() {
+    this.doors = []
+    this.data.doors.forEach(({ x, y, width, height, color, orientation }) => {
+      x += this.world_xy0[0] * 16 + width / 2
+      y += this.world_xy0[1] * 16 - height / 2
+      const door = new Door({ room: this, x, y, width, height, type: 'door', orientation, color })
+      this.bodies.push(door.body)
+      this.doors.push(door)
+    })
+  }
+
   bindGame(game) {
     if (this.game) {
       return
     }
+    this.img = document.createElement('img')
+    this.img.src = `/media/sm_cache/${this.world_controller.slug}/layer-1/${this.json.key}`
+    this.img.onload = this.resetCanvas
+
     game.active_rooms.push(this)
     this.game = game
     this._addBodies()
+    this._resetDoors()
     this._addEdges()
   }
 
@@ -217,10 +248,12 @@ export default class RoomController {
     }
     for (let { x, y, type } of this.data.plm_overrides) {
       if (type === 'ship') {
-        return setPosition([x, y], [6, 1])
+        setPosition([x, y], [6, 1])
+        return
       }
       if (type === 'save-station') {
-        return setPosition([x, y], [1, 1.5])
+        setPosition([x, y], [1, 1.5])
+        return
       }
     }
     const { entrance_number } = player.state
@@ -228,6 +261,15 @@ export default class RoomController {
     if (!edge) {
       edge = this.edges[0]
     }
-    return (player.body.position = vec2.clone(edge.position))
+    const p = (player.body.position = vec2.clone(edge.position))
+    vec2.add(p, p, edge._start_position)
+    return
+  }
+
+  resetCanvas = () => {
+    this.fg_canvas.width = this.img.width
+    this.fg_canvas.height = this.img.height
+    const ctx = this.fg_canvas.getContext('2d')
+    ctx.drawImage(this.img, 0, 0)
   }
 }

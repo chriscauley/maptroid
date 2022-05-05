@@ -1,4 +1,5 @@
 // Bricks are destructable terrain
+import { minBy } from 'lodash'
 import { SCENERY_GROUP, PLAYER_GROUP, BULLET_GROUP } from './constants'
 import p2 from 'p2'
 
@@ -38,14 +39,18 @@ const TYPES = {
   default: {
     color: 'rgb(255, 128, 128)',
   },
+  door: {
+    color: 'blue',
+  },
 }
 
 export default class Brick {
   constructor(options) {
     const _type = TYPES[options.type] || TYPES['default']
     const { max_hp = 1 } = _type
-    const { game, x, y, width = 1, height = 1, type, hp = max_hp } = options
-    Object.assign(this, { game, type, x, y, width, height, hp, _type, max_hp })
+    const { x, y, width = 1, height = 1, type, hp = max_hp, room } = options
+    Object.assign(this, { type, x, y, width, height, hp, _type, max_hp, room })
+    this.game = room.game
     this.makeBody()
     this.game.bindEntity(this)
   }
@@ -55,6 +60,7 @@ export default class Brick {
     const shape = new p2.Box({ collisionGroup: SCENERY_GROUP, collisionMask, width, height })
     const body = (this.body = new p2.Body({ position: [x, y] }))
     body.addShape(shape)
+    body.updateAABB()
   }
   damage(event) {
     if (this._type.weak_to && !this._type.weak_to.includes(event.type)) {
@@ -91,10 +97,70 @@ export default class Brick {
         ctx.globalAlpha = Math.floor(this.game.p2_world.time * 10) % 2 ? 0.5 : 0.25
       }
     }
-    ctx.fillStyle = this._type.color
-    ctx.fillRect(-width / 2, -height / 2, width, height)
+    ctx.strokeStyle = this._type.color
+    ctx.lineWidth = 4 / 16
+    ctx.strokeRect(-width / 2, -height / 2, width, height)
   }
   onCollide(entity, result) {
     this._type.onCollide?.(this, entity, result)
+  }
+}
+
+export class Door extends Brick {
+  constructor(options) {
+    super(options)
+    const { color, orientation } = options
+    Object.assign(this, { color, orientation })
+    this.respawn_aabb = new p2.AABB()
+    this.respawn_aabb.copy(this.body.aabb)
+    if (orientation === 'left') {
+      this.respawn_aabb.upperBound[0] -= 1
+      this.respawn_aabb.lowerBound[0] -= 1
+    } else if (orientation === 'right') {
+      this.respawn_aabb.upperBound[0] += 1
+      this.respawn_aabb.lowerBound[0] += 1
+    } else if (orientation === 'up') {
+      this.respawn_aabb.upperBound[0] += 8
+      this.respawn_aabb.lowerBound[0] -= 8
+      this.respawn_aabb.upperBound[1] += 2
+      this.respawn_aabb.lowerBound[1] += 2
+    } else if (orientation === 'down') {
+      this.respawn_aabb.upperBound[0] += 8
+      this.respawn_aabb.lowerBound[0] -= 8
+      this.respawn_aabb.upperBound[1] -= 2
+      this.respawn_aabb.lowerBound[1] -= 2
+    }
+  }
+  damage(event) {
+    if (this._type.weak_to && !this._type.weak_to.includes(event.type)) {
+      return
+    }
+    const edge = this.room.edges.find((e) => e.aabb.containsPoint(this.body.position))
+    const target_room = this.game.world_controller.room_map[edge?._target_xy]
+    if (target_room) {
+      target_room.bindGame(this.game)
+      const target_door = minBy(target_room.doors, (door) =>
+        p2.vec2.squaredDistance(edge.position, door.body.position),
+      )
+      this.game.backgroundEntity(target_door)
+      target_door.hidden = true
+      target_door.needs_close = this
+    } else {
+      console.warn('unable to find target room')
+    }
+    this.game.backgroundEntity(this)
+    this.hidden = true
+  }
+  draw(ctx) {
+    if (!this.hidden) {
+      super.draw(ctx)
+    }
+  }
+  closeDoors() {
+    this.game.foregroundEntity(this)
+    this.hidden = false
+    this.game.foregroundEntity(this.needs_close)
+    this.needs_close.hidden = false
+    delete this.needs_close
   }
 }

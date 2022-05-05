@@ -50,7 +50,8 @@ const _getSprite = (player) => {
   }
   if (player.collisions.below) {
     // on ground
-    if (Math.abs(player._lastX - player.body.position[0]) < 0.01) { // TODO player.state.moved_x(?)
+    if (Math.abs(player._lastX - player.body.position[0]) < 0.01) {
+      // TODO player.state.moved_x(?)
       player._show_charge = true
       // not moving
       if (pointing) {
@@ -146,7 +147,6 @@ const whiten = (img, number) => {
       }
     }
     ctx.putImageData(idata, 0, 0)
-    document.body.appendChild(canvas)
   }
   return img[key]
 }
@@ -195,10 +195,10 @@ export default (player, ctx) => {
   }
 
   // TODO draw gun with debug enabled
-  // ctx.beginPath()
-  // ctx.arc(position[0], position[1], 0.1, 0, 2 * Math.PI)
-  // ctx.arc(player.body.position[0], player.body.position[1], 0.1, 0, 2 * Math.PI)
-  // ctx.fill()
+  ctx.beginPath()
+  ctx.arc(position[0], position[1], 0.1, 0, 2 * Math.PI)
+  ctx.arc(player.body.position[0], player.body.position[1], 0.1, 0, 2 * Math.PI)
+  ctx.fill()
 
   ctx.imageSmoothingEnabled = _ise
 }
