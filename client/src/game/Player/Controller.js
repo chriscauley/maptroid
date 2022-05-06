@@ -105,7 +105,7 @@ export default class Controller extends RaycastController {
     })
     const distance = Math.min(...distances)
     this.body.position[1] -= distance * 0.9 // 0.9 is because if it's too close it'll clip
-    this.verticalCollisions(this.velocity)
+    this.collisions.below = this.collisions.below || distance !== 0
   }
 
   horizontalCollisions(velocity) {

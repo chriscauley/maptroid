@@ -26,8 +26,8 @@ const DXY_TO_FRAME = {
 // 2*PI rad/cycle * (1 cycle/16 frames) * (60 frame / 1000 ms)
 const rad_per_ms = 2 * Math.PI * (1 / 16) * (60 / 1000)
 
-const logVec = (...args) => console.log( // eslint-disable-line
-    ...args.map((v) => `${v[0].toFixed(1)},${v[1].toFixed(1)}`),
+vec2.log = (...args) => console.log( // eslint-disable-line
+    ...args.map((v) => (isNaN(v?.[0]) ? v : `${v[0].toFixed(1)},${v[1].toFixed(1)}`)),
   )
 
 const _trash = vec2.create()
