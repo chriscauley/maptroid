@@ -124,9 +124,8 @@ export default class Game extends p2.EventEmitter {
 
     // Update the character controller after each physics tick.
     this.p2_world.on('postStep', () => {
-      const now = this.p2_world.time
-      const do_now = this._timeouts.filter((t) => t.when <= now)
-      this._timeouts = this._timeouts.filter((t) => t.when > now)
+      const do_now = this._timeouts.filter((t) => t.when <= this.frame)
+      this._timeouts = this._timeouts.filter((t) => t.when > this.frame)
       do_now.forEach((t) => t.action())
     })
 
@@ -159,7 +158,7 @@ export default class Game extends p2.EventEmitter {
   }
 
   setTimeout(action, delay) {
-    const created = this.p2_world.time
+    const created = this.frame
     const when = created + delay
     const id = this.TIMEOUT_ID
     const timeout = { action, when, created, id }
@@ -374,7 +373,8 @@ export default class Game extends p2.EventEmitter {
 
     // Move physics bodies forward in time
     // uncomment to enable slow motion
-    const do_tick = !this.paused // && this.frame % 10 === 0
+    const do_tick = !this.paused
+    // && this.frame % 10 === 0
     do_tick && this.p2_world.step(FIXED_DELTA_TIME, deltaTime, MAX_SUB_STEPS)
     this.frame++
   }

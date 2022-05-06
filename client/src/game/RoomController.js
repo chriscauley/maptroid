@@ -34,6 +34,7 @@ const invertJson = (json) => {
   const bricks = Room.getGroupedBlocks(json)
     .filter((b) => !b.type.endsWith('-exit') && !b.type.endsWith('-empty'))
     .map((b) => {
+      b.regrow = b.type.includes('-respawn') ? 50 : null
       b.type = b.type.split(' -').pop()
       b.y = -b.y // y-flip
       return b
@@ -196,10 +197,10 @@ export default class RoomController {
 
     // TODO populate bricks from json
     // Add bricks
-    this.data.bricks.forEach(({ x, y, width, height, type }) => {
+    this.data.bricks.forEach(({ x, y, width, height, type, regrow }) => {
       x += this.world_xy0[0] * 16 + width / 2
       y += this.world_xy0[1] * 16 - height / 2
-      const brick = new Brick({ x, y, width, height, type, room: this })
+      const brick = new Brick({ x, y, width, height, type, room: this, regrow })
       this.bodies.push(brick.body)
     })
 

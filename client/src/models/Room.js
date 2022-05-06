@@ -107,9 +107,12 @@ const getBlocks = (room, with_cre = false) => {
   })
 
   room.data.cre_overrides?.forEach(([x, y, w, h, name]) => {
-    const _class = `sm-block -${name}`
     range(w).forEach((dx) => {
-      range(h).forEach((dy) => (block_map[[x + dx, y + dy]] = _class))
+      range(h).forEach((dy) => {
+        const respawn = block_map[[x + dx, y + dy]]?.includes('-respawn') ? 'respawn' : 'unknown'
+        const _class = `sm-block -${respawn} -${name}`
+        block_map[[x + dx, y + dy]] = _class
+      })
     })
   })
   Object.values(room.data.doors || {}).forEach(([x, y, direction]) => {
@@ -118,6 +121,23 @@ const getBlocks = (room, with_cre = false) => {
     })
   })
   return block_map
+}
+
+const _2x2 = [
+  [
+    [0, 1],
+    [1, 0],
+    [1, 1],
+  ],
+  [[-1, 1]],
+]
+
+const _2x1 = [[[1, 0]], []]
+const _1x2 = [[[0, 1]], []]
+const _1x1 = [[], []] // noop
+const GEOMETRIES_BY_TYPE = {
+  default: [_2x2, _2x1, _1x2, _1x1],
+  crumble: [_1x1],
 }
 
 const getGroupedBlocks = (room) => {
@@ -157,24 +177,12 @@ const getGroupedBlocks = (room) => {
     return true
   }
 
-  const geometries = [
-    [
-      [
-        [0, 1],
-        [1, 0],
-        [1, 1],
-      ],
-      [[-1, 1]],
-    ], // 2x2
-    [[[1, 0]], []], // 2x1
-    [[[0, 1]], []], // 1x2
-    [[], []], // 1x1 (noop)
-  ]
-
   sortBy(blocks, ['y', 'x']).forEach((block) => {
     if (!block_map[block.sxy]) {
       return // block was removed in a previous loop
     }
+    const type = block.type.split(' -').pop()
+    const geometries = GEOMETRIES_BY_TYPE[type] || GEOMETRIES_BY_TYPE.default
     geometries.find(([includes, excludes]) => match(block, includes, excludes))
   })
   return results

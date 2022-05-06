@@ -29,7 +29,6 @@ export default class Player extends Controller {
     Object.assign(options, {
       collisionMask: SCENERY_GROUP,
       velocityXSmoothing: 0.0001,
-      skinWidth: 0.1,
     })
     options.body = new p2.Body({
       mass: 0,
@@ -69,7 +68,7 @@ export default class Player extends Controller {
       bomb: new inventory.BombController({ player: this }),
       gun1: new inventory.BeamController({ player: this }),
       gun2: new inventory.DustController({ player: this }),
-      speedbooster: true, // TODO should this be a class
+      speedbooster: false, // TODO should this be a class
     }
     this.loadout = {
       shoot1: this.inventory.gun1,
@@ -292,6 +291,11 @@ export default class Player extends Controller {
     ) {
       this.setPosture(POSTURE.stand)
     }
+
+    if (!this.collisions.below && this.collisions.last_below && this.velocity[1] <= 0) {
+      this.body.position[1] -= this.skinWidth
+    }
+
     const { collisions, velocity, keys } = this
     const input = [(keys.right ? 1 : 0) - (keys.left ? 1 : 0), 0]
     // yflip

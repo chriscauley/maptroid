@@ -24,7 +24,7 @@ export default class RaycastController extends EventEmitter {
 
     const {
       collisionMask = -1,
-      skinWidth = 0.015,
+      skinWidth = 0.1,
       horizontalRayCount = 6,
       verticalRayCount = 4,
     } = options

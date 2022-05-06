@@ -49,8 +49,8 @@ export default class Brick {
   constructor(options) {
     const _type = TYPES[options.type] || TYPES['default']
     const { max_hp = 1 } = _type
-    const { x, y, width = 1, height = 1, type, hp = max_hp, room } = options
-    Object.assign(this, { type, x, y, width, height, hp, _type, max_hp, room })
+    const { x, y, width = 1, height = 1, type, hp = max_hp, room, regrow } = options
+    Object.assign(this, { type, x, y, width, height, hp, _type, max_hp, room, regrow })
     this.game = room.game
     this.makeBody()
     this.game.bindEntity(this)
@@ -73,21 +73,23 @@ export default class Brick {
     }
     this.hp -= amount
     if (this.hp <= 0) {
-      const { regrow } = this._type
-      if (regrow) {
-        this.game.backgroundEntity(this)
-        this._death_timeout = this.game.setTimeout(this.respawn, regrow)
-      } else {
-        this.destroy()
-      }
+      this.destroy()
     }
   }
   respawn = () => {
     this.game.foregroundEntity(this)
     this.hp = this.max_hp
   }
-  destroy() {
-    this.game.removeEntity(this)
+  destroy = () => {
+    const { regrow } = this
+    if (regrow) {
+      this.game.setTimeout(() => {
+        this.game.backgroundEntity(this)
+        this._death_timeout = this.game.setTimeout(this.respawn, regrow)
+      }, 4)
+    } else {
+      this.game.setTimeout(() => this.game.removeEntity(this), 4)
+    }
   }
   draw(ctx) {
     const { width, height } = this.body.shapes[0]
