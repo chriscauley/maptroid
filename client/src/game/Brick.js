@@ -1,6 +1,7 @@
 // Bricks are destructable terrain
-import { minBy } from 'lodash'
+import { minBy, range } from 'lodash'
 import { SCENERY_GROUP, PLAYER_GROUP, BULLET_GROUP } from './constants'
+import { getAsset } from './useAssets'
 import p2 from 'p2'
 
 const TYPES = {
@@ -143,24 +144,109 @@ export class Door extends Brick {
         p2.vec2.squaredDistance(edge.position, door.body.position),
       )
       this.game.backgroundEntity(target_door)
-      target_door.hidden = true
+      target_door.hidden_at = this.game.frame
       target_door.needs_close = this
     } else {
       console.warn('unable to find target room')
     }
     this.game.backgroundEntity(this)
-    this.hidden = true
+    this.hidden_at = this.game.frame
   }
   draw(ctx) {
-    if (!this.hidden) {
-      super.draw(ctx)
+    let index = 0
+    if (this.closing) {
+      index = this.closing
+      this.closing--
+    } else if (this.hidden_at) {
+      index = Math.floor((this.game.frame - this.hidden_at) / 4)
+    }
+    if (index < 4) {
+      ctx.save()
+      ctx.imageSmoothingEnabled = false
+      const { width, height } = this.body.shapes[0]
+      const { img, sw, sh } = getDoorSprite(this.color, this.orientation)
+      ctx.drawImage(img, 0, index * sh, sw, sh, -width / 2, -height / 2, width, height)
+      ctx.restore()
     }
   }
   closeDoors() {
-    this.game.foregroundEntity(this)
-    this.hidden = false
-    this.game.foregroundEntity(this.needs_close)
-    this.needs_close.hidden = false
+    delete this.needs_close.close()
     delete this.needs_close
+    this.close()
   }
+  close() {
+    this.game.foregroundEntity(this)
+    delete this.hidden_at
+    this.closing = 3
+  }
+}
+
+const rotateCCW = (canvas) => {
+  const canvas2 = document.createElement('canvas')
+  canvas2.width = canvas.height
+  canvas2.height = canvas.width
+  const ctx = canvas2.getContext('2d')
+  ctx.rotate(-Math.PI / 2)
+  ctx.drawImage(canvas, -8, 0)
+  return canvas2
+}
+
+const mirrorVertically = (canvas) => {
+  const canvas2 = document.createElement('canvas')
+  canvas2.width = canvas.width
+  canvas2.height = canvas.height
+  const ctx = canvas2.getContext('2d')
+  ctx.translate(0, canvas.height)
+  ctx.scale(1, -1)
+  ctx.drawImage(canvas, 0, 0)
+  return canvas2
+}
+
+const mirrorHorizontally = (canvas) => {
+  const canvas2 = document.createElement('canvas')
+  canvas2.width = canvas.width
+  canvas2.height = canvas.height
+  const ctx = canvas2.getContext('2d')
+  ctx.translate(canvas.width, 0)
+  ctx.scale(-1, 1)
+  ctx.drawImage(canvas, 0, 0)
+  return canvas2
+}
+
+const _cache = {}
+const getDoorSprite = (color, orientation) => {
+  const key = `${color},${orientation}`
+  if (!_cache[key]) {
+    let canvas
+    if (orientation === 'left') {
+      const colors = ['red', 'orange', 'brown', 'green', 'blue']
+      const { img } = getAsset('rainbow_opening')
+      const sx = colors.indexOf(color) * 8
+      canvas = document.createElement('canvas')
+      canvas.width = 8
+      canvas.height = 256
+      const ctx = canvas.getContext('2d')
+      ctx.drawImage(img, -sx, 0)
+    } else if (orientation === 'right') {
+      canvas = mirrorHorizontally(getDoorSprite(color, 'left').img)
+    } else if (orientation === 'up') {
+      canvas = mirrorVertically(getDoorSprite(color, 'down').img)
+    } else if (orientation === 'down') {
+      canvas = rotateCCW(getDoorSprite(color, 'left').img)
+    }
+
+    const sw = ['left', 'right'].includes(orientation) ? 8 : 64
+    const sh = ['left', 'right'].includes(orientation) ? 64 : 8
+
+    if (['up', 'down'].includes(orientation)) {
+      const canvas2 = document.createElement('canvas')
+      canvas2.width = 64
+      canvas2.height = 32
+      const ctx = canvas2.getContext('2d')
+      range(4).forEach((i) => ctx.drawImage(canvas, -i * 64, i * 8))
+      canvas = canvas2
+    }
+    _cache[key] = { img: canvas, sw, sh }
+  }
+  return _cache[key]
 }

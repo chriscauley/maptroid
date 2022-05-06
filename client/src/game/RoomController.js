@@ -143,7 +143,6 @@ export default class RoomController {
     this.data.exit.forEach(({ x, y, width, height }) => {
       let target_dxy
       let start_position
-      let orientation
       if (mod(x, 16) === 15) {
         x -= 3
         width += 3
@@ -271,5 +270,8 @@ export default class RoomController {
     this.fg_canvas.height = this.img.height
     const ctx = this.fg_canvas.getContext('2d')
     ctx.drawImage(this.img, 0, 0)
+    this.data.doors.forEach(({ x, y, width, height }) =>
+      ctx.clearRect(x * 16, y * -16, 16 * width, 16 * height),
+    )
   }
 }

@@ -61,4 +61,4 @@ for ir, weapon_colors in enumerate(replacements):
     animations.append(recolored)
 
 cv2.imwrite('.media/trash/rainbow_caps.png', np.hstack(results))
-cv2.imwrite('static/build/rainbow_opening.png', np.hstack(animations))
+cv2.imwrite('static/sm/rainbow_opening.png', np.vstack(animations))

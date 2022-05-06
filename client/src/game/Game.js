@@ -362,6 +362,7 @@ export default class Game extends p2.EventEmitter {
 
     // this is from the p2.js demo and I think is to mitigate lag spikes
     // I think I'd rather just have the game step 1/60 seconds even if more/less time has passed
+    // reverting to this would cause this.frame++ in tick() to be out of sync with clock
     const deltaTime = this.lastTime ? (time - this.lastTime) / 1000 : 0
     this.lastTime = time
     return Math.min(1 / 10, deltaTime)
