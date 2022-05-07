@@ -88,10 +88,14 @@ def main():
         height, width = [int(i / _s) for i in image.shape[:2]]
         shape_x_ys = []
         special_x_ys = []
+        items = room.item_set.all()
+        item_xys = [i.data['room_xy'] for i in items if not i.data.get('hidden')]
         for y in range(height):
             for x in range(width):
                 cropped = image[y*_s:(y+1)*_s,x*_s:(x+1)*_s,:]
                 if not np.sum(cropped):
+                    continue
+                if [x,y] in item_xys:
                     continue
                 sprite, new = sprite_matcher.get_or_create_from_image(cropped, 'bts')
                 if new:
