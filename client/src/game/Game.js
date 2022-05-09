@@ -431,4 +431,13 @@ export default class Game extends p2.EventEmitter {
     this.paused = !this.paused
     this.emit({ type: 'pause', value: this.paused })
   }
+
+  warp(room_id) {
+    console.warn('saving... last room was', this.current_room.id)
+    const room = this.world_controller.room_by_id[room_id]
+    room.bindGame(this)
+    this.current_room = room
+    this.current_room.positionPlayer(this.player)
+    this.save()
+  }
 }

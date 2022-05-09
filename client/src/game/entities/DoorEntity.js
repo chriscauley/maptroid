@@ -131,9 +131,9 @@ const getDoorSprite = (color, orientation) => {
       ctx.drawImage(img, -sx, 0)
     } else if (orientation === 'right') {
       canvas = mirrorHorizontally(getDoorSprite(color, 'left').img)
-    } else if (orientation === 'up') {
-      canvas = mirrorVertically(getDoorSprite(color, 'down').img)
     } else if (orientation === 'down') {
+      canvas = mirrorVertically(rotateCCW(getDoorSprite(color, 'left').img))
+    } else if (orientation === 'up') {
       canvas = rotateCCW(getDoorSprite(color, 'left').img)
     }
 
@@ -148,7 +148,6 @@ const getDoorSprite = (color, orientation) => {
       range(4).forEach((i) => ctx.drawImage(canvas, -i * 64, i * 8))
       canvas = canvas2
     }
-    document.body.appendChild(canvas)
     _cache[key] = { img: canvas, sw, sh }
   }
   return _cache[key]

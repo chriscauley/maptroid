@@ -249,7 +249,8 @@ export default class RoomController {
     this._addBodies()
     this._resetDoors()
     this._addEdges()
-    this.items = this.game.items_by_room_id[this.id].map((i) => new ItemController(i, this))
+    const items = this.game.items_by_room_id[this.id] || []
+    this.items = items.map((i) => new ItemController(i, this))
   }
 
   positionPlayer(player) {
