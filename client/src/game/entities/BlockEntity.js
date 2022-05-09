@@ -1,7 +1,7 @@
-// Bricks are destructable terrain
+// Block are destructable terrain
 import { minBy, range } from 'lodash'
-import { SCENERY_GROUP, PLAYER_GROUP, BULLET_GROUP } from './constants'
-import { getAsset } from './useAssets'
+import { getAsset } from '../useAssets'
+import BaseEntity from './BaseEntity'
 import p2 from 'p2'
 
 const TYPES = {
@@ -45,71 +45,25 @@ const TYPES = {
   },
 }
 
-export default class Brick {
+export default class BlockEntity extends BaseEntity {
   constructor(options) {
-    const _type = TYPES[options.type] || TYPES['default']
-    const { max_hp = 1 } = _type
-    const { x, y, width = 1, height = 1, type, hp = max_hp, room, regrow } = options
-    Object.assign(this, { type, x, y, width, height, hp, _type, max_hp, room, regrow })
-    this.game = room.game
-    this.makeBody()
-    this.game.bindEntity(this)
+    super(options)
+    this._type = TYPES[options.type] || TYPES['default']
   }
-  makeBody() {
-    const { x, y, width, height } = this
-    const collisionMask = PLAYER_GROUP | BULLET_GROUP
-    const shape = new p2.Box({ collisionGroup: SCENERY_GROUP, collisionMask, width, height })
-    const body = (this.body = new p2.Body({ position: [x, y] }))
-    body.addShape(shape)
-    body.updateAABB()
-  }
+
   damage(event) {
     if (this._type.weak_to && !this._type.weak_to.includes(event.type)) {
       return
     }
-    let amount = event.amount
-    if (amount <= 0 || this.hp <= 0) {
-      return
-    }
-    this.hp -= amount
-    if (this.hp <= 0) {
-      this.destroy()
-    }
+    super.damage(event)
   }
-  respawn = () => {
-    this.game.foregroundEntity(this)
-    this.hp = this.max_hp
-  }
-  destroy = () => {
-    const { regrow } = this
-    if (regrow) {
-      this.game.setTimeout(() => {
-        this.game.backgroundEntity(this)
-        this._death_timeout = this.game.setTimeout(this.respawn, regrow)
-      }, 4)
-    } else {
-      this.game.setTimeout(() => this.game.removeEntity(this), 4)
-    }
-  }
-  draw(ctx) {
-    const { width, height } = this.body.shapes[0]
-    if (this.hp <= 0) {
-      ctx.globalAlpha = 0.25
-      const respawn_in = this._death_timeout?.when - this.game.p2_world.time
-      if (respawn_in < 1) {
-        ctx.globalAlpha = Math.floor(this.game.p2_world.time * 10) % 2 ? 0.5 : 0.25
-      }
-    }
-    ctx.strokeStyle = this._type.color
-    ctx.lineWidth = 4 / 16
-    ctx.strokeRect(-width / 2, -height / 2, width, height)
-  }
+
   onCollide(entity, result) {
     this._type.onCollide?.(this, entity, result)
   }
 }
 
-export class Door extends Brick {
+export class DoorEntity extends BlockEntity {
   constructor(options) {
     super(options)
     const { color, orientation } = options
@@ -134,8 +88,9 @@ export class Door extends Brick {
       this.respawn_aabb.lowerBound[1] -= 2
     }
   }
+
   damage(event) {
-    if (this._type.weak_to && !this._type.weak_to.includes(event.type)) {
+    if (true) { // TODO check damage type
       return
     }
     const edge = this.room.edges.find((e) => e.aabb.containsPoint(this.body.position))
@@ -154,6 +109,7 @@ export class Door extends Brick {
     this.game.backgroundEntity(this)
     this.hidden_at = this.game.frame
   }
+
   draw(ctx) {
     let index = 0
     if (this.closing) {
@@ -171,11 +127,13 @@ export class Door extends Brick {
       ctx.restore()
     }
   }
+
   closeDoors() {
     delete this.needs_close.close()
     delete this.needs_close
     this.close()
   }
+
   close() {
     this.game.foregroundEntity(this)
     delete this.hidden_at
@@ -248,6 +206,7 @@ const getDoorSprite = (color, orientation) => {
       range(4).forEach((i) => ctx.drawImage(canvas, -i * 64, i * 8))
       canvas = canvas2
     }
+    document.body.appendChild(canvas)
     _cache[key] = { img: canvas, sw, sh }
   }
   return _cache[key]

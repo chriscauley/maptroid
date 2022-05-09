@@ -61,10 +61,10 @@ export default {
     },
   },
   async mounted() {
-    await this.$store.route.fetchReady()
+    await this.$store.route.fetchItemsReady()
     const play = await this.$store.play.fetchOne(this.$route.params.play_id)
-    const { world, world_rooms: rooms, zones } = this.$store.route
-    const options = { world, rooms, zones, ...play }
+    const { world, world_rooms: rooms, world_items: items, zones } = this.$store.route
+    const options = { world, rooms, zones, items, ...play }
 
     this.game = new Game(document.getElementById('game-canvas'), options)
     this.game.on('draw', this.draw)

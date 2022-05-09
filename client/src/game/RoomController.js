@@ -3,7 +3,8 @@ import { vec2 } from 'p2'
 import { vector, mod } from '@unrest/geo'
 
 import Room from '@/models/Room'
-import Brick, { Door } from './Brick'
+import BlockEntity, { DoorEntity } from './entities/BlockEntity'
+import ItemController from './ItemController'
 import { SCENERY_GROUP, BULLET_GROUP, PLAYER_GROUP } from './constants'
 
 const _yflip = (xy) => [xy[0], -xy[1]] // YFLIP
@@ -31,7 +32,7 @@ const invertXyMap = (object) => {
 }
 
 const invertJson = (json) => {
-  const bricks = Room.getGroupedBlocks(json)
+  const blocks = Room.getGroupedBlocks(json)
     .filter((b) => !b.type.endsWith('-exit') && !b.type.endsWith('-empty'))
     .map((b) => {
       b.regrow = b.type.includes('-respawn') ? 50 : null
@@ -52,7 +53,7 @@ const invertJson = (json) => {
       }),
     },
     plm_overrides: invertXyMap(json.data.plm_overrides || {}),
-    bricks,
+    blocks,
   }
   return data
 }
@@ -61,7 +62,7 @@ const invertJson = (json) => {
 export const fromString = (string, options = {}) => {
   options = cloneDeep(options)
   options.json = {
-    bricks: [],
+    blocks: [],
     static_boxes: [],
     screens: [],
   }
@@ -74,11 +75,11 @@ export const fromString = (string, options = {}) => {
       } else if (s === '0') {
         options.json.static_boxes.push({ x, y, width: 1, height: 1 })
       } else if (s === '1') {
-        options.json.bricks.push({ x, y, type: 'moss' })
+        options.json.blocks.push({ x, y, type: 'moss' })
       } else if (s === ' ' || s === '_') {
         return
       } else {
-        throw 'Unrecognized brick: ' + s
+        throw 'Unrecognized block: ' + s
       }
     })
   })
@@ -195,13 +196,13 @@ export default class RoomController {
   _addBodies() {
     this.bodies = []
 
-    // TODO populate bricks from json
-    // Add bricks
-    this.data.bricks.forEach(({ x, y, width, height, type, regrow }) => {
+    // TODO populate blocks from json
+    // Add blocks
+    this.data.blocks.forEach(({ x, y, width, height, type, regrow }) => {
       x += this.world_xy0[0] * 16 + width / 2
       y += this.world_xy0[1] * 16 - height / 2
-      const brick = new Brick({ x, y, width, height, type, room: this, regrow })
-      this.bodies.push(brick.body)
+      const block = new BlockEntity({ x, y, width, height, type, room: this, regrow })
+      this.bodies.push(block.body)
     })
 
     const collisionMask = PLAYER_GROUP | BULLET_GROUP
@@ -219,7 +220,16 @@ export default class RoomController {
     this.data.doors.forEach(({ x, y, width, height, color, orientation }) => {
       x += this.world_xy0[0] * 16 + width / 2
       y += this.world_xy0[1] * 16 - height / 2
-      const door = new Door({ room: this, x, y, width, height, type: 'door', orientation, color })
+      const door = new DoorEntity({
+        room: this,
+        x,
+        y,
+        width,
+        height,
+        type: 'door',
+        orientation,
+        color,
+      })
       this.bodies.push(door.body)
       this.doors.push(door)
     })
@@ -238,6 +248,7 @@ export default class RoomController {
     this._addBodies()
     this._resetDoors()
     this._addEdges()
+    this.items = this.game.items_by_room_id[this.id].map((i) => new ItemController(i, this))
   }
 
   positionPlayer(player) {
@@ -274,5 +285,15 @@ export default class RoomController {
     this.data.doors.forEach(({ x, y, width, height }) =>
       ctx.clearRect(x * 16, y * -16, 16 * width, 16 * height),
     )
+  }
+
+  clearMapXy(xy) {
+    console.log(xy)
+    const x = xy[0] * 16
+    const y = xy[1] * 16
+    const ctx = this.fg_canvas.getContext('2d')
+    ctx.fillStyle = 'green'
+    console.log(x, y, 16, 16, this.fg_canvas.width, this.fg_canvas.height)
+    ctx.fillRect(x, y, 16, 16)
   }
 }

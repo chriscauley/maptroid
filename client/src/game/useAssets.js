@@ -34,4 +34,5 @@ export default () =>
     load('ice-beam-bullets'),
     load('long-beam-bullets'),
     load('rainbow_opening'),
+    load('items'),
   ])

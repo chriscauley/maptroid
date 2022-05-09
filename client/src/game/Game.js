@@ -62,6 +62,12 @@ export default class Game extends p2.EventEmitter {
       },
     })
 
+    this.items_by_room_id = {}
+    this.options.items.forEach((i) => {
+      this.items_by_room_id[i.room] = this.items_by_room_id[i.room] || []
+      this.items_by_room_id[i.room].push(i)
+    })
+
     this.ctx.lineWidth = 1 / this.zoom
 
     // Init world
@@ -72,7 +78,7 @@ export default class Game extends p2.EventEmitter {
       e.bodyA._entity?.impact?.(e)
     })
 
-    const { world, rooms, zones, room_id } = this.options
+    const { rooms, room_id, world, zones } = this.options
     this.world_controller = new WorldController({ world, rooms, zones, game: this })
     this.current_room = this.world_controller.room_by_id[room_id]
     this.current_room.bindGame(this)

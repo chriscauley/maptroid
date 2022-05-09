@@ -27,7 +27,7 @@ export default ({ store }) => {
       const world_id = route.world?.id
       const query = Query({ zone__world_id: world_id })
       const page = world_id && store.item.getPage(query)
-      let items = page?.items || []
+      const items = page?.items || []
 
       // Hide all items in hidden rooms
       const visible_rooms = {}
@@ -116,6 +116,21 @@ export default ({ store }) => {
       return new Promise((resolve) =>
         watch(
           () => route.ready,
+          (value) => value && resolve(),
+        ),
+      )
+    },
+
+    get items_ready() {
+      const { world, zones, world_rooms, world_items } = route
+      return world && zones.length && world_rooms.length && world_items.length
+    },
+
+    fetchItemsReady() {
+      // this and get items_read() are used only in game
+      return new Promise((resolve) =>
+        watch(
+          () => route.items_ready,
           (value) => value && resolve(),
         ),
       )

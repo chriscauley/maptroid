@@ -18,6 +18,8 @@ def populate_items(room):
                 zone=room.zone
             )
             print(f'item created {item.data["type"]} in {item.room.name}')
+        item.data['modifier'] = sprite.modifier
+        item.save()
 
 
 if __name__ == "__main__":
