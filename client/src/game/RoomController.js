@@ -3,7 +3,8 @@ import { vec2 } from 'p2'
 import { vector, mod } from '@unrest/geo'
 
 import Room from '@/models/Room'
-import BlockEntity, { DoorEntity } from './entities/BlockEntity'
+import BlockEntity from './entities/BlockEntity'
+import DoorEntity from './entities/DoorEntity'
 import ItemController from './ItemController'
 import { SCENERY_GROUP, BULLET_GROUP, PLAYER_GROUP } from './constants'
 

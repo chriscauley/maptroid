@@ -63,7 +63,7 @@ export default class BaseEntity {
     ctx.strokeRect(-width / 2, -height / 2, width, height)
   }
 
-  onCollide(entity, result) {
+  onCollide(_entity, _result) {
     return // noop
   }
 }
