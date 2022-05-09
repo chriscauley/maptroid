@@ -288,13 +288,12 @@ export default class RoomController {
     )
   }
 
-  clearMapXy(xy) {
-    console.log(xy)
-    const x = xy[0] * 16
-    const y = xy[1] * 16
+  clearOnFg({ width, height, x, y }) {
     const ctx = this.fg_canvas.getContext('2d')
-    ctx.fillStyle = 'green'
-    console.log(x, y, 16, 16, this.fg_canvas.width, this.fg_canvas.height)
-    ctx.fillRect(x, y, 16, 16)
+    x = x - this.world_xy0[0] * 16 - width / 2
+    y = -(y - this.world_xy0[1] * 16 + height - height / 2)
+    const bounds = [16 * x, 16 * y, 16 * width, 16 * height]
+    // TODO store this in order to possibly draw it later
+    ctx.clearRect(...bounds)
   }
 }

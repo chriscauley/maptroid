@@ -47,6 +47,7 @@ export default class BaseEntity {
     } else {
       this.game.setTimeout(() => this.game.removeEntity(this), 4)
     }
+    this.room.clearOnFg(this)
   }
 
   draw(ctx) {
