@@ -4,8 +4,8 @@ import p2 from 'p2'
 
 export default class BaseEntity {
   constructor(options) {
-    const { x, y, width = 1, height = 1, max_hp = 1, hp = max_hp, regrow, room } = options
-    Object.assign(this, { x, y, width, height, max_hp, hp, regrow, room })
+    const { x, y, width = 1, height = 1, max_hp = 1, hp = max_hp, regrow, room, type } = options
+    Object.assign(this, { x, y, width, height, max_hp, hp, regrow, room, type })
     this.game = room.game
     this.makeBody()
     this.game.bindEntity(this)
@@ -47,7 +47,7 @@ export default class BaseEntity {
     } else {
       this.game.setTimeout(() => this.game.removeEntity(this), 4)
     }
-    this.room.clearOnFg(this)
+    this.room.drawOnFg(null, this)
   }
 
   draw(ctx) {

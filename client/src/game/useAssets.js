@@ -1,6 +1,9 @@
 import SpriteSheet from '@/views/SpriteSheet/store'
+import icons from '@/../../server/static/sm/icons.json'
 
-const cache = {}
+const cache = {
+  __icons: {},
+}
 const loading = {}
 const load = (key) => {
   if (cache.key) {
@@ -24,6 +27,20 @@ const load = (key) => {
 }
 
 export const getAsset = (key) => cache[key]
+export const getIcon = (category, slug) => {
+  const cache_key = `${category}__${slug}`
+  if (!cache.__icons[cache_key]) {
+    const [width, height] = icons[category].size
+    const index = icons[category].icons.indexOf(slug)
+    const { img } = getAsset(category)
+    const canvas = document.createElement('canvas')
+    canvas.width = width
+    canvas.height = height
+    canvas.getContext('2d').drawImage(img, 0, -index * height)
+    cache.__icons[cache_key] = canvas
+  }
+  return cache.__icons[cache_key]
+}
 
 export default () =>
   Promise.all([
@@ -35,4 +52,6 @@ export default () =>
     load('long-beam-bullets'),
     load('rainbow_opening'),
     load('items'),
+    load('block'),
+    load('breaking-block'),
   ])

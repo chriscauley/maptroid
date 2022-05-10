@@ -289,12 +289,19 @@ export default class RoomController {
     )
   }
 
-  clearOnFg({ width, height, x, y }) {
+  drawOnFg(img, { width, height, x, y }, source_bounds) {
     const ctx = this.fg_canvas.getContext('2d')
     x = x - this.world_xy0[0] * 16 - width / 2
     y = -(y - this.world_xy0[1] * 16 + height - height / 2)
     const bounds = [16 * x, 16 * y, 16 * width, 16 * height]
     // TODO store this in order to possibly draw it later
     ctx.clearRect(...bounds)
+    if (img) {
+      if (source_bounds) {
+        ctx.drawImage(img, ...source_bounds, ...bounds)
+      } else {
+        ctx.drawImage(img, bounds[0], bounds[1])
+      }
+    }
   }
 }

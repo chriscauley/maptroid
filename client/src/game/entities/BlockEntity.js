@@ -1,5 +1,6 @@
 // Block are destructable terrain
 import BaseEntity from './BaseEntity'
+import { getIcon, getAsset } from '../useAssets'
 
 const TYPES = {
   moss: {
@@ -39,6 +40,9 @@ const TYPES = {
   },
 }
 
+const ANIMATION_DURATION = 25
+const ANIMATION_FRAMES = 4
+
 export default class BlockEntity extends BaseEntity {
   constructor(options) {
     super(options)
@@ -49,10 +53,49 @@ export default class BlockEntity extends BaseEntity {
     if (this._type.weak_to && !this._type.weak_to.includes(event.type)) {
       return
     }
+    if (this.hp) {
+      this._shrinkBlock()
+      if (false || this.regrow) {
+        this._growing = ANIMATION_DURATION
+        this.game.setTimeout(
+          () => this.game.animations.push(() => this._growBlock()),
+          this.regrow - ANIMATION_FRAMES,
+        )
+      }
+    }
     super.damage(event)
+  }
+
+  _growBlock() {
+    this._drawAnimation(ANIMATION_DURATION - this._growing)
+    this._growing--
+    return this._growing > -1
+  }
+
+  _shrinkBlock() {
+    let break_frames = ANIMATION_DURATION
+    this.game.animations.push(() => {
+      this._drawAnimation(break_frames)
+      break_frames--
+      return break_frames > -1
+    })
+  }
+
+  _drawAnimation(count) {
+    const index = Math.floor((ANIMATION_FRAMES * (ANIMATION_DURATION - count)) / ANIMATION_DURATION)
+    const { img } = getAsset('breaking-block')
+    const source_bounds = [0, index * 16, 16, 16]
+    this.room.drawOnFg(img, this, source_bounds)
   }
 
   onCollide(entity, result) {
     this._type.onCollide?.(this, entity, result)
+  }
+
+  draw() {
+    if (this._needs_draw) {
+      this._needs_draw = false
+      this.room.drawOnFg(getIcon('block', this.type), this)
+    }
   }
 }
