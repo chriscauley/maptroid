@@ -83,7 +83,6 @@ export default class Player extends Controller {
       wallJumpClimb = [20, 20], // holding towards wall
       wallLeap = [20, 20], // holding away from wall
       wallJumpOff = [20, 20], // holding neither
-      tech = { bomb_linked: true, bomb_triggered: true, e_tanks: 0 },
       minJumpHeight = 1.2,
       velocityXSmoothing = 0.2,
       velocityXMin = 0.5,
@@ -97,10 +96,25 @@ export default class Player extends Controller {
       wallJumpClimb,
       wallJumpOff,
       wallLeap,
-      tech,
       minJumpHeight,
       velocityXSmoothing,
       velocityXMin,
+    })
+
+    this.tech = {
+      bomb_linked: true,
+      bomb_triggered: true,
+      'energy-tank': 0,
+      'reserve-tank': 0,
+      missile: 0,
+      'super-missile': 0,
+      'power-bomb': 0,
+    }
+
+    this.game.options.items.forEach((i) => {
+      if (this.save_state.collected[i.id]) {
+        this.collectItem({ id: i.id, type: i.data.type })
+      }
     })
 
     this.speed = {
@@ -529,4 +543,13 @@ export default class Player extends Controller {
   }
 
   onCollide() {} // noop
+  collectItem({ id, type }) {
+    this.save_state.collected[id] = true
+    const pack_items = ['missile', 'super-missile', 'power-bomb', 'energy-tank', 'reserve-tank']
+    if (pack_items.includes(type)) {
+      this.tech[type]++
+    } else {
+      this.tech[type] = true
+    }
+  }
 }

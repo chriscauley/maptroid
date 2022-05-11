@@ -9,12 +9,12 @@ export default class BaseController {
   update = () => {
     this.enabled = {}
     this.item_list = this.items.map((slug) => {
-      this.enabled[slug] = !this.player.state.disabled[slug]
+      this.enabled[slug] = !this.player.save_state.disabled[slug]
       return {
         slug,
         name: startCase(slug.replace),
         short_name: startCase(slug).replace(/ Beam$/, ''),
-        collected: this.player.cheat || this.player.state.collected[slug],
+        collected: this.player.cheat || this.player.save_state.collected[slug],
         enabled: this.enabled[slug],
       }
     })
