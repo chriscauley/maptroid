@@ -124,6 +124,14 @@ export default class Controller extends RaycastController {
       this.castRay(from, to)
 
       if (this.raycastResult.body) {
+        const dxy = [directionX, 0]
+        if (this.raycastResult.body._entity?.is_item) {
+          // item doens't affect players velocity
+          this.emit({ type: 'collide', body: this.raycastResult.body, dxy })
+          this.raycastResult.reset()
+          continue
+        }
+
         const distance = this.raycastResult.getHitDistance(ray)
         if (distance === 0) {
           continue
@@ -154,11 +162,10 @@ export default class Controller extends RaycastController {
           }
 
           this.collisions._collide_angle = (180 * slopeAngle) / Math.PI
+          this.debounceCollision(dxy)
           if (directionX === -1) {
-            this.debounceCollision([-1, 0])
             collisions.left = true
           } else if (directionX === 1) {
-            this.debounceCollision([1, 0])
             collisions.right = true
           }
         }

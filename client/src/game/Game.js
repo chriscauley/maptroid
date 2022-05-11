@@ -310,7 +310,6 @@ export default class Game extends p2.EventEmitter {
     })
 
     // Draw all bodies
-    this.background_entities.forEach((e) => this.drawBody(e.body))
     this.p2_world.bodies.forEach((body) => this.drawBody(body))
 
     if (this.mouse.canvas_xy) {
@@ -439,5 +438,13 @@ export default class Game extends p2.EventEmitter {
     this.current_room = room
     this.current_room.positionPlayer(this.player)
     this.save()
+  }
+
+  cycle(per_tick, duration) {
+    return Math.floor((this.frame % duration) / per_tick)
+  }
+  cycleSince(since, per_tick, duration) {
+    const frame = this.frame - since
+    return Math.floor((frame % duration) / per_tick)
   }
 }

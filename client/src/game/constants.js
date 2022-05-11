@@ -1,6 +1,7 @@
 export const SCENERY_GROUP = Math.pow(2, 1)
 export const BULLET_GROUP = Math.pow(2, 2)
 export const PLAYER_GROUP = Math.pow(2, 3)
+export const ITEM_GROUP = Math.pow(2, 4)
 
 export const DIRECTIONS = [
   [1, 0],

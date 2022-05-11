@@ -38,15 +38,21 @@ const TYPES = {
   default: {
     color: 'rgb(255, 128, 128)',
   },
+  egg: {
+    color: 'yellow',
+  },
 }
 
 const ANIMATION_DURATION = 25
 const ANIMATION_FRAMES = 4
 
+const EGG_FRAMES = [0, 1, 2, 2, 1, 0]
+
 export default class BlockEntity extends BaseEntity {
   constructor(options) {
     super(options)
     this._type = TYPES[options.type] || TYPES['default']
+    this.color = this._type.color
   }
 
   damage(event) {
@@ -82,6 +88,7 @@ export default class BlockEntity extends BaseEntity {
   }
 
   _drawAnimation(count) {
+    this._needs_draw = true
     const index = Math.floor((ANIMATION_FRAMES * (ANIMATION_DURATION - count)) / ANIMATION_DURATION)
     const { img } = getAsset('breaking-block')
     const source_bounds = [0, index * 16, 16, 16]
@@ -93,7 +100,12 @@ export default class BlockEntity extends BaseEntity {
   }
 
   draw() {
-    if (this._needs_draw) {
+    if (this.type === 'egg') {
+      const y = EGG_FRAMES[Math.abs(this.game.cycle(15, 90))] * 16
+      const { img } = getAsset('animations/egg')
+      const source_bounds = [0, y, 16, 16]
+      this.room.drawOnFg(img, this, source_bounds)
+    } else if (this._needs_draw) {
       this._needs_draw = false
       this.room.drawOnFg(getIcon('block', this.type), this)
     }

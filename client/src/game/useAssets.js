@@ -1,6 +1,8 @@
 import SpriteSheet from '@/views/SpriteSheet/store'
 import icons from '@/../../server/static/sm/icons.json'
 
+icons['items-alt'] = icons['items']
+
 const cache = {
   __icons: {},
 }
@@ -52,6 +54,8 @@ export default () =>
     load('long-beam-bullets'),
     load('rainbow_opening'),
     load('items'),
+    load('items-alt'),
     load('block'),
     load('breaking-block'),
+    load('animations/egg'),
   ])

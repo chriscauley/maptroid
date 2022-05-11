@@ -5,7 +5,7 @@ import { vector, mod } from '@unrest/geo'
 import Room from '@/models/Room'
 import BlockEntity from './entities/BlockEntity'
 import DoorEntity from './entities/DoorEntity'
-import ItemController from './ItemController'
+import ItemEntity from './entities/ItemEntity'
 import { SCENERY_GROUP, BULLET_GROUP, PLAYER_GROUP } from './constants'
 
 const _yflip = (xy) => [xy[0], -xy[1]] // YFLIP
@@ -57,6 +57,17 @@ const invertJson = (json) => {
     blocks,
   }
   return data
+}
+
+const invertItems = (room) => {
+  const items = room.game.items_by_room_id[room.id] || []
+  const [room_x, room_y] = room.world_xy0
+  return items.map(({ data, id: item_id }) => {
+    const { room_xy, modifier, type } = data
+    const x = room_xy[0] + room_x * 16 + 0.5
+    const y = -room_xy[1] + room_y * 16 - 0.5 // yflip
+    return { x, y, width: 1, height: 1, modifier, type, item_id, room }
+  })
 }
 
 // DEPRECATED this is an old way to load rooms from string. Might be useful in tests
@@ -236,6 +247,10 @@ export default class RoomController {
     })
   }
 
+  _addItems() {
+    this.items = invertItems(this).map((i) => new ItemEntity(i))
+  }
+
   bindGame(game) {
     if (this.game) {
       return
@@ -249,8 +264,7 @@ export default class RoomController {
     this._addBodies()
     this._resetDoors()
     this._addEdges()
-    const items = this.game.items_by_room_id[this.id] || []
-    this.items = items.map((i) => new ItemController(i, this))
+    this._addItems()
   }
 
   positionPlayer(player) {

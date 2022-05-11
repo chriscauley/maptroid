@@ -6,6 +6,7 @@ export default class BaseEntity {
   constructor(options) {
     const { x, y, width = 1, height = 1, max_hp = 1, hp = max_hp, regrow, room, type } = options
     Object.assign(this, { x, y, width, height, max_hp, hp, regrow, room, type })
+    this.options = options
     this.game = room.game
     this.makeBody()
     this.game.bindEntity(this)
@@ -14,7 +15,8 @@ export default class BaseEntity {
   makeBody() {
     const { x, y, width, height } = this
     const collisionMask = PLAYER_GROUP | BULLET_GROUP
-    const shape = new p2.Box({ collisionGroup: SCENERY_GROUP, collisionMask, width, height })
+    const { collisionGroup = SCENERY_GROUP } = this.options
+    const shape = new p2.Box({ collisionGroup, collisionMask, width, height })
     const body = (this.body = new p2.Body({ position: [x, y] }))
     body.addShape(shape)
     body.updateAABB()
@@ -35,6 +37,7 @@ export default class BaseEntity {
   respawn = () => {
     this.game.foregroundEntity(this)
     this.hp = this.max_hp
+    this.options.onRespawn?.()
   }
 
   destroy = () => {
@@ -48,6 +51,7 @@ export default class BaseEntity {
       this.game.setTimeout(() => this.game.removeEntity(this), 4)
     }
     this.room.drawOnFg(null, this)
+    this.options.onDestroy?.()
   }
 
   draw(ctx) {
@@ -59,7 +63,7 @@ export default class BaseEntity {
         ctx.globalAlpha = Math.floor(this.game.p2_world.time * 10) % 2 ? 0.5 : 0.25
       }
     }
-    ctx.strokeStyle = this._type.color
+    ctx.strokeStyle = this.color
     ctx.lineWidth = 4 / 16
     ctx.strokeRect(-width / 2, -height / 2, width, height)
   }

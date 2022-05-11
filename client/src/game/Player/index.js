@@ -6,7 +6,7 @@ import p2 from 'p2'
 
 import Controller from './Controller'
 import drawSprite from './drawSprite'
-import { PLAYER_GROUP, SCENERY_GROUP, POSTURE } from '../constants'
+import { PLAYER_GROUP, SCENERY_GROUP, ITEM_GROUP, POSTURE } from '../constants'
 import inventory from '../inventory'
 import getBeamRays from './getBeamRays'
 import aim from './aim'
@@ -27,7 +27,7 @@ function lerp(start, end, delta) {
 export default class Player extends Controller {
   constructor(options = {}) {
     Object.assign(options, {
-      collisionMask: SCENERY_GROUP,
+      collisionMask: SCENERY_GROUP | ITEM_GROUP,
       velocityXSmoothing: 0.0001,
     })
     options.body = new p2.Body({
@@ -525,4 +525,6 @@ export default class Player extends Controller {
     delete state.pointing
     return state
   }
+
+  onCollide() {} // noop
 }
