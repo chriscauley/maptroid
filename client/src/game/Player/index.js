@@ -250,7 +250,9 @@ export default class Player extends Controller {
     } else if (key === 'special') {
       this.doMacro()
     }
-    this.updatePointing()
+    if (!(key === 'down' && !this.collisions.below)) {
+      this.updatePointing()
+    }
   }
 
   updatePointing() {
