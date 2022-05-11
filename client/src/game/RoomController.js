@@ -283,7 +283,7 @@ export default class RoomController {
         return
       }
     }
-    const { entrance_number } = player.state
+    const { entrance_number } = player.save_state
     let edge = this.edges.find((e) => e._entrance_number == entrance_number)
     if (!edge) {
       edge = this.edges[0]

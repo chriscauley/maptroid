@@ -87,7 +87,7 @@ export default class Game extends p2.EventEmitter {
     this.player = new Player({
       game: this,
       p2_world: this.p2_world,
-      state: this.options.player,
+      save_state: this.options.player,
     })
     this.current_room.positionPlayer(this.player)
     this.p2_world.on('postStep', () => {
@@ -99,8 +99,8 @@ export default class Game extends p2.EventEmitter {
         room.edges.forEach((body) => {
           if (body.aabb.overlaps(aabb)) {
             this.current_room = body._room
-            this.player.state.entrance_number = body._entrance_number
-            this.player.state.room_id = body._entrance_number.room_id
+            this.player.save_state.entrance_number = body._entrance_number
+            this.player.save_state.room_id = body._entrance_number.room_id
             const target_room = this.world_controller.room_map[body._target_xy]
             if (target_room) {
               target_room.bindGame(this)

@@ -12,7 +12,7 @@ export default (player) => {
   const dx = player.collisions.faceDir
   const dxy = [dx, 0]
 
-  const { pointing } = player.state
+  const { pointing, posture } = player.state
   if (pointing === 'down') {
     dxy[1] = -1
     dxy[0] = 0
@@ -28,7 +28,7 @@ export default (player) => {
     dxy[1] = root2over2
     position[1] += 0.35
     position[0] += 1.2 * dx
-    if (player.state.posture === POSTURE.crouch) {
+    if (posture === POSTURE.crouch) {
       position[1] += 0.05
     }
   } else if (pointing === 'downward') {
@@ -36,7 +36,7 @@ export default (player) => {
     dxy[1] = -root2over2
     position[1] -= 1.5
     position[0] += 1 * dx
-    if (player.state.posture === POSTURE.crouch) {
+    if (posture === POSTURE.crouch) {
       position[1] += 0.1
     }
   } else {
@@ -46,7 +46,7 @@ export default (player) => {
       // standing still
       position[1] -= 1
       position[0] += 1 * dx
-      if (player.state.posture === POSTURE.crouch) {
+      if (posture === POSTURE.crouch) {
         position[1] += 0.1
       }
     } else {

@@ -69,7 +69,7 @@ export default (function() {
 
   return (player, _origin) => {
     const { pointing, posture } = player.state
-    const key = `${pointing}.${player.state.posture}.${player.collisions.faceDir}.${_origin}`
+    const key = `${pointing}.${posture}.${player.collisions.faceDir}.${_origin}`
     if (!cache[key]) {
       const { range } = player.inventory.gun1
       if (posture === POSTURE.ball || posture === POSTURE.spin) {

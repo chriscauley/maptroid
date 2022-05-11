@@ -52,12 +52,14 @@ export default class Player extends Controller {
     this.input = vec2.create()
     this.is_player = true
     this.cheat = true
+    this.save_state = reactive({
+      collected: {},
+      disabled: {},
+      ...options.save_state,
+    })
     this.state = options.state || {
       health: 0, // will be healed after this.tech is set
-      disabled: reactive({}),
-      collected: reactive({}),
     }
-    delete this.state.pointing // in case it was on saved state
     this.state.posture = POSTURE.stand
     this.aim = {
       position: vec2.create(),
@@ -519,13 +521,11 @@ export default class Player extends Controller {
   }
 
   toggleItem(item) {
-    this.state.disabled[item.slug] = !this.state.disabled[item.slug]
+    this.save_state.disabled[item.slug] = !this.save_state.disabled[item.slug]
   }
 
   getSaveJson() {
-    const state = cloneDeep(this.state)
-    delete state.pointing
-    return state
+    return cloneDeep(this.save_state)
   }
 
   onCollide() {} // noop
