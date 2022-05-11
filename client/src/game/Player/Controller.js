@@ -175,21 +175,16 @@ export default class Controller extends RaycastController {
     }
   }
 
-  canStand(dy = 1) {
+  checkVertical(dy = 1) {
     let { posture } = this.state
-    if (posture === POSTURE.stand) {
-      return false
-    }
     if (posture === POSTURE.spin) {
       posture = POSTURE.crouch
     }
-    const { _heights } = POSTURE
-    const distance = _heights[posture + 1] - _heights[posture]
     const { raycastOrigins } = this
     for (let i = 0; i < this.verticalRayCount; i++) {
       const from = raycastOrigins[dy > 0 ? 'topLeft' : 'bottomLeft'].slice()
       from[0] += this.verticalRaySpacing * i
-      const to = [from[0], from[1] + distance * dy]
+      const to = [from[0], from[1] + dy]
       this.castRay(from, to)
       if (this.raycastResult.body) {
         break

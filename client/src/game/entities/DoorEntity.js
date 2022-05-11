@@ -42,9 +42,11 @@ export default class DoorEntity extends BaseEntity {
       const target_door = minBy(target_room.doors, (door) =>
         p2.vec2.squaredDistance(edge.position, door.body.position),
       )
-      this.game.backgroundEntity(target_door)
-      target_door.hidden_at = this.game.frame
-      target_door.needs_close = this
+      if (target_door) {
+        this.game.backgroundEntity(target_door)
+        target_door.hidden_at = this.game.frame
+        target_door.needs_close = this
+      }
     } else {
       console.warn('unable to find target room')
     }

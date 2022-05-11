@@ -77,18 +77,17 @@ export default class Player extends Controller {
       shoot2: this.inventory.gun2,
       bomb: this.inventory.bomb,
     }
+
     const {
       wallSlideSpeedMax = 3,
       wallStickTime = 0.25,
       wallJumpClimb = [20, 20], // holding towards wall
       wallLeap = [20, 20], // holding away from wall
       wallJumpOff = [20, 20], // holding neither
-      minJumpHeight = 1.2,
+      minJumpHeight = 0.1,
       velocityXSmoothing = 0.2,
       velocityXMin = 0.5,
     } = cloneDeep(options)
-
-    this.setMaxJumpHeight(7.1, 1.533 / 2)
 
     Object.assign(this, {
       wallSlideSpeedMax,
@@ -100,6 +99,8 @@ export default class Player extends Controller {
       velocityXSmoothing,
       velocityXMin,
     })
+
+    this.setMaxJumpHeight(7.1, 1.533 / 2)
 
     this.tech = {
       bomb_linked: true,
@@ -200,7 +201,7 @@ export default class Player extends Controller {
     } else if (key === 'shoot2') {
       this.loadout.shoot2?.press()
     } else if (key === 'up') {
-      if (this.canStand() || this.canStand(-2)) {
+      if (this.checkVertical() || this.checkVertical(-2)) {
         if (posture === POSTURE.ball) {
           this.setPosture(POSTURE.crouch)
         } else if (posture === POSTURE.crouch) {
@@ -235,7 +236,7 @@ export default class Player extends Controller {
     if (this.collisions.below) {
       // add half height difference to keep player on ground
       this.body.position[1] += (height - old_height) / 2
-    } else if (height > old_height && !this.canStand(-1)) {
+    } else if (height > old_height && !this.checkVertical(-1)) {
       // add half height difference to stop player from clipping through floor
       this.body.position[1] += (height - old_height) / 2
     }
@@ -359,6 +360,8 @@ export default class Player extends Controller {
 
       if (posture === POSTURE.ball) {
         // TODO springball
+      } else if (!this.checkVertical(0.25)) {
+        // not enough vertical room to stand
       } else if (wallSliding) {
         // yflip
         if (wallDirX === input[0]) {
@@ -390,7 +393,7 @@ export default class Player extends Controller {
       }
     } else if (collisions.below || keys.up || keys.down) {
       if (this.state.posture === POSTURE.spin) {
-        this.setPosture(this.canStand() ? POSTURE.stand : POSTURE.crouch)
+        this.setPosture(this.checkVertical() ? POSTURE.stand : POSTURE.crouch)
       }
     }
 
@@ -471,7 +474,7 @@ export default class Player extends Controller {
         this.collisions.turning = input[0]
         this.collisions.turn_for = 8
       } else if (this.state.posture === POSTURE.crouch) {
-        if (this.canStand()) {
+        if (this.checkVertical()) {
           this.setPosture(POSTURE.stand)
         }
       }
