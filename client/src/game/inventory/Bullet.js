@@ -41,6 +41,7 @@ export default class Bullet {
     const velocity = vec2.scale(vec2.create(), dxy, SPEED)
     this.forward_velocity = vec2.scale(vec2.create(), velocity, 1 / 60)
     this.reverse_velocity = vec2.scale(vec2.create(), velocity, -1 / 60)
+    this.options = options // TODO make this.wave and this.y_offset use this.options
     this.wave = options.wave
     this.y_offset = options.y_offset || 0
 
@@ -120,10 +121,15 @@ export default class Bullet {
   }
 
   setRenderer() {
-    const { enabled } = this.controller
-    let slug = BEAMS.filter((s) => enabled[s + '-beam']).join('_')
-    if (this.charged) {
-      slug = 'charged_' + slug
+    let slug
+    if (this.options.dust) {
+      slug = this.charged ? 'super-missile' : 'missile'
+    } else {
+      const { enabled } = this.controller
+      slug = BEAMS.filter((s) => enabled[s + '-beam']).join('_')
+      if (this.charged) {
+        slug = 'charged_' + slug
+      }
     }
     if (['', 'missile', 'super-missile'].includes(slug)) {
       this.body.angle = 0
@@ -156,6 +162,8 @@ const weaponSheetRenderer = (spritename) => (bullet) => {
 
 const renderers = {
   '': weaponSheetRenderer('beam'),
+  missile: weaponSheetRenderer('missile'),
+  'super-missile': weaponSheetRenderer('super-missile'),
   charged_: () => {
     throw 'TODO'
   },

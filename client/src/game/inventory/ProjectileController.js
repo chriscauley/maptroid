@@ -13,7 +13,9 @@ export default class ProjectileController extends BaseController {
     this.bullets = {}
   }
   shoot() {
-    if (this.enabled['spazer-beam']) {
+    if (this.is_dust) {
+      this._shootBullet({ dust: 1 })
+    } else if (this.enabled['spazer-beam']) {
       if (this.enabled['wave-beam']) {
         this._shootBullet()
         this._shootBullet({ wave: 1 })
@@ -44,8 +46,15 @@ export default class ProjectileController extends BaseController {
   tick = () => {
     Object.values(this.bullets).forEach((b) => b.tick())
   }
-  release() {}
+
+  release() {
+    if (this.is_charged) {
+      this.shoot()
+      this.is_charged = false
+    }
+  }
+
   canCharge() {
-    return true // TODO
+    return false // TODO
   }
 }

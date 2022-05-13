@@ -25,6 +25,7 @@ export const PLAYER_ACTIONS = [
   'shoot1',
   'shoot2',
   'special',
+  'swap',
   'jump',
   'run',
   'aimup',
