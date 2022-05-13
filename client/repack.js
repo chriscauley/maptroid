@@ -10,4 +10,8 @@ const portal_colors = loadStatic('sm/portal/colors.json')
 const templates = loadStatic('sm/icons/template_sprites.json')
 lines.push(`$portal_colors: ${toSassMap(portal_colors)};`)
 lines.push(`$template_sprites: ${toSassMap(templates)};`)
+
+const icons = loadStatic('sm/icons.json')
+lines.push(`$ui_items: ${icons['ui_items']['icons'].join(' ')};`)
+
 fs.writeFileSync('./src/styles/variables.scss', lines.join('\n\n'))

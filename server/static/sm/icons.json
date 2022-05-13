@@ -154,5 +154,15 @@
     "icons": [
       "samus_eater"
     ]
+  },
+  "ui_items": {
+    "size": [16, 16],
+    "icons": [
+      "ui-missile",
+      "ui-super-missile",
+      "ui-power-bomb",
+      "ui-grappling-beam",
+      "ui-x-ray"
+    ]
   }
 }

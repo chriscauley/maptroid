@@ -6,7 +6,7 @@ import p2 from 'p2'
 
 import Controller from './Controller'
 import drawSprite from './drawSprite'
-import { PLAYER_GROUP, SCENERY_GROUP, ITEM_GROUP, POSTURE } from '../constants'
+import { PLAYER_GROUP, SCENERY_GROUP, ITEM_GROUP, POSTURE, ENERGY } from '../constants'
 import inventory from '../inventory'
 import getBeamRays from './getBeamRays'
 import aim from './aim'
@@ -55,12 +55,18 @@ export default class Player extends Controller {
     this.save_state = reactive({
       collected: {},
       disabled: {},
+      missile: 0,
+      'super-missile': 0,
+      'power-bomb': 0,
+      energy: ENERGY.base_energy,
+      reserve: 0,
       ...options.save_state,
     })
-    this.state = options.state || {
-      health: 0, // will be healed after this.tech is set
-    }
-    this.state.posture = POSTURE.stand
+    this.state = reactive(
+      options.state || {
+        posture: POSTURE.stand,
+      },
+    )
     this.aim = {
       position: vec2.create(),
       dxy: [0, 0],
@@ -102,7 +108,7 @@ export default class Player extends Controller {
 
     this.setMaxJumpHeight(7.1, 1.533 / 2)
 
-    this.tech = {
+    this.tech = reactive({
       bomb_linked: true,
       bomb_triggered: true,
       'energy-tank': 0,
@@ -110,7 +116,7 @@ export default class Player extends Controller {
       missile: 0,
       'super-missile': 0,
       'power-bomb': 0,
-    }
+    })
 
     this.game.options.items.forEach((i) => {
       if (this.save_state.collected[i.id]) {
@@ -145,7 +151,6 @@ export default class Player extends Controller {
       aimdown: 0,
     }
     this._last_pressed_at = {}
-    this.heal(Infinity)
   }
 
   setMaxJumpHeight(maxJumpHeight, timeToJumpApex) {
@@ -158,9 +163,32 @@ export default class Player extends Controller {
     this.terminalVelocity = -this.maxJumpVelocity
   }
 
+  getMax(type) {
+    const base = type === 'energy-tank' ? ENERGY.base_energy : 0
+    return this.tech[type] * ENERGY.per_pack[type] + base
+  }
+
+  fullHeal() {
+    this.save_state.energy = this.getMax('energy-tank')
+  }
+
   heal(amount) {
-    this.state.health += amount
-    this.state.health = Math.min(this.state.health, 99 + 100 * this.tech.e_tanks)
+    this.save_state.energy += amount
+    const max_health = this.getMax('energy-tank')
+    if (this.save_state.energy > max_health) {
+      this.save_state.reserve += this.save_state.energy - max_health
+      this.save_state.energy = max_health
+      const max_reserve = this.getMax('reserve-tank')
+      this.save_state.reserve = Math.max(this.save_state.reserve, max_reserve)
+    }
+  }
+
+  addResource(type, amount) {
+    if (type === 'energy') {
+      this.heal(amount)
+    } else {
+      this.save_state[type] += amount
+    }
   }
 
   doMacro() {
@@ -222,8 +250,23 @@ export default class Player extends Controller {
       }
     } else if (key === 'pause') {
       this.game.togglePause()
+    } else if (key === 'swap') {
+      this.nextWeapon()
     }
     this.updatePointing()
+  }
+
+  nextWeapon() {
+    const weapons = ['missile', 'super-missile', 'power-bomb', 'grappling-beam', 'x-ray']
+    const index = weapons.indexOf(this.state.active_weapon) + 1
+    this.state.active_weapon = weapons[index]
+
+    if (index >= weapons.length) {
+      delete this.state.active_weapon
+    } else if (!this.tech[this.state.active_weapon]) {
+      // tech hasn't been picked up yet, skip to next weapon
+      this.nextWeapon()
+    }
   }
 
   setPosture(posture) {
@@ -546,13 +589,21 @@ export default class Player extends Controller {
   }
 
   onCollide() {} // noop
+
   collectItem({ id, type }) {
-    this.save_state.collected[id] = true
     const pack_items = ['missile', 'super-missile', 'power-bomb', 'energy-tank', 'reserve-tank']
     if (pack_items.includes(type)) {
       this.tech[type]++
     } else {
       this.tech[type] = true
+    }
+    if (!this.save_state.collected[id]) {
+      this.save_state.collected[id] = true
+      if (type === 'energy-tank') {
+        this.fullHeal()
+      } else if (ENERGY.per_pack[type]) {
+        this.addResource(type, ENERGY.per_pack[type])
+      }
     }
   }
 }

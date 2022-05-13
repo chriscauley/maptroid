@@ -42,3 +42,16 @@ export const POSTURE = {
 }
 
 export const CHARGE_TIME = 1000
+
+export const ENERGY = {
+  total_tanks: 14,
+  total_reserve: 4,
+  base_energy: 99,
+  per_pack: {
+    missile: 5,
+    'super-missile': 5,
+    'power-bomb': 5,
+    'reserve-tank': 100,
+    'energy-tank': 100,
+  },
+}

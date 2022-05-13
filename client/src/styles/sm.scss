@@ -98,7 +98,7 @@
   }
 }
 
-.sm-elevator, .sm-item, .sm-block, .sm-cre-hex, .sm-portal {
+.sm-elevator, .sm-item, .sm-block, .sm-cre-hex, .sm-portal, .sm-ui {
   @apply relative inline-block;
   height: 1em;
   width: 1em;
@@ -187,6 +187,21 @@ $block: empty block spike_misc spark exit switch_shot;
     $name: nth($block, $i + 1);
     &.-#{"" + $name}:before {
       background-image: url("/static/sm/block-alt.png");
+      background-position: 0 $i * -100%;
+    }
+  }
+}
+
+.sm-ui {
+  &:before {
+    background-image: url("/static/sm/ui.png");
+  }
+  &.-active:before {
+    background-image: url("/static/sm/ui-active.png");
+  }
+  @for $i from 0 to length($ui_items) {
+    $name: nth($ui_items, $i + 1);
+    &.-#{"" + $name}:before {
       background-position: 0 $i * -100%;
     }
   }

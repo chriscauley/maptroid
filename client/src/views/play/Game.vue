@@ -1,5 +1,6 @@
 <template>
   <div>
+    <game-hud :game="game" v-if="game" />
     <game-canvas :game="game" @click="click" />
     <debug-game :game="game" v-if="game" />
     <pause-menu v-if="paused" :game="game" />
@@ -11,6 +12,7 @@ import Mousetrap from '@unrest/vue-mousetrap'
 import DebugGame from '@/components/DebugGame'
 import PauseMenu from '@/components/PauseMenu.vue'
 import GameCanvas from '@/components/Game'
+import GameHud from '@/components/GameHud.vue'
 
 import Game from '@/game/Game'
 
@@ -18,7 +20,7 @@ export default {
   __route: {
     path: '/play/:world_slug/:play_id/',
   },
-  components: { DebugGame, GameCanvas, PauseMenu },
+  components: { DebugGame, GameCanvas, GameHud, PauseMenu },
   mixins: [Mousetrap.Mixin],
   data() {
     return { game: null, paused: false }
@@ -51,8 +53,8 @@ export default {
           'a,A': shoot1,
           'r,R': shoot2,
           'x,X': jump,
-          'z,Z': special,
-          'c,C': swap,
+          'z,Z': swap,
+          'c,C': special,
           shift: run,
           '+,=': () => this.game.adjustZoom(1),
           '-,_': () => this.game.adjustZoom(-1),

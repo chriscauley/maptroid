@@ -1,0 +1,69 @@
+.game-hud {
+  @apply flex gap-4 items-start;
+  background: gray;
+  @apply font-bold text-lg;
+  font-family: monospace;
+}
+
+.game-hud {
+  &__etank-box, &__rtank-box, &__weapon-box {
+    @apply flex;
+  }
+}
+
+$ui-1: #312029;
+$ui-2: #734952;
+$ui-3: #734952;
+$ui-yellow: #ffb600;
+
+.game-hud__etank, .game-hud__rtank {
+  @apply h-6 w-6;
+  &-box {
+    @apply gap-1 flex-wrap;
+    flex-direction: row-reverse;
+  }
+  &.-null {
+    opacity: 0;
+  }
+  &.-empty {
+    background: $ui-2;
+  }
+}
+
+.game-hud__etank {
+  &-box {
+    width: 1.75rem * 7;
+  }
+  &.-full {
+    background: #de3894;
+  }
+  &-count {
+    @apply px-1;
+    flex-basis: 100%;
+  }
+}
+
+
+.game-hud__rtank {
+  &.-full {
+    background: $ui-yellow;
+  }
+  &-box {
+    width: 1.75rem * 2;
+  }
+}
+
+.game-hud__weapon {
+  &-wrapper {
+    width: 4rem;
+  }
+  &-box {
+    @apply gap-2;
+  }
+  &-icon {
+    font-size: 4rem;
+  }
+  &-border {
+    @apply flex flex-col items-center;
+  }
+}
