@@ -489,6 +489,9 @@ export default class Player extends Controller {
     if (collisions.above || collisions.below) {
       velocity[1] = 0
     }
+    if (collisions.left || collisions.right) {
+      velocity[0] = 0
+    }
     this.beam_rays = getBeamRays(this)
   }
 
