@@ -12,7 +12,14 @@ export default class ProjectileController extends BaseController {
     this.player.game.p2_world.on('preSolve', this.tick)
     this.bullets = {}
   }
+
   shoot() {
+    const frame = this.player.game.frame
+    if (this.getCooldown() + this.last_fired > frame) {
+      return
+    }
+    this.last_fired = frame
+
     if (this.is_dust) {
       this._shootBullet({ dust: 1 })
     } else if (this.enabled['spazer-beam']) {
@@ -36,13 +43,16 @@ export default class ProjectileController extends BaseController {
       }
     }
   }
+
   _shootBullet(options = {}) {
     const bullet = new Bullet(this, options)
     this.bullets[bullet.id] = bullet
   }
+
   press() {
     this.shoot()
   }
+
   tick = () => {
     // TODO this should be handled by the game's entity list
     Object.values(this.bullets).forEach((b) => b.tick())

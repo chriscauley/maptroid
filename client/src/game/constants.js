@@ -57,7 +57,7 @@ export const ENERGY = {
 }
 
 export const COOLDOWN = {
-  missile: 40, // missile can 3 times in 2 seconds
-  'super-missile': 80, // super missiles fire 3 times in 4 seconds
-  beam: 18, // I timed it as 50 shots in 15 seconds and 15 / 50 * 60 = 18
+  missile: 8, // if I fire a missile and press fire again 8 frames later, a second missile fires
+  'super-missile': 30, // super missiles fire 3 times in 4 seconds
+  beam: 20, // Charge is 3x beam, so it makes sense to have max rate be about equal to charge
 }

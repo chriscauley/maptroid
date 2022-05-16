@@ -38,21 +38,13 @@ export default class Bullet {
     const position = vec2.clone(controller.player.aim.position)
     vec2.add(position, controller.player.body.position, position)
     this.dxy_frame = DXY_TO_FRAME[[Math.sign(dxy[0]), Math.sign(dxy[1])]]
-    const velocity = vec2.scale(vec2.create(), dxy, SPEED)
+    const speed = Math.max(2 * vec2.length(controller.player.velocity), SPEED)
+    const velocity = vec2.scale(vec2.create(), dxy, speed)
     this.forward_velocity = vec2.scale(vec2.create(), velocity, 1 / 60)
     this.reverse_velocity = vec2.scale(vec2.create(), velocity, -1 / 60)
     this.options = options // TODO make this.wave and this.y_offset use this.options
     this.wave = options.wave
     this.y_offset = options.y_offset || 0
-
-    // Add player's y velocity if they aren't pointing in the x direction
-    if (!dxy[0]) {
-      velocity[1] += controller.player.velocity[1]
-    }
-    // Do the same, but for the x velocity and y direction
-    if (!dxy[1]) {
-      velocity[0] += controller.player.velocity[0]
-    }
 
     this.freq = controller.enabled['plasma-beam'] ? rad_per_ms / 2 : rad_per_ms
     this.from = vec2.create()
