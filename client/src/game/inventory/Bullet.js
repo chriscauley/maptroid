@@ -96,6 +96,7 @@ export default class Bullet {
       })
       this.destroy()
     } else if (this.controller.player.getNow() - this.start > LIFETIME) {
+      // TODO this should be distance from player, not a timer
       this.destroy()
     }
     raycastResult.reset()

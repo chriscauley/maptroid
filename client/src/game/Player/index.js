@@ -8,7 +8,6 @@ import Controller from './Controller'
 import drawSprite from './drawSprite'
 import { PLAYER_GROUP, SCENERY_GROUP, ITEM_GROUP, POSTURE, ENERGY } from '../constants'
 import inventory from '../inventory'
-import getBeamRays from './getBeamRays'
 import aim from './aim'
 import animate from './animate'
 
@@ -29,6 +28,7 @@ export default class Player extends Controller {
     Object.assign(options, {
       collisionMask: SCENERY_GROUP | ITEM_GROUP,
       velocityXSmoothing: 0.0001,
+      legacy_controls: true,
     })
     options.body = new p2.Body({
       mass: 0,
@@ -46,6 +46,7 @@ export default class Player extends Controller {
     options.p2_world.addBody(options.body)
 
     super(options)
+    this.options = options
     this.game = options.game
     this.game.bindEntity(this)
 
@@ -74,14 +75,22 @@ export default class Player extends Controller {
     this._charged = {}
     this.inventory = {
       bomb: new inventory.BombController({ player: this }),
-      gun1: new inventory.BeamController({ player: this }),
-      gun2: new inventory.DustController({ player: this }),
+      beam: new inventory.BeamController({ player: this }),
+      dust: new inventory.DustController({ player: this }),
+      cycle: new inventory.CycleController({ player: this }),
+      swap: new inventory.SwapController({ player: this }),
+      'grappling-beam': new inventory.GrapplingBeamController({ player: this }),
       speedbooster: false, // TODO should this be a class
     }
     this.loadout = {
-      shoot1: this.inventory.gun1,
-      shoot2: this.inventory.gun2,
+      shoot1: this.inventory.beam,
+      shoot2: this.inventory.dust,
       bomb: this.inventory.bomb,
+    }
+
+    if (options.legacy_controls) {
+      this.loadout.shoot1 = this.inventory.cycle
+      this.loadout.shoot2 = this.inventory.swap
     }
 
     const {
@@ -251,7 +260,11 @@ export default class Player extends Controller {
     } else if (key === 'pause') {
       this.game.togglePause()
     } else if (key === 'swap') {
-      this.nextWeapon()
+      if (this.options.legacy_controls) {
+        delete this.state.active_weapon
+      } else {
+        console.warn('TODO switch loadout')
+      }
     }
     this.updatePointing()
   }
@@ -492,7 +505,7 @@ export default class Player extends Controller {
     if (collisions.left || collisions.right) {
       velocity[0] = 0
     }
-    this.beam_rays = getBeamRays(this)
+    // this.beam_rays = getBeamRays(this)
   }
 
   _updateVelocityX(input, velocity, deltaTime) {

@@ -55,3 +55,9 @@ export const ENERGY = {
     'energy-tank': 100,
   },
 }
+
+export const COOLDOWN = {
+  missile: 40, // missile can 3 times in 2 seconds
+  'super-missile': 80, // super missiles fire 3 times in 4 seconds
+  beam: 18, // I timed it as 50 shots in 15 seconds and 15 / 50 * 60 = 18
+}

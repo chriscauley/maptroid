@@ -1,4 +1,5 @@
 import ProjectileController from './ProjectileController'
+import { COOLDOWN } from '../constants'
 
 export default class DustController extends ProjectileController {
   constructor(options) {
@@ -7,12 +8,14 @@ export default class DustController extends ProjectileController {
     this.is_dust = true
   }
   canCharge() {
-    return this.player.tech['super-missile']
+    return false
   }
-  getRefractoryFrames() {
-    // missile can 3 times in 2 seconds
-    return 40
-    // super missiles fire 3 times in 4 seconds
-    return 80
+  getCooldown() {
+    const is_super = this.player.state.active_weapon === 'super-missile'
+    return is_super ? COOLDOWN['super-missile'] : COOLDOWN.missile
+  }
+  shoot() {
+    this.is_charged = this.player.state.active_weapon === 'super-missile'
+    super.shoot()
   }
 }

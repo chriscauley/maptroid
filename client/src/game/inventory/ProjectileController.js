@@ -44,6 +44,7 @@ export default class ProjectileController extends BaseController {
     this.shoot()
   }
   tick = () => {
+    // TODO this should be handled by the game's entity list
     Object.values(this.bullets).forEach((b) => b.tick())
   }
 
