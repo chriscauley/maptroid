@@ -1,4 +1,6 @@
 // Block are destructable terrain
+import { range } from 'lodash'
+
 import BaseEntity from './BaseEntity'
 import { getIcon, getAsset } from '../useAssets'
 
@@ -92,7 +94,23 @@ export default class BlockEntity extends BaseEntity {
     const index = Math.floor((ANIMATION_FRAMES * (ANIMATION_DURATION - count)) / ANIMATION_DURATION)
     const { img } = getAsset('breaking-block')
     const source_bounds = [0, index * 16, 16, 16]
-    this.room.drawOnFg(img, this, source_bounds)
+    this.getEachBounds().map((dest) => this.room.drawOnFg(img, dest, source_bounds))
+  }
+
+  getEachBounds() {
+    // used for drawing animation and respawned block (when block is more than 1x1)
+    const out = []
+    range(this.width).forEach((dx) => {
+      range(this.height).forEach((dy) => {
+        out.push({
+          width: 1,
+          height: 1,
+          x: this.x + dx - this.width / 2 + 0.5,
+          y: this.y + dy - this.height / 2 + 0.5,
+        })
+      })
+    })
+    return out
   }
 
   onCollide(entity, result) {
@@ -100,6 +118,9 @@ export default class BlockEntity extends BaseEntity {
   }
 
   draw() {
+    if (this._in_game_background) {
+      return
+    }
     if (this.type === 'egg') {
       const y = EGG_FRAMES[Math.abs(this.game.cycle(15, 90))] * 16
       const { img } = getAsset('animations/egg')
@@ -107,7 +128,9 @@ export default class BlockEntity extends BaseEntity {
       this.room.drawOnFg(img, this, source_bounds)
     } else if (this._needs_draw) {
       this._needs_draw = false
-      this.room.drawOnFg(getIcon('block', this.type), this)
+      this.getEachBounds().map((dest) => {
+        this.room.drawOnFg(getIcon('block', this.type), dest)
+      })
     }
   }
 }

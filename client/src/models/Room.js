@@ -123,6 +123,20 @@ const getBlocks = (room, with_cre = false) => {
   return block_map
 }
 
+// each of these geometries are [includes, excludes]
+// includes and excludes are the dxys which must or must not be of the same type
+// 0,0 is not included (because it will always be of same type)
+const _2x3 = [
+  [
+    [0, 1],
+    [0, 2],
+    [1, 0],
+    [1, 1],
+    [1, 2],
+  ],
+  [],
+]
+
 const _2x2 = [
   [
     [0, 1],
@@ -137,7 +151,7 @@ const _1x2 = [[[0, 1]], []]
 const _1x1 = [[], []] // noop
 const GEOMETRIES_BY_TYPE = {
   default: [_2x2, _2x1, _1x2, _1x1],
-  crumble: [_1x1],
+  crumble: [_2x2, _1x2, _1x1], // never 2x1 because those are usually bridges!
 }
 
 const getGroupedBlocks = (room) => {

@@ -310,6 +310,7 @@ export default class Game extends p2.EventEmitter {
     })
 
     // Draw all bodies
+    this.background_entities.forEach((e) => this.drawBody(e.body))
     this.p2_world.bodies.forEach((body) => this.drawBody(body))
 
     if (this.mouse.canvas_xy) {
@@ -403,10 +404,12 @@ export default class Game extends p2.EventEmitter {
   backgroundEntity(entity) {
     // moves an entity to the background so it can still be renedered without being in the p2_world
     this.background_entities.push(entity)
+    entity._in_game_background = true
     this.p2_world.removeBody(entity.body)
   }
 
   foregroundEntity(entity) {
+    entity._in_game_background = false
     this.background_entities = this.background_entities.filter((e) => e.id !== entity.id)
     this.p2_world.addBody(entity.body)
   }
