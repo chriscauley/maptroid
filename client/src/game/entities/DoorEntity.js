@@ -28,13 +28,39 @@ export default class DoorEntity extends BaseEntity {
       this.respawn_aabb.upperBound[1] -= 2
       this.respawn_aabb.lowerBound[1] -= 2
     }
+
+    if (this.color === 'red') {
+      this.max_hp = this.hp = 5
+      this.weak_to = ['missile', 'super-missile']
+    } else if (this.color === 'green') {
+      this.weak_to = ['super-missile']
+    } else if (this.color === 'orange') {
+      this.weak_to = ['power-bomb']
+    } else if (this.color === 'brown') {
+      this.weak_to = ['nothing']
+    }
+    // blue is weak to undefined, so can be hurt by everything
+
+    this.flash_since = -100 // used to make red doors flicker
   }
 
-  damage(_event) {
-    if (false) {
-      // TODO check damage type
+  damage(event) {
+    if (this.weak_to && !this.weak_to.includes(event.type)) {
       return
     }
+
+    if (this.color === 'red' && event.type === 'super-missile') {
+      this.hp = 0
+    } else {
+      this.flash_since = this.game.frame
+      this.hp--
+    }
+
+    if (this.hp > 0) {
+      // TODO animate door damage
+      return
+    }
+
     const edge = this.room.edges.find((e) => e.aabb.containsPoint(this.body.position))
     const target_room = this.game.world_controller.room_map[edge?._target_xy]
     if (target_room) {
@@ -66,7 +92,15 @@ export default class DoorEntity extends BaseEntity {
       ctx.save()
       ctx.imageSmoothingEnabled = false
       const { width, height } = this.body.shapes[0]
-      const { img, sw, sh } = getDoorSprite(this.color, this.orientation)
+      let color = this.color
+      if (this.flash_since) {
+        if (this.flash_since + 48 < this.game.frame) {
+          delete this.flash_since
+        } else if (this.game.cycleSince(this.flash_since, 8, 16) === 0) {
+          color = 'blue'
+        }
+      }
+      const { img, sw, sh } = getDoorSprite(color, this.orientation)
       ctx.drawImage(img, 0, index * sh, sw, sh, -width / 2, -height / 2, width, height)
       ctx.restore()
     }

@@ -69,6 +69,10 @@ export default class Bullet {
     this.controller.player.game.bindEntity(this)
     this.start = controller.player.getNow()
     this.charged = controller.is_charged
+    this.type = 'beam'
+    if (options.dust) {
+      this.type = this.charged ? 'super-missile' : 'missile'
+    }
     this.setRenderer()
   }
   tick = () => {
@@ -88,7 +92,7 @@ export default class Bullet {
       player.p2_world.emit({
         type: 'damage',
         damage: {
-          type: 'beam',
+          type: this.type,
           player: player.id,
           amount: 1,
           body_id: raycastResult.body.id,
@@ -123,8 +127,8 @@ export default class Bullet {
 
   setRenderer() {
     let slug
-    if (this.options.dust) {
-      slug = this.charged ? 'super-missile' : 'missile'
+    if (this.type === 'missile' || this.type === 'super-missile') {
+      slug = this.type
     } else {
       const { enabled } = this.controller
       slug = BEAMS.filter((s) => enabled[s + '-beam']).join('_')
