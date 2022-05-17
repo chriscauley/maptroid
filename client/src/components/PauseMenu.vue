@@ -58,11 +58,11 @@ export default {
       return [
         {
           name: 'Beam',
-          items: this.game.player.inventory.gun1.getItemList(),
+          items: this.game.player.inventory.beam.getItemList(),
         },
         {
-          name: 'Dust Cannon',
-          items: this.game.player.inventory.gun2.getItemList(),
+          name: 'Boots',
+          items: this.game.player.inventory.boots.getItemList(),
         },
       ]
     },

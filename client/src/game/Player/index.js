@@ -75,6 +75,7 @@ export default class Player extends Controller {
     this._charged = {}
     this.inventory = {
       bomb: new inventory.BombController({ player: this }),
+      boots: new inventory.BootsController({ player: this }),
       beam: new inventory.BeamController({ player: this }),
       dust: new inventory.DustController({ player: this }),
       cycle: new inventory.CycleController({ player: this }),
@@ -86,6 +87,7 @@ export default class Player extends Controller {
       shoot1: this.inventory.beam,
       shoot2: this.inventory.dust,
       bomb: this.inventory.bomb,
+      boots: this.inventory.boots,
     }
 
     if (options.legacy_controls) {
@@ -246,6 +248,7 @@ export default class Player extends Controller {
         }
       }
     } else if (key === 'down') {
+      animate.pulseFeet(this.game, this.body, 'white')
       if (posture === POSTURE.stand) {
         const type = this._last_collision?.body._type
         if (this.velocity[1] === 0 && ['ship', 'save-station'].includes(type)) {
@@ -575,6 +578,9 @@ export default class Player extends Controller {
 
   getMoveAcceleration(input) {
     if (!input[0]) {
+      if (this.state.posture === POSTURE.crouch) {
+        return 300
+      }
       return 80 // at full speed, letting go should stop in ~8 blocks
     }
     if (this.keys.run) {
@@ -595,7 +601,8 @@ export default class Player extends Controller {
         return this.speed.run
       }
       // TODO speedbooster in inventory
-      return this.inventory.speedbooster ? this.speed.boost : this.speed.run
+      const boost = this.inventory.boots.enabled['speed-booster']
+      return boost ? this.speed.boost : this.speed.run
     }
     return this.speed.walk
   }
