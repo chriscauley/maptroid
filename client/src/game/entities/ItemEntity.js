@@ -1,9 +1,9 @@
 import BlockEntity from './BlockEntity'
-import BaseEntity from './BaseEntity'
+import BoxEntity from './BoxEntity'
 import { getIcon } from '../useAssets'
 import { ITEM_GROUP } from '../constants'
 
-export default class ItemEntity extends BaseEntity {
+export default class ItemEntity extends BoxEntity {
   constructor(options) {
     options.collisionGroup = ITEM_GROUP
     super(options)
@@ -22,7 +22,7 @@ export default class ItemEntity extends BaseEntity {
           this.game.removeEntity(this.block)
         }
         if (modifier === 'inegg' || !modifier) {
-          this.room.drawOnFg(null, this)
+          this.room.drawOnFg(null, this.options)
         }
       }
     }, 1)
@@ -31,13 +31,13 @@ export default class ItemEntity extends BaseEntity {
   draw(_ctx) {
     if (this.exists) {
       const fname = `items${this.game.frame % 8 < 4 ? '' : '-alt'}`
-      this.room.drawOnFg(getIcon(fname, this.type), this)
+      this.room.drawOnFg(getIcon(fname, this.type), this.options)
     }
   }
 
   onCollide = (player, _result) => {
     this.exists = false
-    this.room.drawOnFg(null, this)
+    this.room.drawOnFg(null, this.options)
     player.collectItem({ id: this.options.item_id, type: this.type })
     this.game.removeEntity(this)
   }

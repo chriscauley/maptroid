@@ -1,7 +1,7 @@
 // Block are destructable terrain
 import { range } from 'lodash'
 
-import BaseEntity from './BaseEntity'
+import BoxEntity from './BoxEntity'
 import { getIcon, getAsset } from '../useAssets'
 
 const TYPES = {
@@ -50,7 +50,7 @@ const ANIMATION_FRAMES = 4
 
 const EGG_FRAMES = [0, 1, 2, 2, 1, 0]
 
-export default class BlockEntity extends BaseEntity {
+export default class BlockEntity extends BoxEntity {
   constructor(options) {
     super(options)
     this._type = TYPES[options.type] || TYPES['default']
@@ -100,13 +100,14 @@ export default class BlockEntity extends BaseEntity {
   getEachBounds() {
     // used for drawing animation and respawned block (when block is more than 1x1)
     const out = []
-    range(this.width).forEach((dx) => {
-      range(this.height).forEach((dy) => {
+    const { width, height, x, y } = this.options
+    range(width).forEach((dx) => {
+      range(height).forEach((dy) => {
         out.push({
           width: 1,
           height: 1,
-          x: this.x + dx - this.width / 2 + 0.5,
-          y: this.y + dy - this.height / 2 + 0.5,
+          x: x + dx - width / 2 + 0.5,
+          y: y + dy - height / 2 + 0.5,
         })
       })
     })
@@ -125,7 +126,7 @@ export default class BlockEntity extends BaseEntity {
       const y = EGG_FRAMES[Math.abs(this.game.cycle(15, 90))] * 16
       const { img } = getAsset('animations/egg')
       const source_bounds = [0, y, 16, 16]
-      this.room.drawOnFg(img, this, source_bounds)
+      this.room.drawOnFg(img, this.options, source_bounds)
     } else if (this._needs_draw) {
       this._needs_draw = false
       this.getEachBounds().map((dest) => {

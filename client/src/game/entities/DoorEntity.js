@@ -1,10 +1,10 @@
 // Block are destructable terrain
 import { minBy, range } from 'lodash'
 import { getAsset } from '../useAssets'
-import BaseEntity from './BaseEntity'
+import BoxEntity from './BoxEntity'
 import p2 from 'p2'
 
-export default class DoorEntity extends BaseEntity {
+export default class DoorEntity extends BoxEntity {
   constructor(options) {
     super(options)
     const { color, orientation } = options

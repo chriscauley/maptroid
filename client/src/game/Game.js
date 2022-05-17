@@ -381,8 +381,11 @@ export default class Game extends p2.EventEmitter {
     // uncomment to enable slow motion
     const do_tick = !this.paused
     // && this.frame % 10 === 0
-    do_tick && this.p2_world.step(FIXED_DELTA_TIME, deltaTime, MAX_SUB_STEPS)
-    this.frame++
+    if (do_tick) {
+      this.p2_world.step(FIXED_DELTA_TIME, deltaTime, MAX_SUB_STEPS)
+      this.frame++
+      Object.values(this.entities).forEach((e) => e.tick())
+    }
   }
 
   stop() {

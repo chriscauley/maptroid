@@ -1,8 +1,10 @@
 import p2 from 'p2'
-import { SCENERY_GROUP, BULLET_GROUP, DIRECTIONS } from '../constants'
+import Explosion from '../entities/Explosion'
+import { BULLET_GROUP } from '../constants'
 
-const { Ray, RaycastResult, vec2 } = p2
+const { vec2 } = p2
 const BLAST_RADIUS = 0.75
+const BLAST_DURATION = 15
 const RADIUS = 0.1
 
 class Bomb {
@@ -10,6 +12,7 @@ class Bomb {
     this.player = player
     this.type = 'bomb'
     this.makeShape()
+    this.room = this.player.game.current_room
     const [x, y] = this.player.body.position
     this.xy = [Math.floor(x), Math.floor(y)]
     this.created = this.player.p2_world.time
@@ -17,34 +20,17 @@ class Bomb {
   }
 
   detonate() {
-    const { position } = this.body
-    const ray = new Ray({
-      mode: Ray.ALL,
-      from: position,
-      callback: (result) => {
-        result.body &&
-          this.player.p2_world.emit({
-            damage: {
-              type: 'bomb',
-              player_id: this.player.id,
-              amount: 1,
-              body_id: result.body.id,
-            },
-            type: 'damage',
-          })
-      },
-    })
-    const result = new RaycastResult()
-    ray.collisionMask = SCENERY_GROUP
-    DIRECTIONS.forEach((dxy) => {
-      result.reset()
-      ray.to = [ray.from[0] + dxy[0] * BLAST_RADIUS, ray.from[1] + dxy[1] * BLAST_RADIUS]
-      ray.update()
-      this.player.p2_world.raycast(result, ray)
+    const [x, y] = this.body.position
+    new Explosion({
+      x,
+      y,
+      max_radius: BLAST_RADIUS,
+      duration: BLAST_DURATION,
+      room: this.room,
     })
     this.blastPlayer(this.player) // should this target other players?
     this.player.game.removeEntity(this)
-    this.detonated = true
+    this.detonated = this.player.game.frame
   }
 
   blastPlayer(player) {
@@ -91,6 +77,8 @@ class Bomb {
     ctx.fill()
     ctx.closePath()
   }
+
+  tick() {}
 }
 
 export default class BombController {

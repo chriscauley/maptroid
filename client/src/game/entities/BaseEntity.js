@@ -1,26 +1,16 @@
-// Blocks are destructable terrain
-import { SCENERY_GROUP, PLAYER_GROUP, BULLET_GROUP } from '../constants'
-import p2 from 'p2'
-
 export default class BaseEntity {
   constructor(options) {
-    const { x, y, width = 1, height = 1, max_hp = 1, hp = max_hp, regrow, room, type } = options
-    Object.assign(this, { x, y, width, height, max_hp, hp, regrow, room, type })
-    this.options = options
+    const { x, y, max_hp = 1, hp = max_hp, regrow, room, type } = options
+    Object.assign(this, { x, y, max_hp, hp, regrow, room, type })
     this.game = room.game
+    this.created = this.game.frame
+    this.options = options
     this.makeBody()
     this.game.bindEntity(this)
   }
 
-  makeBody() {
-    const { x, y, width, height } = this
-    const collisionMask = PLAYER_GROUP | BULLET_GROUP
-    const { collisionGroup = SCENERY_GROUP } = this.options
-    const shape = new p2.Box({ collisionGroup, collisionMask, width, height })
-    const body = (this.body = new p2.Body({ position: [x, y] }))
-    body.addShape(shape)
-    body.updateAABB()
-  }
+  makeBody() {}
+  draw() {}
 
   damage(event) {
     let amount = event.amount
@@ -50,25 +40,14 @@ export default class BaseEntity {
     } else {
       this.game.setTimeout(() => this.game.removeEntity(this), 4)
     }
-    this.room.drawOnFg(null, this)
+    const { x, y, width, height } = this.options
+    this.room.drawOnFg(null, { x, y, width, height })
     this.options.onDestroy?.()
-  }
-
-  draw(ctx) {
-    const { width, height } = this.body.shapes[0]
-    if (this.hp <= 0) {
-      ctx.globalAlpha = 0.25
-      const respawn_in = this._death_timeout?.when - this.game.p2_world.time
-      if (respawn_in < 1) {
-        ctx.globalAlpha = Math.floor(this.game.p2_world.time * 10) % 2 ? 0.5 : 0.25
-      }
-    }
-    ctx.strokeStyle = this.color
-    ctx.lineWidth = 4 / 16
-    ctx.strokeRect(-width / 2, -height / 2, width, height)
   }
 
   onCollide(_entity, _result) {
     return // noop
   }
+
+  tick() {}
 }

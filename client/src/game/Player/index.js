@@ -354,6 +354,8 @@ export default class Player extends Controller {
     return (left || right) && !below && this.velocity[1] < 0 && _collide_angle % 90 < 1
   }
 
+  tick() {}
+
   update(deltaTime) {
     this.aim = aim(this)
     if (this.pointing === 'down' && this.collisions.below) {

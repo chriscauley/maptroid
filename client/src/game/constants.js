@@ -3,6 +3,14 @@ export const BULLET_GROUP = Math.pow(2, 2)
 export const PLAYER_GROUP = Math.pow(2, 3)
 export const ITEM_GROUP = Math.pow(2, 4)
 
+export const GROUP = {
+  scenery: Math.pow(2, 1),
+  bullet: Math.pow(2, 2),
+  player: Math.pow(2, 3),
+  item: Math.pow(2, 4),
+  explosion: Math.pow(2, 5),
+}
+
 export const DIRECTIONS = [
   [1, 0],
   [-1, 0],
