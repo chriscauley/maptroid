@@ -1985,8 +1985,8 @@
           11
         ],
         "253": [
-          9,
-          0
+          8,
+          -1
         ],
         "255": [
           12,
@@ -2402,9 +2402,21 @@
         86,
         84
       ],
-      "offsets": {},
-      "name": "morphing_left",
-      "preset": "center"
+      "offsets": {
+        "84": [
+          3,
+          3
+        ],
+        "86": [
+          3,
+          7
+        ],
+        "88": [
+          3,
+          13
+        ]
+      },
+      "name": "morphing_left"
     },
     "morphing_right": {
       "sprite_ids": [
@@ -2412,8 +2424,31 @@
         85,
         80
       ],
+      "offsets": {
+        "80": [
+          3,
+          3
+        ],
+        "85": [
+          3,
+          7
+        ],
+        "87": [
+          3,
+          13
+        ]
+      },
+      "name": "morphing_right"
+    },
+    "spacejump_left": {
+      "sprite_ids": [
+        49,
+        50,
+        51,
+        52
+      ],
       "offsets": {},
-      "name": "morphing_right",
+      "name": "spacejump_left",
       "preset": "center"
     },
     "spacejump_right": {
@@ -2425,17 +2460,6 @@
       ],
       "offsets": {},
       "name": "spacejump_right",
-      "preset": "center"
-    },
-    "spacejumpo_left": {
-      "sprite_ids": [
-        49,
-        50,
-        51,
-        52
-      ],
-      "offsets": {},
-      "name": "spacejumpo_left",
       "preset": "center"
     },
     "sparking_left": {

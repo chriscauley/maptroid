@@ -1,5 +1,3 @@
-// Taken from p2.js/examples/canvas/js/KinematicCharacterController.js
-
 import { POSTURE, CHARGE_TIME } from '../constants'
 import SpriteSheet from '@/views/SpriteSheet/store'
 import { getAsset } from '../useAssets'
@@ -31,9 +29,21 @@ const _getSprite = (player) => {
     return [pose, index]
   }
   if (posture === POSTURE.ball) {
+    const balling = Math.floor(player.state.balling / 4)
+    if (balling > 1) {
+      return ['morphing' + dir, 0]
+    } else if (balling === 1) {
+      return ['morphing' + dir, 1]
+    }
     return ['ball' + dir, getFrame(now, 8)]
   } else if (posture === POSTURE.crouch) {
     player._show_charge = true
+    if (player.collisions.below) {
+      const crouching = Math.floor(player.state.crouching / 3)
+      if (crouching > 0) {
+        return ['_poses' + dir, 14]
+      }
+    }
     if (pointing === 'zenith') {
       return ['_poses' + dir, 4]
     } else if (pointing === 'upward') {

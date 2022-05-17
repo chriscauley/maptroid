@@ -253,8 +253,10 @@ export default class Player extends Controller {
           return
         } else {
           this.setPosture(POSTURE.crouch)
+          this.state.crouching = 6
         }
       } else if (posture === POSTURE.crouch) {
+        this.state.balling = 11
         this.setPosture(POSTURE.ball)
       }
     } else if (key === 'pause') {
@@ -375,6 +377,14 @@ export default class Player extends Controller {
 
     const { collisions, velocity, keys } = this
     const input = [(keys.right ? 1 : 0) - (keys.left ? 1 : 0), 0]
+    if (this.state.crouching > 0) {
+      this.input[0] = 0
+      this.state.crouching--
+    }
+    if (this.state.balling > 0) {
+      this.state.balling--
+    }
+
     // yflip
     if (this.terminalVelocity && velocity[1] < this.terminalVelocity) {
       // deltaTime was spent falling faster than terminalVelocity
@@ -535,7 +545,7 @@ export default class Player extends Controller {
         this.collisions.turning = input[0]
         this.collisions.turn_for = 8
       } else if (this.state.posture === POSTURE.crouch) {
-        if (this.checkVertical()) {
+        if (this.checkVertical() && !(this.state.crouching > 0)) {
           this.setPosture(POSTURE.stand)
         }
       }

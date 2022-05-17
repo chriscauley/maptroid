@@ -47,7 +47,8 @@ export default class Game extends p2.EventEmitter {
       _timeouts: [],
       // start mouse offscreen
       mouse: { canvas_xy: [-1e6, -1e6], world_xy: [-1e6, -1e6], _world_xy: [-1e6, -1e6] },
-      frame: 0,
+      frame: 0, // used for game time
+      rt_frame: 0, // used to track slow mo vs actual time
       ui: [], // random crap to draw on canvas
       actions: {}, // input map
       paused: true,
@@ -380,7 +381,8 @@ export default class Game extends p2.EventEmitter {
     // Move physics bodies forward in time
     // uncomment to enable slow motion
     const do_tick = !this.paused
-    // && this.frame % 10 === 0
+    // && this.rt_frame % 8 === 0
+    this.rt_frame++
     if (do_tick) {
       this.p2_world.step(FIXED_DELTA_TIME, deltaTime, MAX_SUB_STEPS)
       this.frame++
