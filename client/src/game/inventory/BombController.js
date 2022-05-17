@@ -4,13 +4,16 @@ import { BULLET_GROUP } from '../constants'
 
 const { vec2 } = p2
 const BLAST_RADIUS = 0.75
+const PB_RADIUS = 16
 const BLAST_DURATION = 15
 const RADIUS = 0.1
 
 class Bomb {
   constructor({ player }) {
     this.player = player
-    this.type = 'bomb'
+    this.is_power_bomb = player.state.active_weapon === 'power-bomb'
+    this.type = this.is_power_bomb ? 'power-bomb' : 'bomb'
+    this.bomb_color = this.is_power_bomb ? 'orange' : 'white'
     this.makeShape()
     this.room = this.player.game.current_room
     const [x, y] = this.player.body.position
@@ -24,9 +27,11 @@ class Bomb {
     new Explosion({
       x,
       y,
-      max_radius: BLAST_RADIUS,
+      max_radius: this.is_power_bomb ? PB_RADIUS : BLAST_RADIUS,
       duration: BLAST_DURATION,
       room: this.room,
+      damage_type: this.type,
+      color: this.bomb_color,
     })
     this.blastPlayer(this.player) // should this target other players?
     this.player.game.removeEntity(this)
@@ -62,12 +67,12 @@ class Bomb {
 
   draw(ctx) {
     const dt = this.detonate_at - this.player.p2_world.time
-    let colors = ['white', 'red']
+    let colors = [this.bomb_color, 'red']
     if (dt > 1) {
-      colors = ['gray', 'white']
+      colors = ['gray', this.bomb_color]
     }
     if (dt < 0.2 && dt > 0.1) {
-      colors = ['red', 'white']
+      colors = ['red', this.bomb_color]
     }
     ;[ctx.fillStyle, ctx.strokeStyle] = colors
     ctx.lineWidth = 2 / this.player.game.zoom
