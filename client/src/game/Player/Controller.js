@@ -48,6 +48,17 @@ export default class Controller extends RaycastController {
         return
       }
       this.lastCollisions[body.id] = now
+      if (this.state.speeding && body._entity?.isWeakTo('speed')) {
+        this.p2_world.emit({
+          type: 'damage',
+          damage: {
+            type: 'speed',
+            player: this.id,
+            amount: 1,
+            body_id: body.id,
+          },
+        })
+      }
       this.emit({ type: 'collide', dxy, body })
     }
   }
@@ -154,6 +165,13 @@ export default class Controller extends RaycastController {
         }
 
         if (!collisions.climbingSlope || slopeAngle > maxClimbAngle) {
+          this.debounceCollision(dxy)
+
+          if (this.raycastResult.body._entity?.hp === 0) {
+            this.raycastResult.reset()
+            continue
+          }
+
           velocity[0] = (distance - skinWidth) * directionX
           rayLength = distance
 
@@ -162,7 +180,7 @@ export default class Controller extends RaycastController {
           }
 
           this.collisions._collide_angle = (180 * slopeAngle) / Math.PI
-          this.debounceCollision(dxy)
+
           if (directionX === -1) {
             collisions.left = true
           } else if (directionX === 1) {

@@ -480,11 +480,11 @@ export default class Player extends Controller {
     const x_speed = Math.abs(velocity[0])
     if (this.keys.run && !this.state.speeding) {
       if (Math.abs(x_speed - this.speed.boost) < 0.1) {
-        this.state.speeding = true
+        this.state.speeding = this.game.frame
         animate.pulseFeet(this.game, this.body, '#44ff44')
       }
     } else if (this.collisions.below && x_speed < this.speed.run) {
-      this.state.speeding = false
+      delete this.state.speeding
     }
 
     // determine new x velocity

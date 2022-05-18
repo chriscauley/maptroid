@@ -57,8 +57,12 @@ export default class BlockEntity extends BoxEntity {
     this.color = this._type.color
   }
 
+  isWeakTo(damage_type) {
+    return !this._type.weak_to || this._type.weak_to.includes(damage_type)
+  }
+
   damage(event) {
-    if (this._type.weak_to && !this._type.weak_to.includes(event.type)) {
+    if (!this.isWeakTo(event.type)) {
       return
     }
     if (this.hp) {

@@ -161,6 +161,30 @@ const whiten = (img, number) => {
   return img[key]
 }
 
+const bluetify = (img) => {
+  const key = `__bluetify`
+  if (!img[key]) {
+    const canvas = (img[key] = document.createElement('canvas'))
+    canvas.width = img.width
+    canvas.height = img.height
+    const ctx = canvas.getContext('2d')
+    ctx.drawImage(img, 0, 0)
+    const idata = ctx.getImageData(0, 0, img.width, img.height)
+    const data = idata.data
+    for (let i = 0; i < data.length; i += 4) {
+      if (data[i + 3]) {
+        // alpha channel is not zero
+        // add number to r, g, b channels
+        data[i] += 0
+        data[i + 1] += 120
+        data[i + 2] += 165
+      }
+    }
+    ctx.putImageData(idata, 0, 0)
+  }
+  return img[key]
+}
+
 export default (player, ctx) => {
   const _ise = ctx.imageSmoothingEnabled
   ctx.imageSmoothingEnabled = false
@@ -183,7 +207,22 @@ export default (player, ctx) => {
   const { position } = player.aim
   const charge_sprite = shoots.map((key) => getChargeSprite(player, key)).find(Boolean)
 
-  if (charge_sprite) {
+  if (player.state.speeding) {
+    const speed_image = bluetify(img)
+    ctx.drawImage(speed_image, sx, sy, sw, sh, base_x, base_y, dw, dh)
+    if (player.game.cycleSince(player.state.speeding, 1, 8) === 0) {
+      let duration = 16
+      const [x, y] = player.body.position
+      player.game.animations.push(() => {
+        duration--
+        ctx.save()
+        ctx.translate(x, y)
+        ctx.drawImage(speed_image, sx, sy, sw, sh, base_x, base_y, dw, dh)
+        ctx.restore()
+        return player.state.speeding && duration > 0
+      })
+    }
+  } else if (charge_sprite) {
     const { frame_no, weapon } = charge_sprite
     if (weapon.is_charged) {
       const charge_image = whiten(img, ((frame_no % 4) + 1) * 30)

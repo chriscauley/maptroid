@@ -44,8 +44,12 @@ export default class DoorEntity extends BoxEntity {
     this.flash_since = -100 // used to make red doors flicker
   }
 
+  isWeakTo(damage_type) {
+    return !this.weak_to || this.weak_to.includes(damage_type)
+  }
+
   damage(event) {
-    if (this.weak_to && !this.weak_to.includes(event.type)) {
+    if (!this.isWeakTo(event.type)) {
       return
     }
 
@@ -114,6 +118,7 @@ export default class DoorEntity extends BoxEntity {
 
   close() {
     this.game.foregroundEntity(this)
+    this.hp = 1
     delete this.hidden_at
     this.closing = 3
   }
