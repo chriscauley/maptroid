@@ -33,12 +33,21 @@ export default class BaseEntity {
   destroy = () => {
     const { regrow } = this
     if (regrow) {
-      this.game.setTimeout(() => {
+      if (this.type === 'crumble') {
+        this.game.setTimeout(() => {
+          this.game.backgroundEntity(this)
+          this._death_timeout = this.game.setTimeout(this.respawn, regrow)
+        }, 4)
+      } else {
         this.game.backgroundEntity(this)
         this._death_timeout = this.game.setTimeout(this.respawn, regrow)
-      }, 4)
+      }
     } else {
-      this.game.setTimeout(() => this.game.removeEntity(this), 4)
+      if (this.type === 'crumble') {
+        this.game.setTimeout(() => this.game.removeEntity(this), 4)
+      } else {
+        this.game.removeEntity(this)
+      }
     }
     const { x, y, width, height } = this.options
     this.room.drawOnFg(null, { x, y, width, height })

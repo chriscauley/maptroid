@@ -123,6 +123,7 @@ export default class RoomController {
     })
     for (let { x, y, type } of this.data.plm_overrides) {
       if (type === 'save-station') {
+        this.save_station = true
         const exterior = [
           [x, y],
           [x + 2, y],
@@ -135,6 +136,7 @@ export default class RoomController {
           type,
         })
       } else if (type === 'ship') {
+        this.save_station = true
         const exterior = [
           [x + 5, y - 0.5],
           [x + 7, y - 0.5],

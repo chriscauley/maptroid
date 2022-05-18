@@ -11,13 +11,13 @@ const TYPES = {
   },
   bomb: {
     color: 'rgb(255, 33, 33)',
-    weak_to: ['bomb', 'speed', 'screw', 'beam'], // TODO remove beam
+    weak_to: ['bomb', 'power-bomb', 'speed-booster', 'screw'],
   },
   shot: {
     color: 'rgb(200, 200, 200)',
   },
   crumble: {
-    weak_to: 'crumble',
+    weak_to: ['crumble'],
     color: 'rgb(255, 200, 200)',
     onCollide(self, entity, result) {
       if (entity.is_player && result.dxy[1] === -1) {
@@ -26,15 +26,22 @@ const TYPES = {
     },
   },
   'power-bomb': {
+    weak_to: ['power-bomb'],
     color: 'rgb(255, 255, 128)',
   },
   'super-missile': {
+    weak_to: ['super-missile'],
     color: 'rgb(128,255,128)',
   },
+  'speed-booster': {
+    weak_to: ['speed-booster'],
+  },
   grapple: {
+    weak_to: [],
     color: 'rgb(128, 255, 255)',
   },
   'grapple-break': {
+    weak_to: [],
     color: 'rgb(0, 128, 128)',
   },
   default: {

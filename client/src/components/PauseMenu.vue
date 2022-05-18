@@ -12,7 +12,11 @@
           Inventory
         </button>
       </div>
-      <div v-if="show === 'map'">Map!</div>
+      <div v-if="show === 'map'">
+        <div v-for="station in save_stations" @click="warpTo(station)" :key="station.id">
+          {{ station.name }}
+        </div>
+      </div>
       <div v-if="show === 'inventory'">
         <div
           class="pause-menu__inventory-section"
@@ -66,10 +70,21 @@ export default {
         },
       ]
     },
+    save_stations() {
+      const rooms = this.game.world_controller.rooms.filter((r) => r.save_station)
+      return rooms.map((r) => ({
+        id: r.id,
+        name: r.json.name,
+      }))
+    },
   },
   methods: {
     toggle(item) {
       this.game.player.toggleItem(item)
+    },
+    warpTo({ id }) {
+      this.game.togglePause()
+      this.game.warp(id)
     },
   },
 }
