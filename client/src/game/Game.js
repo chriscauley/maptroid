@@ -97,7 +97,7 @@ export default class Game extends p2.EventEmitter {
       // this could all be in some kind of room.tick function
       const { aabb } = this.player.body
       this.active_rooms.forEach((room) => {
-        room.edges.forEach((body) => {
+        room.exits.forEach((body) => {
           if (body.aabb.overlaps(aabb)) {
             this.current_room = body._room
             this.player.save_state.entrance_number = body._entrance_number

@@ -153,9 +153,9 @@ export default class RoomController {
   }
 
   _room2world = (xy) => vector.times(vector.add(xy, this.world_xy0), 16)
-  _addEdges() {
+  _addExits() {
     const [room_x, room_y] = this.world_xy0
-    this.edges = []
+    this.exits = []
     this.data.exit.forEach(({ x, y, width, height }) => {
       let target_dxy
       let start_position
@@ -181,10 +181,10 @@ export default class RoomController {
         console.warn('cannot place exit', x, y, width, height)
         return
       }
-      const edge_x = 16 * room_x + x
-      const edge_y = 16 * room_y + y
-      const center_x = edge_x + width / 2
-      const center_y = edge_y + height / 2
+      const exit_x = 16 * room_x + x
+      const exit_y = 16 * room_y + y
+      const center_x = exit_x + width / 2
+      const center_y = exit_y + height / 2
       const options = { _color: 'rgba(255, 128, 128, 0.5)', collisionResponse: false }
       const body = this.game.addStaticBox([center_x, center_y, width, height], options)
       this.bodies.push(body)
@@ -203,7 +203,7 @@ export default class RoomController {
         },
       }
       body._start_position = start_position
-      this.edges.push(body)
+      this.exits.push(body)
     })
   }
 
@@ -265,7 +265,7 @@ export default class RoomController {
     this.game = game
     this._addBodies()
     this._resetDoors()
-    this._addEdges()
+    this._addExits()
     this._addItems()
   }
 
@@ -286,12 +286,12 @@ export default class RoomController {
       }
     }
     const { entrance_number } = player.save_state
-    let edge = this.edges.find((e) => e._entrance_number == entrance_number)
-    if (!edge) {
-      edge = this.edges[0]
+    let exit = this.exits.find((e) => e._entrance_number == entrance_number)
+    if (!exit) {
+      exit = this.exits[0]
     }
-    const p = (player.body.position = vec2.clone(edge.position))
-    vec2.add(p, p, edge._start_position)
+    const p = (player.body.position = vec2.clone(exit.position))
+    vec2.add(p, p, exit._start_position)
     return
   }
 

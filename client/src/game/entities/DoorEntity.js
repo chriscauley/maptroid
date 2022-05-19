@@ -65,12 +65,12 @@ export default class DoorEntity extends BoxEntity {
       return
     }
 
-    const edge = this.room.edges.find((e) => e.aabb.containsPoint(this.body.position))
-    const target_room = this.game.world_controller.room_map[edge?._target_xy]
+    const exit = this.room.exits.find((e) => e.aabb.containsPoint(this.body.position))
+    const target_room = this.game.world_controller.room_map[exit?._target_xy]
     if (target_room) {
       target_room.bindGame(this.game)
       const target_door = minBy(target_room.doors, (door) =>
-        p2.vec2.squaredDistance(edge.position, door.body.position),
+        p2.vec2.squaredDistance(exit.position, door.body.position),
       )
       if (target_door) {
         this.game.backgroundEntity(target_door)
