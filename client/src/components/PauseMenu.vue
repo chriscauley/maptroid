@@ -13,8 +13,11 @@
         </button>
       </div>
       <div v-if="show === 'map'">
-        <div v-for="station in save_stations" @click="warpTo(station)" :key="station.id">
-          {{ station.name }}
+        <div v-for="zone in zones" :key="zone.id" class="pause-menu__inventory-section">
+          <h4>{{ zone.name }}</h4>
+          <div v-for="room in zone.save_rooms" @click="warpTo(room)" :key="room.id" tabindex="1">
+            {{ room.name }}
+          </div>
         </div>
       </div>
       <div v-if="show === 'inventory'">
@@ -70,12 +73,20 @@ export default {
         },
       ]
     },
-    save_stations() {
-      const rooms = this.game.world_controller.rooms.filter((r) => r.save_station)
-      return rooms.map((r) => ({
-        id: r.id,
-        name: r.json.name,
-      }))
+    zones() {
+      return this.$store.route.zones.map((zone) => {
+        const rooms = this.game.world_controller.rooms.filter((r) => r.json.zone === zone.id)
+        return {
+          name: zone.name,
+          id: zone.id,
+          save_rooms: rooms
+            .filter((r) => r.save_station)
+            .map((r) => ({
+              id: r.id,
+              name: r.json.name?.replace('Save Station', '') || r.id,
+            })),
+        }
+      })
     },
   },
   methods: {
