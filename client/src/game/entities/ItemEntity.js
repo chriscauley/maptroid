@@ -53,7 +53,7 @@ export default class ItemEntity extends BoxEntity {
       room,
       type,
       onDestroy: () => this.exists && this.game.foregroundEntity(this),
-      onRegrow: () => this.exits && this.game.backgroundEntity(this),
+      onRegrow: () => this.exists && this.game.backgroundEntity(this),
       regrow: type === 'egg' ? undefined : 300,
     })
     this.game.backgroundEntity(this)

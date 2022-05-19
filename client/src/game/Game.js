@@ -97,23 +97,27 @@ export default class Game extends p2.EventEmitter {
       // this could all be in some kind of room.tick function
       const { aabb } = this.player.body
       this.active_rooms.forEach((room) => {
-        room.exits.forEach((body) => {
-          if (body.aabb.overlaps(aabb)) {
-            this.current_room = body._room
-            this.player.save_state.entrance_number = body._entrance_number
-            this.player.save_state.room_id = body._entrance_number.room_id
-            const target_room = this.world_controller.room_map[body._target_xy]
+        room.exits.forEach((exit) => {
+          if (exit.body.aabb.overlaps(aabb)) {
+            this.current_room = exit.room
+            this.player.save_state.entrance_number = exit.options.entrance_number
+            this.player.save_state.room_id = exit.options.entrance_number.room_id
+            const target_room = this.world_controller.room_map[exit.options.target_xy]
             if (target_room) {
               target_room.bindGame(this)
             } else {
-              console.error('no room at', body._target_xy)
+              console.error('no room at', exit.options.target_xy)
             }
           }
         })
       })
+      const position = this.player.body.position
       this.current_room.doors.forEach((door) => {
-        if (door.needs_close && door.respawn_aabb.containsPoint(this.player.body.position)) {
+        if (door.needs_close && door.front_region.body.aabb.containsPoint(position)) {
           door.closeDoors()
+        }
+        if (!door.needs_close && door.back_region.body.aabb.containsPoint(position)) {
+          door.needs_close = true
         }
       })
     })

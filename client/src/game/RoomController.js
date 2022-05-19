@@ -7,6 +7,7 @@ import BlockEntity from './entities/BlockEntity'
 import DoorEntity from './entities/DoorEntity'
 import ItemEntity from './entities/ItemEntity'
 import { SCENERY_GROUP, BULLET_GROUP, PLAYER_GROUP } from './constants'
+import BaseRegion from './region/BaseRegion'
 
 const _yflip = (xy) => [xy[0], -xy[1]] // YFLIP
 
@@ -181,29 +182,26 @@ export default class RoomController {
         console.warn('cannot place exit', x, y, width, height)
         return
       }
-      const exit_x = 16 * room_x + x
-      const exit_y = 16 * room_y + y
-      const center_x = exit_x + width / 2
-      const center_y = exit_y + height / 2
-      const options = { _color: 'rgba(255, 128, 128, 0.5)', collisionResponse: false }
-      const body = this.game.addStaticBox([center_x, center_y, width, height], options)
-      this.bodies.push(body)
+      const edge_x = 16 * room_x + x
+      const edge_y = 16 * room_y + y
+      const center_x = edge_x + width / 2
+      const center_y = edge_y + height / 2
       const screen_xy = vector.add(this.world_xy0, [parseInt(x / 16), parseInt(y / 16)])
       if (target_dxy[1] === -1) {
         // Issue #182000795
         screen_xy[1]++
       }
-      body._target_xy = vector.add(screen_xy, target_dxy)
-      body._room = this
-      body._entrance_number = `${x},${y}`
-      body._entity = {
-        draw: (ctx) => {
-          const s = body.shapes[0]
-          ctx.fillRect(-s.width / 2, -s.height / 2, s.width, s.height)
-        },
-      }
-      body._start_position = start_position
-      this.exits.push(body)
+      this.exits.push(new BaseRegion({
+        x: center_x,
+        y: center_y,
+        width,
+        height,
+        type: 'exit',
+        room: this,
+        target_xy: vector.add(screen_xy, target_dxy),
+        entrance_number: `${x},${y}`,
+        start_position,
+      }))
     })
   }
 
@@ -286,12 +284,12 @@ export default class RoomController {
       }
     }
     const { entrance_number } = player.save_state
-    let exit = this.exits.find((e) => e._entrance_number == entrance_number)
+    let exit = this.exits.find((e) => e.options.entrance_number == entrance_number)
     if (!exit) {
       exit = this.exits[0]
     }
-    const p = (player.body.position = vec2.clone(exit.position))
-    vec2.add(p, p, exit._start_position)
+    const p = (player.body.position = vec2.clone(exit.body.position))
+    vec2.add(p, p, exit.options.start_position)
     return
   }
 

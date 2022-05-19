@@ -1,33 +1,45 @@
 // Block are destructable terrain
-import { minBy, range } from 'lodash'
-import { getAsset } from '../useAssets'
-import BoxEntity from './BoxEntity'
+import { minBy, range, pick } from 'lodash'
 import p2 from 'p2'
+
+import BoxEntity from './BoxEntity'
+import BaseRegion from '../region/BaseRegion'
+import { getAsset } from '../useAssets'
 
 export default class DoorEntity extends BoxEntity {
   constructor(options) {
     super(options)
     const { color, orientation } = options
     Object.assign(this, { color, orientation })
-    this.respawn_aabb = new p2.AABB()
-    this.respawn_aabb.copy(this.body.aabb)
+    const front = pick(this.options, ['x', 'y', 'width', 'height'])
+    const back = pick(this.options, ['x', 'y', 'width', 'height'])
     if (orientation === 'left') {
-      this.respawn_aabb.upperBound[0] -= 1
-      this.respawn_aabb.lowerBound[0] -= 1
+      front.x -= 0.5
+      back.x += 0.5
     } else if (orientation === 'right') {
-      this.respawn_aabb.upperBound[0] += 1
-      this.respawn_aabb.lowerBound[0] += 1
+      front.x += 0.5
+      back.x -= 0.5
     } else if (orientation === 'up') {
-      this.respawn_aabb.upperBound[0] += 8
-      this.respawn_aabb.lowerBound[0] -= 8
-      this.respawn_aabb.upperBound[1] += 2
-      this.respawn_aabb.lowerBound[1] += 2
+      front.y += 1
+      front.width += 8
+      back.y -= 0.5
     } else if (orientation === 'down') {
-      this.respawn_aabb.upperBound[0] += 8
-      this.respawn_aabb.lowerBound[0] -= 8
-      this.respawn_aabb.upperBound[1] -= 2
-      this.respawn_aabb.lowerBound[1] -= 2
+      front.y -= 1
+      front.width += 8
+      back.y += 0.5
     }
+
+    this.front_region = new BaseRegion({
+      ...front,
+      room: this.room,
+      type: 'door_front',
+    })
+
+    this.back_region = new BaseRegion({
+      ...back,
+      room: this.room,
+      type: 'door_back',
+    })
 
     if (this.color === 'red') {
       this.max_hp = this.hp = 5
@@ -65,23 +77,38 @@ export default class DoorEntity extends BoxEntity {
       return
     }
 
-    const exit = this.room.exits.find((e) => e.aabb.containsPoint(this.body.position))
-    const target_room = this.game.world_controller.room_map[exit?._target_xy]
-    if (target_room) {
-      target_room.bindGame(this.game)
-      const target_door = minBy(target_room.doors, (door) =>
-        p2.vec2.squaredDistance(exit.position, door.body.position),
-      )
-      if (target_door) {
-        this.game.backgroundEntity(target_door)
-        target_door.hidden_at = this.game.frame
-        target_door.needs_close = this
-      }
-    } else {
-      console.warn('unable to find target room')
+    const target_door = this.getLinkedDoor()
+    if (target_door) {
+      this.game.backgroundEntity(target_door)
+      target_door.hidden_at = this.game.frame
     }
+
     this.game.backgroundEntity(this)
     this.hidden_at = this.game.frame
+  }
+
+  getTargetRoom() {
+    if (!this._target_room) {
+      const exit = this.room.exits.find((e) => e.body.aabb.containsPoint(this.body.position))
+      this._target_room = this.game.world_controller.room_map[exit?.options.target_xy]
+      this._target_room.bindGame(this.game)
+      if (!this._target_room) {
+        console.warn('unable to find target room')
+      }
+    }
+    return this._target_room
+  }
+
+  getLinkedDoor() {
+    const target_room = this.getTargetRoom()
+    if (target_room) {
+      const exit = this.room.exits.find((e) => e.body.aabb.containsPoint(this.body.position))
+      return minBy(
+        target_room.doors,
+        (door) => p2.vec2.squaredDistance(exit.body.position, door.body.position),
+      )
+    }
+    return undefined
   }
 
   draw(ctx) {
@@ -111,7 +138,7 @@ export default class DoorEntity extends BoxEntity {
   }
 
   closeDoors() {
-    delete this.needs_close.close()
+    this.getLinkedDoor()?.close()
     delete this.needs_close
     this.close()
   }

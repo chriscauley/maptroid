@@ -9,6 +9,7 @@ export const GROUP = {
   player: Math.pow(2, 3),
   item: Math.pow(2, 4),
   explosion: Math.pow(2, 5),
+  region: Math.pow(2, 6),
 }
 
 export const DIRECTIONS = [
