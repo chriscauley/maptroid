@@ -102,7 +102,7 @@ def main():
       sprite, new = matcher.get_or_create_from_image(s, 'plm')
       room.data['plm_sprites'].append([sprite.id, [round(i / 16) for i in xy]])
       if sprite.type in template_sprites:
-        if 'plm' not in room.data:
+        if 'plm_overrides' not in room.data:
           room.data['plm_overrides'] = {}
         x , y = [round(i / 16) for i in xy]
         room.data['plm_overrides'][f'{x},{y}'] = sprite.type

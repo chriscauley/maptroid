@@ -210,18 +210,18 @@ export default (player, ctx) => {
   if (player.state.speeding) {
     const speed_image = bluetify(img)
     ctx.drawImage(speed_image, sx, sy, sw, sh, base_x, base_y, dw, dh)
-    if (player.game.cycleSince(player.state.speeding, 1, 8) === 0) {
-      let duration = 16
-      const [x, y] = player.body.position
-      player.game.animations.push(() => {
-        duration--
+    const [x, y] = player.body.position
+    let tick = 8
+    player.game.animations.push(() => {
+      tick--
+      if (tick % 4 === 0) {
         ctx.save()
         ctx.translate(x, y)
         ctx.drawImage(speed_image, sx, sy, sw, sh, base_x, base_y, dw, dh)
         ctx.restore()
-        return player.state.speeding && duration > 0
-      })
-    }
+      }
+      return tick > 0
+    })
   } else if (charge_sprite) {
     const { frame_no, weapon } = charge_sprite
     if (weapon.is_charged) {

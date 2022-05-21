@@ -23,6 +23,11 @@
       "save-station",
       32,
       16
+    ],
+    [
+      "elevator-platform",
+      32,
+      5
     ]
   ]
 }

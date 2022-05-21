@@ -123,7 +123,7 @@ export default class Game extends p2.EventEmitter {
     })
     this.player.on('collide', (result) => {
       this.player._last_collision = result
-      result.body._entity?.onCollide(this.player, result)
+      result.body._entity?.onCollide?.(this.player, result)
     })
     // Set up key listeners
     PLAYER_ACTIONS.forEach((a) => {
@@ -201,6 +201,7 @@ export default class Game extends p2.EventEmitter {
       position: [x, y],
       angle: angle,
     })
+    body._entity = options._entity
     body.addShape(shape)
     this.p2_world.addBody(body)
     return body
@@ -210,7 +211,7 @@ export default class Game extends p2.EventEmitter {
     const body = new p2.Body({ position: [0, 0] })
     body.fromPolygon(coords.slice()) // NOTE p2 consumes coords so make a copy
     body.shapes.forEach((s) => Object.assign(s, options))
-    body._type = options._type
+    body._entity = options._entity
     this.p2_world.addBody(body)
     return body
   }
@@ -444,12 +445,10 @@ export default class Game extends p2.EventEmitter {
   }
 
   warp(room_id) {
-    console.warn('saving... last room was', this.current_room.id)
     const room = this.world_controller.room_by_id[room_id]
     room.bindGame(this)
     this.current_room = room
     this.current_room.positionPlayer(this.player)
-    this.save()
   }
 
   cycle(per_tick, duration) {

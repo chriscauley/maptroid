@@ -94,6 +94,24 @@ def find_doors(image, world):
             matched_doors[(x, y)] = [round(x/16), round(y/16), orientation, color]
     return matched_doors
 
+def find_elevators(room):
+    world = room.world
+    path = f'.media/smile_exports/{world.slug}/plm_enemies/{room.key}'
+    if not os.path.exists(path):
+        print(f'skipping elevators for {room.name or room.id} because of missing plm_enimies')
+        return []
+    layer = cv2.imread(path)
+    gray = cv2.cvtColor(layer, cv2.COLOR_BGRA2GRAY)
+    template = cv2.imread('static/sm/icons/templates/elevator-platform.png', cv2.IMREAD_UNCHANGED)
+    gray_template = cv2.cvtColor(template, cv2.COLOR_BGRA2GRAY)
+    coords = urcv.template.match(gray, gray_template, threshold=0.85)
+    return [[round(x1 / 16), round(y1 / 16)] for x1, y1, _, _ in coords]
+
+def populate_room_elevators(room):
+    for [x, y] in find_elevators(room):
+        room.data['plm_overrides'] = room.data.get('plm_overrides', {})
+        room.data['plm_overrides'][f'{x},{y}'] = 'elevator'
+
 def draw_doors(image, doors, world, offset=[0, 0]):
     rotated_caps = get_door_icons(world, 'full')
     image = urcv.force_alpha(image)

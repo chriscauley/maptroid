@@ -122,6 +122,8 @@ def main():
             x, y = [int(i) for i in sxy.split(',')]
             if slug == 'save-station':
                 isolations.append([(x,y), (x+2,y), (x+2, y+0.5), (x,y+0.5)])
+            if slug == 'elevator-platform':
+                isolations.append([(x,y), (x+2,y), (x+2, y+0.5), (x,y+0.5)])
             if slug == 'ship':
                 isolations.append([(x+5,y+0.5), (x+7,y+0.5), (x+7, y+1), (x+5,y+1)])
         # scale the isolations

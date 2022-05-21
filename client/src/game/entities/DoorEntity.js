@@ -103,9 +103,8 @@ export default class DoorEntity extends BoxEntity {
     const target_room = this.getTargetRoom()
     if (target_room) {
       const exit = this.room.exits.find((e) => e.body.aabb.containsPoint(this.body.position))
-      return minBy(
-        target_room.doors,
-        (door) => p2.vec2.squaredDistance(exit.body.position, door.body.position),
+      return minBy(target_room.doors, (door) =>
+        p2.vec2.squaredDistance(exit.body.position, door.body.position),
       )
     }
     return undefined

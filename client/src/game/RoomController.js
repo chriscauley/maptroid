@@ -8,6 +8,7 @@ import DoorEntity from './entities/DoorEntity'
 import ItemEntity from './entities/ItemEntity'
 import { SCENERY_GROUP, BULLET_GROUP, PLAYER_GROUP } from './constants'
 import BaseRegion from './region/BaseRegion'
+import { invertAsset } from './useAssets'
 
 const _yflip = (xy) => [xy[0], -xy[1]] // YFLIP
 
@@ -131,23 +132,67 @@ export default class RoomController {
           [x + 2, y - 0.5],
           [x, y - 0.5],
         ]
+        const onCrouch = () => this.game.save()
         this.static_shapes.push({
-          color: 'red',
           exterior: exterior.map((xy) => [xy[0] / 16, xy[1] / 16]).map(this._room2world),
-          type,
+          _entity: { type, color: 'red', room: this, onCrouch },
         })
       } else if (type === 'ship') {
         this.save_station = true
+        const onCrouch = () => this.game.save()
         const exterior = [
           [x + 5, y - 0.5],
           [x + 7, y - 0.5],
           [x + 7, y - 1],
           [x + 5, y - 1],
         ]
+        const draw = (ctx) => {
+          const img = invertAsset('ship')
+          const dh = 5
+          const dw = 11.75
+          ctx.save()
+          ctx.imageSmoothingEnabled = false
+          ctx.drawImage(img, -dw / 2, -4, dw, dh)
+          ctx.restore()
+        }
         this.static_shapes.push({
-          color: 'red',
           exterior: exterior.map((xy) => [xy[0] / 16, xy[1] / 16]).map(this._room2world),
-          type,
+          _entity: { type, color: 'red', room: this, onCrouch, draw },
+        })
+      } else if (type === 'elevator') {
+        const exterior = [
+          [x, y],
+          [x + 2, y],
+          [x + 2, y - 0.5],
+          [x, y - 0.5],
+        ]
+        const screen_xy = vector.add([x / 16, y / 16], this.world_xy0).map((i) => Math.floor(i))
+        screen_xy[1]++ // TODO why this ++?
+        this.static_shapes.push({
+          exterior: exterior.map((xy) => [xy[0] / 16, xy[1] / 16]).map(this._room2world),
+          _entity: {
+            room: this,
+            color: 'yellow',
+            type,
+            room_xy: [x, y],
+            draw: (ctx) => {
+              const img = invertAsset('platform')
+              ctx.drawImage(img, 0, 0, 32, 5, -1, 0, 2, 0.25)
+            },
+            onCrouch: () => {
+              const elevators = this.world_controller.elevators[screen_xy]
+              let warped
+              elevators.forEach(([target_xy, dxy]) => {
+                if (dxy[1] && !dxy[0]) {
+                  if (warped) {
+                    throw 'Attempting to warp twice!'
+                  }
+                  this.game.warp(this.world_controller.room_map[target_xy].id)
+                  warped = true
+                }
+              })
+            },
+          },
         })
       }
     }
@@ -179,7 +224,15 @@ export default class RoomController {
         target_dxy = [0, -1]
         start_position = [0, 2.5]
       } else {
-        console.warn('cannot place exit', x, y, width, height)
+        const elevator = this.bodies.find((b) => {
+          const e = b._entity
+          // TODO where does this +1 come from on y?!?
+          return e?.type === 'elevator' && e.room_xy[0] === x && e.room_xy[1] === y + 1
+        })
+        if (!elevator) {
+          // elevators are handled elsewhere
+          console.warn('cannot place exit', x, y, width, height)
+        }
         return
       }
       const edge_x = 16 * room_x + x
@@ -191,17 +244,19 @@ export default class RoomController {
         // Issue #182000795
         screen_xy[1]++
       }
-      this.exits.push(new BaseRegion({
-        x: center_x,
-        y: center_y,
-        width,
-        height,
-        type: 'exit',
-        room: this,
-        target_xy: vector.add(screen_xy, target_dxy),
-        entrance_number: `${x},${y}`,
-        start_position,
-      }))
+      this.exits.push(
+        new BaseRegion({
+          x: center_x,
+          y: center_y,
+          width,
+          height,
+          type: 'exit',
+          room: this,
+          target_xy: vector.add(screen_xy, target_dxy),
+          entrance_number: `${x},${y}`,
+          start_position,
+        }),
+      )
     })
   }
 
@@ -218,12 +273,14 @@ export default class RoomController {
     })
 
     const collisionMask = PLAYER_GROUP | BULLET_GROUP
-    const shape_options = { collisionMask, collisionGroup: SCENERY_GROUP }
     // Add bts shapes
     this.static_shapes.forEach((shape) => {
-      shape_options._color = shape.color
-      shape_options._type = shape.type
-      this.bodies.push(this.game.addStaticShape(shape.exterior, shape_options))
+      const options = {
+        collisionMask,
+        collisionGroup: SCENERY_GROUP,
+        ...shape,
+      }
+      this.bodies.push(this.game.addStaticShape(shape.exterior, options))
     })
   }
 
@@ -278,7 +335,7 @@ export default class RoomController {
         setPosition([x, y], [6, 1])
         return
       }
-      if (type === 'save-station') {
+      if (type === 'save-station' || type === 'elevator') {
         setPosition([x, y], [1, 1.5])
         return
       }

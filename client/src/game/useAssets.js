@@ -5,9 +5,11 @@ icons['items-alt'] = icons['items']
 
 const cache = {
   __icons: {},
+  __inverted: {},
 }
 const loading = {}
-const load = (key) => {
+const load = (path, key) => {
+  key = key || path
   if (cache.key) {
     return Promise.resolve()
   }
@@ -24,11 +26,28 @@ const load = (key) => {
       delete loading[key]
       resolve()
     }
-    img.src = `/static/sm/${key}.png`
+    img.src = `/static/sm/${path}.png`
+    document.body.appendChild(img)
   })
 }
 
 export const getAsset = (key) => cache[key]
+export const invertAsset = (key) => {
+  if (!cache.__inverted[key]) {
+    const asset = getAsset(key).img
+    const canvas = document.createElement('canvas')
+    document.body.appendChild(canvas)
+    canvas.width = asset.width
+    canvas.height = asset.height
+    const ctx = canvas.getContext('2d')
+    ctx.translate(0, canvas.height)
+    ctx.scale(1, -1)
+    ctx.drawImage(asset, 0, 0)
+    cache.__inverted[key] = canvas
+  }
+  return cache.__inverted[key]
+}
+
 export const getIcon = (category, slug) => {
   const cache_key = `${category}__${slug}`
   if (!cache.__icons[cache_key]) {
@@ -58,4 +77,6 @@ export default () =>
     load('block'),
     load('breaking-block'),
     load('animations/egg'),
+    load('icons/templates/elevator-platform', 'platform'),
+    load('icons/templates/ship', 'ship'),
   ])

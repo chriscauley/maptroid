@@ -250,9 +250,8 @@ export default class Player extends Controller {
     } else if (key === 'down') {
       animate.pulseFeet(this.game, this.body, 'white')
       if (posture === POSTURE.stand) {
-        const type = this._last_collision?.body._type
-        if (this.velocity[1] === 0 && ['ship', 'save-station'].includes(type)) {
-          this.game.save()
+        if (this.velocity[1] === 0 && this._last_collision?.body._entity?.onCrouch) {
+          this._last_collision?.body._entity?.onCrouch()
           return
         } else {
           this.setPosture(POSTURE.crouch)

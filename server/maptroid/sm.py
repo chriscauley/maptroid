@@ -231,6 +231,10 @@ def make_walls_image(zone, dest):
             doors.append([x+room_x*16, y+room_y*16, orientation, alpha])
 
         for sxy, type_ in room.data.get('plm_overrides', {}).items():
+            if type_ not in icons:
+                if type_ not in ['elevator']:
+                    print("WARNING: unknown type", type_)
+                continue
             [x, y] = tuple([int(i) for i in sxy.split(',')])
             h, w = [i // 16 for i in icons[type_].shape[:2]]
             for dx in range(w):
