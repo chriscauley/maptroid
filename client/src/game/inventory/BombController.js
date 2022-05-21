@@ -15,7 +15,7 @@ class Bomb {
     this.type = this.is_power_bomb ? 'power-bomb' : 'bomb'
     this.bomb_color = this.is_power_bomb ? 'orange' : 'white'
     this.makeShape()
-    this.room = this.player.game.current_room
+    this.room = this.player.current_room
     const [x, y] = this.player.body.position
     this.xy = [Math.floor(x), Math.floor(y)]
     this.created = this.player.p2_world.time

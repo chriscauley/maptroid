@@ -33,12 +33,16 @@ export default class DoorEntity extends BoxEntity {
       ...front,
       room: this.room,
       type: 'door_front',
+      canCollide: (_self, entity) => this.needs_close && entity.is_player,
+      onCollide: () => this.closeDoors(),
     })
 
     this.back_region = new BaseRegion({
       ...back,
       room: this.room,
       type: 'door_back',
+      canCollide: (_self, entity) => !this.needs_close && entity.is_player,
+      onCollide: () => (this.needs_close = true),
     })
 
     if (this.color === 'red') {

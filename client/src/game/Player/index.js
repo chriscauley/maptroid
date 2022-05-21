@@ -640,4 +640,9 @@ export default class Player extends Controller {
       }
     }
   }
+
+  enterRoom(room) {
+    this.current_room = room
+    room.bindGame(this.game)
+  }
 }

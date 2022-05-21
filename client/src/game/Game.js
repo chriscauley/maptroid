@@ -81,8 +81,6 @@ export default class Game extends p2.EventEmitter {
 
     const { rooms, room_id, world, zones } = this.options
     this.world_controller = new WorldController({ world, rooms, zones, game: this })
-    this.current_room = this.world_controller.room_by_id[room_id]
-    this.current_room.bindGame(this)
 
     // Create the character controller
     this.player = new Player({
@@ -90,36 +88,13 @@ export default class Game extends p2.EventEmitter {
       p2_world: this.p2_world,
       save_state: this.options.player,
     })
-    this.current_room.positionPlayer(this.player)
+    this.world_controller.room_by_id[room_id].positionPlayer(this.player)
+
     this.p2_world.on('postStep', () => {
       this.player.update(this.p2_world.lastTimeStep)
 
       // this could all be in some kind of room.tick function
-      const { aabb } = this.player.body
-      this.active_rooms.forEach((room) => {
-        room.exits.forEach((exit) => {
-          if (exit.body.aabb.overlaps(aabb)) {
-            this.current_room = exit.room
-            this.player.save_state.entrance_number = exit.options.entrance_number
-            this.player.save_state.room_id = exit.options.entrance_number.room_id
-            const target_room = this.world_controller.room_map[exit.options.target_xy]
-            if (target_room) {
-              target_room.bindGame(this)
-            } else {
-              console.error('no room at', exit.options.target_xy)
-            }
-          }
-        })
-      })
-      const position = this.player.body.position
-      this.current_room.doors.forEach((door) => {
-        if (door.needs_close && door.front_region.body.aabb.containsPoint(position)) {
-          door.closeDoors()
-        }
-        if (!door.needs_close && door.back_region.body.aabb.containsPoint(position)) {
-          door.needs_close = true
-        }
-      })
+      this.active_rooms.forEach((room) => room.regions.forEach((r) => r.testCollision(this.player)))
     })
     this.player.on('collide', (result) => {
       this.player._last_collision = result
@@ -433,7 +408,7 @@ export default class Game extends p2.EventEmitter {
   save() {
     const options = {
       world_id: this.world_controller.id,
-      room_id: this.current_room.id,
+      room_id: this.player.current_room.id,
       id: this.id,
       player: this.player.getSaveJson(),
     }
@@ -446,9 +421,7 @@ export default class Game extends p2.EventEmitter {
 
   warp(room_id) {
     const room = this.world_controller.room_by_id[room_id]
-    room.bindGame(this)
-    this.current_room = room
-    this.current_room.positionPlayer(this.player)
+    room.positionPlayer(this.player)
   }
 
   cycle(per_tick, duration) {

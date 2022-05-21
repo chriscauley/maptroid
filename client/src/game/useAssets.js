@@ -27,7 +27,6 @@ const load = (path, key) => {
       resolve()
     }
     img.src = `/static/sm/${path}.png`
-    document.body.appendChild(img)
   })
 }
 
@@ -36,7 +35,6 @@ export const invertAsset = (key) => {
   if (!cache.__inverted[key]) {
     const asset = getAsset(key).img
     const canvas = document.createElement('canvas')
-    document.body.appendChild(canvas)
     canvas.width = asset.width
     canvas.height = asset.height
     const ctx = canvas.getContext('2d')

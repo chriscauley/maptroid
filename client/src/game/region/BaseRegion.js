@@ -11,11 +11,13 @@ export default class BaseRegion {
   constructor(options) {
     const { x, y, width, height, room, type } = options
     Object.assign(this, { x, y, width, height, room, type })
+    room.regions.push(this)
     this.game = room.game
     this.created = this.game.frame
     this.options = options
     this.makeBody()
     this.game.bindEntity(this)
+    this._colliding_with = {}
   }
 
   makeBody() {
@@ -34,4 +36,21 @@ export default class BaseRegion {
   }
 
   tick() {}
+
+  testCollision(entity) {
+    if (!this.options.canCollide(this, entity)) {
+      return
+    }
+    if (this.body.aabb.overlaps(entity.body.aabb)) {
+      if (!this._colliding_with[entity.id] && this.options.onCollide) {
+        this.options.onCollide(this, entity)
+      }
+      this._colliding_with[entity.id] = true
+    } else {
+      if (this._colliding_with[entity.id] && this.options.onCollideEnd) {
+        this.options.onCollideEnd(this, entity)
+      }
+      this._colliding_with[entity.id] = false
+    }
+  }
 }

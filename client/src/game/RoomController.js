@@ -255,6 +255,20 @@ export default class RoomController {
           target_xy: vector.add(screen_xy, target_dxy),
           entrance_number: `${x},${y}`,
           start_position,
+          canCollide: (_exit, entity) => entity.is_player,
+          onCollide: (exit, entity) => {
+            if (entity.is_player) {
+              this.game.player.enterRoom(exit.room)
+              entity.save_state.entrance_number = exit.options.entrance_number
+              entity.save_state.room_id = exit.options.entrance_number.room_id
+              const target_room = this.game.world_controller.room_map[exit.options.target_xy]
+              if (target_room) {
+                target_room.bindGame(this.game)
+              } else {
+                console.error('no room at', exit.options.target_xy)
+              }
+            }
+          },
         }),
       )
     })
@@ -318,6 +332,7 @@ export default class RoomController {
 
     game.active_rooms.push(this)
     this.game = game
+    this.regions = []
     this._addBodies()
     this._resetDoors()
     this._addExits()
@@ -325,6 +340,7 @@ export default class RoomController {
   }
 
   positionPlayer(player) {
+    player.enterRoom(this)
     const setPosition = (room_xy, offset) => {
       room_xy = vector.add(room_xy, offset)
       player.body.position = vector.add(vector.times(this.world_xy0, 16), room_xy)
