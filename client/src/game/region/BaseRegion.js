@@ -5,6 +5,7 @@ const colors = {
   exit: 'rgba(255, 128, 128, 0.5)',
   door_front: 'rgba(128, 255, 128, 0.5)',
   door_back: 'rgba(128, 128, 255, 0.5)',
+  portal: 'rgba(255, 0, 255, 0.5)',
 }
 
 export default class BaseRegion {

@@ -253,20 +253,16 @@ export default class RoomController {
           type: 'exit',
           room: this,
           target_xy: vector.add(screen_xy, target_dxy),
+          target_dxy,
           entrance_number: `${x},${y}`,
           start_position,
           canCollide: (_exit, entity) => entity.is_player,
           onCollide: (exit, entity) => {
             if (entity.is_player) {
+              this.loadRoomForExit(exit)
               this.game.player.enterRoom(exit.room)
               entity.save_state.entrance_number = exit.options.entrance_number
               entity.save_state.room_id = exit.options.entrance_number.room_id
-              const target_room = this.game.world_controller.room_map[exit.options.target_xy]
-              if (target_room) {
-                target_room.bindGame(this.game)
-              } else {
-                console.error('no room at', exit.options.target_xy)
-              }
             }
           },
         }),
@@ -334,8 +330,8 @@ export default class RoomController {
     this.game = game
     this.regions = []
     this._addBodies()
-    this._resetDoors()
     this._addExits()
+    this._resetDoors()
     this._addItems()
   }
 
@@ -390,5 +386,47 @@ export default class RoomController {
         ctx.drawImage(img, bounds[0], bounds[1])
       }
     }
+  }
+
+  loadRoomForExit(exit) {
+    if (exit.target_room) {
+      return exit.target_room
+    }
+    let target_room = this.game.world_controller.room_map[exit.options.target_xy]
+    if (!target_room) {
+      const global_xy = [exit.x, exit.y].map((i) => Math.floor(i / 16))
+      global_xy[1]++ // TODO why this +1?
+      const elevators = this.game.world_controller.elevators[global_xy] || []
+      elevators.forEach(([target_xy, _xdxy]) => {
+        // TODO need to align elevator dxy and exit dxy
+        if (target_room) {
+          console.error('multiple target rooms detected')
+        }
+        target_room = this.game.world_controller.room_map[target_xy]
+        const { width, height } = exit
+        const dxy_to_portal = vec2.multiply(vec2.create(), [width, height], exit.options.target_dxy)
+        const [x, y] = vec2.add(vec2.create(), exit.body.position, dxy_to_portal)
+        this.regions.push(
+          new BaseRegion({
+            x,
+            y,
+            width,
+            height,
+            type: 'portal',
+            room: this,
+            canCollide() {
+              return
+            },
+          }),
+        )
+      })
+    }
+    if (target_room) {
+      target_room.bindGame(this.game)
+      exit.target_room = target_room
+    } else {
+      console.error('no room at', exit.options.target_xy)
+    }
+    return target_room
   }
 }

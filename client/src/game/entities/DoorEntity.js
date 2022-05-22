@@ -13,6 +13,7 @@ export default class DoorEntity extends BoxEntity {
     Object.assign(this, { color, orientation })
     const front = pick(this.options, ['x', 'y', 'width', 'height'])
     const back = pick(this.options, ['x', 'y', 'width', 'height'])
+    this.exit = this.room.exits.find((e) => e.body.aabb.containsPoint(this.body.position))
     if (orientation === 'left') {
       front.x -= 0.5
       back.x += 0.5
@@ -42,7 +43,7 @@ export default class DoorEntity extends BoxEntity {
       room: this.room,
       type: 'door_back',
       canCollide: (_self, entity) => !this.needs_close && entity.is_player,
-      onCollide: () => (this.needs_close = true),
+      onCollideEnd: () => (this.needs_close = true),
     })
 
     if (this.color === 'red') {
@@ -93,11 +94,11 @@ export default class DoorEntity extends BoxEntity {
 
   getTargetRoom() {
     if (!this._target_room) {
-      const exit = this.room.exits.find((e) => e.body.aabb.containsPoint(this.body.position))
-      this._target_room = this.game.world_controller.room_map[exit?.options.target_xy]
-      this._target_room.bindGame(this.game)
+      this._target_room = this.game.world_controller.room_map[this.exit?.options.target_xy]
       if (!this._target_room) {
         console.warn('unable to find target room')
+      } else {
+        this._target_room.bindGame(this.game)
       }
     }
     return this._target_room
@@ -105,10 +106,9 @@ export default class DoorEntity extends BoxEntity {
 
   getLinkedDoor() {
     const target_room = this.getTargetRoom()
-    if (target_room) {
-      const exit = this.room.exits.find((e) => e.body.aabb.containsPoint(this.body.position))
+    if (target_room && this.exit) {
       return minBy(target_room.doors, (door) =>
-        p2.vec2.squaredDistance(exit.body.position, door.body.position),
+        p2.vec2.squaredDistance(this.exit.body.position, door.body.position),
       )
     }
     return undefined
