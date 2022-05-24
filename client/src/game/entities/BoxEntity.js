@@ -10,6 +10,7 @@ export default class BoxEntity extends BaseEntity {
     const { collisionGroup = SCENERY_GROUP } = this.options
     const shape = new p2.Box({ collisionGroup, collisionMask, width, height })
     const body = (this.body = new p2.Body({ position: [x, y] }))
+    body._entity = this
     body.addShape(shape)
     body.updateAABB()
   }

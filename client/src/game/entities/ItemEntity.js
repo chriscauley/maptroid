@@ -60,4 +60,8 @@ export default class ItemEntity extends BoxEntity {
     })
     this.game.backgroundEntity(this)
   }
+
+  damage() {
+    // items cannot be damaged
+  }
 }

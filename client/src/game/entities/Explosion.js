@@ -26,9 +26,10 @@ export default class Explosion extends BaseEntity {
     body.addShape(shape)
     body.updateAABB()
     this.dr = (this.options.max_radius - this.radius) / this.options.duration
-    this.hit = {}
+    this.hit = { [this.id]: true }
     Object.values(this.game.entities).forEach((e) => {
-      doesBodyContainPoint(e.body, [x, y]) && this.damageEntity(e)
+      // the raytracing used in tick will miss bodies that contain explosion center
+      e.id !== this.id && doesBodyContainPoint(e.body, [x, y]) && this.damageEntity(e)
     })
   }
 
@@ -53,7 +54,6 @@ export default class Explosion extends BaseEntity {
       shape.updateBoundingRadius()
       shape.updateArea()
 
-      // this.game.animations.push(() => this.draw(this.game.ctx))
       ray.from = this.body.position
       Object.values(this.game.entities).forEach((e) => {
         if (this.hit[e.id]) {
