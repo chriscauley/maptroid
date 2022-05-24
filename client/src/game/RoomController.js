@@ -1,13 +1,13 @@
 import { cloneDeep } from 'lodash'
 import { vec2 } from 'p2'
-import { vector, mod } from '@unrest/geo'
+import { vector } from '@unrest/geo'
 
 import Room from '@/models/Room'
 import BlockEntity from './entities/BlockEntity'
 import DoorEntity from './entities/DoorEntity'
 import ItemEntity from './entities/ItemEntity'
 import { SCENERY_GROUP, BULLET_GROUP, PLAYER_GROUP } from './constants'
-import BaseRegion from './region/BaseRegion'
+import Exit from './region/Exit'
 import { invertAsset } from './useAssets'
 
 const _yflip = (xy) => [xy[0], -xy[1]] // YFLIP
@@ -200,73 +200,9 @@ export default class RoomController {
 
   _room2world = (xy) => vector.times(vector.add(xy, this.world_xy0), 16)
   _addExits() {
-    const [room_x, room_y] = this.world_xy0
     this.exits = []
     this.data.exit.forEach(({ x, y, width, height }) => {
-      let target_dxy
-      let start_position
-      if (mod(x, 16) === 15) {
-        x -= 3
-        width += 3
-        target_dxy = [1, 0]
-        start_position = [-2, 0]
-      } else if (mod(x, 16) === 0) {
-        width += 3
-        target_dxy = [-1, 0]
-        start_position = [2, 0]
-      } else if (mod(y, 16) === 15) {
-        y -= 3
-        height += 3
-        target_dxy = [0, 1]
-        start_position = [0, -2]
-      } else if (mod(y, 16) === 0) {
-        height += 3
-        target_dxy = [0, -1]
-        start_position = [0, 2.5]
-      } else {
-        const elevator = this.bodies.find((b) => {
-          const e = b._entity
-          // TODO where does this +1 come from on y?!?
-          return e?.type === 'elevator' && e.room_xy[0] === x && e.room_xy[1] === y + 1
-        })
-        if (!elevator) {
-          // elevators are handled elsewhere
-          console.warn('cannot place exit', x, y, width, height)
-        }
-        return
-      }
-      const edge_x = 16 * room_x + x
-      const edge_y = 16 * room_y + y
-      const center_x = edge_x + width / 2
-      const center_y = edge_y + height / 2
-      const screen_xy = vector.add(this.world_xy0, [parseInt(x / 16), parseInt(y / 16)])
-      if (target_dxy[1] === -1) {
-        // Issue #182000795
-        screen_xy[1]++
-      }
-      this.exits.push(
-        new BaseRegion({
-          x: center_x,
-          y: center_y,
-          width,
-          height,
-          type: 'exit',
-          room: this,
-          target_xy: vector.add(screen_xy, target_dxy),
-          target_dxy,
-          entrance_number: `${x},${y}`,
-          start_position,
-          canCollide: (_exit, entity) => entity.is_player,
-          onCollide: (exit, entity) => {
-            if (entity.is_player) {
-              this.loadRoomForExit(exit)
-              this.game.player.enterRoom(exit.room)
-              entity.save_state.entrance_number = exit.options.entrance_number
-              entity.save_state.room_id = exit.options.entrance_number.room_id
-            }
-          },
-        }),
-      )
+      this.exits.push(new Exit({ x, y, width, height, room: this }))
     })
   }
 
@@ -341,6 +277,7 @@ export default class RoomController {
       room_xy = vector.add(room_xy, offset)
       player.body.position = vector.add(vector.times(this.world_xy0, 16), room_xy)
       player.body.updateAABB()
+      this.game.syncCamera()
     }
     for (let { x, y, type } of this.data.plm_overrides) {
       if (type === 'ship') {
@@ -357,8 +294,10 @@ export default class RoomController {
     if (!exit) {
       exit = this.exits[0]
     }
-    const p = (player.body.position = vec2.clone(exit.body.position))
-    vec2.add(p, p, exit.options.start_position)
+    player.body.position = vec2.clone(exit.body.position)
+    const p = player.body.position
+    vec2.add(p, p, exit.start_position)
+    this.game.syncCamera()
     return
   }
 
@@ -386,47 +325,5 @@ export default class RoomController {
         ctx.drawImage(img, bounds[0], bounds[1])
       }
     }
-  }
-
-  loadRoomForExit(exit) {
-    if (exit.target_room) {
-      return exit.target_room
-    }
-    let target_room = this.game.world_controller.room_map[exit.options.target_xy]
-    if (!target_room) {
-      const global_xy = [exit.x, exit.y].map((i) => Math.floor(i / 16))
-      global_xy[1]++ // TODO why this +1?
-      const elevators = this.game.world_controller.elevators[global_xy] || []
-      elevators.forEach(([target_xy, _xdxy]) => {
-        // TODO need to align elevator dxy and exit dxy
-        if (target_room) {
-          console.error('multiple target rooms detected')
-        }
-        target_room = this.game.world_controller.room_map[target_xy]
-        const { width, height } = exit
-        const dxy_to_portal = vec2.multiply(vec2.create(), [width, height], exit.options.target_dxy)
-        const [x, y] = vec2.add(vec2.create(), exit.body.position, dxy_to_portal)
-        this.regions.push(
-          new BaseRegion({
-            x,
-            y,
-            width,
-            height,
-            type: 'portal',
-            room: this,
-            canCollide() {
-              return
-            },
-          }),
-        )
-      })
-    }
-    if (target_room) {
-      target_room.bindGame(this.game)
-      exit.target_room = target_room
-    } else {
-      console.error('no room at', exit.options.target_xy)
-    }
-    return target_room
   }
 }

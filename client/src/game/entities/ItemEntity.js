@@ -27,7 +27,9 @@ export default class ItemEntity extends BoxEntity {
       }
     }, 1)
   }
+
   reset() {}
+
   draw(_ctx) {
     if (this.exists && !this._in_game_background) {
       const fname = `items${this.game.frame % 8 < 4 ? '' : '-alt'}`

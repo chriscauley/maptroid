@@ -1,6 +1,5 @@
 // Block are destructable terrain
-import { minBy, range, pick } from 'lodash'
-import p2 from 'p2'
+import { range, pick } from 'lodash'
 
 import BoxEntity from './BoxEntity'
 import BaseRegion from '../region/BaseRegion'
@@ -92,26 +91,17 @@ export default class DoorEntity extends BoxEntity {
     this.hidden_at = this.game.frame
   }
 
-  getTargetRoom() {
-    if (!this._target_room) {
-      this._target_room = this.game.world_controller.room_map[this.exit?.options.target_xy]
-      if (!this._target_room) {
-        console.warn('unable to find target room')
-      } else {
-        this._target_room.bindGame(this.game)
+  getLinkedDoor() {
+    if (!this._linked_door) {
+      this.exit?.bindTargets()
+      if (this.exit?.target_exit) {
+        this._linked_door = this.exit.target_exit.getDoor()
+        if (this._linked_door) {
+          this._linked_door._linked_door = this
+        }
       }
     }
-    return this._target_room
-  }
-
-  getLinkedDoor() {
-    const target_room = this.getTargetRoom()
-    if (target_room && this.exit) {
-      return minBy(target_room.doors, (door) =>
-        p2.vec2.squaredDistance(this.exit.body.position, door.body.position),
-      )
-    }
-    return undefined
+    return this._linked_door
   }
 
   draw(ctx) {

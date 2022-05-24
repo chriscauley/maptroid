@@ -431,4 +431,9 @@ export default class Game extends p2.EventEmitter {
     const frame = this.frame - since
     return Math.floor((frame % duration) / per_tick)
   }
+
+  syncCamera() {
+    this.cameraPos[0] = -this.player.body.position[0]
+    this.cameraPos[1] = -this.player.body.position[1]
+  }
 }

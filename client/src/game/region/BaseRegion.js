@@ -11,18 +11,19 @@ const colors = {
 export default class BaseRegion {
   constructor(options) {
     const { x, y, width, height, room, type } = options
+    // TODO remove this.x, this.y, etc in favor of this.options.x OR this.body.x
     Object.assign(this, { x, y, width, height, room, type })
     room.regions.push(this)
     this.game = room.game
     this.created = this.game.frame
     this.options = options
-    this.makeBody()
+    this.makeBody(options)
     this.game.bindEntity(this)
     this._colliding_with = {}
   }
 
-  makeBody() {
-    const { x, y, width, height } = this.options
+  makeBody(options) {
+    const { x, y, width, height } = options
     const collisionGroup = GROUP.region
     const shape = new p2.Box({ collisionGroup, width, height })
     shape._color = colors[this.type]
@@ -42,7 +43,7 @@ export default class BaseRegion {
     if (!this.options.canCollide(this, entity)) {
       return
     }
-    if (this.body.aabb.overlaps(entity.body.aabb)) {
+    if (this.body.aabb.containsPoint(entity.body.position)) {
       if (!this._colliding_with[entity.id] && this.options.onCollide) {
         this.options.onCollide(this, entity)
       }

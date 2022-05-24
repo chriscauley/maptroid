@@ -1,3 +1,5 @@
+import { vector } from '@unrest/geo'
+
 import RoomController from './RoomController'
 import ZoneController from './ZoneController'
 
@@ -44,19 +46,19 @@ export default class WorldController {
     this.json.data.elevators.forEach((e) => {
       const _last = e.xys.length - 1
       const start = e.xys[0]
-      const start_delta = [e.xys[1][0] - start[0], e.xys[1][1] - start[1]] // yflip
+      const start_dxy = vector.sign([e.xys[1][0] - start[0], e.xys[1][1] - start[1]]) // yflip
       const end = e.xys[_last]
       const before_end = e.xys[_last - 1]
-      const end_delta = [before_end[0] - end[0], before_end[1] - end[1]] // yflip
+      const end_dxy = vector.sign([before_end[0] - end[0], before_end[1] - end[1]]) // yflip
 
       start[1] = -start[1] // yflip
       end[1] = -end[1] // yflip
 
       this.elevators[start] = this.elevators[start] || []
-      this.elevators[start].push([end, start_delta])
+      this.elevators[start].push([end, start_dxy])
 
       this.elevators[end] = this.elevators[end] || []
-      this.elevators[end].push([start, end_delta])
+      this.elevators[end].push([start, end_dxy])
     })
   }
 

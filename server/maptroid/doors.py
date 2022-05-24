@@ -90,8 +90,10 @@ def find_doors(image, world):
         for x, y, w, h in xywhs:
             door = image[y:y+th,x:x+tw]
             color = match_door_color(door, world)
+            x = round(x / 16)
+            y = round(y / 16)
 
-            matched_doors[(x, y)] = [round(x/16), round(y/16), orientation, color]
+            matched_doors[(x, y)] = [x, y, orientation, color]
     return matched_doors
 
 def find_elevators(room):
