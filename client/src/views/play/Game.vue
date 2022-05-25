@@ -75,16 +75,13 @@ export default {
     this.game.on('save', this.save)
     this.game.on('pause', () => (this.paused = this.game.paused))
     this.game.paused = false
-    this.focus = () => this._focus()
     this.blur = () => this._blur()
     window.addEventListener('blur', this._blur)
-    window.addEventListener('focus', this._focus)
   },
   unmounted() {
     this.game.close()
     this.game.off('draw', this.draw)
     window.removeEventListener('blur', this.blur)
-    window.removeEventListener('focus', this.focus)
   },
   methods: {
     click(_event, data) {
@@ -99,9 +96,6 @@ export default {
     },
     _blur() {
       !this.game.paused && this.game.togglePause()
-    },
-    _focus() {
-      this.game.paused && this.game.togglePause()
     },
   },
 }
