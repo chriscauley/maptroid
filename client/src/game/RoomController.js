@@ -6,7 +6,7 @@ import Room from '@/models/Room'
 import BlockEntity from './entities/BlockEntity'
 import DoorEntity from './entities/DoorEntity'
 import ItemEntity from './entities/ItemEntity'
-import { SCENERY_GROUP, BULLET_GROUP, PLAYER_GROUP } from './constants'
+import { GROUP } from './constants'
 import Exit from './region/Exit'
 import { invertAsset } from './useAssets'
 
@@ -218,12 +218,12 @@ export default class RoomController {
       this.bodies.push(block.body)
     })
 
-    const collisionMask = PLAYER_GROUP | BULLET_GROUP
+    const collisionMask = GROUP.player | GROUP.bullet
     // Add bts shapes
     this.static_shapes.forEach((shape) => {
       const options = {
         collisionMask,
-        collisionGroup: SCENERY_GROUP,
+        collisionGroup: GROUP.scenery,
         ...shape,
       }
       this.bodies.push(this.game.addStaticShape(shape.exterior, options))

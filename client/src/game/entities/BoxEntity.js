@@ -1,13 +1,13 @@
 // Blocks are destructable terrain
 import BaseEntity from './BaseEntity'
-import { PLAYER_GROUP, BULLET_GROUP, SCENERY_GROUP } from '../constants'
+import { GROUP } from '../constants'
 import p2 from 'p2'
 
 export default class BoxEntity extends BaseEntity {
   makeBody() {
     const { x, y, width, height } = this.options
-    const collisionMask = PLAYER_GROUP | BULLET_GROUP
-    const { collisionGroup = SCENERY_GROUP } = this.options
+    const collisionMask = GROUP.player | GROUP.bullet
+    const { collisionGroup = GROUP.scenery } = this.options
     const shape = new p2.Box({ collisionGroup, collisionMask, width, height })
     const body = (this.body = new p2.Body({ position: [x, y] }))
     body._entity = this

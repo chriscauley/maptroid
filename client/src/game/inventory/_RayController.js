@@ -4,7 +4,7 @@
 import { sortBy } from 'lodash'
 import { vec2, Ray, RaycastResult } from 'p2'
 
-import { SCENERY_GROUP, POSTURE } from '../constants'
+import { GROUP, POSTURE } from '../constants'
 import drawRay from '../drawRay'
 import vec from '../vec'
 
@@ -12,7 +12,7 @@ export default class BeamController {
   constructor({ player }) {
     this.player = player
     this.range = 10
-    this.ray = new Ray({ mode: Ray.CLOSEST, collisionMask: SCENERY_GROUP })
+    this.ray = new Ray({ mode: Ray.CLOSEST, collisionMask: GROUP.scenery })
     this.raycastResult = new RaycastResult()
   }
   shoot() {

@@ -1,8 +1,3 @@
-export const SCENERY_GROUP = Math.pow(2, 1)
-export const BULLET_GROUP = Math.pow(2, 2)
-export const PLAYER_GROUP = Math.pow(2, 3)
-export const ITEM_GROUP = Math.pow(2, 4)
-
 export const GROUP = {
   scenery: Math.pow(2, 1),
   bullet: Math.pow(2, 2),
@@ -69,4 +64,11 @@ export const COOLDOWN = {
   missile: 8, // if I fire a missile and press fire again 8 frames later, a second missile fires
   'super-missile': 30, // super missiles fire 3 times in 4 seconds
   beam: 20, // Charge is 3x beam, so it makes sense to have max rate be about equal to charge
+}
+
+export const SPEED = {
+  walk: 10.2,
+  run: 18,
+  boost: 36,
+  wall_jump: [5.6 / Math.SQRT2, 5.6 * Math.SQRT2],
 }

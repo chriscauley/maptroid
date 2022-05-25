@@ -2,12 +2,12 @@ import { Ray, RaycastResult } from 'p2'
 
 import BaseController from './BaseController'
 import Bullet from './Bullet'
-import { SCENERY_GROUP } from '../constants'
+import { GROUP } from '../constants'
 
 export default class ProjectileController extends BaseController {
   constructor(options) {
     super(options)
-    this.ray = new Ray({ mode: Ray.CLOSEST, collisionMask: SCENERY_GROUP })
+    this.ray = new Ray({ mode: Ray.CLOSEST, collisionMask: GROUP.scenery })
     this.raycastResult = new RaycastResult()
     this.player.game.p2_world.on('preSolve', this.tick)
     this.bullets = {}

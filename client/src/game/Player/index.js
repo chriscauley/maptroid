@@ -6,7 +6,7 @@ import p2 from 'p2'
 
 import Controller from './Controller'
 import drawSprite from './drawSprite'
-import { PLAYER_GROUP, SCENERY_GROUP, ITEM_GROUP, POSTURE, ENERGY } from '../constants'
+import { GROUP, POSTURE, ENERGY, SPEED } from '../constants'
 import inventory from '../inventory'
 import aim from './aim'
 import animate from './animate'
@@ -26,7 +26,7 @@ function lerp(start, end, delta) {
 export default class Player extends Controller {
   constructor(options = {}) {
     Object.assign(options, {
-      collisionMask: SCENERY_GROUP | ITEM_GROUP,
+      collisionMask: GROUP.scenery | GROUP.item,
       velocityXSmoothing: 0.0001,
       legacy_controls: true,
     })
@@ -40,7 +40,7 @@ export default class Player extends Controller {
       new p2.Box({
         width: 8 / 16,
         height: POSTURE._heights[POSTURE.stand], // TODO switch between ball and standing (=40/16)
-        collisionGroup: PLAYER_GROUP,
+        collisionGroup: GROUP.player,
       }),
     )
     options.p2_world.addBody(options.body)
@@ -134,12 +134,6 @@ export default class Player extends Controller {
         this.collectItem({ id: i.id, type: i.data.type })
       }
     })
-
-    this.speed = {
-      walk: 10.2,
-      run: 18,
-      boost: 36,
-    }
 
     this.velocity = vec2.create()
     this.scaledVelocity = vec2.create()
@@ -307,7 +301,7 @@ export default class Player extends Controller {
       new p2.Box({
         width: 8 / 16,
         height,
-        collisionGroup: PLAYER_GROUP,
+        collisionGroup: GROUP.player,
       }),
     )
   }
@@ -478,11 +472,11 @@ export default class Player extends Controller {
     // check speed booster and set speeding
     const x_speed = Math.abs(velocity[0])
     if (this.keys.run && !this.state.speeding) {
-      if (Math.abs(x_speed - this.speed.boost) < 0.1) {
+      if (Math.abs(x_speed - SPEED.boost) < 0.1) {
         this.state.speeding = this.game.frame
         animate.pulseFeet(this.game, this.body, '#44ff44')
       }
-    } else if (this.collisions.below && x_speed < this.speed.run) {
+    } else if (this.collisions.below && x_speed < SPEED.run) {
       delete this.state.speeding
     }
 
@@ -593,17 +587,17 @@ export default class Player extends Controller {
       return 0
     }
     if (this.state.posture === POSTURE.ball || !this.collisions.below) {
-      return this.speed.walk
+      return SPEED.walk
     }
     if (this.keys.run) {
-      if (Math.abs(this.velocity[0]) < this.speed.run * 0.9) {
-        return this.speed.run
+      if (Math.abs(this.velocity[0]) < SPEED.run * 0.9) {
+        return SPEED.run
       }
       // TODO speedbooster in inventory
       const boost = this.inventory.boots.enabled['speed-booster']
-      return boost ? this.speed.boost : this.speed.run
+      return boost ? SPEED.boost : SPEED.run
     }
-    return this.speed.walk
+    return SPEED.walk
   }
 
   draw = (ctx) => {

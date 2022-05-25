@@ -1,11 +1,11 @@
 import BlockEntity from './BlockEntity'
 import BoxEntity from './BoxEntity'
 import { getIcon } from '../useAssets'
-import { ITEM_GROUP } from '../constants'
+import { GROUP } from '../constants'
 
 export default class ItemEntity extends BoxEntity {
   constructor(options) {
-    options.collisionGroup = ITEM_GROUP
+    options.collisionGroup = GROUP.item
     super(options)
     this.is_item = true
     this.exists = true

@@ -1,6 +1,6 @@
 import p2 from 'p2'
 import Explosion from '../entities/Explosion'
-import { BULLET_GROUP } from '../constants'
+import { GROUP } from '../constants'
 
 const { vec2 } = p2
 const BLAST_RADIUS = 0.75
@@ -56,12 +56,9 @@ class Bomb {
 
   makeShape() {
     const position = vec2.copy([0, 0], this.player.body.position)
-    this.body = new p2.Body({
-      position,
-      gravityScale: 0,
-      collisionGroup: BULLET_GROUP,
-    })
-    this.body.addShape(new p2.Circle({ radius: RADIUS, collisionGroup: BULLET_GROUP }))
+    const collisionGroup = GROUP.bullet
+    this.body = new p2.Body({ position, gravityScale: 0, collisionGroup })
+    this.body.addShape(new p2.Circle({ radius: RADIUS, collisionGroup }))
     this.player.game.bindEntity(this)
   }
 

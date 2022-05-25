@@ -4,7 +4,7 @@ import p2 from 'p2'
 import useAssets from './useAssets'
 import drawRay from './drawRay'
 import Player from './Player'
-import { SCENERY_GROUP, BULLET_GROUP, PLAYER_GROUP, PLAYER_ACTIONS } from './constants'
+import { GROUP, PLAYER_ACTIONS } from './constants'
 import WorldController from './WorldController'
 import gamepad from '@/unrest/gamepad/gamepad'
 
@@ -163,14 +163,15 @@ export default class Game extends p2.EventEmitter {
 
   addStaticCircle(x, y, radius, angle = 0) {
     var body = new p2.Body({ position: [x, y], angle: angle })
-    body.addShape(new p2.Circle({ collisionGroup: SCENERY_GROUP, radius }))
+    body.addShape(new p2.Circle({ collisionGroup: GROUP.scenery, radius }))
     this.p2_world.addBody(body)
     return body
   }
 
   addStaticBox([x, y, width, height, angle = 0], options) {
-    const collisionMask = PLAYER_GROUP | BULLET_GROUP
-    const shape = new p2.Box({ collisionGroup: SCENERY_GROUP, collisionMask, width, height })
+    const collisionMask = GROUP.player | GROUP.bullet
+    const collisionGroup = GROUP.scenery
+    const shape = new p2.Box({ collisionGroup, collisionMask, width, height })
     Object.assign(shape, options)
     const body = new p2.Body({
       position: [x, y],
