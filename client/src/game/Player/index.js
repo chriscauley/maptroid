@@ -96,11 +96,8 @@ export default class Player extends Controller {
     }
 
     const {
-      wallSlideSpeedMax = 3,
+      wallSlideSpeedMax = 0,
       wallStickTime = 0.25,
-      wallJumpClimb = [20, 20], // holding towards wall
-      wallLeap = [20, 20], // holding away from wall
-      wallJumpOff = [20, 20], // holding neither
       minJumpHeight = 0.1,
       velocityXSmoothing = 0.2,
       velocityXMin = 0.5,
@@ -109,9 +106,6 @@ export default class Player extends Controller {
     Object.assign(this, {
       wallSlideSpeedMax,
       wallStickTime,
-      wallJumpClimb,
-      wallJumpOff,
-      wallLeap,
       minJumpHeight,
       velocityXSmoothing,
       velocityXMin,
@@ -156,6 +150,11 @@ export default class Player extends Controller {
       aimdown: 0,
     }
     this._last_pressed_at = {}
+  }
+
+  getWallJump(_wall_dir, _key_dir) {
+    // TODO should wall jump have different velocities depending on if these match?
+    return [5.1, this.maxJumpVelocity]
   }
 
   setMaxJumpHeight(maxJumpHeight, timeToJumpApex) {
@@ -400,7 +399,7 @@ export default class Player extends Controller {
     const wallSliding = this.isWallsliding()
 
     if (wallSliding) {
-      if (velocity[1] < -this.wallSlideSpeedMax) {
+      if (this.wallSlideSpeedMax && velocity[1] < -this.wallSlideSpeedMax) {
         // yflip
         velocity[1] = -this.wallSlideSpeedMax
       }
@@ -428,16 +427,9 @@ export default class Player extends Controller {
         // not enough vertical room to stand
       } else if (wallSliding) {
         // yflip
-        if (wallDirX === input[0]) {
-          velocity[0] = -wallDirX * this.wallJumpClimb[0]
-          velocity[1] = this.wallJumpClimb[1]
-        } else if (input[0] === 0) {
-          velocity[0] = -wallDirX * this.wallJumpOff[0]
-          velocity[1] = this.wallJumpOff[1]
-        } else {
-          velocity[0] = -wallDirX * this.wallLeap[0]
-          velocity[1] = this.wallLeap[1]
-        }
+        const wall_jump = this.getWallJump(wallDirX, input[0])
+        velocity[0] = -wallDirX * wall_jump[0]
+        velocity[1] = wall_jump[1]
       } else if (collisions.below) {
         // can only jump if standing on something
         animate.pulseFeet(this.game, this.body, 'red')

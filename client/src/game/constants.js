@@ -70,5 +70,4 @@ export const SPEED = {
   walk: 10.2,
   run: 18,
   boost: 36,
-  wall_jump: [5.6 / Math.SQRT2, 5.6 * Math.SQRT2],
 }
