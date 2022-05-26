@@ -124,15 +124,21 @@ export default class Game extends p2.EventEmitter {
 
   click() {
     const [mouse_x, mouse_y] = this.mouse.world_xy.map((i) => Math.ceil(i))
+    const aabb = new p2.AABB({
+      upperBound: [mouse_x + 1, mouse_y + 1],
+      lowerBound: [mouse_x, mouse_y],
+    })
+    p2.vec2.log(aabb.upperBound, aabb.lowerBound)
+    const entities = Object.values(this.entities).filter((entity) =>
+      aabb.containsPoint(entity.body.position),
+    )
+    const bodies = this.p2_world.bodies.filter((b) => b.aabb.overlaps(aabb))
     return {
       mouse_x,
       mouse_y,
-      entity: {
-        ...Object.values(this.entities).find((entity) => {
-          const [x, y] = entity.body.position
-          return x === mouse_x && y === mouse_y
-        }),
-      },
+      entities,
+      entity_names: entities.map((e) => e.constructor.name),
+      bodies,
     }
   }
 

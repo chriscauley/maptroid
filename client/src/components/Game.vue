@@ -20,7 +20,7 @@ export default {
       this.$emit('click', e, this.game.click(e))
     },
     mousemove(e) {
-      this.$emit('mousemove', e, this.game.mousemove(e))
+      this.$emit('mousemove', e, this.game?.mousemove(e))
     },
   },
 }

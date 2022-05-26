@@ -370,7 +370,6 @@ export default class Player extends Controller {
       from[1] += this.horizontalRaySpacing * i
       const to = [from[0] + directionX * rayLength, from[1]]
       this.castRay(from, to)
-      const distance = this.raycastResult.getHitDistance(this.ray)
 
       if (this.raycastResult.body) {
         this.collisions.ws = 1
