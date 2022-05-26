@@ -12,7 +12,7 @@ export default {
     game: Object,
   },
   data() {
-    return { state: {} }
+    return { state: { collisions: {} } }
   },
   mounted() {
     this.game.on('draw', this.updateDebugLog)
@@ -43,11 +43,10 @@ export default {
         const { position } = game.player.body
         const { velocity, gravity, scaledVelocity } = game.player
         const max_speed_y = Math.max(state.player?.max_speed_y || 0, Math.abs(velocity[1]))
+        state.collisions = game.player.collisions
         Object.assign(state.misc, { position, velocity, scaledVelocity, max_speed_y, gravity })
         Object.assign(state.misc, game.player.state)
-        state.misc.isWallsliding = game.player.isWallsliding()
 
-        state.collisions = game.player.collisions
         state.keys = game.player.keys
       }
     },

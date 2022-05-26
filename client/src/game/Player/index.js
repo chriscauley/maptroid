@@ -4,7 +4,7 @@ import { reactive } from 'vue'
 import { cloneDeep } from 'lodash'
 import p2 from 'p2'
 
-import Controller from './Controller'
+import Controller, { angle, UNIT_Y } from './Controller'
 import drawSprite from './drawSprite'
 import { GROUP, POSTURE, ENERGY, SPEED } from '../constants'
 import inventory from '../inventory'
@@ -342,13 +342,53 @@ export default class Player extends Controller {
     }
   }
 
-  isWallsliding() {
-    if (this.state.posture !== POSTURE.spin) {
-      return false
+  checkWallSliding(input) {
+    this.collisions.is_wall_sliding = false
+    if (this.game.frame - this._last_wall_sliding < 6) {
+      // just finished a wall slide
+      return
     }
-    const { left, right, below, _collide_angle } = this.collisions
-    // yflip
-    return (left || right) && !below && this.velocity[1] < 0 && _collide_angle % 90 < 1
+    if (this.state.posture !== POSTURE.spin || this.collisions.below) {
+      // can only wall slide if spinning
+      return
+    }
+
+    if (!input) {
+      return
+    }
+
+    const directionX = -input
+    const _dir = directionX === -1 ? 'bottomLeft' : 'bottomRight'
+    const rayLength = 6 / 16 // TODO this should be a constant somewhere
+
+    let collide_angle
+
+    this.collisions.ws = 0
+    this.collisions.wsd = -input
+    for (let i = 0; i < this.horizontalRayCount; i++) {
+      const from = this.raycastOrigins[_dir].slice()
+      from[1] += this.horizontalRaySpacing * i
+      const to = [from[0] + directionX * rayLength, from[1]]
+      this.castRay(from, to)
+      const distance = this.raycastResult.getHitDistance(this.ray)
+
+      if (this.raycastResult.body) {
+        this.collisions.ws = 1
+        const entity = this.raycastResult.body._entity
+        if (entity?.is_item || entity?.hp < 1) {
+          this.raycastResult.reset()
+          continue
+        }
+        collide_angle = (180 * angle(this.raycastResult.normal, UNIT_Y)) / Math.PI
+        if (collide_angle % 1 < 1) {
+          this.collisions.is_wall_sliding = true
+          this.raycastResult.reset()
+          return
+        }
+      }
+    }
+
+    // return (left || right) && this.velocity[1] < 0 && _collide_angle % 90 < 1
   }
 
   tick() {}
@@ -396,10 +436,11 @@ export default class Player extends Controller {
     }
 
     const wallDirX = collisions.left ? -1 : 1
-    const wallSliding = this.isWallsliding()
+    this.checkWallSliding(input[0])
 
-    if (wallSliding) {
-      if (this.wallSlideSpeedMax && velocity[1] < -this.wallSlideSpeedMax) {
+    // This conditional is currently unused (since theres no wallSlideSpeedMax set)
+    if (this.wallSlideSpeedMax && this.collisions.is_wall_sliding) {
+      if (velocity[1] < -this.wallSlideSpeedMax) {
         // yflip
         velocity[1] = -this.wallSlideSpeedMax
       }
@@ -425,11 +466,12 @@ export default class Player extends Controller {
         // TODO springball
       } else if (!this.checkVertical(0.25)) {
         // not enough vertical room to stand
-      } else if (wallSliding) {
+      } else if (this.collisions.is_wall_sliding) {
         // yflip
         const wall_jump = this.getWallJump(wallDirX, input[0])
         velocity[0] = -wallDirX * wall_jump[0]
         velocity[1] = wall_jump[1]
+        this._last_wall_sliding = this.game.frame
       } else if (collisions.below) {
         // can only jump if standing on something
         animate.pulseFeet(this.game, this.body, 'red')
@@ -540,13 +582,16 @@ export default class Player extends Controller {
     }
 
     let targetVelocityX = input[0] * this.getMoveSpeed() // TODO issue #1
+    this.collisions.move_speed = targetVelocityX
     if (
       Math.sign(targetVelocityX) === Math.sign(velocity[0]) &&
       Math.abs(targetVelocityX) < Math.abs(velocity[0])
     ) {
+      // player is already moving faster than this in the x direction
       targetVelocityX = velocity[0]
     }
     if (this.state.posture === POSTURE.spin && targetVelocityX === 0) {
+      // when spinning, do not change x direction unless player explicitly says to do so
       targetVelocityX = velocity[0]
     }
 
@@ -562,6 +607,9 @@ export default class Player extends Controller {
   }
 
   getMoveAcceleration(input) {
+    if (!this.collisions.below) {
+      return 80 // calibrated to make is_wall_sliding last 7 frames
+    }
     if (!input[0]) {
       if (this.state.posture === POSTURE.crouch) {
         return 300
@@ -575,6 +623,9 @@ export default class Player extends Controller {
   }
 
   getMoveSpeed() {
+    if (!this.collisions.below) {
+      return SPEED.float // in air speed is slow
+    }
     if (this.state.posture === POSTURE.crouch) {
       return 0
     }

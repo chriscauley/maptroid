@@ -11,7 +11,7 @@ export default class Exit extends BaseRegion {
     options.onCollide = (exit, entity) => {
       exit.bindTargets()
       exit.game.player.enterRoom(exit.room)
-      entity.save_state.entrance_number = exit.options.entrance_number
+      entity.save_state.entrance_number = exit.entrance_number
       entity.save_state.room_id = exit.room.id
     }
 

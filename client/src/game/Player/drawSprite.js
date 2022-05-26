@@ -20,6 +20,9 @@ const _getSprite = (player) => {
   const { pointing, posture } = player.state
   const dir = player.collisions.faceDir === -1 ? '_left' : '_right'
   player._show_charge = false
+  if (player.collisions.is_wall_sliding) {
+    return ['_poses' + dir, 13]
+  }
   if (player.collisions.turn_for >= 0) {
     let index = Math.floor(player.collisions.turn_for / 2)
     if (player.collisions.turning === 1) {

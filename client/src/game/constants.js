@@ -67,6 +67,7 @@ export const COOLDOWN = {
 }
 
 export const SPEED = {
+  float: 4.2,
   walk: 10.2,
   run: 18,
   boost: 36,

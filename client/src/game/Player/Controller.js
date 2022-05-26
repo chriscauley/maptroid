@@ -4,14 +4,14 @@ import { POSTURE } from '../constants'
 
 const { vec2, Ray, RaycastResult } = p2
 
-const UNIT_Y = vec2.fromValues(0, 1)
+export const UNIT_Y = vec2.fromValues(0, 1)
 const DEG_TO_RAD = Math.PI / 180
 
 // math helpers
 function sign(x) {
   return x >= 0 ? 1 : -1
 }
-function angle(a, b) {
+export function angle(a, b) {
   return Math.acos(vec2.dot(a, b))
 }
 
