@@ -178,7 +178,7 @@ export default class Controller extends RaycastController {
             velocity[1] = Math.tan(collisions.slopeAngle) * Math.abs(velocity[0])
           }
 
-          this.collisions._collide_angle = (180 * slopeAngle) / Math.PI
+          this.collisions._h_collide_angle = slopeAngle
 
           if (directionX === -1) {
             collisions.left = true

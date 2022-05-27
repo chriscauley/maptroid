@@ -283,7 +283,7 @@ export default class Player extends Controller {
     const height = POSTURE._heights[posture]
     const old_height = this.body.shapes[0].height
 
-    if (this.collisions.below) {
+    if (this.collisions.below && posture !== POSTURE.spin) {
       // add half height difference to keep player on ground
       this.body.position[1] += (height - old_height) / 2
     } else if (height > old_height && !this.checkVertical(-1)) {
@@ -378,14 +378,12 @@ export default class Player extends Controller {
           continue
         }
         collide_angle = (180 * angle(this.raycastResult.normal, UNIT_Y)) / Math.PI
-        if (collide_angle % 1 < 1) {
+        if (collide_angle % 90 < 1) {
           this.collisions.is_wall_sliding = true
           return
         }
       }
     }
-
-    // return (left || right) && this.velocity[1] < 0 && _collide_angle % 90 < 1
   }
 
   tick() {}
@@ -487,6 +485,7 @@ export default class Player extends Controller {
       } else if (collisions.below) {
         // can only jump if standing on something
         animate.pulseFeet(this.game, this.body, 'red')
+        const old_velocity = velocity[1]
         velocity[1] = this.maxJumpVelocity
         if (this.state.speeding) {
           this.setPosture(POSTURE.spin)
@@ -497,6 +496,10 @@ export default class Player extends Controller {
         } else if (keys.left && !collisions.left) {
           this.setPosture(POSTURE.spin)
           velocity[1] *= 1.1
+        }
+        if (old_velocity > 0) {
+          // if moving up a ramp, add that velocity
+          velocity[1] += old_velocity
         }
       } else if (posture !== POSTURE.spin) {
         this.setPosture(POSTURE.spin)
