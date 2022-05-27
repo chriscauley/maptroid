@@ -298,7 +298,7 @@ export default class Player extends Controller {
     this.body.removeShape(this.body.shapes[0])
     this.body.addShape(
       new p2.Box({
-        width: 8 / 16,
+        width: 10 / 16,
         height,
         collisionGroup: GROUP.player,
       }),
@@ -359,7 +359,7 @@ export default class Player extends Controller {
 
     const directionX = -input
     const _dir = directionX === -1 ? 'bottomLeft' : 'bottomRight'
-    const rayLength = 6 / 16 // TODO this should be a constant somewhere
+    const rayLength = this.skinWidth + 6 / 16 // TODO this should be a constant somewhere
 
     let collide_angle
 
@@ -396,6 +396,9 @@ export default class Player extends Controller {
     this.aim = aim(this)
     if (this.pointing === 'down' && this.collisions.below) {
       this.pointing = undefined
+    }
+    if (!this.collisions.last_below && this.collisions.below) {
+        animate.pulseFeet(this.game, this.body, 'green')
     }
     if (
       this.state.posture === POSTURE.crouch &&
