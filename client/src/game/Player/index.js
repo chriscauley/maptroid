@@ -375,13 +375,11 @@ export default class Player extends Controller {
       if (this.raycastResult.body) {
         const entity = this.raycastResult.body._entity
         if (entity?.is_item || entity?.hp < 1) {
-          this.raycastResult.reset()
           continue
         }
         collide_angle = (180 * angle(this.raycastResult.normal, UNIT_Y)) / Math.PI
         if (collide_angle % 1 < 1) {
           this.collisions.is_wall_sliding = true
-          this.raycastResult.reset()
           return
         }
       }

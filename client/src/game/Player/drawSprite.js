@@ -147,7 +147,7 @@ const getChargeSprite = (player, key) => {
     return undefined
   }
   const dframe = player.game.frame - player._last_pressed_at[key]
-  const charge_level = Math.floor(4 * dframe / CHARGE_FRAMES)
+  const charge_level = Math.floor((4 * dframe) / CHARGE_FRAMES)
   if (charge_level == 0) {
     return undefined
   }

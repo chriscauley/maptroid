@@ -290,7 +290,7 @@ export default class RoomController {
       }
     }
     const { entrance_number } = player.save_state
-    let exit = this.exits.find((e) => e.options.entrance_number == entrance_number)
+    let exit = this.exits.find((e) => e.entrance_number == entrance_number)
     if (!exit) {
       exit = this.exits[0]
     }

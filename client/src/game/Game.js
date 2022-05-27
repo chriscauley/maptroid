@@ -220,6 +220,10 @@ export default class Game extends p2.EventEmitter {
     // TODO should also be available with debug enabled
     // this.drawBts(body)
 
+    if (this.highlight_body_id === body.id) {
+      this.drawBts(body)
+    }
+
     this.ctx.restore()
 
     // TODO this should only be visible with debug
@@ -300,6 +304,9 @@ export default class Game extends p2.EventEmitter {
     // Draw all bodies
     this.background_entities.forEach((e) => this.drawBody(e.body))
     this.p2_world.bodies.forEach((body) => this.drawBody(body))
+    if (this.highlight_ray) {
+      drawRay(this.ctx, this.highlight_ray)
+    }
 
     if (this.mouse.canvas_xy) {
       const zoom = this.zoom

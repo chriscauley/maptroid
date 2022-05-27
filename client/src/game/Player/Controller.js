@@ -1,4 +1,5 @@
 import p2 from 'p2'
+
 import RaycastController from './RaycastController'
 import { POSTURE } from '../constants'
 
@@ -139,7 +140,6 @@ export default class Controller extends RaycastController {
         if (this.raycastResult.body._entity?.is_item) {
           // item doens't affect players velocity
           this.emit({ type: 'collide', body: this.raycastResult.body, dxy })
-          this.raycastResult.reset()
           continue
         }
 
@@ -168,7 +168,6 @@ export default class Controller extends RaycastController {
           this.debounceCollision(dxy)
 
           if (this.raycastResult.body._entity?.hp === 0) {
-            this.raycastResult.reset()
             continue
           }
 
@@ -188,8 +187,6 @@ export default class Controller extends RaycastController {
           }
         }
       }
-
-      this.raycastResult.reset()
     }
   }
 
@@ -209,7 +206,6 @@ export default class Controller extends RaycastController {
       }
     }
     const can_stand = !this.raycastResult.body
-    this.raycastResult.reset()
     return can_stand
   }
 
@@ -229,7 +225,6 @@ export default class Controller extends RaycastController {
         if (this.raycastResult.body._entity?.is_item) {
           // item doens't affect players velocity
           this.emit({ type: 'collide', body: this.raycastResult.body, dxy })
-          this.raycastResult.reset()
           continue
         }
 
@@ -249,8 +244,6 @@ export default class Controller extends RaycastController {
           collisions.above = true
         }
       }
-
-      this.raycastResult.reset()
     }
 
     if (collisions.climbingSlope) {
@@ -317,11 +310,10 @@ export default class Controller extends RaycastController {
         }
       }
     }
-
-    this.raycastResult.reset()
   }
 
   castRay(from, to) {
+    this.raycastResult.reset()
     const ray = this.ray
     ray.collisionMask = this.collisionMask // TODO does this ever change?
     vec2.copy(ray.from, from)
