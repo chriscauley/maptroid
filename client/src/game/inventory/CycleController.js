@@ -16,7 +16,9 @@ export default class CycleGunController extends BaseController {
     return this._getCurrentController().press()
   }
   release() {
-    return this._getCurrentController().release()
+    const controller = this._getCurrentController()
+    controller.is_charged = this.is_charged
+    return controller.release()
   }
   tick() {
     return this._getCurrentController.tick()

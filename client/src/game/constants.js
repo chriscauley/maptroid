@@ -45,7 +45,7 @@ export const POSTURE = {
   _heights: [14 / 16, 30 / 16, 42 / 16, 24 / 16],
 }
 
-export const CHARGE_TIME = 1000
+export const CHARGE_FRAMES = 60
 
 export const ENERGY = {
   total_tanks: 14,

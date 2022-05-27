@@ -1,4 +1,4 @@
-import { POSTURE, CHARGE_TIME } from '../constants'
+import { POSTURE, CHARGE_FRAMES } from '../constants'
 import SpriteSheet from '@/views/SpriteSheet/store'
 import { getAsset } from '../useAssets'
 
@@ -13,6 +13,9 @@ const _poses = {
   upward: 2,
   downward: 3,
   down: 3, // TODO need to be able to shoot down from stainding
+  wall_sliding: 13,
+  push_off: 15,
+  pre_spin: 16,
 }
 
 const _getSprite = (player) => {
@@ -20,9 +23,11 @@ const _getSprite = (player) => {
   const { pointing, posture } = player.state
   const dir = player.collisions.faceDir === -1 ? '_left' : '_right'
   player._show_charge = false
+
   if (player.collisions.is_wall_sliding) {
-    return ['_poses' + dir, 13]
+    return ['_poses' + dir, _poses.wall_sliding]
   }
+
   if (player.collisions.turn_for >= 0) {
     let index = Math.floor(player.collisions.turn_for / 2)
     if (player.collisions.turning === 1) {
@@ -95,7 +100,23 @@ const _getSprite = (player) => {
     }
   } else {
     if (posture === POSTURE.spin) {
-      const frame = getFrame(now, 8)
+      let frame = getFrame(now, 8)
+      // check if player is pushing off wall
+      if (player._last_wall_jump_frame) {
+        if (player.state.input[0] !== -player._last_wall_jump_direction) {
+          // player has not changed directions
+          const frames_since_slide = player.game.frame - player._last_wall_jump_frame
+          if (frames_since_slide < 2) {
+            return ['_poses' + dir, _poses.wall_sliding]
+          } else if (frames_since_slide < 7) {
+            return ['_poses' + dir, _poses.push_off]
+          } else if (frames_since_slide < 12) {
+            return ['_poses' + dir, _poses.pre_spin]
+          }
+          frame = (frames_since_slide - 12) % 8
+        }
+      }
+
       return ['spinjump' + dir, frame]
     }
     if (pointing === 'downward') {
@@ -125,19 +146,18 @@ const getChargeSprite = (player, key) => {
   if (!player.loadout[key].canCharge() || !player.keys[key]) {
     return undefined
   }
-  const dt = player.getNow() - player._last_pressed_at[key]
-  const charge_level = Math.floor((4 * dt) / CHARGE_TIME)
+  const dframe = player.game.frame - player._last_pressed_at[key]
+  const charge_level = Math.floor(4 * dframe / CHARGE_FRAMES)
   if (charge_level == 0) {
     return undefined
   }
-  const frame_no = Math.floor(dt / 60) // how many frames have we been charging for
   weapon.is_charged = charge_level >= 4
-  const cycle_no = Math.floor(frame_no / 4) % 2 // 0 or 1, switching every 4 frames
+  const cycle_no = Math.floor(dframe / 4) % 2 // 0 or 1, switching every 4 frames
   const y = player.loadout[key]['ice-beam'] ? 0 : 1
   const x = Math.min(charge_level, 4) - 1 + cycle_no
   const { img } = getAsset('charge-beam')
 
-  return { img, sx: x * 16, sy: y * 16, sh: 16, sw: 16, frame_no, weapon }
+  return { img, sx: x * 16, sy: y * 16, sh: 16, sw: 16, dframe, weapon }
 }
 
 const whiten = (img, number) => {
@@ -226,9 +246,9 @@ export default (player, ctx) => {
       return tick > 0
     })
   } else if (charge_sprite) {
-    const { frame_no, weapon } = charge_sprite
+    const { dframe, weapon } = charge_sprite
     if (weapon.is_charged) {
-      const charge_image = whiten(img, ((frame_no % 4) + 1) * 30)
+      const charge_image = whiten(img, ((dframe % 4) + 1) * 30)
       ctx.save()
       ctx.drawImage(charge_image, sx, sy, sw, sh, base_x, base_y, dw, dh)
       ctx.restore()

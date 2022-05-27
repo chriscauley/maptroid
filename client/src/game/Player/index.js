@@ -50,7 +50,6 @@ export default class Player extends Controller {
     this.game = options.game
     this.game.bindEntity(this)
 
-    this.input = vec2.create()
     this.is_player = true
     this.cheat = true
     this.save_state = reactive({
@@ -63,11 +62,9 @@ export default class Player extends Controller {
       reserve: 0,
       ...options.save_state,
     })
-    this.state = reactive(
-      options.state || {
-        posture: POSTURE.stand,
-      },
-    )
+    this.state = reactive({
+      posture: POSTURE.stand,
+    })
     this.aim = {
       position: vec2.create(),
       dxy: [0, 0],
@@ -220,7 +217,7 @@ export default class Player extends Controller {
     }
 
     // TODO there may be possible glitchiness with thes next line being after the pause logic
-    this._last_pressed_at[key] = this.getNow()
+    this._last_pressed_at[key] = this.game.frame
     const { posture } = this.state
     if (posture === POSTURE.spin && ['shoot1', 'shoot2'].includes(key)) {
       this.setPosture(POSTURE.stand)
@@ -344,8 +341,8 @@ export default class Player extends Controller {
 
   checkWallSliding(input) {
     this.collisions.is_wall_sliding = false
-    if (this.game.frame - this._last_wall_sliding < 6) {
-      // just finished a wall slide
+    if (this.game.frame - this._last_wall_jump_frame < 6) {
+      // mid wall jump
       return
     }
     if (this.state.posture !== POSTURE.spin || this.collisions.below) {
@@ -353,18 +350,22 @@ export default class Player extends Controller {
       return
     }
 
-    if (!input) {
+    if (!this._requestJump && this.game.frame - this._last_pressed_at.jump < 6) {
+      // in the middle of a fresh spin jump
       return
     }
 
-    const directionX = -input
+    if (!input[0]) {
+      // not holding left XOR right
+      return
+    }
+
+    const directionX = -input[0]
     const _dir = directionX === -1 ? 'bottomLeft' : 'bottomRight'
     const rayLength = this.skinWidth + 6 / 16 // TODO this should be a constant somewhere
 
     let collide_angle
 
-    this.collisions.ws = 0
-    this.collisions.wsd = -input
     for (let i = 0; i < this.horizontalRayCount; i++) {
       const from = this.raycastOrigins[_dir].slice()
       from[1] += this.horizontalRaySpacing * i
@@ -372,7 +373,6 @@ export default class Player extends Controller {
       this.castRay(from, to)
 
       if (this.raycastResult.body) {
-        this.collisions.ws = 1
         const entity = this.raycastResult.body._entity
         if (entity?.is_item || entity?.hp < 1) {
           this.raycastResult.reset()
@@ -398,7 +398,7 @@ export default class Player extends Controller {
       this.pointing = undefined
     }
     if (!this.collisions.last_below && this.collisions.below) {
-        animate.pulseFeet(this.game, this.body, 'green')
+      animate.pulseFeet(this.game, this.body, 'green')
     }
     if (
       this.state.posture === POSTURE.crouch &&
@@ -413,9 +413,11 @@ export default class Player extends Controller {
     }
 
     const { collisions, velocity, keys } = this
-    const input = [(keys.right ? 1 : 0) - (keys.left ? 1 : 0), 0]
+
+    // TODO use this.state.input everywhere instead of passing around input
+    const input = (this.state.input = [(keys.right ? 1 : 0) - (keys.left ? 1 : 0), 0])
     if (this.state.crouching > 0) {
-      this.input[0] = 0
+      input[0] = 0
       this.state.crouching--
     }
     if (this.state.balling > 0) {
@@ -438,9 +440,10 @@ export default class Player extends Controller {
     }
 
     const wallDirX = collisions.left ? -1 : 1
-    this.checkWallSliding(input[0])
+    this.checkWallSliding(input)
 
     // This conditional is currently unused (since theres no wallSlideSpeedMax set)
+    // This is the logic for "clinging" to the wall while wall jumping
     if (this.wallSlideSpeedMax && this.collisions.is_wall_sliding) {
       if (velocity[1] < -this.wallSlideSpeedMax) {
         // yflip
@@ -464,6 +467,14 @@ export default class Player extends Controller {
       this._requestJump = false
       const posture = this.state.posture
 
+      // clear these so that they don't affect spin animation
+      // TODO are all these animation only? move to state or new this.animations object
+      delete this._last_wall_jump_frame
+      delete this._last_wall_jump_direction
+      delete this.state.crouching
+      delete this.collisions.turning
+      delete this.collisions.turn_for
+
       if (posture === POSTURE.ball) {
         // TODO springball
       } else if (!this.checkVertical(0.25)) {
@@ -473,7 +484,8 @@ export default class Player extends Controller {
         const wall_jump = this.getWallJump(wallDirX, input[0])
         velocity[0] = -wallDirX * wall_jump[0]
         velocity[1] = wall_jump[1]
-        this._last_wall_sliding = this.game.frame
+        this._last_wall_jump_frame = this.game.frame
+        this._last_wall_jump_direction = -wallDirX
       } else if (collisions.below) {
         // can only jump if standing on something
         animate.pulseFeet(this.game, this.body, 'red')

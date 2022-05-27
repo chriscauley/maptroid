@@ -366,8 +366,8 @@ export default class Game extends p2.EventEmitter {
     const deltaTime = this.getDeltaTime(time)
 
     // Move physics bodies forward in time
-    // uncomment to enable slow motion
     const do_tick = !this.paused
+    // uncomment to enable slow motion
     // && this.rt_frame % 8 === 0
     this.rt_frame++
     if (do_tick) {
