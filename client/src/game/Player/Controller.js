@@ -129,6 +129,8 @@ export default class Controller extends RaycastController {
       rayLength = 2 * skinWidth
     }
 
+    collisions._ortho_top = [0, 0]
+
     for (let i = 0; i < this.horizontalRayCount; i++) {
       const from = raycastOrigins[directionX === -1 ? 'bottomLeft' : 'bottomRight'].slice()
       from[1] += this.horizontalRaySpacing * i
@@ -178,7 +180,13 @@ export default class Controller extends RaycastController {
             velocity[1] = Math.tan(collisions.slopeAngle) * Math.abs(velocity[0])
           }
 
-          this.collisions._h_collide_angle = slopeAngle
+          // "orthogonal vector" used in ricocheting off of ceilings
+          if (i === this.horizontalRayCount - 1) {
+            const normal = this.raycastResult.normal
+            // rotate normal down and in direction player is facing
+            collisions._ortho_top[0] = directionX * Math.abs(normal[1])
+            collisions._ortho_top[1] = Math.sign(normal[1]) * Math.abs(normal[0])
+          }
 
           if (directionX === -1) {
             collisions.left = true

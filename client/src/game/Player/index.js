@@ -560,7 +560,13 @@ export default class Player extends Controller {
       velocity[1] = 0
     }
     if (collisions.left || collisions.right) {
-      velocity[0] = 0
+      const o = collisions._ortho_top
+      if (Math.abs(o[0]) > Math.sin((5 * Math.PI) / 180)) {
+        // richochet off ceiling
+        vec2.scale(velocity, o, vec2.length(velocity))
+      } else {
+        velocity[0] = 0
+      }
     }
     // this.beam_rays = getBeamRays(this)
   }
