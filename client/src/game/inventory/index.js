@@ -4,6 +4,8 @@ import BootsController from './BootsController'
 import CycleController from './CycleController'
 import DustController from './DustController'
 import GrapplingBeamController from './GrapplingBeamController'
+import MiscController from './MiscController'
+import SuitController from './SuitController'
 import SwapController from './SwapController'
 
 export default {
@@ -13,5 +15,7 @@ export default {
   CycleController,
   DustController,
   GrapplingBeamController,
+  MiscController,
+  SuitController,
   SwapController,
 }

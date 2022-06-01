@@ -1,14 +1,34 @@
-.pause-menu {
-  &__inventory-section {
-    @apply border-2 rounded p-2;
+.pause-menu .-focused{
+  outline: 3px dashed white;
+}
+
+.pause-menu__nav {
+  @apply flex gap-4 justify-between;
+}
+
+.pause-menu button {
+  @apply block h-6 truncate w-full;
+  text-align: left;
+}
+
+.pause-menu__inventory {
+  @apply flex flex-col flex-wrap gap-2;
+  height: 450px;
+  width: calc(0.5rem + 400px);
+  &.-map {
+    height: 500px;
   }
-  &__inventory-row {
+  &-section {
+    @apply border-2 rounded p-2;
+    width: 200px;
+  }
+  &-row {
     @apply h-6 mb-1;
   }
-  &__inventory-row__inner {
+  &-row__inner {
     @apply flex items-center;
   }
-  &__inventory-toggle {
+  &-toggle {
     @apply border-4 h-4 mx-4 rounded-full w-4;
   }
 }

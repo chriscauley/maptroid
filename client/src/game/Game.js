@@ -59,7 +59,7 @@ export default class Game extends p2.EventEmitter {
         buttonUp: (button) => this.player.release(button),
       },
       pausemenu: {
-        show: 'map',
+        show: 'inventory',
       },
     })
 

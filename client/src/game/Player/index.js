@@ -71,6 +71,8 @@ export default class Player extends Controller {
     }
     this._charged = {}
     this.inventory = {
+      misc: new inventory.MiscController({ player: this }),
+      suit: new inventory.SuitController({ player: this }),
       bomb: new inventory.BombController({ player: this }),
       boots: new inventory.BootsController({ player: this }),
       beam: new inventory.BeamController({ player: this }),
@@ -209,6 +211,7 @@ export default class Player extends Controller {
     }
     this.keys[key] = 1
     if (this.game.paused) {
+      this.game.pause_menu_element?.pressButton(key)
       if (key === 'pause') {
         this.game.togglePause()
         this.updatePointing()
