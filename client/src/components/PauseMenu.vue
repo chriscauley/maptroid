@@ -34,7 +34,7 @@
             <button>
               Reserve Tank
             </button>
-            <div>
+            <div class="pause-menu__reserve-tanks__wrapper">
               <div class="pause-menu__reserve-tanks">
                 <div v-for="(tank, i) in reserve.classes" :class="tank" :key="i" />
                 <div class="_pink-bar" :style="reserve.pink_style" />
@@ -123,7 +123,7 @@ export default {
     },
     reserve() {
       const count = this.game.player.tech['reserve-tank']
-      const slots = Math.min(4, count)
+      const slots = Math.max(4, count)
       const max = 100 * slots
       const { reserve } = this.game.player.save_state
       return {

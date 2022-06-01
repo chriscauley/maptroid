@@ -2,13 +2,39 @@
   outline: 3px dashed white;
 }
 
-.pause-menu__nav {
-  @apply flex gap-4 justify-between;
-}
-
 .pause-menu button {
   @apply block h-6 truncate w-full;
   text-align: left;
+}
+
+.pause-menu__nav {
+  @apply flex gap-4 justify-between;
+  button {
+    @apply flex gap-2 px-2;
+    &:last-child {
+      @apply flex-row-reverse;
+    }
+  }
+}
+
+.pause-menu__reserve-tanks {
+  @apply flex relative;
+  &__wrapper {
+    @apply flex font-bold gap-4 items-center;
+  }
+  ._tank {
+    @apply border-2 border-dashed border-l-0 border-gray-500 h-6 w-8 relative;
+    &:first-child {
+      @apply border-l-2
+    }
+    &.-exists {
+     @apply border-white border-solid;
+    }
+  }
+  ._pink-bar {
+    @apply absolute h-6;
+    background-color: #de3894;
+  }
 }
 
 .pause-menu__inventory {
@@ -32,7 +58,6 @@
     @apply border-4 h-4 mx-4 rounded-full w-4;
   }
 }
-
 
 .pause-menu__inventory-row.-enabled {
   @apply bg-green-400;
