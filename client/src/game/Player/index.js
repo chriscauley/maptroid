@@ -241,8 +241,21 @@ export default class Player extends Controller {
         }
       }
     } else if (key === 'down') {
-      animate.pulseFeet(this.game, this.body, 'white')
-      if (posture === POSTURE.stand) {
+      let pulse_color = 'white'
+      if (!this.collisions.below) {
+        if (posture === POSTURE.spin && this._last_wall_jump_frame && this.keys.jump) {
+          // alcatraz escape
+          pulse_color = 'rainbow'
+          this.state.balling = 11 // TODO remeasure this, might be closer to 6-8
+          this.setPosture(POSTURE.ball)
+        } else if ([POSTURE.stand, POSTURE.spin].includes(posture)) {
+          this.state.crouching = 6
+          this.setPosture(POSTURE.crouch)
+        } else if (posture === POSTURE.crouch) {
+          this.state.balling = 11
+          this.setPosture(POSTURE.ball)
+        }
+      } else if (posture === POSTURE.stand) {
         if (this.velocity[1] === 0 && this._last_collision?.body._entity?.onCrouch) {
           this._last_collision?.body._entity?.onCrouch()
           return
@@ -254,6 +267,7 @@ export default class Player extends Controller {
         this.state.balling = 11
         this.setPosture(POSTURE.ball)
       }
+      animate.pulseFeet(this.game, this.body, pulse_color)
     } else if (key === 'pause') {
       this.game.togglePause()
     } else if (key === 'swap') {
@@ -397,7 +411,12 @@ export default class Player extends Controller {
       this.pointing = undefined
     }
     if (!this.collisions.last_below && this.collisions.below) {
-      animate.pulseFeet(this.game, this.body, 'green')
+      if (this.state.posture === POSTURE.ball && this.state.balling) {
+        // mock ball!
+        animate.pulseFeet(this.game, this.body, 'rainbow')
+      } else {
+        animate.pulseFeet(this.game, this.body, 'green')
+      }
     }
     if (
       this.state.posture === POSTURE.crouch &&
@@ -503,6 +522,10 @@ export default class Player extends Controller {
         if (old_velocity > 0) {
           // if moving up a ramp, add that velocity
           velocity[1] += old_velocity
+        }
+        if (this.keys.down) {
+          this.setPosture(POSTURE.crouch)
+          this.state.crouching = 6
         }
       } else if (posture !== POSTURE.spin) {
         this.setPosture(POSTURE.spin)
@@ -614,9 +637,17 @@ export default class Player extends Controller {
       // player is already moving faster than this in the x direction
       targetVelocityX = velocity[0]
     }
-    if (this.state.posture === POSTURE.spin && targetVelocityX === 0) {
-      // when spinning, do not change x direction unless player explicitly says to do so
-      targetVelocityX = velocity[0]
+    if (targetVelocityX === 0) {
+      if (this.state.posture === POSTURE.spin) {
+        // when spinning, do not change x direction unless player explicitly says to do so
+        targetVelocityX = velocity[0]
+      } else if (this.keys.jump) {
+        // this keeps velocity during jump + aim down, etc
+        targetVelocityX = velocity[0]
+      } else if (this.state.balling) {
+        // mock ball, alcatraz escape
+        targetVelocityX = velocity[0]
+      }
     }
 
     const x_step = this.getMoveAcceleration(input) * deltaTime
