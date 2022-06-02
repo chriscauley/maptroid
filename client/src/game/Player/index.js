@@ -417,6 +417,8 @@ export default class Player extends Controller {
       } else {
         animate.pulseFeet(this.game, this.body, 'green')
       }
+    } else if (!this.collisions.last_below && this.collisions.below) {
+      delete this.state.balling // needed for failed mock ball
     }
     if (
       this.state.posture === POSTURE.crouch &&
@@ -648,6 +650,11 @@ export default class Player extends Controller {
         // mock ball, alcatraz escape
         targetVelocityX = velocity[0]
       }
+    }
+
+    if (this.state.posture === POSTURE.ball && this.state.balling === 0 && !this.collisions.below) {
+      // failed mock ball
+      targetVelocityX = 0
     }
 
     const x_step = this.getMoveAcceleration(input) * deltaTime
