@@ -28,6 +28,7 @@ export default class Controller extends RaycastController {
       below: false,
       left: false,
       right: false,
+      last: {},
       climbingSlope: false,
       descendingSlope: false,
       slopeAngle: 0,
@@ -40,15 +41,15 @@ export default class Controller extends RaycastController {
     this.ray = new Ray({ mode: Ray.CLOSEST })
     this.raycastResult = new RaycastResult()
 
-    this.lastCollisions = {}
+    this._last_collised_with = {}
     this.debounceCollision = (dxy) => {
       // this debouncing is mostly to stop it from colliding on all of the rays
       const now = this.getNow()
       const body = this.raycastResult.body
-      if (now - this.lastCollisions[body.id] < 50) {
+      if (now - this._last_collised_with[body.id] < 50) {
         return
       }
-      this.lastCollisions[body.id] = now
+      this._last_collised_with[body.id] = now
       if (this.state.speeding && body._entity?.isWeakTo('speed-booster')) {
         this.p2_world.emit({
           type: 'damage',
@@ -65,9 +66,31 @@ export default class Controller extends RaycastController {
   }
 
   resetCollisions(velocity) {
+    // note: velocity here is scaled to the time step
     const collisions = this.collisions
 
-    collisions.last_below = collisions.below
+    if (this.physics.bouncekeep) {
+      if (
+        (!collisions.last.left && collisions.left) ||
+        (!collisions.last.right && collisions.right)
+      ) {
+        // record the velocity and direction when hitting a wall (for bounce-keep)
+        this.state.x_collide_velocity = collisions.last.velocity
+        this.state.x_collide_dir = collisions.left ? -1 : 1
+      }
+    }
+    collisions.last = {
+      // using actual velocity instead of scaled velocity
+      velocity: this.velocity.slice(),
+    }
+
+    if (collisions.below) {
+      this.state.x_collide_velocity = [0, 0]
+      this.state.x_collide_dir = 0
+    }
+
+    ;['left', 'right', 'above', 'below'].forEach((key) => (collisions.last[key] = collisions[key]))
+
     collisions.above = collisions.below = false
     collisions.left = collisions.right = false
     collisions.climbingSlope = false
@@ -91,13 +114,13 @@ export default class Controller extends RaycastController {
     }
 
     this.collidedWith = {}
+
     this.horizontalCollisions(velocity)
-    if (velocity[1] !== 0) {
-      this.verticalCollisions(velocity)
-    }
+    this.verticalCollisions(velocity)
 
     vec2.add(this.body.position, this.body.position, velocity)
-    if (!collisions.below && collisions.last_below) {
+
+    if (!collisions.below && collisions.last.below) {
       const can_snap = !this.keys.jump
       if (can_snap) {
         this.snapToFloor()
@@ -116,8 +139,11 @@ export default class Controller extends RaycastController {
       return Math.max(0, this.raycastResult.getHitDistance(ray))
     })
     const distance = Math.min(...distances)
-    this.body.position[1] -= distance * 0.9 // 0.9 is because if it's too close it'll clip
-    this.collisions.below = this.collisions.below || distance !== 0
+    if (distance) {
+      this.body.position[1] -= distance * 0.9 // 0.9 is because if it's too close it'll clip
+      this.collisions.below = true
+      this.velocity[1] -= distance * 60
+    }
   }
 
   horizontalCollisions(velocity) {

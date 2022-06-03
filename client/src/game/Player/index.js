@@ -52,6 +52,9 @@ export default class Player extends Controller {
 
     this.is_player = true
     this.cheat = true
+    this.physics = {
+      bouncekeep: true,
+    }
     this.save_state = reactive({
       collected: {},
       disabled: {},
@@ -410,25 +413,25 @@ export default class Player extends Controller {
     if (this.pointing === 'down' && this.collisions.below) {
       this.pointing = undefined
     }
-    if (!this.collisions.last_below && this.collisions.below) {
+    if (!this.collisions.last.below && this.collisions.below) {
       if (this.state.posture === POSTURE.ball && this.state.balling) {
         // mock ball!
         animate.pulseFeet(this.game, this.body, 'rainbow')
       } else {
         animate.pulseFeet(this.game, this.body, 'green')
       }
-    } else if (!this.collisions.last_below && this.collisions.below) {
+    } else if (!this.collisions.last.below && this.collisions.below) {
       delete this.state.balling // needed for failed mock ball
     }
     if (
       this.state.posture === POSTURE.crouch &&
       this.collisions.below &&
-      !this.collisions.last_below
+      !this.collisions.last.below
     ) {
       this.setPosture(POSTURE.stand)
     }
 
-    if (!this.collisions.below && this.collisions.last_below && this.velocity[1] <= 0) {
+    if (!this.collisions.below && this.collisions.last.below && this.velocity[1] <= 0) {
       this.body.position[1] -= this.skinWidth
     }
 
@@ -459,7 +462,6 @@ export default class Player extends Controller {
       this.gravity = this._gravity
     }
 
-    const wallDirX = collisions.left ? -1 : 1
     this.checkWallSliding(input)
 
     // This conditional is currently unused (since theres no wallSlideSpeedMax set)
@@ -473,7 +475,7 @@ export default class Player extends Controller {
       if (this.timeToWallUnstick > 0) {
         velocity[0] = 0
 
-        if (input[0] !== wallDirX && input[0] !== 0) {
+        if (input[0] !== this.state.x_collide_dir && input[0] !== 0) {
           this.timeToWallUnstick -= deltaTime
         } else {
           this.timeToWallUnstick = this.wallStickTime
@@ -501,11 +503,16 @@ export default class Player extends Controller {
         // not enough vertical room to stand
       } else if (this.collisions.is_wall_sliding) {
         // yflip
-        const wall_jump = this.getWallJump(wallDirX, input[0])
-        velocity[0] = -wallDirX * wall_jump[0]
+        const dx = this.state.x_collide_dir
+        const wall_jump = this.getWallJump(dx, input[0])
+        const new_x_speed = Math.max(
+          wall_jump[0],
+          Math.abs(this.state.x_collide_velocity[0]), // bounce keep
+        )
+        velocity[0] = -dx * new_x_speed
         velocity[1] = wall_jump[1]
         this._last_wall_jump_frame = this.game.frame
-        this._last_wall_jump_direction = -wallDirX
+        this._last_wall_jump_direction = -dx
       } else if (collisions.below) {
         // can only jump if standing on something
         animate.pulseFeet(this.game, this.body, 'red')
