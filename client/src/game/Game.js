@@ -55,6 +55,7 @@ export default class Game extends p2.EventEmitter {
       paused: true,
       active_rooms: [],
       animations: [],
+      frame_times: [],
       gamepad_options: {
         buttonDown: (button) => this.player.press(button),
         buttonUp: (button) => this.player.release(button),
@@ -383,6 +384,10 @@ export default class Game extends p2.EventEmitter {
       this.p2_world.step(FIXED_DELTA_TIME, deltaTime, MAX_SUB_STEPS)
       this.frame++
       Object.values(this.entities).forEach((e) => e.tick())
+      this.frame_times.push(new Date().valueOf())
+      while (this.frame_times.length > 60) {
+        this.frame_times.shift()
+      }
     }
     return do_tick
   }

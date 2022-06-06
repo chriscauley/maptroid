@@ -50,7 +50,7 @@ export default class Controller extends RaycastController {
         return
       }
       this._last_collised_with[body.id] = now
-      if (this.state.speeding && body._entity?.isWeakTo('speed-booster')) {
+      if (this.state.speeding && body._entity?.isWeakTo?.('speed-booster')) {
         this.p2_world.emit({
           type: 'damage',
           damage: {

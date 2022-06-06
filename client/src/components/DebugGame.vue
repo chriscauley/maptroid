@@ -1,7 +1,8 @@
 <template>
   <code id="debug" class="debug-game">
     <div v-for="(column, ic) in state" :key="ic">
-      <div v-for="(row, key) in column" :key="key">{{ key }}: {{ pprint(row) }}</div>
+      {{ ic }}
+      <div v-for="(row, key) in column" :key="key">{{ key }}: {{ pprint(row, key) }}</div>
     </div>
   </code>
 </template>
@@ -21,7 +22,10 @@ export default {
     this.game.off('draw', this.updateDebugLog)
   },
   methods: {
-    pprint(i) {
+    pprint(i, key) {
+      if (key === 'last') {
+        return '<<last>>'
+      }
       if (i instanceof Float32Array) {
         i = [...i]
       }
@@ -49,6 +53,7 @@ export default {
 
         state.keys = game.player.keys
       }
+      state.misc.fps = (1000 * 60) / (new Date().valueOf() - game.frame_times[0])
     },
   },
 }
