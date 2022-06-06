@@ -49,6 +49,7 @@ export default class Game extends p2.EventEmitter {
       mouse: { canvas_xy: [-1e6, -1e6], world_xy: [-1e6, -1e6], _world_xy: [-1e6, -1e6] },
       frame: 0, // used for game time
       rt_frame: 0, // used to track slow mo vs actual time
+      speed_ratio: 1,
       ui: [], // random crap to draw on canvas
       actions: {}, // input map
       paused: true,
@@ -352,9 +353,11 @@ export default class Game extends p2.EventEmitter {
     this._frame = requestAnimationFrame(this.animate)
     gamepad.poll(this.gamepad_options)
 
-    this.tick(time) // move game froward in time
-    this.render() // draw to canvas
-    this.emit({ type: 'draw', ctx: this.ctx })
+    const changed = this.tick(time) // move game froward in time
+    if (changed) {
+      this.render() // draw to canvas
+      this.emit({ type: 'draw', ctx: this.ctx })
+    }
   }
 
   getDeltaTime(time) {
@@ -373,15 +376,15 @@ export default class Game extends p2.EventEmitter {
     const deltaTime = this.getDeltaTime(time)
 
     // Move physics bodies forward in time
-    const do_tick = !this.paused
+    const do_tick = !this.paused && this.rt_frame % this.speed_ratio === 0
     // uncomment to enable slow motion
-    // && this.rt_frame % 8 === 0
     this.rt_frame++
     if (do_tick) {
       this.p2_world.step(FIXED_DELTA_TIME, deltaTime, MAX_SUB_STEPS)
       this.frame++
       Object.values(this.entities).forEach((e) => e.tick())
     }
+    return do_tick
   }
 
   stop() {
@@ -438,12 +441,13 @@ export default class Game extends p2.EventEmitter {
     room.positionPlayer(this.player)
   }
 
-  cycle(per_tick, duration) {
-    return Math.floor((this.frame % duration) / per_tick)
+  cycle(rate, duration) {
+    // cycles 1 ... (duration / rate) over the course of duration frames
+    return Math.floor((this.frame % duration) / rate)
   }
-  cycleSince(since, per_tick, duration) {
+  cycleSince(since, rate, duration) {
     const frame = this.frame - since
-    return Math.floor((frame % duration) / per_tick)
+    return Math.floor((frame % duration) / rate)
   }
 
   syncCamera() {

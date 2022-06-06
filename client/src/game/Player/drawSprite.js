@@ -2,12 +2,6 @@ import { POSTURE, CHARGE_FRAMES } from '../constants'
 import SpriteSheet from '@/views/SpriteSheet/store'
 import { getAsset } from '../useAssets'
 
-// animation helper
-const getFrame = (time, count, factor = 1) => {
-  const duration = (count * factor * 1000) / 24
-  return parseInt((count * (time % duration)) / duration)
-}
-
 const _poses = {
   zenith: 1,
   upward: 2,
@@ -18,9 +12,125 @@ const _poses = {
   pre_spin: 16,
 }
 
+const getTurn = (player, posture) => {
+  let index = Math.floor(player.collisions.turn_for / 2)
+  if (player.collisions.turning === 1) {
+    index = 4 - index
+  }
+  const pose = `turn_${posture === POSTURE.crouch ? 'crouch' : 'stand'}ing`
+  return [pose, index]
+}
+
+const getBall = (player, dir) => {
+  const balling = Math.floor(player.state.balling / 4)
+  if (balling > 1) {
+    return ['morphing' + dir, 0]
+  } else if (balling === 1) {
+    return ['morphing' + dir, 1]
+  }
+  return ['ball' + dir, player.game.cycle(1, 8)]
+}
+
+const getCrouch = (player, dir) => {
+  player._show_charge = true
+  const pointing = player.state.pointing
+  if (player.collisions.below) {
+    const crouching = Math.floor(player.state.crouching / 3)
+    if (crouching > 0) {
+      return ['_poses' + dir, 14]
+    }
+  }
+  if (pointing === 'zenith') {
+    return ['_poses' + dir, 4]
+  } else if (pointing === 'upward') {
+    return ['_poses' + dir, 5]
+  } else if (pointing === 'downward') {
+    return ['_poses' + dir, 6]
+  } else if (pointing === 'down') {
+    return ['_poses' + dir, 8]
+  }
+
+  // crouching + breathing
+  return ['crouch' + dir, player.game.cycle(10, 30)]
+}
+
+const getStanding = (player, dir) => {
+  const pointing = player.state.pointing
+  // on ground
+  // TODO player.state.moved_x(?)
+  player._show_charge = true
+  // not moving
+  if (pointing) {
+    return ['_poses' + dir, _poses[pointing]]
+  }
+
+  // standing + breathing
+  return ['stand' + dir, player.game.cycle(10, 30)]
+}
+
+const getRunning = (player, dir) => {
+  // running
+  const pointing = player.state.pointing
+  let aim = ''
+  if (pointing === 'zenith') {
+    // TODO this is just not allowed in vanilla so I need to make a sprite for it
+  } else if (pointing === 'upward') {
+    aim = '_aimup'
+  } else if (pointing === 'downward') {
+    aim = '_aimdown'
+  } else if (player.keys['shoot1'] || player.keys['shoot2']) {
+    aim = '_aim'
+  } else if (pointing === 'down') {
+    // TODO Vanilla only has shoot down while jumping
+  }
+
+  // TODO this should cycleSince, not cycle
+  player._show_charge = true
+  return ['walk' + aim + dir, player.game.cycle(2.4, 24)]
+}
+
+const getSpin = (player, dir) => {
+  let frame = player.game.cycleSince(player._last_pressed_at.jump, 1, 8)
+  // check if player is pushing off wall
+  if (player._last_wall_jump_frame) {
+    if (player.state.input[0] !== -player._last_wall_jump_direction) {
+      // player has not changed directions
+      const frames_since_slide = player.game.frame - player._last_wall_jump_frame
+      if (frames_since_slide < 2) {
+        return ['_poses' + dir, _poses.wall_sliding]
+      } else if (frames_since_slide < 7) {
+        return ['_poses' + dir, _poses.push_off]
+      } else if (frames_since_slide < 12) {
+        return ['_poses' + dir, _poses.pre_spin]
+      }
+      frame = (frames_since_slide - 12) % 8
+    }
+  }
+
+  return ['spinjump' + dir, frame]
+}
+
+const getInAir = (player, dir) => {
+  const pointing = player.state
+  if (pointing === 'downward') {
+    player._show_charge = true
+    return ['jump_aimdown' + dir, 3]
+  } else if (pointing === 'upward') {
+    player._show_charge = true
+    return ['jump_aimup' + dir, 3]
+  } else if (pointing === 'down') {
+    player._show_charge = true
+    return ['_poses' + dir, 8]
+  } else if (pointing === 'zenith') {
+    player._show_charge = true
+    return ['_poses' + dir, 9]
+  }
+  // in air
+  return ['falling' + dir, 2]
+}
+
 const _getSprite = (player) => {
-  const now = player.getNow()
-  const { pointing, posture } = player.state
+  const { posture } = player.state
   const dir = player.collisions.faceDir === -1 ? '_left' : '_right'
   player._show_charge = false
 
@@ -29,113 +139,28 @@ const _getSprite = (player) => {
   }
 
   if (player.collisions.turn_for >= 0) {
-    let index = Math.floor(player.collisions.turn_for / 2)
-    if (player.collisions.turning === 1) {
-      index = 4 - index
-    }
-    const pose = `turn_${posture === POSTURE.crouch ? 'crouch' : 'stand'}ing`
-    return [pose, index]
+    return getTurn(player, posture)
   }
   if (posture === POSTURE.ball) {
-    const balling = Math.floor(player.state.balling / 4)
-    if (balling > 1) {
-      return ['morphing' + dir, 0]
-    } else if (balling === 1) {
-      return ['morphing' + dir, 1]
-    }
-    return ['ball' + dir, getFrame(now, 8)]
+    return getBall(player, dir)
   } else if (posture === POSTURE.crouch) {
-    player._show_charge = true
-    if (player.collisions.below) {
-      const crouching = Math.floor(player.state.crouching / 3)
-      if (crouching > 0) {
-        return ['_poses' + dir, 14]
-      }
-    }
-    if (pointing === 'zenith') {
-      return ['_poses' + dir, 4]
-    } else if (pointing === 'upward') {
-      return ['_poses' + dir, 5]
-    } else if (pointing === 'downward') {
-      return ['_poses' + dir, 6]
-    } else if (pointing === 'down') {
-      return ['_poses' + dir, 8]
-    }
-
-    // crouching + breathing
-    const frame = getFrame(now, 3)
-    return ['crouch' + dir, frame]
+    return getCrouch(player, dir)
   }
+
   if (player.collisions.below) {
-    // on ground
+    // Player is on ground
     if (Math.abs(player._lastX - player.body.position[0]) < 0.01) {
-      // TODO player.state.moved_x(?)
-      player._show_charge = true
-      // not moving
-      if (pointing) {
-        return ['_poses' + dir, _poses[pointing]]
-      }
-
-      // standing + breathing
-      const frame = getFrame(now, 3, 9)
-      return ['stand' + dir, frame]
-    } else {
-      // running
-      player._show_charge = true
-      let aim = ''
-      if (pointing === 'zenith') {
-        // TODO this is just not allowed in vanilla so I need to make a sprite for it
-      } else if (pointing === 'upward') {
-        aim = '_aimup'
-      } else if (pointing === 'downward') {
-        aim = '_aimdown'
-      } else if (player.keys['shoot1'] || player.keys['shoot2']) {
-        aim = '_aim'
-      } else if (pointing === 'down') {
-        // TODO Vanilla only has shoot down while jumping
-      }
-
-      const frame = getFrame(now, 10)
-      return ['walk' + aim + dir, frame]
+      return getStanding(player, dir)
     }
-  } else {
-    if (posture === POSTURE.spin) {
-      let frame = getFrame(now, 8)
-      // check if player is pushing off wall
-      if (player._last_wall_jump_frame) {
-        if (player.state.input[0] !== -player._last_wall_jump_direction) {
-          // player has not changed directions
-          const frames_since_slide = player.game.frame - player._last_wall_jump_frame
-          if (frames_since_slide < 2) {
-            return ['_poses' + dir, _poses.wall_sliding]
-          } else if (frames_since_slide < 7) {
-            return ['_poses' + dir, _poses.push_off]
-          } else if (frames_since_slide < 12) {
-            return ['_poses' + dir, _poses.pre_spin]
-          }
-          frame = (frames_since_slide - 12) % 8
-        }
-      }
-
-      return ['spinjump' + dir, frame]
-    }
-    if (pointing === 'downward') {
-      player._show_charge = true
-      return ['jump_aimdown' + dir, 3]
-    } else if (pointing === 'upward') {
-      player._show_charge = true
-      return ['jump_aimup' + dir, 3]
-    } else if (pointing === 'down') {
-      player._show_charge = true
-      return ['_poses' + dir, 8]
-    } else if (pointing === 'zenith') {
-      player._show_charge = true
-      return ['_poses' + dir, 9]
-    }
-    // in air
-    return ['falling' + dir, 2]
+    return getRunning(player, dir)
   }
-  return ['crouch_left', 0]
+
+  // player must be in air
+  if (posture === POSTURE.spin) {
+    return getSpin(player, dir)
+  }
+
+  return getInAir(player, dir)
 }
 
 const shoots = ['shoot1', 'shoot2']
