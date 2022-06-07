@@ -1,9 +1,9 @@
 from django import forms
-from unrest import schema
+import unrest_schema
 
 from contact.models import Message
 
-@schema.register
+@unrest_schema.register
 class ContactForm(forms.ModelForm):
     user_can_POST = 'NEW'
     class Meta:

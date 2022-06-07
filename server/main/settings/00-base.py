@@ -5,7 +5,7 @@ from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 DEBUG = True
-
+SECURE_CROSS_ORIGIN_OPENER_POLICY = 'unsafe-none'
 ALLOWED_HOSTS = []
 
 # Application definition

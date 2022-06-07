@@ -3,18 +3,18 @@ from django.conf import settings
 from django import forms
 import urllib
 import os
-from unrest import schema
+import unrest_schema
 
 from .models import World, Room, Screenshot, Zone, Item, Video, SmileSprite, Run
 
-@schema.register
+@unrest_schema.register
 class WorldForm(forms.ModelForm):
   user_can_GET = user_can_LIST = 'ALL'
   class Meta:
     model = World
     fields = ('name', 'slug', 'hidden', 'data')
 
-@schema.register
+@unrest_schema.register
 class RoomForm(forms.ModelForm):
   user_can_GET = user_can_LIST = 'ALL'
   filter_fields = ['zone__slug', 'world__slug'] # TODO use world__slug and remove zone__slug
@@ -22,7 +22,7 @@ class RoomForm(forms.ModelForm):
     model = Room
     fields = ['name', 'key', 'world', 'zone', 'data']
 
-@schema.register
+@unrest_schema.register
 class ScreenshotForm(forms.ModelForm):
   _original = None
   original = forms.CharField(required=False)
@@ -48,7 +48,7 @@ class ScreenshotForm(forms.ModelForm):
     model = Screenshot
     fields = ['original', 'output', 'world', 'zone', 'data']
 
-@schema.register
+@unrest_schema.register
 class ZoneForm(forms.ModelForm):
   user_can_GET = user_can_LIST = 'ALL'
   filter_fields = ['world__slug']
@@ -57,7 +57,7 @@ class ZoneForm(forms.ModelForm):
     fields = ['name', 'slug', 'data', 'world']
 
 
-@schema.register
+@unrest_schema.register
 class ItemForm(forms.ModelForm):
   user_can_GET = user_can_LIST = 'ALL'
   filter_fields = ['zone__world_id']
@@ -66,7 +66,7 @@ class ItemForm(forms.ModelForm):
     fields = ['room', 'zone', 'data']
 
 
-@schema.register
+@unrest_schema.register
 class VideoForm(forms.ModelForm):
   user_can_GET = user_can_LIST = 'ALL'
   filter_fields = ['world__slug']
@@ -76,7 +76,7 @@ class VideoForm(forms.ModelForm):
     fields = ['source', 'external_id', 'title', 'label', 'data']
 
 
-@schema.register
+@unrest_schema.register
 class RunForm(forms.ModelForm):
   user_can_GET = user_can_LIST = 'ALL'
   filter_fields = ['world__slug', 'user_id']
@@ -85,7 +85,7 @@ class RunForm(forms.ModelForm):
     fields = ['data', 'user', 'world']
 
 
-@schema.register
+@unrest_schema.register
 class SmileSprite(forms.ModelForm):
   user_can_GET = user_can_LIST = 'ALL'
   readonly_fields = ['url']
