@@ -1,7 +1,10 @@
 from django.conf import settings
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
+from django.contrib.auth.decorators import user_passes_test
 import json
 from pathlib import Path
+
+from sprite.models import PlmSprite
 
 def spritesheet(request, name):
     path = Path(settings.BASE_DIR / f'../static/sm/{name}.json')
@@ -9,3 +12,10 @@ def spritesheet(request, name):
         data = json.loads(request.body.decode('utf-8'))
         path.write_text(json.dumps(data, indent=2))
     return HttpResponse(path.read_text())
+
+
+@user_passes_test(lambda u: u.is_superuser)
+def automatch(request, plmsprite_id=None):
+    plmsprite = PlmSprite.objects.get(id=plmsprite_id)
+    book = plmsprite.automatch()
+    return JsonResponse({'url': book.url})

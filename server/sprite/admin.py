@@ -1,3 +1,11 @@
 from django.contrib import admin
 
-# Register your models here.
+from sprite.models import PlmSprite, MatchedSprite
+
+@admin.register(MatchedSprite)
+class MatchedSpriteAdmin(admin.ModelAdmin):
+    pass
+
+@admin.register(PlmSprite)
+class PlmSpriteAdmin(admin.ModelAdmin):
+    pass
