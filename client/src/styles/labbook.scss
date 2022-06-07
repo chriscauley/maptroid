@@ -1,0 +1,11 @@
+.labbook-section {
+  &__row {
+    @apply flex gap-2 items-center;
+  }
+  &__swatch {
+    @apply border border-white w-8 h-8;
+  }
+  img {
+    image-rendering: pixelated;
+  }
+}
