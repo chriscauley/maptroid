@@ -1,10 +1,12 @@
 import About from './About.vue'
+import AssignSprite from './AssignSprite'
 import Contact from './Contact.vue'
 import dread from './dread/index'
 import Downloads from './Downloads.vue'
 import FileBrowser from './FileBrowser.vue'
 import gamepad from '@/unrest/gamepad'
 import Home from './Home.vue'
+import Labbook from './Labbook.vue'
 import play from './play'
 import SpriteSheet from './SpriteSheet'
 import ProcessDread from './ProcessDread.vue'
@@ -26,12 +28,14 @@ export default {
   ...dread,
   ...play,
   About,
+  AssignSprite,
   Contact,
   Downloads,
   FileBrowser,
   ConfigureGamepad,
   TestGamepad,
   Home,
+  Labbook,
   ProcessDread,
   Trainer,
   ScreenshotAnalyzer,

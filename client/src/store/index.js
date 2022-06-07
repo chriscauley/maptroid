@@ -5,6 +5,7 @@ import item from './item'
 import local from './local'
 import osd from './osd'
 import play from './play'
+import plmsprite from './plmsprite'
 import room from './room'
 import route from './route'
 import run from './run'
@@ -24,6 +25,7 @@ const modules = {
   local,
   osd,
   play,
+  plmsprite,
   room,
   run,
   smile,
