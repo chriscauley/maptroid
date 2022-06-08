@@ -24,22 +24,24 @@ import { getClient } from '@unrest/vue-storage'
 export default {
   props: {
     sprite: Object,
+    category: String,
   },
   emits: ['refetch', 'close', 'select-dindex'],
   methods: {
     prepSchema(schema) {
       schema.properties.plmsprite.default = this.sprite.id
+      schema.properties.category.default = this.category
       return schema
     },
-    success(data) {
-      this.$emit('refetch', data.id)
+    success() {
+      this.$emit('refetch')
       this.$emit('close')
     },
     automatch() {
       const url = `sprite/automatch/${this.sprite.id}/`
-      getClient().post(url).then((r) => {
-        console.log(r)
-      })
+      getClient()
+        .post(url)
+        .then(this.success)
     },
   },
 }

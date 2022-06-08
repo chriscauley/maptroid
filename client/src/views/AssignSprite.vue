@@ -1,28 +1,55 @@
 <template>
   <div class="admin-smile-sprite" v-if="plmsprites">
     <div class="admin-smile-sprite__groups btn-group">
+      <h3>Unmatched PLM Sprites ({{ plmsprites.length }})</h3>
       <div class="admin-smile-sprite__cards">
         <div
-          v-for="sprite in plmsprites.items"
+          v-for="sprite in plmsprites"
           :key="sprite.id"
           class="admin-smile-sprite__card"
-          @click="click(sprite)"
+          @click="(e) => clickPlm(e, sprite)"
         >
           <div class="admin-smile-sprite__img" :style="`background-image: url('${sprite.url}')`" />
         </div>
       </div>
     </div>
+    <div class="admin-smile-sprite__groups btn-group">
+      <div
+        v-for="(count, category) in category_counts"
+        :key="category"
+        :class="`btn -${category === active_category ? 'primary' : 'secondary'}`"
+        @click="setCategory(category)"
+      >
+        {{ category }} ({{ count }})
+      </div>
+      <div class="admin-smile-sprite__cards">
+        <div
+          v-for="sprite in visible_matchedsprites"
+          :key="sprite.id"
+          class="admin-smile-sprite__card"
+          @click="selected_matchedsprite = sprite"
+        >
+          <div class="admin-smile-sprite__img" :style="`background-image: url('${sprite.url}')`" />
+        </div>
+      </div>
+    </div>
+
     <assign-sprite-form
-      v-if="selected_sprite"
-      :sprite="selected_sprite"
-      @refetch="refetch"
-      @close="selected_sprite = null"
+      v-if="selected_plmsprite"
+      :sprite="selected_plmsprite"
+      @refetch="refetchAll"
+      @close="selected_plmsprite = null"
+      :category="active_category"
     />
+    <unrest-modal v-if="selected_matchedsprite" @close="selected_matchedsprite = null">
+      <pre>{{ pprint(selected_matchedsprite) }}</pre>
+    </unrest-modal>
   </div>
 </template>
 
 <script>
 import AssignSpriteForm from './AssignSpriteForm.vue'
+import { getClient } from '@unrest/vue-storage'
 
 export default {
   components: { AssignSpriteForm },
@@ -30,16 +57,61 @@ export default {
     path: '/app/assign-sprite/',
   },
   data() {
-    return { selected_sprite: null }
+    return {
+      selected_plmsprite: null,
+      selected_matchedsprite: null,
+    }
   },
   computed: {
     plmsprites() {
-      return this.$store.plmsprite.getPage({ query: { matchedsprite__isnull: true } })
+      return this.getPlmsprites()
+    },
+    matchedsprites() {
+      return this.getMatchedsprites()
+    },
+    category_counts() {
+      const counts = {}
+      this.matchedsprites.forEach((m) => {
+        counts[m.category] = (counts[m.category] || 0) + 1
+      })
+      return counts
+    },
+    active_category() {
+      return this.$route.query.category || 'enemy'
+    },
+    visible_matchedsprites() {
+      return this.matchedsprites.filter((m) => m.category === this.active_category)
     },
   },
   methods: {
-    click(sprite) {
-      this.selected_sprite = sprite
+    setCategory(category) {
+      this.$router.replace({ query: { ...this.$route.query, category } })
+    },
+    pprint(sprite) {
+      return JSON.stringify(sprite, null, 2)
+    },
+    refetchAll() {
+      this.$store.plmsprite.api.markStale()
+      this.$store.matchedsprite.api.markStale()
+      this.getPlmsprites()
+      this.getMatchedsprites()
+    },
+    getPlmsprites() {
+      const query = { per_page: 500, matchedsprite__isnull: true }
+      return this.$store.plmsprite.getPage({ query })?.items
+    },
+    getMatchedsprites() {
+      const query = { per_page: 10000 }
+      return this.$store.matchedsprite.getPage({ query })?.items || []
+    },
+    clickPlm(e, sprite) {
+      if (e.shiftKey && e.ctrlKey) {
+        getClient()
+          .post(`sprite/automatch/${sprite.id}/`)
+          .then(this.refetchAll)
+      } else {
+        this.selected_plmsprite = sprite
+      }
     },
   },
 }

@@ -11,7 +11,6 @@ import sys
 import unrest_image as img
 import urcv
 
-from maptroid.models import get_smilesprite_table, SmileSprite
 from sprite.models import MatchedSprite, PlmSprite
 
 world, zones = get_world_zones_from_argv()

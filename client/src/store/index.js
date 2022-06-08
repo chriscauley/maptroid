@@ -3,6 +3,7 @@ import unrest from '@unrest/vue'
 import admin_options from './admin'
 import item from './item'
 import local from './local'
+import matchedsprite from './matchedsprite'
 import osd from './osd'
 import play from './play'
 import plmsprite from './plmsprite'
@@ -23,6 +24,7 @@ const store = {}
 const modules = {
   item,
   local,
+  matchedsprite,
   osd,
   play,
   plmsprite,

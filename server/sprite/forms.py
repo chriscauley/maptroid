@@ -21,7 +21,7 @@ class MatchedSpriteForm(forms.ModelForm):
   readonly_fields = ['url']
   class Meta:
     model = MatchedSprite
-    fields = ['type', 'category', 'modifier', 'color', 'plmsprite']
+    fields = ['type', 'category', 'modifier', 'color']
 
   def save(self, commit=True):
     instance = self.instance

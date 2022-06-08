@@ -221,7 +221,11 @@ class PlmSprite(BaseSpriteModel):
                 'caption': 'extra',
             })
 
-            if np.sum(extra):
+            gray_extra = cv2.cvtColor(extra, cv2.COLOR_BGR2GRAY)
+            kernel = np.ones((5, 5),np.uint8)
+            gray_extra = cv2.erode(gray_extra, kernel, iterations = 1)
+
+            if np.sum(gray_extra):
                 extra_x = extra_y = 0
                 while np.sum(extra[0]) == 0:
                     extra_y += 1

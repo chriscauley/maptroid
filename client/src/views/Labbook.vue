@@ -23,9 +23,11 @@
     </div>
   </div>
   <div v-else>
-    <router-link v-for="slug in book_slugs" :key="slug" :to="`/app/labbook/${slug}/`">
-      {{ slug }}
-    </router-link>
+    <div v-for="slug in book_slugs" :key="slug">
+      <router-link :to="`/app/labbook/${slug}/`">
+        {{ slug }}
+      </router-link>
+    </div>
   </div>
 </template>
 
