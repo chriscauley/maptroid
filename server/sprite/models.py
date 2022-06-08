@@ -60,10 +60,12 @@ modifiers = [
 colors = [
     'black',
     'blue',
+    'dust',
     'eye',
     'gold',
     'gray',
     'green',
+    'mixed',
     'orange',
     'pink',
     'purple',
@@ -95,12 +97,13 @@ class MatchedSprite(BaseSpriteModel):
 
     @property
     def short_code(self):
-        values = [self.category, self.type, self.modifier, self.color]
+        values = [self.category, self.type, self.color, self.modifier]
         values = [v for v in values if v]
         return '/'.join(values)
 
 def match_template(img1, img2):
-    res = cv2.matchTemplate(img1, img2, cv2.TM_CCOEFF_NORMED, mask=img2)
+    res = cv2.matchTemplate(img1, img2, cv2.TM_CCORR_NORMED, mask=img2)
+    res[res == float('inf')] = 0 # bug https://github.com/opencv/opencv/issues/15768
     min_val, max_val, min_loc, max_loc = cv2.minMaxLoc(res)
     return max_val, max_loc
 
@@ -146,111 +149,121 @@ class PlmSprite(BaseSpriteModel):
             'id': self.id,
             'url': f'/api/sprite/automatch/{self.id}/'
         }
-        book = Labbook(f'automatch_plm_{self.id}', _data)
+        self.book = Labbook(f'automatch_plm_{self.id}', _data)
         if not force and self.matchedsprite:
-            return book
+            return
         _pc = self.primary_color
-        image = cv2.imread(self.image.path, cv2.IMREAD_UNCHANGED)
-        book.add({
+        self.og_image = cv2.imread(self.image.path, cv2.IMREAD_UNCHANGED)
+        self.book.add({
             'media': self.image.path,
             'caption': 'og',
             'color': self.primary_color,
         })
-        gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+        self.gray_image = cv2.cvtColor(self.og_image, cv2.COLOR_BGR2GRAY)
         sprites = MatchedSprite.objects.filter(primary_color=_pc)
-        book.add({
-            'np': gray,
-            'caption': 'gray',
+        self.book.add({
+            'np': 100 * self.gray_image,
+            'caption': 'gray (silhouette)',
         })
 
-        book.data['result'] = 'fail'
+        match = None
+        xy = None
         for sprite in sprites:
-            book.add({
-                'media': sprite.image.path,
-                'caption': sprite.short_code,
-                'color': self.primary_color,
-            })
-            image2 = cv2.imread(sprite.image.path, cv2.IMREAD_UNCHANGED)
-            gray2 = cv2.cvtColor(image2, cv2.COLOR_BGR2GRAY)
+            match, xy = self.direct_match(sprite)
+            if match:
+                sprites = []
+                break
 
-            if gray.shape[0] < gray2.shape[0] or gray.shape[1] < gray2.shape[1]:
-                book.add({ 'caption': f'TODO shape mismatch {gray.shape}, {gray2.shape}' })
-                continue
-
-            value, (x, y) = match_template(gray, gray2)
-            if value < 0.9:
-                continue
-
-            self.matchedsprite = sprite
-            self.matched_xy = [x, y]
+        if match:
+            self.matchedsprite = match
+            self.matched_xy = xy
+            self.extract_sprite(match, xy)
             self.save()
-            result = image.copy()
-            h, w = result.shape[:2]
-            bottom_right = [x + w, y + h]
-            cv2.rectangle(result, (x, y), bottom_right, (255, 255, 255, 255), 1)
+            self.book.add({ 'caption': 'success!' })
+            self.book.data['success'] = True
 
-            to_delete = image.copy()
-            to_delete[:] = 0
-            urcv.draw.paste(to_delete, image2, x, y)
-            book.add({
-                'np': to_delete,
-                'caption': 'to remove'
+
+    def direct_match(self, matchedsprite):
+        gray = self.gray_image
+        self.book.add({
+            'media': matchedsprite.image.path,
+            'caption': matchedsprite.short_code,
+            'color': matchedsprite.primary_color,
+        })
+        image2 = cv2.imread(matchedsprite.image.path, cv2.IMREAD_UNCHANGED)
+        gray2 = cv2.cvtColor(image2, cv2.COLOR_BGR2GRAY)
+
+        if gray.shape[0] < gray2.shape[0] or gray.shape[1] < gray2.shape[1]:
+            self.book.add({ 'caption': f'TODO shape mismatch {gray.shape}, {gray2.shape}' })
+            return None, None
+
+        value, xy = match_template(gray, gray2)
+        self.book.add({ 'caption': f'matched at: {value}, {xy}' })
+        if value < 0.9:
+            return None, None
+        return matchedsprite, xy
+
+    def extract_sprite(self, matchedsprite, xy):
+        # h, w = self.og_image.shape[:2]
+
+        to_delete = self.og_image.copy()
+        to_delete[:] = 0
+        image2 = cv2.imread(matchedsprite.image.path, cv2.IMREAD_UNCHANGED)
+        urcv.draw.paste(to_delete, image2, xy[0], xy[1])
+        self.book.add({
+            'np': to_delete,
+            'caption': 'to remove'
+        })
+
+        gray_to_delete = cv2.cvtColor(to_delete, cv2.COLOR_BGR2GRAY)
+        self.book.add({
+            'np': gray_to_delete,
+            'caption': 'gray delete2',
+        })
+        delta_delete = cv2.subtract(self.gray_image, gray_to_delete)
+
+        self.book.add({
+            'np': delta_delete * 100,
+            'caption': 'delta_delete (x100)',
+        })
+
+        thresh = cv2.threshold(delta_delete, 10, 255, cv2.THRESH_BINARY)[1]
+        self.book.add({
+            'np': thresh,
+            'caption': 'thresh',
+        })
+
+        extra = cv2.bitwise_and(self.og_image, self.og_image, mask=thresh)
+        gray_extra = cv2.cvtColor(extra, cv2.COLOR_BGR2GRAY)
+        kernel = np.ones((3, 3),np.uint8)
+        gray_extra = cv2.erode(gray_extra, kernel, iterations = 1)
+
+        self.book.add({
+            'np': extra,
+            'caption': f'extra: {np.sum(gray_extra)}',
+        })
+
+        if np.sum(gray_extra):
+            extra_x = extra_y = 0
+            while np.sum(extra[0]) == 0:
+                extra_y += 1
+                extra = extra[1:]
+            while np.sum(extra[-1]) == 0:
+                extra = extra[:-1]
+            while np.sum(extra[:,0]) == 0:
+                extra_x += 1
+                extra = extra[:,1:]
+            while np.sum(extra[:,-1]) == 0:
+                extra = extra[:,:-1]
+
+            new, self.extra_plmsprite = PlmSprite.get_or_create_from_np_array(extra)
+
+            if new:
+                self.book.add({ 'caption': 'New PlmSprite created!' })
+            self.extra_xy = [extra_x, extra_y]
+            self.save()
+
+            self.extra_plmsprite.automatch()
+            self.book.add({
+                'child_labbook': self.extra_plmsprite.book.name,
             })
-
-            gray_to_delete = cv2.cvtColor(to_delete, cv2.COLOR_BGR2GRAY)
-            book.add({
-                'np': gray_to_delete,
-                'caption': 'gray delete2',
-            })
-            delta_delete = cv2.subtract(gray, gray_to_delete)
-
-            book.add({
-                'np': delta_delete * 100,
-                'caption': 'delta_delete (x100)',
-            })
-
-            thresh = cv2.threshold(delta_delete, 10, 255, cv2.THRESH_BINARY)[1]
-            book.add({
-                'np': thresh,
-                'caption': 'thresh',
-            })
-
-            extra = cv2.bitwise_and(image, image, mask=thresh)
-            book.add({
-                'np': extra,
-                'caption': 'extra',
-            })
-
-            gray_extra = cv2.cvtColor(extra, cv2.COLOR_BGR2GRAY)
-            kernel = np.ones((5, 5),np.uint8)
-            gray_extra = cv2.erode(gray_extra, kernel, iterations = 1)
-
-            if np.sum(gray_extra):
-                extra_x = extra_y = 0
-                while np.sum(extra[0]) == 0:
-                    extra_y += 1
-                    extra = extra[1:]
-                while np.sum(extra[-1]) == 0:
-                    extra = extra[:-1]
-                while np.sum(extra[:,0]) == 0:
-                    extra_x += 1
-                    extra = extra[:,1:]
-                while np.sum(extra[:,-1]) == 0:
-                    extra = extra[:,:-1]
-
-                new, self.extra_plmsprite = PlmSprite.get_or_create_from_np_array(extra)
-
-                if new:
-                    book.add({ 'caption': 'New PlmSprite created!' })
-                self.extra_xy = [extra_x, extra_y]
-                self.save()
-
-                book2 = self.extra_plmsprite.automatch()
-                book.add({
-                    'child_labbook': book2.name,
-                })
-
-            book.data['result'] = 'success'
-            break
-
-        return book

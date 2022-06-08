@@ -39,15 +39,26 @@
       :sprite="selected_plmsprite"
       @refetch="refetchAll"
       @close="selected_plmsprite = null"
+      @automatch="automatch"
       :category="active_category"
     />
     <unrest-modal v-if="selected_matchedsprite" @close="selected_matchedsprite = null">
       <pre>{{ pprint(selected_matchedsprite) }}</pre>
+      <template #extra_actions>
+        <a
+          :href="`/djadmin/sprite/matchedsprite/${selected_matchedsprite.id}/`"
+          class="btn-link fa fa-edit"
+          target="_blank"
+        >
+        </a>
+      </template>
     </unrest-modal>
   </div>
 </template>
 
 <script>
+import { sortBy } from 'lodash'
+
 import AssignSpriteForm from './AssignSpriteForm.vue'
 import { getClient } from '@unrest/vue-storage'
 
@@ -77,10 +88,15 @@ export default {
       return counts
     },
     active_category() {
+      if (this.$route.query.category === 'null') {
+        return null
+      }
       return this.$route.query.category || 'enemy'
     },
     visible_matchedsprites() {
-      return this.matchedsprites.filter((m) => m.category === this.active_category)
+      const { active_category } = this
+      const sprites = this.matchedsprites.filter((m) => m.category === active_category)
+      return sortBy(sprites, 'short_code')
     },
   },
   methods: {
@@ -106,12 +122,31 @@ export default {
     },
     clickPlm(e, sprite) {
       if (e.shiftKey && e.ctrlKey) {
-        getClient()
-          .post(`sprite/automatch/${sprite.id}/`)
-          .then(this.refetchAll)
+        this.automatch(sprite)
       } else {
         this.selected_plmsprite = sprite
       }
+    },
+    automatch(sprite) {
+      const post = getClient().post(`sprite/automatch/${sprite.id}/`)
+      post.then((result) => {
+        if (result.url) {
+          const href = `/app/labbook/${result.name}/`
+          this.$ui.toast({
+            level: result.success ? 'success' : 'error',
+            tagName: () => (
+              <a href={href} class="btn -link" target="_blank">
+                View Labbook
+                <i class="fa fa-arrow-up-right-from-square" />
+              </a>
+            ),
+          })
+        } else {
+          this.$ui.toast.error('Labbook wasn not generated')
+        }
+        this.refetchAll()
+        this.selected_plmsprite = null
+      })
     },
   },
 }

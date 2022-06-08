@@ -18,7 +18,7 @@ class PlmSpriteForm(forms.ModelForm):
 class MatchedSpriteForm(forms.ModelForm):
   plmsprite = forms.IntegerField(widget=forms.HiddenInput())
   user_can_GET = user_can_LIST = 'ALL'
-  readonly_fields = ['url']
+  readonly_fields = ['url', 'short_code']
   class Meta:
     model = MatchedSprite
     fields = ['type', 'category', 'modifier', 'color']

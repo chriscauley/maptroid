@@ -1,13 +1,19 @@
 <template>
-  <unrest-modal @close="$emit('close')">
+  <unrest-modal @close="$emit('close')" :hide_actions="true">
     <div>
       <div class="admin-smile-sprite__preview">
         <div id="geo-box">
           <div class="admin-smile-sprite__img" :style="`background-image: url('${sprite.url}')`" />
         </div>
-        <div class="btn -primary admin-smile-sprite__automatch" @click="automatch">
+        <div class="btn -primary" @click="$emit('automatch', sprite)">
           Automatch
         </div>
+        <a
+          :href="`/djadmin/sprite/plmsprite/${sprite.id}/`"
+          class="btn-link fa fa-edit"
+          target="_blank"
+        >
+        </a>
       </div>
       <unrest-schema-form
         form_name="schema/matched-sprite"
@@ -26,7 +32,7 @@ export default {
     sprite: Object,
     category: String,
   },
-  emits: ['refetch', 'close', 'select-dindex'],
+  emits: ['refetch', 'close', 'select-dindex', 'automatch'],
   methods: {
     prepSchema(schema) {
       schema.properties.plmsprite.default = this.sprite.id

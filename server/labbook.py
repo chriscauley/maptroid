@@ -15,6 +15,7 @@ class Labbook():
         self.root = Path(settings.MEDIA_ROOT) / f'labbooks/{name}'
         self.root.mkdir(parents=True, exist_ok=True)
         self.data['sections'] = self.sections = []
+        self.url = None
 
     def add(self, section):
         section_no = len(self.sections)

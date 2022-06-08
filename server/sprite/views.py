@@ -17,5 +17,8 @@ def spritesheet(request, name):
 @user_passes_test(lambda u: u.is_superuser)
 def automatch(request, plmsprite_id=None):
     plmsprite = PlmSprite.objects.get(id=plmsprite_id)
-    book = plmsprite.automatch()
-    return JsonResponse({'url': book.url})
+    plmsprite.automatch(force=True)
+    return JsonResponse({
+        **plmsprite.book.data,
+        'url': plmsprite.book.url,
+    })
