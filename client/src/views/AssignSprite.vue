@@ -135,10 +135,13 @@ export default {
           this.$ui.toast({
             level: result.success ? 'success' : 'error',
             tagName: () => (
-              <a href={href} class="btn -link" target="_blank">
-                View Labbook
-                <i class="fa fa-arrow-up-right-from-square" />
-              </a>
+              <div>
+                <a href={href} class="btn -link" target="_blank">
+                  View Labbook
+                  <i class="fa fa-arrow-up-right-from-square" />
+                </a>
+                { result.results?.join(', ') }
+              </div>
             ),
           })
         } else {

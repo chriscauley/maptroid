@@ -18,7 +18,20 @@ def spritesheet(request, name):
 def automatch(request, plmsprite_id=None):
     plmsprite = PlmSprite.objects.get(id=plmsprite_id)
     plmsprite.automatch(force=True)
+    results = []
+    if plmsprite.matchedsprite:
+        results.append(plmsprite.matchedsprite.type)
+    current = plmsprite
+    while current.extra_plmsprite and current.extra_plmsprite.id != current.id:
+        current = current.extra_plmsprite
+        if current.matchedsprite:
+            results.append(current.matchedsprite.type)
+
+    if len(results) == 1:
+        # only one layer deep of match, return more verbose description
+        results = [plmsprite.matchedsprite.short_code]
     return JsonResponse({
         **plmsprite.book.data,
         'url': plmsprite.book.url,
+        'results': results,
     })
