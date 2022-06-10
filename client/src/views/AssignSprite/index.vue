@@ -34,7 +34,7 @@
       </div>
     </div>
 
-    <assign-sprite-form
+    <plmsprite-form
       v-if="selected_plmsprite"
       :sprite="selected_plmsprite"
       @refetch="refetchAll"
@@ -58,12 +58,12 @@
 
 <script>
 import { sortBy } from 'lodash'
-
-import AssignSpriteForm from './AssignSpriteForm.vue'
 import { getClient } from '@unrest/vue-storage'
 
+import PlmspriteForm from './PlmspriteForm.vue'
+
 export default {
-  components: { AssignSpriteForm },
+  components: { PlmspriteForm },
   __route: {
     path: '/app/assign-sprite/',
   },

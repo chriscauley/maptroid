@@ -1,5 +1,5 @@
 import About from './About.vue'
-import AssignSprite from './AssignSprite'
+import AssignSprite from './AssignSprite/index.vue'
 import Contact from './Contact.vue'
 import dread from './dread/index'
 import Downloads from './Downloads.vue'
