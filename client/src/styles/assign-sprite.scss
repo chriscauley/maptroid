@@ -1,0 +1,17 @@
+.plmsprite-box {
+  @apply relative mb-2;
+  img {
+    image-rendering: pixelated;
+    outline: 1px solid green;
+  }
+  &__matched {
+    @apply absolute;
+    background-size: contain;
+    filter: invert(1);
+    opacity: 0.5;
+    outline: 1px solid black;
+    &:hover {
+      opacity: 0;
+    }
+  }
+}

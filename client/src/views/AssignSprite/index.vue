@@ -42,17 +42,12 @@
       @automatch="automatch"
       :category="active_category"
     />
-    <unrest-modal v-if="selected_matchedsprite" @close="selected_matchedsprite = null">
-      <pre>{{ pprint(selected_matchedsprite) }}</pre>
-      <template #extra_actions>
-        <a
-          :href="`/djadmin/sprite/matchedsprite/${selected_matchedsprite.id}/`"
-          class="btn-link fa fa-edit"
-          target="_blank"
-        >
-        </a>
-      </template>
-    </unrest-modal>
+    <matchedsprite-form
+      v-if="selected_matchedsprite"
+      :id="selected_matchedsprite.id"
+      @refetch="refetchAll"
+      @close="selected_matchedsprite = null"
+    />
   </div>
 </template>
 
@@ -60,10 +55,11 @@
 import { sortBy } from 'lodash'
 import { getClient } from '@unrest/vue-storage'
 
+import MatchedspriteForm from './MatchedspriteForm.vue'
 import PlmspriteForm from './PlmspriteForm.vue'
 
 export default {
-  components: { PlmspriteForm },
+  components: { MatchedspriteForm, PlmspriteForm },
   __route: {
     path: '/app/assign-sprite/',
   },
@@ -140,7 +136,7 @@ export default {
                   View Labbook
                   <i class="fa fa-arrow-up-right-from-square" />
                 </a>
-                { result.results?.join(', ') }
+                {result.results?.join(', ')}
               </div>
             ),
           })

@@ -124,7 +124,6 @@ class PlmSprite(BaseSpriteModel):
         on_delete=models.CASCADE,
         null=True,
         blank=True,
-        related_name="+",
     )
     MATCHES = _choices(['manual', 'automatch', 'creation'])
     match_method = models.CharField(

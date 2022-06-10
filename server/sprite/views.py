@@ -1,10 +1,11 @@
 from django.conf import settings
-from django.http import HttpResponse, JsonResponse
 from django.contrib.auth.decorators import user_passes_test
+from django.http import HttpResponse, JsonResponse
+from django.shortcuts import get_object_or_404
 import json
 from pathlib import Path
 
-from sprite.models import PlmSprite
+from sprite.models import PlmSprite, MatchedSprite
 
 def spritesheet(request, name):
     path = Path(settings.BASE_DIR / f'../static/sm/{name}.json')
@@ -35,3 +36,31 @@ def automatch(request, plmsprite_id=None):
         'url': plmsprite.book.url,
         'results': results,
     })
+
+def serialize_plmsprite(sprite):
+    return {
+        key: getattr(sprite, key)
+        for key in ['id', 'url', 'data', 'extra_plmsprite_id']
+    }
+
+@user_passes_test(lambda u: u.is_superuser)
+def plmsprite_detail(request, plmsprite_id=None):
+    plmsprite = get_object_or_404(PlmSprite, id=plmsprite_id)
+    children = []
+    current = plmsprite
+    while current.extra_plmsprite and current.id != current.extra_plmsprite_id:
+        current = current.extra_plmsprite
+        children.append(serialize_plmsprite(current))
+    data = serialize_plmsprite(plmsprite)
+    data['children'] = children
+    return JsonResponse(data)
+
+@user_passes_test(lambda u: u.is_superuser)
+def matchedsprite_detail(request, matchedsprite_id=None):
+    matchedsprite = get_object_or_404(MatchedSprite, id=matchedsprite_id)
+    data = {
+        key: getattr(matchedsprite, key)
+        for key in ['id', 'url', 'type', 'category', 'modifier', 'color', 'data']
+    }
+    data['plmsprites'] = [serialize_plmsprite(s) for s in matchedsprite.plmsprite_set.all()]
+    return JsonResponse(data)
