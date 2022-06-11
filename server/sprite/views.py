@@ -40,7 +40,7 @@ def automatch(request, plmsprite_id=None):
 def serialize_plmsprite(sprite):
     return {
         key: getattr(sprite, key)
-        for key in ['id', 'url', 'data', 'extra_plmsprite_id']
+        for key in ['id', 'url', 'data', 'extra_plmsprite_id', 'approved']
     }
 
 @user_passes_test(lambda u: u.is_superuser)
@@ -64,3 +64,10 @@ def matchedsprite_detail(request, matchedsprite_id=None):
     }
     data['plmsprites'] = [serialize_plmsprite(s) for s in matchedsprite.plmsprite_set.all()]
     return JsonResponse(data)
+
+@user_passes_test(lambda u: u.is_superuser)
+def approve_matchedsprite(request, matchedsprite_id=None):
+    matchedsprite = get_object_or_404(MatchedSprite, id=matchedsprite_id)
+    matchedsprite.data['approval_count'] = matchedsprite.plmsprite_set.all().count()
+    matchedsprite.save()
+    return JsonResponse({})

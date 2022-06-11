@@ -179,6 +179,9 @@
   }
   &__card {
     @apply border flex gap-2 items-center rounded-lg;
+    &.-red {
+      @apply border-2 border-red-500;
+    }
   }
   &__preview {
     @apply flex gap-2 items-center mb-2;

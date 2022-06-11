@@ -26,10 +26,11 @@
         <div
           v-for="sprite in visible_matchedsprites"
           :key="sprite.id"
-          class="admin-smile-sprite__card"
+          :class="sprite.class"
           @click="selected_matchedsprite = sprite"
         >
           <div class="admin-smile-sprite__img" :style="`background-image: url('${sprite.url}')`" />
+          <div>{{ sprite.data.approval_count || '??' }} / {{ sprite.plmsprite__count }}</div>
         </div>
       </div>
     </div>
@@ -38,7 +39,7 @@
       v-if="selected_plmsprite"
       :sprite="selected_plmsprite"
       @refetch="refetchAll"
-      @close="selected_plmsprite = null"
+      @close="close"
       @automatch="automatch"
       :category="active_category"
     />
@@ -46,13 +47,16 @@
       v-if="selected_matchedsprite"
       :id="selected_matchedsprite.id"
       @refetch="refetchAll"
-      @close="selected_matchedsprite = null"
+      @close="close"
+      @next="nextMatchedsprite"
+      :key="selected_matchedsprite.id"
     />
   </div>
 </template>
 
 <script>
 import { sortBy } from 'lodash'
+import { mod } from '@unrest/geo'
 import { getClient } from '@unrest/vue-storage'
 
 import MatchedspriteForm from './MatchedspriteForm.vue'
@@ -92,6 +96,10 @@ export default {
     visible_matchedsprites() {
       const { active_category } = this
       const sprites = this.matchedsprites.filter((m) => m.category === active_category)
+      sprites.forEach((sprite) => {
+        sprite.approved = sprite.data.approval_count === sprite.plmsprite__count
+        sprite.class = ['admin-smile-sprite__card', !sprite.approved && '-red']
+      })
       return sortBy(sprites, 'short_code')
     },
   },
@@ -99,8 +107,10 @@ export default {
     setCategory(category) {
       this.$router.replace({ query: { ...this.$route.query, category } })
     },
-    pprint(sprite) {
-      return JSON.stringify(sprite, null, 2)
+    close() {
+      this.selected_matchedsprite = null
+      this.selected_plmsprite = null
+      this.refetchAll()
     },
     refetchAll() {
       this.$store.plmsprite.api.markStale()
@@ -146,6 +156,11 @@ export default {
         this.refetchAll()
         this.selected_plmsprite = null
       })
+    },
+    nextMatchedsprite(dindex) {
+      const sprites = this.visible_matchedsprites
+      const index = sprites.indexOf(this.selected_matchedsprite)
+      this.selected_matchedsprite = sprites[mod(index + dindex, sprites.length)]
     },
   },
 }

@@ -125,6 +125,7 @@ class PlmSprite(BaseSpriteModel):
         null=True,
         blank=True,
     )
+    approved = models.BooleanField()
     MATCHES = _choices(['manual', 'automatch', 'creation'])
     match_method = models.CharField(
         max_length=16,
