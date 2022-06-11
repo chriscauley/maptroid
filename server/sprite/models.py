@@ -125,7 +125,7 @@ class PlmSprite(BaseSpriteModel):
         null=True,
         blank=True,
     )
-    approved = models.BooleanField()
+    approved = models.BooleanField(default=False)
     MATCHES = _choices(['manual', 'automatch', 'creation'])
     match_method = models.CharField(
         max_length=16,
@@ -139,7 +139,7 @@ class PlmSprite(BaseSpriteModel):
         null=True,
         blank=True,
     )
-    extra_xy = models.JSONField(default=list)
+    extra_xy = models.JSONField(default=list, blank=True)
 
     @staticmethod
     def get_or_create_from_np_array(np_array):
