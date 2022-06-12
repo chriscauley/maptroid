@@ -64,7 +64,7 @@ export default {
       return `min-height: ${this.scale * this.details.data.height}px;`
     },
     overlay(plmsprite) {
-      const [x, y] = plmsprite.data.matchedsprite_xy
+      const [x, y] = plmsprite.data.matchedsprite_xy || [0,0]
       return {
         class: 'plmsprite-box__matched',
         style: {

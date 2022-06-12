@@ -15,3 +15,15 @@
     }
   }
 }
+
+body.unrest-dragging .admin-smile-sprite {
+  cursor: grabbing;
+  .admin-smile-sprite__card.-plm:hover {
+    cursor: grabbing;
+    outline: 2px solid #08f;
+  }
+  .admin-smile-sprite__card.-dragging {
+    @apply border-transparent;
+    outline: 2px solid #0f8;
+  }
+}

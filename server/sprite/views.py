@@ -71,3 +71,15 @@ def approve_matchedsprite(request, matchedsprite_id=None):
     matchedsprite.data['approval_count'] = matchedsprite.plmsprite_set.all().count()
     matchedsprite.save()
     return JsonResponse({})
+
+@user_passes_test(lambda u: u.is_superuser)
+def force_match(request, plmsprite_id=None, matchedsprite_id=None):
+    matchedsprite = get_object_or_404(MatchedSprite, id=matchedsprite_id)
+    plmsprite = get_object_or_404(PlmSprite, id=plmsprite_id)
+    plmsprite.automatch(sprites=[matchedsprite])
+    return JsonResponse({
+        **plmsprite.book.data,
+        'url': plmsprite.book.url,
+        'results': [str(matchedsprite)],
+    })
+

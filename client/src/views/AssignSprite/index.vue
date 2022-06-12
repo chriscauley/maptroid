@@ -6,8 +6,9 @@
         <div
           v-for="sprite in plmsprites"
           :key="sprite.id"
-          class="admin-smile-sprite__card"
+          class="admin-smile-sprite__card -plm"
           @click="(e) => clickPlm(e, sprite)"
+          @mouseover="hoverPlmsprite(sprite)"
         >
           <div class="admin-smile-sprite__img" :style="`background-image: url('${sprite.url}')`" />
         </div>
@@ -23,15 +24,17 @@
         {{ category }} ({{ count }})
       </div>
       <div class="admin-smile-sprite__cards">
-        <div
+        <unrest-draggable
           v-for="sprite in visible_matchedsprites"
           :key="sprite.id"
           :class="sprite.class"
           @click="selected_matchedsprite = sprite"
+          @dragstart="dragstart"
+          @dragend="dropMatchedsprite(sprite)"
         >
           <div class="admin-smile-sprite__img" :style="`background-image: url('${sprite.url}')`" />
           <div>{{ sprite.data.approval_count || '??' }} / {{ sprite.plmsprite__count }}</div>
-        </div>
+        </unrest-draggable>
       </div>
     </div>
 
@@ -62,6 +65,8 @@ import { getClient } from '@unrest/vue-storage'
 import MatchedspriteForm from './MatchedspriteForm.vue'
 import PlmspriteForm from './PlmspriteForm.vue'
 
+const client = getClient()
+
 export default {
   components: { MatchedspriteForm, PlmspriteForm },
   __route: {
@@ -69,6 +74,8 @@ export default {
   },
   data() {
     return {
+      dragging: false,
+      hovered: null,
       selected_plmsprite: null,
       selected_matchedsprite: null,
     }
@@ -119,7 +126,7 @@ export default {
       this.getMatchedsprites()
     },
     getPlmsprites() {
-      const query = { per_page: 500, matchedsprite__isnull: true }
+      const query = { per_page: 5000, matchedsprite__isnull: true }
       return this.$store.plmsprite.getPage({ query })?.items
     },
     getMatchedsprites() {
@@ -134,34 +141,51 @@ export default {
       }
     },
     automatch(sprite) {
-      const post = getClient().post(`sprite/automatch/${sprite.id}/`)
-      post.then((result) => {
-        if (result.url) {
-          const href = `/app/labbook/${result.name}/`
-          this.$ui.toast({
-            level: result.success ? 'success' : 'error',
-            tagName: () => (
+      const post = client.post(`sprite/automatch/${sprite.id}/`)
+      post.then(this.completeAutomatch)
+     },
+    completeAutomatch(result) {
+      if (result.url) {
+        const href = `/app/labbook/${result.name}/`
+        this.$ui.toast({
+          level: result.success ? 'success' : 'error',
+          tagName: () => (
               <div>
-                <a href={href} class="btn -link" target="_blank">
-                  View Labbook
-                  <i class="fa fa-arrow-up-right-from-square" />
-                </a>
-                {result.results?.join(', ')}
-              </div>
-            ),
-          })
-        } else {
-          this.$ui.toast.error('Labbook wasn not generated')
-        }
-        this.refetchAll()
-        this.selected_plmsprite = null
-      })
+              <a href={href} class="btn -link" target="_blank">
+              View Labbook
+              <i class="fa fa-arrow-up-right-from-square" />
+              </a>
+              {result.results?.join(', ')}
+            </div>
+          ),
+        })
+      } else {
+        this.$ui.toast.error('Labbook wasn not generated')
+      }
+      this.close()
     },
     nextMatchedsprite(dindex) {
       const sprites = this.visible_matchedsprites
       const index = sprites.indexOf(this.selected_matchedsprite)
       this.selected_matchedsprite = sprites[mod(index + dindex, sprites.length)]
     },
+    dragstart() {
+      this.dragging = true
+      this.hovered = null
+    },
+    dropMatchedsprite(matchedsprite) {
+      const plmsprite = this.hovered
+      this.hovered = null
+      if (plmsprite) {
+        const url = `sprite/force-match/${plmsprite.id}/${matchedsprite.id}/`
+        client.post(url).then(this.completeAutomatch)
+      }
+    },
+    hoverPlmsprite(plmsprite) {
+      if (this.dragging) {
+        this.hovered = plmsprite
+      }
+    }
   },
 }
 </script>

@@ -175,10 +175,10 @@
 
 .admin-smile-sprite {
   &__cards {
-    @apply cursor-pointer flex flex-wrap gap-2 p-2 select-none;
+    @apply flex flex-wrap gap-2 p-2 select-none;
   }
   &__card {
-    @apply border flex gap-2 items-center rounded-lg;
+    @apply border cursor-pointer flex gap-2 items-center rounded-lg;
     &.-red {
       @apply border-2 border-red-500;
     }

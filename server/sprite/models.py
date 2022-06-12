@@ -179,7 +179,7 @@ class PlmSprite(BaseSpriteModel):
             threshold = 0.9
         else:
             # much looser threshold for manually specified sprites
-            threshold = 0.5
+            threshold = 0.85
 
         self.book.add({
             'np': 100 * self.gray_image,
@@ -242,16 +242,6 @@ class PlmSprite(BaseSpriteModel):
         x_half = int(gray2.shape[1] / 2)
         y_half = int(gray2.shape[0] / 2)
 
-        self.book.add({
-            'caption': f'image2 {matchedsprite.id} {matchedsprite.type} {matchedsprite.image.path}',
-            'np': image2,
-        })
-
-        self.book.add({
-            'caption': 'gray2',
-            'np': gray2,
-        })
-
         # give it some padding because there's a good chance these will go off the canvas
         canvas = np.zeros(np.add(gray.shape, gray2.shape), dtype=gray.dtype)
         urcv.draw.paste(canvas, gray, x_half, y_half)
@@ -267,11 +257,17 @@ class PlmSprite(BaseSpriteModel):
             [left_half, 0, 0],
             [right_half, x_half, 0]
         ]
+
+        self.book.add({ 'caption': f'half_matches {x_half} - {y_half}' })
+        results = []
         for target_gray, dx, dy in candidates:
-            value, xy = match_template(canvas, target_gray)
-            if value > 0.9:
-                return value, matchedsprite, [xy[0] - dx - x_half, xy[1] - dy - y_half]
-        return 0, None, None
+            value, xy = match_template(canvas, target_gray.copy())
+            self.book.add({
+                'caption': f'half_match {xy} - {value}',
+                'np': target_gray,
+            })
+            results.append([value, matchedsprite, [xy[0] - dx - x_half, xy[1] - dy - y_half]])
+        return sorted(results)[-1]
 
     def extract_sprite(self, matchedsprite, xy):
         x, y = xy
@@ -340,10 +336,10 @@ class PlmSprite(BaseSpriteModel):
             self.extra_xy = [extra_x, extra_y]
             self.save()
 
-            self.extra_plmsprite.automatch()
-            self.book.add({
-                'child_labbook': self.extra_plmsprite.book.name,
-            })
+            # self.extra_plmsprite.automatch()
+            # self.book.add({
+            #     'child_labbook': self.extra_plmsprite.book.name,
+            # })
 
 def delete_image(source, target, xy, book, gray_image=None):
     # allow gray images to be passed in to save time
