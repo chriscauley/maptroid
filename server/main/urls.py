@@ -5,7 +5,6 @@ from unrest.views import index
 from main.views import list_dir, delete_file
 
 from maptroid.views import replace_svg_color, smile_ocr, save_sprite, sprite_distances, goto_room
-from sprite.views import spritesheet, automatch, plmsprite_detail, matchedsprite_detail, approve_matchedsprite, force_match
 
 # these views are registered using unrest_schema.register
 import maptroid.forms
@@ -42,16 +41,10 @@ urlpatterns = [
     re_path(f'^({"|".join(app_urls)})', index),
     path('api/list-dir/', list_dir),
     path('api/delete-file/', delete_file),
-    path('api/spritesheet/<name>/', spritesheet),
     path('api/replace-svg-color/', replace_svg_color),
     path('api/smile-ocr/', smile_ocr),
     path('api/save-sprite/', save_sprite),
-    path('api/sprite-distances/', sprite_distances),
-    path('api/sprite/automatch/<plmsprite_id>/', automatch),
-    path('api/sprite/plmsprite/<plmsprite_id>/', plmsprite_detail),
-    path('api/sprite/matchedsprite/<matchedsprite_id>/', matchedsprite_detail),
-    path('api/sprite/approve-matchedsprite/<matchedsprite_id>/', approve_matchedsprite),
-    path('api/sprite/force-match/<plmsprite_id>/<matchedsprite_id>/', force_match),
+    path('api/sprite', include('sprite.urls')),
     path('room/<room_id>/', goto_room),
     path('', include('social_django.urls', namespace='social')),
     path('', include('unrest.urls')),
