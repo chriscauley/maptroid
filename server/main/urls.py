@@ -44,7 +44,7 @@ urlpatterns = [
     path('api/replace-svg-color/', replace_svg_color),
     path('api/smile-ocr/', smile_ocr),
     path('api/save-sprite/', save_sprite),
-    path('api/sprite', include('sprite.urls')),
+    path('api/sprite/', include('sprite.urls')),
     path('room/<room_id>/', goto_room),
     path('', include('social_django.urls', namespace='social')),
     path('', include('unrest.urls')),

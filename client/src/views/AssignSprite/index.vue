@@ -1,6 +1,6 @@
 <template>
   <div class="admin-smile-sprite" v-if="plmsprites">
-    <div class="admin-smile-sprite__groups btn-group">
+    <div class="admin-smile-sprite__groups btn-group -plmsprites">
       <h3>Unmatched PLM Sprites ({{ plmsprites.length }})</h3>
       <div class="admin-smile-sprite__cards">
         <div
@@ -23,25 +23,24 @@
       >
         {{ category }} ({{ count }})
       </div>
-      <div class="admin-smile-sprite__cards">
-        <unrest-draggable
-          v-for="sprite in visible_matchedsprites"
-          :key="sprite.id"
-          :class="sprite.class"
-          @click="selected_matchedsprite = sprite"
-          @dragstart="dragstart"
-          @dragend="dropMatchedsprite(sprite)"
-        >
-          <div class="admin-smile-sprite__img" :style="`background-image: url('${sprite.url}')`" />
-          <div>{{ sprite.data.approval_count || '??' }} / {{ sprite.plmsprite__count }}</div>
-        </unrest-draggable>
-      </div>
+    </div>
+    <div class="admin-smile-sprite__cards -matchedsprites">
+      <unrest-draggable
+        v-for="sprite in visible_matchedsprites"
+        :key="sprite.id"
+        :class="sprite.class"
+        @click="selected_matchedsprite = sprite"
+        @dragstart="dragstart"
+        @dragend="dropMatchedsprite(sprite)"
+      >
+        <div class="admin-smile-sprite__img" :style="`background-image: url('${sprite.url}')`" />
+        <div>{{ sprite.data.approval_count || '??' }} / {{ sprite.plmsprite__count }}</div>
+      </unrest-draggable>
     </div>
 
     <plmsprite-form
       v-if="selected_plmsprite"
       :sprite="selected_plmsprite"
-      @refetch="refetchAll"
       @close="close"
       @automatch="automatch"
       :category="active_category"
@@ -49,7 +48,6 @@
     <matchedsprite-form
       v-if="selected_matchedsprite"
       :id="selected_matchedsprite.id"
-      @refetch="refetchAll"
       @close="close"
       @next="nextMatchedsprite"
       :key="selected_matchedsprite.id"
@@ -143,17 +141,17 @@ export default {
     automatch(sprite) {
       const post = client.post(`sprite/automatch/${sprite.id}/`)
       post.then(this.completeAutomatch)
-     },
+    },
     completeAutomatch(result) {
       if (result.url) {
         const href = `/app/labbook/${result.name}/`
         this.$ui.toast({
           level: result.success ? 'success' : 'error',
           tagName: () => (
-              <div>
+            <div>
               <a href={href} class="btn -link" target="_blank">
-              View Labbook
-              <i class="fa fa-arrow-up-right-from-square" />
+                View Labbook
+                <i class="fa fa-arrow-up-right-from-square" />
               </a>
               {result.results?.join(', ')}
             </div>
@@ -185,7 +183,7 @@ export default {
       if (this.dragging) {
         this.hovered = plmsprite
       }
-    }
+    },
   },
 }
 </script>

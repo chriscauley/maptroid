@@ -88,6 +88,8 @@ categories = [
     'station',
     'animation',
     'trash',
+    '_wings',
+    '_parts',
 ]
 
 class MatchedSprite(BaseSpriteModel):
@@ -135,7 +137,7 @@ class PlmSprite(BaseSpriteModel):
     )
     extra_plmsprite = models.ForeignKey(
         'self',
-        on_delete=models.CASCADE,
+        on_delete=models.SET_NULL,
         null=True,
         blank=True,
     )
@@ -170,7 +172,7 @@ class PlmSprite(BaseSpriteModel):
 
         if sprites is None:
             sprites = MatchedSprite.objects.filter(data__primary_color=_pc)
-            sprites = sprites.exclude(category='trash')
+            sprites = sprites.exclude(category__in=['trash','_parts','_wings'])
             # TODO delete these three lines.
             # They aren't necessary because we're now selecting by threshold
             # def get_minus_size(sprite):

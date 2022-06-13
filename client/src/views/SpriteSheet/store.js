@@ -9,7 +9,7 @@ const SpriteSheet = (sheetname) => {
     loading: false,
   })
 
-  const api_url = `spritesheet/${sheetname}/`
+  const api_url = `sprite/spritesheet/${sheetname}/`
   const img_url = `/static/sm/${sheetname}.png`
 
   const waiting = []

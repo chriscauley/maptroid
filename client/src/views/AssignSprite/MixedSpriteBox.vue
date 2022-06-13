@@ -1,14 +1,22 @@
 <template>
   <div class="plmsprite-box">
     <img :src="plmsprite.url" :width="plmsprite.data.width * scale" />
-    <img v-bind="overlay(plmsprite)" />
+    <img v-if="matchedsprite" v-bind="overlay(plmsprite)" />
     <div class="plmsprite-box__title">
       <a :href="adminUrl('plmsprite', plmsprite.id)" class="fa fa-edit link" target="_blank" />
-      #{{ plmsprite.id }}
+      {{ plmsprite.id }}
       <span v-if="plmsprite.extra_plmsprite_id">
-        => #{{ plmsprite.extra_plmsprite_id }}
+        => {{ plmsprite.extra_plmsprite_id }}
         <a
           :href="adminUrl('plmsprite', plmsprite.extra_plmsprite_id)"
+          class="fa fa-edit link"
+          target="_blank"
+        />
+      </span>
+      <span v-if="matchedsprite">
+        @ {{ matchedsprite.id }}
+        <a
+          :href="adminUrl('matchedsprite', matchedsprite.id)"
           class="fa fa-edit link"
           target="_blank"
         />
@@ -29,7 +37,7 @@ export default {
   },
   methods: {
     mh() {
-      return `min-height: ${this.scale * this.matchedsprite.data.height}px;`
+      return `min-height: ${this.scale * this.matchedsprite?.data.height}px;`
     },
     overlay(plmsprite) {
       const [x, y] = plmsprite.data.matchedsprite_xy || [0, 0]

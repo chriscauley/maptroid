@@ -37,10 +37,16 @@ def automatch(request, plmsprite_id=None):
         'results': results,
     })
 
-def serialize_plmsprite(sprite):
+def serialize_plmsprite(plmsprite):
     return {
-        key: getattr(sprite, key)
+        key: getattr(plmsprite, key)
         for key in ['id', 'url', 'data', 'extra_plmsprite_id', 'approved']
+    }
+
+def serialize_matchedsprite(matchedsprite):
+    return {
+        key: getattr(matchedsprite, key)
+        for key in ['id', 'url', 'type', 'category', 'modifier', 'color', 'data']
     }
 
 @user_passes_test(lambda u: u.is_superuser)
@@ -55,13 +61,68 @@ def plmsprite_detail(request, plmsprite_id=None):
     data['children'] = children
     return JsonResponse(data)
 
+def get_plmsprites_from_root(plmsprite):
+    # go up to root plm sprite
+    to_check= [plmsprite]
+    parents = []
+    while to_check:
+        target = to_check.pop()
+        if target.plmsprite_set.all().count():
+            for parent in target.plmsprite_set.all():
+                if target.extra_plmsprite == target:
+                    # one member loops are possible
+                    continue
+                to_check.append(parent)
+        else:
+            parents.append(target)
+
+    targets = []
+    for parent in parents:
+        current = parent
+        targets.append(current)
+        while current.extra_plmsprite:
+            if current.extra_plmsprite == current:
+                break
+            targets.append(current.extra_plmsprite)
+            current = current.extra_plmsprite
+    return targets
+
+@user_passes_test(lambda u: u.is_superuser)
+def root_plm(request, plmsprite_id=None):
+    plmsprite = get_object_or_404(PlmSprite, id=plmsprite_id)
+
+    targets = get_plmsprites_from_root(plmsprite)
+    results = []
+    for target in targets:
+        data = { 'plmsprite': serialize_plmsprite(target) }
+        if target.matchedsprite:
+            data['matchedsprite'] = serialize_matchedsprite(target.matchedsprite)
+        results.append(data)
+    return JsonResponse({ 'results': results })
+
+@user_passes_test(lambda u: u.is_superuser)
+def reset_to_root(request, plmsprite_id=None):
+    plmsprite = get_object_or_404(PlmSprite, id=plmsprite_id)
+    targets = get_plmsprites_from_root(plmsprite)[::-1]
+
+    kept = []
+    deleted = []
+    for target in targets:
+        if target.plmsprite_set.count():
+            deleted.append(target.id)
+            print('should only delete 1', target.delete())
+        else:
+            kept.append(target.id)
+    for id in kept:
+        target = PlmSprite.objects.get(id=id)
+        target.matchedsprite = None
+        target.save()
+    return JsonResponse({'message': f'Deleted: {deleted}. Kept: {kept}'})
+
 @user_passes_test(lambda u: u.is_superuser)
 def matchedsprite_detail(request, matchedsprite_id=None):
     matchedsprite = get_object_or_404(MatchedSprite, id=matchedsprite_id)
-    data = {
-        key: getattr(matchedsprite, key)
-        for key in ['id', 'url', 'type', 'category', 'modifier', 'color', 'data']
-    }
+    data = serialize_matchedsprite(matchedsprite)
     data['plmsprites'] = [serialize_plmsprite(s) for s in matchedsprite.plmsprite_set.all()]
     return JsonResponse(data)
 
