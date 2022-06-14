@@ -1838,20 +1838,20 @@
   dependencies:
     xorshift "^1.1.1"
 
-"@unrest/tailwind@^0.1.15":
-  version "0.1.15"
-  resolved "https://registry.yarnpkg.com/@unrest/tailwind/-/tailwind-0.1.15.tgz#39c26072e58c0722b2551241ea2c660e5575a4d2"
-  integrity sha512-JDwW6x2eGJQ1SPwASOP3mOFrd0uKkrUZDLAbJg826K0T8WCODJV3OJxQV8q+TpMzPyb0cryLK8FWZXx3w4V5UQ==
+"@unrest/tailwind@0.1.18":
+  version "0.1.18"
+  resolved "https://registry.yarnpkg.com/@unrest/tailwind/-/tailwind-0.1.18.tgz#fee266eae8699ad5360b52278b0bcf6f3d1410f5"
+  integrity sha512-jS0lWYFz2jSdYWFXkKX5z6HWNb6IsY876eRLngKcBHn0St574lh4PX8Egjy3+eXpu95kBE4zPKyjEuWgXHCHiA==
 
 "@unrest/vue-auth@^0.0.9":
   version "0.0.9"
   resolved "https://registry.yarnpkg.com/@unrest/vue-auth/-/vue-auth-0.0.9.tgz#af8791f113023098850c271230649da37c611128"
   integrity sha512-RuHQ6Z3F8Cy1/WjCQCxkUj+ESotc5QDuhuKdc7eF7CF9oSKHantLlws4nusWD/KeXb1fGr5shlWrrQsUzjJXjA==
 
-"@unrest/vue-form@^0.0.12":
-  version "0.0.12"
-  resolved "https://registry.yarnpkg.com/@unrest/vue-form/-/vue-form-0.0.12.tgz#4683d141286ac8aca43564bcabf0e483b3a5b1ab"
-  integrity sha512-2Swo8bElLEPBd8Uk9O8OWLhukAnG4oNLukgY1BP4eJ3tS96dNDNl/QsvCl+vthAEL7a7HRrUdniFCz9e2ecmMg==
+"@unrest/vue-form@0.0.14":
+  version "0.0.14"
+  resolved "https://registry.yarnpkg.com/@unrest/vue-form/-/vue-form-0.0.14.tgz#171040315173f05974991b1a24b3d86a6fd61d1c"
+  integrity sha512-rRZbgfZLOoJzRBfHlXeBwuGLdOa5EOwR4OQ3FwS7/KdSqnxy6CgaEBi4SYI8cK28IJ1Qtg90OP2a3DwxpEp3yw==
   dependencies:
     jsonschema "^1.4.0"
     lodash.pick "^4.4.0"
@@ -1864,20 +1864,20 @@
     "@unrest/eslint-config" "^0.0.4"
     mousetrap "^1.6.5"
 
-"@unrest/vue-storage@^0.0.14":
-  version "0.0.14"
-  resolved "https://registry.yarnpkg.com/@unrest/vue-storage/-/vue-storage-0.0.14.tgz#9f603cf4630a25c15936fd794e49c7d43860d69c"
-  integrity sha512-DjGHywmF8TzJAPIBAmu+BWLa5wdQOl6h836UUCzW3A7rXEqYxPXZn6dXlO3vliJqiswvTdV0V+MhDHuieLSu/Q==
+"@unrest/vue-storage@0.0.15":
+  version "0.0.15"
+  resolved "https://registry.yarnpkg.com/@unrest/vue-storage/-/vue-storage-0.0.15.tgz#fef770ba1e3ac91493d3a7575f564f975b489c67"
+  integrity sha512-13EV8iHkZvyz/RKuR3xBlOYE2m6LoPqBCGP2XjWtKzkA4f58wNsTV0I4LcFb3sHsYU62bRWMQ3DYVFAf15XYcg==
   dependencies:
     axios "^0.21.1"
     core-js "^3.6.5"
     local-storage-json "^1.1.0"
     lodash.debounce "^4.0.8"
 
-"@unrest/vue@^0.2.4":
-  version "0.2.4"
-  resolved "https://registry.yarnpkg.com/@unrest/vue/-/vue-0.2.4.tgz#18a36598888366d65382ced31880d82603c87f85"
-  integrity sha512-jLfeKb4tytO4fzzfdZhsz9OrJPLasbaJBcY3e+5QRN9ducYngMzuWl9DcjHz/GXgOrHxor1WQmN4Okov5/dwHg==
+"@unrest/vue@0.2.6":
+  version "0.2.6"
+  resolved "https://registry.yarnpkg.com/@unrest/vue/-/vue-0.2.6.tgz#a220ce869a35963b60a2c481470ed414d81ee7f6"
+  integrity sha512-4EJSkBGH7g+MVqyxPLkZ3k6cDeof0TgmFjCj7KaBPqwCjftZ6NHoX7jGz8FQp5mqrvLi1BEC/yZ3Qu040ma/Og==
   dependencies:
     dedent "^0.7.0"
     lodash.clonedeep "^4.5.0"
