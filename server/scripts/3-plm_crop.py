@@ -1,3 +1,6 @@
+# takes screenshots from ./media/smile_exports/WORLD/plm_enemies/batchNUMBER/
+# crops, parses room_key/event_name, and assigns to room with best guess of position
+
 from _setup import get_world_from_argv
 
 from collections import defaultdict
@@ -14,7 +17,7 @@ import sys
 from PIL import Image
 import pytesseract
 
-from maptroid.models import Room, SmileSprite
+from maptroid.models import Room
 from maptroid.sm import set_transparency, to_media_url
 
 
@@ -81,7 +84,9 @@ class JsonCache(dict):
 
 def get_cached_image(image_name, dest_key, function, force=False):
   def func2():
-    return function(Image.open(os.path.join(SOURCE_DIR, data['batch_name'], image_name)))
+    image = Image.open(os.path.join(SOURCE_DIR, data['batch_name'], image_name))
+    image = image.convert('RGBA')
+    return function(image)
   image, new = img.get_or_create(image_name, func2, DIRS[dest_key], force=force)
   if new:
     print(f"Created image {dest_key} {image_name}")
@@ -127,7 +132,7 @@ def read_text(ss_name, type_, coords):
   hashes = [','.join(h) for h in hashes]
   matched_letters = ' '.join([hash_to_letter.get(h, '?') for h in hashes])
   if not len(hashes):
-    print(os.path.join(SOURCE_DIR, ss_name))
+    print(type_, 'missing hashes',os.path.join(SOURCE_DIR, ss_name))
   if '?' in matched_letters:
     url = to_media_url(DIRS[type_], ss_name)
     hash_to_letter['__missing'].append([url, hashes])
@@ -224,7 +229,12 @@ if __name__ == '__main__':
     load_plms(f'batch{i}')
   if data['missing_smile_id'] or data['missing_event_name']:
     print(f"missing {data['missing_smile_id']} smile_ids and {data['missing_event_name']} event names")
-  missing_rooms = sorted([r.key or '' for r in rooms.filter(data__plm_enemies__isnull=True)])
+
+  # don't show rooms from trash in totals
+  trash_room = world.zone_set.all().get(slug__startswith='ztrash')
+  rooms = rooms.exclude(zone_id=trash_room.id)
+  missing_rooms = rooms.filter(data__plm_enemies__isnull=True)
+  missing_rooms = sorted([r.key or '' for r in missing_rooms])
   if missing_rooms:
     print('missing rooms', missing_rooms)
   processed_count = rooms.filter(data__plm_enemies__isnull=False).count()
