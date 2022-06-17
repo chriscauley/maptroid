@@ -222,10 +222,11 @@ class PlmSprite(BaseSpriteModel):
         dx = 0
         dy = 0
 
-        if gray.shape[0] < gray2.shape[0]:
+        if gray.shape[0] <= gray2.shape[0]:
             gray2 = gray2[2:-2]
             dy = -2
-        if gray.shape[1] < gray2.shape[1]:
+
+        if gray.shape[1] <= gray2.shape[1]:
             gray2 = gray2[:,2:-2]
             dx = -2
 
@@ -277,14 +278,16 @@ class PlmSprite(BaseSpriteModel):
         to_delete = self.og_image.copy()
         to_delete[:] = 0
         image2 = cv2.imread(matchedsprite.image.path, cv2.IMREAD_UNCHANGED)
+
+        # if x or y are negative, cut off left columns or top rows
         if x < 0:
-            image2 = image2[:,:x]
+            image2 = image2[:,abs(x):]
             x = 0
         if y < 0:
-            image2 = image2[:y]
-            x = 0
+            image2 = image2[abs(y):]
+            y = 0
 
-        urcv.draw.paste(to_delete, image2, xy[0], xy[1])
+        urcv.draw.paste(to_delete, image2, x, y)
         self.book.add({
             'np': to_delete,
             'caption': 'to remove'
