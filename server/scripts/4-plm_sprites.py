@@ -1,7 +1,6 @@
-from _setup import get_world_from_argv
+from _setup import get_world_zones_from_argv
 import os
 from django.conf import settings
-import imagehash
 import numpy as np
 import unrest_image as img
 
@@ -10,7 +9,7 @@ from maptroid.utils import mkdir
 
 template_sprites = SmileSprite.objects.filter(template=True).values_list('type', flat=True)
 
-def extract_sprites(image, smile_id):
+def extract_sprites(image):
   pixels = 0
   x_max = len(image[0])
   y_max = len(image)
@@ -57,62 +56,32 @@ def media_url_to_path(url):
   return os.path.join(settings.MEDIA_ROOT, url.split(settings.MEDIA_URL)[-1])
 
 def main():
-  world = get_world_from_argv()
-  OUTPUT_DIR = mkdir(settings.MEDIA_ROOT,f'smile_exports/{world.slug}/plm_enemies/')
-
-  rooms = Room.objects.filter(world=world)
-  rooms = rooms.exclude(data__hidden=True)
-  rooms = rooms.exclude(zone__slug__startswith='ztrash-')
-  rooms = rooms.exclude(zone__slug__startswith='unknown-')
+  world, zones = get_world_zones_from_argv()
+  OUTPUT_DIR = mkdir(settings.MEDIA_ROOT, f'smile_exports/{world.slug}/plm_enemies/{room.key}')
 
   # rooms = rooms.filter(id=19)
-  fails = 0
   matcher = SpriteMatcher()
-  for room in rooms:
-    if room.data.get('hidden'):
-      continue
-    smile_id = room.key.split("_")[-1].split('.')[0]
-    if not 'plm_enemies' in room.data:
-      print('missing plm_enemies:', room.id)
-      continue
-    plms = [plm for plm in room.data['plm_enemies'] if not plm.get('deleted')]
-    if len(plms) != len(set([str(p['xy']) for p in plms])):
-      fails += 1
-      print('FAIL: room has confusing plms:', room.name)
-      continue
-    if not len(plms):
-      fails += 1
-      print('FAIL: room has confusing plms:', room.name)
-      continue
+  for zone in zones:
+    for room in rooms:
+      finalize_plm(room)
+      path = os.path.join(OUTPUT_DIR, room.key)
+      if not os.path.exists(plm_image):
+        print("WARNING: unable to find plm_image for {room.key}")
+        continue
+      plm_image = cv2.imread(path, cv2.IMREAD_UNCHANGED)
 
-    # make an empty canvas of the right size
-    path = os.path.join(settings.MEDIA_ROOT, f'sm_cache/{world.slug}/layer-1/{room.key}')
-    if not os.path.exists(path):
-      print("WARNING unable to find layer-1 for", room.key)
-      continue
-    sprite_canvas = img._coerce(path, 'np')
-    sprite_canvas[:,:,:] = 0
-
-    room.data['plm_sprites'] = []
-    for plm in plms:
-      cropped_path = media_url_to_path(os.path.join(plm['root_url'], plm['cropped']))
-      cropped_data = img._coerce(cropped_path, 'np')
-      x, y = plm['xy'] or [0, 0]
-      height, width, _ = cropped_data.shape
-      sprite_canvas[y:y+height, x:x+width] = cropped_data
-    img._coerce(sprite_canvas, 'pil').save(os.path.join(OUTPUT_DIR, room.key))
-    sprites, xys = extract_sprites(sprite_canvas, smile_id)
-    for s, xy in zip(sprites, xys):
-      sprite, new = matcher.get_or_create_from_image(s, 'plm')
-      room.data['plm_sprites'].append([sprite.id, [round(i / 16) for i in xy]])
-      if sprite.type in template_sprites:
-        if 'plm_overrides' not in room.data:
-          room.data['plm_overrides'] = {}
-        x , y = [round(i / 16) for i in xy]
-        room.data['plm_overrides'][f'{x},{y}'] = sprite.type
-      if new:
-        print("new sprite", sprite)
-    room.save()
+      sprites, xys = extract_sprites(plm_image)
+      for s, xy in zip(sprites, xys):
+        sprite, new = matcher.get_or_create_from_image(s, 'plm')
+        room.data['plm_sprites'].append([sprite.id, [round(i / 16) for i in xy]])
+        if sprite.type in template_sprites:
+          if 'plm_overrides' not in room.data:
+            room.data['plm_overrides'] = {}
+          x , y = [round(i / 16) for i in xy]
+          room.data['plm_overrides'][f'{x},{y}'] = sprite.type
+        if new:
+          print("new sprite", sprite)
+      room.save()
 
 if __name__ == "__main__":
   main()
