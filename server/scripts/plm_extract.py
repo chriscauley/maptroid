@@ -11,7 +11,7 @@ import sys
 import unrest_image as img
 import urcv
 
-from sprite.models import MatchedSprite, PlmSprite
+from sprite.models import MatchedSprite, PlmSprite, RoomPlmSprite
 
 world, zones = get_world_zones_from_argv()
 PLM_DIR = Path(f'.media/smile_exports/{world.slug}/plm_enemies/')
@@ -59,6 +59,7 @@ for zone in zones:
             cropped = urcv.transform.autocrop_zeros(image[y:y+h, x:x+w])
             sprite_number += 1
             new, plmsprite = PlmSprite.get_or_create_from_np_array(cropped)
+            RoomPlmSprite.objects.get_or_create(room=room, plmsprite=plmsprite, xy=[x, y])
 
             if plmsprite.datahash in matches:
                 match += 1

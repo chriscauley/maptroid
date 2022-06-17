@@ -123,7 +123,7 @@ class PlmSprite(BaseSpriteModel):
     layer = models.CharField(max_length=16, choices=LAYERS, default='unknown')
     matchedsprite = models.ForeignKey(
         MatchedSprite,
-        on_delete=models.CASCADE,
+        on_delete=models.SET_NULL,
         null=True,
         blank=True,
     )
@@ -360,25 +360,25 @@ def delete_image(source, target, xy, book, gray_image=None):
     to_delete[:] = 0
     image2 = cv2.imread(matchedsprite.image.path, cv2.IMREAD_UNCHANGED)
     urcv.draw.paste(to_delete, image2, xy[0], xy[1])
-    book.book.add({
+    book.add({
         'np': to_delete,
         'caption': 'to remove'
     })
 
     gray_to_delete = cv2.cvtColor(to_delete, cv2.COLOR_BGR2GRAY)
-    book.book.add({
+    book.add({
         'np': gray_to_delete,
         'caption': 'gray delete2',
     })
     delta_delete = cv2.subtract(gray_image, gray_to_delete)
 
-    book.book.add({
+    book.add({
         'np': delta_delete * 100,
         'caption': 'delta_delete (x100)',
     })
 
     thresh = cv2.threshold(delta_delete, 10, 255, cv2.THRESH_BINARY)[1]
-    book.book.add({
+    book.add({
         'np': thresh,
         'caption': 'thresh',
     })
@@ -404,3 +404,10 @@ def verify_pixels(image1, image2, xy):
     # do the same thing for source template to get possible score
     possible = image2 == image2
     total = np.sum(cv2.bitwise_and(possible, possible, mask=mask))
+
+
+class RoomPlmSprite(models.Model):
+    room = models.ForeignKey('maptroid.Room', models.CASCADE)
+    plmsprite = models.ForeignKey(PlmSprite, models.CASCADE)
+    xy = models.JSONField()
+
