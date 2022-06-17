@@ -22,10 +22,13 @@ def get_world_from_argv():
             return World.objects.get(id=world_id)
         print('bad choice, try again')
 
-def get_world_zones_from_argv():
+def get_world_zones_from_argv(exclude_hidden=False):
     world = get_world_from_argv()
     zones = world.zone_set.all()
     for i, s in enumerate(sys.argv):
         if s in ['-z', '--zones', '--zone']:
             zones = zones.filter(slug__in=sys.argv[i+1].split(','))
+    if exclude_hidden:
+        zones = zones.exclude(slug__startswith="ztrash-")
+        zones = zones.exclude(slug__startswith="unknown-")
     return world, zones
