@@ -61,6 +61,10 @@ def main():
   OUTPUT_DIR = mkdir(settings.MEDIA_ROOT,f'smile_exports/{world.slug}/plm_enemies/')
 
   rooms = Room.objects.filter(world=world)
+  rooms = rooms.exclude(data__hidden=True)
+  rooms = rooms.exclude(zone__slug__startswith='ztrash-')
+  rooms = rooms.exclude(zone__slug__startswith='unknown-')
+
   # rooms = rooms.filter(id=19)
   fails = 0
   matcher = SpriteMatcher()

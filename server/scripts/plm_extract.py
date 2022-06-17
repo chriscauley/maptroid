@@ -32,7 +32,6 @@ def _hash(value):
 
 for zone in zones:
     rooms = zone.room_set.all()
-    room = rooms[:5]
     for room in rooms:
         image_path = str(Path(PLM_DIR / room.key))
         if not os.path.exists(image_path):
