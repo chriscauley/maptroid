@@ -5,6 +5,7 @@ import numpy as np
 import unrest_image as img
 
 from maptroid.models import Room, SmileSprite, SpriteMatcher
+from maptroid import plm
 from maptroid.utils import mkdir
 
 template_sprites = SmileSprite.objects.filter(template=True).values_list('type', flat=True)
@@ -63,7 +64,7 @@ def main():
   matcher = SpriteMatcher()
   for zone in zones:
     for room in rooms:
-      finalize_plm(room)
+      plm.finalize(room)
       path = os.path.join(OUTPUT_DIR, room.key)
       if not os.path.exists(plm_image):
         print("WARNING: unable to find plm_image for {room.key}")

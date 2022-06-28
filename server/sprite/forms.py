@@ -39,6 +39,7 @@ class MatchedSpriteForm(forms.ModelForm):
     instance.image = plm.image
     instance = super().save(commit)
     plm.match_method = 'creation'
+    plm.data['matchedsprite_xy'] = [0,0]
     plm.matchedsprite = instance
     plm.save()
     return instance

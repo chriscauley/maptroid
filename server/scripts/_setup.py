@@ -32,3 +32,23 @@ def get_world_zones_from_argv(exclude_hidden=False):
         zones = zones.exclude(slug__startswith="ztrash-")
         zones = zones.exclude(slug__startswith="unknown-")
     return world, zones
+
+def get_wzr(exclude_hidden=False):
+    world = get_world_from_argv()
+    zones = world.zone_set.all()
+    rooms = world.room_set.all()
+    for i, s in enumerate(sys.argv):
+        if s in ['-z']:
+            slugs = sys.argv[i+1].split(',')
+            zones = zones.filter(slug__in=slugs)
+            if not zones:
+                raise ValueError(f"Unable to find zones matching {slugs}")
+        if s in ['-r']:
+            rooms = rooms.filter(id__in=sys.argv[i+1].split(','))
+    if exclude_hidden:
+        zones = zones.exclude(slug__startswith="ztrash-")
+        zones = zones.exclude(slug__startswith="unknown-")
+    if zones.count():
+        zone_ids = [z.id for z in zones]
+        rooms = rooms.filter(zone_id__in=zone_ids)
+    return world, zones, rooms

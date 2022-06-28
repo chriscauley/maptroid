@@ -173,11 +173,6 @@ class PlmSprite(BaseSpriteModel):
         if sprites is None:
             sprites = MatchedSprite.objects.filter(data__primary_color=_pc)
             sprites = sprites.exclude(category__in=['trash','_parts','_wings'])
-            # TODO delete these three lines.
-            # They aren't necessary because we're now selecting by threshold
-            # def get_minus_size(sprite):
-            #     return -cv2.imread(sprite.image.path).size
-            # sprites = sorted(sprites, key=get_minus_size)
             threshold = 0.9
         else:
             # much looser threshold for manually specified sprites
@@ -222,13 +217,13 @@ class PlmSprite(BaseSpriteModel):
         dx = 0
         dy = 0
 
-        if gray.shape[0] <= gray2.shape[0]:
-            gray2 = gray2[2:-2]
-            dy = -2
+        # if gray.shape[0] <= gray2.shape[0]:
+        #     gray2 = gray2[2:-2]
+        #     dy = -2
 
-        if gray.shape[1] <= gray2.shape[1]:
-            gray2 = gray2[:,2:-2]
-            dx = -2
+        # if gray.shape[1] <= gray2.shape[1]:
+        #     gray2 = gray2[:,2:-2]
+        #     dx = -2
 
         if gray.shape[0] < gray2.shape[0] or gray.shape[1] < gray2.shape[1]:
             self.book.add({ 'caption': 'Source and target mismatch size' })

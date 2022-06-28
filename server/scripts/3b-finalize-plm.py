@@ -1,15 +1,16 @@
-from _setup import get_world_zones_from_argv
+#after hatches are done, make plmsprites for a room
+
+from _setup import get_wzr
 
 from maptroid.plm import extract_plmsprites_from_room
 
-world, zones = get_world_zones_from_argv(exclude_hidden=True)
+world, zones, rooms = get_wzr(exclude_hidden=True)
 hashes = []
 matches = {}
 match = miss = 0
 
-for zone in zones:
-    for room in zone.room_set.all():
-        hashes += extract_plmsprites_from_room(room)
+for room in rooms:
+    hashes += extract_plmsprites_from_room(room)
 
 for hash_ in hashes:
     if hash_ in matches:

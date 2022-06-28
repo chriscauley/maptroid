@@ -16,6 +16,10 @@ class Labbook():
         self.root.mkdir(parents=True, exist_ok=True)
         self.data['sections'] = self.sections = []
         self.url = None
+        self.warnings = []
+
+    def __str__(self):
+        return f'http://maptroid.uberfordogs.com:8943/app/labbook/{self.name}'
 
     def add(self, section):
         section_no = len(self.sections)
@@ -46,3 +50,13 @@ class Labbook():
             index = json.loads(index_path.read_text())
         index[self.name] = self.url = _media(data_path)
         index_path.write_text(json.dumps(index, indent=2))
+
+    def warn(self, warning):
+        self.warnings.append(warning)
+        self.add({ 'flag': 'warning', 'caption': f'WARNING: {warning}' })
+
+    def close(self):
+        if len(self.warnings):
+            print(f"\nLabbook closed with {len(self.warnings)} warnings:")
+            print(self)
+            print("\n".join(self.warnings))
