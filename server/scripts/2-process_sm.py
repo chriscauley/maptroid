@@ -12,6 +12,8 @@ world, zones = get_world_zones_from_argv()
 world.normalize()
 print(f'processing {len(zones)} zones')
 for zone in zones:
+    if zone.name.startswith('ztrash-'):
+        continue
     for room in zone.room_set.all():
         if room.data.get('hidden'):
             continue
