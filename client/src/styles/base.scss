@@ -59,16 +59,6 @@ body {
   background: var(--bg-alt);
 }
 
-.btn-group .btn {
-  @apply rounded-none;
-  &:first-child {
-    @apply rounded-l;
-  }
-  &:last-child {
-    @apply rounded-r;
-  }
-}
-
 .btn.-mini {
   @apply p-1;
   user-select:none;
