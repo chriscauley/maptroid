@@ -52,7 +52,6 @@ def extract_plmsprites_from_room(room):
         RoomPlmSprite.objects.get_or_create(room=room, plmsprite=plmsprite, xy=[x, y])
         if new:
             print('new plmsprite', plmsprite.image.url)
-            arst
 
         hashes.append(plmsprite.datahash)
     return hashes

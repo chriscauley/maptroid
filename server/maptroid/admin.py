@@ -21,6 +21,7 @@ class ZoneAdmin(admin.ModelAdmin):
 
 @admin.register(Item)
 class ItemAdmin(admin.ModelAdmin):
+    raw_id_fields = ['room']
     list_filter = ['zone']
 
 

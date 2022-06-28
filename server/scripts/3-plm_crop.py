@@ -1,7 +1,7 @@
 # takes screenshots from ./media/smile_exports/WORLD/plm_enemies/batchNUMBER/
 # crops, parses room_key/event_name, and assigns to room with best guess of position
 
-from _setup import get_world_from_argv
+from _setup import get_wzr
 
 from collections import defaultdict
 from django.conf import settings
@@ -11,18 +11,17 @@ import imagehash
 import math
 import np
 import os
-import unrest_image as img
-import sys
-
 from PIL import Image
-import pytesseract
+import sys
+import unrest_image as img
+from unrest.utils import JsonCache
 
 from maptroid.models import Room
 from maptroid.sm import set_transparency, to_media_url
 
 
-world = get_world_from_argv()
-rooms = Room.objects.filter(world=world)
+world, _, rooms = get_wzr()
+
 BIN = 16
 
 SMILE_BG = (128, 128, 255, 255)
@@ -67,21 +66,6 @@ DIRS = {
   'processed': get_dir('cache/processed'),
 }
 
-class JsonCache(dict):
-  def __init__(self, name, *args, **kwargs):
-    super().__init__(*args, **kwargs)
-    self._path = os.path.join(settings.BASE_DIR, '../static/smile', name+'.json')
-    if os.path.exists(self._path):
-      with open(self._path, 'r') as f:
-        self.update(json.loads(f.read()))
-  def __setitem__(self, *args):
-    super().__setitem__(*args)
-    self._save()
-  def _save(self):
-    with open(self._path, 'w') as f:
-      f.write(json.dumps(self, indent=2))
-
-
 def get_cached_image(image_name, dest_key, function, force=False):
   def func2():
     image = Image.open(os.path.join(SOURCE_DIR, data['batch_name'], image_name))
@@ -101,7 +85,7 @@ data = {
   'missing_event_name': 0,
 }
 
-hash_to_letter = JsonCache('hash_to_letter')
+hash_to_letter = JsonCache(os.path.join(settings.BASE_DIR, '../static/smile/hash_to_letter.json'))
 
 def read_text(ss_name, type_, coords):
   if ss_name in data['room_keys']:
@@ -229,14 +213,17 @@ if __name__ == '__main__':
     load_plms(f'batch{i}')
   if data['missing_smile_id'] or data['missing_event_name']:
     print(f"missing {data['missing_smile_id']} smile_ids and {data['missing_event_name']} event names")
+    if not '-f' in sys.argv:
+      print("exiting. Rerun with -f flag to ignore missing event names and smile_ids")
 
   # don't show rooms from trash in totals
-  trash_room = world.zone_set.all().get(slug__startswith='ztrash')
-  rooms = rooms.exclude(zone_id=trash_room.id)
   missing_rooms = rooms.filter(data__plm_enemies__isnull=True)
   missing_rooms = sorted([r.key or '' for r in missing_rooms])
   if missing_rooms:
     print('missing rooms', missing_rooms)
+    root = 'http://maptroid.uberfordogs.com:8943'
+    ws = world.slug
+    for key in missing_rooms:
+      print(f'{root}/media/smile_exports/{ws}/layer-1/{key}')
   processed_count = rooms.filter(data__plm_enemies__isnull=False).count()
   print(f'{processed_count} / {rooms.count()} rooms have plm_enemies')
-  # extract_icons()
