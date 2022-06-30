@@ -30,7 +30,7 @@ def goc_item(room, sprite_id, xy):
             room=room,
             zone=room.zone
         )
-        print(f'item created {item.data["type"]} in {item.room.name or item.room.id}')
+        print(f'item created {item.data["type"]} in {item.room.name or item.room.id} @ {xy}')
     item.data['modifier'] = sprite.modifier
     item.save()
 
@@ -74,7 +74,7 @@ for room in rooms:
         book.warn(f'http://maptroid.uberfordogs.com:8943/sm/{world.slug}/?room={room.id}')
     if extra_items:
         to_create += len(extra_items)
-        if '-f' in sys.argv:
+        if '--dry-run' not in sys.argv:
             for xy, (match_id, _type) in extra_items.items():
                 goc_item(room, match_id, xy)
         else:
@@ -82,7 +82,7 @@ for room in rooms:
     book.close()
 
 if to_create:
-    if '-f' in sys.argv:
+    if '--dry-run' not in sys.argv:
         print(f'{to_create} new items were created')
     else:
         print(f'{to_create} missing items will be created if rerun with -f flag')

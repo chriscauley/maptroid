@@ -47,7 +47,10 @@ class Labbook():
         index = {}
         index_path = Path(settings.MEDIA_ROOT) / f'labbooks/index.json'
         if index_path.exists():
-            index = json.loads(index_path.read_text())
+            try:
+                index = json.loads(index_path.read_text())
+            except:
+                print("Warning: malformed json", self.name)
         index[self.name] = self.url = _media(data_path)
         index_path.write_text(json.dumps(index, indent=2))
 
