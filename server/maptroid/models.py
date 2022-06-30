@@ -20,6 +20,8 @@ def default_world_data():
   }
 
 
+DEV_ROOT = 'http://maptroid.uberfordogs.com:8943'
+
 class World(models.Model):
   name = models.CharField(max_length=128)
   slug = models.CharField(max_length=128)
@@ -122,6 +124,9 @@ class Room(models.Model):
       self.data['geometry']['outer'] = get_room_walls(self)
     super().save(*args, **kwargs)
 
+  def get_dev_url(self):
+    return f'{DEV_ROOT}/sm/{self.world.slug}/?room={self.id}'
+
 
 class Item(models.Model):
   room = models.ForeignKey(Room, models.CASCADE)
@@ -129,6 +134,9 @@ class Item(models.Model):
   data = models.JSONField(default=dict, blank=True)
   __str__ = lambda self: str(self.data)
 
+
+  def get_dev_url(self):
+    return f'{DEV_ROOT}/sm/{self.room.world.slug}/?item={self.id}'
 
 # class Door(models.Model):
 #   room = models.ForeignKey(Room, models.CASCADE)

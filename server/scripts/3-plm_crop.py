@@ -221,9 +221,7 @@ if __name__ == '__main__':
   missing_rooms = sorted([r.key or '' for r in missing_rooms])
   if missing_rooms:
     print('missing rooms', missing_rooms)
-    root = 'http://maptroid.uberfordogs.com:8943'
-    ws = world.slug
     for key in missing_rooms:
-      print(f'{root}/media/smile_exports/{ws}/layer-1/{key}')
+      print(Room.objects.get(key=key, world=world).get_dev_url())
   processed_count = rooms.filter(data__plm_enemies__isnull=False).count()
   print(f'{processed_count} / {rooms.count()} rooms have plm_enemies')

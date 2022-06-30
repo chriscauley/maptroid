@@ -4,7 +4,7 @@ import numpy as np
 import os
 import urcv
 
-from maptroid.icons import get_icons, SM_DIR
+from maptroid.icons import get_icons, SM_DIR, ROTATIONS
 
 @functools.lru_cache
 def list_worlds():
@@ -79,10 +79,33 @@ def match_door_color(image, world):
             match = name
     return match
 
+@functools.lru_cache
+def get_vulcania_doors():
+    nwd_doors = cv2.imread('static/sm/nwd-red-doorcap.png')
+    out = []
+    for y_offset in [0, 64, 128]:
+        blue_left = get_door_icons('new-wet-dream', 'full')['left']['blue']
+        nwd_left = nwd_doors[y_offset:y_offset+64]
+        doorset = [(
+            cv2.cvtColor(blue_left, cv2.COLOR_BGRA2GRAY),
+            cv2.cvtColor(nwd_left, cv2.COLOR_BGRA2GRAY),
+            blue_left[:,:,:3],
+        )]
+        for rotate in [90, 180, 270]:
+            doorset.append([cv2.rotate(i, ROTATIONS[rotate]) for i in doorset[0]])
+        out.append(doorset)
+    return out
+
 def find_doors(image, world):
     gray_icons = get_gray_door_icons(world)
     matched_doors = {}
     gray = cv2.cvtColor(image, cv2.COLOR_BGRA2GRAY)
+    if world == 'new-wet-dream':
+        for doorset in get_vulcania_doors():
+            for blue_gray, red_gray, blue in doorset:
+                for x, y, _x2, _y2 in urcv.template.match(gray, red_gray):
+                    urcv.draw.paste(image, blue, x, y)
+                    gray = cv2.cvtColor(image, cv2.COLOR_BGRA2GRAY)
     for key, template in gray_icons.items():
         orientation = key.replace("door_", "")
         xywhs = urcv.template.match(gray, template, threshold=0.85)
@@ -100,7 +123,8 @@ def find_elevators(room):
     world = room.world
     path = f'.media/smile_exports/{world.slug}/plm_enemies/{room.key}'
     if not os.path.exists(path):
-        print(f'skipping elevators for {room.name or room.id} because of missing plm_enimies')
+        print(f'skipping elevators because of missing plm_enimies:')
+        print(room.get_dev_url())
         return []
     layer = cv2.imread(path)
     gray = cv2.cvtColor(layer, cv2.COLOR_BGRA2GRAY)
@@ -115,7 +139,7 @@ def populate_room_elevators(room):
         room.data['plm_overrides'][f'{x},{y}'] = 'elevator'
 
 def draw_doors(image, doors, world, offset=[0, 0]):
-    rotated_caps = get_door_icons(world, 'full')
+    rotated_fulls = get_door_icons(world, 'full')
     image = urcv.force_alpha(image)
 
     for x, y, orientation, color in doors:
@@ -124,8 +148,8 @@ def draw_doors(image, doors, world, offset=[0, 0]):
             dx = -1
         if orientation == 'down':
             dy = -1
-        cap = rotated_caps[orientation][color]
-        urcv.draw.paste_alpha(image, cap, 16*(x+offset[0]+dx), 16*(y+offset[1]+dy))
+        full = rotated_fulls[orientation][color]
+        urcv.draw.paste_alpha(image, full, 16*(x+offset[0]+dx), 16*(y+offset[1]+dy))
     return image
 
 def populate_room_doors(room):
