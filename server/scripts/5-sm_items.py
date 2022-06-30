@@ -71,7 +71,7 @@ for room in rooms:
         book.warn('only one room, warning to trigger print')
     if existing_items:
         book.warn(f"Item in DB is not in plm_image {_repr}\n{existing_items}")
-        book.warn(f'http://maptroid.uberfordogs.com:8943/sm/{world.slug}/?room={room.id}')
+        book.warn(room.get_dev_url())
     if extra_items:
         to_create += len(extra_items)
         if '--dry-run' not in sys.argv:

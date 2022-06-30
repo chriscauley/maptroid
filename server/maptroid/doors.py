@@ -81,7 +81,7 @@ def match_door_color(image, world):
 
 @functools.lru_cache
 def get_vulcania_doors():
-    nwd_doors = cv2.imread('static/sm/nwd-red-doorcap.png')
+    nwd_doors = cv2.imread('static/sm/nwd-doors.png')
     out = []
     for y_offset in [0, 64, 128]:
         blue_left = get_door_icons('new-wet-dream', 'full')['left']['blue']
