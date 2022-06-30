@@ -1,4 +1,4 @@
-from _setup import get_world_zones_from_argv
+from _setup import get_wzr
 from collections import defaultdict
 import cv2
 from django.conf import settings
@@ -67,14 +67,13 @@ def filter_interior_walls(shape_x_ys):
 
 
 def main():
-    world, zones = get_world_zones_from_argv()
-    zone_ids = [z.id for z in zones]
+    world, zones, rooms = get_wzr()
     BTS_DIR = os.path.join(settings.MEDIA_ROOT, f'smile_exports/{world.slug}/bts')
     sprite_matcher = SpriteMatcher()
     keys = os.listdir(BTS_DIR)
     for key in keys:
         room = Room.objects.get(world__slug=world.slug, key=key)
-        if room.zone_id not in zone_ids:
+        if not room in rooms:
             continue
         if room.data.get('trash'):
             continue
@@ -141,7 +140,10 @@ def main():
                 cre_xys[sprite.type].append([x, y])
             if sprite.category == 'hex':
                 hex_xys[sprite.type].append([x, y])
-        cre_xys.update(scan_for_cre(room))
+
+        # scan layer 1 for blocks that don't appear in cre
+        for key, value in scan_for_cre(room).items():
+            cre_xys[key] = cre_xys[key] + value
         room.data['cre'] = {}
         taken_xys = []
         for key, xys in cre_xys.items():
