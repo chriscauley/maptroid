@@ -71,7 +71,7 @@ def main():
     BTS_DIR = os.path.join(settings.MEDIA_ROOT, f'smile_exports/{world.slug}/bts')
     sprite_matcher = SpriteMatcher()
     keys = os.listdir(BTS_DIR)
-    for key in keys:
+    for i_key, key in enumerate(keys):
         room = Room.objects.get(world__slug=world.slug, key=key)
         if not room in rooms:
             continue
@@ -157,7 +157,7 @@ def main():
             if xys:
                 room.data['cre_hex'][key] = xys_to_rectangles(xys)
         room.save()
-        print(f'saving #{room.id} - {room.name}')
+        print(f'{i_key+1} / {len(keys)} saving #{room.id} {room.name or ""}')
 
 """
 b16_
