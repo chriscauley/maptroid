@@ -25,6 +25,7 @@
         </template>
         <svg-overlay :highlighted_rooms="highlighted_rooms" />
         <item-overlay v-if="tool_storage.state.show_items" />
+        <link-overlay v-if="tool_storage.state.show_links" />
         <elevator-overlay />
         <div v-for="(portal, i) in portals" :key="i" :class="portal.class" :style="portal.style" />
       </html-overlay>
@@ -48,6 +49,7 @@ import HtmlOverlay from '@/vue-openseadragon/HtmlOverlay.vue'
 import ViewerPanel from '@/components/ViewerPanel/index.vue'
 import ItemMixin from '@/store/ItemMixin'
 import ItemOverlay from './ItemOverlay.vue'
+import LinkOverlay from './LinkOverlay.vue'
 import OsdStore from './OsdStore'
 import OverlapDropdown from './OverlapDropdown.vue'
 import EditRoom from './EditRoom.vue'
@@ -74,6 +76,7 @@ export default {
     ItemOverlay,
     ElevatorOverlay,
     EditRoom,
+    LinkOverlay,
     OverlapDropdown,
     SvgOverlay,
     RezoneDropdown,
@@ -129,7 +132,7 @@ export default {
       }
 
       const rooms = this.$store.route.world_rooms.filter((r) => zone_offsets[r.zone])
-      const room_bounds = {} // TODO remanme room_bounds
+      const room_bounds = {}
       rooms.forEach((r) => {
         const [zone_x, zone_y] = zone_offsets[r.zone]
         const [x, y, w, h] = r.data.zone.bounds

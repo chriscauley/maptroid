@@ -27,6 +27,11 @@
         @click.stop="deletePlm(block.xy)"
       />
     </template>
+    <template v-if="mode === 'link'">
+      <div v-for="link in links" v-bind="link.attrs" :key="link.key" @click.stop="deleteLink(link)">
+        {{ link.text }}
+      </div>
+    </template>
     <div v-if="drag_bounds" v-bind="drag_bounds_attrs" />
   </div>
 </template>
@@ -72,7 +77,7 @@ export default {
     },
     style() {
       const [x, y, width, height] = this.room.data.zone.bounds
-      if (['item', 'overlap', 'block', 'plm'].includes(this.mode)) {
+      if (['item', 'overlap', 'block', 'plm', 'link'].includes(this.mode)) {
         return {
           height: `${height * 256}px`,
           width: `${width * 256}px`,
@@ -161,13 +166,7 @@ export default {
       return this.room.data.cre_overrides?.map(([x, y, w, h, _name, respawn], id) => ({
         id,
         class: ['sm-room-box__override', { '-respawn': respawn }],
-        style: {
-          height: `${16 * h}px`,
-          left: `${16 * x}px`,
-          position: 'absolute',
-          top: `${16 * y}px`,
-          width: `${16 * w}px`,
-        },
+        style: this._style(x, y, w, h),
       }))
     },
     holes() {
@@ -186,8 +185,31 @@ export default {
         pointerEvents: 'none',
       }))
     },
+    links() {
+      return Object.entries(this.room.data.links || {}).map(([xy, entity]) => {
+        xy = xy.split(',').map(Number)
+        return {
+          id: `link__${xy}`,
+          xy,
+          text: entity.text,
+          attrs: {
+            class: `sm-link -${entity.color}`,
+            style: this._style(xy[0], xy[1], 2, 2),
+          },
+        }
+      })
+    },
   },
   methods: {
+    _style(x, y, w, h) {
+      return {
+        height: `${16 * h}px`,
+        left: `${16 * x}px`,
+        position: 'absolute',
+        top: `${16 * y}px`,
+        width: `${16 * w}px`,
+      }
+    },
     _getMouseXY(clientX, clientY) {
       const box = this.$el.getBoundingClientRect()
       return [clientX - box.x, clientY - box.y].map((i) => Math.floor(i / 16))
@@ -238,6 +260,13 @@ export default {
         const [x, y] = this._getMouseXY(event.clientX, event.clientY)
         const { data } = this.room
         data.plm_overrides[[x, y]] = this.variant
+        this.bounceSave()
+      } else if (this.mode === 'link') {
+        const [x, y] = this._getMouseXY(event.clientX, event.clientY)
+        const { data } = this.room
+        data.links = data.links || {}
+        const text = window.prompt('Please enter a name')
+        data.links[[x, y]] = { type: 'link', color: this.variant, text }
         this.bounceSave()
       }
       this.ctrl_down = false
@@ -305,6 +334,11 @@ export default {
     deletePlm(xy) {
       const { data } = this.room
       delete data.plm_overrides[xy]
+      this.bounceSave()
+    },
+    deleteLink(link) {
+      const { data } = this.room
+      delete data.links[link.xy]
       this.bounceSave()
     },
   },

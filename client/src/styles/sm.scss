@@ -1,6 +1,7 @@
 @use "sass:math";
 @use "sass:color";
 @use "sass:list";
+@use "sass:string";
 @import "./variables.scss";
 
 .edit-room .modal-content {
@@ -22,7 +23,7 @@
 
 .sm-room-box {
   background-size: cover;
-  &.-mode-overlap, &.-mode-item, &.-mode-block, &.-mode-plm {
+  &.-mode-overlap, &.-mode-item, &.-mode-block, &.-mode-plm, &.-mode-link {
     position: relative;
   }
   canvas {
@@ -52,11 +53,15 @@
   }
 }
 
-.osd-html__overlay .sm-item {
+.osd-html__overlay .sm-item,
+.osd-html__overlay .sm-link {
   @apply absolute;
   &:before {
-    @apply absolute bg-black;
+    @apply bg-black;
     outline: 1px solid white;
+  }
+  &:before, ._before {
+    @apply absolute;
     transition: inset 0.25s;
   }
   @mixin item-zoom($zoom, $ratio) {
@@ -64,7 +69,7 @@
       .ur-popper {
         padding-top: $ratio * 100%;
       }
-      &:before {
+      &:before, ._before {
         inset: $ratio * -100%;
       }
     }
@@ -98,11 +103,11 @@
   }
 }
 
-.sm-elevator, .sm-item, .sm-block, .sm-cre-hex, .sm-portal, .sm-ui {
+.sm-elevator, .sm-item, .sm-block, .sm-cre-hex, .sm-portal, .sm-ui, .sm-link {
   @apply relative inline-block;
   height: 1em;
   width: 1em;
-  &:before {
+  &:before, ._before {
     @apply absolute inset-0;
     background-size: 100% auto;
     content: "";
@@ -250,8 +255,33 @@ $ascent-items: weapons-tank shinespark boost-ball;
   }
 }
 
-.osd-html__overlay .sm-portal {
-  @apply absolute;
+.sm-link {
+  @apply flex items-center justify-center;
+  &:before {
+    display: none;
+  }
+  ._before {
+    @apply absolute;
+    background-size: contain;
+    outline: 0;
+  }
+  @each $name, $color in $portal-colors {
+    &.-#{$name}, &.-#{$name} ._before {
+      background-color: string.unquote($color);
+    }
+  }
+  &.-yellow, &.-green, &.-cyan, &.-orange, &.-white {
+    color: black;
+  }
+}
+.osd-html__overlay {
+  .sm-portal, .sm-link {
+    @apply absolute;
+  }
+  .sm-link {
+    /* text is displayed using background image */
+    color: transparent;
+  }
 }
 
 

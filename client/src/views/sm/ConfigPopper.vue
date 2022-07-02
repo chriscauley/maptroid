@@ -29,6 +29,7 @@ const groups = {
     // enemies: true,
     // doors: true,
     route: true,
+    links: true,
   },
 }
 

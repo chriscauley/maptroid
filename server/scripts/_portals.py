@@ -4,7 +4,7 @@ import numpy as np
 import json
 
 with open('./static/sm/portal/colors.json') as f:
-    colors: f.read()
+    colors = json.loads(f.read())
 
 portal = cv2.imread('./static/sm/portal/portal.png', cv2.IMREAD_UNCHANGED)
 # portal = cv2.resize(portal, (128, 128))
