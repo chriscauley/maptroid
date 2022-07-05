@@ -152,6 +152,13 @@ def draw_doors(image, doors, world, offset=[0, 0]):
         urcv.draw.paste_alpha(image, full, 16*(x+offset[0]+dx), 16*(y+offset[1]+dy))
     return image
 
+
+def door_is_overridden(room, door):
+    for x, y, w, h, _type in room.data.get('cre_overrides', []):
+        if door[0] in range(x, x+w) and door[1] in range(y, y+h):
+            return True
+
+
 def populate_room_doors(room):
     world = room.world
     matched_doors = {}
@@ -172,5 +179,8 @@ def populate_room_doors(room):
     for door in all_doors:
         room_x = door[0] // 16
         room_y = door[1] // 16
+        if door_is_overridden(room, door):
+            print("door overridden", room.get_dev_url(), door)
+            continue
         if [room_x, room_y] not in room.data.get('holes', []):
             room.data['doors'].append(door)

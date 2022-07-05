@@ -49,6 +49,5 @@ def get_wzr(exclude_hidden=False):
         zones = zones.exclude(slug__startswith="ztrash-")
         zones = zones.exclude(slug__startswith="unknown-")
     if zones.count():
-        zone_ids = [z.id for z in zones]
-        rooms = rooms.filter(zone_id__in=zone_ids)
+        rooms = rooms.filter(zone__in=zones)
     return world, zones, rooms

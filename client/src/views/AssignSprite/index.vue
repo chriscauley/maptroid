@@ -1,6 +1,6 @@
 <template>
   <div class="admin-smile-sprite" v-if="plmsprites">
-    <div class="admin-smile-sprite__groups btn-group -plmsprites">
+    <div class="admin-smile-sprite__groups -plmsprites">
       <h3>Unmatched PLM Sprites ({{ plmsprites.length }})</h3>
       <div class="admin-smile-sprite__cards">
         <div

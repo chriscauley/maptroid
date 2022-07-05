@@ -10,6 +10,10 @@ from maptroid.sm import process_zone
 world, zones, rooms = get_wzr()
 
 world.normalize()
+
+# reload after normalizing
+world, zones, rooms = get_wzr()
+
 print(f'processing {len(zones)} zones')
 for zone in zones:
     print('processing zone: ', zone)

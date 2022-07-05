@@ -25,7 +25,7 @@ const getText = (link) => {
     ctx.textAlign = 'center'
     const { actualBoundingBoxAscent: a, actualBoundingBoxDescent: d } = ctx.measureText(text)
 
-    ctx.fillText(text, s / 2, s / 2 + (a - d) / 2)
+    ctx.fillText(text, s / 2, s / 2 + (a - d) / 2, 64)
 
     bg_cache[cache_key] = `url(${canvas.toDataURL()})`
   }

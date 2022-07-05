@@ -72,6 +72,8 @@ def process_zone(zone):
         for room in rooms:
             room_x, room_y, width, height = room.data['zone']['bounds']
             room_image = np.zeros((int(height) * 256, int(width) * 256, 4), dtype=np.uint8)
+            if 'layer-2' in layers:
+                room_image[:,:] = (17, 17, 17, 255)
 
             # this allows the clear_holes preference to be set from the top down
             # some maps (eg ascent) look better if filled in a bit more
@@ -128,11 +130,11 @@ def process_zone(zone):
                         layer_image = canvas
                     if is_door_layer:
                         draw_doors(layer_image, room.data['doors'], zone.world.slug)
-                    for x, y in holes:
-                        layer_image[y*256:(y+1) * 256,x*256:(x+1) * 256,:] = [0,0,0,0]
                     cv2.imwrite(layer_path, layer_image)
                     urcv.draw.paste_alpha(room_image, layer_image, 0, 0)
 
+            for x, y in holes:
+                room_image[y*256:(y+1) * 256,x*256:(x+1) * 256,:] = [0,0,0,0]
             cv2.imwrite(os.path.join(layers_dir, room.key), room_image)
             urcv.draw.paste_alpha(zone_image, room_image, room_x * 256, room_y * 256)
         cv2.imwrite(dest, zone_image)

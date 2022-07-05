@@ -117,7 +117,9 @@ const getBlocks = (room, with_cre = false) => {
   })
   Object.values(room.data.doors || {}).forEach(([x, y, direction]) => {
     doors_direction_to_dxys[direction].forEach(([dx, dy]) => {
-      delete block_map[[x + dx, y + dy]]
+      if (block_map[[x + dx, y + dy]] === 'sm-cre-hex -unknown') {
+        delete block_map[[x + dx, y + dy]]
+      }
     })
   })
   return block_map

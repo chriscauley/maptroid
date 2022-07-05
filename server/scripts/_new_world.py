@@ -3,11 +3,11 @@ from django.utils.text import slugify
 
 from maptroid.models import Zone, World
 
-NAME = 'New Wet Dream'
+NAME = 'Kaizo Possible'
 
 # ZONE_NAMES = ['Crateria', 'Brinstar', 'Norfair', 'Wrecked Ship', 'Maridia', 'Tourian']
 
-ZONE_NAMES = ['Solaria', 'Amazonia', 'Vulcania', 'Aquaria', 'Metallia', 'Universia']
+ZONE_NAMES = ['Atlantis Ship', 'Atlantis Water', 'Chozo Ruins', 'Lower Mines', 'Research Lab', 'Upper Mines']
 
 ZONE_NAMES.append('unknown-'+slugify(NAME))
 ZONE_NAMES.append('ztrash-'+slugify(NAME))

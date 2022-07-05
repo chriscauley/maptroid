@@ -40,13 +40,15 @@ class World(models.Model):
       x_max = max(x + width, x_max)
       y_max = max(y + height, y_max)
 
-    if x_min or y_min:
+    if zones and (x_min or y_min):
       for zone in zones:
         zone.data['world']['bounds'][0] -= x_min
         zone.data['world']['bounds'][1] -= y_min
         zone.save()
+      for elevator in self.data.get('elevators', []):
+        elevator['xys'] = [[x-x_min, y-y_min] for x,y in elevator['xys']]
 
-    self.save()
+      self.save()
 
   def save(self, *args, **kwargs):
     if not self.slug:
