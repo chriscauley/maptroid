@@ -47,8 +47,8 @@ const Item = {
     const prepItem = (type) => ({
       type,
       icon: [`sm-item -${type}`, acquired_counts[type] ? '-has' : '-has-not'],
-      // TODO find a better way to hide totals rather than just > 2
-      text: totals[type] > 2 ? `${acquired_counts[type] || 0}/${totals[type]}` : '',
+      // TODO find a better way to hide totals rather than just > 1
+      text: totals[type] > 1 ? `${acquired_counts[type] || 0}/${totals[type]}` : '',
     })
     const groups = ['packs', 'beams', 'abilities'].map((group_name) => ({
       name: group_name,
