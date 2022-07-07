@@ -52,6 +52,8 @@ const Block = {
     'switch_shot',
     'heal',
     'drain',
+    'uparrow',
+    'downarrow',
   ],
   directional: [
     'spike_up',
