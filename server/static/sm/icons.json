@@ -32,7 +32,9 @@
       "spike_misc",
       "spark",
       "exit",
-      "switch_shot"
+      "switch_shot",
+      "heal",
+      "drain"
     ]
   },
   "misc-spikes": {

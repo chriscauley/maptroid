@@ -115,9 +115,11 @@ const getBlocks = (room, with_cre = false) => {
       })
     })
   })
+
+  const _skips = ['sm-cre-hex -unknown', 'sm-cre-hex -respawn']
   Object.values(room.data.doors || {}).forEach(([x, y, direction]) => {
     doors_direction_to_dxys[direction].forEach(([dx, dy]) => {
-      if (block_map[[x + dx, y + dy]] === 'sm-cre-hex -unknown') {
+      if (_skips.includes(block_map[[x + dx, y + dy]])) {
         delete block_map[[x + dx, y + dy]]
       }
     })

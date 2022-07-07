@@ -185,7 +185,7 @@ $block: shot crumble bomb missile super-missile power-bomb speed-booster grapple
   }
 }
 
-$block: empty block spike_misc spark exit switch_shot;
+$block: empty block spike_misc spark exit switch_shot heal drain;
 
 .sm-block {
   @for $i from 0 to length($block) {
