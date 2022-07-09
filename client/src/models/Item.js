@@ -35,7 +35,7 @@ const Item = {
   beams,
   misc,
   groupItems(world, world_items, actions) {
-    const totals = countBy(world_items, 'data.type')
+    const totals = countBy(world_items.filter(i => !i.data.duplicate), 'data.type')
     const items_by_id = {}
     world_items.forEach((i) => (items_by_id[i.id] = i))
     const acquired_types = actions

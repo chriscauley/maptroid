@@ -17,6 +17,7 @@
             <i :class="item.class" />
             <div class="flex-grow truncate">
               {{ item.title }}
+              <div v-if="item.data.duplicate">(duplicate)</div>
               <div v-if="item.data.reward">Reward: {{ item.data.reward }}</div>
             </div>
             <div
