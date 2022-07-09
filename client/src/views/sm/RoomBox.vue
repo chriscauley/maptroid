@@ -272,11 +272,19 @@ export default {
       this.ctrl_down = false
     },
     bounceSave: debounce(function() {
+      this.$store.local.save({ loading: true })
+      this.$store.room
+        .save(this.room)
+        .then(this.$store.route.refetchRooms)
+        .then(() => this.$store.local.save({ loading: false }))
+    }, 2000),
+    fastSave: debounce(function() {
       this.$store.room.save(this.room).then(this.$store.route.refetchRooms)
     }, 500),
     drag(event) {
       this.ctrl_down = event.ctrlKey
-      if (this.tool_storage.state.selected.tool === 'rezone') {
+      const { tool } = this.tool_storage.state.selected
+      if (tool === 'rezone') {
         return
       } else if (this.mode === 'overlap') {
         const box = this.$el.getBoundingClientRect()
@@ -295,9 +303,9 @@ export default {
         const w = Math.abs(x2 - x1) + 1
         const h = Math.abs(y2 - y1) + 1
         this.drag_bounds = [x, y, w, h]
-      } else {
+      } else if (tool === 'move_room') {
         this.osd_store.dragRoom(this.room, event._drag.last_dxy)
-        this.bounceSave()
+        this.fastSave()
       }
     },
     addHole(xy) {

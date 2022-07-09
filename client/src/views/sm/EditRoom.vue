@@ -19,6 +19,10 @@
         </template>
       </unrest-toolbar>
       <room-box :mode="selected.tool" :variant="selected.variant" :room="room" :layer="layer" />
+      <template #extra_actions>
+        {{ room.key }}
+        {{ $store.local.state.loading ? '...' : '' }}
+      </template>
     </unrest-modal>
   </teleport>
 </template>
