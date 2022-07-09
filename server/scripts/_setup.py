@@ -1,5 +1,6 @@
-import os
 import django
+import requests
+import os
 import sys
 
 sys.path.append('.')
@@ -51,3 +52,16 @@ def get_wzr(exclude_hidden=False):
     if zones.count():
         rooms = rooms.filter(zone__in=zones)
     return world, zones, rooms
+
+cache_dir = '../_cache'
+
+def curl(url, force=False):
+    file_path = os.path.join(cache_dir, url.split('/')[-1])
+    if force or not os.path.exists(os.path.join(cache_dir, file_path)):
+        with open(file_path, 'w') as f:
+            response = requests.get(url)
+            response.raise_for_status()
+            f.write(response.text)
+            print('curl downloaded', url)
+    with open(file_path, 'r') as f:
+        return f.read()

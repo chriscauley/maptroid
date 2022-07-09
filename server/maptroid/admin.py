@@ -49,7 +49,8 @@ class ChannelAdmin(admin.ModelAdmin):
 
 @admin.register(World)
 class WorldAdmin(admin.ModelAdmin):
-    pass
+    list_display = ['__str__', 'hidden', 'mc_id', 'data']
+    list_editable = ['hidden', 'mc_id']
 
 
 @admin.register(Screenshot)

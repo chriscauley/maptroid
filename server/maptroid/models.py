@@ -27,6 +27,8 @@ class World(models.Model):
   slug = models.CharField(max_length=128)
   hidden = models.BooleanField(default=False)
   data = models.JSONField(default=dict, blank=True)
+  mc_id = models.IntegerField(null=True, blank=True)
+
   __str__ = lambda self: self.name
 
   def normalize(self):

@@ -1,4 +1,4 @@
-import _setup
+from _setup import curl
 
 import requests
 from bs4 import BeautifulSoup
@@ -23,17 +23,6 @@ zone_map = {
     'Warehouse': 'Brinstar',
     # 'Wrecked Ship': '',
 }
-
-def curl(url, force=False):
-    file_path = os.path.join(cache_dir, url.split('/')[-1])
-    if force or not os.path.exists(os.path.join(cache_dir, file_path)):
-        with open(file_path, 'w') as f:
-            response = requests.get(url)
-            response.raise_for_status()
-            f.write(response.text)
-            print('curl downloaded', url)
-    with open(file_path, 'r') as f:
-        return f.read()
 
 html = curl('https://wiki.supermetroid.run/List_of_rooms_by_SMILE_ID')
 soup = BeautifulSoup(html, 'html.parser')
