@@ -35,6 +35,9 @@ export default {
       return links
     },
     zone_links() {
+      if (!this.$auth.user?.is_super_user) {
+        return null
+      }
       const { world_slug, zone_slug } = this.$route.params
       if (zone_slug === undefined) {
         return null

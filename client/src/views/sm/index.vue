@@ -60,7 +60,6 @@ import ToolStorage from './ToolStorage'
 import ZoneBox from './ZoneBox.vue'
 
 const { Rect } = Openseadragon
-window.Rect = Rect
 
 export default {
   __route: {
