@@ -389,3 +389,16 @@ body.theme-dark_mode {
 .pixelated {
   image-rendering: pixelated;
 }
+
+.ur-dropdown.-mc {
+  .dropdown-items {
+    width: unset;
+  }
+  .dropdown-item {
+    white-space: pre;
+    &.-text {
+      line-height: 1.5;
+      white-space: pre-line;
+    }
+  }
+}

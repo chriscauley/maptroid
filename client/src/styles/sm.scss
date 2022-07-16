@@ -185,7 +185,7 @@ $block: shot crumble bomb missile super-missile power-bomb speed-booster grapple
   }
 }
 
-$block: empty block spike_misc spark exit switch_shot heal drain uparrow downarrow;
+$block: empty block spike_misc spark exit switch_shot heal drain uparrow downarrow wipe;
 
 .sm-block {
   @for $i from 0 to length($block) {
@@ -348,6 +348,12 @@ $zone-colors: (
   "juolbrin": $green,
   "melfad": $magenta,
   "keruarn": $maroon,
+
+  /* oxide */
+  "easy-norfair": $red,
+  "toxic-tank": $green,
+  "murder-ship": $yellow,
+  "blue-surface": $pink,
 );
 
 .sm-room-svg {
@@ -537,10 +543,14 @@ $zone-colors: (
 }
 
 .sm-config-popper {
-  @apply border p-2;
+  @apply border flex flex-col gap-2 p-2;
   background: var(--bg);
+  white-space: pre;
   label {
     @apply block;
+  }
+  &__title {
+    @apply font-bold;
   }
 }
 
