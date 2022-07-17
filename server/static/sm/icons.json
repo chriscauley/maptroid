@@ -124,7 +124,7 @@
     "note": "Used to regenerate colored-doors",
     "size": [32, 64],
     "icons": [
-      "super_metroid",
+      "super-metroid",
       "ypx",
       "ancient-chozo",
       "nature",
@@ -143,7 +143,7 @@
     "note": "Used to get blue palette for colored-doors generation",
     "size": [8, 64],
     "icons": [
-      "super_metroid",
+      "super-metroid",
       "ypx",
       "ancient-chozo",
       "nature",

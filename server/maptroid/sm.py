@@ -242,7 +242,7 @@ def make_walls_image(zone, dest):
                     stamp_map.pop((zx, zy), None)
             zxy = (16 * (x + room_x * 16), 16 * (y + room_y * 16))
             stamp_map[zxy] = type_
-        zone_image = draw_doors(zone_image, doors, 'super_metroid')
+        zone_image = draw_doors(zone_image, doors, 'super-metroid')
 
         skip = ['empty', 'block']
         stamp_map = { k: v for k, v in stamp_map.items() if v not in skip }

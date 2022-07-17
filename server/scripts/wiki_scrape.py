@@ -32,7 +32,7 @@ zone_names = []
 def update_room(smile_id, zone_name, room_name, href):
     if not zone_name:
         return
-    room = Room.objects.get(key=f"super_metroid_{smile_id}.png")
+    room = Room.objects.get(key=f"super-metroid_{smile_id}.png")
     zone = Zone.objects.get(name=zone_map.get(zone_name, zone_name))
     if room.zone and room.zone != zone:
         print('zone mismatch', smile_id, zoom.zone, zone)

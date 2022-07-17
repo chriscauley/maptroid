@@ -16,7 +16,7 @@ def list_worlds():
 @functools.lru_cache
 def get_door_icons(world, style):
     if not world in list_worlds():
-        return get_door_icons('super_metroid', style)
+        return get_door_icons('super-metroid', style)
     left = get_icons('colored-doors', source=f"world_doors/{world}.png")
     if not style in ['cap', 'half', 'halfcan', 'can', 'full']:
         raise ValueError(f"unrecognized door style: {style}")
@@ -171,7 +171,7 @@ def populate_room_doors(room):
         layer = cv2.imread(path)
 
         # plm_enemies will have vanilla door caps
-        world_slug = world.slug if layer_name == 'layer-1' else 'super_metroid'
+        world_slug = world.slug if layer_name == 'layer-1' else 'super-metroid'
 
         matched_doors.update(find_doors(layer, world=world_slug))
     all_doors = list(matched_doors.values())

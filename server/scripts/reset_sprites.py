@@ -12,7 +12,7 @@ if input(m) != "yes":
   exit()
 
 print("deleting")
-for room in Room.objects.filter(world__slug="super_metroid"):
+for room in Room.objects.filter(world__slug="super-metroid"):
   room.data.pop('plm_sprites', None)
   room.save()
 
