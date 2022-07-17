@@ -1,6 +1,6 @@
 <template>
   <div class="video-box" v-if="video">
-    <div class="item-list__header cursor-pointer">
+    <div class="item-list__header cursor-default">
       <div class="video-box__title" @click="open = true">
         <div :style="`background-image: url(${video.channel_icon})`" class="video-box__avatar" />
         {{ video.channel_name }}:
@@ -71,12 +71,20 @@ export default {
       this.loadVideo()
     }
   },
+  updated() {
+    if (this.show_player && !this.$el.querySelector('iframe')) {
+      this.loadVideo()
+    }
+  },
+  unmounted() {
+    clearInterval(this.interval)
+  },
   methods: {
     togglePlayer() {
       this.$store.local.save({ show_video: !this.$store.local.state.show_video })
     },
     loadVideo() {
-      if (!this.show_player) {
+      if (!this.show_player || !window.YT) {
         this.expanded && setTimeout(this.loadVideo, 200)
         return
       }
@@ -90,6 +98,7 @@ export default {
         videoId: this.video.external_id,
         playerVars: { start, origin, autoplay: 1 },
       })
+      clearInterval(this.interval)
       this.interval = setInterval(this.setTime, 60)
     },
     setTime() {

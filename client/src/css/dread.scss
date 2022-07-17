@@ -418,6 +418,9 @@
     @apply flex-grow;
     min-width: 4rem;
   }
+  .item-list__header {
+    cursor: normal;
+  }
 }
 
 .video-picker {
