@@ -5,8 +5,8 @@ const _getIcon = (tool, variant) => {
   return `-tool_${tool} -variant_${variant}`
 }
 
-const ToolStorage = (LS_KEY, { tools }) => {
-  const initial = { selected: {} }
+const ToolStorage = (LS_KEY, { tools, initial = {} }) => {
+  initial = { selected: {}, ...initial }
   const storage = ReactiveLocalStorage({ LS_KEY, initial })
 
   const makeTool = (options) => {

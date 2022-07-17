@@ -34,6 +34,7 @@ def goc_item(room, sprite_id, xy):
     item.data['modifier'] = sprite.modifier
     item.save()
 
+dryrun_rooms = []
 
 for room in rooms:
     book = Labbook(f'_verify_items__{room.id}')
@@ -55,8 +56,13 @@ for room in rooms:
             item = match_item(match_id)
             x += x0
             y += y0
+            if room.data.get('plm_overrides', {}).get(f'{x // 16},{y // 16}') == 'wipe':
+                continue
             if item:
                 room_xy = (x // 16, y // 16)
+                screen_xy = [i // 16 for i in room_xy]
+                if screen_xy in room.data['holes']:
+                    continue
                 existing_item = existing_items.pop(room_xy, None)
                 if not existing_item:
                     extra_items[room_xy] = [match_id, item]
@@ -74,6 +80,7 @@ for room in rooms:
         book.warn(room.get_dev_url())
     if extra_items:
         to_create += len(extra_items)
+        dryrun_rooms.append(room)
         if '--dry-run' not in sys.argv:
             for xy, (match_id, _type) in extra_items.items():
                 goc_item(room, match_id, xy)
@@ -85,4 +92,6 @@ if to_create:
     if '--dry-run' not in sys.argv:
         print(f'{to_create} new items were created')
     else:
-        print(f'{to_create} missing items will be created if rerun with -f flag')
+        print(f'{to_create} missing items will be created if rerun without --dry-run flag')
+        for room in set(dryrun_rooms):
+            print(room.get_dev_url())

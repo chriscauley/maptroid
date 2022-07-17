@@ -1,5 +1,10 @@
 <template>
-  <unrest-dropdown v-if="$store.route.world.mc_id" :items="mc_items" class="btn -primary -mc">
+  <unrest-dropdown
+    v-if="$store.route.world.mc_id"
+    :items="mc_items"
+    class="btn -primary -mc"
+    placement="bottom-end"
+  >
     <img src="/static/metroidconstruction.png" />
   </unrest-dropdown>
 </template>

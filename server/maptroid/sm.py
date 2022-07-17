@@ -230,7 +230,7 @@ def make_walls_image(zone, dest):
 
         for sxy, type_ in room.data.get('plm_overrides', {}).items():
             if type_ not in icons:
-                if type_ not in ['elevator']:
+                if type_ not in ['elevator', 'wipe']:
                     print("WARNING: unknown type", type_)
                 continue
             [x, y] = tuple([int(i) for i in sxy.split(',')])

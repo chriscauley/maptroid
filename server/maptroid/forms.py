@@ -12,7 +12,7 @@ class WorldForm(forms.ModelForm):
   user_can_GET = user_can_LIST = 'ALL'
   class Meta:
     model = World
-    fields = ('name', 'slug', 'hidden', 'data')
+    fields = ('name', 'slug', 'hidden', 'data', 'mc_id')
 
 @unrest_schema.register
 class RoomForm(forms.ModelForm):

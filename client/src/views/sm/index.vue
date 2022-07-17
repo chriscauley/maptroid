@@ -4,6 +4,7 @@
     <template v-if="osd_store.viewer">
       <unrest-toolbar :storage="tool_storage" class="-topleft">
         <config-popper v-if="tool_storage.state.settings_open" :storage="tool_storage" />
+        <mc-dropdown />
         <template #buttons>
           <overlap-dropdown />
           <cre-dropdown @highlight="(h) => (highlighted_rooms = h)" />
@@ -50,6 +51,7 @@ import ViewerPanel from '@/components/ViewerPanel/index.vue'
 import ItemMixin from '@/store/ItemMixin'
 import ItemOverlay from './ItemOverlay.vue'
 import LinkOverlay from './LinkOverlay.vue'
+import McDropdown from './McDropdown.vue'
 import OsdStore from './OsdStore'
 import OverlapDropdown from './OverlapDropdown.vue'
 import EditRoom from './EditRoom.vue'
@@ -76,6 +78,7 @@ export default {
     ElevatorOverlay,
     EditRoom,
     LinkOverlay,
+    McDropdown,
     OverlapDropdown,
     SvgOverlay,
     RezoneDropdown,

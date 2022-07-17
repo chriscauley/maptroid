@@ -33,5 +33,3 @@ for world in World.objects.filter(mc_id__isnull=False):
     ahist[mc_data.get('author')] += 1
     world.save()
 
-print(ahist)
-print(ghist)

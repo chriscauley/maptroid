@@ -1,5 +1,5 @@
 <template>
-  <div :style="style" :class="css" :title="`${room.id} - ${room.name}`" @click="click">
+  <div :style="style" :class="css" :title="`${room.id} - ${room.key}`" @click="click">
     <template v-if="mode">
       <div v-for="(hole, i) in holes" :key="i" :style="hole" />
       <unrest-draggable @drag="drag" :style="`background-image: url(${src})`" />
@@ -47,6 +47,8 @@ export const plms = {}
 Object.values(template_sprites).forEach((sprite_list) => {
   sprite_list.forEach(([type, width, height]) => (plms[type] = { type, width, height }))
 })
+
+plms.wipe = ['wipe', 1, 1]
 
 export default {
   inject: ['osd_store', 'tool_storage'],

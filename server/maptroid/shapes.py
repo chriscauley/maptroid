@@ -32,6 +32,8 @@ def polygons_to_geometry(polygons, isolations=[]):
         multipolygon = MultiPolygon([multipolygon])
     for shape in isolations:
         multipolygon = multipolygon.difference(Polygon(shape))
+    if isinstance(multipolygon, Polygon):
+        multipolygon = MultiPolygon([multipolygon])
     return [
         {
             'exterior': [list(p) for p in polygon.exterior.coords[:-1]],

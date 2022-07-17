@@ -36,6 +36,8 @@ class World(models.Model):
     x_max = y_max = -1e20
     x_min = y_min = 1e20
     for zone in zones:
+      if zone.data.get('hidden'):
+        continue
       x, y, width, height = zone.data['world']['bounds']
       x_min = min(x, x_min)
       y_min = min(y, y_min)

@@ -28,20 +28,30 @@ const groups = {
     items: true,
     // enemies: true,
     // doors: true,
-    route: true,
+    route: false,
     links: true,
   },
 }
 
 export const LAYER_NAMES = flatten(Object.values(groups).map((g) => Object.keys(g)))
+export const INITIAL_LAYERS = {
+  settings_open: true,
+  'show_layer-1': true,
+  show_rooms: true,
+  show_walls: true,
+  show_items: true,
+  show_links: true,
+}
+
 export const DZI_LAYERS = ['layer-1', 'bts', 'plm_enemies', 'walls']
 
 const help_texts = {
   'layer-1':
     'This is actually a combination of layer-1 and layer-2. I had trouble getting SMILE to export layer-2 for almost every room.',
   rooms: 'Shape of rooms (manually defined where not a rectangle)',
-  bts:
-    'This is the room geometry and special tiles according to smile. I know somethings are missing. I am sorry.',
+  bts: 'This is the room geometry and special tiles according to smile.',
+  plm_enemies:
+    'This is the "post load modifications" (items, etc) and enemies layers from the smile editor.',
   svg: 'My room geometry, reverse engineered from bts.',
   route: 'Route taken by selected video',
 }

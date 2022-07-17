@@ -1,5 +1,5 @@
 import ToolStorage from '@/components/unrest/ToolStorage'
-import { LAYER_NAMES } from './ConfigPopper.vue'
+import { LAYER_NAMES, INITIAL_LAYERS } from './ConfigPopper.vue'
 import portal_colors from '@/../../server/static/sm/portal/colors.json'
 
 export default (component) => {
@@ -40,7 +40,9 @@ export default (component) => {
     }
     return tools
   }
-  const storage = ToolStorage('tools__dread', { tools: getTools })
+
+  const initial = INITIAL_LAYERS
+  const storage = ToolStorage('tools__dread', { tools: getTools, initial })
   storage.getVisibleLayers = () => LAYER_NAMES.filter((n) => storage.state[`show_${n}`])
   storage.all_layers = LAYER_NAMES
 

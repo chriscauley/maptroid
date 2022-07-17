@@ -36,7 +36,8 @@
       "heal",
       "drain",
       "uparrow",
-      "downarrow"
+      "downarrow",
+      "plm_wipe"
     ]
   },
   "misc-spikes": {
