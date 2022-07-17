@@ -4,11 +4,11 @@
     <template v-if="osd_store.viewer">
       <unrest-toolbar :storage="tool_storage" class="-topleft">
         <config-popper v-if="tool_storage.state.settings_open" :storage="tool_storage" />
-        <mc-dropdown />
         <template #buttons>
           <overlap-dropdown />
           <cre-dropdown @highlight="(h) => (highlighted_rooms = h)" />
           <rezone-dropdown :storage="tool_storage" />
+          <mc-dropdown />
         </template>
       </unrest-toolbar>
       <html-overlay :viewer="osd_store.viewer">
@@ -24,7 +24,7 @@
         <template v-else>
           <zone-box v-for="zone in zones" :key="zone.id" :zone="zone" />
         </template>
-        <svg-overlay :highlighted_rooms="highlighted_rooms" />
+        <svg-overlay :highlighted_rooms="highlighted_rooms" :storage="tool_storage" />
         <item-overlay v-if="tool_storage.state.show_items" />
         <link-overlay v-if="tool_storage.state.show_links" />
         <elevator-overlay />

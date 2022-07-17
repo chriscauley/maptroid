@@ -27,6 +27,7 @@ export default {
   inject: ['map_props', 'osd_store', 'tool_storage'],
   props: {
     highlighted_rooms: Array,
+    storage: Object,
   },
   data() {
     return { hovering: null }
@@ -87,12 +88,15 @@ export default {
     },
 
     run_lines() {
+      if (!this.storage.state.show_route) {
+        return []
+      }
       let { raw_lines } = this
       if (this.tool_storage.state.selected.tool === 'run_path') {
         raw_lines = this.raw_run_lines
       }
       if (!raw_lines?.length) {
-        return
+        return []
       }
       let last_xy = raw_lines[0].xy
       const active_index = this.$store.local.state.insert_run_action_after || raw_lines.length - 1
