@@ -14,4 +14,4 @@ lines.push(`$template_sprites: ${toSassMap(templates)};`)
 const icons = loadStatic('sm/icons.json')
 lines.push(`$ui_items: ${icons['ui_items']['icons'].join(' ')};`)
 
-fs.writeFileSync('./src/styles/variables.scss', lines.join('\n\n'))
+fs.writeFileSync('./src/css/variables.scss', lines.join('\n\n'))

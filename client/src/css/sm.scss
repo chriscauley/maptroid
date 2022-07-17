@@ -293,8 +293,12 @@ $red: #d42020;
 $maroon: #5c152b;
 $magenta: #991b8c;
 $gray: #585c65;
+$white: #f8f8f8;
 $dark-green: #044f60;
-
+$purple: #401088;
+$sky-blue: #58c0e0;
+$peach: #f88868;
+$dark-blue: #000088;
 
 $zone-colors: (
   "crateria": $pink,
@@ -334,12 +338,12 @@ $zone-colors: (
   "void": $magenta,
 
   /* Vitality */
-  "pendulu-moda": $green,
-  "tag-lacora": $blue,
-  "tchornobog": $dark-green,
-  "akhlys": $red,
+  "pendula-moda": $green,
+  "tac-lacora": $blue,
+  "chornobog": $dark-green,
   "andavald": $magenta,
   "elseq": $maroon,
+  "khlys": $red,
 
   /* Cliffhanger */
   "eldridge": $gray,
@@ -354,6 +358,52 @@ $zone-colors: (
   "toxic-tank": $green,
   "murder-ship": $yellow,
   "blue-surface": $pink,
+
+  /* lost-world */
+  "dark-forest": $dark-green,
+  "fire-mountain": $red,
+  "hilly-swamp": $green,
+  "rock-plain": $blue,
+  "hunters-ship": $yellow,
+  "warp-zone": $magenta,
+
+  /* airy */
+  "airia": $gray,
+  "decays": $yellow,
+  "lonely": $red,
+  "nadirn": $green,
+  "orion": $blue,
+  "planetia": $dark-green,
+
+  /* eris */
+  "chozodian-shrine": $red,
+  "cobalt-mountains": $blue,
+  "dranaphen": $white,
+  "eris-station": $yellow,
+  "ethos": $purple,
+  "frozen-summits": $blue,
+  "marble-shrine": $gray,
+  "phazon-gardens": $sky-blue,
+  "phazon-hollows": $peach,
+  "reservoirs": $dark-blue,
+  "sacred-grounds": $magenta,
+  "the-abyss": $green,
+  "ziobelia": $dark-green,
+
+  /* kaizo-possible */
+  "atlantis-ship": $yellow,
+  "atlantis-water": $blue,
+  "chozo-ruins": $pink,
+  "lower-mines": $red,
+  "upper-mines": $green,
+  "research-lab": $maroon,
+
+  /* ypr */
+  "krateria": $dark-green,
+  "nerfair": $red,
+  "pdinstar": $green,
+  "secret-base": $yellow,
+  "waridia": $blue,
 );
 
 .sm-room-svg {

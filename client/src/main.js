@@ -13,7 +13,7 @@ import form from '@unrest/vue-form'
 import '@unrest/tailwind/dist.css'
 
 import store from '@/store'
-import '@/styles/base.scss'
+import '@/css/base.scss'
 import router from '@/router'
 
 auth.configure({
