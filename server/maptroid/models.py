@@ -54,6 +54,8 @@ class World(models.Model):
 
       self.save()
 
+    return x_max - x_min, y_max - y_min
+
   def save(self, *args, **kwargs):
     if not self.slug:
       self.slug = slugify(self.name)

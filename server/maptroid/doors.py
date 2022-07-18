@@ -80,15 +80,15 @@ def match_door_color(image, world):
     return match
 
 @functools.lru_cache
-def get_vulcania_doors():
-    nwd_doors = cv2.imread('static/sm/nwd-doors.png')
+def get_override_doors(world):
+    world_doors = cv2.imread(f'static/sm/override_doors/{world}_doors.png')
     out = []
-    for y_offset in [0, 64, 128]:
-        blue_left = get_door_icons('new-wet-dream', 'full')['left']['blue']
-        nwd_left = nwd_doors[y_offset:y_offset+64]
+    for y_offset in range(world_doors.shape[0] // 64):
+        blue_left = get_door_icons(world, 'full')['left']['blue']
+        world_left = world_doors[y_offset:y_offset+64]
         doorset = [(
             cv2.cvtColor(blue_left, cv2.COLOR_BGRA2GRAY),
-            cv2.cvtColor(nwd_left, cv2.COLOR_BGRA2GRAY),
+            cv2.cvtColor(world_left, cv2.COLOR_BGRA2GRAY),
             blue_left[:,:,:3],
         )]
         for rotate in [90, 180, 270]:
@@ -96,23 +96,38 @@ def get_vulcania_doors():
         out.append(doorset)
     return out
 
-def find_doors(image, world):
+def find_doors(image, world, room_id):
+    # one room in hydellius has a very bizarre door
+    if room_id == 5135 and world == 'hydellius':
+        door = get_door_icons(world, 'full')['right']['blue']
+        door = cv2.cvtColor(door, cv2.COLOR_BGRA2BGR)
+        urcv.draw.paste(image, door, 0, 96)
+        cv2.imwrite('.media/trash/doot.png', image)
+
     gray_icons = get_gray_door_icons(world)
     matched_doors = {}
     gray = cv2.cvtColor(image, cv2.COLOR_BGRA2GRAY)
-    if world == 'new-wet-dream':
-        for doorset in get_vulcania_doors():
-            for blue_gray, red_gray, blue in doorset:
-                for x, y, _x2, _y2 in urcv.template.match(gray, red_gray):
-                    urcv.draw.paste(image, blue, x, y)
-                    gray = cv2.cvtColor(image, cv2.COLOR_BGRA2GRAY)
+
+    # more weird doors by TROM!
+    override_doors = []
+    if world == 'new-wet-dream' or world == 'hydellius':
+        override_doors = get_override_doors(world)
+    for doorset in override_doors:
+        for blue_gray, red_gray, blue in doorset:
+            for x, y, _x2, _y2 in urcv.template.match(gray, red_gray, threshold=0.8):
+                urcv.draw.paste(image, blue, x, y)
+                gray = cv2.cvtColor(image, cv2.COLOR_BGRA2GRAY)
     for key, template in gray_icons.items():
         orientation = key.replace("door_", "")
         xywhs = urcv.template.match(gray, template, threshold=0.85)
         th, tw = template.shape
         for x, y, w, h in xywhs:
             door = image[y:y+th,x:x+tw]
-            color = match_door_color(door, world)
+            if world in ['hydellius']:
+                # hydellius' layer-1 is very messed up because there's not much color
+                color = 'blue'
+            else:
+                color = match_door_color(door, world)
             x = round(x / 16)
             y = round(y / 16)
 
@@ -173,7 +188,7 @@ def populate_room_doors(room):
         # plm_enemies will have vanilla door caps
         world_slug = world.slug if layer_name == 'layer-1' else 'super-metroid'
 
-        matched_doors.update(find_doors(layer, world=world_slug))
+        matched_doors.update(find_doors(layer, world_slug, room.id))
     all_doors = list(matched_doors.values())
     room.data['doors'] = []
     for door in all_doors:
