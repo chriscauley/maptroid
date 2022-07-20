@@ -1,5 +1,6 @@
 import _setup
 from colour import Color
+import os
 from PIL import Image, ImageDraw
 import re
 import sys
@@ -27,12 +28,42 @@ for line in _text.split(splitter)[1].split('\n'):
     color_by_zone[zone] = color_by_name[color_name]
 
 
-def main(world):
-    print("Processing", world, world.slug)
+def update_metrics(world):
+    """ Save a few world metrics for displaying in home menu """
+    active_zones = world.zone_set.exclude(slug__startswith='ztrash-')
+    active_zones = active_zones.exclude(slug__startswith='unknown-')
+    active_rooms = world.room_set.filter(zone__in=active_zones)
+    world.data['metrics'] = {
+        'rooms': active_rooms.count(),
+        'screens': 0,
+    }
+    for room in active_rooms:
+        _, _, w, h = room.data['zone']['bounds']
+        world.data['metrics']['screens'] += w * h - len(room.data.get('holes', []))
+
+def clean_elevators(world):
+    """ Remove any empty elevators """
+    world.data['elevators'] = [
+        e
+        for e in world.data.get('elevators', [])
+        if len(e['xys']) > 0
+    ]
+
+def make_map_icon(world, force=False):
+    dest = f'.media/world_maps/{world.slug}.png'
+    if os.path.exists(dest) and not force:
+        return
     scale = 4
     W, H = world.normalize()
     img = Image.new("RGB", ((W+2)*scale, (H+2)*scale))
     draw = ImageDraw.Draw(img)
+
+    for elevator in world.data.get('elevators', []):
+        xys = [
+            (int(scale * (xy[0] + 1.5)), int(scale * (xy[1] + 1.5)))
+            for xy in elevator['xys']
+        ]
+        draw.line(xys, 'white', scale // 4, 'curve')
 
     for zone in world.zone_set.all():
         if zone.slug.startswith('unknown') or zone.slug.startswith('ztrash') or zone.data.get('hidden'):
@@ -58,7 +89,15 @@ def main(world):
                 for shape in geo['interiors']:
                     draw.polygon(_pts2(shape), fill="#000000", outline=outline)
 
-    img.save(f'.media/{world.slug}.png')
+    img.save(dest)
+
+def main(world):
+    clean_elevators(world)
+    make_map_icon(world)
+    update_metrics(world)
+    metrics = world.data['metrics']
+    print(metrics['screens'] / (metrics['rooms'] or 1), world)
+    world.save()
 
 if __name__ == "__main__":
     if sys.argv[1] == 'all':
