@@ -5,6 +5,7 @@
   </template>
   <div class="edit-elevator">
     <div v-if="editing">
+      <div class="btn -danger" @click="delete_">Delete</div>
       {{ editing }}
       <div class="btn -secondary" @click="cancel">Cancel</div>
       <div class="btn -primary" @click="save">Save</div>
@@ -105,6 +106,15 @@ export default {
     cancel() {
       this.editing = null
       this.$store.route.refetchWorlds()
+    },
+    delete_(e) {
+      if (!e.shiftKey && !e.ctrlKey) {
+        this.$ui.toast.error('You must hold ctrl and shift to do this')
+        return
+      }
+      const { elevators } = this.$store.route.world.data
+      elevators.splice(elevators.indexOf(this.editing, 1))
+      this.save()
     },
   },
 }
