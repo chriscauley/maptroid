@@ -6,6 +6,7 @@
         :key="zone.id"
         :to="zone.to"
         :class="zone.class(zone.slug, $route.params.zone_slug)"
+        :title="zone.name"
       >
         {{ zone.name.slice(0, 10) }}
       </router-link>
@@ -15,6 +16,7 @@
       <select v-model="filter_h" class="btn -primary">
         <option v-for="option in wh_options" :key="option" :value="option">h={{ option }}</option>
       </select>
+      <input type="text" v-model="search" />
     </div>
     <div v-if="zones">
       {{ rooms?.length }} remaining
@@ -50,7 +52,7 @@ export default {
   },
   data() {
     const wh_options = ['', 1, 2, 3, 4, 5, '>5']
-    return { selected: {}, filter_w: '', filter_h: '', wh_options }
+    return { selected: {}, filter_w: '', filter_h: '', wh_options, search: null }
   },
   computed: {
     mousetrap() {
@@ -94,9 +96,12 @@ export default {
       return this.$store.zone.getPage(this.world_query)?.items
     },
     rooms() {
-      let { filter_h, filter_w } = this
+      let { filter_h, filter_w, search } = this
       const zone_id = this.zones.find((z) => z.slug === this.$route.params.zone_slug)?.id
       let rooms = this.$store.room.getPage(this.world_query)?.items || []
+      if (search) {
+        return rooms.filter((r) => r.key.toLowerCase().includes(search))
+      }
       if (zone_id) {
         rooms = rooms.filter((i) => i.zone === zone_id)
       } else {
