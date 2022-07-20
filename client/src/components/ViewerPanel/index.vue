@@ -1,15 +1,16 @@
 <template>
   <div v-if="collapsed" class="unrest-floating-actions item-list">
     <div class="list-group-item" @click="collapsed = false">
+      <div v-if="filtered_item_type">Filter: {{ filtered_item_type }}</div>
       <i class="fas fa-chevron-up cursor-pointer" />
     </div>
   </div>
   <div v-else class="osd-panel item-list">
     <div class="osd-panel__inner">
-      <div class="item-list__header">
+      <div class="item-list__header" @click="collapsed = true">
         {{ title }}
         <div class="flex-grow" />
-        <i class="fas fa-times cursor-pointer" @click="collapsed = true" />
+        <i class="fas fa-times cursor-pointer" />
       </div>
       <inventory />
       <run-list v-if="tool === 'run_path'" />
@@ -19,17 +20,23 @@
 </template>
 
 <script>
+import { startCase } from 'lodash'
+
 import ItemList from './ItemList.vue'
 import Inventory from '../Inventory'
 import RunList from './RunList.vue'
 
 export default {
   components: { ItemList, Inventory, RunList },
+  inject: ['osd_store'],
   props: {
     items: Object,
     tool: String,
   },
   computed: {
+    filtered_item_type() {
+      return startCase(this.osd_store.state.filters.item_type || '')
+    },
     collapsed: {
       get() {
         return this.$store.local.state.item_list_collapsed
@@ -39,7 +46,8 @@ export default {
       },
     },
     title() {
-      return 'Items and Bosses'
+      const is_dread = this.$route.params.world_slug?.endsWith('dread')
+      return is_dread ? 'Items and Bosses' : 'Items'
     },
   },
 }

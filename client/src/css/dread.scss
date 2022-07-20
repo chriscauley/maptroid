@@ -330,6 +330,19 @@
   }
 }
 
+.item-list .item-list__filter {
+  @apply cursor-default gap-4 justify-start;
+  .ur-form {
+    @apply flex-grow;
+  }
+  .form-group {
+    @apply m-0;
+  }
+  select {
+    @apply cursor-pointer
+  }
+}
+
 .dread-sprites {
   &__item {
     @apply mb-4;

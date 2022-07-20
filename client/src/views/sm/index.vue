@@ -230,12 +230,15 @@ export default {
         if (item) {
           const item_id = parseInt(item)
           this.osd_store.gotoItem(
-            this.$store.route.world_items.find(i => i.id === item_id),
+            this.$store.route.world_items.find((i) => i.id === item_id),
             this.map_props,
           )
         } else if (room) {
           const room_id = parseInt(room)
-          this.osd_store.gotoRoom(this.$store.route.world_rooms.find(r => r.id === room_id), this.map_props)
+          this.osd_store.gotoRoom(
+            this.$store.route.world_rooms.find((r) => r.id === room_id),
+            this.map_props,
+          )
         } else {
           this.osd_store.viewer.viewport.fitBounds(new Rect(0, 0, x_max, y_max), true)
           this.syncImages()

@@ -74,7 +74,10 @@ export default {
         if (!room_id) {
           console.warn('Unable to find matching link', link)
         } else if (targets.length !== 2) {
-          console.warn('Extra targets for link', link, all_links)
+          const skip = ['BA-ascent', 'F-ascent', 'AD-ascent', 'CB-ascent']
+          if (!skip.includes(`${link.text}-${this.$route.params.world_slug}`)) {
+            console.warn('Extra targets for link', link, all_links)
+          }
         }
         link.attrs.to = `?room=${room_id}`
         link.attrs.onClick = () => this.osd_store.gotoRoom({ id: room_id }, this.map_props)

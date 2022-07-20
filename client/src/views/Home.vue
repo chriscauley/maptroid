@@ -1,6 +1,9 @@
 <template>
   <div class="app__home">
     <h2>Project Maptroid</h2>
+    <unrest-form :schema="schema" :state="state">
+      <template #actions>{{ ' ' }}</template>
+    </unrest-form>
     <div class="world-card__list">
       <router-link
         v-for="world in worlds"
@@ -10,6 +13,7 @@
       >
         <div class="world-card__map" :style="bg(world)" />
         {{ world.name }}
+        <div v-if="world.data.mc_data?.author">by {{ world.data.mc_data?.author }}</div>
       </router-link>
     </div>
   </div>
@@ -22,13 +26,28 @@ export default {
   __route: {
     path: '/',
   },
+  data() {
+    return {
+      schema: {
+        type: 'object',
+        properties: {
+          search: { title: null, type: 'string', placeholder: 'Search Maps' },
+        },
+      },
+      state: {},
+    }
+  },
   computed: {
     worlds() {
       let { worlds } = this.$store.route
-      return sortBy(
-        worlds.filter((w) => !w.hidden),
-        'name',
-      )
+      worlds = worlds.filter((w) => !w.hidden)
+      worlds = sortBy(worlds, 'name')
+      if (this.state.search) {
+        const search = this.state.search.trim()
+        const _ = (w) => `${w.name} ${w.data.mc_data?.author || ''}`.toLowerCase()
+        worlds = worlds.filter((w) => _(w).includes(search))
+      }
+      return worlds
     },
   },
   methods: {

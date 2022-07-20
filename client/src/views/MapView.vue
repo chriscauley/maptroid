@@ -32,7 +32,7 @@ export default {
           return `${world_name}: ${startCase(zone_slug)}`
         }
         return world_name
-      }
+      },
     },
   },
   components: { DreadZone, DreadWorld, SmView },

@@ -6,6 +6,7 @@ const { Point, Rect } = Openseadragon
 export default (component) => {
   const osd_store = OsdStore()
   const { state } = osd_store
+  state.filters = {}
   const raw_bounds = {
     zone: {},
     room: {},

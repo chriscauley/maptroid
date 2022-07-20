@@ -14,7 +14,12 @@ export default {
   inject: ['map_props', 'tool_storage', 'osd_store'],
   computed: {
     items() {
-      return this.map_props.items
+      const { items } = this.map_props
+      const { item_type } = this.osd_store.state.filters
+      if (item_type) {
+        return items.filter((i) => i.data.type === item_type)
+      }
+      return items
     },
     selected_item_id() {
       return parseInt(this.$route.query.item)

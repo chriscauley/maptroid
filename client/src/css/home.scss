@@ -2,6 +2,10 @@
   h2 {
     @apply mt-32 text-center;
   }
+  form {
+    @apply m-auto;
+    width: 300px;
+  }
 }
 
 .world-card__list {
