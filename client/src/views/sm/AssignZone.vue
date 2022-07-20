@@ -1,5 +1,5 @@
 <template>
-  <div v-if="world" class="app-sm-assign">
+  <div v-if="world" class="assign-zone">
     <div class="btn-group">
       <router-link
         v-for="zone in prepped_zones"
@@ -20,9 +20,9 @@
     </div>
     <div v-if="zones">
       {{ rooms?.length }} remaining
-      <div v-for="room in rooms.slice(0, 100)" :key="room.id" class="app-sm-assign__image">
+      <div v-for="room in rooms.slice(0, 100)" :key="room.id" class="assign-zone__image">
         <img :src="getLayerImage(room)" />
-        <div class="app-sm-assign__image-bar">
+        <div class="assign-zone__image-bar">
           {{ room.key }}
           <div class="btn-group">
             <div
@@ -48,7 +48,7 @@ import Mousetrap from '@unrest/vue-mousetrap'
 export default {
   mixins: [Mousetrap.Mixin],
   __route: {
-    path: '/sm-assign/:world_slug/:zone_slug?',
+    path: '/staff/assign-zone/:world_slug/:zone_slug?',
   },
   data() {
     const wh_options = ['', 1, 2, 3, 4, 5, '>5']
@@ -73,14 +73,14 @@ export default {
     },
     prepped_zones() {
       const zones = this.zones?.map((z) => ({
-        to: `/sm-assign/${this.world.slug}/${z.slug}/`,
+        to: `/staff/assign-zone/${this.world.slug}/${z.slug}/`,
         name: z.name,
         slug: z.slug,
         id: z.id,
         class: (a, b) => ['btn', a === b ? '-primary' : '-secondary'],
       }))
       zones?.push({
-        to: `/sm-assign/${this.world.slug}/`,
+        to: `/staff/assign-zone/${this.world.slug}/`,
         name: 'No Zone',
         class: (a, b) => ['btn', (a || 0) === (b || 0) ? '-primary' : '-secondary'],
       })

@@ -28,6 +28,7 @@ app_urls = [
   "maps",
   "play",
   "screenshot",
+  "staff",
   "sm",
   "sprite",
   "trainer",
