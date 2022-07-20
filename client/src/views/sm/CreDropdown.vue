@@ -1,7 +1,7 @@
 <template>
   <unrest-dropdown class="btn -danger" v-if="items.length" :items="items">
     <i class="fa fa-exclamation-circle" />
-    {{ items.length - 1 }}
+    {{ missing_items.length }}
   </unrest-dropdown>
 </template>
 
@@ -19,6 +19,13 @@ export default {
   emits: ['highlight'],
   computed: {
     items() {
+      const items = this.missing_items.slice()
+      if (this.$store.route.zone && items.length) {
+        items.unshift({ text: 'Highlght', click: this.highlight })
+      }
+      return items
+    },
+    missing_items() {
       if (!['move_room', 'edit_room'].includes(this.tool_storage.state.selected.tool)) {
         return []
       }
@@ -38,27 +45,26 @@ export default {
         items.forEach((i) => {
           count_by_zone[i.zone_id] = (count_by_zone[i.zone_id] || 0) + 1
         })
-        return this.$store.route.zones.map((zone) => ({
+        const zones = this.$store.route.zones.filter((z) => count_by_zone[z.id])
+        return zones.map((zone) => ({
           text: `${count_by_zone[zone.id]} - ${zone.name}`,
           to: { params: { zone_slug: zone.slug } },
         }))
       }
-      return [
-        {
-          text: 'Highlght',
-          click: () =>
-            this.$emit(
-              'highlight',
-              this.items.map((i) => i.id),
-            ),
-        },
-        ...items.map(({ room, count, id }) => ({
-          id,
-          count,
-          text: `${count} #${room.id} ${room.name || room.data.zone.bounds}`,
-          click: () => this.$store.local.save({ editing_room: room.id }),
-        })),
-      ]
+      return items.map(({ room, count, id }) => ({
+        id,
+        count,
+        text: `${count} #${room.id} ${room.name || room.data.zone.bounds}`,
+        click: () => this.$store.local.save({ editing_room: room.id }),
+      }))
+    },
+  },
+  methods: {
+    highlight() {
+      this.$emit(
+        'highlight',
+        this.items.map((i) => i.id),
+      )
     },
   },
 }
