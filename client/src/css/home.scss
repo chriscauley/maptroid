@@ -1,8 +1,15 @@
 .app__home {
+  h2 {
+    @apply mt-32 text-center;
+  }
+}
 
+.world-card__list {
+  @apply flex flex-wrap gap-4 justify-center
 }
 
 .world-card {
+  @apply border p-4 rounded text-center;
   &__map {
     width: 200px;
     height: 200px;
