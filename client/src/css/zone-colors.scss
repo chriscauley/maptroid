@@ -1,0 +1,154 @@
+$pink: #d83890;
+$green: #017e13;
+$yellow: #d1b102;
+$blue: #283888;
+$red: #d42020;
+$maroon: #5c152b;
+$magenta: #991b8c;
+$gray: #585c65;
+$white: #f8f8f8;
+$dark-green: #044f60;
+$purple: #401088;
+$sky-blue: #58c0e0;
+$peach: #f88868;
+$dark-blue: #000088;
+/* DO NOT CHANGE THIS LINE WITHOUT UPDATING 7-map-icon.py */
+
+$zone-colors: (
+  "crateria": $pink,
+  "brinstar": $green,
+  "wrecked-ship": $yellow,
+  "maridia": $blue,
+  "norfair": $red,
+  "tourian": $magenta,
+
+  /* ypx */
+  "bringtea": $green,
+  "daridia": $blue,
+  "gorfair": $red,
+  "orateria": $pink,
+  "steamed-tofu": $yellow,
+  "tourist": $magenta,
+
+  /* y-faster */
+  "orangestar": $pink,
+  "goldstar": $green,
+  "darkstar": $yellow,
+  "zaristar": $blue,
+  "northstar": $red,
+  "finalstar": $magenta,
+
+  /* Super Zero Mission */
+  "ridley": $red,
+  "chozodia": $yellow,
+  "kraid": $dark-green,
+  "pirate-ship": $blue,
+
+  /* Ascent */
+  "zone-1": $pink,
+  "zone-2": $yellow,
+  "zone-3a": $blue,
+  "zone-3b": $red,
+  "void": $magenta,
+
+  /* Vitality */
+  "pendula-moda": $green,
+  "tac-lacora": $blue,
+  "chornobog": $dark-green,
+  "andavald": $magenta,
+  "elseq": $maroon,
+  "khlys": $red,
+
+  /* Cliffhanger */
+  "eldridge": $gray,
+  "surripere": $pink,
+  "melkabah": $magenta,
+  "juolbrin": $green,
+  "melfad": $blue,
+  "keruarn": $maroon,
+
+  /* oxide */
+  "easy-norfair": $red,
+  "toxic-tank": $green,
+  "murder-ship": $yellow,
+  "blue-surface": $pink,
+
+  /* lost-world */
+  "dark-forest": $dark-green,
+  "fire-mountain": $red,
+  "hilly-swamp": $green,
+  "rock-plain": $blue,
+  "hunters-ship": $yellow,
+  "warp-zone": $magenta,
+
+  /* airy */
+  "airia": $gray,
+  "decays": $yellow,
+  "lonely": $red,
+  "nadirn": $green,
+  "orion": $blue,
+  "planetia": $dark-green,
+
+  /* eris */
+  "chozodian-shrine": $red,
+  "cobalt-mountains": $blue,
+  "dranaphen": $white,
+  "eris-station": $yellow,
+  "ethos": $purple,
+  "frozen-summits": $blue,
+  "marble-shrine": $gray,
+  "phazon-gardens": $sky-blue,
+  "phazon-hollows": $peach,
+  "reservoirs": $dark-blue,
+  "sacred-grounds": $magenta,
+  "the-abyss": $green,
+  "ziobelia": $dark-green,
+
+  /* kaizo-possible */
+  "atlantis-ship": $yellow,
+  "atlantis-water": $blue,
+  "chozo-ruins": $pink,
+  "lower-mines": $red,
+  "upper-mines": $green,
+  "research-lab": $maroon,
+
+  /* ypr */
+  "krateria": $dark-green,
+  "nerfair": $red,
+  "pdinstar": $green,
+  "secret-base": $yellow,
+  "waridia": $blue,
+
+  /* new-wet-dream */
+  "amazonia": $green,
+  "aquaria": $blue,
+  "metallia": $yellow,
+  "solaria": $pink,
+  "universia": $magenta,
+  "vulcania": $red,
+
+  /* arrival */
+  "fever-swamp": $pink,
+  "kolpruz": $blue,
+  "minstraine": $red,
+  "prometheus-x": $magenta,
+  "pyrax-core": $blue,
+  "walrus": $green,
+
+  /* temporus */
+  "temporus": $dark-green,
+
+  /* space-junk */
+  "space-junk": $blue,
+  "escape": $red,
+
+  /* hydellius */
+  "fire-unit": $red,
+  "land-deck": $green,
+  "main-center": $pink,
+  "sand-cliff": $yellow,
+  "sea-lab": $blue,
+  "wind-tower": $magenta,
+
+  /* "": $, */
+);
