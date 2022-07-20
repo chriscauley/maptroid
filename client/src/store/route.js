@@ -176,10 +176,10 @@ export default ({ store }) => {
       const { $route, $router } = store._app.config.globalProperties
       if (!item) {
         const query = { ...$route.query }
-        delete query.item_id
+        delete query.item
         $router.replace({ path: $route.path, query })
       } else {
-        $router.replace({ path: $route.path, query: { item_id: item.id } })
+        $router.replace({ path: $route.path, query: { item: item.id } })
       }
     },
 

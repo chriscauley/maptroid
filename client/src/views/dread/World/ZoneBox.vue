@@ -50,7 +50,9 @@ export default {
       this.dragging = false
     },
     getZoneLink(zone_slug) {
-      return { name: 'dread_map', params: { world_slug: 'dread', zone_slug } }
+      const { name } = this.$route
+      const { world_slug } = this.$route.params
+      return { name, params: { world_slug, zone_slug } }
     },
   },
 }

@@ -53,7 +53,7 @@
 <script>
 import { computed } from 'vue'
 import Mousetrap from '@unrest/vue-mousetrap'
-import { startCase, sortBy } from 'lodash'
+import { sortBy } from 'lodash'
 
 import AdminPopup from './AdminPopup.vue'
 import DreadItems from '@/models/DreadItems'
@@ -68,13 +68,6 @@ import ToolStorage from './ToolStorage'
 import OsdStore from './OsdStore'
 
 export default {
-  __route: {
-    name: 'dread_map',
-    path: '/maps/:world_slug/:zone_slug/',
-    meta: {
-      title: ({ params }) => startCase(params.zone_slug),
-    },
-  },
   components: {
     AdminPopup,
     DreadViewer,
@@ -99,8 +92,11 @@ export default {
             zone_id: i.zone,
             _target: i.data.transit_target_id,
             to: {
-              name: 'dread_map',
-              params: { world_slug: 'dread', zone_slug: zone.slug },
+              name: this.$route.name,
+              params: {
+                world_slug: this.$route.params.world_slug,
+                zone_slug: zone.slug,
+              },
               query: { item: i.id },
             },
             name: i.data.name || `${DreadItems.getName(i)} - ${zone.name}`,
@@ -172,8 +168,8 @@ export default {
       this.osd_store.gotoItem(item)
       const { slug } = this.$store.route.zone
       this.$router.replace({
-        name: 'dread_map',
-        params: { zone_slug: slug, world_slug: 'dread' },
+        name: this.$route.name,
+        params: { zone_slug: slug, world_slug: this.$route.params.wrold_slug },
         query: { item: item.id },
       })
     },

@@ -17,7 +17,7 @@ export default {
       return this.map_props.items
     },
     selected_item_id() {
-      return parseInt(this.$route.query.item_id)
+      return parseInt(this.$route.query.item)
     },
     matched() {
       const matched = {}

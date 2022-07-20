@@ -27,9 +27,6 @@ import VideoPlayer from '@/components/Video/index.vue'
 import ZoneBox from './ZoneBox.vue'
 
 export default {
-  __route: {
-    path: '/maps/:world_slug/',
-  },
   components: { BaseViewer, HtmlOverlay, ItemList, VideoPlayer, ZoneBox },
   data() {
     DreadItems.makeCss()
@@ -46,8 +43,8 @@ export default {
     gotoItem(item) {
       const zone = this.$store.route.zones.find((z) => z.id === item.zone)
       this.$router.push({
-        name: 'dread_map',
-        params: { world_slug: 'dread', zone_slug: zone.slug },
+        name: this.$route.name,
+        params: { world_slug: this.$route.params.world_slug, zone_slug: zone.slug },
         query: { item: item.id },
       })
     },

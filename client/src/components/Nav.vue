@@ -19,11 +19,13 @@
 </template>
 
 <script>
+import { sortBy } from 'lodash'
+
 export default {
   computed: {
     home_links() {
       const links = [
-        ...this.world_links,
+        { text: 'Select Map', to: '/' },
         { text: 'Download Maps + Icons', to: '/downloads/' },
         { text: 'About', to: '/about/' },
         { text: 'Contact', to: '/contact/' },
@@ -35,10 +37,10 @@ export default {
       return links
     },
     zone_links() {
-      if (!this.$auth.user?.is_superuser) {
+      const { world_slug, zone_slug } = this.$route.params
+      if (!this.$auth.user?.is_superuser && world_slug !== 'metroid-dread') {
         return null
       }
-      const { world_slug, zone_slug } = this.$route.params
       if (zone_slug === undefined) {
         return null
       }
@@ -56,6 +58,7 @@ export default {
       if (!this.$auth.user?.is_superuser) {
         worlds = worlds.filter((w) => !w.hidden)
       }
+      worlds = sortBy(worlds, 'name')
       const { name } = this.$route
       return worlds.map((world) => ({
         text: `${world.name} ${world.hidden ? '(hidden)' : ''}`,

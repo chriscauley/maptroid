@@ -7,6 +7,7 @@ import FileBrowser from './FileBrowser.vue'
 import gamepad from '@/unrest/gamepad'
 import Home from './Home.vue'
 import Labbook from './Labbook.vue'
+import MapView from './MapView.vue'
 import play from './play'
 import SpriteSheet from './SpriteSheet'
 import ProcessDread from './ProcessDread.vue'
@@ -18,14 +19,15 @@ import SmileCompare from './SmileCompare.vue'
 import SmileOcr from './SmileOcr.vue'
 import SmileSprite from './SmileSprite/index.vue'
 import SpriteGallery from './SpriteGallery.vue'
-import SuperMetroid from './sm/index.vue'
 import SmAssignZone from './sm/AssignZone.vue'
 import SmPlmAlign from './sm/PlmAlign.vue'
 
 const { TestGamepad, ConfigureGamepad } = gamepad
 
+const { DreadSprites } = dread
+
 export default {
-  ...dread,
+  DreadSprites,
   ...play,
   About,
   AssignSprite,
@@ -36,6 +38,7 @@ export default {
   TestGamepad,
   Home,
   Labbook,
+  MapView,
   ProcessDread,
   Trainer,
   ScreenshotAnalyzer,
@@ -46,7 +49,6 @@ export default {
   SmileOcr,
   SmileSprite,
   SpriteGallery,
-  SuperMetroid,
   SmAssignZone,
   SmPlmAlign,
 }
