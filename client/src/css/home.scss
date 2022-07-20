@@ -1,0 +1,12 @@
+.app__home {
+
+}
+
+.world-card {
+  &__map {
+    width: 200px;
+    height: 200px;
+    background: no-repeat center;
+    background-size: contain;
+  }
+}
