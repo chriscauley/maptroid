@@ -1,7 +1,7 @@
 <template>
-  <div v-for="link in links" :key="link.key" v-bind="link.attrs" @click="(e) => click(e, link)">
+  <router-link v-for="link in links" :key="link.key" v-bind="link.attrs">
     <div class="_before" :style="link.before" />
-  </div>
+  </router-link>
 </template>
 
 <script>
@@ -33,10 +33,11 @@ const getText = (link) => {
 }
 
 export default {
-  inject: ['map_props'],
+  inject: ['map_props', 'osd_store'],
   computed: {
     links() {
       const out = []
+      const all_links = {}
       const rooms = this.$store.route.world_rooms.filter(
         (r) => this.map_props.room_bounds[r.id] && r.data.links,
       )
@@ -44,9 +45,12 @@ export default {
         const [room_x, room_y] = this.map_props.room_bounds[room.id]
         Object.entries(room.data.links).forEach(([xy, link]) => {
           xy = xy.split(',').map(Number)
+          all_links[link.text] = all_links[link.text] || []
+          all_links[link.text].push(room.id)
           out.push({
-            key: `${xy}`,
+            key: `${room.id}_${xy}`,
             xy,
+            room_id: room.id,
             color: link.color,
             text: link.text,
             attrs: {
@@ -64,11 +68,19 @@ export default {
           })
         })
       })
+      out.forEach((link) => {
+        const targets = all_links[link.text]
+        const room_id = targets.find((id) => id !== link.room_id)
+        if (!room_id) {
+          console.warn('Unable to find matching link', link)
+        } else if (targets.length !== 2) {
+          console.warn('Extra targets for link', link, all_links)
+        }
+        link.attrs.to = `?room=${room_id}`
+        link.attrs.onClick = () => this.osd_store.gotoRoom({ id: room_id }, this.map_props)
+      })
       return out
     },
-  },
-  methods: {
-    click(_event, _item) {},
   },
 }
 </script>
