@@ -27,7 +27,7 @@
         <svg-overlay :highlighted_rooms="highlighted_rooms" :storage="tool_storage" />
         <item-overlay v-if="tool_storage.state.show_items" />
         <link-overlay v-if="tool_storage.state.show_links" />
-        <elevator-overlay />
+        <elevator-overlay v-if="tool_storage.state.show_links" />
         <div v-for="(portal, i) in portals" :key="i" :class="portal.class" :style="portal.style" />
       </html-overlay>
     </template>

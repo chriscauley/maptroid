@@ -364,11 +364,22 @@ body.theme-dark_mode {
 }
 
 .app-nav {
-  @apply border-b flex gap-2 left-0 p-2 relative select-none;
+  @apply border-b flex gap-2 items-center left-0 p-2 relative select-none;
   background: var(--bg);
   &__title {
     font-weight: bold;
     font-size: 2rem;
+  }
+  &__right {
+    @apply flex gap-2;
+    .btn.-secondary {
+      @apply flex items-center;
+      .fa-github {
+        color: black;
+        font-size: 1.2em;
+        line-height: 1;
+      }
+    }
   }
 }
 

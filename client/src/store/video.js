@@ -1,7 +1,4 @@
-import { computed } from 'vue'
 import { RestStorage } from '@unrest/vue-storage'
-
-import { hms } from '@/lib/time'
 
 export default ({ store }) => {
   const storage = RestStorage('schema/video', { collection_slug: 'schema/video' })

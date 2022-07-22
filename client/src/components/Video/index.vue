@@ -11,9 +11,7 @@
       <template v-if="$auth.user?.is_superuser">
         <div class="video-box__seperator" />
         <div @click="togglePlayer">
-          <template v-if="expanded">
-            {{ visible_time }} <i class="fa fa-chevron-down" />
-          </template>
+          <template v-if="expanded"> {{ visible_time }} <i class="fa fa-chevron-down" /> </template>
           <template v-else> Expand Player <i class="fa fa-chevron-up" /> </template>
         </div>
       </template>
