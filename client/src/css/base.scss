@@ -372,6 +372,9 @@ body.theme-dark_mode {
   }
   &__right {
     @apply flex gap-2;
+    .btn {
+      @apply px-2 py-1;
+    }
     .btn.-secondary {
       @apply flex items-center;
       .fa-github {
