@@ -49,6 +49,9 @@ export default {
         this.$store.local.save({ item_list_collapsed: value })
       },
     },
+    title() {
+      return this.$store.route.isDread() ? 'Items and Bosses' : 'Items'
+    },
   },
 }
 </script>

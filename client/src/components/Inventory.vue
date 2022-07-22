@@ -19,7 +19,7 @@ export default {
       const video = this.$store.video.getCurrentVideo()
       const run = this.$store.run.getCurrentRun()
 
-      if (this.$route.params.world_slug === 'dread') {
+      if (this.$store.route.isDread()) {
         return DreadItems.groupItems(world_items, video.data.actions)
       }
 

@@ -193,6 +193,11 @@ export default ({ store }) => {
     blurItem() {
       route.selectItem(null)
     },
+
+    isDread() {
+      const { $route } = store._app.config.globalProperties
+      return $route.params.world_slug === 'metroid-dread'
+    },
   }
 
   return route

@@ -1,5 +1,5 @@
 <template>
-  <template v-if="$route.params.world_slug === 'metroid-dread'">
+  <template v-if="$store.route.isDread()">
     <dread-zone v-if="$route.params.zone_slug" />
     <dread-world v-else />
   </template>
