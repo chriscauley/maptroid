@@ -4,7 +4,7 @@
       <unrest-toolbar :storage="item_storage" class="-topleft">
         <template #buttons>
           <div :class="invertClass" title="invert" @click="toggleInvert">
-            <i class="fa fa-file-image" />
+            <i class="fa fa-file" />
           </div>
           <unrest-dropdown :items="zone_items" class="btn -info">
             {{ room_zone }}
@@ -80,7 +80,7 @@ const tools = [
   { slug: 'block', variants: Block.directional, icon: (_, v) => `sm-block -${v}` },
   { slug: 'plm', variants: Object.keys(plms), icon: (_, v) => `sm-block -${v}` },
   { slug: 'link', variants: Object.keys(portal_colors), icon: (_, v) => `sm-link -${v}` },
-  { slug: 'overlap', icon: 'fa fa-layer-group' },
+  { slug: 'overlap', icon: 'fa fa-th-large' },
 ]
 
 export default {

@@ -11,8 +11,8 @@
         </option>
       </select>
       <div v-for="plm in plms.filter((p) => p._plm.deleted)" :key="plm.src" class="_deleted">
-        <i class="fas fa-trash" @click="undelete(plm)" />
-        <a class="far fa-question-circle" :href="plm.src" target="_blank" />
+        <i class="fa fa-trash" @click="undelete(plm)" />
+        <a class="fa fa-question-circle" :href="plm.src" target="_blank" />
       </div>
     </div>
     <div class="sm-plm-enemies__workarea" v-if="current_room">

@@ -26,7 +26,7 @@
       <div v-else>
         <div class="item-popper__name">{{ item.attrs.title }}</div>
         <div v-if="reward" class="item-popper__reward">
-          <i class="fas fa-plus" />
+          <i class="fa fa-plus" />
           {{ reward }}
         </div>
         <div class="flexy select-none">
@@ -38,7 +38,7 @@
             target="_blank"
           >
             {{ time.hms }}
-            <i class="fa fa-external-link" />
+            <i class="fa fa-arrow-up-right-from-square" />
           </a>
         </div>
       </div>

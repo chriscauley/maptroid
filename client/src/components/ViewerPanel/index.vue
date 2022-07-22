@@ -2,7 +2,7 @@
   <div v-if="collapsed" class="unrest-floating-actions item-list">
     <div class="list-group-item" @click="collapsed = false">
       <div v-if="filtered_item_type">Filter: {{ filtered_item_type }}</div>
-      <i class="fas fa-chevron-up cursor-pointer" />
+      <i class="fa fa-chevron-up" />
     </div>
   </div>
   <div v-else class="osd-panel item-list">
@@ -10,7 +10,7 @@
       <div class="item-list__header" @click="collapsed = true">
         {{ title }}
         <div class="flex-grow" />
-        <i class="fas fa-times cursor-pointer" />
+        <i class="fa fa-times" />
       </div>
       <inventory />
       <run-list v-if="tool === 'run_path'" />

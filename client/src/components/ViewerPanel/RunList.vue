@@ -7,10 +7,10 @@
         </div>
       </unrest-dropdown>
       <div v-if="running" class="btn -primary" @click="stopRun">
-        <i class="fas fa-stop" />
+        <i class="fa fa-stop" />
       </div>
       <div v-else class="btn -secondary" @click="startRun">
-        <i class="fas fa-play" />
+        <i class="fa fa-play" />
       </div>
     </div>
     <div class="run-list__scroll" ref="scroll">
@@ -22,8 +22,8 @@
           </div>
         </div>
         <div v-if="i === $store.local.state.insert_run_action_after" class="list-group-item">
-          <i class="fas fa-chevron-right" />
-          <i class="fas fa-chevron-right" />
+          <i class="fa fa-chevron-right" />
+          <i class="fa fa-chevron-right" />
           <span class="flex-grow">Insert here!</span>
         </div>
       </template>

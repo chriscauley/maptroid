@@ -17,8 +17,8 @@
       <div class="plmsprite-box__details">
         {{ details.data.approval_count || '??' }} / {{ details.plmsprites.length }}
         <div class="btn -primary" @click="markApproved">Mark Approved</div>
-        <i class="fas fa-chevron-left cursor-pointer" @click="$emit('next', -1)" />
-        <i class="fas fa-chevron-right cursor-pointer" @click="$emit('next', 1)" />
+        <i class="fa fa-chevron-left cursor-pointer" @click="$emit('next', -1)" />
+        <i class="fa fa-chevron-right cursor-pointer" @click="$emit('next', 1)" />
       </div>
     </div>
   </unrest-modal>

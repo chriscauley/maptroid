@@ -12,9 +12,9 @@
         <div class="video-box__seperator" />
         <div @click="togglePlayer">
           <template v-if="expanded">
-            {{ visible_time }} <i class="fas fa-chevron-down" />
+            {{ visible_time }} <i class="fa fa-chevron-down" />
           </template>
-          <template v-else> Expand Player <i class="fas fa-chevron-up" /> </template>
+          <template v-else> Expand Player <i class="fa fa-chevron-up" /> </template>
         </div>
       </template>
     </div>

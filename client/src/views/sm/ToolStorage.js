@@ -16,7 +16,7 @@ export default (component) => {
         ...tools,
         { slug: 'select', icon: 'fa fa-mouse-pointer' },
         { slug: 'move_zone', icon: 'fa fa-object-group' },
-        { slug: 'move_room', icon: 'fa fa-chess-board' },
+        { slug: 'move_room', icon: 'fa fa-th' },
         { slug: 'edit_room', icon: 'fa fa-edit' },
         {
           slug: 'elevator',
@@ -30,11 +30,11 @@ export default (component) => {
         },
         {
           slug: 'video_path',
-          icon: 'fab fa-youtube',
+          icon: 'fa fa-youtube-play',
         },
         {
           slug: 'run_path',
-          icon: 'fas fa-dice',
+          icon: 'fa fa-gamepad',
         },
       ]
     }
