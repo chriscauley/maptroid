@@ -417,7 +417,7 @@
   @apply absolute bottom-0 left-0;
   background: var(--bg);
   &__avatar {
-    @apply h-8 rounded-full w-8;
+    @apply h-8 ml-4 rounded-full w-8;
     background: no-repeat center;
     background-size: contain;
   }
@@ -425,14 +425,14 @@
     width: 700px;
   }
   &__title {
-    @apply flex gap-2 items-center;
+    @apply cursor-pointer flex gap-2 items-center;
   }
   &__seperator {
     @apply flex-grow;
     min-width: 4rem;
   }
   .item-list__header {
-    cursor: normal;
+    cursor: default;
   }
 }
 

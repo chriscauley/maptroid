@@ -26,7 +26,7 @@
       <div v-else>
         <div class="item-popper__name">{{ item.attrs.title }}</div>
         <div v-if="reward" class="item-popper__reward">
-          <i class="fa fa-plus" />
+          <i class="fas fa-plus" />
           {{ reward }}
         </div>
         <div class="flexy select-none">
@@ -83,7 +83,7 @@ export default {
       return this.$auth.user?.is_superuser
     },
     video_times() {
-      return this.$store.video.times_by_item_id[this.item.id] || []
+      return this.$store.route.times_by_item_id[this.item.id] || []
     },
   },
   methods: {

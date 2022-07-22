@@ -1,19 +1,19 @@
 <template>
   <div v-if="collapsed" class="unrest-floating-actions item-list">
-    <div class="list-group-item" @click="collapsed = false">
-      <i class="fa fa-chevron-up cursor-pointer" />
+    <div class="list-group-item">
+      <i class="fa fa-chevron-up" />
     </div>
   </div>
   <div v-else class="osd-panel item-list">
     <div class="osd-panel__inner">
-      <div class="item-list__header">
-        Items and Bosses
+      <div class="item-list__header" @click="collapsed = false">
+        {{ title }}
         <div class="flex-grow" />
         <i class="fa fa-close cursor-pointer" @click="collapsed = true" />
       </div>
       <div class="list-group">
         <template v-for="item in items" :key="item.id">
-          <div class="list-group-item" @click="$emit('select-item', item)">
+          <div class="list-group-item" @click.stop="$emit('select-item', item)">
             <i :class="item.class" />
             <div class="flex-grow truncate">
               {{ item.title }}
@@ -21,7 +21,7 @@
               <div v-if="item.data.reward">Reward: {{ item.data.reward }}</div>
             </div>
             <div
-              v-for="time in $store.video.times_by_item_id[item.id]"
+              v-for="time in $store.route.times_by_item_id[item.id]"
               :key="time.seconds"
               class="pill -primary"
             >

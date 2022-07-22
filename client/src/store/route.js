@@ -1,5 +1,7 @@
 import { computed, watch } from 'vue'
 
+import { hms } from '@/lib/time'
+
 const Query = (q = {}) => ({ query: { per_page: 5000, ...q } })
 
 export default ({ store }) => {
@@ -164,12 +166,17 @@ export default ({ store }) => {
 
     get times_by_item_id() {
       const video = store.video.getCurrentVideo()
-      const times_by_item_id = {}
+      const out = {}
       if (video) {
-        video.data.items.forEach(([item_id, _time]) => (times_by_item_id[item_id] = []))
-        video.data.items.forEach(([item_id, time]) => times_by_item_id[item_id].push(time))
+        video.data.actions.forEach(([item_id, seconds]) => {
+          out[item_id] = out[item_id] || []
+          out[item_id].push({
+            seconds,
+            hms: hms(seconds),
+          })
+        })
       }
-      return times_by_item_id
+      return out
     },
 
     selectItem(item) {

@@ -1,16 +1,22 @@
 <template>
   <div class="video-box" v-if="video">
-    <div class="item-list__header cursor-default">
+    <div class="item-list__header">
       <div class="video-box__title" @click="open = true">
+        Route:
+        <div>{{ video.label }}</div>
+        by
+        {{ video.channel_name }}
         <div :style="`background-image: url(${video.channel_icon})`" class="video-box__avatar" />
-        {{ video.channel_name }}:
-        <div class="flex-grow truncate">{{ video.label }}</div>
       </div>
-      <div class="video-box__seperator" />
-      <div @click="togglePlayer">
-        <template v-if="expanded"> {{ visible_time }} <i class="fas fa-chevron-down" /> </template>
-        <template v-else> Expand Player <i class="fas fa-chevron-up" /> </template>
-      </div>
+      <template v-if="$auth.user?.is_superuser">
+        <div class="video-box__seperator" />
+        <div @click="togglePlayer">
+          <template v-if="expanded">
+            {{ visible_time }} <i class="fas fa-chevron-down" />
+          </template>
+          <template v-else> Expand Player <i class="fas fa-chevron-up" /> </template>
+        </div>
+      </template>
     </div>
     <div v-if="show_player" class="video-box__player">
       <div :id="player_id" />

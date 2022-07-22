@@ -169,7 +169,7 @@ export default {
       const { slug } = this.$store.route.zone
       this.$router.replace({
         name: this.$route.name,
-        params: { zone_slug: slug, world_slug: this.$route.params.wrold_slug },
+        params: { zone_slug: slug, world_slug: this.$route.params.world_slug },
         query: { item: item.id },
       })
     },
