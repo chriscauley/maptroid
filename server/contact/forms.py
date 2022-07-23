@@ -5,7 +5,7 @@ from contact.models import Message
 
 @unrest_schema.register
 class ContactForm(forms.ModelForm):
-    user_can_POST = 'NEW'
+    user_can_POST = 'ANY'
     class Meta:
         model = Message
         fields = ['email', 'body']
