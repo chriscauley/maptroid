@@ -10,5 +10,5 @@ scikit-image==0.19.3
 shapely==1.8.2
 social-auth-app-django==5.0.0
 social-auth-core==4.2.0
-urcv==0.0.4
+urcv==0.0.5
 uWSGI==2.0.20
