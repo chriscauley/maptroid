@@ -7,6 +7,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 DEBUG = True
 SECURE_CROSS_ORIGIN_OPENER_POLICY = 'unsafe-none'
 ALLOWED_HOSTS = []
+CSRF_TRUSTED_ORIGINS = ['https://maptroid.unrest.io']
 
 # Application definition
 INSTALLED_APPS = [

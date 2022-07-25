@@ -91,9 +91,9 @@ def make_map_icon(world, force=False):
 
     img.save(dest)
 
-def main(world):
+def main(world, force):
     clean_elevators(world)
-    make_map_icon(world)
+    make_map_icon(world, force)
     update_metrics(world)
     metrics = world.data['metrics']
     print(metrics['screens'] / (metrics['rooms'] or 1), world)
@@ -105,4 +105,3 @@ if __name__ == "__main__":
     else:
         worlds = World.objects.filter(slug__in=sys.argv[1:])
     for world in worlds:
-        main(world)
