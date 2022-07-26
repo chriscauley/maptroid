@@ -199,8 +199,9 @@ export default {
         this.zones.forEach((zone) => {
           const [x, y, width, height] = zone.data.world.bounds
           const visible_layers = this.tool_storage.getVisibleLayers()
+          const version = `?version=${world.data.version}`
           DZI_LAYERS.forEach((layer) => {
-            const tileSource = `/media/sm_zone/${world.slug}/${layer}/${zone.slug}.dzi`
+            const tileSource = `/media/sm_zone/${world.slug}/${layer}/${zone.slug}.dzi${version}`
             const opacity = visible_layers.includes(layer) ? 1 : 0
             this.osd_store.viewer.addTiledImage({ tileSource, width, x, y, opacity })
           })
