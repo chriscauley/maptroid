@@ -104,7 +104,7 @@
   }
 }
 
-.sm-elevator, .sm-item, .sm-block, .sm-cre-hex, .sm-portal, .sm-ui, .sm-link {
+.sm-elevator, .sm-item, .sm-block, .sm-cre-hex, .sm-ui, .sm-link {
   @apply relative inline-block;
   height: 1em;
   width: 1em;
@@ -245,17 +245,6 @@ $ascent-items: weapons-tank shinespark boost-ball;
   }
 }
 
-.sm-portal {
-  &:before {
-    image-rendering: unset;
-  }
-  @each $name, $_color in $portal-colors {
-    &.-#{$name}:before {
-      background-image: url("/static/sm/portal/#{$name}.png")
-    }
-  }
-}
-
 .sm-link {
   @apply flex items-center justify-center;
   &:before {
@@ -266,7 +255,7 @@ $ascent-items: weapons-tank shinespark boost-ball;
     background-size: contain;
     outline: 0;
   }
-  @each $name, $color in $portal-colors {
+  @each $name, $color in $link-colors {
     &.-#{$name}, &.-#{$name} ._before {
       background-color: string.unquote($color);
     }
@@ -276,11 +265,9 @@ $ascent-items: weapons-tank shinespark boost-ball;
   }
 }
 .osd-html__overlay {
-  .sm-portal, .sm-link {
-    @apply absolute;
-  }
   .sm-link {
     /* text is displayed using background image */
+    @apply absolute;
     color: transparent;
   }
 }

@@ -18,11 +18,6 @@
           else could work on it. Feel free to <router-link to="/about/">contact me</router-link>
           if you'd like to know more.
         </p>
-        <p>
-          <a href="https://thenounproject.com/icon/portal-4647674/" title="portal icon">
-            Portal icon adapted from the noun project
-          </a>
-        </p>
         <legal-stuff />
       </div>
     </div>

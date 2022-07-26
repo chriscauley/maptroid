@@ -5,7 +5,6 @@ const collection_slug = 'schema/world'
 const fromServer = (world) => {
   world.data = {
     elevators: [],
-    portals: {},
     ...world.data,
   }
   return world

@@ -28,7 +28,6 @@
         <item-overlay v-if="tool_storage.state.show_items" />
         <link-overlay v-if="tool_storage.state.show_links" />
         <elevator-overlay v-if="tool_storage.state.show_links" />
-        <div v-for="(portal, i) in portals" :key="i" :class="portal.class" :style="portal.style" />
       </html-overlay>
     </template>
     <viewer-panel :items="visible_items" :tool="tool_storage.state.selected.tool" />
@@ -177,21 +176,6 @@ export default {
         `-zoom-${zoom} -tool-${tool} -variant-${variant}`,
         layers.map((l) => `-layer-${l}`),
       ]
-    },
-    portals() {
-      const { portals } = this.$store.route.world.data
-      return Object.entries(portals).map(([xy, value]) => {
-        const [x, y] = xy.split(',').map(Number)
-        return {
-          style: {
-            left: `${x * 100}%`,
-            top: `${y * 100}%`,
-            width: '100%',
-            height: '100%',
-          },
-          class: `sm-portal -${value}`,
-        }
-      })
     },
   },
   watch: {

@@ -6,9 +6,9 @@ const toSassMap = obj => JSON.stringify(obj, null, 2)
       .replace(/[\{]/g,"(")
       .replace(/[\}]/g,")")
 
-const portal_colors = loadStatic('sm/portal/colors.json')
+const link_colors = loadStatic('sm/link_colors.json')
 const templates = loadStatic('sm/icons/template_sprites.json')
-lines.push(`$portal_colors: ${toSassMap(portal_colors)};`)
+lines.push(`$link_colors: ${toSassMap(link_colors)};`)
 lines.push(`$template_sprites: ${toSassMap(templates)};`)
 
 const icons = loadStatic('sm/icons.json')

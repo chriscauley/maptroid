@@ -30,7 +30,7 @@
 <script>
 import RoomBox, { plms } from './RoomBox.vue'
 import ToolStorage from '@/components/unrest/ToolStorage'
-import portal_colors from '@/../../server/static/sm/portal/colors.json'
+import link_colors from '@/../../server/static/sm/link_colors.json'
 import Item from '@/models/Item'
 
 const Block = {
@@ -79,7 +79,7 @@ const tools = [
   { slug: 'block', variants: Block.misc, icon: (_, v) => `sm-block -${v}` },
   { slug: 'block', variants: Block.directional, icon: (_, v) => `sm-block -${v}` },
   { slug: 'plm', variants: Object.keys(plms), icon: (_, v) => `sm-block -${v}` },
-  { slug: 'link', variants: Object.keys(portal_colors), icon: (_, v) => `sm-link -${v}` },
+  { slug: 'link', variants: Object.keys(link_colors), icon: (_, v) => `sm-link -${v}` },
   { slug: 'overlap', icon: 'fa fa-th-large' },
 ]
 
