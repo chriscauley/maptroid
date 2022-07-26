@@ -31,3 +31,6 @@ for zone in zones:
             populate_room_elevators(room)
             room.save()
     process_zone(zone)
+
+world.data['version'] = world.data.get('version', 0) + 1
+world.save()

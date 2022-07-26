@@ -1,7 +1,7 @@
 colour==0.1.5
 Django==4.0.5
 django-mailer==2.1
-django-unrest-schema==0.0.2
+django-unrest-schema==0.0.3
 django-unrest==0.1.9
 ImageHash==4.2.1
 numpy==1.19.5

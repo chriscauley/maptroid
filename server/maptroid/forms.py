@@ -1,5 +1,6 @@
 from django.core.files.base import ContentFile
 from django.conf import settings
+from django.core.cache import cache
 from django import forms
 import urllib
 import os
@@ -18,6 +19,15 @@ class WorldForm(forms.ModelForm):
 class RoomForm(forms.ModelForm):
   user_can_GET = user_can_LIST = 'ALL'
   filter_fields = ['zone__slug', 'world__slug'] # TODO use world__slug and remove zone__slug
+
+  def get_list_cache(self, request):
+    if request.user.is_superuser:
+      return
+    return cache.get(request.path)
+
+  def set_list_cache(self, request, value):
+    return cache.set(request.path, value)
+
   class Meta:
     model = Room
     fields = ['name', 'key', 'world', 'zone', 'data']
