@@ -3,6 +3,7 @@ import AssignSprite from './AssignSprite/index.vue'
 import Contact from './Contact.vue'
 import dread from './dread/index'
 import Downloads from './Downloads.vue'
+import FAQ from './FAQ/index.vue'
 import FileBrowser from './FileBrowser.vue'
 import gamepad from '@/unrest/gamepad'
 import Home from './Home.vue'
@@ -33,6 +34,7 @@ export default {
   AssignSprite,
   Contact,
   Downloads,
+  FAQ,
   FileBrowser,
   ConfigureGamepad,
   TestGamepad,

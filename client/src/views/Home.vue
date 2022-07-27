@@ -1,6 +1,11 @@
 <template>
   <div class="app__home">
-    <h2>Project Maptroid</h2>
+    <h1>
+      Project Maptroid
+      <router-link to="/app/faq/" class="link">
+        What is this?
+      </router-link>
+    </h1>
     <unrest-form :schema="schema" :state="state">
       <template #actions>{{ ' ' }}</template>
     </unrest-form>

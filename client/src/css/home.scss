@@ -1,6 +1,9 @@
 .app__home {
-  h2 {
+  h1 {
     @apply mt-32 text-center;
+    a {
+      @apply block text-base;
+    }
   }
   form {
     @apply m-auto;

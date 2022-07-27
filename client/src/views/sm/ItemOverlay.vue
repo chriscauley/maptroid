@@ -1,7 +1,13 @@
 <template>
-  <div v-for="item in items" :key="item.id" v-bind="getAttrs(item)" @click="(e) => click(e, item)">
+  <router-link
+    v-for="item in items"
+    :key="item.id"
+    v-bind="getAttrs(item)"
+    @click.stop="(e) => click(e, item)"
+    :to="`?item=${item.id}`"
+  >
     <item-popper v-if="item.id === selected_item_id" :item="item" />
-  </div>
+  </router-link>
 </template>
 
 <script>
@@ -73,8 +79,6 @@ export default {
         } else {
           this.$store.run.addAction(['item', item.id])
         }
-      } else if (tool === 'edit_room') {
-        window.open(`/djadmin/maptroid/item/${item.id}/`)
       }
     },
   },

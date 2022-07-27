@@ -52,7 +52,7 @@ export default {
     },
     zone_links() {
       const { world_slug, zone_slug } = this.$route.params
-      if (!this.$auth.user?.is_superuser && this.$store.route.isDread()) {
+      if (!this.$auth.user?.is_superuser || this.$store.route.isDread()) {
         return null
       }
       if (zone_slug === undefined) {

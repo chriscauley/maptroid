@@ -57,11 +57,19 @@
   }
 }
 
-.app-about {
+.app-about, .app-faq {
   @apply flex items-center justify-center w-full;
+  color: var(--text-alt);
   &__inner {
     @apply border p-4;
     width: 600px;
+  }
+  ul {
+    @apply ml-8;
+    list-style: disc;
+  }
+  h3 {
+    @apply mb-2 mt-8;
   }
 }
 
