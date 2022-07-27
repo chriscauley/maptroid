@@ -148,7 +148,7 @@ export default {
   },
   computed: {
     zones() {
-      return this.$store.zone.getPage({ query: { world_id: WORLD, limit: 5000 } })?.items || []
+      return this.$store.zone.getPage({ query: { world: WORLD, limit: 5000 } })?.items || []
     },
   },
   methods: {
