@@ -104,4 +104,3 @@ if __name__ == "__main__":
         worlds = World.objects.exclude(slug='metroid-dread')
     else:
         worlds = World.objects.filter(slug__in=sys.argv[1:])
-    for world in worlds:

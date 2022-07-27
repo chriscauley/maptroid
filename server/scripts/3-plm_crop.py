@@ -9,7 +9,7 @@ from django.core.files.base import ContentFile
 import json
 import imagehash
 import math
-import np
+import numpy as np
 import os
 from PIL import Image
 import sys
