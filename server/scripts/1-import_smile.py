@@ -1,9 +1,6 @@
 # creates the world and rooms from layer exports
-
+import _setup
 import os
-import django
-os.environ['DJANGO_SETTINGS_MODULE'] = 'main.settings'
-django.setup()
 
 import typer
 from django.conf import settings

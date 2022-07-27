@@ -1,3 +1,4 @@
+beautifulsoup4==4.11.1
 colour==0.1.5
 Django==4.0.5
 django-mailer==2.1
@@ -11,5 +12,6 @@ scikit-image==0.19.3
 shapely==1.8.2
 social-auth-app-django==5.0.0
 social-auth-core==4.2.0
+typer==0.6.1
 urcv==0.0.5
 uWSGI==2.0.20

@@ -53,8 +53,6 @@ for zone in zones:
     zone_image = autocrop(zone_image)
     print(_path, old_size, zone_image.shape)
     zone_xys[zone.slug] = {}
-    if old_size != zone_image.size:
-        cv2.imwrite(str(_path), zone_image)
     zone_images.append([zone, zone_image])
 
 input("Press enter to continue or ctrl+c to halt")
