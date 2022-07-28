@@ -54,6 +54,7 @@ def make_map_icon(world, force=False):
     if os.path.exists(dest) and not force:
         return
     scale = 4
+    print('making map for', world)
     W, H = world.normalize()
     img = Image.new("RGB", ((W+2)*scale, (H+2)*scale))
     draw = ImageDraw.Draw(img)
@@ -104,3 +105,5 @@ if __name__ == "__main__":
         worlds = World.objects.exclude(slug='metroid-dread')
     else:
         worlds = World.objects.filter(slug__in=sys.argv[1:])
+    for world in worlds:
+        main(world, '-f' in sys.argv)

@@ -12,9 +12,7 @@ from maptroid.models import World, Room
 SMILE_DIR = os.path.join(settings.BASE_DIR, '../.media/smile_exports/')
 ROOM_SLICES = ['layer-1', 'bts', 'layer-2']
 
-app = typer.Typer()
-
-def main(world_slug: str):
+def main(world_slug):
   world = World.objects.get(slug=world_slug)
   world_dir = os.path.join(SMILE_DIR, world_slug)
   os.listdir(world_dir)
@@ -34,7 +32,8 @@ def main(world_slug: str):
         missing.append(room_slice)
     if missing:
       print(f'{key} missing in: {missing}')
-      continue
+      if not '-f' in sys.argv:
+        continue
     room, new = Room.objects.get_or_create(key=key, world=world)
     if new or 'zone' not in room.data:
       print(f'New Room: {room}')
@@ -46,4 +45,4 @@ def main(world_slug: str):
       room.save()
 
 if __name__ == "__main__":
-  typer.run(main)
+  main(sys.argv[1])
