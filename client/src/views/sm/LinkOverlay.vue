@@ -77,8 +77,11 @@ export default {
 	     console.warn('Unable to find matching link', link)
 	  }
         } else if (targets.length !== 2) {
-          const skip = ['BA-ascent', 'F-ascent', 'AD-ascent', 'CB-ascent']
-          if (!skip.includes(`${link.text}-${world_slug}`)) {
+          const skip = {
+            ascent: ['BA', 'F', 'AD', 'CB'],
+            'hyper-metroid': ['1', '4', '7', '10', '13'],
+	  }
+          if (!skip['world_slug'].includes(link.text)) {
             console.warn('Extra targets for link', link, all_links)
           }
         }
