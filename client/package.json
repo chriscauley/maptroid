@@ -13,7 +13,7 @@
     "@unrest/css": "0.0.8",
     "@unrest/geo": "0.0.5",
     "@unrest/tailwind": "0.1.19",
-    "@unrest/vue": "0.2.11",
+    "@unrest/vue": "0.2.12",
     "@unrest/vue-auth": "0.0.12",
     "@unrest/vue-form": "0.0.15",
     "@unrest/vue-mousetrap": "0.0.11",
