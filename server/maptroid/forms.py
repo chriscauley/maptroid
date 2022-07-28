@@ -23,10 +23,10 @@ class RoomForm(forms.ModelForm):
   def get_list_cache(self, request):
     if request.user.is_superuser:
       return
-    return cache.get(request.path)
+    return cache.get(request.get_full_path())
 
   def set_list_cache(self, request, value):
-    return cache.set(request.path, value)
+    return cache.set(request.get_full_path(), value)
 
   class Meta:
     model = Room
