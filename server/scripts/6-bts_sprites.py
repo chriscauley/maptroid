@@ -147,12 +147,16 @@ def main():
         room.data['cre'] = {}
         taken_xys = []
         for key, xys in cre_xys.items():
+            if not key:
+                raise ValueError("Key does not exist. Assign value at /app/smilesprite")
             if xys:
                 room.data['cre'][key] = xys_to_rectangles(xys)
                 for xy in xys:
                     taken_xys.append(xy)
         room.data['cre_hex'] = {}
         for key, xys in hex_xys.items():
+            if not key:
+                raise ValueError("Key does not exist. Assign value at /app/smilesprite")
             xys = [xy for xy in xys if not xy in taken_xys]
             if xys:
                 room.data['cre_hex'][key] = xys_to_rectangles(xys)

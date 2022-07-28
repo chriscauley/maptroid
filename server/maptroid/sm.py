@@ -247,5 +247,7 @@ def make_walls_image(zone, dest):
         skip = ['empty', 'block']
         stamp_map = { k: v for k, v in stamp_map.items() if v not in skip }
         for (x, y), category in stamp_map.items():
+            if not category:
+                raise ValueError("Category does not exist. Assign value at /app/smilesprite")
             urcv.draw.paste_alpha(zone_image, icons[category], x, y)
     cv2.imwrite(dest, zone_image)
