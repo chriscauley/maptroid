@@ -1,5 +1,5 @@
 <template>
-  <div :class="wrapper_class" v-if="ready">
+  <div :class="wrapper_class" v-if="$store.route.ready && ready">
     <base-viewer :osd_store="osd_store" @viewer-bound="loadImages" />
     <template v-if="osd_store.viewer">
       <unrest-toolbar :storage="tool_storage" class="-topleft">

@@ -71,11 +71,14 @@ export default {
       out.forEach((link) => {
         const targets = all_links[link.text]
         const room_id = targets.find((id) => id !== link.room_id)
+	const { world_slug } = this.$route.params
         if (!room_id) {
-          console.warn('Unable to find matching link', link)
+          if (world_slug !== 'hyper-metroid') {
+	     console.warn('Unable to find matching link', link)
+	  }
         } else if (targets.length !== 2) {
           const skip = ['BA-ascent', 'F-ascent', 'AD-ascent', 'CB-ascent']
-          if (!skip.includes(`${link.text}-${this.$route.params.world_slug}`)) {
+          if (!skip.includes(`${link.text}-${world_slug}`)) {
             console.warn('Extra targets for link', link, all_links)
           }
         }

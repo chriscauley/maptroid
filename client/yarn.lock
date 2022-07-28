@@ -2795,10 +2795,10 @@
     local-storage-json "^1.1.0"
     lodash.debounce "^4.0.8"
 
-"@unrest/vue@0.2.11":
-  version "0.2.11"
-  resolved "https://registry.yarnpkg.com/@unrest/vue/-/vue-0.2.11.tgz#60469b74907e04a0eaf7773d34621dc91171df1b"
-  integrity sha512-LpnA7fppY1yzOzpo0Mo9hSZr12xPaVAxLmi18mI5TkYWbfNh8Kuwqnl2300hkNUAONAmd3bITZUVGnlvWUf2bg==
+"@unrest/vue@0.2.12":
+  version "0.2.12"
+  resolved "https://registry.yarnpkg.com/@unrest/vue/-/vue-0.2.12.tgz#22f1829453d1089b8e793c312b0892fecb764d88"
+  integrity sha512-3eTbLfI9x3JgIDhsSPFsg07uwKTqRxhkh1VdmV50fZeMekNAFFO09dFFY9UgkW8iV1+9Nj+LnyZOjvQ371u7sg==
   dependencies:
     dedent "^0.7.0"
     lodash.clonedeep "^4.5.0"

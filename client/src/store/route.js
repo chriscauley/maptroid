@@ -15,7 +15,7 @@ export default ({ store }) => {
       return route.worlds.find((w) => w.slug === route.params.world_slug)
     }),
     zones: computed(() => route.all_zones.filter((z) => !z.data.hidden)),
-    all_zones: computed(() => (route.world && store.zone.getPage(route.world_query)?.items) || []),
+    all_zones: computed(() => store.zone.getPage(route.world_query)?.items || []),
     zone: computed(() => {
       const { zone_slug } = route.params
       return zone_slug && route.zones.find((w) => w.slug === zone_slug)
@@ -38,10 +38,10 @@ export default ({ store }) => {
     }),
 
     world_rooms: computed(() => {
-      const page = route.world && store.room.getPage(route.world_query)
+      const page = store.room.getPage(route.world_query)
 
       const visible_zones = {}
-      route.zones.forEach((z) => (visible_zones[z.id] = true))
+      route.zones.forEach((z) => visible_zones[z.id] = true)
       return (page?.items || []).filter((r) => !r.data.hidden && visible_zones[r.zone])
     }),
 
