@@ -90,6 +90,10 @@ def make_map_icon(world, force=False):
                 for shape in geo['interiors']:
                     draw.polygon(_pts2(shape), fill="#000000", outline=outline)
 
+    if world.slug == 'ascent':
+        # ascent is unnecessarily tall
+        w, h = img.size
+        img = img.crop((0, scale * 34, w, h))
     img.save(dest)
 
 def main(world, force):
