@@ -41,7 +41,7 @@ export default ({ store }) => {
       const page = store.room.getPage(route.world_query)
 
       const visible_zones = {}
-      route.zones.forEach((z) => visible_zones[z.id] = true)
+      route.zones.forEach((z) => (visible_zones[z.id] = true))
       return (page?.items || []).filter((r) => !r.data.hidden && visible_zones[r.zone])
     }),
 

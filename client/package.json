@@ -6,7 +6,7 @@
     "build": "vue-cli-service build && rm -rf ../server/dist && mv dist ../server",
     "lint": "eslint \"src/**/*\" \"__tests__/**/*\"",
     "serve": "VUE_APP_OFFLINE=1 vue-cli-service serve",
-    "watch": "yarn build --watch"
+    "watch": "vue-cli-service build --watch --dest ../server/dist"
   },
   "dependencies": {
     "@popperjs/core": "^2.9.3",

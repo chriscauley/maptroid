@@ -7,7 +7,36 @@
   }
   form {
     @apply m-auto;
-    width: 300px;
+    width: 450px;
+    .form-group____root > .input-wrapper {
+      @apply flex gap-2;
+    }
+    .form-group__sort_by, .form-group__difficulty {
+      .ur-dropdown {
+        @apply cursor-pointer flex gap-2;
+      }
+    }
+    .form-group__search {
+      @apply flex-grow relative;
+      flex-basis: 196px;
+      input {
+        @apply pl-8;
+      }
+      &:before {
+        @apply absolute;
+        content: "\f002";
+        font-family: FontAwesome;
+        left: 0.75rem;
+        top: 50%;
+        transform: translate(0, -50%);
+      }
+    }
+    .form-group__sort_by {
+      flex-basis: 115px;
+    }
+    .form-group__difficulty {
+      flex-basis: 145px;
+    }
   }
 }
 
@@ -16,11 +45,29 @@
 }
 
 .world-card {
-  @apply border p-4 rounded text-center;
+  @apply flex gap-4 p-1 rounded;
+  background: var(--bg);
   &__map {
+    @apply rounded;
     width: 200px;
     height: 200px;
-    background: no-repeat center;
+    background: black no-repeat center;
     background-size: contain;
+  }
+  &__details {
+    @apply flex flex-col justify-between pr-2 py-1;
+    width: 200px;
+  }
+  &__title {
+    @apply font-bold text-xl;
+  }
+}
+
+.mc-data {
+  &__row {
+    @apply flex justify-between;
+  }
+  &__rating {
+    @apply flex flex-grow gap-1 items-center;
   }
 }

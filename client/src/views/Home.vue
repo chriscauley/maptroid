@@ -17,8 +17,15 @@
         :to="`/maps/${world.slug}/`"
       >
         <div class="world-card__map" :style="bg(world)" />
-        {{ world.name }}
-        <div v-if="world.data.mc_data?.author">by {{ world.data.mc_data?.author }}</div>
+        <div class="world-card__details">
+          <div>
+            <div class="world-card__title">{{ world.name }}</div>
+            <div v-if="world.data.mc_data?.author" class="world-card__author">
+              by {{ world.data.mc_data?.author }}
+            </div>
+          </div>
+          <mc-data v-if="world.data.mc_data" :mc_data="world.data.mc_data" />
+        </div>
       </router-link>
     </div>
   </div>
@@ -26,32 +33,102 @@
 
 <script>
 import { sortBy } from 'lodash'
+import { markRaw } from 'vue'
+import FancySelect from '@/components/FancySelect'
+
+import McData from '@/components/McData.vue'
+
+const difficulties = ['Beginner', 'Vanilla', 'Veteran', 'Expert', 'Unknown']
+const sort_choices = ['Name', 'Rating', 'Runtime']
+
+const getDifficultyChoices = (worlds) => {
+  const counts = {}
+  worlds = worlds.filter((w) => !w.hidden)
+  worlds.forEach((world) => {
+    const difficulty = world.data.mc_data?.difficulty || 'Unknown'
+    counts[difficulty] = (counts[difficulty] || 0) + 1
+  })
+  const choices = Object.entries(counts).map(([value, count]) => ({
+    name: `${value} (${count})`,
+    value,
+  }))
+  return sortBy(choices, (c) => difficulties.indexOf(c.value))
+}
+
+const parseRuntime = (world) => {
+  const [h, m] = (world.data.mc_data?.runtime || '-1:0').split(':')
+  return -(parseInt(h) * 60 + parseInt(m))
+}
 
 export default {
   __route: {
     path: '/',
   },
+  components: { McData },
   data() {
+    const ui = { tagName: markRaw(FancySelect) }
     return {
       schema: {
         type: 'object',
         properties: {
           search: { title: null, type: 'string', placeholder: 'Search Maps' },
+          sort_by: {
+            title: null,
+            type: 'string',
+            enum: sort_choices.map((s) => s.toLowerCase()),
+            enumNames: sort_choices,
+            ui,
+            icon: (c) => (c === 'name' ? 'sort-alpha-asc' : 'sort-amount-desc'),
+          },
+          difficulty: {
+            title: null,
+            getChoices: () => getDifficultyChoices(this.$store.route.worlds),
+            placeholder: 'Difficulty',
+            ui,
+            icon: 'shield',
+          },
         },
       },
-      state: {},
+      state: { sort_by: 'name' },
     }
   },
   computed: {
     worlds() {
       let { worlds } = this.$store.route
+      const { search, difficulty, sort_by } = this.state
       worlds = worlds.filter((w) => !w.hidden)
-      worlds = sortBy(worlds, 'name')
-      if (this.state.search) {
-        const search = this.state.search.trim()
-        const _ = (w) => `${w.name} ${w.data.mc_data?.author || ''}`.toLowerCase()
-        worlds = worlds.filter((w) => _(w).includes(search))
+      if (search) {
+        const _search = search.trim()
+        const _ = (w) => {
+          const mc_data = w.data.mc_data || {}
+          const author = mc_data.author || ''
+          const difficulty = mc_data.difficulty || ''
+          const genre = mc_data.genre || ''
+          return `${w.name} ${author} ${genre} ${difficulty}`.toLowerCase()
+        }
+        worlds = worlds.filter((w) => _(w).includes(_search))
       }
+      if (difficulty) {
+        worlds = worlds.filter((w) => {
+          return (w.data.mc_data?.difficulty || 'Unknown') === difficulty
+        })
+      }
+      let sorter = 'name'
+      if (sort_by === 'difficulty') {
+        sorter = (w) => difficulties.indexOf(w.data.mc_data?.difficulty)
+      } else if (sort_by === 'rating') {
+        sorter = (w) => {
+          if (!w.data.mc_data) {
+            // dread, super metroid are lst
+            return 0
+          }
+          // unrated things are right between rated and nintendo games
+          return -(w.data.mc_data.rating || 0.25)
+        }
+      } else if (sort_by === 'runtime') {
+        sorter = parseRuntime
+      }
+      worlds = sortBy(worlds, sorter)
       return worlds
     },
   },
