@@ -1,0 +1,13 @@
+{% load static %}
+{% if request.GET.success %}
+File uploaded successfully. Click <a href="{{ request.path}}">here</a> to upload another.
+{% else %}
+<form method="post" enctype="multipart/form-data">
+  <h3>Upload File for {{ world }}</h3>
+  {% csrf_token %}
+  <input type="file" name="myfile">
+  <div>
+    <button type="submit">Upload</button>
+  </div>
+</form>
+{% endif %}

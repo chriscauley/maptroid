@@ -12,6 +12,8 @@ import sprite.forms
 import unrest.user.forms
 import contact.forms
 
+from contact.views import simple_upload
+
 def dread_redirect(request, *args, **kwargs):
   path = request.get_full_path().split('dread/')[-1]
   return HttpResponseRedirect('/maps/metroid-dread/'+path)
@@ -49,6 +51,7 @@ urlpatterns = [
     path('api/save-sprite/', save_sprite),
     path('api/sprite/', include('sprite.urls')),
     path('room/<room_id>/', goto_room),
+    path('upload_file/<world_slug>/', simple_upload),
     path('', include('social_django.urls', namespace='social')),
     path('', include('unrest.urls')),
 ]
