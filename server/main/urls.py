@@ -13,7 +13,8 @@ import unrest.user.forms
 import contact.forms
 
 def dread_redirect(request, *args, **kwargs):
-  return HttpResponseRedirect('/maps'+request.get_full_path())
+  path = request.get_full_path().split('dread/')[-1]
+  return HttpResponseRedirect('/maps/metroid-dread/'+path)
 
 app_urls = [
   "app",
@@ -39,6 +40,7 @@ app_urls = [
 urlpatterns = [
     path('djadmin/', admin.site.urls),
     re_path('^dread', dread_redirect),
+    re_path('^maps/dread', dread_redirect),
     re_path(f'^({"|".join(app_urls)})', index),
     path('api/list-dir/', list_dir),
     path('api/delete-file/', delete_file),

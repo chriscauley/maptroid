@@ -3,7 +3,7 @@ from django.utils.text import slugify
 
 from maptroid.models import Zone, World
 
-NAME = 'Hyper Metroid'
+NAME = 'Redesign: Axeil Edition'
 
 ZONE_NAMES = ['Crateria', 'Brinstar', 'Norfair', 'Wrecked Ship', 'Maridia', 'Tourian']
 
