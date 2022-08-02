@@ -316,14 +316,14 @@ export default {
         this.fastSave()
       }
     },
-    addHole(xy) {
+    addOverlap(xy) {
       const { holes } = this.room.data
       if (!holes.find((xy2) => vec.isEqual(xy, xy2))) {
         holes.push(xy)
         this.$store.room.bounceSave(this.room)
       }
     },
-    removeHole(xy) {
+    removeOverlap(xy) {
       const { data } = this.room
       if (data.holes.find((xy2) => vec.isEqual(xy, xy2))) {
         data.holes = data.holes.filter((xy2) => !vec.isEqual(xy, xy2))
