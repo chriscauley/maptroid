@@ -1,11 +1,17 @@
-import { RestStorage } from '@unrest/vue-storage'
+import { RestStorage, LocalStorage } from '@unrest/vue-storage'
 
-export default ({ store }) => {
-  const storage = RestStorage('schema/run', { collection_slug: 'schema/run' })
+export default ({ store, app }) => {
+  const rest_storage = RestStorage('schema/run', { collection_slug: 'schema/run' })
+  const local_storage = LocalStorage('schema/run')
+
+  const getStorage = () => (app.$auth.user?.is_superuser ? rest_storage : local_storage)
 
   const getUserId = () => store._app.config.globalProperties.$auth.user?.id
 
-  Object.assign(storage, {
+  const storage = {
+    getPage(options) {
+      return getStorage().getPage(options)
+    },
     getCurrentRun() {
       const user_id = getUserId()
       const { world_runs } = store.route
@@ -20,9 +26,11 @@ export default ({ store }) => {
     },
     startNewRun() {
       const world_id = store.route.world.id
-      storage.save({ user: getUserId(), world: world_id }).then((world) => {
-        storage.setCurrentRun(world)
-      })
+      getStorage()
+        .save({ user: getUserId(), world: world_id })
+        .then((world) => {
+          storage.setCurrentRun(world)
+        })
     },
 
     addAction(action) {
@@ -34,7 +42,9 @@ export default ({ store }) => {
       } else {
         run.data.actions.push(action)
       }
-      return store.run.save(run).then(store.refetch)
+      return getStorage()
+        .save(run)
+        .then(store.refetch)
     },
 
     removeLastActionAtXY([x, y], room) {
@@ -48,16 +58,19 @@ export default ({ store }) => {
       run.data.actions = run.data.actions.filter((_, index) => index !== last_index)
       const { insert_run_action_after } = store.local.state
       if (last_index <= insert_run_action_after) {
-        store.local.save({ insert_run_action_after: insert_run_action_after - 1 })
+        getStorage().save({ insert_run_action_after: insert_run_action_after - 1 })
       }
-      return store.run.save(run).then(store.refetch)
+      return getStorage()
+        .save(run)
+        .then(store.refetch)
     },
 
     refetch() {
-      store.run.api.markStale()
-      store.run.getCurrentRun()
+      const s = getStorage()
+      s.api.markStale()
+      s.getCurrentRun()
     },
-  })
+  }
 
   return storage
 }

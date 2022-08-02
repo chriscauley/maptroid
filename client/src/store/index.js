@@ -50,7 +50,7 @@ export default {
     store._app = app
 
     Object.entries(modules).forEach(([name, module]) => {
-      this[name] = store[name] = module({ store })
+      this[name] = store[name] = module({ store, app })
     })
 
     admin_modules.forEach((model_name) => {

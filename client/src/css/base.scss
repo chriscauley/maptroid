@@ -417,3 +417,11 @@ body.theme-dark_mode {
     }
   }
 }
+
+.fa-run {
+  background: url("/static/run.png") center no-repeat;
+  background-size: contain;
+  height: 1em;
+  filter: invert(1);
+  width: 1em;
+}

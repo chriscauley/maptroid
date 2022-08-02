@@ -9,6 +9,10 @@ export default (component) => {
         icon: 'fa fa-cogs',
         select: ToolStorage.TOGGLE,
       },
+      {
+        slug: 'run_path',
+        icon: 'fa fa-run',
+      },
     ]
     if (component.$auth.user?.is_superuser) {
       return [
@@ -25,10 +29,6 @@ export default (component) => {
         {
           slug: 'video_path',
           icon: 'fa fa-youtube-play',
-        },
-        {
-          slug: 'run_path',
-          icon: 'fa fa-gamepad',
         },
       ]
     }

@@ -47,7 +47,7 @@ export default {
       return actions.map(this.prepAction)
     },
     run_items() {
-      const items = this.$store.route.world_runs?.map((run) => ({
+      const items = this.$store.route.world_runs.map((run) => ({
         text: run.id,
         click: () => this.$store.local.save({ current_run_id: run.id }),
       }))
