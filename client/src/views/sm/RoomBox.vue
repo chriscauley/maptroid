@@ -79,7 +79,7 @@ export default {
     },
     style() {
       const [x, y, width, height] = this.room.data.zone.bounds
-      if (['item', 'overlap', 'block', 'plm', 'link'].includes(this.mode)) {
+      if (['item', 'overlap', 'block', 'plm', 'link', 'split'].includes(this.mode)) {
         return {
           height: `${height * 256}px`,
           width: `${width * 256}px`,
@@ -172,17 +172,21 @@ export default {
       }))
     },
     holes() {
-      if (this.mode !== 'overlap') {
-        return []
-      }
+      let holes = []
       const s = 256
-      return this.room.data.holes?.map(([x, y]) => ({
+      if (this.mode == 'overlap') {
+        holes = this.room.data.holes
+      } else if (this.mode === 'split') {
+        holes = this.room.data.splits || []
+      }
+      return holes.map(([x, y, color]) => ({
         left: `${x * s}px`,
         top: `${y * s}px`,
         width: s + 'px',
         height: s + 'px',
         position: 'absolute',
-        background: 'rgba(255,0,0,0.25)',
+        background: color || 'rgb(255,0,0)',
+        opacity: 0.25,
         zIndex: 1,
         pointerEvents: 'none',
       }))
@@ -288,12 +292,14 @@ export default {
       const { tool } = this.tool_storage.state.selected
       if (tool === 'rezone') {
         return
-      } else if (this.mode === 'overlap') {
+      } else if (['overlap', 'split'].includes(this.mode)) {
         const box = this.$el.getBoundingClientRect()
         const [x, y] = event._drag.xy
         if (inRange(x - box.x, 0, box.width) && inRange(y - box.y, 0, box.height)) {
           const xy = [x - box.x, y - box.y].map((i) => Math.floor(i / 256))
-          this[event.shiftKey ? 'removeHole' : 'addHole'](xy)
+          const action = event.shiftKey ? 'remove' : 'add'
+          const target = this.mode[0].toUpperCase() + this.mode.slice(1)
+          this[action + target](xy)
         }
       } else if (this.mode === 'item' || this.mode === 'plm') {
         // handled in click
@@ -321,6 +327,29 @@ export default {
       const { data } = this.room
       if (data.holes.find((xy2) => vec.isEqual(xy, xy2))) {
         data.holes = data.holes.filter((xy2) => !vec.isEqual(xy, xy2))
+        this.$store.room.bounceSave(this.room)
+      }
+    },
+    addSplit(xy) {
+      const xyc = [xy[0], xy[1], this.variant]
+      if (!this.room.data.splits) {
+        this.room.data.splits = [] // eslint-disable-line
+      }
+      const { splits } = this.room.data
+      if (!splits.find((xyc2) => vec.isEqual(xyc, xyc2))) {
+        this.removeSplit(xyc)
+        splits.push(xyc)
+        this.$store.room.bounceSave(this.room)
+      }
+    },
+    removeSplit(xy) {
+      // no need to make xyc here because vec.isEqual only checks first two values
+      if (!this.room.data.splits) {
+        this.room.data.splits = [] // eslint-disable-line
+      }
+      const { data } = this.room
+      if (data.splits.find((xy2) => vec.isEqual(xy, xy2))) {
+        data.splits = data.splits.filter((xy2) => !vec.isEqual(xy, xy2))
         this.$store.room.bounceSave(this.room)
       }
     },

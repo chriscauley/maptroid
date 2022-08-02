@@ -24,7 +24,7 @@
 
 .sm-room-box {
   background-size: cover;
-  &.-mode-overlap, &.-mode-item, &.-mode-block, &.-mode-plm, &.-mode-link {
+  &.-mode-split, &.-mode-overlap, &.-mode-item, &.-mode-block, &.-mode-plm, &.-mode-link {
     position: relative;
   }
   canvas {
@@ -264,6 +264,13 @@ $ascent-items: weapons-tank shinespark boost-ball;
     color: black;
   }
 }
+
+@each $name, $color in $link-colors {
+  .fa.-#{$name} {
+    color: string.unquote($color);
+  }
+}
+
 .osd-html__overlay {
   .sm-link {
     /* text is displayed using background image */

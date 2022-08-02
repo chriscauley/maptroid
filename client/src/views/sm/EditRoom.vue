@@ -81,6 +81,7 @@ const tools = [
   { slug: 'plm', variants: Object.keys(plms), icon: (_, v) => `sm-block -${v}` },
   { slug: 'link', variants: Object.keys(link_colors), icon: (_, v) => `sm-link -${v}` },
   { slug: 'overlap', icon: 'fa fa-th-large' },
+  { slug: 'split', variants: Object.keys(link_colors), icon: (_, v) => `fa fa-chain -${v}` },
 ]
 
 export default {

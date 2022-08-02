@@ -10,6 +10,7 @@ import Home from './Home.vue'
 import Labbook from './Labbook.vue'
 import MapView from './MapView.vue'
 import play from './play'
+import SplitRoom from './SplitRoom'
 import SpriteSheet from './SpriteSheet'
 import ProcessDread from './ProcessDread.vue'
 import Trainer from './Trainer'
@@ -46,11 +47,12 @@ export default {
   ScreenshotAnalyzer,
   ScreenshotUpload,
   ScreenshotViewer,
-  SpriteSheet,
   SmileCompare,
   SmileOcr,
   SmileSprite,
-  SpriteGallery,
   SmAssignZone,
   SmPlmAlign,
+  SplitRoom,
+  SpriteSheet,
+  SpriteGallery,
 }
