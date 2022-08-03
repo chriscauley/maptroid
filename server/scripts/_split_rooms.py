@@ -3,11 +3,16 @@ from _setup import get_wzr
 import cv2
 from collections import defaultdict
 import os
+import sys
 import urcv
 
 from maptroid.models import Room
 
 world, zones, rooms = get_wzr()
+
+def crop(image, coords):
+    x, y, w, h = [i*256 for i in coords]
+    return image[y:y+h,x:x+w]
 
 for room in rooms:
     if not room.data.get('splits', []):
@@ -20,14 +25,33 @@ for room in rooms:
         xys_by_color[color].append((x,y))
 
     used_xys = {}
-    _, _, w, h = room.data['zone']['bounds']
+    zx, zy, zw, zh = room.data['zone']['bounds']
     old_zone = room.zone
     for color, xys in xys_by_color.items():
+        if '--finalize' in sys.argv:
+            x_max = max([xy[0] for xy in xys])
+            y_max = max([xy[1] for xy in xys])
+            x_min = min([xy[0] for xy in xys])
+            y_min = min([xy[1] for xy in xys])
+            room_w = x_max - x_min + 1
+            room_h = y_max - y_min + 1
+        else:
+            room_w = zw
+            room_h = zh
+            x_min = 0
+            y_min = 0
+
         new_key = room.key.replace('.png', f'-{color}.png')
-        holes = [(x,y) for x in range(w) for y in range(h) if not (x, y) in xys]
+        new_room, new = Room.objects.get_or_create(world=world, key=new_key)
+        if new_room.data.get('split_lock'):
+            print(f'Skipping room due to split_lock {new_room.key}')
+            continue
+
+        holes = [(x,y) for x in range(zw) for y in range(zh) if not (x, y) in xys]
         for xy in xys:
             if xy in used_xys:
                 raise ValueError(f"Duplicate xy {xy} in room {room}")
+
         layer_1 = None
         for layer in ['bts', 'layer-1', 'layer-2', 'plm_enemies']:
             source = f'.media/smile_exports/{world.slug}/{layer}/{room.key}'
@@ -44,6 +68,9 @@ for room in rooms:
             for x, y in holes:
                 result[y*256:(y+1) * 256,x*256:(x+1) * 256] = 0
 
+            # trim to room dimensions
+            result = crop(result, (x_min, y_min, room_w, room_h))
+
             dest = f'.media/smile_exports/{world.slug}/{layer}/{new_key}'
             cv2.imwrite(dest, result)
             dest = f'.media/sm_cache/{world.slug}/{layer}/{new_key}'
@@ -57,13 +84,14 @@ for room in rooms:
                 urcv.draw.paste_alpha(result, layer_1, 0, 0)
                 cv2.imwrite(dest, result)
 
-        new_room, new = Room.objects.get_or_create(world=world, key=new_key)
         new_room.data['holes'] = holes
-        if new:
+        if new or '--reset' in sys.argv:
             new_room.data['zone'] ={
-                'bounds': [0,0,w,h],
-                'raw': [0,0,w,h],
+                'bounds': [0, 0, room_w, room_h],
+                'raw': [0, 0, room_w, room_h],
             }
+        if '--finalize' in sys.argv:
+            new_room.data['split_lock'] = True
         if not old_zone.slug.startswith('ztrash-'):
             new_room.zone = old_zone
         new_room.save()
