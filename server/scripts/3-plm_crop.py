@@ -18,6 +18,7 @@ from unrest.utils import JsonCache
 
 from maptroid.models import Room
 from maptroid.sm import set_transparency, to_media_url
+import urcv
 
 
 world, _, rooms = get_wzr()
@@ -42,9 +43,9 @@ coords = {
         'event_name': (1718, 138, 1879, 149),
     },
     'batch4': {
-        "workarea": (0, 122, 1280, 1024),
-        "smile_id": (90, 105, 52, 17),
-        "event_name": (163, 105, 166, 17),
+        "workarea": (0, 122, 1280, 1024+122),
+        "smile_id": (90+2, 105+2, 52+90-4, 17+105-4),
+        "event_name": (163+2, 105+2, 166+163-4, 17+105-4),
     },
 }
 
@@ -72,7 +73,6 @@ DIRS = {
 }
 
 def get_cached_image(image_name, dest_key, function, force=False):
-    print(image_name)
     def func2():
         image = Image.open(os.path.join(SOURCE_DIR, data['batch_name'], image_name))
         image = image.convert('RGBA')
@@ -134,6 +134,11 @@ def read_text(ss_name, type_, coords):
 
 def get_cropped_workarea(image):
     image = image.crop(coords[data['batch_name']]['workarea'])
+    if data['batch_name'] == 'batch4':
+        # NB array is RGB not BGR
+        array = np.array(image)
+        urcv.replace_color(array[:,:4], [192, 64, 0], [0, 0, 0])
+        image = Image.fromarray(array)
     x, y = image.size
     x -= 1
     y -= 1
@@ -173,7 +178,10 @@ def load_plms(batch_name):
         if not smile_id:
             continue
 
-        event = read_text(ss_name, 'event_name', coords[data['batch_name']]['event_name'])
+        if batch_name == 'batch4':
+            event = 'unknown'
+        else:
+            event = read_text(ss_name, 'event_name', coords[data['batch_name']]['event_name'])
         if not event:
             continue
 
