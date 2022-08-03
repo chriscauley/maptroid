@@ -60,11 +60,10 @@ for room in rooms:
         new_room, new = Room.objects.get_or_create(world=world, key=new_key)
         new_room.data['holes'] = holes
         if new:
-            print('new_room', new_room)
-        new_room.data['zone'] ={
-            'bounds': [0,0,w,h],
-            'raw': [0,0,w,h],
-        }
+            new_room.data['zone'] ={
+                'bounds': [0,0,w,h],
+                'raw': [0,0,w,h],
+            }
         if not old_zone.slug.startswith('ztrash-'):
             new_room.zone = old_zone
         new_room.save()

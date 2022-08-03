@@ -31,7 +31,7 @@ for world in World.objects.filter(mc_id__isnull=False):
                     value = value.split('Average')[0] # collection rate
                 if key == 'rating':
                     text = str(div)
-                    value = text.count('/star.png') + text.count('/half_star.png')
+                    value = text.count('/star.png') + text.count('/half_star.png') / 2
                 if isinstance(value, str):
                     value = value.strip()
                 print(key, value)
