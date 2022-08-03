@@ -81,7 +81,7 @@ export default {
             ascent: ['BA', 'F', 'AD', 'CB'],
             'hyper-metroid': ['1', '4', '7', '10', '13'],
           }
-          if (!skip['world_slug'].includes(link.text)) {
+          if (!skip[world_slug].includes(link.text)) {
             console.warn('Extra targets for link', link, all_links)
           }
         }
