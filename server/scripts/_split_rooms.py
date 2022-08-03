@@ -28,18 +28,12 @@ for room in rooms:
     zx, zy, zw, zh = room.data['zone']['bounds']
     old_zone = room.zone
     for color, xys in xys_by_color.items():
-        if '--finalize' in sys.argv:
-            x_max = max([xy[0] for xy in xys])
-            y_max = max([xy[1] for xy in xys])
-            x_min = min([xy[0] for xy in xys])
-            y_min = min([xy[1] for xy in xys])
-            room_w = x_max - x_min + 1
-            room_h = y_max - y_min + 1
-        else:
-            room_w = zw
-            room_h = zh
-            x_min = 0
-            y_min = 0
+        x_max = max([xy[0] for xy in xys])
+        y_max = max([xy[1] for xy in xys])
+        x_min = min([xy[0] for xy in xys])
+        y_min = min([xy[1] for xy in xys])
+        room_w = x_max - x_min + 1
+        room_h = y_max - y_min + 1
 
         new_key = room.key.replace('.png', f'-{color}.png')
         new_room, new = Room.objects.get_or_create(world=world, key=new_key)
@@ -47,7 +41,7 @@ for room in rooms:
             print(f'Skipping room due to split_lock {new_room.key}')
             continue
 
-        holes = [(x,y) for x in range(zw) for y in range(zh) if not (x, y) in xys]
+        zone_holes = [(x,y) for x in range(zw) for y in range(zh) if not (x, y) in xys]
         for xy in xys:
             if xy in used_xys:
                 raise ValueError(f"Duplicate xy {xy} in room {room}")
@@ -65,7 +59,7 @@ for room in rooms:
                 source = cv2.cvtColor(source, cv2.COLOR_BGR2BGRA)
             result = source.copy()
 
-            for x, y in holes:
+            for x, y in zone_holes:
                 result[y*256:(y+1) * 256,x*256:(x+1) * 256] = 0
 
             # trim to room dimensions
@@ -84,14 +78,14 @@ for room in rooms:
                 urcv.draw.paste_alpha(result, layer_1, 0, 0)
                 cv2.imwrite(dest, result)
 
-        new_room.data['holes'] = holes
-        if new or '--reset' in sys.argv:
-            new_room.data['zone'] ={
-                'bounds': [0, 0, room_w, room_h],
-                'raw': [0, 0, room_w, room_h],
-            }
-        if '--finalize' in sys.argv:
-            new_room.data['split_lock'] = True
+        new_xys = [(x-x_min, y-y_min) for x, y in xys]
+        new_holes = [(x,y) for x in range(room_w) for y in range(room_h) if not (x, y) in new_xys]
+        new_room.data['holes'] = new_holes
+        new_room.data['zone'] = {
+            'bounds': [zx + x_min, zy + y_min, room_w, room_h],
+            'raw': [zx + x_min, zy + y_min, room_w, room_h],
+        }
+        new_room.data['split_lock'] = True
         if not old_zone.slug.startswith('ztrash-'):
             new_room.zone = old_zone
         new_room.save()
