@@ -17,7 +17,6 @@ def crop(image, coords):
 for room in rooms:
     if not room.data.get('splits', []):
         continue
-    print('splitting', room.id, room.key)
     xys_by_color = defaultdict(list)
 
     for split in room.data.get('splits'):
@@ -36,10 +35,6 @@ for room in rooms:
         room_h = y_max - y_min + 1
 
         new_key = room.key.replace('.png', f'-{color}.png')
-        new_room, new = Room.objects.get_or_create(world=world, key=new_key)
-        if new_room.data.get('split_lock'):
-            print(f'Skipping room due to split_lock {new_room.key}')
-            continue
 
         zone_holes = [(x,y) for x in range(zw) for y in range(zh) if not (x, y) in xys]
         for xy in xys:
@@ -78,6 +73,11 @@ for room in rooms:
                 urcv.draw.paste_alpha(result, layer_1, 0, 0)
                 cv2.imwrite(dest, result)
 
+        new_room, new = Room.objects.get_or_create(world=world, key=new_key)
+        if new_room.data.get('split_lock'):
+            print(f'Skipping room due to split_lock {new_room.key} #{new_room.id}')
+            continue
+
         new_xys = [(x-x_min, y-y_min) for x, y in xys]
         new_holes = [(x,y) for x in range(room_w) for y in range(room_h) if not (x, y) in new_xys]
         new_room.data['holes'] = new_holes
@@ -86,7 +86,7 @@ for room in rooms:
             'raw': [zx + x_min, zy + y_min, room_w, room_h],
         }
         new_room.data['split_lock'] = True
-        if not old_zone.slug.startswith('ztrash-'):
+        if not new_room.zone:
             new_room.zone = old_zone
         new_room.save()
     room.zone = world.zone_set.filter(slug__startswith='ztrash-').first()
