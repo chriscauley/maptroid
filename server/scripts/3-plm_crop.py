@@ -165,7 +165,8 @@ def load_plms(batch_name):
     print(f'skipping {len(processed)} screenshots found in plm_enemies[:].source')
     hash_to_letter['__missing'] = []
 
-    for ss_name in os.listdir(batch_dir):
+    ss_names = os.listdir(batch_dir)
+    for ss_name in ss_names:
         if not ss_name.endswith('png'):
             continue
 
