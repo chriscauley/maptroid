@@ -65,7 +65,9 @@ const Block = {
     'drain',
     'uparrow',
     'downarrow',
-    'morph_lock',
+    'morph_lock_1',
+    'morph_lock_2',
+    'morph_lock_3',
   ],
   directional: [
     'spike_up',
