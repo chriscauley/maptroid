@@ -12,6 +12,9 @@ lines.push(`$link_colors: ${toSassMap(link_colors)};`)
 lines.push(`$template_sprites: ${toSassMap(templates)};`)
 
 const icons = loadStatic('sm/icons.json')
-lines.push(`$ui_items: ${icons['ui_items']['icons'].join(' ')};`)
+const icon_categories = ['items', 'ui_items', 'custom-items', 'block', 'block-alt']
+icon_categories.forEach((category) => {
+  lines.push(`$${category}: ${icons[category]['icons'].join(' ')};`)
+})
 
 fs.writeFileSync('./src/css/variables.scss', lines.join('\n\n'))

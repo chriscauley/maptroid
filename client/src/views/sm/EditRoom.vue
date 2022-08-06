@@ -18,7 +18,13 @@
           </unrest-dropdown>
         </template>
       </unrest-toolbar>
-      <room-box :mode="selected.tool" :variant="selected.variant" :room="room" :layer="layer" />
+      <room-box
+        :mode="selected.tool"
+        :variant="selected.variant"
+        :room="room"
+        :layer="layer"
+        :hide_blocks="hide_blocks"
+      />
       <template #extra_actions>
         {{ room.key }}
         {{ $store.local.state.loading ? '...' : '' }}
@@ -28,6 +34,7 @@
 </template>
 
 <script>
+import Mousetrap from '@unrest/vue-mousetrap'
 import RoomBox, { plms } from './RoomBox.vue'
 import ToolStorage from '@/components/unrest/ToolStorage'
 import link_colors from '@/../../server/static/sm/link_colors.json'
@@ -58,6 +65,7 @@ const Block = {
     'drain',
     'uparrow',
     'downarrow',
+    'morph_lock',
   ],
   directional: [
     'spike_up',
@@ -71,10 +79,20 @@ const Block = {
   ],
 }
 
+const packs = Item.packs.slice()
+const beams = Item.beams.slice()
+const abilities = Item.abilities.slice()
+
+packs.push('weapons-tank')
+packs.push('shinespark')
+abilities.push('boost-ball')
+beams.push('beam-combo')
+abilities.push('gaea-armor')
+
 const tools = [
-  { slug: 'item', variants: Item.packs, icon: (_, v) => `sm-item -${v}` },
-  { slug: 'item', variants: Item.beams, icon: (_, v) => `sm-item -${v}` },
-  { slug: 'item', variants: Item.abilities, icon: (_, v) => `sm-item -${v}` },
+  { slug: 'item', variants: packs, icon: (_, v) => `sm-item -${v}` },
+  { slug: 'item', variants: beams, icon: (_, v) => `sm-item -${v}` },
+  { slug: 'item', variants: abilities, icon: (_, v) => `sm-item -${v}` },
   { slug: 'block', variants: Block.weapon, icon: (_, v) => `sm-block -${v}` },
   { slug: 'block', variants: Block.misc, icon: (_, v) => `sm-block -${v}` },
   { slug: 'block', variants: Block.directional, icon: (_, v) => `sm-block -${v}` },
@@ -86,13 +104,23 @@ const tools = [
 
 export default {
   components: { RoomBox },
+  mixins: [Mousetrap.Mixin],
   data() {
     return {
       item_storage: ToolStorage('tools__sm-item', { tools }),
       layer: 'layer-2+layer-1',
+      hide_blocks: false,
     }
   },
   computed: {
+    mousetrap() {
+      return {
+        z: {
+          keydown: () => (this.hide_blocks = true),
+          keyup: () => (this.hide_blocks = false),
+        },
+      }
+    },
     invertClass() {
       const { invert_layers } = this.room.data
       return ['btn', invert_layers ? '-primary' : '-secondary']

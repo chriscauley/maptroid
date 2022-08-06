@@ -149,8 +149,6 @@ $cre-hex: respawn block exit;
   }
 }
 
-$block: shot crumble bomb missile super-missile power-bomb speed-booster grapple_break grapple grapple_mirror spike_up spike_down spike_right spike_left conveyor_down conveyor_up conveyor_right conveyor_left enemy enemy-break;
-
 .sm-block {
   @for $i from 0 to length($block) {
     $name: nth($block, $i + 1);
@@ -186,11 +184,9 @@ $block: shot crumble bomb missile super-missile power-bomb speed-booster grapple
   }
 }
 
-$block: empty block spike_misc spark exit switch_shot heal drain uparrow downarrow wipe;
-
 .sm-block {
-  @for $i from 0 to length($block) {
-    $name: nth($block, $i + 1);
+  @for $i from 0 to length($block-alt) {
+    $name: nth($block-alt, $i + 1);
     &.-#{"" + $name}:before {
       background-image: url("/static/sm/block-alt.png");
       background-position: 0 $i * -100%;
@@ -213,8 +209,6 @@ $block: empty block spike_misc spark exit switch_shot heal drain uparrow downarr
   }
 }
 
-$items: morph-ball bomb screw-attack missile super-missile energy-tank energy2-tank varia-suit space-jump power-bomb hi-jump-boots speed-booster pedastool reserve-tank x-ray spring-ball grappling-beam charge-beam spazer-beam wave-beam ice-beam plasma-beam gravity-suit;
-
 .sm-item {
   &:before {
     background-image: url("/static/sm/items.png");
@@ -231,6 +225,18 @@ $items: morph-ball bomb screw-attack missile super-missile energy-tank energy2-t
   &.-confused:before {
     background-image: url("/static/sm/confused.png");
     background-position: unset;
+  }
+}
+.sm-item {
+  @for $i from 0 to length($custom-items) {
+    $name: nth($custom-items, $i + 1);
+    &.-#{"" + $name}:before {
+      background-image: url("/static/sm/custom-items.png");
+      background-position: 0 $i * -100%;
+    }
+    &.-alt:before {
+      background-image: url("/static/sm/custom-items-alt.png");
+    }
   }
 }
 

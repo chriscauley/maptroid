@@ -37,7 +37,10 @@
       "drain",
       "uparrow",
       "downarrow",
-      "plm_wipe"
+      "plm_wipe",
+      "morph_lock_1",
+      "morph_lock_2",
+      "morph_lock_3"
     ]
   },
   "misc-spikes": {
@@ -97,6 +100,16 @@
       "ice-beam",
       "plasma-beam",
       "gravity-suit"
+    ]
+  },
+  "custom-items": {
+    "size": [16, 16],
+    "icons": [
+      "weapons-tank",
+      "shinespark",
+      "boost-ball",
+      "beam-combo",
+      "gaea-armor"
     ]
   },
   "colored-doors": {

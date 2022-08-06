@@ -12,7 +12,7 @@
         @click.stop="removeItem(item.id)"
       />
     </template>
-    <template v-if="['block', 'plm'].includes(mode)">
+    <template v-if="!hide_blocks && ['block', 'plm'].includes(mode)">
       <div v-for="block in blocks" v-bind="block.attrs" :key="block.id" />
       <div
         v-for="override in cre_overrides"
@@ -58,6 +58,7 @@ export default {
     variant: String,
     layer: String,
     highlight: Boolean,
+    hide_blocks: Boolean,
   },
   data() {
     return { drag_bounds: null, ctrl_down: false }
