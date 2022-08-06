@@ -63,9 +63,6 @@ export default {
   data() {
     return { drag_bounds: null, ctrl_down: false }
   },
-  watch: {
-    hide_blocks: 'bounceSave',
-  },
   computed: {
     css() {
       const { zoom } = this.osd_store.state
@@ -209,6 +206,9 @@ export default {
         }
       })
     },
+  },
+  watch: {
+    hide_blocks: 'bounceSave',
   },
   methods: {
     _style(x, y, w, h) {
