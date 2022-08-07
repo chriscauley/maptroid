@@ -83,7 +83,8 @@ def main():
         room.save()
         image = img._coerce(os.path.join(BTS_DIR, key), 'np')
         image = img.replace_color(image, (0,0,0,255), (0,0,0,0))
-        image = img.make_holes(image, room.data['holes'])
+        if not room.data.get('geometry_override'):
+            image = img.make_holes(image, room.data['holes'])
         height, width = [int(i / _s) for i in image.shape[:2]]
         shape_x_ys = []
         special_x_ys = []
@@ -128,7 +129,11 @@ def main():
         # scale the isolations
         isolations = [[(x / 16, y / 16) for x, y in shape] for shape in isolations]
 
-        room.data['geometry']['inner'] = polygons_to_geometry(polygons, isolations)
+        room.data['geometry']['inner'] = polygons_to_geometry(
+            polygons,
+            isolations,
+            external=room.data.get('geometry_override'),
+        )
 
         room.data['bts'] = {
             'sprites': list(set([s.id for s, x, y in (shape_x_ys + special_x_ys)])),

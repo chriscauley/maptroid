@@ -133,8 +133,18 @@ def process_zone(zone):
                     cv2.imwrite(layer_path, layer_image)
                     urcv.draw.paste_alpha(room_image, layer_image, 0, 0)
 
-            for x, y in holes:
-                room_image[y*256:(y+1) * 256,x*256:(x+1) * 256,:] = [0,0,0,0]
+            if room.data.get('geometry_override'):
+                mask = np.zeros(room_image.shape[:2], dtype=np.uint8)
+                points = [[int(256 * i) for i in xy] for xy in room.data['geometry_override']]
+                points.append(points[0])
+                points = np.array([[points]])
+                cv2.fillPoly(mask, points, (255))
+                room_image = cv2.bitwise_and(room_image, room_image, mask = mask)
+                room_image = cv2.polylines(room_image, points, True, (255, 0, 0), 2)
+            else:
+                for x, y in holes:
+                    room_image[y*256:(y+1) * 256,x*256:(x+1) * 256,:] = [0,0,0,0]
+
             cv2.imwrite(os.path.join(layers_dir, room.key), room_image)
             urcv.draw.paste_alpha(zone_image, room_image, room_x * 256, room_y * 256)
         cv2.imwrite(dest, zone_image)

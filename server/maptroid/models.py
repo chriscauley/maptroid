@@ -130,6 +130,8 @@ class Room(models.Model):
     if self.world_id != 3 and 'zone' in self.data: # TODO this doesn't work for dread yet
       self.data['geometry']['screens'] = get_screens(self)
       self.data['geometry']['outer'] = get_room_walls(self)
+      if self.data.get('geometry_override'):
+          self.data['geometry']['outer'][0]['exterior'] = self.data['geometry_override']
     super().save(*args, **kwargs)
 
   def get_dev_url(self):

@@ -1,4 +1,4 @@
-from shapely.geometry import Polygon, MultiPolygon
+from shapely.geometry import Polygon, MultiPolygon, GeometryCollection
 from shapely.ops import unary_union
 
 def _square(x, y):
@@ -23,17 +23,30 @@ def get_screens(room):
     return screens
 
 def get_room_walls(room):
-    polygons = [_square(x, y) for x, y in get_screens(room)]
+    if room.data.get('geometry_override'):
+        polygons = [Polygon(room.data.get('geometry_override'))]
+    else:
+        polygons = [_square(x, y) for x, y in get_screens(room)]
     return polygons_to_geometry(polygons)
 
-def polygons_to_geometry(polygons, isolations=[]):
+def polygons_to_geometry(polygons, isolations=[], external=None):
     multipolygon = unary_union(polygons)
+    if external is not None:
+        multipolygon = multipolygon.intersection(Polygon(external))
+
+    # intersection can turn it into a geometry collection
+    if not multipolygon.is_empty and isinstance(multipolygon, GeometryCollection):
+        multipolygon = MultiPolygon(geo_object for geo_object in multipolygon.geoms
+                                    if isinstance(geo_object, (Polygon, MultiPolygon)))
+
+    # unary union and difference has a tendency to convert multipolygon back into a polygon
     if isinstance(multipolygon, Polygon):
         multipolygon = MultiPolygon([multipolygon])
     for shape in isolations:
         multipolygon = multipolygon.difference(Polygon(shape))
     if isinstance(multipolygon, Polygon):
         multipolygon = MultiPolygon([multipolygon])
+
     return [
         {
             'exterior': [list(p) for p in polygon.exterior.coords[:-1]],
