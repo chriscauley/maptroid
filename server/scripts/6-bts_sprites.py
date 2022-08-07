@@ -67,7 +67,7 @@ def filter_interior_walls(shape_x_ys):
 
 
 def main():
-    world, zones, rooms = get_wzr()
+    world, zones, rooms = get_wzr(exclude_hidden=True)
     BTS_DIR = os.path.join(settings.MEDIA_ROOT, f'smile_exports/{world.slug}/bts')
     sprite_matcher = SpriteMatcher()
     keys = os.listdir(BTS_DIR)
