@@ -490,6 +490,10 @@ $ascent-items: weapons-tank shinespark boost-ball;
   }
 }
 
+.sm-room-box.-mode-geometry {
+  @apply m-2;
+}
+
 .geometry-editor {
   @apply absolute inset-0;
   &__dot {

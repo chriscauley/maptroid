@@ -61,8 +61,10 @@ export default {
           })
         })
       })
-      range(w).forEach((x_screen) => dots.push([x_screen, h]))
-      range(h).forEach((y_screen) => dots.push([w, y_screen]))
+      range(mod).forEach((di) => {
+        range(w).forEach((x_screen) => dots.push([x_screen+di/mod, h]))
+        range(h).forEach((y_screen) => dots.push([w, y_screen+di/mod]))
+      })
       dots.push([w, h])
       return dots.map(([x, y]) => ({
         xy: [x, y],
