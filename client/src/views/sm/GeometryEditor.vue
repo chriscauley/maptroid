@@ -126,6 +126,9 @@ export default {
     },
     save() {
       this.room.data.geometry_override = this.temporary // eslint-disable-line
+      if (this.room.data.geometry_override.length < 4) {
+        delete this.room.data.geometry_override // eslint-disable-line
+      }
       this.$store.room.save(this.room).then(this.$store.route.refetchRooms)
     },
   },
