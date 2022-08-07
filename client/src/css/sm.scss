@@ -24,7 +24,7 @@
 
 .sm-room-box {
   background-size: cover;
-  &.-mode-split, &.-mode-overlap, &.-mode-item, &.-mode-block, &.-mode-plm, &.-mode-link {
+  &.-mode-split, &.-mode-overlap, &.-mode-geometry, &.-mode-item, &.-mode-block, &.-mode-plm, &.-mode-link {
     position: relative;
   }
   canvas {
@@ -488,4 +488,36 @@ $ascent-items: weapons-tank shinespark boost-ball;
   &__scroll {
     overflow-y: auto;
   }
+}
+
+.geometry-editor {
+  @apply absolute inset-0;
+  &__dot {
+    @apply absolute bg-white cursor-pointer h-3 rounded-full w-3;
+    transform: translate(-50%, -50%);
+    &:hover {
+      @apply border-2 w-5 h-5;
+    }
+    &.-minor {
+      @apply bg-gray-500;
+    }
+  }
+  svg {
+    @apply absolute inset-0;
+  }
+  path {
+    stroke-width: 0.01;
+    fill: none;
+  }
+  &__error {
+    @apply bg-red-800 fixed flex items-center justify-center p-4;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+  }
+}
+
+#edit-room__actions {
+  @apply absolute bottom-0 left-0 p-1;
 }

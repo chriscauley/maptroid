@@ -33,12 +33,15 @@
       </div>
     </template>
     <div v-if="drag_bounds" v-bind="drag_bounds_attrs" />
+    <geometry-editor v-if="mode === 'geometry'" :room="room" @save="fastSave" />
   </div>
 </template>
 
 <script>
 import { debounce, inRange, range } from 'lodash'
 import vec from '@/lib/vec'
+
+import GeometryEditor from './GeometryEditor.vue'
 import Room from '@/models/Room'
 import template_sprites from '@/../../server/static/sm/icons/template_sprites.json'
 
@@ -51,6 +54,7 @@ Object.values(template_sprites).forEach((sprite_list) => {
 plms.wipe = ['wipe', 1, 1]
 
 export default {
+  components: { GeometryEditor },
   inject: ['osd_store', 'tool_storage'],
   props: {
     room: Object,
@@ -80,7 +84,8 @@ export default {
     },
     style() {
       const [x, y, width, height] = this.room.data.zone.bounds
-      if (['item', 'overlap', 'block', 'plm', 'link', 'split'].includes(this.mode)) {
+      const _modes = ['item', 'geometry', 'overlap', 'block', 'plm', 'link', 'split']
+      if (_modes.includes(this.mode)) {
         return {
           height: `${height * 256}px`,
           width: `${width * 256}px`,
@@ -175,7 +180,7 @@ export default {
     holes() {
       let holes = []
       const s = 256
-      if (this.mode == 'overlap') {
+      if (this.mode === 'overlap' || this.mode === 'geometry') {
         holes = this.room.data.holes
       } else if (this.mode === 'split') {
         holes = this.room.data.splits || []

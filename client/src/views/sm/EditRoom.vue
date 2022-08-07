@@ -26,6 +26,7 @@
         :hide_blocks="hide_blocks"
       />
       <template #extra_actions>
+        <div id="edit-room__actions" />
         {{ room.key }}
         {{ $store.local.state.loading ? '...' : '' }}
       </template>
@@ -101,6 +102,7 @@ const tools = [
   { slug: 'plm', variants: Object.keys(plms), icon: (_, v) => `sm-block -${v}` },
   { slug: 'link', variants: Object.keys(link_colors), icon: (_, v) => `sm-link -${v}` },
   { slug: 'overlap', icon: 'fa fa-th-large' },
+  { slug: 'geometry', icon: 'fa fa-object-group' },
   { slug: 'split', variants: Object.keys(link_colors), icon: (_, v) => `fa fa-chain -${v}` },
 ]
 
