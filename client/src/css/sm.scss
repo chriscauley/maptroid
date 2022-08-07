@@ -496,6 +496,7 @@ $ascent-items: weapons-tank shinespark boost-ball;
 
 .geometry-editor {
   @apply absolute inset-0;
+  z-index: 1;
   &__dot {
     @apply absolute bg-white cursor-pointer h-3 rounded-full w-3;
     transform: translate(-50%, -50%);

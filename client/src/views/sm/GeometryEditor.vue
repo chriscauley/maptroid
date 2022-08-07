@@ -55,20 +55,21 @@ export default {
       const mod = this.mod
       range(w).forEach((x_screen) => {
         range(h).forEach((y_screen) => {
-          range(mod).forEach((di) => {
-            dots.push([x_screen + di / mod, y_screen])
-            dots.push([x_screen, y_screen + di / mod])
+          range(mod).forEach((dx) => {
+            range(mod).forEach((dy) => {
+              dots.push([x_screen + dx / mod, y_screen + dy / mod])
+            })
           })
         })
       })
       range(mod).forEach((di) => {
-        range(w).forEach((x_screen) => dots.push([x_screen+di/mod, h]))
-        range(h).forEach((y_screen) => dots.push([w, y_screen+di/mod]))
+        range(w).forEach((x_screen) => dots.push([x_screen + di / mod, h]))
+        range(h).forEach((y_screen) => dots.push([w, y_screen + di / mod]))
       })
       dots.push([w, h])
       return dots.map(([x, y]) => ({
         xy: [x, y],
-        class: ['geometry-editor__dot', x % 1 || y % 1 ? '-minor' : '-major'],
+        class: ['geometry-editor__dot', x % 1 && y % 1 ? '-minor' : '-major'],
         style: {
           top: `${y * 256}px`,
           left: `${x * 256}px`,
