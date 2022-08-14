@@ -94,7 +94,7 @@ data = {
     'missing_event_name': 0,
 }
 
-hash_to_letter = JsonCache(os.path.join(settings.BASE_DIR, '../static/smile/hash_to_letter.json'))
+hash_to_letter = JsonCache(os.path.join(settings.BASE_DIR, '../sprite/hash_to_letter.json'))
 
 def read_text(ss_name, type_, coords):
     if ss_name in data['room_keys']:

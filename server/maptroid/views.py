@@ -111,7 +111,7 @@ def process(zone, world):
 def smile_ocr(request):
     if not request.user.is_superuser:
         raise NotImplementedError()
-    cache_path = os.path.join(settings.BASE_DIR, '../static/smile/hash_to_letter.json')
+    cache_path = os.path.join(settings.BASE_DIR, '../sprite/hash_to_letter.json')
     if request.method == 'POST':
         data = json.loads(request.body.decode("utf-8"))
         with open(cache_path, 'w') as f:
