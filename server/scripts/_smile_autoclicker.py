@@ -5,7 +5,7 @@ import _setup
 from collections import defaultdict
 import cv2
 import imagehash
-from maptroid.ocr import read_text, UnknownLettersError
+from maptroid.ocr import read_text, UnknownLettersError, EmptyTextError
 from mss import mss
 import numpy as np
 from pathlib import Path
@@ -23,9 +23,14 @@ DROPDOWN_GREEN = (0, 255, 0)
 DROPDOWN_BLUE = (215, 120, 0)
 DROPDOWN_ORANGE = (40, 135, 255)
 DROPDOWN_GRAY = (100, 100, 100)
-LAYER = 'plm_enemies'
+DROPDOWN_BG_GRAY = (244,244,244)
+DROPDOWN_TEXT_GRAY = (128,128,128)
 
-MAX_ROOMS = 0
+LAYER = 'bts'
+SYNC_DIR = '../../_maptroid-sink'
+assert(Path(SYNC_DIR).exists())
+
+MAX_IMAGES = 0
 FILTER_ROOMS = []
 SKIP = 0
 
@@ -35,6 +40,14 @@ def dhash(image):
 
 class WaitError(Exception):
     pass
+
+
+def clean_dropdown_image(image):
+    urcv.replace_color(image, DROPDOWN_ORANGE, DROPDOWN_GREEN)
+    urcv.replace_color(image, DROPDOWN_BLUE, DROPDOWN_GREEN)
+    urcv.replace_color(image, DROPDOWN_BG_GRAY, DROPDOWN_GREEN)
+    urcv.replace_color(image, DROPDOWN_TEXT_GRAY, BLACK)
+    urcv.replace_color(image, WHITE, BLACK)
 
 class ScreenChecker:
     def __init__(self, world_slug):
@@ -46,7 +59,7 @@ class ScreenChecker:
 
         self.data = JsonCache(
             f".media/winderz/{world_slug}.json",
-            {'coords': {},'hashes': {}, 'colors': {}}
+            {'coords': {},'hashes': {}, 'colors': {}, 'room_events': {}}
         )
         screenshot = None
 
@@ -131,17 +144,31 @@ class SmileScreenChecker(ScreenChecker):
                 pyautogui.press('pageup')
             self.click_neutral()
             tries += 1
+        self.click('room_key')
+        # go off and on room once to reset event_name if script started on first room
+        pyautogui.press('down')
+        pyautogui.press('up')
+        pyautogui.press('up')
+        time.sleep(0.5)
+        print('first room', self.get_smile_id())
         self.click_neutral()
 
-    def goto_next_room(self):
-        smile_id = self.get_smile_id()
+    def move_dropdown(self, key, direction):
+        text = self.get_text(key)
         self.click_neutral()
-        self.click('room_key')
-        pyautogui.press('down')
-        def smile_id_changed():
-            return smile_id != self.get_smile_id()
+        self.click(key)
+        pyautogui.press(direction)
+        def text_changed():
+            try:
+                new_text = self.get_text(key)
+                return text != new_text
+            except (UnknownLettersError, EmptyTextError):
+                # sometimes it takes a second for this to load. If it fails once wait and try again
+                time.sleep(0.2)
+                new_text = self.get_text(key)
+                return text != new_text
         try:
-            self.sleep_until(smile_id_changed)
+            self.sleep_until(text_changed)
             return True
         except WaitError:
             return False
@@ -166,23 +193,50 @@ class SmileScreenChecker(ScreenChecker):
 
     def get_dropdown(self, key):
         image = self.get_image(key)
-        urcv.replace_color(image, DROPDOWN_ORANGE, DROPDOWN_GREEN)
-        urcv.replace_color(image, DROPDOWN_BLUE, DROPDOWN_GREEN)
-        urcv.replace_color(image, WHITE, BLACK)
+        clean_dropdown_image(image)
         if image.shape[0] > 20:
             # multi row, split at gray
             image = split_on_color(image, DROPDOWN_GRAY)[0]
 
         return image
 
+    def get_text(self, key):
+        def text_is_readable():
+            try:
+                image = self.get_image(key)
+                clean_dropdown_image(image)
+                return read_text(image).upper()
+            except (UnknownLettersError, EmptyTextError) as e:
+                cv2.imwrite('.media/trash/empty_image.png', image)
+                return False
+        return self.sleep_until(text_is_readable)
+
     def get_smile_id(self):
         try:
-            smile_id = self.get_image('room_key')
-            return read_text(smile_id).upper()
-        except UnknownLettersError:
+            return self.get_text('room_key')
+        except:
+            # sometimes it takes a second for this to load. If it fails once wait and try again
             time.sleep(0.1)
-            smile_id = self.get_image('room_key')
-            return read_text(smile_id).upper()
+            return self.get_text('room_key')
+
+    def get_event_name(self):
+        EVENT_SUBSTITUTIONS = {
+            'E652=MORPH&MIS': 'E652=MORPH&MISSI',
+            'E669=POWERBOMBS': 'E669=POWERBOMBS1',
+            'E5FF=TOURIANBOS': 'E5FF=TOURIANBOSS',
+        }
+        text = self.get_text('event_name')
+        if text in EVENT_SUBSTITUTIONS:
+            text = EVENT_SUBSTITUTIONS[text]
+        events = self.list_events()
+        if text in events:
+            return text
+        for target in events:
+            if target.startswith(text):
+                print(f'Warning, substituted event_name "{text}" => "{target}"')
+                return target
+        smile_id = self.get_smile_id()
+        raise ValueError(f'Unable to find event: {text} not in {events} for room {smile_id}')
 
     def sleep_until(self, f, max_wait=10):
         waited = 0
@@ -191,20 +245,40 @@ class SmileScreenChecker(ScreenChecker):
         while True:
             if waited > max_wait:
                 raise WaitError(f"Waited to long for {name}")
-            if f():
+            value = f()
+            if value:
                 break
             time.sleep(dt)
             waited += dt
         self.stats['sleep_until__'+name].append(waited)
-        print('waited', name, waited)
+        return value
 
     def event_options_appears(self):
         return (self.get_dropdown('event_options') == DROPDOWN_GREEN).all(1).any()
 
-    def get_dest_path(self, smile_id):
+    def get_dest_path(self, smile_id, event_name):
         s = self.world_slug
-        return f".media/smile_exports/{s}/{LAYER}/{s}_{smile_id}.png"
+        _dir = Path(f"{SYNC_DIR}/{s}/{LAYER}/{event_name}/")
+        if not _dir.exists():
+            print(f"making directory: {_dir}")
+            _dir.mkdir(parents=True)
+        return str(_dir / f"{s}_{smile_id}.png")
 
+
+    def list_events(self):
+        smile_id = self.get_smile_id()
+        if smile_id not in self.data['room_events']:
+            print('got events', smile_id)
+            self.click_neutral()
+            self.click('event_name')
+            self.sleep_until(self.event_options_appears)
+            event_options = self.get_dropdown('event_options')
+            values = []
+            for i, image in enumerate(split_many_on_color(event_options, DROPDOWN_GREEN)):
+                values.append(read_text(image).upper())
+            self.data['room_events'][smile_id] = values
+            self.data._save()
+        return self.data['room_events'][smile_id]
 
 def split_on_color(image, color):
     for y0 in range(image.shape[0]):
@@ -282,17 +356,6 @@ def combine_screens(screens):
         dy = y * 256
     return canvas
 
-def count_events(screen):
-    smile_id = screen.get_smile_id()
-    screen.click_neutral()
-    screen.click('event_name')
-    screen.sleep_until(screen.event_options_appears)
-    event_options = screen.get_dropdown('event_options')
-    values = []
-    for i, image in enumerate(split_many_on_color(event_options, DROPDOWN_GREEN)):
-        values.append(read_text(image))
-    return smile_id, values
-
 def main(world_slug):
     [f.unlink() for f in Path('.media/trash/').glob("*") if f.is_file()]
     screen = SmileScreenChecker(world_slug)
@@ -307,29 +370,45 @@ def main(world_slug):
     screen.goto_workarea_left()
     screen.moveTo('screen_00')
 
-    room_count = 0
+    image_count = 0
     screen.goto_first_room()
     for i in range(SKIP):
         screen.click('room_key')
         pyautogui.press('down')
-    max_rooms = MAX_ROOMS or 500
+    max_images = MAX_IMAGES or 1000
     # count = 0
-    while room_count < max_rooms:
-        # try:
-        #     smile_id, events = count_events(screen)
-        # except UnknownLettersError:
-        #     time.sleep(0.1)
-        #     smile_id, events = count_events(screen)
-        # count += len(events)
+    last_event_name = None
+    while image_count < max_images:
+        smile_id = screen.get_smile_id()
         image_written = capture_room(screen)
         if image_written:
-            room_count += 1
-        if not screen.goto_next_room():
+            image_count += 1
+        events = screen.list_events()
+        event_name = screen.get_event_name()
+        print(smile_id, event_name, last_event_name)
+        if event_name != events[0]:
+            screen.click_neutral()
+            screen.click('room_key')
+            # TODO sleep until room_key is selected
+            time.sleep(0.2)
+            pyautogui.press('tab')
+            pyautogui.press('up')
+            def event_name_changes():
+                event_name = screen.get_event_name()
+                return event_name != last_event_name
+            screen.sleep_until(event_name_changes)
+            last_event_name = event_name
+            # event changing seems to take a while
+        elif screen.move_dropdown('room_key', 'down'):
+            print('new room', screen.get_smile_id())
+        else:
+            # all out of events and rooms
             break
 
 def capture_room(screen):
     smile_id = screen.get_smile_id()
-    result_path = screen.get_dest_path(smile_id)
+    event_name = screen.get_event_name()
+    result_path = screen.get_dest_path(smile_id, event_name)
     if Path(result_path).exists():
         return
     screen.goto_workarea_top()
@@ -337,7 +416,6 @@ def capture_room(screen):
 
     if FILTER_ROOMS and smile_id not in FILTER_ROOMS:
         return
-    event_name = screen.get_image('event_name')
 
     x = y = 0
     screens = {}
@@ -377,6 +455,7 @@ def capture_room(screen):
     else:
         if LAYER == 'plm_enemies':
             # plm enemies is currently stored with alpha layer in it's raw form
+            result = cv2.cvtColor(result, cv2.COLOR_BGR2BGRA)
             urcv.remove_color_alpha(result, [0, 0, 0])
         cv2.imwrite(result_path, result)
         return True
