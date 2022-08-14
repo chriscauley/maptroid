@@ -1,6 +1,7 @@
 # Extract PlmSprites from .media/smile_exports/WORLD/plm_enemies/ROOM_KEY
 
 from _setup import get_wzr
+import os
 
 from maptroid import plm
 
@@ -11,15 +12,22 @@ def main(rooms):
     matches = {}
     match = miss = 0
 
-    for room in rooms:
+    def composit_room(room):
+        # This is for the old depracated manual screenshot approach
         if not 'plm_enemies' in room.data:
             fails.append(f'FAIL: missing data.plm_enemies for #{room.id} {room.key}')
-            continue
+            return
         plms = [plm for plm in room.data['plm_enemies'] if not plm.get('deleted')]
         if len(plms) != len(set([str(p['xy']) for p in plms])):
             fails.append(f'FAIL: room has confusing plms: {room.name or room.id}')
-            continue
+            return
         plm.finalize(room)
+
+    for room in rooms:
+        if not os.path.exists(f'.media/smile_exports/{world.slug}/plm_enemies/{room.key}'):
+            composit_room(room)
+
+    for room in rooms:
         hashes += plm.extract_plmsprites_from_room(room)
 
     for hash_ in hashes:

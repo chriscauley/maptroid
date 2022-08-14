@@ -3,7 +3,7 @@ from django.utils.text import slugify
 
 from maptroid.models import Zone, World
 
-NAME = 'Redesign: Axeil Edition'
+NAME = 'Colors Basic'
 
 ZONE_NAMES = ['Crateria', 'Brinstar', 'Norfair', 'Wrecked Ship', 'Maridia', 'Tourian']
 
@@ -19,6 +19,7 @@ if not new:
 print("New world", NAME)
 world.hidden = True
 world.data['clear_holes'] = True
+world.data['importer_version'] = 1
 world.save()
 
 for zone_name in ZONE_NAMES:

@@ -1,9 +1,11 @@
+# Automates taking screenshots of smile
+
 import _setup
 
 from collections import defaultdict
 import cv2
 import imagehash
-from maptroid.ocr import read_text
+from maptroid.ocr import read_text, UnknownLettersError
 from mss import mss
 import numpy as np
 from pathlib import Path
@@ -15,6 +17,13 @@ from unrest.utils import JsonCache
 import urcv
 
 BG_COLOR = (255, 128, 128)
+WHITE = (255,255,255)
+BLACK = (0, 0, 0)
+DROPDOWN_GREEN = (0, 255, 0)
+DROPDOWN_BLUE = (215, 120, 0)
+DROPDOWN_ORANGE = (40, 135, 255)
+DROPDOWN_GRAY = (100, 100, 100)
+LAYER = 'plm_enemies'
 
 MAX_ROOMS = 0
 FILTER_ROOMS = []
@@ -24,16 +33,19 @@ def dhash(image):
     image = Image.fromarray(image)
     return imagehash.dhash(image)
 
+class WaitError(Exception):
+    pass
+
 class ScreenChecker:
     def __init__(self, world_slug):
         self.world_slug = world_slug
-        Path(f"./.cache/winderz/{world_slug}").mkdir(exist_ok=True, parents=True)
+        Path(f".media/winderz/{world_slug}").mkdir(exist_ok=True, parents=True)
         self.sct = mss()
         self._prompt = None
-        self.stats = defaultdict(int)
+        self.stats = defaultdict(list)
 
         self.data = JsonCache(
-            f"./.cache/winderz/{world_slug}.json",
+            f".media/winderz/{world_slug}.json",
             {'coords': {},'hashes': {}, 'colors': {}}
         )
         screenshot = None
@@ -86,12 +98,11 @@ class ScreenChecker:
             while True:
                 cv2.imshow(window_name, current)
                 pressed = urcv.wait_key()
-                current = self.get_image(key)
-                print(pressed)
                 if pressed == 'q':
                     exit()
                 elif pressed == 'c':
                     break
+                current = self.get_image(key)
             cv2.destroyWindow(window_name)
             self.data['hashes'][hash_key] = str(dhash(current))
             self.data._save()
@@ -113,7 +124,7 @@ class SmileScreenChecker(ScreenChecker):
             self.click('room_key')
             if tries:
                 time.sleep(0.1)
-            if tries > 10:
+            if tries > 4:
                 raise NotImplementedError('unable to get to top')
             for i in range(10):
                 time.sleep(0.1)
@@ -127,18 +138,15 @@ class SmileScreenChecker(ScreenChecker):
         self.click_neutral()
         self.click('room_key')
         pyautogui.press('down')
-        waited = 0
-        while smile_id == self.get_smile_id():
-            time.sleep(0.1)
-            waited += 1
-            if waited > 40:
-                print('last room', smile_id)
-                return
-        return smile_id
+        def smile_id_changed():
+            return smile_id != self.get_smile_id()
+        try:
+            self.sleep_until(smile_id_changed)
+            return True
+        except WaitError:
+            return False
 
     def click_neutral(self):
-        self.click('neutral')
-        time.sleep(0.1)
         self.click('neutral')
 
     def goto_workarea_top(self):
@@ -156,9 +164,76 @@ class SmileScreenChecker(ScreenChecker):
             'down': not all(workarea[-1,0] == BG_COLOR),
         }
 
+    def get_dropdown(self, key):
+        image = self.get_image(key)
+        urcv.replace_color(image, DROPDOWN_ORANGE, DROPDOWN_GREEN)
+        urcv.replace_color(image, DROPDOWN_BLUE, DROPDOWN_GREEN)
+        urcv.replace_color(image, WHITE, BLACK)
+        if image.shape[0] > 20:
+            # multi row, split at gray
+            image = split_on_color(image, DROPDOWN_GRAY)[0]
+
+        return image
+
     def get_smile_id(self):
-        smile_id = self.get_image('room_key')
-        return read_text(smile_id).upper()
+        try:
+            smile_id = self.get_image('room_key')
+            return read_text(smile_id).upper()
+        except UnknownLettersError:
+            time.sleep(0.1)
+            smile_id = self.get_image('room_key')
+            return read_text(smile_id).upper()
+
+    def sleep_until(self, f, max_wait=10):
+        waited = 0
+        dt = 0.01
+        name = f.__name__
+        while True:
+            if waited > max_wait:
+                raise WaitError(f"Waited to long for {name}")
+            if f():
+                break
+            time.sleep(dt)
+            waited += dt
+        self.stats['sleep_until__'+name].append(waited)
+        print('waited', name, waited)
+
+    def event_options_appears(self):
+        return (self.get_dropdown('event_options') == DROPDOWN_GREEN).all(1).any()
+
+    def get_dest_path(self, smile_id):
+        s = self.world_slug
+        return f".media/smile_exports/{s}/{LAYER}/{s}_{smile_id}.png"
+
+
+def split_on_color(image, color):
+    for y0 in range(image.shape[0]):
+        if not (image[y0] == color).all():
+            break
+    for y in range(y0, image.shape[0]):
+        if (image[y] == color).all():
+            if y == 0:
+                raise ValueError('wtf')
+            return image[y0:y], image[y:]
+    return image, None
+
+def split_many_on_color(image, color):
+    image = image.copy()
+    results = []
+    i = 0
+    while True:
+        i+= 1
+        keep, remainder = split_on_color(image, color)
+        results.append(keep)
+        if i > 25:
+            exit()
+        if remainder is None or (remainder == color).all():
+            break # remainder is purer color so get rid of it
+        elif remainder.size and np.sum(remainder) > 0:
+            image = remainder # repeat loop with remainder
+        else:
+            break
+    return results
 
 def rb_trim(image):
     bg_color = image[-1,-1]
@@ -207,11 +282,24 @@ def combine_screens(screens):
         dy = y * 256
     return canvas
 
+def count_events(screen):
+    smile_id = screen.get_smile_id()
+    screen.click_neutral()
+    screen.click('event_name')
+    screen.sleep_until(screen.event_options_appears)
+    event_options = screen.get_dropdown('event_options')
+    values = []
+    for i, image in enumerate(split_many_on_color(event_options, DROPDOWN_GREEN)):
+        values.append(read_text(image))
+    return smile_id, values
+
 def main(world_slug):
     [f.unlink() for f in Path('.media/trash/').glob("*") if f.is_file()]
     screen = SmileScreenChecker(world_slug)
     if not screen.confirm('amazon_titlebar'):
         pyautogui.click(50, 50)
+        time.sleep(1)
+    cv2.imwrite('.media/trash/az.png', screen.get_image('amazon_titlebar'))
     if not screen.confirm('amazon_titlebar'):
         raise Exception("Unable to find amazon")
 
@@ -225,18 +313,28 @@ def main(world_slug):
         screen.click('room_key')
         pyautogui.press('down')
     max_rooms = MAX_ROOMS or 500
+    # count = 0
     while room_count < max_rooms:
-        room_count += 1
-        capture_room(screen)
+        # try:
+        #     smile_id, events = count_events(screen)
+        # except UnknownLettersError:
+        #     time.sleep(0.1)
+        #     smile_id, events = count_events(screen)
+        # count += len(events)
+        image_written = capture_room(screen)
+        if image_written:
+            room_count += 1
         if not screen.goto_next_room():
-            print(screen.stats)
             break
 
 def capture_room(screen):
+    smile_id = screen.get_smile_id()
+    result_path = screen.get_dest_path(smile_id)
+    if Path(result_path).exists():
+        return
     screen.goto_workarea_top()
     screen.goto_workarea_left()
 
-    smile_id = screen.get_smile_id()
     if FILTER_ROOMS and smile_id not in FILTER_ROOMS:
         return
     event_name = screen.get_image('event_name')
@@ -266,10 +364,8 @@ def capture_room(screen):
         if screen.needs_scroll()['right']:
             capture_row()
         else:
-            # _capture()
-            return
+            _capture(0, 0)
     s = screen.world_slug
-    result_path = f'.media/smile_exports/{s}/plm_enemies/{s}_{smile_id}.png'
     result = combine_screens(screens)
     if '--verify' in sys.argv:
         result2 = cv2.imread(result_path)
@@ -279,7 +375,11 @@ def capture_room(screen):
             cv2.imwrite(f'.media/trash/{smile_id}_diff.png', diff_image(result, result2))
             print('image failed', smile_id)
     else:
+        if LAYER == 'plm_enemies':
+            # plm enemies is currently stored with alpha layer in it's raw form
+            urcv.remove_color_alpha(result, [0, 0, 0])
         cv2.imwrite(result_path, result)
+        return True
 
 def diff_image(image1, image2):
     W = max(image1.shape[1], image2.shape[1])

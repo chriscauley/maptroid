@@ -34,14 +34,14 @@ for new_zone in new_world.zone_set.all():
     slug = new_zone.slug.split('-')[0]
     if slug == 'unknown':
         continue
-    new_zone_by_slug[slug] = zone
+    new_zone_by_slug[slug] = new_zone
     base_zone = base_zone_by_slug[slug]
     new_zone.data = base_zone.data
     new_zone.save()
 
 for key, new_room in new_room_by_key.items():
     base_room = base_room_by_key[key]
-    new_room.name = base_room.key
+    new_room.name = base_room.name
     new_room.data['zone'] = base_room.data['zone']
     new_room.data['holes'] = base_room.data['holes']
     if 'geometry_override' in base_room.data:

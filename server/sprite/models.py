@@ -23,6 +23,9 @@ EXCLUDE_COLORS = [
     # (51, 51, 51),
 ]
 
+def hash_np(image):
+    return hashlib.md5(image.data.tobytes()).hexdigest()
+
 class BaseSpriteModel(models.Model):
     class Meta:
         abstract = True
@@ -37,7 +40,7 @@ class BaseSpriteModel(models.Model):
         super().save(*args, **kwargs)
         if not self.datahash or not self.data:
             image = cv2.imread(self.image.path, cv2.IMREAD_UNCHANGED)
-            self.datahash = hashlib.md5(image.data.tobytes()).hexdigest()
+            self.datahash = hash_np(image)
             self.data = dict(
                 primary_color=urcv.top_color(image, exclude=EXCLUDE_COLORS),
                 width=image.shape[1],
@@ -145,7 +148,7 @@ class PlmSprite(BaseSpriteModel):
 
     @staticmethod
     def get_or_create_from_np_array(np_array):
-        datahash = hashlib.md5(np_array.data.tobytes()).hexdigest()
+        datahash = hash_np(np_array)
         plmsprite = PlmSprite.objects.filter(datahash=datahash).first()
         if plmsprite:
             return False, plmsprite

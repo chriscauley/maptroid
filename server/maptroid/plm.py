@@ -1,6 +1,5 @@
 import cv2
 from django.conf import settings
-import hashlib
 from imagehash import colorhash, dhash
 import numpy as np
 import os
@@ -15,11 +14,18 @@ from sprite.models import MatchedSprite, PlmSprite, RoomPlmSprite
 
 _plm_dir = lambda room: f'.media/smile_exports/{room.world.slug}/plm_enemies/'
 
+class MishapenImageError(Exception):
+    pass
+
 def extract_plmsprites_from_room(room):
     image_path = os.path.join(_plm_dir(room), room.key)
     if not os.path.exists(image_path):
         return []
     image = cv2.imread(image_path, cv2.IMREAD_UNCHANGED)
+    H, W = image.shape[:2]
+    x, y, w, h = room.data['zone']['bounds']
+    if H != h*256 or W != w*256:
+        raise MishapenImageError(f'{room.key} image:{W},{H} != room.data.zone:{w*256},{h*256}')
     original = image.copy()
     gray = cv2.bitwise_not(cv2.cvtColor(image, cv2.COLOR_BGR2GRAY))
     thresh = cv2.threshold(gray, 0, 255, cv2.THRESH_BINARY_INV + cv2.THRESH_OTSU)[1]
@@ -52,6 +58,8 @@ def extract_plmsprites_from_room(room):
         RoomPlmSprite.objects.get_or_create(room=room, plmsprite=plmsprite, xy=[x, y])
         if new:
             print('new plmsprite', plmsprite.image.url)
+            if w <= 32 and h <= 32:
+                plmsprite.automatch()
 
         hashes.append(plmsprite.datahash)
     return hashes

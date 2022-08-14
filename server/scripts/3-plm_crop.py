@@ -23,6 +23,9 @@ import urcv
 
 world, _, rooms = get_wzr()
 
+if world.data.get('importer_version', 0) < 1:
+    raise ValueError("plm cropping only made to work on worlds with importer_version >= 1")
+
 BIN = 16
 
 SMILE_BG = (128, 128, 255, 255)
