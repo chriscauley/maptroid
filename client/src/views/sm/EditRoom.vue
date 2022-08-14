@@ -110,8 +110,9 @@ export default {
   components: { RoomBox },
   mixins: [Mousetrap.Mixin],
   data() {
+    const initial = {"selected":{"tool":"item","variant":"missile"}}
     return {
-      item_storage: ToolStorage('tools__sm-item', { tools }),
+      item_storage: ToolStorage('tools__sm-item', { tools, initial }),
       layer: 'layer-2+layer-1',
       hide_blocks: false,
     }
