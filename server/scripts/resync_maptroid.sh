@@ -1,5 +1,5 @@
 
-for i in bts layer-1 layer-2;
+for i in bts layer-1 layer-2 plm_enemies;
 do
     cp ~chriscauley/projects/_maptroid-sink/$1/$i/*.png .media/smile_exports/$1/$i/;
 done

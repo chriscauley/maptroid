@@ -5,7 +5,6 @@ import _setup
 from collections import defaultdict
 import cv2
 import imagehash
-from maptroid.ocr import read_text, UnknownLettersError, EmptyTextError
 from mss import mss
 import numpy as np
 from pathlib import Path
@@ -13,8 +12,10 @@ from PIL import Image
 import pyautogui
 import sys
 import time
-from unrest.utils import JsonCache
 import urcv
+
+from maptroid.ocr import read_text, UnknownLettersError, EmptyTextError
+from maptroid.utils import get_winderz
 
 BG_COLOR = (255, 128, 128)
 WHITE = (255,255,255)
@@ -26,11 +27,11 @@ DROPDOWN_GRAY = (100, 100, 100)
 DROPDOWN_BG_GRAY = (244,244,244)
 DROPDOWN_TEXT_GRAY = (128,128,128)
 
-LAYER = 'bts'
+LAYER = sys.argv[2]
 SYNC_DIR = '../../_maptroid-sink'
 assert(Path(SYNC_DIR).exists())
 
-MAX_IMAGES = 0
+MAX_IMAGES = 50
 FILTER_ROOMS = []
 SKIP = 0
 
@@ -57,11 +58,7 @@ class ScreenChecker:
         self._prompt = None
         self.stats = defaultdict(list)
 
-        self.data = JsonCache(
-            f".media/winderz/{world_slug}.json",
-            {'coords': {},'hashes': {}, 'colors': {}, 'room_events': {}}
-        )
-        screenshot = None
+        self.data = get_winderz(world_slug)
 
     def prompt(self, text):
         window_name = f'{self.world_slug} prompt'
@@ -169,6 +166,7 @@ class SmileScreenChecker(ScreenChecker):
                 return text != new_text
         try:
             self.sleep_until(text_changed)
+            time.sleep(0.5)
             return True
         except WaitError:
             return False
@@ -238,7 +236,7 @@ class SmileScreenChecker(ScreenChecker):
         smile_id = self.get_smile_id()
         raise ValueError(f'Unable to find event: {text} not in {events} for room {smile_id}')
 
-    def sleep_until(self, f, max_wait=10):
+    def sleep_until(self, f, max_wait=5):
         waited = 0
         dt = 0.01
         name = f.__name__
@@ -396,11 +394,17 @@ def main(world_slug):
             def event_name_changes():
                 event_name = screen.get_event_name()
                 return event_name != last_event_name
-            screen.sleep_until(event_name_changes)
-            last_event_name = event_name
-            # event changing seems to take a while
+            try:
+                # event changing seems to take a while
+                screen.sleep_until(event_name_changes)
+                last_event_name = event_name
+            except WaitError:
+                screen.move_dropdown('room_key', 'down')
+                print("FAIL: unable to get {smile_id} {event_name}")
+                last_event_name = None
         elif screen.move_dropdown('room_key', 'down'):
-            print('new room', screen.get_smile_id())
+            # print('new room', screen.get_smile_id())
+            pass
         else:
             # all out of events and rooms
             break

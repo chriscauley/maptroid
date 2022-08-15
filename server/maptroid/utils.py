@@ -1,4 +1,5 @@
 import os
+from unrest.utils import JsonCache
 
 def mkdir(root, *args):
     parts = os.path.join(*args).strip('/').split('/')
@@ -10,3 +11,12 @@ def mkdir(root, *args):
         if not os.path.exists(path):
             os.mkdir(path)
     return path
+
+def get_winderz(world_slug):
+    return JsonCache(f".media/winderz/{world_slug}.json", {
+        'coords': {},
+        'hashes': {},
+        'colors': {},
+        'room_events': {},
+        'room_errors': {},
+    })
