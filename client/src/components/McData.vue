@@ -1,16 +1,21 @@
 <template>
   <div class="mc-data">
-    <div>Genre: {{ mc_data.genre }}</div>
-    <div>Difficulty: {{ mc_data.difficulty }}</div>
-    <div class="mc-data__row">
-      <div class="mc-data__rating" :title="rating.title">
-        <img v-for="(icon, i) in rating.icons" :key="i" :src="`/static/mc/${icon}.png`" />
-        {{ rating.text }}
-      </div>
-      <div class="mc-data__runtime">
-        {{ mc_data.runtime }}
-      </div>
+    <div v-if="world.data.metrics">
+      Screens: {{ world.data.metrics.screens }}
     </div>
+    <template v-if="mc_data">
+      <div>Genre: {{ mc_data.genre }}</div>
+      <div>Difficulty: {{ mc_data.difficulty }}</div>
+      <div class="mc-data__row">
+        <div class="mc-data__rating" :title="rating.title">
+          <img v-for="(icon, i) in rating.icons" :key="i" :src="`/static/mc/${icon}.png`" />
+          {{ rating.text }}
+        </div>
+        <div class="mc-data__runtime">
+          {{ mc_data.runtime }}
+        </div>
+      </div>
+    </template>
   </div>
 </template>
 
@@ -19,9 +24,12 @@ import { range } from 'lodash'
 
 export default {
   props: {
-    mc_data: Object,
+    world: Object
   },
   computed: {
+    mc_data() {
+      return this.world.data.mc_data
+    },
     rating() {
       const { rating } = this.mc_data
       if (!rating) {

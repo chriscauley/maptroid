@@ -24,7 +24,7 @@
               by {{ world.data.mc_data?.author }}
             </div>
           </div>
-          <mc-data v-if="world.data.mc_data" :mc_data="world.data.mc_data" />
+          <mc-data :world="world" />
         </div>
       </router-link>
     </div>
@@ -39,7 +39,7 @@ import FancySelect from '@/components/FancySelect'
 import McData from '@/components/McData.vue'
 
 const difficulties = ['Beginner', 'Vanilla', 'Veteran', 'Expert', 'Unknown']
-const sort_choices = ['Name', 'Rating', 'Runtime']
+const sort_choices = ['Name', 'Rating', 'Runtime', 'Screens']
 
 const getDifficultyChoices = (worlds) => {
   const counts = {}
@@ -127,6 +127,8 @@ export default {
         }
       } else if (sort_by === 'runtime') {
         sorter = parseRuntime
+      } else if (sort_by === 'screens') {
+        sorter = w => (-w.data.metrics?.screens) || 1e6
       }
       worlds = sortBy(worlds, sorter)
       return worlds
