@@ -11,7 +11,7 @@ import unrest_image as img
 import urcv
 
 from maptroid.cre import scan_for_cre
-from maptroid.icons import get_icons, MAP_OPERATIONS
+from maptroid.icons import get_icons
 from maptroid.models import Room, SmileSprite, SpriteMatcher
 from maptroid.shapes import polygons_to_geometry
 from maptroid.rectangle import xys_to_rectangles
@@ -37,6 +37,22 @@ _s2 = 2 # when blocks are combined, their points are multiplied by 2 so that the
 point2str = lambda p: f'{p[0]},{p[1]}'
 line2str = lambda line: '|'.join([point2str(p) for p in line])
 print_lines = lambda lines: print("  ".join([line2str(line) for line in lines]))
+
+_op = dict(brightness=50, contrast=20, multiply=(0,0,1,1))
+MAP_OPERATIONS = {
+    'shot': _op,
+    'crumble':_op,
+    'bomb': _op,
+    'missile': _op,
+    'super-missile': _op,
+    'power-bomb': _op,
+    'speed-booster': _op,
+    'grapple': _op,
+    'spike': _op,
+    'conveyor': _op,
+}
+
+
 
 # Failed attempat at only using interior walls, leaving it in for now
 def filter_interior_walls(shape_x_ys):
