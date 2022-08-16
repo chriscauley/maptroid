@@ -15,6 +15,8 @@ world.normalize()
 world, zones, rooms = get_wzr()
 
 print(f'processing {len(zones)} zones')
+skip_dzi = '--skip-dzi' in sys.argv
+print(f'skip_dzi is set to:', 'on' if skip_dzi else 'off')
 for zone in zones:
     print('processing zone: ', zone)
     if zone.name.startswith('ztrash-'):
@@ -30,7 +32,7 @@ for zone in zones:
             populate_room_doors(room)
             populate_room_elevators(room)
             room.save()
-    process_zone(zone)
+    process_zone(zone, skip_dzi=skip_dzi)
 
 world.data['version'] = world.data.get('version', 0) + 1
 world.save()

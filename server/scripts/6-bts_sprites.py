@@ -134,7 +134,13 @@ def main():
     sprite_matcher = SpriteMatcher()
     keys = os.listdir(BTS_DIR)
     for i_key, key in enumerate(keys):
-        room = Room.objects.get(world__slug=world.slug, key=key)
+        if not key.endswith('png'):
+            continue
+        try:
+            room = Room.objects.get(world__slug=world.slug, key=key)
+        except Exception as e:
+            print("missing key: ",key)
+            raise e
         if not room in rooms:
             continue
         if room.data.get('trash'):

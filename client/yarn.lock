@@ -2769,10 +2769,10 @@
   resolved "https://registry.yarnpkg.com/@unrest/vue-auth/-/vue-auth-0.0.12.tgz#9c724ebf456e2ef60de6ecdc7d84149de9f608b2"
   integrity sha512-/bkfn5Hi2JWRSn+Y8MkZwu0qLRfZAOciD2dDuNvgngDGLAcHzb08eEtHFvx9EZqmAWoX1VdlD28oCh8BMR9FLg==
 
-"@unrest/vue-form@0.0.15":
-  version "0.0.15"
-  resolved "https://registry.yarnpkg.com/@unrest/vue-form/-/vue-form-0.0.15.tgz#9b9d58e58a61ec583677dc1e6e16fb1d3287c502"
-  integrity sha512-U16DZ4Rfj0DaxJFfIKSaC1Jshk+CdFrxd6hYrhb7jhCM9pk3gm7aFTvD9zEAhl8zr0UJ354pGLrqUo7dVxxrmA==
+"@unrest/vue-form@0.0.16":
+  version "0.0.16"
+  resolved "https://registry.yarnpkg.com/@unrest/vue-form/-/vue-form-0.0.16.tgz#501baf9a1c7a8b7b0ef4aaa6bad02b92ce8d742f"
+  integrity sha512-lTjPeHW0QnaVzY9qASmH3A7RF7t8ST0ckW9lhwiLiHHQB7Cd95Z2zAYlmgls7SjFnMml9cvsBT2mpcP4TWs1Rw==
   dependencies:
     jsonschema "^1.4.0"
     lodash.pick "^4.4.0"

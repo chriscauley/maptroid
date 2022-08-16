@@ -46,7 +46,7 @@ def get_occupied_world_xys(target_zone):
 def to_media_url(path, *args):
     return os.path.join(settings.MEDIA_URL, path.split('/.media/')[-1], *args)
 
-def process_zone(zone):
+def process_zone(zone, skip_dzi=False):
     if zone.data.get("hidden"):
         return
     zone.normalize()
@@ -148,7 +148,8 @@ def process_zone(zone):
             cv2.imwrite(os.path.join(layers_dir, room.key), room_image)
             urcv.draw.paste_alpha(zone_image, room_image, room_x * 256, room_y * 256)
         cv2.imwrite(dest, zone_image)
-        png_to_dzi(dest)
+        if not skip_dzi:
+            png_to_dzi(dest)
 
     zone.normalize()
 
@@ -160,7 +161,7 @@ def process_zone(zone):
     zone_x, zone_y, zw, zh = zone.data['world']['bounds']
     if zw > 70 or zh > 70:
         print(f'WARNING: skipping dzis for {zone.name} because bounds are too large: {zw}x{zh}')
-    else:
+    elif not skip_dzi:
         make_layered_zone_image(zone, ['layer-2', 'layer-1'], os.path.join(LAYER_DIR, f'{zone.slug}.png'))
         make_layered_zone_image(zone, ['bts'], os.path.join(BTS_DIR, f'{zone.slug}.png'))
         make_layered_zone_image(zone, ['plm_enemies'], os.path.join(PLM_DIR, f'{zone.slug}.png'))
