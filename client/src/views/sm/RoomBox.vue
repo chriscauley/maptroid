@@ -12,7 +12,7 @@
         @click.stop="removeItem(item.id)"
       />
     </template>
-    <img v-if="show_bts_extra" :src="room.data['bts-extra']" class="_bts-extra" />
+    <img v-if="show_bts_extra" :src="bts_extra" class="_bts-extra" />
     <template v-if="!hide_blocks && ['block', 'plm'].includes(mode)">
       <div v-for="block in blocks" v-bind="block.attrs" :key="block.id" />
       <div
