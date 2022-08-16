@@ -20,3 +20,24 @@ def get_winderz(world_slug):
         'room_events': {},
         'room_errors': {},
     })
+
+# These are used to generate the cre-extra values in smile_autoclicker
+CRES = [
+    'bomb',
+    'grapple',
+    'vertical',
+    'shot',
+    'crumble',
+    'spike',
+]
+
+COLORS = [
+    (255,0,0),
+    (0,255,0),
+    (0,0,255),
+    (255,255,0),
+    (255,0,255),
+    (0,255,255),
+]
+
+CRE_COLORS = dict(zip(CRES,COLORS))

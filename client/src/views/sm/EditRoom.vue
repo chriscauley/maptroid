@@ -24,6 +24,7 @@
         :room="room"
         :layer="layer"
         :hide_blocks="hide_blocks"
+        :show_bts_extra="show_bts_extra"
       />
       <template #extra_actions>
         <div id="edit-room__actions" />
@@ -115,6 +116,7 @@ export default {
       item_storage: ToolStorage('tools__sm-item', { tools, initial }),
       layer: 'layer-2+layer-1',
       hide_blocks: false,
+      show_bts_extra: false,
     }
   },
   computed: {
@@ -124,6 +126,7 @@ export default {
           keydown: () => (this.hide_blocks = true),
           keyup: () => (this.hide_blocks = false),
         },
+        x: () => (this.show_bts_extra = !this.show_bts_extra),
       }
     },
     invertClass() {

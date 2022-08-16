@@ -44,6 +44,7 @@
           <option>layer-1</option>
           <option>layer-2</option>
           <option>bts</option>
+          <option>bts-extra</option>
         </select>
       </div>
       <div v-for="event in selected?.events" :key="event" class="_event-row">

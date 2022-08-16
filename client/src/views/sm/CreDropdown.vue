@@ -1,5 +1,10 @@
 <template>
-  <unrest-dropdown class="btn -danger" v-if="items.length" :items="items">
+  <unrest-dropdown
+    class="btn -danger cre-dropdown"
+    v-if="items.length"
+    :items="items"
+    placement="top-start"
+  >
     <i class="fa fa-exclamation-circle" />
     {{ missing_items.length }}
   </unrest-dropdown>

@@ -5,6 +5,14 @@
 @import "./variables.scss";
 @import "./zone-colors.scss";
 
+.ur-dropdown.cre-dropdown {
+  @apply fixed bottom-0;
+  .ur-popper.popdown {
+    max-height: 600px;
+    overflow-y: auto;
+  }
+}
+
 .edit-room .modal-content {
   min-width: 900px;
   padding-top: 3rem; /* for toolbar */
@@ -51,6 +59,11 @@
   }
   &.-highlight {
     outline: 4px solid red;
+  }
+  ._bts-extra {
+    @apply absolute inset-0;
+    pointer-events: none;
+    z-index:1;
   }
 }
 

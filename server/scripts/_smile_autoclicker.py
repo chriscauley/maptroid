@@ -15,7 +15,7 @@ import time
 import urcv
 
 from maptroid.ocr import read_text, UnknownLettersError, EmptyTextError
-from maptroid.utils import get_winderz
+from maptroid.utils import get_winderz, CRES, CRE_COLORS
 
 BG_COLOR = (255, 128, 128)
 WHITE = (255,255,255)
@@ -27,11 +27,12 @@ DROPDOWN_GRAY = (100, 100, 100)
 DROPDOWN_BG_GRAY = (244,244,244)
 DROPDOWN_TEXT_GRAY = (128,128,128)
 
+
 LAYER = sys.argv[2]
 SYNC_DIR = '../../_maptroid-sink'
 assert(Path(SYNC_DIR).exists())
 
-MAX_IMAGES = 50
+MAX_IMAGES = 300
 FILTER_ROOMS = []
 SKIP = 0
 
@@ -42,6 +43,14 @@ def dhash(image):
 class WaitError(Exception):
     pass
 
+
+def paste_to_channel(bg, fg, color):
+    bg2 = bg.copy()
+    bg2[:] = 0
+    gray = cv2.cvtColor(fg, cv2.COLOR_BGR2GRAY)
+    _, mask = cv2.threshold(gray, 15, 255, cv2.THRESH_BINARY)
+    bg2[mask == 255] = color
+    return cv2.addWeighted(bg, 1, bg2, 0.5, 0)
 
 def clean_dropdown_image(image):
     urcv.replace_color(image, DROPDOWN_ORANGE, DROPDOWN_GREEN)
@@ -80,8 +89,10 @@ class ScreenChecker:
 
     def get_coords(self, key):
         if not key in self.data['coords']:
-            image = self.grab()
-            self.data['coords'][key] = urcv.input.get_exact_roi(image, f"Select coords for {key}")
+            self.data['coords'][key] = urcv.input.get_exact_roi(
+                lambda: self.grab(),
+                f"Select coords for {key}",
+            )
             self.data._save()
         return self.data['coords'][key]
 
@@ -278,6 +289,47 @@ class SmileScreenChecker(ScreenChecker):
             self.data._save()
         return self.data['room_events'][smile_id]
 
+    def get_current_cre(self):
+        for current_cre in CRES:
+            if self.confirm('cre-text', current_cre):
+                return current_cre
+
+    def goto_cre(self, target_cre):
+        current_cre = self.get_current_cre()
+        if not current_cre:
+            raise ValueError("Unknown CRE")
+        current_index = CRES.index(current_cre)
+        target_index = CRES.index(target_cre)
+        delta_index = current_index - target_index
+        direction = 'up-cre' if delta_index < 0 else 'down-cre'
+        for i in range(abs(delta_index)):
+            self.click(direction)
+        def cre_matches():
+            return self.get_current_cre() == target_cre
+        self.sleep_until(cre_matches)
+
+    def capture_cre(self):
+        if not self.confirm('show-type-on-map', 'is-checked'):
+            raise Exception("Please check show type on map")
+
+        for i in range(15):
+            self.click('down-cre')
+        canvas = rb_trim(self.get_image('workarea'))
+        canvas[:,:,:3] = 0
+        cre_canvases = []
+        for cre in CRES:
+            self.goto_cre(cre)
+
+            # click this twice to refresh cre tiles
+            self.click('show-type-on-map')
+            self.click('show-type-on-map')
+            time.sleep(0.2)
+
+            cre_canvas = rb_trim(self.get_image('workarea'))
+            canvas = paste_to_channel(canvas, cre_canvas, CRE_COLORS[cre])
+        return canvas
+
+
 def split_on_color(image, color):
     for y0 in range(image.shape[0]):
         if not (image[y0] == color).all():
@@ -364,6 +416,7 @@ def main(world_slug):
     if not screen.confirm('amazon_titlebar'):
         raise Exception("Unable to find amazon")
 
+    screen = SmileScreenChecker(world_slug)
     screen.goto_workarea_top()
     screen.goto_workarea_left()
     screen.moveTo('screen_00')
@@ -425,7 +478,10 @@ def capture_room(screen):
     screens = {}
     def _capture(x, y):
         time.sleep(0.2)
-        workarea = screen.get_image('workarea')
+        if LAYER == 'bts-extra':
+            workarea = screen.capture_cre()
+        else:
+            workarea = screen.get_image('workarea')
         screens[(x,y)] = workarea
     def capture_row():
         screen.goto_workarea_left()
@@ -457,7 +513,7 @@ def capture_room(screen):
             cv2.imwrite(f'.media/trash/{smile_id}_diff.png', diff_image(result, result2))
             print('image failed', smile_id)
     else:
-        if LAYER == 'plm_enemies':
+        if LAYER in 'plm_enemies':
             # plm enemies is currently stored with alpha layer in it's raw form
             result = cv2.cvtColor(result, cv2.COLOR_BGR2BGRA)
             urcv.remove_color_alpha(result, [0, 0, 0])

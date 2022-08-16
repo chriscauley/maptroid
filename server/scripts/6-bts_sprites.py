@@ -8,12 +8,21 @@ from shapely.geometry import Polygon, MultiPolygon
 from shapely.ops import unary_union
 import sys
 import unrest_image as img
+import urcv
 
 from maptroid.cre import scan_for_cre
+from maptroid.icons import get_icons, MAP_OPERATIONS
 from maptroid.models import Room, SmileSprite, SpriteMatcher
 from maptroid.shapes import polygons_to_geometry
 from maptroid.rectangle import xys_to_rectangles
-from maptroid.utils import mkdir
+from maptroid.utils import mkdir, CRE_COLORS
+
+# used to look up cre colors from names.
+# Colors were halved during processing because of 50% alpha
+CRE_REVERSE_COLORS = {
+    str(v).replace('255', '128'): k
+    for k, v in CRE_COLORS.items()
+}
 
 def extract_sprites(image):
     pass
@@ -28,7 +37,6 @@ _s2 = 2 # when blocks are combined, their points are multiplied by 2 so that the
 point2str = lambda p: f'{p[0]},{p[1]}'
 line2str = lambda line: '|'.join([point2str(p) for p in line])
 print_lines = lambda lines: print("  ".join([line2str(line) for line in lines]))
-
 
 # Failed attempat at only using interior walls, leaving it in for now
 def filter_interior_walls(shape_x_ys):
@@ -65,6 +73,60 @@ def filter_interior_walls(shape_x_ys):
 
     return [[s,x,y] for s,x,y in shape_x_ys if walls[y,x] ==1 ]
 
+
+def auto_cre(room, cre_xys, hex_xys):
+    icons = {
+        **get_icons('block', operations=MAP_OPERATIONS),
+        **get_icons('block-alt', operations=MAP_OPERATIONS),
+        **get_icons('misc-spikes', operations=MAP_OPERATIONS),
+    }
+    icons['spike'] = icons['spike_up']
+    path = os.path.join(f".media/smile_exports/{room.world.slug}/bts-extra/{room.key}")
+    if not os.path.exists(path):
+        return
+    bts_image = cv2.imread(path)
+    final_canvas = cv2.cvtColor(bts_image.copy(), cv2.COLOR_BGR2BGRA)
+    final_canvas[:] = 0
+    H, W = bts_image.shape[:2]
+
+    # auto_cre can only replace xys with "unknown" or "respawn"
+    allowed_xys = {}
+    for type_ in ["unknown", "respawn"]:
+        for xy in hex_xys[type_]:
+            allowed_xys[tuple(xy)] = True
+
+    # do not write over any alredy described xys (SMILE will lable speed booster as crumble, etc)
+    forbidden_xys = {}
+    for xys in cre_xys.values():
+        for xy in xys:
+            forbidden_xys[tuple(xy)] = True
+
+    for x in range(W//16):
+        for y in range(H//16):
+            pixel = bts_image[y*16+1,x*16+1]
+            square = bts_image[y*16:(y+1)*16,x*16:(x+1)*16]
+            if np.sum(pixel) == 0:
+                if np.sum(square) != 0:
+                    # This is just a check to make sure we can just go off the top pixel
+                    # TODO remove after processing a few maps if this doesn't catch anything
+                    raise ValueError(f"pixel-square missmatch: {np.sum(square)}")
+                continue
+            xy = (x, y)
+            if xy not in allowed_xys:
+                continue
+            if xy in forbidden_xys:
+                continue
+            cre = CRE_REVERSE_COLORS.get(str(tuple(pixel)))
+            # if cre == 'spike':
+            #     cre = 'spike-up'
+            if cre in [None, 'vertical']:
+                continue
+            urcv.draw.paste(final_canvas, icons[cre], x*16, y*16)
+    if not os.path.exists(f".media/sm_cache/{room.world.slug}/bts-extra/"):
+        os.mkdir(f".media/sm_cache/{room.world.slug}/bts-extra/")
+    out_path = f".media/sm_cache/{room.world.slug}/bts-extra/{room.key}"
+    room.data['bts-extra'] = f"/media/sm_cache/{room.world.slug}/bts-extra/{room.key}"
+    cv2.imwrite(out_path, final_canvas)
 
 def main():
     world, zones, rooms = get_wzr(exclude_hidden=True)
@@ -151,6 +213,7 @@ def main():
             cre_xys[key] = cre_xys[key] + value
         room.data['cre'] = {}
         taken_xys = []
+        auto_cre(room, cre_xys, hex_xys)
         for key, xys in cre_xys.items():
             if not key:
                 raise ValueError("Key does not exist. Assign value at /app/smilesprite")

@@ -12,6 +12,7 @@
         @click.stop="removeItem(item.id)"
       />
     </template>
+    <img v-if="show_bts_extra" :src="room.data['bts-extra']" class="_bts-extra" />
     <template v-if="!hide_blocks && ['block', 'plm'].includes(mode)">
       <div v-for="block in blocks" v-bind="block.attrs" :key="block.id" />
       <div
@@ -63,11 +64,16 @@ export default {
     layer: String,
     highlight: Boolean,
     hide_blocks: Boolean,
+    show_bts_extra: Boolean,
   },
   data() {
     return { drag_bounds: null, ctrl_down: false }
   },
   computed: {
+    bts_extra() {
+      const { world } = this.$store.route
+      return `/media/sm_cache/${world.slug}/bts-extra/${this.room.key}`
+    },
     css() {
       const { zoom } = this.osd_store.state
       // 0.2 is based off observation
