@@ -1,4 +1,6 @@
+import imagehash
 import os
+from PIL import Image
 from unrest.utils import JsonCache
 
 def mkdir(root, *args):
@@ -41,3 +43,7 @@ COLORS = [
 ]
 
 CRE_COLORS = dict(zip(CRES,COLORS))
+
+def dhash(image):
+    image = Image.fromarray(image)
+    return imagehash.dhash(image)

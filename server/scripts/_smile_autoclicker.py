@@ -14,34 +14,19 @@ import sys
 import time
 import urcv
 
-from maptroid.ocr import read_text, UnknownLettersError, EmptyTextError
-from maptroid.utils import get_winderz, CRES, CRE_COLORS
+from maptroid import ocr
+from maptroid.smile import SmileScreen, WaitError
+from maptroid.utils import get_winderz, CRES, CRE_COLORS, dhash
 
 BG_COLOR = (255, 128, 128)
-WHITE = (255,255,255)
-BLACK = (0, 0, 0)
-DROPDOWN_GREEN = (0, 255, 0)
-DROPDOWN_BLUE = (215, 120, 0)
-DROPDOWN_ORANGE = (40, 135, 255)
-DROPDOWN_GRAY = (100, 100, 100)
-DROPDOWN_BG_GRAY = (244,244,244)
-DROPDOWN_TEXT_GRAY = (128,128,128)
-
 
 LAYER = sys.argv[2]
 SYNC_DIR = '../../_maptroid-sink'
 assert(Path(SYNC_DIR).exists())
 
-MAX_IMAGES = 300
+MAX_IMAGES = 10
 FILTER_ROOMS = []
 SKIP = 0
-
-def dhash(image):
-    image = Image.fromarray(image)
-    return imagehash.dhash(image)
-
-class WaitError(Exception):
-    pass
 
 
 def paste_to_channel(bg, fg, color):
@@ -52,312 +37,6 @@ def paste_to_channel(bg, fg, color):
     bg2[mask == 255] = color
     return cv2.addWeighted(bg, 1, bg2, 0.5, 0)
 
-def clean_dropdown_image(image):
-    urcv.replace_color(image, DROPDOWN_ORANGE, DROPDOWN_GREEN)
-    urcv.replace_color(image, DROPDOWN_BLUE, DROPDOWN_GREEN)
-    urcv.replace_color(image, DROPDOWN_BG_GRAY, DROPDOWN_GREEN)
-    urcv.replace_color(image, DROPDOWN_TEXT_GRAY, BLACK)
-    urcv.replace_color(image, WHITE, BLACK)
-
-class ScreenChecker:
-    def __init__(self, world_slug):
-        self.world_slug = world_slug
-        Path(f".media/winderz/{world_slug}").mkdir(exist_ok=True, parents=True)
-        self.sct = mss()
-        self._prompt = None
-        self.stats = defaultdict(list)
-
-        self.data = get_winderz(world_slug)
-
-    def prompt(self, text):
-        window_name = f'{self.world_slug} prompt'
-        _prompt = np.zeros((100, 400), dtype=np.uint8)
-        _prompt[:] = 0
-        urcv.text.write(_prompt, text)
-        cv2.imshow(window_name, _prompt)
-        if not self._prompt:
-            cv2.moveWindow(window_name, 1500, 1100)
-        # cv2.setWindowProperty(window_name, cv2.WND_PROP_TOPMOST, 1)
-        cv2.setWindowProperty(window_name,cv2.WND_PROP_FULLSCREEN,cv2.WINDOW_FULLSCREEN)
-        cv2.setWindowProperty(window_name,cv2.WND_PROP_FULLSCREEN,cv2.WINDOW_NORMAL)
-        self._prompt = True
-
-    def grab(self, monitor=None):
-        monitor = monitor or self.sct.monitors[1]
-        return np.array(self.sct.grab(monitor))
-
-
-    def get_coords(self, key):
-        if not key in self.data['coords']:
-            self.data['coords'][key] = urcv.input.get_exact_roi(
-                lambda: self.grab(),
-                f"Select coords for {key}",
-            )
-            self.data._save()
-        return self.data['coords'][key]
-
-    def get_image(self, key):
-        x, y, w, h = self.get_coords(key)
-        return self.grab({ 'top': y, 'left': x, 'width': w, 'height': h })[:,:,:3]
-
-    def get_color(self, key):
-        while key not in self.data['colors']:
-            image = urcv.transform.crop(self.grab(), self.get_coords(key))
-            cv2.imshow(f'get color {key}', image)
-            pressed = urcv.wait_key()
-            if pressed == 'y':
-                self.data['colors'][key] = image[0][0].tolist()
-        return self.data['colors'][key]
-
-    def confirm(self, key, extra=None):
-        current = self.get_image(key)
-        hash_key = key
-        if extra:
-            hash_key += "__" + extra
-        if not hash_key in self.data['hashes']:
-            window_name = f'(c/r/q) {hash_key}'
-            while True:
-                cv2.imshow(window_name, current)
-                pressed = urcv.wait_key()
-                if pressed == 'q':
-                    exit()
-                elif pressed == 'c':
-                    break
-                current = self.get_image(key)
-            cv2.destroyWindow(window_name)
-            self.data['hashes'][hash_key] = str(dhash(current))
-            self.data._save()
-        return self.data['hashes'][hash_key] == str(dhash(current))
-
-    def click(self, key):
-        x, y, w, h = self.get_coords(key)
-        pyautogui.click(x + w / 2, y + h / 2)
-
-
-    def moveTo(self, key):
-        x, y, w, h = self.get_coords(key)
-        pyautogui.moveTo(x + w / 2, y + h / 2, 0.1)
-
-class SmileScreenChecker(ScreenChecker):
-    def goto_first_room(self):
-        tries = 0
-        while not self.confirm('room_key', 'first_room'):
-            self.click('room_key')
-            if tries:
-                time.sleep(0.1)
-            if tries > 4:
-                raise NotImplementedError('unable to get to top')
-            for i in range(10):
-                time.sleep(0.1)
-                pyautogui.press('pageup')
-            self.click_neutral()
-            tries += 1
-        self.click('room_key')
-        # go off and on room once to reset event_name if script started on first room
-        pyautogui.press('down')
-        pyautogui.press('up')
-        pyautogui.press('up')
-        time.sleep(0.5)
-        print('first room', self.get_smile_id())
-        self.click_neutral()
-
-    def move_dropdown(self, key, direction):
-        text = self.get_text(key)
-        self.click_neutral()
-        self.click(key)
-        pyautogui.press(direction)
-        def text_changed():
-            try:
-                new_text = self.get_text(key)
-                return text != new_text
-            except (UnknownLettersError, EmptyTextError):
-                # sometimes it takes a second for this to load. If it fails once wait and try again
-                time.sleep(0.2)
-                new_text = self.get_text(key)
-                return text != new_text
-        try:
-            self.sleep_until(text_changed)
-            time.sleep(0.5)
-            return True
-        except WaitError:
-            return False
-
-    def click_neutral(self):
-        self.click('neutral')
-
-    def goto_workarea_top(self):
-        while self.confirm('up_scroll', 'needs_scroll'):
-            self.click('up_scroll')
-
-    def goto_workarea_left(self):
-        while self.confirm('left_scroll', 'needs_scroll'):
-            self.click('left_scroll')
-
-    def needs_scroll(self):
-        workarea = self.get_image('workarea')
-        return {
-            'right': not all(workarea[0,-1] == BG_COLOR),
-            'down': not all(workarea[-1,0] == BG_COLOR),
-        }
-
-    def get_dropdown(self, key):
-        image = self.get_image(key)
-        clean_dropdown_image(image)
-        if image.shape[0] > 20:
-            # multi row, split at gray
-            image = split_on_color(image, DROPDOWN_GRAY)[0]
-
-        return image
-
-    def get_text(self, key):
-        def text_is_readable():
-            try:
-                image = self.get_image(key)
-                clean_dropdown_image(image)
-                return read_text(image).upper()
-            except (UnknownLettersError, EmptyTextError) as e:
-                cv2.imwrite('.media/trash/empty_image.png', image)
-                return False
-        return self.sleep_until(text_is_readable)
-
-    def get_smile_id(self):
-        try:
-            return self.get_text('room_key')
-        except:
-            # sometimes it takes a second for this to load. If it fails once wait and try again
-            time.sleep(0.1)
-            return self.get_text('room_key')
-
-    def get_event_name(self):
-        EVENT_SUBSTITUTIONS = {
-            'E652=MORPH&MIS': 'E652=MORPH&MISSI',
-            'E669=POWERBOMBS': 'E669=POWERBOMBS1',
-            'E5FF=TOURIANBOS': 'E5FF=TOURIANBOSS',
-        }
-        text = self.get_text('event_name')
-        if text in EVENT_SUBSTITUTIONS:
-            text = EVENT_SUBSTITUTIONS[text]
-        events = self.list_events()
-        if text in events:
-            return text
-        for target in events:
-            if target.startswith(text):
-                print(f'Warning, substituted event_name "{text}" => "{target}"')
-                return target
-        smile_id = self.get_smile_id()
-        raise ValueError(f'Unable to find event: {text} not in {events} for room {smile_id}')
-
-    def sleep_until(self, f, max_wait=5):
-        waited = 0
-        dt = 0.01
-        name = f.__name__
-        while True:
-            if waited > max_wait:
-                raise WaitError(f"Waited to long for {name}")
-            value = f()
-            if value:
-                break
-            time.sleep(dt)
-            waited += dt
-        self.stats['sleep_until__'+name].append(waited)
-        return value
-
-    def event_options_appears(self):
-        return (self.get_dropdown('event_options') == DROPDOWN_GREEN).all(1).any()
-
-    def get_dest_path(self, smile_id, event_name):
-        s = self.world_slug
-        _dir = Path(f"{SYNC_DIR}/{s}/{LAYER}/{event_name}/")
-        if not _dir.exists():
-            print(f"making directory: {_dir}")
-            _dir.mkdir(parents=True)
-        return str(_dir / f"{s}_{smile_id}.png")
-
-
-    def list_events(self):
-        smile_id = self.get_smile_id()
-        if smile_id not in self.data['room_events']:
-            print('got events', smile_id)
-            self.click_neutral()
-            self.click('event_name')
-            self.sleep_until(self.event_options_appears)
-            event_options = self.get_dropdown('event_options')
-            values = []
-            for i, image in enumerate(split_many_on_color(event_options, DROPDOWN_GREEN)):
-                values.append(read_text(image).upper())
-            self.data['room_events'][smile_id] = values
-            self.data._save()
-        return self.data['room_events'][smile_id]
-
-    def get_current_cre(self):
-        for current_cre in CRES:
-            if self.confirm('cre-text', current_cre):
-                return current_cre
-
-    def goto_cre(self, target_cre):
-        current_cre = self.get_current_cre()
-        if not current_cre:
-            raise ValueError("Unknown CRE")
-        current_index = CRES.index(current_cre)
-        target_index = CRES.index(target_cre)
-        delta_index = current_index - target_index
-        direction = 'up-cre' if delta_index < 0 else 'down-cre'
-        for i in range(abs(delta_index)):
-            self.click(direction)
-        def cre_matches():
-            return self.get_current_cre() == target_cre
-        self.sleep_until(cre_matches)
-
-    def capture_cre(self):
-        if not self.confirm('show-type-on-map', 'is-checked'):
-            raise Exception("Please check show type on map")
-
-        for i in range(15):
-            self.click('down-cre')
-        canvas = rb_trim(self.get_image('workarea'))
-        canvas[:,:,:3] = 0
-        cre_canvases = []
-        for cre in CRES:
-            self.goto_cre(cre)
-
-            # click this twice to refresh cre tiles
-            self.click('show-type-on-map')
-            self.click('show-type-on-map')
-            time.sleep(0.2)
-
-            cre_canvas = rb_trim(self.get_image('workarea'))
-            canvas = paste_to_channel(canvas, cre_canvas, CRE_COLORS[cre])
-        return canvas
-
-
-def split_on_color(image, color):
-    for y0 in range(image.shape[0]):
-        if not (image[y0] == color).all():
-            break
-    for y in range(y0, image.shape[0]):
-        if (image[y] == color).all():
-            if y == 0:
-                raise ValueError('wtf')
-            return image[y0:y], image[y:]
-    return image, None
-
-def split_many_on_color(image, color):
-    image = image.copy()
-    results = []
-    i = 0
-    while True:
-        i+= 1
-        keep, remainder = split_on_color(image, color)
-        results.append(keep)
-        if i > 25:
-            exit()
-        if remainder is None or (remainder == color).all():
-            break # remainder is purer color so get rid of it
-        elif remainder.size and np.sum(remainder) > 0:
-            image = remainder # repeat loop with remainder
-        else:
-            break
-    return results
 
 def rb_trim(image):
     bg_color = image[-1,-1]
@@ -408,7 +87,7 @@ def combine_screens(screens):
 
 def main(world_slug):
     [f.unlink() for f in Path('.media/trash/').glob("*") if f.is_file()]
-    screen = SmileScreenChecker(world_slug)
+    screen = SmileScreen(world_slug)
     if not screen.confirm('amazon_titlebar'):
         pyautogui.click(50, 50)
         time.sleep(1)
@@ -416,7 +95,6 @@ def main(world_slug):
     if not screen.confirm('amazon_titlebar'):
         raise Exception("Unable to find amazon")
 
-    screen = SmileScreenChecker(world_slug)
     screen.goto_workarea_top()
     screen.goto_workarea_left()
     screen.moveTo('screen_00')
@@ -436,7 +114,6 @@ def main(world_slug):
             image_count += 1
         events = screen.list_events()
         event_name = screen.get_event_name()
-        print(smile_id, event_name, last_event_name)
         if event_name != events[0]:
             screen.click_neutral()
             screen.click('room_key')
@@ -456,11 +133,11 @@ def main(world_slug):
                 print("FAIL: unable to get {smile_id} {event_name}")
                 last_event_name = None
         elif screen.move_dropdown('room_key', 'down'):
-            # print('new room', screen.get_smile_id())
             pass
         else:
-            # all out of events and rooms
+            print("Stopping scrapping (no more rooms)")
             break
+    print(f"finished scraping {image_count} images")
 
 def capture_room(screen):
     smile_id = screen.get_smile_id()
@@ -518,6 +195,7 @@ def capture_room(screen):
             result = cv2.cvtColor(result, cv2.COLOR_BGR2BGRA)
             urcv.remove_color_alpha(result, [0, 0, 0])
         cv2.imwrite(result_path, result)
+        print('wrote', result_path)
         return True
 
 def diff_image(image1, image2):
