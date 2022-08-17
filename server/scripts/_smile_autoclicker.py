@@ -24,7 +24,7 @@ LAYER = sys.argv[2]
 SYNC_DIR = '../../_maptroid-sink'
 assert(Path(SYNC_DIR).exists())
 
-MAX_IMAGES = 10
+MAX_IMAGES = 0
 FILTER_ROOMS = []
 SKIP = 0
 
@@ -135,7 +135,7 @@ def main(world_slug):
         elif screen.move_dropdown('room_key', 'down'):
             pass
         else:
-            print("Stopping scrapping (no more rooms)")
+            print("Stopped scrapping (no more rooms)")
             break
     print(f"finished scraping {image_count} images")
 

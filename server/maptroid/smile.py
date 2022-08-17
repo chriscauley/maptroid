@@ -48,7 +48,8 @@ class BaseScreen:
         self._prompt = None
         self.stats = defaultdict(list)
 
-        self.data = get_winderz(world_slug)
+        self.world_data = get_winderz(world_slug)
+        self.global_data = get_winderz('_global')
 
     def prompt(self, text):
         window_name = f'{self.world_slug} prompt'
@@ -69,26 +70,17 @@ class BaseScreen:
 
 
     def get_coords(self, key):
-        if not key in self.data['coords']:
-            self.data['coords'][key] = urcv.input.get_exact_roi(
+        if not key in self.global_data['coords']:
+            self.global_data['coords'][key] = urcv.input.get_exact_roi(
                 lambda: self.grab(),
                 f"Select coords for {key}",
             )
-            self.data._save()
-        return self.data['coords'][key]
+            self.global_data._save()
+        return self.global_data['coords'][key]
 
     def get_image(self, key):
         x, y, w, h = self.get_coords(key)
         return self.grab({ 'top': y, 'left': x, 'width': w, 'height': h })[:,:,:3]
-
-    def get_color(self, key):
-        while key not in self.data['colors']:
-            image = urcv.transform.crop(self.grab(), self.get_coords(key))
-            cv2.imshow(f'get color {key}', image)
-            pressed = urcv.wait_key()
-            if pressed == 'y':
-                self.data['colors'][key] = image[0][0].tolist()
-        return self.data['colors'][key]
 
     def confirm(self, key, extra=None):
         current = self.get_image(key)
@@ -96,8 +88,7 @@ class BaseScreen:
         hash_key = key
         if extra:
             hash_key += "__" + extra
-        if not hash_key in self.data['hashes']:
-            window_name = f'(c/r/q) {hash_key}'
+        if not hash_key in self.global_data['hashes']:
             while True:
                 cv2.imshow(window_name, current)
                 pressed = urcv.wait_key()
@@ -107,9 +98,9 @@ class BaseScreen:
                     break
                 current = self.get_image(key)
             cv2.destroyWindow(window_name)
-            self.data['hashes'][hash_key] = str(dhash(current))
-            self.data._save()
-        return self.data['hashes'][hash_key] == str(dhash(current))
+            self.global_data['hashes'][hash_key] = str(dhash(current))
+            self.global_data._save()
+        return self.global_data['hashes'][hash_key] == str(dhash(current))
 
     def click(self, key):
         x, y, w, h = self.get_coords(key)
@@ -123,7 +114,25 @@ class BaseScreen:
 class SmileScreen(BaseScreen):
     def goto_first_room(self):
         tries = 0
-        while not self.confirm('room_key', 'first_room'):
+        key = 'first_room'
+        if not key in self.world_data:
+            current = self.get_image('room_key')
+            while True:
+                window_name = f'(c/r/q) Confirm first room {ocr.read_text(current.copy())}'
+                cv2.imshow(window_name, current)
+                pressed = urcv.wait_key()
+                if pressed == 'q':
+                    exit()
+                elif pressed == 'c':
+                    cv2.destroyWindow(window_name)
+                    break
+                current = self.get_image('room_key')
+                cv2.destroyWindow(window_name)
+            self.world_data[key] = ocr.read_text(current)
+
+        def is_first_room():
+            return self.get_text('room_key') == self.world_data[key]
+        while not is_first_room():
             self.click('room_key')
             if tries:
                 time.sleep(0.1)
@@ -248,8 +257,7 @@ class SmileScreen(BaseScreen):
 
     def list_events(self):
         smile_id = self.get_smile_id()
-        if smile_id not in self.data['room_events']:
-            print('got events', smile_id)
+        if smile_id not in self.world_data['room_events']:
             self.click_neutral()
             self.click('event_name')
             def event_options_appears():
@@ -269,9 +277,10 @@ class SmileScreen(BaseScreen):
             images, _coords = ocr.vsplit(event_options, ocr.DROPDOWN_GREEN)
             for image in images:
                 values.append(ocr.read_text(image, interactive=True).upper())
-            self.data['room_events'][smile_id] = values
-            self.data._save()
-        return self.data['room_events'][smile_id]
+            self.world_data['room_events'][smile_id] = values
+            print('got events', smile_id, values)
+            self.world_data._save()
+        return self.world_data['room_events'][smile_id]
 
     def get_current_cre(self):
         for current_cre in CRES:

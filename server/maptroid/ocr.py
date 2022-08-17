@@ -35,9 +35,11 @@ class EmptyTextError(Exception):
 ROOT = tk.Tk()
 def prompt(text):
     ROOT.withdraw()
-    value = simpledialog.askstring(title="Test", prompt=text +" (cancel twice will exit)")
+    value = simpledialog.askstring(title="Test", prompt=text +" (cancel=exit,empty=error)")
     if value is None:
         exit()
+    if len(value) == 0:
+        raise UnknownLettersError("forced unknown")
     return value
 
 def normalize_colors(image):
@@ -119,6 +121,7 @@ def hsplit(image, bg_color=None):
 def read_text(image, interactive=False):
     normalize_colors(image)
     letter_images, _coords = hsplit(image, bg_color=WHITE)
+    cv2.imwrite('.media/trash/last_ocr.png', image)
 
     if not len(letter_images):
         path = f'./media/trash/empty_image.png'
