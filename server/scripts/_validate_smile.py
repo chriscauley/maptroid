@@ -54,7 +54,7 @@ def main():
                     if ih % 256 + iw%256 == 0:
                         rms.append(image_path)
                     else:
-                        kolorpaints.append(image_path)
+                        kolourpaints.append(image_path)
                     winderz['room_errors'][smile_id][error_key] = 'bad_shape'
                 else:
                     success += 1

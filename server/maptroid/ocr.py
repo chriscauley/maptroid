@@ -118,6 +118,14 @@ def hsplit(image, bg_color=None):
     return split_letters, coords
 
 
+def sep_stack(images):
+    empty = images[0].copy()
+    result = []
+    for image in images:
+        result.append(image)
+        result.append(empty)
+    return np.hstack(result)
+
 def read_text(image, interactive=False):
     normalize_colors(image)
     letter_images, _coords = hsplit(image, bg_color=WHITE)
@@ -127,6 +135,7 @@ def read_text(image, interactive=False):
         path = f'./media/trash/empty_image.png'
         raise EmptyTextError('Image given was all background image')
 
+    cv2.imwrite('.media/trash/last_stacked.png', sep_stack(letter_images))
     results = []
     unknown = False
     for letter_image in letter_images:
@@ -134,9 +143,8 @@ def read_text(image, interactive=False):
         if not hash_ in hash_to_letter:
             if interactive:
                 window_name = f'text missing for hash{hash_}'
-                i = letter_image
-                cv2.imwrite('.media/trash/letter.png', i)
-                cv2.imshow(window_name, i)
+                cv2.imwrite('.media/trash/last_letter.png', letter_image)
+                cv2.imshow(window_name, letter_image)
                 cv2.setWindowProperty(window_name,cv2.WND_PROP_FULLSCREEN,cv2.WINDOW_FULLSCREEN)
                 cv2.setWindowProperty(window_name,cv2.WND_PROP_FULLSCREEN,cv2.WINDOW_NORMAL)
                 cv2.waitKey(200)
@@ -144,9 +152,12 @@ def read_text(image, interactive=False):
                 cv2.destroyWindow(window_name)
                 hash_to_letter[hash_] = value
             else:
-                path = f'./media/missing_hashses/_missing_{hash_}.png'
-                cv2.imwrite(path, letter_image)
-                hash_to_letter['_missing_'+hash_] = path
+                if not hash_ in hash_to_letter['missing']:
+                    path = f'.media/missing_hashes/{hash_}.png'
+                    print('saving missing', path)
+                    cv2.imwrite(path, letter_image)
+                    hash_to_letter['missing'][hash_] = path
+                    hash_to_letter._save()
                 unknown = True
         results.append(hash_to_letter.get(hash_))
 

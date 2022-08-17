@@ -15,7 +15,7 @@ import time
 import urcv
 
 from maptroid import ocr
-from maptroid.smile import SmileScreen, WaitError
+from maptroid.smile import SmileScreen, WaitError, rb_trim
 from maptroid.utils import get_winderz, CRES, CRE_COLORS, dhash
 
 BG_COLOR = (255, 128, 128)
@@ -36,21 +36,6 @@ def paste_to_channel(bg, fg, color):
     _, mask = cv2.threshold(gray, 15, 255, cv2.THRESH_BINARY)
     bg2[mask == 255] = color
     return cv2.addWeighted(bg, 1, bg2, 0.5, 0)
-
-
-def rb_trim(image):
-    bg_color = image[-1,-1]
-    if np.sum(bg_color) == 0:
-        return image
-    while (image[-1] == bg_color).all():
-        image = image[:-1]
-        if not image.shape[0]:
-            break
-    while (image[:,-1] == bg_color).all():
-        image = image[:,:-1]
-        if not image.shape[1]:
-            break
-    return image
 
 
 # TODO make a validation script that checks to make sure second to last image lines up properly with last image
@@ -85,15 +70,10 @@ def combine_screens(screens):
         dy = y * 256
     return canvas
 
-def main(world_slug):
+def main(world_slug, layer):
     [f.unlink() for f in Path('.media/trash/').glob("*") if f.is_file()]
-    screen = SmileScreen(world_slug)
-    if not screen.confirm('amazon_titlebar'):
-        pyautogui.click(50, 50)
-        time.sleep(1)
-    cv2.imwrite('.media/trash/az.png', screen.get_image('amazon_titlebar'))
-    if not screen.confirm('amazon_titlebar'):
-        raise Exception("Unable to find amazon")
+    screen = SmileScreen(world_slug, layer)
+    screen.go_home()
 
     screen.goto_workarea_top()
     screen.goto_workarea_left()
@@ -208,4 +188,4 @@ def diff_image(image1, image2):
     return cv2.add(cv2.subtract(canvas1, canvas2), cv2.subtract(canvas2, canvas1))
 
 if __name__ == "__main__":
-    main(sys.argv[1])
+    main(sys.argv[1], sys.argv[2])

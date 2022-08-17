@@ -19,13 +19,27 @@ from maptroid.utils import get_winderz, CRES, CRE_COLORS, dhash
 
 BG_COLOR = (255, 128, 128)
 
-LAYER = sys.argv[2]
 SYNC_DIR = '../../_maptroid-sink'
 assert(Path(SYNC_DIR).exists())
 
 MAX_IMAGES = 0
 FILTER_ROOMS = []
 SKIP = 0
+
+
+def rb_trim(image):
+    bg_color = image[-1,-1]
+    if np.sum(bg_color) == 0:
+        return image
+    while (image[-1] == bg_color).all():
+        image = image[:-1]
+        if not image.shape[0]:
+            break
+    while (image[:,-1] == bg_color).all():
+        image = image[:,:-1]
+        if not image.shape[1]:
+            break
+    return image
 
 
 class WaitError(Exception):
@@ -42,7 +56,8 @@ def paste_to_channel(bg, fg, color):
 
 
 class BaseScreen:
-    def __init__(self, world_slug):
+    def __init__(self, world_slug, layer):
+        self.layer = layer
         self.world_slug = world_slug
         self.sct = mss()
         self._prompt = None
@@ -84,11 +99,13 @@ class BaseScreen:
 
     def confirm(self, key, extra=None):
         current = self.get_image(key)
-        ocr.normalize_colors(current)
+        # if normalize:
+        #     ocr.normalize_colors(current)
         hash_key = key
         if extra:
             hash_key += "__" + extra
         if not hash_key in self.global_data['hashes']:
+            window_name = f'(c/r/q) {hash_key}'
             while True:
                 cv2.imshow(window_name, current)
                 pressed = urcv.wait_key()
@@ -112,11 +129,11 @@ class BaseScreen:
         pyautogui.moveTo(x + w / 2, y + h / 2, 0.1)
 
 class SmileScreen(BaseScreen):
-    def goto_first_room(self):
+    def goto_first_room(self, image_key='room_key'):
         tries = 0
         key = 'first_room'
         if not key in self.world_data:
-            current = self.get_image('room_key')
+            current = self.get_image(image_key)
             while True:
                 window_name = f'(c/r/q) Confirm first room {ocr.read_text(current.copy())}'
                 cv2.imshow(window_name, current)
@@ -126,14 +143,14 @@ class SmileScreen(BaseScreen):
                 elif pressed == 'c':
                     cv2.destroyWindow(window_name)
                     break
-                current = self.get_image('room_key')
+                current = self.get_image(image_key)
                 cv2.destroyWindow(window_name)
             self.world_data[key] = ocr.read_text(current)
 
         def is_first_room():
-            return self.get_text('room_key') == self.world_data[key]
+            return self.get_text(image_key) == self.world_data[key]
         while not is_first_room():
-            self.click('room_key')
+            self.click(image_key)
             if tries:
                 time.sleep(0.1)
             if tries > 4:
@@ -143,13 +160,13 @@ class SmileScreen(BaseScreen):
                 pyautogui.press('pageup')
             self.click_neutral()
             tries += 1
-        self.click('room_key')
+        self.click(image_key)
         # go off and on room once to reset event_name if script started on first room
         pyautogui.press('down')
         pyautogui.press('up')
         pyautogui.press('up')
         time.sleep(0.5)
-        print('first room', self.get_smile_id())
+        print('first room', self.get_text(image_key))
         self.click_neutral()
 
     def move_dropdown(self, key, direction):
@@ -192,11 +209,18 @@ class SmileScreen(BaseScreen):
             'down': not all(workarea[-1,0] == BG_COLOR),
         }
 
-    def get_text(self, key):
+    def get_text(self, key, interactive=False, invert=False):
         def text_is_readable():
             try:
                 image = self.get_image(key)
-                return ocr.read_text(image, interactive=True).upper()
+                if key == 'rf_smile_id' and (image == ocr.DROPDOWN_ORANGE).all(2).any():
+                    # SMILE RF has an annoyingly small room key dropdown area
+                    urcv.replace_color(image, ocr.BLACK, ocr.DROPDOWN_GREEN)
+                if invert:
+                    image = np.invert(image)
+                    urcv.replace_color(image, ocr.BLACK, ocr.DROPDOWN_GREEN)
+                cv2.imwrite('.media/trash/last_is_readable.png', image)
+                return ocr.read_text(image, interactive=interactive).upper()
             except (ocr.UnknownLettersError, ocr.EmptyTextError) as e:
                 # sometimes it takes catches the text in mid-render
                 # If it fails once wait and try again
@@ -246,9 +270,16 @@ class SmileScreen(BaseScreen):
         self.stats['sleep_until__'+name].append(waited)
         return value
 
-    def get_dest_path(self, smile_id, event_name):
+    def get_root_path(self, file_name):
         s = self.world_slug
-        _dir = Path(f"{SYNC_DIR}/{s}/{LAYER}/{event_name}/")
+        _dir = Path(f"{SYNC_DIR}/{s}/")
+        return str(_dir / file_name)
+
+    def get_dest_path(self, smile_id, event_name=None):
+        s = self.world_slug
+        _dir = Path(f"{SYNC_DIR}/{s}/{self.layer}/")
+        if event_name:
+            _dir = _dir / event_name
         if not _dir.exists():
             print(f"making directory: {_dir}")
             _dir.mkdir(parents=True)
@@ -321,3 +352,11 @@ class SmileScreen(BaseScreen):
             cre_canvas = rb_trim(self.get_image('workarea'))
             canvas = paste_to_channel(canvas, cre_canvas, CRE_COLORS[cre])
         return canvas
+
+    def go_home(self):
+        if not self.confirm('amazon_titlebar'):
+            pyautogui.click(50, 50)
+            time.sleep(1)
+        cv2.imwrite('.media/trash/az.png', self.get_image('amazon_titlebar'))
+        if not self.confirm('amazon_titlebar'):
+            raise Exception("Unable to find amazon")

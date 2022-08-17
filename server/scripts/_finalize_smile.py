@@ -1,3 +1,5 @@
+# Moves files from event folders into main layer folders
+
 from _setup import get_wzr
 
 import os
