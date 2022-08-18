@@ -4,6 +4,7 @@ import _setup
 
 from collections import defaultdict
 import cv2
+from django.conf import settings
 import imagehash
 from mss import mss
 import numpy as np
@@ -21,8 +22,6 @@ from maptroid.utils import get_winderz, CRES, CRE_COLORS, dhash
 BG_COLOR = (255, 128, 128)
 
 LAYER = sys.argv[2]
-SYNC_DIR = '../../_maptroid-sink'
-assert(Path(SYNC_DIR).exists())
 
 MAX_IMAGES = 0
 FILTER_ROOMS = []

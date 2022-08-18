@@ -12,9 +12,8 @@ from maptroid.models import World
 
 def get_world_from_argv():
     worlds = World.objects.all()
-    for world in worlds:
-        if world.slug in sys.argv:
-            return world
+    if len(sys.argv) > 1:
+        return World.objects.get(slug=sys.argv[1])
     while True:
         for world in worlds:
             print(f"{world.id} - {world.slug}")
@@ -43,6 +42,7 @@ def get_wzr(exclude_hidden=False):
             slugs = sys.argv[i+1].split(',')
             zones = zones.filter(slug__in=slugs)
             if not zones:
+                print([z.slug for z in world.zone_set.all()])
                 raise ValueError(f"Unable to find zones matching {slugs}")
         if s in ['-r']:
             rooms = rooms.filter(id__in=sys.argv[i+1].split(','))

@@ -19,9 +19,6 @@ from maptroid.utils import get_winderz, CRES, CRE_COLORS, dhash
 
 BG_COLOR = (255, 128, 128)
 
-SYNC_DIR = '../../_maptroid-sink'
-assert(Path(SYNC_DIR).exists())
-
 MAX_IMAGES = 0
 FILTER_ROOMS = []
 SKIP = 0
@@ -272,12 +269,12 @@ class SmileScreen(BaseScreen):
 
     def get_root_path(self, file_name):
         s = self.world_slug
-        _dir = Path(f"{SYNC_DIR}/{s}/")
+        _dir = Path(f"{settings.MAPTROID_SINK_PATH}/{s}/")
         return str(_dir / file_name)
 
     def get_dest_path(self, smile_id, event_name=None):
         s = self.world_slug
-        _dir = Path(f"{SYNC_DIR}/{s}/{self.layer}/")
+        _dir = Path(f"{settings.MAPTROID_SINK_PATH}/{s}/{self.layer}/")
         if event_name:
             _dir = _dir / event_name
         if not _dir.exists():

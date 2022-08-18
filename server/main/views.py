@@ -47,11 +47,9 @@ def delete_file(request):
     return JsonResponse({'message': 'ok'})
 
 # TOOD Move this to maptroid views?
-SINK_DIR = '/home/chriscauley/projects/_maptroid-sink'
-
 @superuser_required
 def sink(request, path):
-    file_path = os.path.join(SINK_DIR, path)
+    file_path = os.path.join(settings.MAPTROID_SINK_PATH, path)
     file_name = file_path.split('/')[-1]
     response = FileResponse(open(file_path,'rb'), content_type="image/png")
     return response
