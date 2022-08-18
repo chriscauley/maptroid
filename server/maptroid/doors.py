@@ -15,6 +15,8 @@ def list_worlds():
 
 @functools.lru_cache
 def get_door_icons(world, style):
+    if world.startswith('y-faster'):
+        world = 'y-faster'
     if not world in list_worlds():
         return get_door_icons('super-metroid', style)
     left = get_icons('colored-doors', source=f"world_doors/{world}.png")

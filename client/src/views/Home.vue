@@ -39,7 +39,7 @@ import FancySelect from '@/components/FancySelect'
 import McData from '@/components/McData.vue'
 
 const difficulties = ['Beginner', 'Vanilla', 'Veteran', 'Expert', 'Unknown']
-const sort_choices = ['Name', 'Rating', 'Runtime', 'Screens']
+const sort_choices = ['Name', 'Runtime', 'Screens']
 
 const getDifficultyChoices = (worlds) => {
   const counts = {}
@@ -116,19 +116,10 @@ export default {
       let sorter = 'name'
       if (sort_by === 'difficulty') {
         sorter = (w) => difficulties.indexOf(w.data.mc_data?.difficulty)
-      } else if (sort_by === 'rating') {
-        sorter = (w) => {
-          if (!w.data.mc_data) {
-            // dread, super metroid are lst
-            return 0
-          }
-          // unrated things are right between rated and nintendo games
-          return -(w.data.mc_data.rating || 0.25)
-        }
       } else if (sort_by === 'runtime') {
         sorter = parseRuntime
       } else if (sort_by === 'screens') {
-        sorter = w => (-w.data.metrics?.screens) || 1e6
+        sorter = (w) => -w.data.metrics?.screens || 1e6
       }
       worlds = sortBy(worlds, sorter)
       return worlds

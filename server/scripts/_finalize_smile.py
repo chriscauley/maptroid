@@ -1,11 +1,14 @@
+# Moves files from event folders into main layer folders
+
 from _setup import get_wzr
 
+from django.conf import settings
 import os
 import shutil
 
 def main():
     world, zones, rooms = get_wzr()
-    root_dir = f'/home/chriscauley/projects/_maptroid-sink/{world.slug}/'
+    root_dir = os.path.join(settings.MAPTROID_SINK_PATH, world.slug)
     for room in rooms:
         event = room.data.get('default_event', 'E5E6=STANDARD1')
         for layer in ['plm_enemies', 'layer-1', 'layer-2', 'bts', 'bts-extra']:

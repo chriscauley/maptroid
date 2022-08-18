@@ -2,6 +2,7 @@ from _setup import get_wzr
 
 from collections import defaultdict
 import cv2
+from django.conf import settings
 import json
 import os
 import sys
@@ -13,7 +14,7 @@ ALL_LAYERS = ['plm_enemies', 'layer-1', 'layer-2', 'bts', 'bts-extra']
 def main():
     world, zones, rooms = get_wzr()
     winderz = get_winderz(world.slug)
-    root_dir = f'/home/chriscauley/projects/_maptroid-sink/{world.slug}/'
+    root_dir = os.path.join(settings.MAPTROID_SINK_PATH, world.slug)
     layer_fails = defaultdict(int)
     layer_dne = defaultdict(int)
     fails = []
@@ -54,7 +55,7 @@ def main():
                     if ih % 256 + iw%256 == 0:
                         rms.append(image_path)
                     else:
-                        kolorpaints.append(image_path)
+                        kolourpaints.append(image_path)
                     winderz['room_errors'][smile_id][error_key] = 'bad_shape'
                 else:
                     success += 1

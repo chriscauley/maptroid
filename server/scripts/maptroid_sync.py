@@ -1,11 +1,12 @@
 import _setup
+from django.conf import settings
 from shutil import copy
 import os
 from PIL import Image
 
 from maptroid.models import Screenshot, World
 
-SOURCE = '../../_maptroid-sink/dread'
+SOURCE = settings.MAPTROID_SINK_PATH
 DEST = '.media/screenshots/dread'
 
 dest_files = os.listdir(DEST)

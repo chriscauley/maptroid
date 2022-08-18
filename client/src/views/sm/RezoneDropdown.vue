@@ -1,6 +1,6 @@
 <template>
   <unrest-dropdown class="btn -warning" v-if="$store.route.zone" :items="items">
-    <i class="fa fa-exclamation-circle" />
+    <i class="fa fa-arrows-h" />
     {{ text }}
   </unrest-dropdown>
 </template>

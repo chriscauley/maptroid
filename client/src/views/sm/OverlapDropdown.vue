@@ -1,7 +1,7 @@
 <template>
-  <unrest-dropdown class="btn -danger" v-if="overlap_items.length" :items="overlap_items">
-    <i class="fa fa-exclamation-circle" />
-    {{ overlap_items.length }}
+  <unrest-dropdown class="btn -danger" v-if="items.length" :items="items">
+    <i class="fa fa-th-large" />
+    {{ items.length - 1 }}
   </unrest-dropdown>
 </template>
 
@@ -10,11 +10,9 @@ import { sortBy } from 'lodash'
 
 export default {
   inject: ['map_props', 'tool_storage'],
+  emits: ['highlight'],
   computed: {
-    overlap_items() {
-      if (!['move_room', 'edit_room'].includes(this.tool_storage.state.selected.tool)) {
-        return []
-      }
+    items() {
       const { rooms } = this.map_props
 
       // How many times does an zone_xy appear in each room?
@@ -44,15 +42,36 @@ export default {
 
       // Create items for each room to appear in dropdown
       const items = Object.entries(room_counts).map(([room_id, count]) => {
-        const room = rooms.find((r) => r.id === parseInt(room_id))
+        const id = parseInt(room_id)
+        const room = rooms.find((r) => r.id === id)
         return {
+          id,
           count,
           text: `${count} #${room_id} ${room.name || room.data.zone.bounds}`,
           click: () => this.$store.local.save({ editing_room: room.id }),
         }
       })
 
+      if (this.$store.route.zone && items.length) {
+        items.unshift({
+          text: 'Highlght',
+          click: () =>
+            this.$emit(
+              'highlight',
+              this.items.map((i) => i.id),
+            ),
+          count: 1e6,
+        })
+      }
       return sortBy(items, 'count').reverse()
+    },
+  },
+  watch: {
+    items: {
+      handler() {
+        this.tool_storage.state.overlap_items = this.items
+      },
+      immediate: true,
     },
   },
 }

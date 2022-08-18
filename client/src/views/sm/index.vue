@@ -5,12 +5,16 @@
       <unrest-toolbar :storage="tool_storage" class="-topleft">
         <config-popper v-if="tool_storage.state.settings_open" :storage="tool_storage" />
         <template #buttons>
-          <overlap-dropdown />
-          <cre-dropdown @highlight="(h) => (highlighted_rooms = h)" />
-          <rezone-dropdown :storage="tool_storage" />
           <mc-dropdown />
         </template>
       </unrest-toolbar>
+      <div v-if="edit_or_move" class="unrest-floating-actions -left">
+        <div class="btn-group">
+          <overlap-dropdown @highlight="(h) => (highlighted_rooms = h)" />
+          <cre-dropdown @highlight="(h) => (highlighted_rooms = h)" />
+          <rezone-dropdown :storage="tool_storage" />
+        </div>
+      </div>
       <html-overlay :viewer="osd_store.viewer">
         <template v-if="$store.route.zone">
           <room-box
@@ -100,6 +104,10 @@ export default {
     }
   },
   computed: {
+    edit_or_move() {
+      const { tool } = this.tool_storage.state.selected
+      return ['move_room', 'edit_room'].includes(tool)
+    },
     show_player() {
       const { tool } = this.tool_storage.state.selected
       return tool === 'video_path' || !tool

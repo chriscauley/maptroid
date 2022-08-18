@@ -1,11 +1,6 @@
 <template>
-  <unrest-dropdown
-    class="btn -danger cre-dropdown"
-    v-if="items.length"
-    :items="items"
-    placement="top-start"
-  >
-    <i class="fa fa-exclamation-circle" />
+  <unrest-dropdown class="btn -danger cre-dropdown" v-if="items.length" :items="items">
+    <i class="fa fa-object-group" />
     {{ missing_items.length }}
   </unrest-dropdown>
 </template>
@@ -31,9 +26,6 @@ export default {
       return items
     },
     missing_items() {
-      if (!['move_room', 'edit_room'].includes(this.tool_storage.state.selected.tool)) {
-        return []
-      }
       const { rooms } = this.map_props
       let items = rooms.map((room) => {
         const block_map = Room.getBlocks(room)
@@ -62,6 +54,14 @@ export default {
         text: `${count} #${room.id} ${room.name || room.data.zone.bounds}`,
         click: () => this.$store.local.save({ editing_room: room.id }),
       }))
+    },
+  },
+  watch: {
+    items: {
+      handler() {
+        this.tool_storage.state.cre_items = this.items
+      },
+      immediate: true,
     },
   },
   methods: {

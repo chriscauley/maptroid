@@ -1,4 +1,7 @@
+from django.conf import settings
+import imagehash
 import os
+from PIL import Image
 from unrest.utils import JsonCache
 
 def mkdir(root, *args):
@@ -13,7 +16,8 @@ def mkdir(root, *args):
     return path
 
 def get_winderz(world_slug):
-    return JsonCache(f".media/winderz/{world_slug}.json", {
+    path = os.path.join(settings.MAPTROID_SINK_PATH, f'smile_config/{world_slug}.json')
+    return JsonCache(path, {
         'coords': {},
         'hashes': {},
         'colors': {},
@@ -41,3 +45,7 @@ COLORS = [
 ]
 
 CRE_COLORS = dict(zip(CRES,COLORS))
+
+def dhash(image):
+    image = Image.fromarray(image)
+    return imagehash.dhash(image)
