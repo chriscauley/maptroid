@@ -1,3 +1,4 @@
+from django.conf import settings
 import imagehash
 import os
 from PIL import Image
@@ -15,7 +16,8 @@ def mkdir(root, *args):
     return path
 
 def get_winderz(world_slug):
-    return JsonCache(f".media/winderz/{world_slug}.json", {
+    path = os.path.join(settings.MAPTROID_SINK_PATH, f'smile_config/{world_slug}.json')
+    return JsonCache(path, {
         'coords': {},
         'hashes': {},
         'colors': {},
