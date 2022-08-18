@@ -17,6 +17,7 @@ def default_world_data():
   return {
     'clear_holes': True,
     'elevators': [],
+    'hidden': True,
   }
 
 
@@ -26,7 +27,7 @@ class World(models.Model):
   name = models.CharField(max_length=128)
   slug = models.CharField(max_length=128)
   hidden = models.BooleanField(default=False)
-  data = models.JSONField(default=dict, blank=True)
+  data = models.JSONField(default=default_world_data, blank=True)
   mc_id = models.IntegerField(null=True, blank=True)
 
   __str__ = lambda self: self.name

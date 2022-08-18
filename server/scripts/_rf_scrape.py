@@ -200,7 +200,8 @@ def main(world_slug):
         print("New Room:", room.key,"in", zone, room.data['zone'])
 
     for k in ['z-trash-'+world_slug, 'unknown-'+world_slug]:
-        goc_zone(k, world=world)
+        z = goc_zone(k, world=world)
+        z.data['hidden'] = True
 
 if __name__ == '__main__':
     main(sys.argv[1])

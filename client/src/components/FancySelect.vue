@@ -37,7 +37,7 @@ export default {
       const matched = this.items.find((item) => {
         return item.value === this.modelValue
       })
-      return (matched || this.items[0]).text
+      return (matched || this.items[0] || {}).text
     },
   },
 }
