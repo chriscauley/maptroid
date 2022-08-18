@@ -62,12 +62,3 @@
     @apply font-bold text-xl;
   }
 }
-
-.mc-data {
-  &__row {
-    @apply flex justify-between;
-  }
-  &__rating {
-    @apply flex flex-grow gap-1 items-center;
-  }
-}

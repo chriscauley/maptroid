@@ -5,8 +5,7 @@
 @import "./variables.scss";
 @import "./zone-colors.scss";
 
-.ur-dropdown.cre-dropdown {
-  @apply fixed bottom-0;
+.unrest-floating-actions.-left {
   .ur-popper.popdown {
     max-height: 600px;
     overflow-y: auto;

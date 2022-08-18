@@ -2,18 +2,16 @@
   <template v-if="is_selected">
     <div :style="style" class="osd-mousetrap" @click="click" @mousemove="mousemove" />
     <div class="osd-mousetrap__cursor" :style="cursor_style" />
-  </template>
-  <div class="edit-elevator">
-    <div v-if="editing">
+    <div class="edit-elevator" v-if="editing">
       <div class="btn -danger" @click="delete_">Delete</div>
       {{ editing }}
       <div class="btn -secondary" @click="cancel">Cancel</div>
       <div class="btn -primary" @click="save">Save</div>
     </div>
-  </div>
-  <svg class="sm-elevator-svg" v-if="!$route.params.zone_slug" v-bind="map_props.svg">
-    <line v-for="(line, i) in lines" :key="i" v-bind="line" />
-  </svg>
+    <svg class="sm-elevator-svg" v-if="!$route.params.zone_slug" v-bind="map_props.svg">
+      <line v-for="(line, i) in lines" :key="i" v-bind="line" />
+    </svg>
+  </template>
 </template>
 
 <script>

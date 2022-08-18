@@ -30,14 +30,18 @@
         <div id="edit-room__actions" />
         {{ room.key }}
         {{ $store.local.state.loading ? '...' : '' }}
+        <nav-edit-room icon="th-large" :links="overlap_links" />
+        <nav-edit-room icon="object-group" :links="cre_links" />
       </template>
     </unrest-modal>
   </teleport>
 </template>
 
 <script>
+import { mod } from '@unrest/geo'
 import Mousetrap from '@unrest/vue-mousetrap'
 import RoomBox, { plms } from './RoomBox.vue'
+import NavEditRoom from './NavEditRoom'
 import ToolStorage from '@/components/unrest/ToolStorage'
 import link_colors from '@/../../server/static/sm/link_colors.json'
 import Item from '@/models/Item'
@@ -108,8 +112,9 @@ const tools = [
 ]
 
 export default {
-  components: { RoomBox },
+  components: { RoomBox, NavEditRoom },
   mixins: [Mousetrap.Mixin],
+  inject: ['tool_storage'],
   data() {
     const initial = { selected: { tool: 'item', variant: 'missile' } }
     return {
@@ -120,6 +125,37 @@ export default {
     }
   },
   computed: {
+    overlap_links() {
+      const { overlap_items } = this.tool_storage.state
+      const current_index = overlap_items.findIndex((r) => (r.id = this.room))
+      if (current_index !== -1) {
+        const next = overlap_items[mod(current_index + 1, overlap_items.length)].id
+        const prev = overlap_items[mod(current_index - 1, overlap_items.length)].id
+        const click = (id) => this.$store.local.save({ editing_room: id })
+        return {
+          next: () => click(next),
+          prev: () => click(prev),
+        }
+      }
+      return null
+    },
+    cre_links() {
+      const { cre_items } = this.tool_storage.state
+      if (!cre_items) {
+        return null
+      }
+      const current_index = cre_items.findIndex((r) => (r.id = this.room))
+      if (current_index !== -1) {
+        const next = cre_items[mod(current_index + 1, cre_items.length)].id
+        const prev = cre_items[mod(current_index - 1, cre_items.length)].id
+        const click = (id) => this.$store.local.save({ editing_room: id })
+        return {
+          next: () => click(next),
+          prev: () => click(prev),
+        }
+      }
+      return null
+    },
     mousetrap() {
       return {
         z: {
