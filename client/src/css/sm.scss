@@ -96,9 +96,21 @@
 }
 
 .sm-zone-box {
-  &__move {
+  &__move:before {
+    content: "";
     background: rgba(255, 128, 128, 0.5);
+    inset: 0;
     outline: 1px solid gray;
+    position: absolute;
+  @mixin zone-zoom($zoom, $ratio) {
+    .-zoom-#{$zoom} & {
+      inset: $ratio * -5%;
+    }
+  }
+  @include zone-zoom(-4, 16);
+  @include zone-zoom(-3, 12);
+  @include zone-zoom(-2, 8);
+  @include zone-zoom(-1, 6);
   }
 }
 
