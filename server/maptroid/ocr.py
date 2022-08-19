@@ -9,8 +9,12 @@ import os
 from unrest.utils import JsonCache
 import random
 import urcv
-import tkinter as tk
-from tkinter import simpledialog
+try:
+    import tkinter as tk
+    from tkinter import simpledialog
+    ROOT = tk.Tk()
+except ImportError:
+    pass
 
 from maptroid.utils import dhash
 
@@ -32,7 +36,6 @@ class EmptyTextError(Exception):
     pass
 
 
-ROOT = tk.Tk()
 def prompt(text):
     ROOT.withdraw()
     value = simpledialog.askstring(title="Test", prompt=text +" (cancel=exit,empty=error)")

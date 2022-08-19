@@ -4,15 +4,21 @@ import _setup
 
 from collections import defaultdict
 import cv2
+from django.conf import settings
 import imagehash
 from mss import mss
 import numpy as np
 from pathlib import Path
 from PIL import Image
-import pyautogui
 import sys
 import time
 import urcv
+
+try:
+    import pyautogui
+except KeyError:
+    print("WARNING: import pyautogui failed because no x available")
+    pass
 
 from maptroid import ocr
 from maptroid.utils import get_winderz, CRES, CRE_COLORS, dhash
@@ -56,12 +62,17 @@ class BaseScreen:
     def __init__(self, world_slug, layer):
         self.layer = layer
         self.world_slug = world_slug
-        self.sct = mss()
         self._prompt = None
         self.stats = defaultdict(list)
 
         self.world_data = get_winderz(world_slug)
         self.global_data = get_winderz('_global')
+
+    @property
+    def sct(self):
+        if not hasattr(self, '_sct'):
+            self._sct = mss()
+        return self._sct
 
     def prompt(self, text):
         window_name = f'{self.world_slug} prompt'

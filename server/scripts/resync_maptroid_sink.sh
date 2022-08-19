@@ -1,7 +1,8 @@
+# source .venv/bin/activate
+# echo "First moving maptroid-sink with events (this will fail in prod)"
+# python scripts/_finalize_smile.py $1
+
 set -e
-source .venv/bin/activate
-echo "First moving maptroid-sink with events"
-python scripts/_finalize_smile.py $1
 
 [ -d ".media/smile_exports/$1/" ] || mkdir .media/smile_exports/$1/
 for i in bts layer-1 layer-2 plm_enemies bts-extra;

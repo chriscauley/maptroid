@@ -1,5 +1,6 @@
 import _setup
 import cv2
+from django.utils.text import slugify
 import json
 import numpy as np
 import os
@@ -143,12 +144,12 @@ def process_images(screen):
             'rows': all_results,
         }))
 
-def goc_zone(zone_slug, world):
+def goc_zone(zone_name, world):
+    zone_slug = slugify(zone_name)
     try:
         zone = Zone.objects.get(world=world, slug=zone_slug)
     except Zone.DoesNotExist:
-        name = zone_slug.replace("-", " ").title()
-        zone = Zone.objects.create(name=name, slug=zone_slug, world=world)
+        zone = Zone.objects.create(name=zone_name, slug=zone_slug, world=world)
         print("New Zone: ", zone)
     return zone
 
@@ -189,7 +190,7 @@ def main(world_slug):
             continue
 
         match = re.match(r'\$?(\d?\d?)(.*)', data['zone'])
-        zone = goc_zone(match.group(2))
+        zone = goc_zone(match.group(2), world)
 
         room = Room.objects.create(key=room_key, zone=zone, world=world)
         room.data['zone'] = {

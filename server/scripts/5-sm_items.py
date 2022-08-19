@@ -17,7 +17,10 @@ world, zones, rooms = get_wzr(exclude_hidden=True)
 def safe_open(path):
     if not os.path.exists(path):
         return []
-    return cv2.imread(path, cv2.IMREAD_UNCHANGED)
+    img = cv2.imread(path, cv2.IMREAD_UNCHANGED)
+    if img.shape[2] == 3:
+        img = cv2.cvtColor(img, cv2.COLOR_BGR2BGRA)
+    return img
 
 to_create = 0
 
