@@ -73,6 +73,11 @@ def swap_room_event(request):
     return JsonResponse(winderz)
 
 @superuser_required
+def winderz(request, world_slug):
+    winderz = get_winderz(world_slug)
+    return JsonResponse(winderz)
+
+@superuser_required
 def save_default_event(request):
     data = json.loads(request.body.decode('utf-8') or "{}")
     room = Room.objects.get(id=data['room_id'])

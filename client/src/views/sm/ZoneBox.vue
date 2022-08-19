@@ -1,6 +1,6 @@
 <template>
   <div :class="css" :style="style" :title="zone.name">
-    <unrest-draggable @drag="drag" v-if="move_zones" class="sm-zone-box__move" />
+    <unrest-draggable @drag="drag" v-if="move_zones" class="sm-zone-box__move" style="inset: -25%" />
     <room-box v-for="room in rooms" :key="room.id" :room="room" />
   </div>
 </template>

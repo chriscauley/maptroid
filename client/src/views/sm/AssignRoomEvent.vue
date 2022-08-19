@@ -62,7 +62,6 @@
 </template>
 
 <script>
-import axios from 'axios'
 import { sortBy } from 'lodash'
 
 import { getClient } from '@unrest/vue-storage'
@@ -111,7 +110,7 @@ export default {
   },
   methods: {
     refreshData() {
-      axios.get(`/media/winderz/${this.$route.params.world_slug}.json`).then(({ data }) => {
+      client.get(`winderz/${this.$route.params.world_slug}`).then((data) => {
         this.data = data
       })
     },
