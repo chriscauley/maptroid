@@ -305,8 +305,14 @@ class SmileScreen(BaseScreen):
             self.click('event_name')
             def event_options_appears():
                 image = self.get_image('event_options')
-                return (image == ocr.DROPDOWN_BLUE).all(2).any()
+                # sometimes the left side of the dropdown renders partially
+                return (image[:,:-5] == ocr.DROPDOWN_BLUE).all(2).any()
             self.sleep_until(event_options_appears)
+
+            # this is still buggy even with event_options_appears
+            # but it is cached, so we'll just sleep here
+            time.sleep(0.2)
+
             event_options = self.get_image('event_options')
 
             # remove everything after bottom dotted line
@@ -317,6 +323,9 @@ class SmileScreen(BaseScreen):
 
             event_options = np.vstack([event_options, event_options[-1:]])
             values = []
+            urcv.replace_color(event_options, ocr.DROPDOWN_ORANGE, ocr.DROPDOWN_GREEN)
+            urcv.replace_color(event_options, ocr.DROPDOWN_BLUE, ocr.DROPDOWN_GREEN)
+            # event_options = ocr.vtrim(event_options, ocr.DROPDOWN_GREEN)
             images, _coords = ocr.vsplit(event_options, ocr.DROPDOWN_GREEN)
             for image in images:
                 values.append(ocr.read_text(image, interactive=True).upper())

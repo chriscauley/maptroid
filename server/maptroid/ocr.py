@@ -73,7 +73,7 @@ def htrim(image, color=None):
         x1 += 1
     while (image[:,x2] == color).all() and x1 < x2:
         x2 -= 1
-    return image[:,x1:x2]
+    return image[:,x1:x2+1]
 
 
 def vsplit(image, bg_color=None):
@@ -132,8 +132,8 @@ def sep_stack(images):
         result.append(empty)
     return np.hstack(result)
 
-def read_text(image, interactive=False):
-    image = image.copy()
+def read_text(og_image, interactive=False):
+    image = og_image.copy()
     cv2.imwrite('.media/trash/last_ocr_og.png', image)
     normalize_colors(image)
     cv2.imwrite('.media/trash/last_ocr_normalized.png', image)
@@ -152,12 +152,14 @@ def read_text(image, interactive=False):
             if interactive:
                 window_name = f'text missing for hash{hash_}'
                 cv2.imwrite('.media/trash/last_letter.png', letter_image)
+                cv2.imshow('og'+window_name, og_image)
                 cv2.imshow(window_name, letter_image)
                 cv2.setWindowProperty(window_name,cv2.WND_PROP_FULLSCREEN,cv2.WINDOW_FULLSCREEN)
                 cv2.setWindowProperty(window_name,cv2.WND_PROP_FULLSCREEN,cv2.WINDOW_NORMAL)
                 cv2.waitKey(200)
                 value = prompt("What letter is being shown?")
                 cv2.destroyWindow(window_name)
+                cv2.destroyWindow('og'+window_name)
                 hash_to_letter[hash_] = value
             else:
                 if not hash_ in hash_to_letter['missing']:

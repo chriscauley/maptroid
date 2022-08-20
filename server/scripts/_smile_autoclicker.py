@@ -156,12 +156,15 @@ def main(world_slug, layer):
                 print(f"FAIL: unable to get {smile_id} {event_name}")
                 last_event_name = None
         elif screen.move_dropdown('room_key', 'down'):
+            if smile_id not in screen.world_data['room_list']:
+                screen.world_data['room_list'].append(smile_id)
             if targets is not None:
                 targets.remove(smile_id)
                 if len(targets) == 0:
                     print('final target')
                     break
         else:
+            screen.world_data['room_list_complete'] = True
             print("Stopped scrapping (no more rooms)")
             break
     print(f"finished scraping {image_count} images")

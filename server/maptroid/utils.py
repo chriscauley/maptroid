@@ -23,6 +23,7 @@ def get_winderz(world_slug):
         'colors': {},
         'room_events': {},
         'room_errors': {},
+        'room_list': [],
     })
 
 # These are used to generate the cre-extra values in smile_autoclicker
