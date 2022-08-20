@@ -134,8 +134,6 @@ def auto_cre(room, cre_xys, hex_xys):
             if xy in forbidden_xys:
                 continue
             cre = CRE_REVERSE_COLORS.get(str(tuple(pixel)))
-            # if cre == 'spike':
-            #     cre = 'spike-up'
             if cre in [None, 'vertical']:
                 continue
             urcv.draw.paste(final_canvas, icons[cre], x*16, y*16)

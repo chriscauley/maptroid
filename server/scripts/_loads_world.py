@@ -16,8 +16,8 @@ def get_or_create(model, data):
             setattr(obj, k, v)
         obj.save()
     except model.DoesNotExist:
-        print(f'Created new {model}: {obj}')
         obj = model.objects.create(**data)
+        print(f'Created new {model}: {obj}')
     return obj
 
 

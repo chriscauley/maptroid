@@ -1,6 +1,6 @@
-source .venv/bin/activate
-echo "First moving maptroid-sink with events (this will fail in prod)"
-python scripts/_finalize_smile.py $1
+# source .venv/bin/activate
+# echo "First moving maptroid-sink with events (this will fail in prod)"
+# python scripts/_finalize_smile.py $1
 
 set -e
 
