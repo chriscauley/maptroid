@@ -25,7 +25,6 @@ LAYER = sys.argv[2]
 
 MAX_IMAGES = 0
 FILTER_ROOMS = []
-SKIP = 0
 
 
 def paste_to_channel(bg, fg, color):
@@ -69,29 +68,74 @@ def combine_screens(screens):
         dy = y * 256
     return canvas
 
+def get_targets(screen):
+    if not screen.world_data.get("room_list_complete"):
+        return None
+    if not screen.world_data.get('room_list'):
+        # legacy worlds that don't have their room_list populated
+        screen.world_data["room_list"] = list(screen.world_data['room_events'].keys())
+    targets = []
+    for smile_id, event_names in screen.world_data['room_events'].items():
+        for event_name in event_names:
+            path = screen.get_dest_path(smile_id, event_name)
+            if not Path(path).exists():
+                targets.append(smile_id)
+    return targets
+
 def main(world_slug, layer):
     [f.unlink() for f in Path('.media/trash/').glob("*") if f.is_file()]
     screen = SmileScreen(world_slug, layer)
+    targets = get_targets(screen)
     screen.go_home()
 
     screen.goto_workarea_top()
+    time.sleep(2) # need to sleep after last down/up (should wait for smile_id to match first)
     screen.goto_workarea_left()
     screen.moveTo('screen_00')
 
     image_count = 0
     screen.goto_first_room()
-    for i in range(SKIP):
-        screen.click('room_key')
-        pyautogui.press('down')
     max_images = MAX_IMAGES or 1000
     # count = 0
     last_event_name = None
+    current_index = 0
     while image_count < max_images:
         smile_id = screen.get_smile_id()
+        if targets is not None:
+            current_index = screen.world_data['room_list'].index(smile_id)
+            if len(targets) == 0:
+                print("targets is empty")
+                break
+            if smile_id not in targets:
+                target_index = screen.world_data['room_list'].index(targets[0])
+                delta_index = target_index - current_index
+                screen.click('room_key')
+                print(f'skipping to {targets[0]} from {smile_id} by {target_index}-{ current_index}={delta_index}')
+                if delta_index >= 7:
+                    pyautogui.press('pagedown')
+                elif delta_index > 0:
+                    for i in range(delta_index):
+                        pyautogui.press('down')
+                        pyautogui.sleep(0.2)
+
+                else: # less than zero
+                    print("got ahead of self")
+                    for i in range(-delta_index):
+                        pyautogui.press('up')
+                screen.sleep_until(screen._wait_text_changed('room_key', smile_id), max_wait=10)
+                continue
+
+                # if delta_index < 0:
+                #     raise ValueError("got ahead of self")
+                # for i in range(delta_index):
+                #     pyautogui.press('down')
+                # time.sleep(delta_index / 20)
+        print('processing', smile_id)
+
         image_written = capture_room(screen)
         if image_written:
             image_count += 1
-        events = screen.list_events()
+        events = screen.list_events(smile_id)
         event_name = screen.get_event_name()
         if event_name != events[0]:
             screen.click_neutral()
@@ -109,10 +153,14 @@ def main(world_slug, layer):
                 last_event_name = event_name
             except WaitError:
                 screen.move_dropdown('room_key', 'down')
-                print("FAIL: unable to get {smile_id} {event_name}")
+                print(f"FAIL: unable to get {smile_id} {event_name}")
                 last_event_name = None
         elif screen.move_dropdown('room_key', 'down'):
-            pass
+            if targets is not None:
+                targets.remove(smile_id)
+                if len(targets) == 0:
+                    print('final target')
+                    break
         else:
             print("Stopped scrapping (no more rooms)")
             break
@@ -133,7 +181,7 @@ def capture_room(screen):
     x = y = 0
     screens = {}
     def _capture(x, y):
-        time.sleep(0.2)
+        time.sleep(0.5)
         if LAYER == 'bts-extra':
             workarea = screen.capture_cre()
         else:

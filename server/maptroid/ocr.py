@@ -25,6 +25,7 @@ DROPDOWN_BLUE = (215, 120, 0)
 DROPDOWN_ORANGE = (40, 135, 255)
 DROPDOWN_GRAY = (100, 100, 100)
 DROPDOWN_BG_GRAY = (224,224,224)
+DROPDOWN_BG_GRAY2 = (224,223,224)
 DROPDOWN_TEXT_GRAY = (128,128,128)
 
 hash_to_letter = JsonCache('./hash_to_letter.json')
@@ -49,6 +50,7 @@ def normalize_colors(image):
     urcv.replace_color(image, DROPDOWN_ORANGE, DROPDOWN_GREEN)
     urcv.replace_color(image, DROPDOWN_BLUE, DROPDOWN_GREEN)
     urcv.replace_color(image, DROPDOWN_BG_GRAY, DROPDOWN_GREEN)
+    urcv.replace_color(image, DROPDOWN_BG_GRAY2, DROPDOWN_GREEN)
     urcv.replace_color(image, DROPDOWN_TEXT_GRAY, BLACK)
     urcv.replace_color(image, WHITE, BLACK)
     urcv.replace_color(image, DROPDOWN_GREEN, WHITE)
@@ -123,6 +125,7 @@ def hsplit(image, bg_color=None):
 
 def sep_stack(images):
     empty = images[0].copy()
+    empty[:] = 0
     result = []
     for image in images:
         result.append(image)
@@ -130,9 +133,11 @@ def sep_stack(images):
     return np.hstack(result)
 
 def read_text(image, interactive=False):
+    image = image.copy()
+    cv2.imwrite('.media/trash/last_ocr_og.png', image)
     normalize_colors(image)
+    cv2.imwrite('.media/trash/last_ocr_normalized.png', image)
     letter_images, _coords = hsplit(image, bg_color=WHITE)
-    cv2.imwrite('.media/trash/last_ocr.png', image)
 
     if not len(letter_images):
         path = f'./media/trash/empty_image.png'

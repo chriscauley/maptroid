@@ -156,7 +156,7 @@ class SmileScreen(BaseScreen):
             self.world_data[key] = ocr.read_text(current)
 
         def is_first_room():
-            return self.get_text(image_key) == self.world_data[key]
+            return self.get_text(image_key, interactive=True) == self.world_data[key]
         while not is_first_room():
             self.click(image_key)
             if tries:
@@ -177,23 +177,26 @@ class SmileScreen(BaseScreen):
         print('first room', self.get_text(image_key))
         self.click_neutral()
 
+    def _wait_text_changed(self, key, old_text):
+        def text_changed():
+            try:
+                new_text = self.get_text(key)
+                return old_text != new_text
+            except (ocr.UnknownLettersError, ocr.EmptyTextError):
+                # sometimes it takes catches the text in mid-render
+                # If it fails once wait and try again
+                time.sleep(0.2)
+                new_text = self.get_text(key, interactive=True)
+                return oldtext != new_text
+        return text_changed
+
     def move_dropdown(self, key, direction):
         text = self.get_text(key)
         self.click_neutral()
         self.click(key)
         pyautogui.press(direction)
-        def text_changed():
-            try:
-                new_text = self.get_text(key)
-                return text != new_text
-            except (ocr.UnknownLettersError, ocr.EmptyTextError):
-                # sometimes it takes catches the text in mid-render
-                # If it fails once wait and try again
-                time.sleep(0.2)
-                new_text = self.get_text(key)
-                return text != new_text
         try:
-            self.sleep_until(text_changed)
+            self.sleep_until(self._wait_text_changed(key, text), max_wait=10)
             time.sleep(0.5)
             return True
         except WaitError:
@@ -225,10 +228,12 @@ class SmileScreen(BaseScreen):
                     # SMILE RF has an annoyingly small room key dropdown area
                     urcv.replace_color(image, ocr.BLACK, ocr.DROPDOWN_GREEN)
                 if invert:
+                    print('inverting')
                     image = np.invert(image)
                     urcv.replace_color(image, ocr.BLACK, ocr.DROPDOWN_GREEN)
                 cv2.imwrite('.media/trash/last_is_readable.png', image)
-                return ocr.read_text(image, interactive=interactive).upper()
+                text = ocr.read_text(image, interactive=interactive).upper()
+                return text
             except (ocr.UnknownLettersError, ocr.EmptyTextError) as e:
                 # sometimes it takes catches the text in mid-render
                 # If it fails once wait and try again
@@ -242,7 +247,7 @@ class SmileScreen(BaseScreen):
             # sometimes it takes catches the text in mid-render
             # If it fails once wait and try again
             time.sleep(0.1)
-            return self.get_text('room_key')
+            return self.get_text('room_key', interactive=True)
 
     def get_event_name(self):
         EVENT_SUBSTITUTIONS = {
@@ -250,17 +255,17 @@ class SmileScreen(BaseScreen):
             'E669=POWERBOMBS': 'E669=POWERBOMBS1',
             'E5FF=TOURIANBOS': 'E5FF=TOURIANBOSS',
         }
-        text = self.get_text('event_name')
+        smile_id = self.get_smile_id()
+        text = self.get_text('event_name', interactive=True)
         if text in EVENT_SUBSTITUTIONS:
             text = EVENT_SUBSTITUTIONS[text]
-        events = self.list_events()
+        events = self.list_events(smile_id)
         if text in events:
             return text
         for target in events:
             if target.startswith(text):
                 print(f'Warning, substituted event_name "{text}" => "{target}"')
                 return target
-        smile_id = self.get_smile_id()
         raise ValueError(f'Unable to find event: {text} not in {events} for room {smile_id}')
 
     def sleep_until(self, f, max_wait=5):
@@ -294,8 +299,7 @@ class SmileScreen(BaseScreen):
         return str(_dir / f"{s}_{smile_id}.png")
 
 
-    def list_events(self):
-        smile_id = self.get_smile_id()
+    def list_events(self, smile_id):
         if smile_id not in self.world_data['room_events']:
             self.click_neutral()
             self.click('event_name')

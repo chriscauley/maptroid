@@ -92,6 +92,7 @@ def process_images(screen):
         index += 1
         path = screen.get_dest_path(smile_id)
         img = cv2.imread(path)
+        cv2.imshow('room info', img)
         scale = 4
         demo = urcv.transform.scale(img, scale)
 
@@ -164,6 +165,8 @@ def main(world_slug):
     if missing:
         print(missing[:10])
         print(f"need to scrape for missing {len(missing)} rooms (see above for first 10)")
+        print("Press enter to continue or ctrl+c to quit")
+        input()
         scrape_all_rooms(screen)
 
     results_path = screen.get_root_path('rf_scrape.json')

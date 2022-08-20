@@ -58,7 +58,7 @@ def sink(request, path):
 @superuser_required
 def swap_room_event(request):
     data = json.loads(request.body.decode('utf-8') or "{}")
-    root = os.path.join(SINK_DIR, data['world_slug'], data['layer'])
+    root = os.path.join(settings.MAPTROID_SINK_PATH, data['world_slug'], data['layer'])
     source = os.path.join(root, data['source_event'], data['key'])
     target = os.path.join(root, data['target_event'], data['key'])
     winderz = get_winderz(data['world_slug'])

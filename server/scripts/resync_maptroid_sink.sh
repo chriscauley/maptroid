@@ -1,6 +1,6 @@
-# source .venv/bin/activate
-# echo "First moving maptroid-sink with events (this will fail in prod)"
-# python scripts/_finalize_smile.py $1
+source .venv/bin/activate
+echo "First moving maptroid-sink with events (this will fail in prod)"
+python scripts/_finalize_smile.py $1
 
 set -e
 
@@ -11,3 +11,4 @@ do
     cp ~chriscauley/projects/_maptroid-sink/$1/$i/*.png .media/smile_exports/$1/$i/;
 done
 # cp ~chriscauley/projects/_maptroid-sink/$1/plm_overrides/*.png .media/smile_exports/$1/plm_enemies/
+echo 'All done! (just did that thing on the previous line)'
