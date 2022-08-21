@@ -12,8 +12,6 @@
 </template>
 
 <script>
-import { range } from 'lodash'
-
 export default {
   props: {
     world: Object,

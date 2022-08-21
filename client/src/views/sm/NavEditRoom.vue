@@ -4,7 +4,8 @@
       <i :class="getIcon('chevron-left')" />
     </div>
     <div class="btn -danger cursor-default">
-      <i :class="getIcon(icon)" />
+      <i :class="icon" />
+      {{ links.count }}
     </div>
     <div class="btn -danger" @click="links.next">
       <i :class="getIcon('chevron-right')" />

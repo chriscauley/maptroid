@@ -1,6 +1,6 @@
 <template>
   <unrest-dropdown class="btn -danger cre-dropdown" v-if="items.length" :items="items">
-    <i class="fa fa-object-group" />
+    <i class="sm-block -crumble" />
     {{ missing_items.length }}
   </unrest-dropdown>
 </template>

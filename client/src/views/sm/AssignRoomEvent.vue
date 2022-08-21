@@ -84,7 +84,10 @@ export default {
       }
       const prepped_rooms = rooms.map((room) => {
         const smile_id = room.key.split('_')[1].split('.')[0]
-        const events = this.data.room_events[smile_id]
+        const events = this.data.room_events[smile_id] || []
+        if (!events.length) {
+          console.error("missing events for", smile_id)
+        }
         const errors = this.data.room_errors[smile_id]
         return {
           default_event: room.data.default_event,

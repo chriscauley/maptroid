@@ -30,8 +30,8 @@
         <div id="edit-room__actions" />
         {{ room.key }}
         {{ $store.local.state.loading ? '...' : '' }}
-        <nav-edit-room icon="th-large" :links="overlap_links" />
-        <nav-edit-room icon="object-group" :links="cre_links" />
+        <nav-edit-room icon="fa fa-th-large" :links="overlap_links" />
+        <nav-edit-room icon="sm-block -crumble" :links="cre_links" />
       </template>
     </unrest-modal>
   </teleport>
@@ -127,34 +127,39 @@ export default {
   computed: {
     overlap_links() {
       const { overlap_items } = this.tool_storage.state
-      const current_index = overlap_items.findIndex((r) => (r.id = this.room))
-      if (current_index !== -1) {
-        const next = overlap_items[mod(current_index + 1, overlap_items.length)].id
-        const prev = overlap_items[mod(current_index - 1, overlap_items.length)].id
-        const click = (id) => this.$store.local.save({ editing_room: id })
-        return {
-          next: () => click(next),
-          prev: () => click(prev),
-        }
+      if (!overlap_items?.length) {
+        return null
       }
-      return null
+      let current_index = overlap_items.findIndex((r) => (r.id === this.room.id))
+      if (current_index === -1) {
+        current_index = 0
+      }
+      const next = overlap_items[mod(current_index + 1, overlap_items.length)].id
+      const prev = overlap_items[mod(current_index - 1, overlap_items.length)].id
+      const click = (id) => this.$store.local.save({ editing_room: id })
+      return {
+        next: () => click(next),
+        prev: () => click(prev),
+        count: overlap_items.length,
+      }
     },
     cre_links() {
       const { cre_items } = this.tool_storage.state
-      if (!cre_items) {
+      if (!cre_items?.length) {
         return null
       }
-      const current_index = cre_items.findIndex((r) => (r.id = this.room))
-      if (current_index !== -1) {
-        const next = cre_items[mod(current_index + 1, cre_items.length)].id
-        const prev = cre_items[mod(current_index - 1, cre_items.length)].id
-        const click = (id) => this.$store.local.save({ editing_room: id })
-        return {
-          next: () => click(next),
-          prev: () => click(prev),
-        }
+      let current_index = cre_items.findIndex((r) => (r.id === this.room.id))
+      if (current_index === -1) {
+        current_index = 0
       }
-      return null
+      const next = cre_items[mod(current_index + 1, cre_items.length)].id
+      const prev = cre_items[mod(current_index - 1, cre_items.length)].id
+      const click = (id) => this.$store.local.save({ editing_room: id })
+      return {
+        next: () => click(next),
+        prev: () => click(prev),
+        count: cre_items.length,
+      }
     },
     mousetrap() {
       return {

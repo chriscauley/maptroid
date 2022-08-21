@@ -106,7 +106,7 @@ export default {
   computed: {
     edit_or_move() {
       const { tool } = this.tool_storage.state.selected
-      return ['move_room', 'edit_room'].includes(tool)
+      return ['move_room', 'edit_room', 'rezone'].includes(tool)
     },
     show_player() {
       const { tool } = this.tool_storage.state.selected
