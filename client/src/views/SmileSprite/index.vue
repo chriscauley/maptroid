@@ -5,7 +5,7 @@
         v-for="(count, name) in group_counts"
         :key="name"
         :class="`btn -${name === $route.params.category ? 'primary' : 'secondary'}`"
-        :to="`/smilesprite/${name}`"
+        :to="`/staff/smilesprite/${name}`"
       >
         {{ name }}
         {{ count }}
@@ -44,7 +44,7 @@ import SmileSpriteForm from './Form.vue'
 
 export default {
   __route: {
-    path: '/smilesprite/:category?',
+    path: '/staff/smilesprite/:category?',
   },
   components: { SmileSpriteForm },
   data() {

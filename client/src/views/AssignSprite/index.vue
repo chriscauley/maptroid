@@ -68,7 +68,7 @@ const client = getClient()
 export default {
   components: { MatchedspriteForm, PlmspriteForm },
   __route: {
-    path: '/app/assign-sprite/',
+    path: '/staff/assign-sprite/',
   },
   data() {
     return {
