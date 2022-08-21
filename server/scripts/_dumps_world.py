@@ -12,6 +12,7 @@ def main():
         },
         'zones': [],
         'rooms': [],
+        'items': [],
     }
 
     zone_slug_by_id = {}
@@ -30,6 +31,12 @@ def main():
         }
         item['zone_slug'] = zone_slug_by_id[room.zone_id]
         out['rooms'].append(item)
+        for item in room.item_set.all():
+            out['items'].append({
+                'zone_slug': zone_slug_by_id[room.zone_id],
+                'room_key': room.key,
+                'data': item.data,
+            })
 
     with open(f'./{world.slug}.json', 'w') as f:
         f.write(json.dumps(out))

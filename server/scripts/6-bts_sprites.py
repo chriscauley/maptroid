@@ -124,8 +124,9 @@ def auto_cre(room, cre_xys, hex_xys):
             if np.sum(pixel) == 0:
                 if np.sum(square) != 0:
                     # This is just a check to make sure we can just go off the top pixel
-                    # TODO remove after processing a few maps if this doesn't catch anything
-                    raise ValueError(f"pixel-square missmatch: {np.sum(square)}")
+                    # this works because the center of the bts box should be black
+                    print(path, x, y)
+                    raise ValueError(f"pixel-square mismatch: {np.sum(square)}")
                 continue
             xy = (x, y)
             if xy not in allowed_xys:

@@ -137,6 +137,12 @@ class BaseScreen:
         pyautogui.moveTo(x + w / 2, y + h / 2, 0.1)
 
 class SmileScreen(BaseScreen):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        mdb_path = f'{settings.MAPTROID_SINK_PATH}/{self.world_slug}/mdb.txt'
+        with open(mdb_path, 'r') as f:
+            mdb = f.read()
+            self.room_list = mdb.strip().split('\n')
     def goto_first_room(self, image_key='room_key'):
         tries = 0
         key = 'first_room'
@@ -228,7 +234,6 @@ class SmileScreen(BaseScreen):
                     # SMILE RF has an annoyingly small room key dropdown area
                     urcv.replace_color(image, ocr.BLACK, ocr.DROPDOWN_GREEN)
                 if invert:
-                    print('inverting')
                     image = np.invert(image)
                     urcv.replace_color(image, ocr.BLACK, ocr.DROPDOWN_GREEN)
                 cv2.imwrite('.media/trash/last_is_readable.png', image)

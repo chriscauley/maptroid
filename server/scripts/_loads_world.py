@@ -1,7 +1,7 @@
 import _setup
 
 import json
-from maptroid.models import World, Zone, Room
+from maptroid.models import World, Zone, Room, Item
 import sys
 
 def get_or_create(model, data):
@@ -28,16 +28,35 @@ def main(file_path):
     world = get_or_create(World, data['world'])
 
     zone_id_by_zone_slug = {}
+    room_id_by_room_key = {}
+    room_matched_items = {}
 
-    for item in data['zones']:
-        item['world_id'] = world.id
-        zone = get_or_create(Zone, item)
+    for entity in data['zones']:
+        entity['world_id'] = world.id
+        zone = get_or_create(Zone, entity)
         zone_id_by_zone_slug[zone.slug] = zone.id
 
-    for item in data['rooms']:
-        item['world_id'] = world.id
-        item['zone_id'] = zone_id_by_zone_slug[item.pop('zone_slug')]
-        get_or_create(Room, item)
+    for entity in data['rooms']:
+        entity['world_id'] = world.id
+        entity['zone_id'] = zone_id_by_zone_slug[entity.pop('zone_slug')]
+        room = get_or_create(Room, entity)
+        room_id_by_room_key[room.key] = room.id
+        room_matched_items[room.id] = {}
+        for item in room.item_set.all():
+            xy = tuple(item.data['room_xy'])
+            room_matched_items[room.id][xy] = item.data['type']
+
+    for entity in data['items']:
+        room_id = room_id_by_room_key[entity.pop('room_key')]
+        xy = tuple(entity['data']['room_xy'])
+        matched_item = room_matched_items[room_id].get(xy)
+        if matched_item is None:
+            entity['room_id'] = room_id
+            entity['zone_id'] = zone_id_by_zone_slug[entity.pop('zone_slug')]
+            item = Item.objects.create(**entity)
+            print("Item created:", entity)
+        elif matched_item != entity['data']['type']:
+            raise ValueError(f"Attempting to create item where '{matched_item}' exists")
 
 if __name__ == "__main__":
     main(sys.argv[1])
