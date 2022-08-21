@@ -102,7 +102,12 @@ const getBlocks = (room, with_cre = false) => {
   Object.entries(room.data.plm_overrides || {}).map(([sxy, value]) => {
     if (value.startsWith('samus-eater')) {
       const [x, y] = sxy.split(',').map(Number)
-      range(4).forEach((dx) => range(2).forEach((dy) => delete block_map[[x + dx, y + dy]]))
+      let [w, h] = [4, 2]
+      if (value.includes('left') || value.includes('right')) {
+        w = 2
+        h = 4
+      }
+      range(w).forEach((dx) => range(h).forEach((dy) => delete block_map[[x + dx, y + dy]]))
     }
   })
 

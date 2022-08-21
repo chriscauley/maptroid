@@ -17,6 +17,19 @@ ship = cv2.imread('static/sm/icons/ship.png', cv2.IMREAD_UNCHANGED)
 sprites_by_width[ship.shape[1]].append(['ship', ship, *ship.shape[:2][::-1]])
 sprites_by_width[64].append(['samus-eater', samus_eater, 64, 32])
 sprites_by_width[64].append(['samus-eater_flipped', cv2.flip(samus_eater, -1), 64, 32])
+sprites_by_width[32].append([
+    'samus-eater_right',
+    cv2.rotate(samus_eater, cv2.cv2.ROTATE_90_CLOCKWISE),
+    32,
+    64,
+])
+sprites_by_width[32].append([
+    'samus-eater_left',
+    cv2.rotate(samus_eater, cv2.cv2.ROTATE_90_COUNTERCLOCKWISE),
+    32,
+    64,
+])
+
 
 for sprite in SmileSprite.objects.filter(template=True):
     img = cv2.imread(str(sprite.image.path), cv2.IMREAD_UNCHANGED)
