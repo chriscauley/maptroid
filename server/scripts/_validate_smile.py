@@ -34,6 +34,10 @@ def main():
         x,y,w,h = room.data['zone']['bounds']
         h_px = h * 256
         w_px = w * 256
+        if not smile_id in winderz['room_events']:
+            print("missing room_events for", smile_id)
+            layer_dne['all'] += 1
+            continue
         for layer in layers:
             for event in winderz['room_events'][smile_id]:
                 image_path = f'{root_dir}/{layer}/{event}/{room.key}'

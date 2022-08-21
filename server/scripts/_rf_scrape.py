@@ -87,7 +87,8 @@ def process_images(screen):
 
     index = 0
     all_results = []
-    for smile_id in screen.world_data['room_events']:
+    fails = []
+    for smile_id in screen.room_list:
         results = {}
         index += 1
         path = screen.get_dest_path(smile_id)
@@ -103,8 +104,10 @@ def process_images(screen):
                 urcv.replace_color(cropped, ocr.BLACK, ocr.DROPDOWN_GREEN)
             results[name] = ocr.read_text(cropped, interactive=True)
 
-        print(smile_id, index, '/', len(screen.world_data['room_events']), results['room_name'])
-        assert(smile_id in results['room_name'])
+        if not smile_id in results['room_name']:
+            fails.append([smile_id, results['room_name'], path])
+            continue
+
 
         def hex2dec(s):
             return int(results[s].replace("$", ""),16)
@@ -139,6 +142,11 @@ def process_images(screen):
         cv2.imshow("demo", demo)
 
         urcv.wait_key()
+    if fails:
+        print("Failed images")
+        for fail in fails:
+            print(fail)
+
     with open(results_path, 'w') as f:
         f.write(json.dumps({
             'keys': ['smile_id', 'x', 'y', 'width', 'height', 'zone'],
@@ -157,7 +165,7 @@ def goc_zone(zone_name, world):
 def main(world_slug):
     screen = SmileScreen(world_slug, layer='rf_scrape')
     missing = []
-    for smile_id in screen.world_data['room_events']:
+    for smile_id in screen.room_list:
         path = screen.get_dest_path(smile_id)
         if not os.path.exists(path):
             missing.append(path)
@@ -170,9 +178,8 @@ def main(world_slug):
         scrape_all_rooms(screen)
 
     results_path = screen.get_root_path('rf_scrape.json')
-    if not os.path.exists(results_path):
-        process_images(screen)
-        print('processed files into rf_scrape.json')
+    process_images(screen)
+    print('processed files into rf_scrape.json')
 
     try:
         world = World.objects.get(slug=world_slug)

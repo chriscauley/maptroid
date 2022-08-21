@@ -69,11 +69,6 @@ def combine_screens(screens):
     return canvas
 
 def get_targets(screen):
-    if not screen.world_data.get("room_list_complete"):
-        return None
-    if not screen.world_data.get('room_list'):
-        # legacy worlds that don't have their room_list populated
-        screen.world_data["room_list"] = list(screen.world_data['room_events'].keys())
     targets = []
     for smile_id, event_names in screen.world_data['room_events'].items():
         for event_name in event_names:
@@ -102,27 +97,27 @@ def main(world_slug, layer):
     while image_count < max_images:
         smile_id = screen.get_smile_id()
         if targets is not None:
-            current_index = screen.world_data['room_list'].index(smile_id)
+            current_index = screen.room_list.index(smile_id)
             if len(targets) == 0:
                 print("targets is empty")
                 break
             if smile_id not in targets:
-                target_index = screen.world_data['room_list'].index(targets[0])
+                target_index = screen.room_list.index(targets[0])
                 delta_index = target_index - current_index
                 screen.click('room_key')
                 print(f'skipping to {targets[0]} from {smile_id} by {target_index}-{ current_index}={delta_index}')
                 if delta_index >= 7:
                     pyautogui.press('pagedown')
+                    time.sleep(0.1)
                 elif delta_index > 0:
                     for i in range(delta_index):
                         pyautogui.press('down')
                         pyautogui.sleep(0.2)
-
                 else: # less than zero
                     print("got ahead of self")
                     for i in range(-delta_index):
                         pyautogui.press('up')
-                screen.sleep_until(screen._wait_text_changed('room_key', smile_id), max_wait=10)
+                    time.sleep(5)
                 continue
 
                 # if delta_index < 0:
@@ -156,15 +151,12 @@ def main(world_slug, layer):
                 print(f"FAIL: unable to get {smile_id} {event_name}")
                 last_event_name = None
         elif screen.move_dropdown('room_key', 'down'):
-            if smile_id not in screen.world_data['room_list']:
-                screen.world_data['room_list'].append(smile_id)
             if targets is not None:
                 targets.remove(smile_id)
                 if len(targets) == 0:
                     print('final target')
                     break
         else:
-            screen.world_data['room_list_complete'] = True
             print("Stopped scrapping (no more rooms)")
             break
     print(f"finished scraping {image_count} images")
