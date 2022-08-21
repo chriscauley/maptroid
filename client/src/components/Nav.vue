@@ -16,6 +16,9 @@
       </template>
     </template>
     <div class="flex-grow" />
+    <unrest-dropdown v-if="superuser_links" :items="superuser_links">
+      <div class="btn -link">Admin</div>
+    </unrest-dropdown>
     <div class="app-nav__right">
       <router-link to="/contact/" class="btn -secondary">
         <i class="fa fa-envelope" />
@@ -88,6 +91,18 @@ export default {
     title() {
       return 'Project Maptroid'
     },
+    superuser_links() {
+      if (!this.$auth.user?.is_superuser) {
+        return null
+      }
+      const {world_slug='super-metroid'} =  this.$route.params
+      return [
+        { to: `/staff/assign-sprite/`, text: 'Assign Sprite' },
+        { to: `/staff/smilesprite/`, text: 'Smile Sprite (old)' },
+        { to: `/staff/assign-zone/${world_slug}`, text: "Assign Zone" },
+        { to: `/staff/assign-room-event/${world_slug}`, text: "Room Events" },
+      ]
+    }
   },
 }
 </script>
