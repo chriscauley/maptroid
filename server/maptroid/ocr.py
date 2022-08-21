@@ -36,10 +36,28 @@ class UnknownLettersError(Exception):
 class EmptyTextError(Exception):
     pass
 
+def guess_split(image, og_image):
+    start = 0
+    end = 3
+    results = []
+    while True:
+        if end > image.shape[1]:
+            break
+        image_slice = image[:, start:end]
+        hash_ = str(dhash(image_slice))
+        if hash_ in hash_to_letter:
+            start = end
+            end += 3
+            results.append(hash_to_letter[hash_])
+        else:
+            end += 1
+    return ''.join(results)
 
-def prompt(text):
+
+def prompt(text, **kwargs):
     ROOT.withdraw()
-    value = simpledialog.askstring(title="Test", prompt=text +" (cancel=exit,empty=error)")
+    prompt = text +" (cancel=exit,empty=error)"
+    value = simpledialog.askstring(title="Test", prompt=prompt, **kwargs)
     if value is None:
         exit()
     if len(value) == 0:
@@ -157,7 +175,8 @@ def read_text(og_image, interactive=False):
                 cv2.setWindowProperty(window_name,cv2.WND_PROP_FULLSCREEN,cv2.WINDOW_FULLSCREEN)
                 cv2.setWindowProperty(window_name,cv2.WND_PROP_FULLSCREEN,cv2.WINDOW_NORMAL)
                 cv2.waitKey(200)
-                value = prompt("What letter is being shown?")
+                guess = guess_split(letter_image, og_image)
+                value = prompt("What letter is being shown?", initialvalue=guess)
                 cv2.destroyWindow(window_name)
                 cv2.destroyWindow('og'+window_name)
                 hash_to_letter[hash_] = value
