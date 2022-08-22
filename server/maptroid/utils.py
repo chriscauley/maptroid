@@ -50,3 +50,7 @@ CRE_COLORS = dict(zip(CRES,COLORS))
 def dhash(image):
     image = Image.fromarray(image)
     return imagehash.dhash(image)
+
+def colorhash(image):
+    image = Image.fromarray(image)
+    return imagehash.colorhash(image)

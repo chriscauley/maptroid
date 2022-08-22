@@ -1,6 +1,9 @@
-# source .venv/bin/activate
-# echo "First moving maptroid-sink with events (this will fail in prod)"
-# python scripts/_finalize_smile.py $1
+if [ -z "$SKIP_SYNC" ]
+then
+    source .venv/bin/activate
+    echo "First moving maptroid-sink with events (this will fail in prod)"
+    python scripts/_finalize_smile.py $1
+fi
 
 set -e
 
@@ -10,5 +13,8 @@ do
     [ -d .media/smile_exports/$1/$i/ ] || mkdir .media/smile_exports/$1/$i/
     cp ~chriscauley/projects/_maptroid-sink/$1/$i/*.png .media/smile_exports/$1/$i/;
 done
-# cp ~chriscauley/projects/_maptroid-sink/$1/plm_overrides/*.png .media/smile_exports/$1/plm_enemies/
-echo 'All done! (just did that thing on the previous line)'
+
+if [ -z "$SKIP_SYNC" ]
+then
+    echo 'All done! (ignore instruction on previous line)'
+done
