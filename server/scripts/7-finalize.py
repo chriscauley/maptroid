@@ -49,6 +49,12 @@ def clean_elevators(world):
         if len(e['xys']) > 0
     ]
 
+def room_sorter(room):
+    # this is used to draw larger rooms first
+    # otherwise when large rooms get "holes" drawn they can cover up interior smaller rooms
+    [_, _, w, h] = room.data['zone']['bounds']
+    return - w * h
+
 def make_map_icon(world, force=False):
     dest = f'.media/world_maps/{world.slug}.png'
     if os.path.exists(dest) and not force:
@@ -73,7 +79,10 @@ def make_map_icon(world, force=False):
         zone_slug = zone.slug.split("__")[0]
         if not zone_slug in color_by_zone:
             raise ValueError(f'Zone with slug {zone_slug} missing from color map')
-        for room in zone.room_set.all():
+
+        rooms = zone.room_set.all()
+        rooms = sorted(rooms, key=room_sorter)
+        for room in rooms:
             rx, ry, _, _ = room.data['zone']['bounds']
             fill = color_by_zone[zone_slug]
             def _pts2(points):

@@ -1826,10 +1826,10 @@
   dependencies:
     xorshift "^1.2.0"
 
-"@unrest/tailwind@0.1.19":
-  version "0.1.19"
-  resolved "https://registry.yarnpkg.com/@unrest/tailwind/-/tailwind-0.1.19.tgz#3c40a0179093a4446781c9b915fdf2abe811c76b"
-  integrity sha512-UwNkskvJg9byaq/zLybnkHiHfm5uD7C4dpwJoAHsZpQYIMC1X7+XB6OhJCr8V7ZpyOeSf+hWXVF9AnrTmmnJtg==
+"@unrest/tailwind@0.1.20":
+  version "0.1.20"
+  resolved "https://registry.yarnpkg.com/@unrest/tailwind/-/tailwind-0.1.20.tgz#edd750d1611579aee2c85a0f57be696f54558b60"
+  integrity sha512-WxRD3zYU0IKTxSI/HBgMYUwI8+O+wTl/m/6wbIYnTOMa9CjVJRm8b/uKl7Nh8Kgsbun57v/yHTKs/TDGnaSvcA==
 
 "@unrest/vue-auth@0.0.12":
   version "0.0.12"
