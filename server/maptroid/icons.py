@@ -58,8 +58,10 @@ ROTATIONS = {
 }
 
 
-def _process(image, brightness=0, contrast=0, grayscale=0, multiply=None, alpha=1, rotate=None):
+def _process(image, brightness=0, contrast=0, grayscale=0, multiply=None, alpha=1, rotate=None, scale=None):
     alpha_channel = None
+    if scale:
+        image = urcv.transform.scale(image, scale)
     if image.shape[2] == 4:
         alpha_channel = image[:,:,3]
         image = cv2.cvtColor(image, cv2.COLOR_BGRA2BGR)
