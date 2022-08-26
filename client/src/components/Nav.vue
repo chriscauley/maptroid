@@ -95,18 +95,18 @@ export default {
       if (!this.$auth.user?.is_superuser) {
         return null
       }
-      const { world_slug } =  this.$route.params
+      const { world_slug } = this.$route.params
       const { world, zone } = this.$store.route
       const links = [
         { to: `/staff/assign-sprite/`, text: 'Assign Sprite' },
         { to: `/staff/smilesprite/`, text: 'Smile Sprite (old)' },
-        { to: `/staff/assign-zone/${world_slug}`, text: "Assign Zone" },
-        { to: `/staff/assign-room-event/${world_slug}`, text: "Room Events" },
+        { to: `/staff/assign-zone/${world_slug}`, text: 'Assign Zone' },
+        { to: `/staff/assign-room-event/${world_slug}`, text: 'Room Events' },
         { href: `/djadmin/maptroid/world/${world?.id || ''}`, text: 'Admin World' },
         { href: `/djadmin/maptroid/zone/${zone?.id || ''}`, text: 'Admin Zone' },
       ]
       return links
-    }
+    },
   },
 }
 </script>

@@ -3,9 +3,7 @@
     <template v-if="mc_data">
       <div>Genre: {{ mc_data.genre }}</div>
       <div>Difficulty: {{ mc_data.difficulty }}</div>
-      <div class="mc-data__runtime">
-        Length: {{ mc_data.runtime }}
-      </div>
+      <div class="mc-data__runtime">Length: {{ mc_data.runtime }}</div>
     </template>
     <div v-if="world.data.metrics">Screens: {{ world.data.metrics.screens }}</div>
   </div>
