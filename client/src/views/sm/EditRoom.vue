@@ -130,7 +130,7 @@ export default {
       if (!overlap_items?.length) {
         return null
       }
-      let current_index = overlap_items.findIndex((r) => (r.id === this.room.id))
+      let current_index = overlap_items.findIndex((r) => r.id === this.room.id)
       if (current_index === -1) {
         current_index = 0
       }
@@ -148,7 +148,7 @@ export default {
       if (!cre_items?.length) {
         return null
       }
-      let current_index = cre_items.findIndex((r) => (r.id === this.room.id))
+      let current_index = cre_items.findIndex((r) => r.id === this.room.id)
       if (current_index === -1) {
         current_index = 0
       }

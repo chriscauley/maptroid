@@ -25,7 +25,7 @@ from maptroid.utils import get_winderz, CRES, CRE_COLORS, dhash
 
 BG_COLOR = (255, 128, 128)
 
-MAX_IMAGES = 0
+MAX_IMAGES = 5
 FILTER_ROOMS = []
 SKIP = 0
 

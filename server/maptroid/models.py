@@ -63,10 +63,6 @@ class World(models.Model):
     super().save(*args, **kwargs)
 
 
-def default_data():
-  return { 'world': { 'bounds': [0, 0, 1, 1] } }
-
-
 class Zone(models.Model):
   class Meta:
     ordering = ('name',)
@@ -75,7 +71,7 @@ class Zone(models.Model):
   slug = models.CharField(max_length=128)
   world = models.ForeignKey(World, models.CASCADE)
 
-  data = models.JSONField(default=default_data, blank=True)
+  data = models.JSONField(default=dict, blank=True)
 
   # TODO generalize these functions
   def get_image_path(self, ext='png'):
@@ -109,6 +105,8 @@ class Zone(models.Model):
   def save(self, *args, **kwargs):
     if not self.slug:
       self.slug = slugify(self.name)
+    if 'world' not in self.data:
+        self.data.update({ 'world': { 'bounds': [0, 0, 1, 1] } })
     super().save(*args, **kwargs)
 
 

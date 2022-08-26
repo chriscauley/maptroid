@@ -8,7 +8,14 @@
     }
   }
   ._images {
-    @apply relative;
+    @apply bg-gray-200 relative;
+    img {
+      max-width: unset;
+    }
+    ._rf-img {
+      @apply relative;
+      z-index: 1;
+    }
     ._top-image {
       @apply absolute top-0 left-0;
     }
@@ -18,5 +25,8 @@
   }
   ._event-row {
     @apply mb-8
+  }
+  ._rf-img {
+    @apply border-red-400 border-4;
   }
 }

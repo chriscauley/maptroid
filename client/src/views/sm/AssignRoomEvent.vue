@@ -4,6 +4,7 @@
       <div v-for="room in room_list" :key="room.key" :class="getRoomClass(room)">
         <router-link :to="`?room=${room.key}`">
           <i v-if="room.errors" class="fa fa-exclamation -red" />
+          <i v-if="room.is_split" class="fa fa-check -green" />
           <span v-if="room.events.length > 1">
             <i v-if="!room.default_event" class="fa fa-exclamation -yellow" />
             {{ room.events.length }}x
@@ -15,8 +16,17 @@
     <div class="assign-room-event__content">
       <h3>
         {{ $route.params.world_slug }}
-        {{ selected?.key }}
+        <a v-if="selected" :href="`/djadmin/maptroid/room/${selected.id}/`">
+          {{ selected.key }}
+          <i class="fa fa-edit" />
+        </a>
       </h3>
+      <div v-if="selected" class="assign-room-event__info">
+        <img :src="rf_info.src" />
+        <div>
+          <div v-for="(item, key) in rf_info.items" :key="key">{{ key }}: {{ item }}</div>
+        </div>
+      </div>
       <div class="btn-group" v-if="selected?.events.length > 1">
         <div
           :class="getEventClass(event)"
@@ -38,6 +48,12 @@
         >
           {{ event }}
         </div>
+        <div class="btn -danger" @click="replace(key, 'coerce')">
+          Coerce image to room
+        </div>
+        <div class="btn -danger" @click="replace(key, 'reverse')">
+          Coerce room to image
+        </div>
       </div>
       <div class="unrest-floating-actions">
         <select v-model="layer" class="btn -primary">
@@ -48,12 +64,30 @@
         </select>
       </div>
       <div v-for="event in selected?.events" :key="event" class="_event-row">
-        <div :class="getEventClass(event)" @click="assignEvent(event)">
-          {{ event }}
+        <div class="_top-menu btn-group">
+          <div
+            v-if="selected.split_events[event]"
+            class="btn -text"
+            @click="doAction('split', event)"
+          >
+            <i class="fa fa-check -green" />
+            Split!
+          </div>
+          <template v-else>
+            <div :class="getEventClass(event)" @click="assignEvent(event)">
+              {{ event }}
+            </div>
+            <div class="btn -success" @click="doAction('split', event)">
+              Split into new room
+            </div>
+            <div class="btn -success" @click="doAction('copy', event)">
+              Copy Room
+            </div>
+          </template>
         </div>
-        <div class="_images">
-          <div class="_top-menu"></div>
-          <img :src="getImage(layer, event)" />
+        <div class="_images" :style="rf_info.style">
+          <div class="_rf-img" :style="rf_info.style" />
+          <img :src="getImage(layer, event)" class="_top-image" />
           <img :src="getImage('plm_enemies', event)" class="_top-image" />
         </div>
       </div>
@@ -77,22 +111,46 @@ export default {
     return { data: null, layer: 'layer-1' }
   },
   computed: {
+    rf_info() {
+      const { world_slug } = this.$route.params
+      const room_key = this.$route.query.room
+      const room = this.$store.route.world_rooms.find((r) => r.key === room_key)
+      const [x, y, width, height] = room.data.zone.bounds
+      return {
+        src: `/sink/${world_slug}/rf_scrape/${room.key}`,
+        items: { x, y, width, height },
+        style: `width: ${width * 256}px;height: ${height * 256}px`,
+      }
+    },
     room_list() {
-      const rooms = this.$store.route.world_rooms
+      let rooms = this.$store.route.world_rooms
       if (!(rooms && this.data)) {
         return
       }
+      rooms = rooms.filter((r) => !r.data.event)
+      rooms = rooms.filter((r) => !r.data.split_lock)
       const prepped_rooms = rooms.map((room) => {
         const smile_id = room.key.split('_')[1].split('.')[0]
         const events = this.data.room_events[smile_id] || []
         if (!events.length) {
-          console.error("missing events for", smile_id)
+          console.error('missing events for', smile_id)
         }
         const errors = this.data.room_errors[smile_id]
+        const split_events = {}
+        let is_split = false
+        events.forEach((event) => {
+          const slug = event.toLowerCase().replace('=', '')
+          if (room.data.events?.includes(slug)) {
+            is_split = split_events[event] = true
+          }
+        })
         return {
-          default_event: room.data.default_event,
+          id: room.id,
           key: room.key,
+          default_event: room.data.default_event,
           smile_id,
+          split_events,
+          is_split,
           events,
           errors,
           weight: -events.length - (errors ? 10 : 0),
@@ -106,9 +164,7 @@ export default {
       if (!room) {
         return null
       }
-      return {
-        ...room,
-      }
+      return { ...room }
     },
   },
   methods: {
@@ -144,6 +200,12 @@ export default {
       const room = rooms.find((r) => r.key === room_key)
       room.data.default_event = default_event
       client.post('save-default-event/', { room_id: room.id, default_event })
+    },
+    doAction(action, event) {
+      const room_id = this.selected.id
+      const { world_slug } = this.$route.params
+      const data = { room_id: room_id, action, event, world_slug }
+      client.post('room/event/', data)
     },
   },
 }

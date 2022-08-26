@@ -3,7 +3,7 @@ from django.urls import include, path, re_path
 from django.http import HttpResponseRedirect
 from unrest.views import index
 
-from main.views import list_dir, delete_file, sink, swap_room_event, save_default_event, winderz
+from main.views import list_dir, delete_file, sink, swap_room_event, save_default_event, winderz, event_action
 from maptroid.views import replace_svg_color, smile_ocr, save_sprite, sprite_distances, goto_room
 
 # these views are registered using unrest_schema.register
@@ -53,6 +53,7 @@ urlpatterns = [
     path('api/winderz/<world_slug>/', winderz),
     path('api/swap-room-event/', swap_room_event),
     path('api/save-default-event/', save_default_event),
+    path('api/room/event/', event_action),
     path('room/<room_id>/', goto_room),
     path('upload_file/<world_slug>/', simple_upload),
     re_path('^sink/(.*)', sink),

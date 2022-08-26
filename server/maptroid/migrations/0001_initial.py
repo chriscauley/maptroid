@@ -41,7 +41,7 @@ class Migration(migrations.Migration):
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('name', models.CharField(max_length=128)),
                 ('slug', models.CharField(max_length=128)),
-                ('data', models.JSONField(blank=True, default=maptroid.models.default_data)),
+                ('data', models.JSONField(blank=True, default=dict)),
                 ('world', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='maptroid.world')),
             ],
             options={
