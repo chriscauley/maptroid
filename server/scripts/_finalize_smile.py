@@ -30,6 +30,10 @@ def main():
     world, zones, rooms = get_wzr()
     root_dir = os.path.join(settings.MAPTROID_SINK_PATH, world.slug)
     for room in rooms:
+        if room.data.get('event'):
+            continue
+        if room.data.get('split_lock'):
+            continue
         event = room.data.get('default_event', 'E5E6=STANDARD1')
         for layer in ['plm_enemies', 'layer-1', 'layer-2', 'bts', 'bts-extra']:
             dest_dir = os.path.join(root_dir, layer)
@@ -38,6 +42,9 @@ def main():
                 print("Made directory", dest_dir)
             src = os.path.join(root_dir, layer, event, room.key)
             dest = os.path.join(dest_dir, room.key)
+            if not os.path.exists(src):
+                print('missing', src)
+                continue
             image = cv2.imread(src, cv2.IMREAD_UNCHANGED)
             remove_cursor(image)
             cv2.imwrite(dest, image)

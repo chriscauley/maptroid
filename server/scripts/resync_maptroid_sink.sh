@@ -17,4 +17,4 @@ done
 if [ -z "$SKIP_SYNC" ]
 then
     echo 'All done! (ignore instruction on previous line)'
-done
+fi

@@ -16,12 +16,11 @@ import time
 import urcv
 
 from maptroid import ocr
+from maptroid.models import Room
 from maptroid.smile import SmileScreen, WaitError, rb_trim
 from maptroid.utils import get_winderz, CRES, CRE_COLORS, dhash
 
 BG_COLOR = (255, 128, 128)
-
-LAYER = sys.argv[2]
 
 MAX_IMAGES = 0
 FILTER_ROOMS = []
@@ -38,7 +37,7 @@ def paste_to_channel(bg, fg, color):
 
 # TODO make a validation script that checks to make sure second to last image lines up properly with last image
 
-def combine_screens(screens):
+def combine_screens(screens, world_slug, smile_id):
     h, w = screens[(0,0)].shape[:2]
     x_max = 0
     y_max = 0
@@ -66,65 +65,77 @@ def combine_screens(screens):
             continue
         dx = x * 256
         dy = y * 256
+
+    room = Room.objects.filter(world__slug=world_slug, key=f'{world_slug}_{smile_id}.png').first()
+    if room:
+        _ , _, zw, zh = room.data['zone']['bounds']
+        print(smile_id, zh*256, zw*256, 'vs', canvas.shape)
     return canvas
 
 def get_targets(screen):
     targets = []
-    for smile_id, event_names in screen.world_data['room_events'].items():
-        for event_name in event_names:
+    for smile_id in screen.room_list:
+        if smile_id not in screen.world_data['room_events']:
+            targets.append(smile_id)
+            continue
+        for event_name in screen.world_data['room_events'][smile_id]:
             path = screen.get_dest_path(smile_id, event_name)
             if not Path(path).exists():
                 targets.append(smile_id)
     return targets
 
+def skip_to_next_target(screen, smile_id, targets):
+    current_index = screen.room_list.index(smile_id)
+    target_index = screen.room_list.index(targets[0])
+    delta_index = target_index - current_index
+    screen.click('room_key')
+    print(f'skipping to {targets[0]} from {smile_id} by {target_index}-{ current_index}={delta_index}')
+    if delta_index >= 7 and False:
+        pyautogui.press('pagedown')
+        time.sleep(0.1)
+    elif delta_index > 0:
+        for i in range(delta_index):
+            pyautogui.press('down')
+            time.sleep(0.2)
+    else: # less than zero
+        print("got ahead of self")
+        for i in range(-delta_index):
+            pyautogui.press('up')
+        time.sleep(5)
+    # time.sleep(1)
+
 def main(world_slug, layer):
     [f.unlink() for f in Path('.media/trash/').glob("*") if f.is_file()]
     screen = SmileScreen(world_slug, layer)
+
     targets = get_targets(screen)
     screen.go_home()
 
+    # TODO move all this into go home?
     screen.goto_workarea_top()
     time.sleep(2) # need to sleep after last down/up (should wait for smile_id to match first)
     screen.goto_workarea_left()
     screen.moveTo('screen_00')
+    screen.goto_first_room()
+    screen.show_layers(layer)
 
     image_count = 0
-    screen.goto_first_room()
+
     max_images = MAX_IMAGES or 1000
-    # count = 0
     last_event_name = None
     current_index = 0
+
     while image_count < max_images:
         smile_id = screen.get_smile_id()
-        if targets is not None:
-            current_index = screen.room_list.index(smile_id)
-            if len(targets) == 0:
-                print("targets is empty")
-                break
-            if smile_id not in targets:
-                target_index = screen.room_list.index(targets[0])
-                delta_index = target_index - current_index
-                screen.click('room_key')
-                print(f'skipping to {targets[0]} from {smile_id} by {target_index}-{ current_index}={delta_index}')
-                if delta_index >= 7:
-                    pyautogui.press('pagedown')
-                    time.sleep(0.1)
-                elif delta_index > 0:
-                    for i in range(delta_index):
-                        pyautogui.press('down')
-                        pyautogui.sleep(0.2)
-                else: # less than zero
-                    print("got ahead of self")
-                    for i in range(-delta_index):
-                        pyautogui.press('up')
-                    time.sleep(5)
-                continue
 
-                # if delta_index < 0:
-                #     raise ValueError("got ahead of self")
-                # for i in range(delta_index):
-                #     pyautogui.press('down')
-                # time.sleep(delta_index / 20)
+        if len(targets) == 0:
+            print("targets is empty")
+            break
+
+        if smile_id not in targets:
+            skip_to_next_target(screen, smile_id, targets)
+            continue
+
         print('processing', smile_id)
 
         image_written = capture_room(screen)
@@ -177,7 +188,7 @@ def capture_room(screen):
     screens = {}
     def _capture(x, y):
         time.sleep(0.5)
-        if LAYER == 'bts-extra':
+        if screen.layer == 'bts-extra':
             workarea = screen.capture_cre()
         else:
             workarea = screen.get_image('workarea')
@@ -203,7 +214,7 @@ def capture_room(screen):
         else:
             _capture(0, 0)
     s = screen.world_slug
-    result = combine_screens(screens)
+    result = combine_screens(screens, screen.world_slug, smile_id)
     if '--verify' in sys.argv:
         result2 = cv2.imread(result_path)
         if not np.array_equal(result, result2):
@@ -212,7 +223,7 @@ def capture_room(screen):
             cv2.imwrite(f'.media/trash/{smile_id}_diff.png', diff_image(result, result2))
             print('image failed', smile_id)
     else:
-        if LAYER in 'plm_enemies':
+        if screen.layer in 'plm_enemies':
             # plm enemies is currently stored with alpha layer in it's raw form
             result = cv2.cvtColor(result, cv2.COLOR_BGR2BGRA)
             urcv.remove_color_alpha(result, [0, 0, 0])
@@ -229,5 +240,21 @@ def diff_image(image1, image2):
     urcv.draw.paste(canvas2, image2, 0, 0)
     return cv2.add(cv2.subtract(canvas1, canvas2), cv2.subtract(canvas2, canvas1))
 
+def grab_all_layers(world_slug):
+    images = []
+    for layer in ['layer-1', 'layer-2', 'bts', 'plm_enemies', 'bts-extra']:
+        print('starting layer:', layer)
+        main(world_slug, layer)
+        print('finished layer:', layer)
+
 if __name__ == "__main__":
-    main(sys.argv[1], sys.argv[2])
+    if sys.argv[2] == 'all':
+        grab_all_layers(sys.argv[1])
+    else:
+        main(sys.argv[1], sys.argv[2])
+
+    time.sleep(1)
+    with pyautogui.hold('alt'):
+        pyautogui.press('tab')
+        time.sleep(1)
+        pyautogui.press('tab')

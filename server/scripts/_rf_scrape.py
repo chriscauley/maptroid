@@ -91,6 +91,7 @@ def process_images(screen):
     for smile_id in screen.room_list:
         results = {}
         index += 1
+        print(f'{index} / {len(screen.room_list)}')
         path = screen.get_dest_path(smile_id)
         img = cv2.imread(path)
         cv2.imshow('room info', img)
@@ -99,9 +100,12 @@ def process_images(screen):
 
         for name, coords in RF_COORDS.items():
             cropped = urcv.transform.crop(img, coords)
-            if name != 'room_name':
-                cropped = np.invert(cropped)
-                urcv.replace_color(cropped, ocr.BLACK, ocr.DROPDOWN_GREEN)
+            if name == 'room_name':
+                cropped = cv2.cvtColor(cropped, cv2.COLOR_BGR2GRAY)
+                cropped = cv2.threshold(cropped, 195, 255, cv2.THRESH_BINARY)[1]
+                cropped = cv2.cvtColor(cropped, cv2.COLOR_GRAY2BGR)
+            cropped = np.invert(cropped)
+            urcv.replace_color(cropped, ocr.BLACK, ocr.DROPDOWN_GREEN)
             results[name] = ocr.read_text(cropped, interactive=True)
 
         if not smile_id in results['room_name']:
@@ -200,7 +204,9 @@ def main(world_slug):
             continue
 
         match = re.match(r'\$?(\d?\d?)(.*)', data['zone'])
-        zone = goc_zone(match.group(2), world)
+        zone_number = match.group(1)
+        zone_name = match.group(2) or f'zone {zone_number}'
+        zone = goc_zone(zone_name, world)
 
         room = Room.objects.create(key=room_key, zone=zone, world=world)
         room.data['zone'] = {
@@ -210,7 +216,7 @@ def main(world_slug):
         room.save()
         print("New Room:", room.key,"in", zone, room.data['zone'])
 
-    for k in ['z-trash-'+world_slug, 'unknown-'+world_slug]:
+    for k in ['ztrash-'+world_slug, 'unknown-'+world_slug]:
         z = goc_zone(k, world=world)
         z.data['hidden'] = True
 

@@ -386,3 +386,42 @@ class SmileScreen(BaseScreen):
         cv2.imwrite('.media/trash/az.png', self.get_image('amazon_titlebar'))
         if not self.confirm('amazon_titlebar'):
             raise Exception("Unable to find amazon")
+
+    def show_layers(self, layer_name):
+        if layer_name =='plm_enemies':
+            layers = ['plm', 'enemies']
+        elif layer_name == 'bts-extra':
+            layers = []
+        else:
+            # layer-1, layer-2, or bts
+            layers = [layer_name]
+
+        # Show all layers
+        pyautogui.press('f6')
+        time.sleep(1)
+
+        # press f# key to hide layers that aren't in layers
+        layer_order = ['layer-1', 'layer-2', 'bts', 'plm', 'enemies']
+        for i, target_layer in enumerate(layer_order):
+            if not target_layer in layers:
+                key = f'f{i+1}'
+                pyautogui.press(key)
+
+        if layer_name in ['bts-extra', 'bts']:
+            if not self.confirm('show-type-on-map', 'is-checked'):
+                # bts-extra and needs this box checked
+                self.click('show-type-on-map')
+        elif self.confirm('show-type-on-map', 'is-checked'):
+            # every other layer needs this box unchecked
+            self.click('show-type-on-map')
+
+        if layer_name == 'bts':
+            self.click('down-cre')
+            self.click('down-cre')
+            self.click('down-cre')
+            self.click('down-cre')
+            time.sleep(0.2)
+            self.goto_cre('spike')
+            self.click('up-cre')
+            self.click('up-cre')
+        time.sleep(0.2)
