@@ -66,6 +66,7 @@ const Block = {
     'exit',
     'enemy',
     'enemy-break',
+    'screw-attack',
     'switch_shot',
     'heal',
     'drain',

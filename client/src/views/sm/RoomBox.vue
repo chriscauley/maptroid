@@ -9,7 +9,7 @@
         v-for="item in items"
         v-bind="item.attrs"
         :key="item.id"
-        @click.stop="removeItem(item.id)"
+        @click.stop="(e) => clickItem(e, item.id)"
       />
     </template>
     <img v-if="show_bts_extra" :src="bts_extra" class="_bts-extra" />
@@ -376,8 +376,14 @@ export default {
       }
       this.$store.item.save(data).then(this.$store.route.refetchItems)
     },
-    removeItem(id) {
-      this.$store.item.delete({ id }).then(this.$store.route.refetchItems)
+    clickItem(e, id) {
+      if (e.ctrlKey && e.shiftKey) {
+        this.$store.item.delete({ id }).then(this.$store.route.refetchItems)
+      } else {
+        const item = this.$store.route.world_items.find((i) => i.id === id)
+        item.data['hidden'] = true
+        this.$store.item.save(item).then(this.$store.route.refetchItems)
+      }
       this.bounceSave()
     },
     deleteOverride(id) {
