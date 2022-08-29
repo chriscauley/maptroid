@@ -139,7 +139,7 @@ class BaseScreen:
 class SmileScreen(BaseScreen):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        mdb_path = f'{settings.MAPTROID_SINK_PATH}/{self.world_slug}/mdb.txt'
+        mdb_path = f'{settings.SINK_DIR}/{self.world_slug}/mdb.txt'
         with open(mdb_path, 'r') as f:
             mdb = f.read()
             self.room_list = mdb.strip().split('\n')
@@ -290,12 +290,12 @@ class SmileScreen(BaseScreen):
 
     def get_root_path(self, file_name):
         s = self.world_slug
-        _dir = Path(f"{settings.MAPTROID_SINK_PATH}/{s}/")
+        _dir = Path(f"{settings.SINK_DIR}/{s}/")
         return str(_dir / file_name)
 
     def get_dest_path(self, smile_id, event_name=None):
         s = self.world_slug
-        _dir = Path(f"{settings.MAPTROID_SINK_PATH}/{s}/{self.layer}/")
+        _dir = Path(f"{settings.SINK_DIR}/{s}/{self.layer}/")
         if event_name:
             _dir = _dir / event_name
         if not _dir.exists():

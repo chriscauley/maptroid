@@ -50,19 +50,11 @@ def delete_file(request):
     os.remove(path)
     return JsonResponse({'message': 'ok'})
 
-# TOOD Move this to maptroid views?
-@superuser_required
-def sink(request, path):
-    file_path = os.path.join(settings.MAPTROID_SINK_PATH, path)
-    file_name = file_path.split('/')[-1]
-    response = FileResponse(open(file_path,'rb'), content_type="image/png")
-    return response
-
 
 @superuser_required
 def swap_room_event(request):
     data = json.loads(request.body.decode('utf-8') or "{}")
-    root = os.path.join(settings.MAPTROID_SINK_PATH, data['world_slug'], data['layer'])
+    root = os.path.join(settings.SINK_DIR, data['world_slug'], data['layer'])
     source = os.path.join(root, data['source_event'], data['key'])
     target = os.path.join(root, data['target_event'], data['key'])
     winderz = get_winderz(data['world_slug'])
@@ -190,7 +182,7 @@ def event_action(request):
 
     # copy room images
     for layer in ['layer-1', 'layer-2', 'bts', 'bts-extra', 'plm_enemies']:
-        layer_dir = os.path.join(settings.MAPTROID_SINK_PATH, world.slug, layer)
+        layer_dir = os.path.join(settings.SINK_DIR, world.slug, layer)
         source = os.path.join(layer_dir, event_name, old_room.key)
         target = os.path.join(layer_dir, new_room_key)
         img = cv2.imread(source, cv2.IMREAD_UNCHANGED)

@@ -22,10 +22,7 @@ def scan_for_cre(room, _classes=SCAN_TEMPLATES, layer=None):
     }
     if not layer:
         layer = 'layer-2' if room.data.get('invert_layers') else 'layer-1'
-    room_layer_1 = os.path.join(
-        settings.MEDIA_ROOT,
-        f'smile_exports/{room.world.slug}/{layer}/{room.key}',
-    )
+    room_layer_1 = os.path.join(settings.SINK_DIR, f'{room.world.slug}/{layer}/{room.key}')
     image = cv2.imread(room_layer_1)
     for x, y in room.data.get('holes', []):
         image[y*256:(y+1)*256, x*256:(x+1)*256, :] = 0

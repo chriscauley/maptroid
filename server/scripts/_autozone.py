@@ -1,3 +1,4 @@
+# DEPRECATED this method has been surpassed by _rf_scrape
 from _setup import get_world_zones_from_argv
 import cv2
 from pathlib import Path
@@ -7,7 +8,7 @@ import urcv
 
 
 world, zones = get_world_zones_from_argv()
-WORLD = Path(f'.media/smile_exports/{world.slug}')
+WORLD = Path(f'.media/_maptroid-sink/{world.slug}')
 LAYER_1 = WORLD / 'layer-1'
 
 zone_images = []

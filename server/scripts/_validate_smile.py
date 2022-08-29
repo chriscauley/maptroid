@@ -23,7 +23,7 @@ def check_bg_color(image):
 def main():
     world, zones, rooms = get_wzr()
     winderz = get_winderz(world.slug)
-    root_dir = os.path.join(settings.MAPTROID_SINK_PATH, world.slug)
+    root_dir = os.path.join(settings.SINK_DIR, world.slug)
     layer_fails = defaultdict(int)
     layer_dne = defaultdict(int)
     fails = []

@@ -12,7 +12,7 @@ import urcv
 
 from sprite.models import MatchedSprite, PlmSprite, RoomPlmSprite
 
-_plm_dir = lambda room: f'.media/smile_exports/{room.world.slug}/plm_enemies/'
+_plm_dir = lambda room: os.path.join(settings.SINK_DIR, f'{room.world.slug}/plm_enemies/')
 
 class MishapenImageError(Exception):
     pass

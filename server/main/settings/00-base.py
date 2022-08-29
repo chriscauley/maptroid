@@ -107,10 +107,10 @@ STATICFILES_DIRS = [
   os.path.join(BASE_DIR, '../dist'),
 ]
 
-MAPTROID_SINK_PATH = os.path.join(BASE_DIR, "../../../_maptroid-sink")
-
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, '../.media')
+SINK_DIR = os.path.join(MEDIA_ROOT, "_maptroid-sink")
+
 
 EMAIL_HOST = 'smtp.sparkpostmail.com'
 EMAIL_PORT = 587

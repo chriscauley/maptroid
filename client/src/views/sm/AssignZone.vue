@@ -125,7 +125,7 @@ export default {
   methods: {
     getLayerImage(room) {
       const { sm_layer } = this.$store.local.state
-      return `/media/smile_exports/${this.world.slug}/${sm_layer}/${room.key}`
+      return `/media/_maptroid-sink/${this.world.slug}/${sm_layer}/${room.key}`
     },
     setRoomZone(room, zone_id) {
       room.zone = zone_id

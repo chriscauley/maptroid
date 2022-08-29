@@ -21,7 +21,8 @@
       "conveyor_right",
       "conveyor_left",
       "enemy",
-      "enemy-break"
+      "enemy-break",
+      "screw-attack"
     ]
   },
   "block-alt": {
@@ -153,7 +154,8 @@
       "hydellius",
       "hyper-metroid",
       "redesign-axeil-edition",
-      "biohazard"
+      "biohazard",
+      "super-zero-mission"
     ]
   },
   "blue_caps": {
@@ -176,8 +178,8 @@
       "hydellius",
       "hyper-metroid",
       "redesign-axeil-edition",
-      "biohazard"
-
+      "biohazard",
+      "super-zero-mission"
     ]
   },
   "samus_eaters": {

@@ -5,7 +5,7 @@ from maptroid.models import Room
 
 world, _, _ = get_wzr()
 
-for d in ['smile_exports', 'sm_cache']:
+for d in ['_maptroid-sink', 'sm_cache']:
     ROOT = f'.media/{d}/{world.slug}'
     dirs = ['layer-1', 'layer-2', 'bts', 'plm_enemies', 'layer-2+layer-1']
     for _dir in dirs:

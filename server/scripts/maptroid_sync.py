@@ -6,7 +6,7 @@ from PIL import Image
 
 from maptroid.models import Screenshot, World
 
-SOURCE = settings.MAPTROID_SINK_PATH
+SOURCE = settings.SINK_DIR
 DEST = '.media/screenshots/dread'
 
 dest_files = os.listdir(DEST)

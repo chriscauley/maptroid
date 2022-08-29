@@ -9,12 +9,11 @@ import sys
 
 from maptroid.models import World, Room
 
-SMILE_DIR = os.path.join(settings.BASE_DIR, '../.media/smile_exports/')
 ROOM_SLICES = ['layer-1', 'bts', 'layer-2']
 
 def main(world_slug):
   world = World.objects.get(slug=world_slug)
-  world_dir = os.path.join(SMILE_DIR, world_slug)
+  world_dir = os.path.join(settings.SINK_DIR, world_slug)
   os.listdir(world_dir)
 
   keys = []

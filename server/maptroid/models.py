@@ -247,7 +247,7 @@ class SpriteMatcher():
       # it's a match!
       if not np.array_equal(image, img._coerce(sprite.image.path, 'np')):
         print('duplicated!')
-        duplicates_path = mkdir(settings.MEDIA_ROOT, f'smile_exports/plm_enemies/duplicates/{layer}')
+        duplicates_path = mkdir(settings.MEDIA_ROOT, f'smile_sprites/duplicates/{layer}')
         duplicate_path = os.path.join(duplicates_path, f'{sprite.id}.png')
         if os.path.exists(duplicate_path):
           dupe = img._coerce(duplicate_path, 'np')

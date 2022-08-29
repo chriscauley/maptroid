@@ -1,4 +1,5 @@
 import cv2
+from django.conf import settings
 import functools
 import numpy as np
 import os
@@ -15,7 +16,8 @@ def list_worlds():
 
 @functools.lru_cache
 def get_door_icons(world, style):
-    if world.startswith('y-faster'):
+    if world.startswith('y-faster') or world == 'z-factor':
+        # Metaquarius doors
         world = 'y-faster'
     if not world in list_worlds():
         return get_door_icons('super-metroid', style)
@@ -125,8 +127,8 @@ def find_doors(image, world, room_id):
         th, tw = template.shape
         for x, y, w, h in xywhs:
             door = image[y:y+th,x:x+tw]
-            if world in ['hydellius']:
-                # hydellius' layer-1 is very messed up because there's not much color
+            if world in ['hydellius', 'super-zero-mission']:
+                # some maps layer-1 is very messed up because there's not much color
                 color = 'blue'
             else:
                 color = match_door_color(door, world)
@@ -138,7 +140,7 @@ def find_doors(image, world, room_id):
 
 def find_elevators(room):
     world = room.world
-    path = f'.media/smile_exports/{world.slug}/plm_enemies/{room.key}'
+    path = os.path.join(settings.SINK_DIR, f'{world.slug}/plm_enemies/{room.key}')
     if not os.path.exists(path):
         print(f'skipping elevators because of missing plm_enimies:')
         print(room.get_dev_url())
@@ -181,7 +183,7 @@ def populate_room_doors(room):
     matched_doors = {}
     for layer_name in ['layer-1', 'plm_enemies']:
 
-        path = f'.media/smile_exports/{world.slug}/{layer_name}/{room.key}'
+        path = os.path.join(settings.SINK_DIR, f'{world.slug}/{layer_name}/{room.key}')
         if not os.path.exists(path):
             print(f'skipping {layer_name} for {room.key}')
             continue

@@ -117,7 +117,7 @@ export default {
       const room = this.$store.route.world_rooms.find((r) => r.key === room_key)
       const [x, y, width, height] = room.data.zone.bounds
       return {
-        src: `/sink/${world_slug}/rf_scrape/${room.key}`,
+        src: `/media/_maptroid-sink/${world_slug}/rf_scrape/${room.key}`,
         items: { x, y, width, height },
         style: `width: ${width * 256}px;height: ${height * 256}px`,
       }
@@ -175,7 +175,7 @@ export default {
     },
     getImage(layer, event) {
       const { world_slug } = this.$route.params
-      return `/sink/${world_slug}/${layer}/${event}/${this.selected.key}`
+      return `/media/_maptroid-sink/${world_slug}/${layer}/${event}/${this.selected.key}`
     },
     getRoomClass(room) {
       return room.key === this.$route.query.room && '_selected-room'

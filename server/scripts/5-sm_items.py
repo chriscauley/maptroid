@@ -1,6 +1,7 @@
 from _setup import get_wzr
 
 import cv2
+from django.conf import settings
 import numpy as np
 import os
 import sys
@@ -41,7 +42,7 @@ dryrun_rooms = []
 
 for room in rooms:
     book = Labbook(f'_verify_items__{room.id}')
-    plm_dir = f'.media/smile_exports/{world.slug}/plm_enemies/'
+    plm_dir = os.path.join(settings.SINK_DIR, f'{world.slug}/plm_enemies/')
     canvas = safe_open(f'{plm_dir}{room.key}')
     existing_items = {}
     extra_items = {}

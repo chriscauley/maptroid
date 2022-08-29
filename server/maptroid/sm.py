@@ -88,7 +88,7 @@ def process_zone(zone, skip_dzi=False):
 
             for layer in layers:
                 is_door_layer = layer == 'layer-1' and 'doors' in room.data
-                path = os.path.join(settings.MEDIA_ROOT, f'smile_exports/{world.slug}/{layer}/{room.key}')
+                path = os.path.join(settings.SINK_DIR, f'{world.slug}/{layer}/{room.key}')
                 layer_dir = mkdir(CACHE_DIR, layer)
                 layer_path = os.path.join(layer_dir, room.key)
 

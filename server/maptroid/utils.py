@@ -16,7 +16,7 @@ def mkdir(root, *args):
     return path
 
 def get_winderz(world_slug):
-    path = os.path.join(settings.MAPTROID_SINK_PATH, f'smile_config/{world_slug}.json')
+    path = os.path.join(settings.SINK_DIR, f'smile_config/{world_slug}.json')
     return JsonCache(path, {
         'coords': {},
         'hashes': {},

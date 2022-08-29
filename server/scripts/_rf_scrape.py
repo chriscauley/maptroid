@@ -158,6 +158,8 @@ def process_images(screen):
         }))
 
 def goc_zone(zone_name, world):
+    if zone_name == 'Wreckedship':
+        zone_name = 'Wrecked Ship'
     zone_slug = slugify(zone_name)
     try:
         zone = Zone.objects.get(world=world, slug=zone_slug)
@@ -219,6 +221,7 @@ def main(world_slug):
     for k in ['ztrash-'+world_slug, 'unknown-'+world_slug]:
         z = goc_zone(k, world=world)
         z.data['hidden'] = True
+        z.save()
 
 if __name__ == '__main__':
     main(sys.argv[1])

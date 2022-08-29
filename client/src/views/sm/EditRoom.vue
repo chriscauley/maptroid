@@ -206,7 +206,7 @@ export default {
       const world = this.$store.route.world.slug
       const layers = ['layer-1', 'layer-2', 'bts', 'plm_enemies']
       const items = layers.map((layer) => ({
-        href: `/media/smile_exports/${world}/${layer}/${key}`,
+        href: `/media/_maptroid-sink/${world}/${layer}/${key}`,
         text: `smile ${layer}`,
       }))
       layers.push('layer-2+layer-1')

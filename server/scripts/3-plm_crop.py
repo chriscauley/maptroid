@@ -1,3 +1,4 @@
+# DEPRECATED this method is deprecated in favor os _smile_autoclicker which generates plm_enemies files just like any other
 # takes screenshots from ./media/smile_exports/WORLD/plm_enemies/batchNUMBER/
 # crops, parses room_key/event_name, and assigns to room with best guess of position
 

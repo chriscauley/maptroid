@@ -1,6 +1,7 @@
-# Extract PlmSprites from .media/smile_exports/WORLD/plm_enemies/ROOM_KEY
+# Extract PlmSprites from .media/_maptroid-sink/WORLD/plm_enemies/ROOM_KEY
 
 from _setup import get_wzr
+from django.conf import settings
 import os
 
 from maptroid import plm
@@ -24,7 +25,7 @@ def main(rooms):
         plm.finalize(room)
 
     for room in rooms:
-        if not os.path.exists(f'.media/smile_exports/{world.slug}/plm_enemies/{room.key}'):
+        if not os.path.exists(f'{settings.SINK_DIR}/{world.slug}/plm_enemies/{room.key}'):
             composit_room(room)
 
     for room in rooms:

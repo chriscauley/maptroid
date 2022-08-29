@@ -97,7 +97,7 @@ def auto_cre(room, cre_xys, hex_xys):
         **get_icons('misc-spikes', operations=MAP_OPERATIONS),
     }
     icons['spike'] = icons['spike_up']
-    path = os.path.join(f".media/smile_exports/{room.world.slug}/bts-extra/{room.key}")
+    path = os.path.join(settings.SINK_DIR, f"{room.world.slug}/bts-extra/{room.key}")
     if not os.path.exists(path):
         return
     bts_image = cv2.imread(path)
@@ -144,8 +144,8 @@ def auto_cre(room, cre_xys, hex_xys):
     cv2.imwrite(out_path, final_canvas)
 
 def main():
-    world, zones, rooms = get_wzr(exclude_hidden=True)
-    BTS_DIR = os.path.join(settings.MEDIA_ROOT, f'smile_exports/{world.slug}/bts')
+    world, zones, rooms = get_wzr(exclude_hidden='--include-hidden' not in sys.argv)
+    BTS_DIR = os.path.join(settings.SINK_DIR, f'{world.slug}/bts')
     sprite_matcher = SpriteMatcher()
     keys = os.listdir(BTS_DIR)
     for i_key, key in enumerate(keys):

@@ -24,7 +24,7 @@ colors = [
     [255, 255, 0],
 ]
 room = Room.objects.get(id=sys.argv[1])
-room_layer_1 = Path(settings.MEDIA_ROOT) / f'smile_exports/super-metroid/layer-1/{room.key}'
+room_layer_1 = Path(settings.SINK_DIR) / f'super-metroid/layer-1/{room.key}'
 image = cv2.imread(str(room_layer_1))
 
 clone = image.copy()
