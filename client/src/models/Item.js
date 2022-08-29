@@ -3,8 +3,10 @@ import { countBy } from 'lodash'
 const abilities = [
   'varia-suit',
   'gravity-suit',
+  'gaea-armor',
   'morph-ball',
   'bomb',
+  'boost-ball',
   'spring-ball',
   'hi-jump-boots',
   'speed-booster',
@@ -12,7 +14,16 @@ const abilities = [
   'screw-attack',
 ]
 
-const packs = ['missile', 'super-missile', 'power-bomb', 'energy-tank', 'reserve-tank', 'confused']
+const packs = [
+  'missile',
+  'super-missile',
+  'power-bomb',
+  'energy-tank',
+  'reserve-tank',
+  'confused',
+  'weapons-tank',
+  'shinespark',
+]
 
 const beams = [
   'charge-beam',
@@ -22,6 +33,7 @@ const beams = [
   'plasma-beam',
   'x-ray',
   'grappling-beam',
+  'beam-combo',
 ]
 
 const misc = ['pedastool', 'energy2-tank']
