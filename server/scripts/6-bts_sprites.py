@@ -227,6 +227,12 @@ def main():
             if sprite.category == 'block':
                 cre_xys[sprite.type].append([x, y])
             if sprite.category == 'hex':
+                screen_x = x // 16
+                screen_y = y // 16
+                if [screen_x, screen_y] in room.data['holes']:
+                    # the gemetry override makes it necessary to remove holes
+                    # we want the blocks to appear but not the hexes (cres)
+                    continue
                 hex_xys[sprite.type].append([x, y])
 
         # scan layer 1 for blocks that don't appear in cre
