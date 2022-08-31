@@ -33,12 +33,18 @@ def main():
     layers = []
     kolourpaints = []
     rms = []
+    ignore_zones = [
+        world.zone_set.get(slug__startswith='ztrash').id,
+        world.zone_set.get(slug__startswith='unknown').id,
+    ]
     for layer in ALL_LAYERS:
         if not os.path.exists(f'{root_dir}/{layer}/'):
             print("WARNING: no layer", layer)
         else:
             layers.append(layer)
     for room in rooms:
+        if room.zone_id in ignore_zones:
+            continue
         smile_id = room.key.split("_")[-1].split(".")[0]
         x,y,w,h = room.data['zone']['bounds']
         h_zone = h * 256

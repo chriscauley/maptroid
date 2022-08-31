@@ -113,8 +113,8 @@ def main(world_slug, layer):
 
     # TODO move all this into go home?
     screen.goto_workarea_top()
-    time.sleep(2) # need to sleep after last down/up (should wait for smile_id to match first)
     screen.goto_workarea_left()
+    time.sleep(2) # need to sleep after last down/up (should wait for smile_id to match first)
     screen.moveTo('screen_00')
     screen.goto_first_room()
     screen.show_layers(layer)

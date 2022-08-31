@@ -28,12 +28,18 @@ def remove_cursor(image):
 
 def main():
     world, zones, rooms = get_wzr()
-    root_dir = os.path.join(settings.MAPTROID_SINK_PATH, world.slug)
+    root_dir = os.path.join(settings.SINK_DIR, world.slug)
     for room in rooms:
-        if room.data.get('event'):
+        if room.zone.data.get('hidden'):
             continue
-        if room.data.get('split_lock'):
-            continue
+        if room.data.get('event') or room.data.get('split_lock'):
+            for layer in ['plm_enemies', 'layer-1', 'layer-2', 'bts', 'bts-extra']:
+                path = f'{root_dir}/{layer}/{room.key}'
+                img = cv2.imread(path, cv2.IMREAD_UNCHANGED)
+                count = np.sum(img)
+                remove_cursor(img)
+                if np.sum(img) != count:
+                    cv2.imwrite(path, img)
         event = room.data.get('default_event', 'E5E6=STANDARD1')
         for layer in ['plm_enemies', 'layer-1', 'layer-2', 'bts', 'bts-extra']:
             dest_dir = os.path.join(root_dir, layer)
