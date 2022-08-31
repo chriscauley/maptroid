@@ -424,4 +424,8 @@ class SmileScreen(BaseScreen):
             self.goto_cre('spike')
             self.click('up-cre')
             self.click('up-cre')
+
+            # need to toggle this to make it appear on first room
+            self.click('show-type-on-map')
+            self.click('show-type-on-map')
         time.sleep(0.2)

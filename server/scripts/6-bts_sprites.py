@@ -56,9 +56,11 @@ MAP_OPERATIONS = {
 
 # Failed attempat at only using interior walls, leaving it in for now
 def filter_interior_walls(shape_x_ys):
+    width = max([sxy[1] for sxy in shape_x_ys]) + 1
+    height = max([sxy[2] for sxy in shape_x_ys]) + 1
     walls = np.zeros((height, width))
     for shape, x, y in shape_x_ys:
-        if shape.type == 'b_0286': # solid block; see note on shape type below
+        if shape.type == 'b25_04ok0': # solid block; see note on shape type below
             walls[y, x] = 2 # maybe keep
         else:
             walls[y, x] = 1 # definitely keep
