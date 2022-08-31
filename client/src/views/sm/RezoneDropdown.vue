@@ -12,7 +12,7 @@ export default {
   },
   computed: {
     items() {
-      return this.$store.route.zones.map((zone) => ({
+      return this.$store.route.all_zones.map((zone) => ({
         text: zone.name,
         click: () =>
           this.storage.save({
@@ -23,7 +23,7 @@ export default {
     text() {
       const { tool, variant } = this.storage.state.selected
       if (tool === 'rezone') {
-        return this.$store.route.zones.find((z) => z.id === variant).name
+        return this.$store.route.all_zones.find((z) => z.id === variant).name
       }
       return ''
     },
