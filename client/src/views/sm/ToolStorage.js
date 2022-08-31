@@ -45,6 +45,7 @@ export default (component) => {
       'show_layer-1': true,
       show_rooms: false,
       show_walls: false,
+      show_plm_enemies: false,
     }
     const changed = []
     Object.entries(target_settings).forEach(([key, value]) => {
@@ -53,12 +54,6 @@ export default (component) => {
         storage.state[key] = value
       }
     })
-    if (changed.length > 0) {
-      const _changed = changed.map((s) => startCase(s.replace('show_', '')))
-      component.$ui.toast.info(
-        `To properly display this map several layers were toggled (${_changed.join(', ')})`,
-      )
-    }
   }
   storage.getVisibleLayers = () => LAYER_NAMES.filter((n) => storage.state[`show_${n}`])
   storage.all_layers = LAYER_NAMES
