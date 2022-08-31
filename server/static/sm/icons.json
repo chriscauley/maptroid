@@ -41,7 +41,8 @@
       "wipe",
       "morph_lock_1",
       "morph_lock_2",
-      "morph_lock_3"
+      "morph_lock_3",
+      "target"
     ]
   },
   "misc-spikes": {
