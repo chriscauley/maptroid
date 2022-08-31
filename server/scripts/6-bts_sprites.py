@@ -146,6 +146,7 @@ def auto_cre(room, cre_xys, hex_xys):
 def main():
     world, zones, rooms = get_wzr(exclude_hidden='--include-hidden' not in sys.argv)
     BTS_DIR = os.path.join(settings.SINK_DIR, f'{world.slug}/bts')
+    AUTO_HOLE = '--auto-hole' in sys.argv
     sprite_matcher = SpriteMatcher()
     keys = os.listdir(BTS_DIR)
     for i_key, key in enumerate(keys):
@@ -166,13 +167,19 @@ def main():
         room.save()
         image = img._coerce(os.path.join(BTS_DIR, key), 'np')
         image = img.replace_color(image, (0,0,0,255), (0,0,0,0))
+
+        if AUTO_HOLE:
+            # resetting holes
+            room.data['holes'] = []
         if not room.data.get('geometry_override'):
             image = img.make_holes(image, room.data['holes'])
+
         height, width = [int(i / _s) for i in image.shape[:2]]
         shape_x_ys = []
         special_x_ys = []
         items = room.item_set.all()
         item_xys = [i.data['room_xy'] for i in items if not i.data.get('hidden')]
+        filled_screens = defaultdict(int)
         for y in range(height):
             for x in range(width):
                 cropped = image[y*_s:(y+1)*_s,x*_s:(x+1)*_s,:]
@@ -185,9 +192,16 @@ def main():
                     print('New sprite', sprite)
                 if sprite.type.startswith('b25_') or sprite.type.startswith('b16_'):
                     shape_x_ys.append([sprite, x, y])
+                    if AUTO_HOLE:
+                        filled_screens[(x//16,y//16)] += 1
                 else:
                     special_x_ys.append([sprite, x, y])
 
+        new_holes = [k for k,v in filled_screens.items() if v == 256]
+        if AUTO_HOLE and new_holes:
+            room.data['holes'] = new_holes
+            print('set', new_holes)
+            room.save()
 
         BLOCK_SPRITE = SmileSprite.objects.filter(type='b25_04ok0')[0]
         for [x, y, w, h, shape] in room.data.get('cre_overrides', []):
