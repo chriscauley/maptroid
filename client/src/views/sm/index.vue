@@ -179,9 +179,10 @@ export default {
       const zoom = clamp(Math.ceil(Math.log2(image_zoom)), -4, 4)
       const { tool, variant } = this.tool_storage.state.selected
       const layers = this.tool_storage.getVisibleLayers()
+      const { world_slug } = this.$route.params
       return [
         'app-body -full-screen',
-        `-zoom-${zoom} -tool-${tool} -variant-${variant}`,
+        `-zoom-${zoom} -tool-${tool} -variant-${variant} -world-${world_slug}`,
         layers.map((l) => `-layer-${l}`),
       ]
     },

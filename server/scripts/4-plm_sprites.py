@@ -7,7 +7,7 @@ import os
 from maptroid import plm
 
 def main(rooms):
-    world, zones, rooms = get_wzr()
+    world, zones, rooms = get_wzr(exclude_hidden=True)
     fails = []
     hashes = []
     matches = {}

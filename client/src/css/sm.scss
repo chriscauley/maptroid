@@ -390,6 +390,14 @@ $ascent-items: weapons-tank shinespark boost-ball;
   }
 }
 
+.app-body.-zoom--3, .app-body.-zoom--4 {
+    &.-world-grand-prix, &.-world-grand-prix-2,
+    .sm-room-svg path.-outer {
+	fill: none !important;
+    }
+}
+
+
 /* everything below here is from the old editor and will eventually be removed */
 .sm-room, .sm-map, .sm-chozo, .sm-door {
   background-size: 100% auto;
