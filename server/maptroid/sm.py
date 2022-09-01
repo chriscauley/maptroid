@@ -48,14 +48,6 @@ def get_occupied_world_xys(target_zone):
 def to_media_url(path, *args):
     return os.path.join(settings.MEDIA_URL, path.split('/.media/')[-1], *args)
 
-def move(source, dest):
-    if os.path.exists(dest):
-        if os.path.isdir(dest):
-            shutil.rmtree(dest)
-        else:
-            os.unlink(dest)
-    shutil.move(source, dest)
-
 @functools.lru_cache
 def get_vitality_layer_1(zone_slug):
     hires_dir = os.path.join(settings.SINK_DIR, '_hires-vitality')
@@ -172,6 +164,8 @@ def process_zone(zone, skip_dzi=False):
         cv2.imwrite(dest, zone_image)
         if not skip_dzi:
             png_to_dzi(dest)
+            if zone.world.slug == 'vitality' and 'layer-1' in layers:
+                shutil.remove(det)
 
     zone.normalize()
 
