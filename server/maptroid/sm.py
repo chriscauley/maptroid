@@ -3,6 +3,7 @@ from django.conf import settings
 import numpy as np
 import os
 from PIL import Image, ImageDraw
+import shutil
 
 from maptroid.doors import draw_doors
 from maptroid.dzi import png_to_dzi
@@ -46,6 +47,14 @@ def get_occupied_world_xys(target_zone):
 def to_media_url(path, *args):
     return os.path.join(settings.MEDIA_URL, path.split('/.media/')[-1], *args)
 
+def move(source, dest):
+    if os.path.exists(dest):
+        if os.path.isdir(dest):
+            shutil.rmtree(dest)
+        else:
+            os.unlink(dest)
+    shutil.move(source, dest)
+
 def process_zone(zone, skip_dzi=False):
     if zone.data.get("hidden"):
         return
@@ -65,6 +74,20 @@ def process_zone(zone, skip_dzi=False):
     kernel3 = np.ones((3,3), dtype=np.uint8)
 
     def make_layered_zone_image(zone, layers, dest):
+        if 'layer-1' in layers and world.slug == 'vitality':
+            # I got high res renders from dman, use those instead
+            hires_dir = os.path.join(settings.SINK_DIR, '_hires-vitality')
+            path = os.path.join(hires_dir, f'{zone.slug}.png')
+            png_to_dzi(path)
+            move(
+                os.path.join(hires_dir, zone.slug+'_files'),
+                os.path.join(LAYER_DIR, zone.slug+'_files'),
+            )
+            move(
+                os.path.join(hires_dir, zone.slug+'.dzi'),
+                os.path.join(LAYER_DIR, zone.slug+'.dzi'),
+            )
+            return
         zone_x, zone_y, zw, zh = zone.data['world']['bounds']
         zone_image = np.zeros((zh * 256, zw * 256, 4), dtype=np.uint8)
         layers_dir = mkdir(CACHE_DIR, '+'.join(layers))
