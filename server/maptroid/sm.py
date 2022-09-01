@@ -112,14 +112,14 @@ def process_zone(zone, skip_dzi=False):
                 if room.data.get('invert_layers'):
                     # "fire flea" rooms have their layers switched in smile
                     cutout_bg = layer == 'layer-1'
-                if not os.path.exists(path):
-                    print(f'skipping {room.key} {layer} because file DNE')
-                elif 'layer-1' in layers and world.slug == 'vitality':
+                if 'layer-1' in layers and world.slug == 'vitality':
                     # Use ingame scans instead
                     bounds = 256 * np.array(room.data['zone']['bounds'], dtype=np.uint32)
                     hires_zone_image = get_vitality_layer_1(zone.slug)
-                    room_image = urcv.transform.crop(hires_zone_image, bounds)
+                    room_image = urcv.transform.crop(hires_zone_image, bounds).copy()
                     continue
+                elif not os.path.exists(path):
+                    print(f'skipping {room.key} {layer} because file DNE')
                 else:
                     layer_image = cv2.imread(path, cv2.IMREAD_UNCHANGED)
                     if np.sum(layer_image) == 0:
@@ -168,6 +168,7 @@ def process_zone(zone, skip_dzi=False):
 
             cv2.imwrite(os.path.join(layers_dir, room.key), room_image)
             urcv.draw.paste_alpha(zone_image, room_image, room_x * 256, room_y * 256)
+
         cv2.imwrite(dest, zone_image)
         if not skip_dzi:
             png_to_dzi(dest)
