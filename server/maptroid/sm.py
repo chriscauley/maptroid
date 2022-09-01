@@ -1,5 +1,6 @@
 import cv2
 from django.conf import settings
+import functools
 import numpy as np
 import os
 from PIL import Image, ImageDraw
@@ -55,6 +56,12 @@ def move(source, dest):
             os.unlink(dest)
     shutil.move(source, dest)
 
+@functools.lru_cache
+def get_vitality_layer_1(zone_slug):
+    hires_dir = os.path.join(settings.SINK_DIR, '_hires-vitality')
+    path = os.path.join(hires_dir, f'{zone_slug}.png')
+    return urcv.force_alpha(cv2.imread(path))
+
 def process_zone(zone, skip_dzi=False):
     if zone.data.get("hidden"):
         return
@@ -74,20 +81,6 @@ def process_zone(zone, skip_dzi=False):
     kernel3 = np.ones((3,3), dtype=np.uint8)
 
     def make_layered_zone_image(zone, layers, dest):
-        if 'layer-1' in layers and world.slug == 'vitality':
-            # I got high res renders from dman, use those instead
-            hires_dir = os.path.join(settings.SINK_DIR, '_hires-vitality')
-            path = os.path.join(hires_dir, f'{zone.slug}.png')
-            png_to_dzi(path)
-            move(
-                os.path.join(hires_dir, zone.slug+'_files'),
-                os.path.join(LAYER_DIR, zone.slug+'_files'),
-            )
-            move(
-                os.path.join(hires_dir, zone.slug+'.dzi'),
-                os.path.join(LAYER_DIR, zone.slug+'.dzi'),
-            )
-            return
         zone_x, zone_y, zw, zh = zone.data['world']['bounds']
         zone_image = np.zeros((zh * 256, zw * 256, 4), dtype=np.uint8)
         layers_dir = mkdir(CACHE_DIR, '+'.join(layers))
@@ -119,9 +112,14 @@ def process_zone(zone, skip_dzi=False):
                 if room.data.get('invert_layers'):
                     # "fire flea" rooms have their layers switched in smile
                     cutout_bg = layer == 'layer-1'
-
                 if not os.path.exists(path):
                     print(f'skipping {room.key} {layer} because file DNE')
+                elif 'layer-1' in layers and world.slug == 'vitality':
+                    # Use ingame scans instead
+                    bounds = 256 * np.array(room.data['zone']['bounds'], dtype=np.uint32)
+                    hires_zone_image = get_vitality_layer_1(zone.slug)
+                    room_image = urcv.transform.crop(hires_zone_image, bounds)
+                    continue
                 else:
                     layer_image = cv2.imread(path, cv2.IMREAD_UNCHANGED)
                     if np.sum(layer_image) == 0:
