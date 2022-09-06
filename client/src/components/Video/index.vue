@@ -2,8 +2,15 @@
   <div class="video-box" v-if="video">
     <div v-if="missing_item">
       <img :src="`/media/_maptroid-sink/_videos/${video.external_id}/${missing_item.frame}.png`" />
-      {{ missing_item.item }}
-      {{ parseInt(missing_item.seconds / 60) }}:{{ missing_item.seconds % 60 }}
+      <div class="video-box__missing">
+        <div>
+          {{ missing_item.item }}
+          {{ parseInt(missing_item.seconds / 60) }}:{{ missing_item.seconds % 60 }}
+        </div>
+        <div class="btn -danger" @click="skip">
+          Skip
+        </div>
+      </div>
     </div>
     <div v-else>
       <div class="item-list__header">
@@ -122,6 +129,19 @@ export default {
       if (new_time !== this.$store.local.state.current_time) {
         this.$store.local.save({ current_time: new_time })
       }
+    },
+    skip(e) {
+      if (!e.shiftKey && !e.ctrlKey) {
+        this.$ui.toast.error('You must hold ctrl and shift')
+        return
+      }
+      const { video } = this
+      video.data.skips = video.data.skips || {}
+      video.data.skips[this.missing_item.frame] = true
+      this.$store.video.save(video).then(() => {
+        this.$store.video.api.markStale()
+        this.$store.video.getCurrentVideo()
+      })
     },
   },
 }

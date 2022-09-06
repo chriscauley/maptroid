@@ -420,6 +420,9 @@
   .item-list__header {
     cursor: default;
   }
+  &__missing {
+    @apply flex justify-between;
+  }
 }
 
 .video-picker {

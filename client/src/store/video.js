@@ -26,7 +26,7 @@ export default ({ store }) => {
 
       const items = video.data.unknown_items.map(([frame, item]) => {
         const seconds = parseInt(frame / video.data.fps)
-        const matched = matched_times[seconds]
+        const matched = matched_times[seconds] || video.data.skips?.[frame]
         return { frame, item, seconds, matched }
       })
 

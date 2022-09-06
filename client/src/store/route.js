@@ -36,7 +36,7 @@ export default ({ store }) => {
       route.world_rooms.forEach((r) => (visible_rooms[r.id] = true))
       items = items.filter((i) => visible_rooms[i.room])
       if (!store._app.config.globalProperties.$auth.user?.is_superuser) {
-          items = items.filter(i => !i.data.hidden)
+        items = items.filter((i) => !i.data.hidden)
       }
       return items
     }),
