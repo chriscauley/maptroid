@@ -108,6 +108,7 @@ def process_zone(zone, skip_dzi=False):
                     bounds = 256 * np.array(room.data['zone']['bounds'], dtype=np.uint32)
                     hires_zone_image = get_vitality_layer_1(zone.slug)
                     room_image = urcv.transform.crop(hires_zone_image, bounds).copy()
+                    cv2.imwrite(layer_path, room_image)
                     continue
                 elif not os.path.exists(path):
                     print(f'skipping {room.key} {layer} because file DNE')
