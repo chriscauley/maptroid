@@ -286,32 +286,31 @@ class Screenshot(models.Model):
 
 
 class Channel(models.Model):
-  SOURCES = _choices(['youtube'])
-  source = models.CharField(max_length=16, choices=SOURCES, default="youtube")
-  external_id = models.CharField(max_length=24)
+  youtube_id = models.CharField(max_length=24, null=True, blank=True)
+  twitch_id = models.CharField(max_length=24, null=True, blank=True)
   name = models.CharField(max_length=30)
   icon = models.ImageField(upload_to="channel_icons")
   __str__ = lambda self: self.name
 
 
-def default_video_data():
-  return {
-    'items': [],
-    'room_xys': [],
-  }
 
 
 class Video(models.Model):
   class Meta:
     ordering = ('order',)
-  SOURCES = _choices(['youtube'])
+  SOURCES = _choices(['youtube', 'twitch'])
   source = models.CharField(max_length=16, choices=SOURCES, default="youtube")
   thumbnail = models.ImageField(upload_to="video_thumbnails")
   external_id = models.CharField(max_length=24)
   title = models.CharField(max_length=255)
   label = models.CharField(max_length=64)
   channel = models.ForeignKey(Channel, models.CASCADE)
-  data = models.JSONField(default=default_video_data, blank=True)
+  def default_data():
+    return {
+      'items': [],
+      'room_xys': [],
+    }
+  data = models.JSONField(default=default_data, blank=True)
   world = models.ForeignKey(World, models.CASCADE)
   order = models.IntegerField(default=0)
   __str__ = lambda self: self.title

@@ -18,7 +18,7 @@ class Migration(migrations.Migration):
             name='Run',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('data', models.JSONField(blank=True, default=maptroid.models.default_video_data)),
+                ('data', models.JSONField(blank=True, default=maptroid.models.Video.default_data)),
                 ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
                 ('world', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='maptroid.world')),
             ],

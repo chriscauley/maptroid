@@ -14,6 +14,6 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='video',
             name='data',
-            field=models.JSONField(blank=True, default=maptroid.models.default_video_data),
+            field=models.JSONField(blank=True, default=maptroid.models.Video.default_data),
         ),
     ]
