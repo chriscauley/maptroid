@@ -1,23 +1,32 @@
 <template>
   <div class="video-box" v-if="video">
-    <div class="item-list__header">
-      <div class="video-box__title" @click="open = true">
-        Route:
-        <div>{{ video.label }}</div>
-        by
-        {{ video.channel_name }}
-        <div :style="`background-image: url(${video.channel_icon})`" class="video-box__avatar" />
-      </div>
-      <template v-if="$auth.user?.is_superuser">
-        <div class="video-box__seperator" />
-        <div @click="togglePlayer">
-          <template v-if="expanded"> {{ visible_time }} <i class="fa fa-chevron-down" /> </template>
-          <template v-else> Expand Player <i class="fa fa-chevron-up" /> </template>
-        </div>
-      </template>
+    <div v-if="missing_item">
+      <img :src="`/media/_maptroid-sink/_videos/${video.external_id}/${missing_item.frame}.png`" />
+      {{ missing_item.item }}
+      {{ parseInt(missing_item.seconds / 60) }}:{{ missing_item.seconds % 60 }}
     </div>
-    <div v-if="show_player" class="video-box__player">
-      <div :id="player_id" />
+    <div v-else>
+      <div class="item-list__header">
+        <div class="video-box__title" @click="open = true">
+          Route:
+          <div>{{ video.label }}</div>
+          by
+          {{ video.channel_name }}
+          <div :style="`background-image: url(${video.channel_icon})`" class="video-box__avatar" />
+        </div>
+        <template v-if="$auth.user?.is_superuser">
+          <div class="video-box__seperator" />
+          <div @click="togglePlayer">
+            <template v-if="expanded">
+              {{ visible_time }} <i class="fa fa-chevron-down" />
+            </template>
+            <template v-else> Expand Player <i class="fa fa-chevron-up" /> </template>
+          </div>
+        </template>
+      </div>
+      <div v-if="show_player" class="video-box__player">
+        <div :id="player_id" />
+      </div>
     </div>
     <teleport to="body">
       <unrest-modal v-if="open" @close="open = false">
@@ -41,6 +50,9 @@ export default {
     return { player: null, open: null, player_id }
   },
   computed: {
+    missing_item() {
+      return this.$store.video.getNextUnknownItem()
+    },
     mousetrap() {
       const { player } = this
       return {

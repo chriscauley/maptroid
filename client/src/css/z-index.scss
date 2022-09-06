@@ -52,8 +52,11 @@
   .sm-room-svg {
     z-index: 100;
   }
-  .sm-item, .sm-link {
+  .sm-link {
     z-index: 120;
+  }
+  .sm-item {
+    z-index: 121;
   }
 }
 

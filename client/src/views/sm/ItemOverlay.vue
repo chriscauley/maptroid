@@ -19,6 +19,15 @@ export default {
   components: { ItemPopper },
   inject: ['map_props', 'tool_storage', 'osd_store'],
   computed: {
+    video_items() {
+      const { tool } = this.tool_storage.state.selected
+      const video_items = {}
+      if (tool === 'video_path') {
+        const video = this.$store.video.getCurrentVideo()
+        video?.data.items.map((item) => (video_items[item[0]] = true))
+      }
+      return video_items
+    },
     items() {
       const { items } = this.map_props
       const { item_type } = this.osd_store.state.filters
@@ -46,6 +55,8 @@ export default {
       const [x, y] = item.data.room_xy
       const _class = [...item.attrs.class]
       _class.push(this.matched[item.id] ? '-matched' : '-not-matched')
+      _class.push(this.video_items[item.id] ? '-video-matched' : '-not-video-matched')
+
       return {
         ...item.attrs,
         class: _class,
@@ -61,7 +72,10 @@ export default {
       const { tool } = this.tool_storage.state.selected
       if (tool === 'video_path') {
         const video = this.$store.video.getCurrentVideo()
-        if (event.shiftKey) {
+        const unknown_item = this.$store.video.getNextUnknownItem()
+        if (unknown_item) {
+          video.data.items.push([item.id, unknown_item.seconds])
+        } else if (event.shiftKey) {
           video.data.items = video.data.items.filter((i) => i[0] !== item.id)
         } else {
           video.data.items.push([item.id, this.$store.local.state.current_time])
@@ -70,6 +84,8 @@ export default {
           this.$store.video.api.markStale()
           this.$store.video.getCurrentVideo()
         })
+        event.stopPropagation()
+        event.preventDefault()
       } else if (tool === 'run_path') {
         const run = this.$store.run.getCurrentRun()
         run.data.actions = run.data.actions || []
@@ -79,6 +95,8 @@ export default {
         } else {
           this.$store.run.addAction(['item', item.id])
         }
+        event.stopPropagation()
+        event.preventDefault()
       }
     },
   },

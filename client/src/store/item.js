@@ -15,6 +15,10 @@ const fromServer = (item) => {
       title: startCase(item.data.type),
       class: [`sm-item -${item.data.type}`],
     }
+    if (item.data.duplicate) {
+      item.attrs.title += ' (duplicate)'
+      item.attrs.class.push('-duplicate')
+    }
   }
   item.attrs.id = `item__${item.id}`
   return item

@@ -50,8 +50,7 @@ const help_texts = {
   'layer-1': 'Foreground and background layers exported from SMILE',
   rooms: 'Shape of rooms (manually defined where not a rectangle)',
   bts: 'This is the room geometry and special tiles according to SMILE.',
-  plm_enemies:
-    'This is the "post load modifications" (items, etc) and enemies layers from SMILE.',
+  plm_enemies: 'This is the "post load modifications" (items, etc) and enemies layers from SMILE.',
   svg: 'My room geometry, reverse engineered from bts.',
   route: 'Route taken by selected video',
 }

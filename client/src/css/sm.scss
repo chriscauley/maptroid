@@ -70,7 +70,14 @@
   @apply absolute;
   &:before {
     @apply bg-black;
-    outline: 1px solid white;
+    outline: 2px solid white;
+  }
+  &.-duplicate:before {
+    outline: 2px solid gray;
+  }
+  &.-video-matched:before {
+    outline: 8px solid green;
+    opacity: 0.5;
   }
   &:before, ._before {
     @apply absolute;
@@ -250,7 +257,11 @@ $cre-hex: respawn block exit;
     background-image: url("/static/sm/confused.png");
     background-position: unset;
   }
+  &.-duplicate:before {
+    border: red 5px solid;
+  }
 }
+
 .sm-item {
   @for $i from 0 to length($custom-items) {
     $name: nth($custom-items, $i + 1);

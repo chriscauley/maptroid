@@ -1,5 +1,3 @@
-import { startCase } from 'lodash'
-
 import ToolStorage from '@/components/unrest/ToolStorage'
 import { LAYER_NAMES, INITIAL_LAYERS } from './ConfigPopper.vue'
 
