@@ -265,6 +265,9 @@ $cre-hex: respawn block exit;
     /* DEPRECATED */
     outline: red 10px solid;
   }
+  &.-hidden:before {
+    outline: yellow 10px solid;
+  }
 }
 
 .sm-item {

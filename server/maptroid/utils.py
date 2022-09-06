@@ -47,6 +47,11 @@ COLORS = [
 
 CRE_COLORS = dict(zip(CRES,COLORS))
 
+def ahash(image):
+    image = Image.fromarray(image)
+    return imagehash.average_hash(image)
+
+
 def dhash(image):
     image = Image.fromarray(image)
     return imagehash.dhash(image)

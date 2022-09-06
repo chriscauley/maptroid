@@ -14,7 +14,7 @@ const fromServer = (item) => {
   } else {
     item.attrs = {
       title: startCase(item.data.type),
-      class: [`sm-item -${item.data.type}`],
+      class: [`sm-item -${item.data.type}`, item.data.hidden && '-hidden'],
     }
     if (auth.user?.is_superuser) {
       item.attrs.title += ' ' + item.id

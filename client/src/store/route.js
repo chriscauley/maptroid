@@ -29,12 +29,16 @@ export default ({ store }) => {
       const world_id = route.world?.id
       const query = Query({ zone__world_id: world_id })
       const page = world_id && store.item.getPage(query)
-      const items = page?.items || []
+      let items = page?.items || []
 
       // Hide all items in hidden rooms
       const visible_rooms = {}
       route.world_rooms.forEach((r) => (visible_rooms[r.id] = true))
-      return items.filter((i) => visible_rooms[i.room] && !i.data.hidden)
+      items = items.filter((i) => visible_rooms[i.room])
+      if (!store._app.config.globalProperties.$auth.user?.is_superuser) {
+          items = items.filter(i => !i.data.hidden)
+      }
+      return items
     }),
 
     world_rooms: computed(() => {
