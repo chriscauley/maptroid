@@ -1,0 +1,14 @@
+.item-popper {
+  @apply p-2 rounded border;
+  background: var(--bg);
+  &__name, &__reward, &__duplicate {
+    @apply flex gap-2;
+    white-space: nowrap;
+    input {
+      width: 70px;
+    }
+  }
+  .flexy .fa {
+    cursor: pointer;
+  }
+}

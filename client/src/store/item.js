@@ -1,4 +1,5 @@
 import { startCase } from 'lodash'
+import auth from '@unrest/vue-auth'
 import { RestStorage } from '@unrest/vue-storage'
 
 import DreadItems from '@/models/DreadItems'
@@ -15,9 +16,16 @@ const fromServer = (item) => {
       title: startCase(item.data.type),
       class: [`sm-item -${item.data.type}`],
     }
+    if (auth.user?.is_superuser) {
+      item.attrs.title += ' ' + item.id
+    }
     if (item.data.duplicate) {
-      item.attrs.title += ' (duplicate)'
+      /* DEPRECATED */
       item.attrs.class.push('-duplicate')
+    }
+    if (item.data.duplicate_of) {
+      item.attrs.title += ' (duplicate)'
+      item.attrs.class.push('-duplicate_of')
     }
   }
   item.attrs.id = `item__${item.id}`

@@ -48,7 +48,7 @@ const Item = {
   misc,
   groupItems(world, world_items, actions) {
     const totals = countBy(
-      world_items.filter((i) => !i.data.duplicate),
+      world_items.filter((i) => !i.data.duplicate_of),
       'data.type',
     )
     const items_by_id = {}

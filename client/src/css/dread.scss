@@ -222,16 +222,6 @@
   }
 }
 
-.item-popper {
-  @apply p-2 rounded border;
-  background: var(--bg);
-  &__name, &__reward {
-    white-space: nowrap;
-  }
-  .flexy .fa {
-    cursor: pointer;
-  }
-}
 .dread-debug {
   @apply fixed bottom-0 left-0 p-2;
   background: rgba(0,0,0,0.5);

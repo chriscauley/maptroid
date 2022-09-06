@@ -6,11 +6,15 @@
         <a :href="`/djadmin/maptroid/item/${item.id}/`" class="link" @click.stop>
           Item Admin
         </a>
+        <label class="item-popper__duplicate">
+          Duplicate of:
+          <input v-model="duplicate_of" @input="updateDuplicate" />
+        </label>
         <div
           v-for="status in statuses"
           :key="status"
           :class="['btn', item.data[status] ? '-primary' : '-secondary']"
-          @click="(e) => click(e, status)"
+          @click="(e) => toggleStatus(e, status)"
         >
           {{ item.data[status] ? 'Is' : 'Not' }} {{ status }}
         </div>
@@ -20,7 +24,7 @@
 </template>
 
 <script>
-import { cloneDeep } from 'lodash'
+import { debounce } from 'lodash'
 
 export default {
   inject: ['osd_store'],
@@ -28,23 +32,35 @@ export default {
     item: Object,
   },
   data() {
-    return { statuses: ['duplicate'] }
+    return { statuses: ['duplicate', 'hidden'], duplicate_of: this.item.data.duplicate_of }
   },
   methods: {
-    click(event, status) {
+    updateDuplicate() {
+      const { item } = this
+      item.data.duplicate_of = parseInt(this.duplicate_of)
+      const match = (i) => i.id === item.data.duplicate_of
+      const target_item = this.$store.route.world_items.find(match)
+      if (!target_item) {
+        delete item.data.duplicate_of
+      }
+      this.bounceSave()
+    },
+    bounceSave: debounce(function() {
+      this.$store.item.save(this.item).then(this.$store.route.refetchItems)
+    }, 1000),
+    toggleStatus(event, status) {
+      const { item } = this
       if (!(event.shiftKey && event.ctrlKey)) {
         this.$ui.toast.error('Must hold ctrl + shift')
         return
       }
-      const item = cloneDeep(this.item)
       if (item.data[status]) {
         delete item.data[status]
       } else {
         item.data[status] = true
       }
 
-      this.$store.item.save(item).then(this.$store.route.refetchItems)
-      return
+      this.$store.item.save(item)
     },
   },
 }

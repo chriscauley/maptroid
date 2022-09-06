@@ -1,7 +1,24 @@
 <template>
   <svg v-bind="svg.attrs">
     <defs>
-      <marker id="arrowhead" markerWidth="5" markerHeight="3.5" refX="3" refY="1.75" orient="auto">
+      <marker
+        id="white-arrowhead"
+        markerWidth="5"
+        markerHeight="3.5"
+        refX="3"
+        refY="1.75"
+        orient="auto"
+      >
+        <polygon points="0 0, 5 1.75, 0 3.5" fill="#fff" />
+      </marker>
+      <marker
+        id="green-arrowhead"
+        markerWidth="5"
+        markerHeight="3.5"
+        refX="3"
+        refY="1.75"
+        orient="auto"
+      >
         <polygon points="0 0, 5 1.75, 0 3.5" fill="#0f0" />
       </marker>
       <marker
@@ -18,6 +35,7 @@
     <path v-for="path in svg.paths" v-bind="path" :key="path.id" />
     <path v-if="hovering" v-bind="hovering" />
     <line v-for="(line, i) in run_lines" :key="i" v-bind="line" />
+    <line v-if="one_line" v-bind="one_line" />
   </svg>
 </template>
 
@@ -163,6 +181,30 @@ export default {
         },
       }
     },
+    one_line() {
+      const selected_item_id = parseInt(this.$route.query.item)
+      let selected_item = this.map_props.items.find((i) => i.id === selected_item_id)
+      let target_item
+      if (selected_item?.data.duplicate_of) {
+        target_item = this.map_props.items.find((i) => i.id === selected_item.data.duplicate_of)
+      } else if (selected_item) {
+        target_item = this.map_props.items.find((i) => i.data.duplicate_of === selected_item_id)
+        ;[selected_item, target_item] = [target_item, selected_item] // switch direction
+      }
+
+      if (target_item && selected_item) {
+        const xy1 = this.getItemXY(selected_item)
+        const xy2 = this.getItemXY(target_item)
+        return {
+          x1: xy1[0],
+          x2: xy2[0],
+          y1: xy1[1],
+          y2: xy2[1],
+          class: 'one-line',
+        }
+      }
+      return null
+    },
   },
   methods: {
     click(event, room) {
@@ -210,6 +252,11 @@ export default {
     },
     blur() {
       this.hovering = null
+    },
+    getItemXY(item) {
+      const [room_x, room_y] = this.map_props.room_bounds[item.room]
+      const [item_x, item_y] = item.data.room_xy
+      return [room_x + item_x / 16, room_y + item_y / 16]
     },
   },
 }

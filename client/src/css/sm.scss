@@ -72,9 +72,6 @@
     @apply bg-black;
     outline: 2px solid white;
   }
-  &.-duplicate:before {
-    outline: 2px solid gray;
-  }
   &.-video-matched:before {
     outline: 8px solid green;
     opacity: 0.5;
@@ -257,8 +254,12 @@ $cre-hex: respawn block exit;
     background-image: url("/static/sm/confused.png");
     background-position: unset;
   }
+  &.-duplicate_of:before {
+    border: gray 10px solid;
+  }
   &.-duplicate:before {
-    border: red 5px solid;
+    /* DEPRECATED */
+    outline: red 10px solid;
   }
 }
 
@@ -347,16 +348,20 @@ $ascent-items: weapons-tank shinespark boost-ball;
       }
     }
   }
-  line.run {
+  line.run, line.one-line {
     stroke: theme('colors.green.500');
     stroke-width: 0.0625;
     pointer-events: none;
-    marker-end: url(#arrowhead);
+    marker-end: url(#green-arrowhead);
     &.-highlight {
       stroke: theme('colors.red.800');
       stroke-width: 0.25;
       marker-end: url(#red-arrowhead);
     }
+  }
+  line.one-line {
+    stroke: white;
+    marker-end: url(#white-arrowhead);
   }
 }
 
