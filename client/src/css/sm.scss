@@ -74,7 +74,7 @@
   }
   &.-video-matched:before {
     outline: 8px solid green;
-    opacity: 0.5;
+    opacity: 0.75;
   }
   &:before, ._before {
     @apply absolute;
@@ -255,7 +255,11 @@ $cre-hex: respawn block exit;
     background-position: unset;
   }
   &.-duplicate_of:before {
+    filter: grayscale(1) brightness(0.75);
+  }
+  .-tool-video_path &.-duplicate_of:before {
     border: gray 10px solid;
+    filter: unset;
   }
   &.-duplicate:before {
     /* DEPRECATED */
