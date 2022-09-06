@@ -106,7 +106,7 @@ export default {
     },
 
     run_lines() {
-      if (!this.storage.state.show_route) {
+      if (!this.storage.state.show_route || !this.$auth.user?.is_superuser) {
         return []
       }
       let { raw_lines } = this
