@@ -4,7 +4,6 @@ import functools
 import numpy as np
 import os
 from PIL import Image, ImageDraw
-import shutil
 
 from maptroid.doors import draw_doors
 from maptroid.dzi import png_to_dzi
@@ -165,7 +164,7 @@ def process_zone(zone, skip_dzi=False):
         if not skip_dzi:
             png_to_dzi(dest)
             if zone.world.slug == 'vitality' and 'layer-1' in layers:
-                shutil.remove(det)
+                os.unlink(dest)
 
     zone.normalize()
 
