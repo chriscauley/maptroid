@@ -2,20 +2,14 @@ import subprocess
 import os
 
 def main():
-    with open('./base.graph', 'r') as f:
-        text = f.read()
-    top, *rest, bottom = text.split('/* split */')
-
-    colors = zip(['start', 'purple', 'green', 'white', 'blue'], rest)
-    for color, code in colors:
-        with open(f'_{color}.graph', 'w') as f:
-            f.write(top+code+bottom)
-
+    colors = ['start', 'purple', 'green', 'white', 'blue']
+    for color in colors:
         with open(f'../src/svg/{color}.svg', "w") as f:
-            cmd = f'dot _{color}.graph -Tsvg'
+            cmd = f'dot {color}.graph -Tsvg'
             process = subprocess.Popen(cmd.split(), stdout=f)
             process.wait()
 
+        # Remove the first 6 lines as the xml declaration breaks the vue svg loader
         with open(f'../src/svg/{color}.svg', "r") as f:
             text = f.read()
 

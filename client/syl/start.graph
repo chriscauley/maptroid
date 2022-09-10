@@ -1,0 +1,15 @@
+digraph G {
+  rankdir="LR";
+  subgraph cluster_0 {
+    label = "Start Area";
+    start_cu;
+    start_cd;
+    start_cl;
+    start_cr;
+  }
+
+  start_cu -> pcore_d [class="-purple"];
+  start_cr -> lcore_l [class="-green"];
+  start_cd -> wcore_u [class="-white"];
+  start_cl -> bcore_r [class="-blue"];
+}

@@ -1,0 +1,83 @@
+digraph G {
+  rankdir="LR";
+
+  start_cu -> pcore_d [class="-purple"];
+  parea -> start_cl [class="-purple"];
+
+  subgraph cluster_100 {
+    label = "Purple snow";
+
+    subgraph cluster_101 {
+      label = "Purple Core (missile)";
+      pcore_l;
+      missile_core [shape="rectangle" style="filled" fillcolor="#ff8888"];
+    }
+
+    subgraph cluster_102 {
+      label = "Purple core";
+      pcore_r;
+      pcore_d;
+    }
+
+    subgraph cluster_103 {
+      label = "Purple wheel (top right)";
+      pwtr_u;
+      pwtr_cl;
+      pwtr_cd;
+    }
+
+    subgraph cluster_104 {
+      label = "Vertical Core";
+      vcore_u;
+      vcore_d;
+    }
+
+    subgraph cluster_1040 {
+      label = "Vertical Core (right)";
+      vcore_r;
+    }
+
+    subgraph cluster_105 {
+      label = "Tall Core";
+      tcore_u;
+      tcore_d;
+      tcore_l;
+      tcore_r;
+    }
+
+    subgraph cluster_106 {
+      label = "Purple Exit";
+      pexit_l;
+      pexit_cr;
+      missile_topleft [shape="rectangle" style="filled" fillcolor="#ff8888"];
+    }
+
+    pexit_cr -> pcore_l;
+
+    tcore_u -> tcore_d;
+    tcore_d -> vcore_u;
+    tcore_l -> pexit_cr [class="-purple"];
+    tcore_r -> pcore_l [class="-red"];
+
+    // internal connections
+    pwtr_u -> vcore_d;
+    pwtr_cl -> vcore_r;
+    pwtr_cd -> vcore_u [class="-purple"];
+
+    vcore_u -> tcore_u;
+    vcore_d -> tcore_u [class="-purple"];
+
+    pcore_r -> pwtr_cl;
+    pcore_l -> pcore_r;
+
+    // loops
+    pcore_d -> pwtr_u [class="-purple"];
+  }
+
+  subgraph cluster_501 {
+    label = "Purple Area";
+    parea;
+  }
+  pexit_l -> parea [class="-purple"];
+  vcore_r -> start_cl;
+}

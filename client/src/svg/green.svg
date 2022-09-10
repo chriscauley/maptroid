@@ -1,0 +1,250 @@
+<svg width="983pt" height="581pt"
+ viewBox="0.00 0.00 982.86 581.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 577)">
+<title>G</title>
+<polygon fill="white" stroke="transparent" points="-4,4 -4,-577 978.86,-577 978.86,4 -4,4"/>
+<g id="clust1" class="cluster">
+<title>cluster_200</title>
+<polygon fill="none" stroke="black" points="0,-98 0,-529 974.86,-529 974.86,-98 0,-98"/>
+</g>
+<g id="clust2" class="cluster">
+<title>cluster_201</title>
+<polygon fill="none" stroke="black" points="211.64,-446 211.64,-521 497.63,-521 497.63,-446 211.64,-446"/>
+<text text-anchor="middle" x="354.64" y="-505.8" font-family="Times,serif" font-size="14.00">Long Core</text>
+</g>
+<g id="clust3" class="cluster">
+<title>cluster_202</title>
+<polygon fill="none" stroke="black" points="563.68,-239 563.68,-476 772.87,-476 772.87,-239 563.68,-239"/>
+<text text-anchor="middle" x="668.28" y="-460.8" font-family="Times,serif" font-size="14.00">Green Missile (bottom left)</text>
+</g>
+<g id="clust4" class="cluster">
+<title>cluster_203</title>
+<polygon fill="none" stroke="black" points="8,-434 8,-509 154.09,-509 154.09,-434 8,-434"/>
+<text text-anchor="middle" x="81.05" y="-493.8" font-family="Times,serif" font-size="14.00">Green Chozo (left)</text>
+</g>
+<g id="clust5" class="cluster">
+<title>cluster_204</title>
+<polygon fill="none" stroke="black" points="808.87,-401 808.87,-476 966.86,-476 966.86,-401 808.87,-401"/>
+<text text-anchor="middle" x="887.87" y="-460.8" font-family="Times,serif" font-size="14.00">Green Chozo (right)</text>
+</g>
+<g id="clust6" class="cluster">
+<title>cluster_205</title>
+<polygon fill="none" stroke="black" points="190.09,-106 190.09,-235 331.09,-235 331.09,-106 190.09,-106"/>
+<text text-anchor="middle" x="260.59" y="-219.8" font-family="Times,serif" font-size="14.00">Green Chozo (up)</text>
+</g>
+<g id="clust7" class="cluster">
+<title>cluster_206</title>
+<polygon fill="none" stroke="black" points="367.09,-249 367.09,-324 527.68,-324 527.68,-249 367.09,-249"/>
+<text text-anchor="middle" x="447.39" y="-308.8" font-family="Times,serif" font-size="14.00">Green Chozo (down)</text>
+</g>
+<g id="clust8" class="cluster">
+<title>cluster_207</title>
+<polygon fill="none" stroke="black" points="23.65,-243 23.65,-426 316.69,-426 316.69,-243 23.65,-243"/>
+<text text-anchor="middle" x="170.17" y="-410.8" font-family="Times,serif" font-size="14.00">Green Exit</text>
+</g>
+<g id="clust9" class="cluster">
+<title>cluster_502</title>
+<polygon fill="none" stroke="black" points="212.54,-8 212.54,-83 309.64,-83 309.64,-8 212.54,-8"/>
+<text text-anchor="middle" x="261.09" y="-67.8" font-family="Times,serif" font-size="14.00">Green Area</text>
+</g>
+<!-- start_cr -->
+<g id="node1" class="node">
+<title>start_cr</title>
+<ellipse fill="none" stroke="black" cx="81.05" cy="-555" rx="46.59" ry="18"/>
+<text text-anchor="middle" x="81.05" y="-551.3" font-family="Times,serif" font-size="14.00">start_cr</text>
+</g>
+<!-- lcore_l -->
+<g id="node2" class="node">
+<title>lcore_l</title>
+<ellipse fill="none" stroke="black" cx="260.59" cy="-472" rx="40.89" ry="18"/>
+<text text-anchor="middle" x="260.59" y="-468.3" font-family="Times,serif" font-size="14.00">lcore_l</text>
+</g>
+<!-- start_cr&#45;&gt;lcore_l -->
+<g id="edge1" class="edge &#45;green">
+<title>start_cr&#45;&gt;lcore_l</title>
+<path fill="none" stroke="black" d="M111.76,-541.11C142.22,-526.87 189.65,-504.69 222.54,-489.32"/>
+<polygon fill="black" stroke="black" points="224.25,-492.39 231.83,-484.98 221.28,-486.04 224.25,-492.39"/>
+</g>
+<!-- lcore_r -->
+<g id="node8" class="node">
+<title>lcore_r</title>
+<ellipse fill="none" stroke="black" cx="447.39" cy="-472" rx="42.49" ry="18"/>
+<text text-anchor="middle" x="447.39" y="-468.3" font-family="Times,serif" font-size="14.00">lcore_r</text>
+</g>
+<!-- lcore_l&#45;&gt;lcore_r -->
+<g id="edge13" class="edge">
+<title>lcore_l&#45;&gt;lcore_r</title>
+<path fill="none" stroke="black" d="M301.69,-472C329.04,-472 365.5,-472 394.98,-472"/>
+<polygon fill="black" stroke="black" points="395.09,-475.5 405.09,-472 395.09,-468.5 395.09,-475.5"/>
+</g>
+<!-- garea -->
+<g id="node3" class="node">
+<title>garea</title>
+<ellipse fill="none" stroke="black" cx="260.59" cy="-34" rx="37.09" ry="18"/>
+<text text-anchor="middle" x="260.59" y="-30.3" font-family="Times,serif" font-size="14.00">garea</text>
+</g>
+<!-- start_cu -->
+<g id="node4" class="node">
+<title>start_cu</title>
+<ellipse fill="none" stroke="black" cx="887.87" cy="-49" rx="48.19" ry="18"/>
+<text text-anchor="middle" x="887.87" y="-45.3" font-family="Times,serif" font-size="14.00">start_cu</text>
+</g>
+<!-- garea&#45;&gt;start_cu -->
+<g id="edge2" class="edge">
+<title>garea&#45;&gt;start_cu</title>
+<path fill="none" stroke="black" d="M297.91,-34.87C402.11,-37.37 702.63,-44.58 829.39,-47.62"/>
+<polygon fill="black" stroke="black" points="829.58,-51.13 839.66,-47.87 829.74,-44.13 829.58,-51.13"/>
+</g>
+<!-- gexit_cr -->
+<g id="node5" class="node">
+<title>gexit_cr</title>
+<ellipse fill="none" stroke="black" cx="260.59" cy="-377" rx="48.19" ry="18"/>
+<text text-anchor="middle" x="260.59" y="-373.3" font-family="Times,serif" font-size="14.00">gexit_cr</text>
+</g>
+<!-- start_cl -->
+<g id="node6" class="node">
+<title>start_cl</title>
+<ellipse fill="none" stroke="black" cx="447.39" cy="-72" rx="45.49" ry="18"/>
+<text text-anchor="middle" x="447.39" y="-68.3" font-family="Times,serif" font-size="14.00">start_cl</text>
+</g>
+<!-- gexit_cr&#45;&gt;start_cl -->
+<g id="edge3" class="edge">
+<title>gexit_cr&#45;&gt;start_cl</title>
+<path fill="none" stroke="black" d="M272.33,-359.28C303.39,-308.01 393.51,-159.27 430.38,-98.42"/>
+<polygon fill="black" stroke="black" points="433.43,-100.13 435.62,-89.77 427.45,-96.5 433.43,-100.13"/>
+</g>
+<!-- gmissilel_cu -->
+<g id="node7" class="node">
+<title>gmissilel_cu</title>
+<ellipse fill="none" stroke="black" cx="668.28" cy="-319" rx="67.69" ry="18"/>
+<text text-anchor="middle" x="668.28" y="-315.3" font-family="Times,serif" font-size="14.00">gmissilel_cu</text>
+</g>
+<!-- gmissilel_cu&#45;&gt;start_cu -->
+<g id="edge4" class="edge">
+<title>gmissilel_cu&#45;&gt;start_cu</title>
+<path fill="none" stroke="black" d="M731.01,-312.19C745.95,-308.17 761.01,-301.86 772.87,-292 841.28,-235.13 871.06,-127.93 881.77,-77.1"/>
+<polygon fill="black" stroke="black" points="885.23,-77.64 883.78,-67.15 878.37,-76.26 885.23,-77.64"/>
+</g>
+<!-- gmissilel_cl -->
+<g id="node9" class="node">
+<title>gmissilel_cl</title>
+<ellipse fill="none" stroke="black" cx="668.28" cy="-427" rx="64.19" ry="18"/>
+<text text-anchor="middle" x="668.28" y="-423.3" font-family="Times,serif" font-size="14.00">gmissilel_cl</text>
+</g>
+<!-- lcore_r&#45;&gt;gmissilel_cl -->
+<g id="edge12" class="edge &#45;green">
+<title>lcore_r&#45;&gt;gmissilel_cl</title>
+<path fill="none" stroke="black" d="M486.01,-464.26C518.89,-457.51 567.25,-447.56 605.75,-439.65"/>
+<polygon fill="black" stroke="black" points="606.72,-443.02 615.81,-437.58 605.31,-436.17 606.72,-443.02"/>
+</g>
+<!-- gchozo_r -->
+<g id="node13" class="node">
+<title>gchozo_r</title>
+<ellipse fill="none" stroke="black" cx="887.87" cy="-427" rx="51.99" ry="18"/>
+<text text-anchor="middle" x="887.87" y="-423.3" font-family="Times,serif" font-size="14.00">gchozo_r</text>
+</g>
+<!-- gmissilel_cl&#45;&gt;gchozo_r -->
+<g id="edge9" class="edge">
+<title>gmissilel_cl&#45;&gt;gchozo_r</title>
+<path fill="none" stroke="black" d="M742.96,-427C769.76,-427 799.74,-427 825.37,-427"/>
+<polygon fill="black" stroke="black" points="742.8,-423.5 732.8,-427 742.8,-430.5 742.8,-423.5"/>
+<polygon fill="black" stroke="black" points="825.69,-430.5 835.69,-427 825.69,-423.5 825.69,-430.5"/>
+</g>
+<!-- gmissilel_r -->
+<g id="node10" class="node">
+<title>gmissilel_r</title>
+<ellipse fill="none" stroke="black" cx="668.28" cy="-373" rx="61.19" ry="18"/>
+<text text-anchor="middle" x="668.28" y="-369.3" font-family="Times,serif" font-size="14.00">gmissilel_r</text>
+</g>
+<!-- gchozo_l -->
+<g id="node12" class="node">
+<title>gchozo_l</title>
+<ellipse fill="none" stroke="black" cx="81.05" cy="-460" rx="50.09" ry="18"/>
+<text text-anchor="middle" x="81.05" y="-456.3" font-family="Times,serif" font-size="14.00">gchozo_l</text>
+</g>
+<!-- gmissilel_r&#45;&gt;gchozo_l -->
+<g id="edge10" class="edge &#45;green">
+<title>gmissilel_r&#45;&gt;gchozo_l</title>
+<path fill="none" stroke="black" d="M617.06,-382.85C551.52,-395.41 433.13,-417.03 331.09,-430 268.7,-437.93 252.49,-434.16 190.09,-442 172.35,-444.23 153.06,-447.25 135.76,-450.18"/>
+<polygon fill="black" stroke="black" points="135.09,-446.74 125.82,-451.89 136.27,-453.64 135.09,-446.74"/>
+</g>
+<!-- missile_botright -->
+<g id="node11" class="node">
+<title>missile_botright</title>
+<polygon fill="#ff8888" stroke="black" points="734.28,-283 602.28,-283 602.28,-247 734.28,-247 734.28,-283"/>
+<text text-anchor="middle" x="668.28" y="-261.3" font-family="Times,serif" font-size="14.00">missile_botright</text>
+</g>
+<!-- gchozo_l&#45;&gt;gexit_cr -->
+<g id="edge11" class="edge &#45;green">
+<title>gchozo_l&#45;&gt;gexit_cr</title>
+<path fill="none" stroke="black" d="M115.26,-446.75C127.54,-441.69 141.53,-435.76 154.09,-430 177.09,-419.45 202.44,-406.75 222.53,-396.43"/>
+<polygon fill="black" stroke="black" points="224.36,-399.42 231.64,-391.72 221.15,-393.2 224.36,-399.42"/>
+</g>
+<!-- gchozo_u -->
+<g id="node14" class="node">
+<title>gchozo_u</title>
+<ellipse fill="none" stroke="black" cx="260.59" cy="-186" rx="53.09" ry="18"/>
+<text text-anchor="middle" x="260.59" y="-182.3" font-family="Times,serif" font-size="14.00">gchozo_u</text>
+</g>
+<!-- gchozo_d -->
+<g id="node16" class="node">
+<title>gchozo_d</title>
+<ellipse fill="none" stroke="black" cx="447.39" cy="-275" rx="53.09" ry="18"/>
+<text text-anchor="middle" x="447.39" y="-271.3" font-family="Times,serif" font-size="14.00">gchozo_d</text>
+</g>
+<!-- gchozo_u&#45;&gt;gchozo_d -->
+<g id="edge7" class="edge">
+<title>gchozo_u&#45;&gt;gchozo_d</title>
+<path fill="none" stroke="black" d="M292.11,-200.7C323.4,-215.77 372.23,-239.29 406.56,-255.82"/>
+<polygon fill="black" stroke="black" points="405.3,-259.1 415.83,-260.28 408.34,-252.79 405.3,-259.1"/>
+</g>
+<!-- missile_gchozo -->
+<g id="node15" class="node">
+<title>missile_gchozo</title>
+<polygon fill="#ff8888" stroke="black" points="322.09,-150 199.09,-150 199.09,-114 322.09,-114 322.09,-150"/>
+<text text-anchor="middle" x="260.59" y="-128.3" font-family="Times,serif" font-size="14.00">missile_gchozo</text>
+</g>
+<!-- gchozo_d&#45;&gt;gmissilel_cu -->
+<g id="edge8" class="edge">
+<title>gchozo_d&#45;&gt;gmissilel_cu</title>
+<path fill="none" stroke="black" d="M493.47,-284.06C525.25,-290.45 568.26,-299.1 603.54,-306.19"/>
+<polygon fill="black" stroke="black" points="603.25,-309.7 613.75,-308.24 604.63,-302.84 603.25,-309.7"/>
+</g>
+<!-- gexit_u -->
+<g id="node17" class="node">
+<title>gexit_u</title>
+<ellipse fill="none" stroke="black" cx="81.05" cy="-269" rx="44.39" ry="18"/>
+<text text-anchor="middle" x="81.05" y="-265.3" font-family="Times,serif" font-size="14.00">gexit_u</text>
+</g>
+<!-- gexit_u&#45;&gt;garea -->
+<g id="edge14" class="edge &#45;green">
+<title>gexit_u&#45;&gt;garea</title>
+<path fill="none" stroke="black" d="M91.89,-251.05C109.58,-219.47 148.79,-152.53 190.09,-102 203.4,-85.72 220.21,-69.19 233.96,-56.5"/>
+<polygon fill="black" stroke="black" points="236.61,-58.82 241.66,-49.5 231.9,-53.64 236.61,-58.82"/>
+</g>
+<!-- gexit_cd -->
+<g id="node18" class="node">
+<title>gexit_cd</title>
+<ellipse fill="none" stroke="black" cx="81.05" cy="-323" rx="49.29" ry="18"/>
+<text text-anchor="middle" x="81.05" y="-319.3" font-family="Times,serif" font-size="14.00">gexit_cd</text>
+</g>
+<!-- gexit_cd&#45;&gt;gchozo_u -->
+<g id="edge5" class="edge &#45;red">
+<title>gexit_cd&#45;&gt;gchozo_u</title>
+<path fill="none" stroke="black" d="M122.62,-312.96C133.61,-308.93 144.97,-303.42 154.09,-296 177.33,-277.09 169.86,-261.1 190.09,-239 200.75,-227.36 214.22,-216.43 226.45,-207.56"/>
+<polygon fill="black" stroke="black" points="228.52,-210.38 234.68,-201.76 224.49,-204.66 228.52,-210.38"/>
+</g>
+<!-- gexit_l -->
+<g id="node19" class="node">
+<title>gexit_l</title>
+<ellipse fill="none" stroke="black" cx="81.05" cy="-377" rx="41.69" ry="18"/>
+<text text-anchor="middle" x="81.05" y="-373.3" font-family="Times,serif" font-size="14.00">gexit_l</text>
+</g>
+<!-- gexit_l&#45;&gt;gexit_cr -->
+<g id="edge6" class="edge">
+<title>gexit_l&#45;&gt;gexit_cr</title>
+<path fill="none" stroke="black" d="M122.78,-377C146.37,-377 176.43,-377 202.37,-377"/>
+<polygon fill="black" stroke="black" points="202.45,-380.5 212.45,-377 202.45,-373.5 202.45,-380.5"/>
+</g>
+</g>
+</svg>

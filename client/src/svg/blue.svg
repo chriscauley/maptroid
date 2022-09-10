@@ -1,0 +1,238 @@
+<svg width="943pt" height="716pt"
+ viewBox="0.00 0.00 942.87 716.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 712)">
+<title>G</title>
+<polygon fill="white" stroke="transparent" points="-4,4 -4,-712 938.87,-712 938.87,4 -4,4"/>
+<g id="clust1" class="cluster">
+<title>cluster_400</title>
+<polygon fill="none" stroke="black" points="110.99,-173 110.99,-700 933.87,-700 933.87,-173 110.99,-173"/>
+</g>
+<g id="clust2" class="cluster">
+<title>cluster_401</title>
+<polygon fill="none" stroke="black" points="118.99,-563 118.99,-692 399.78,-692 399.78,-563 118.99,-563"/>
+<text text-anchor="middle" x="259.39" y="-676.8" font-family="Times,serif" font-size="14.00">Blue Core (no up)</text>
+</g>
+<g id="clust3" class="cluster">
+<title>cluster_402</title>
+<polygon fill="none" stroke="black" points="256.58,-181 256.58,-364 438.58,-364 438.58,-181 256.58,-181"/>
+<text text-anchor="middle" x="347.58" y="-348.8" font-family="Times,serif" font-size="14.00">Blue Missile (top right)</text>
+</g>
+<g id="clust4" class="cluster">
+<title>cluster_403</title>
+<polygon fill="none" stroke="black" points="293.44,-372 293.44,-555 603.67,-555 603.67,-372 293.44,-372"/>
+<text text-anchor="middle" x="448.56" y="-539.8" font-family="Times,serif" font-size="14.00">Blue Exit</text>
+</g>
+<g id="clust5" class="cluster">
+<title>cluster_404</title>
+<polygon fill="none" stroke="black" points="649.57,-432 649.57,-561 788.57,-561 788.57,-432 649.57,-432"/>
+<text text-anchor="middle" x="719.07" y="-545.8" font-family="Times,serif" font-size="14.00">Blue Chozo (left)</text>
+</g>
+<g id="clust6" class="cluster">
+<title>cluster_405</title>
+<polygon fill="none" stroke="black" points="474.58,-289 474.58,-364 621.57,-364 621.57,-289 474.58,-289"/>
+<text text-anchor="middle" x="548.08" y="-348.8" font-family="Times,serif" font-size="14.00">Blue Chozo (right)</text>
+</g>
+<g id="clust7" class="cluster">
+<title>cluster_406</title>
+<polygon fill="none" stroke="black" points="816.57,-521 816.57,-596 925.87,-596 925.87,-521 816.57,-521"/>
+<text text-anchor="middle" x="871.22" y="-580.8" font-family="Times,serif" font-size="14.00">Blue Balcony</text>
+</g>
+<g id="clust8" class="cluster">
+<title>cluster_504</title>
+<polygon fill="none" stroke="black" points="502.53,-8 502.53,-83 592.63,-83 592.63,-8 502.53,-8"/>
+<text text-anchor="middle" x="547.58" y="-67.8" font-family="Times,serif" font-size="14.00">Blue Area</text>
+</g>
+<!-- start_cl -->
+<g id="node1" class="node">
+<title>start_cl</title>
+<ellipse fill="none" stroke="black" cx="45.5" cy="-643" rx="45.49" ry="18"/>
+<text text-anchor="middle" x="45.5" y="-639.3" font-family="Times,serif" font-size="14.00">start_cl</text>
+</g>
+<!-- bcore_r -->
+<g id="node2" class="node">
+<title>bcore_r</title>
+<ellipse fill="none" stroke="black" cx="173.79" cy="-643" rx="45.49" ry="18"/>
+<text text-anchor="middle" x="173.79" y="-639.3" font-family="Times,serif" font-size="14.00">bcore_r</text>
+</g>
+<!-- start_cl&#45;&gt;bcore_r -->
+<g id="edge1" class="edge &#45;blue">
+<title>start_cl&#45;&gt;bcore_r</title>
+<path fill="none" stroke="black" d="M91.02,-643C99.79,-643 109.09,-643 118.15,-643"/>
+<polygon fill="black" stroke="black" points="118.24,-646.5 128.24,-643 118.24,-639.5 118.24,-646.5"/>
+</g>
+<!-- bcore_l -->
+<g id="node9" class="node">
+<title>bcore_l</title>
+<ellipse fill="none" stroke="black" cx="347.58" cy="-589" rx="44.39" ry="18"/>
+<text text-anchor="middle" x="347.58" y="-585.3" font-family="Times,serif" font-size="14.00">bcore_l</text>
+</g>
+<!-- bcore_r&#45;&gt;bcore_l -->
+<g id="edge7" class="edge">
+<title>bcore_r&#45;&gt;bcore_l</title>
+<path fill="none" stroke="black" d="M209.97,-631.94C236.66,-623.55 273.54,-611.96 302.25,-602.93"/>
+<polygon fill="black" stroke="black" points="303.55,-606.2 312.04,-599.86 301.45,-599.52 303.55,-606.2"/>
+</g>
+<!-- bmissile_cd -->
+<g id="node3" class="node">
+<title>bmissile_cd</title>
+<ellipse fill="none" stroke="black" cx="347.58" cy="-315" rx="64.19" ry="18"/>
+<text text-anchor="middle" x="347.58" y="-311.3" font-family="Times,serif" font-size="14.00">bmissile_cd</text>
+</g>
+<!-- start_cu -->
+<g id="node4" class="node">
+<title>start_cu</title>
+<ellipse fill="none" stroke="black" cx="547.58" cy="-147" rx="48.19" ry="18"/>
+<text text-anchor="middle" x="547.58" y="-143.3" font-family="Times,serif" font-size="14.00">start_cu</text>
+</g>
+<!-- bmissile_cd&#45;&gt;start_cu -->
+<g id="edge2" class="edge">
+<title>bmissile_cd&#45;&gt;start_cu</title>
+<path fill="none" stroke="black" d="M401.54,-305.07C414.39,-301.1 427.58,-295.6 438.58,-288 481.58,-258.31 514.98,-206.14 532.64,-174.26"/>
+<polygon fill="black" stroke="black" points="535.94,-175.53 537.61,-165.07 529.78,-172.2 535.94,-175.53"/>
+</g>
+<!-- bmissile_cu -->
+<g id="node5" class="node">
+<title>bmissile_cu</title>
+<ellipse fill="none" stroke="black" cx="347.58" cy="-261" rx="64.19" ry="18"/>
+<text text-anchor="middle" x="347.58" y="-257.3" font-family="Times,serif" font-size="14.00">bmissile_cu</text>
+</g>
+<!-- start_cd -->
+<g id="node6" class="node">
+<title>start_cd</title>
+<ellipse fill="none" stroke="black" cx="719.07" cy="-67" rx="48.19" ry="18"/>
+<text text-anchor="middle" x="719.07" y="-63.3" font-family="Times,serif" font-size="14.00">start_cd</text>
+</g>
+<!-- bmissile_cu&#45;&gt;start_cd -->
+<g id="edge3" class="edge">
+<title>bmissile_cu&#45;&gt;start_cd</title>
+<path fill="none" stroke="black" d="M405.47,-252.95C417.63,-248.93 429.52,-242.93 438.58,-234 476.42,-196.7 435.33,-155.81 474.58,-120 476.38,-118.36 595.9,-92.85 666.8,-77.83"/>
+<polygon fill="black" stroke="black" points="667.83,-81.19 676.88,-75.69 666.38,-74.34 667.83,-81.19"/>
+</g>
+<!-- barea -->
+<g id="node7" class="node">
+<title>barea</title>
+<ellipse fill="none" stroke="black" cx="547.58" cy="-34" rx="37.09" ry="18"/>
+<text text-anchor="middle" x="547.58" y="-30.3" font-family="Times,serif" font-size="14.00">barea</text>
+</g>
+<!-- barea&#45;&gt;start_cd -->
+<g id="edge4" class="edge">
+<title>barea&#45;&gt;start_cd</title>
+<path fill="none" stroke="black" d="M582.47,-40.6C606.37,-45.25 638.84,-51.57 666.01,-56.86"/>
+<polygon fill="black" stroke="black" points="665.65,-60.36 676.13,-58.83 666.98,-53.49 665.65,-60.36"/>
+</g>
+<!-- bcore_d -->
+<g id="node8" class="node">
+<title>bcore_d</title>
+<ellipse fill="none" stroke="black" cx="173.79" cy="-589" rx="46.59" ry="18"/>
+<text text-anchor="middle" x="173.79" y="-585.3" font-family="Times,serif" font-size="14.00">bcore_d</text>
+</g>
+<!-- bcore_d&#45;&gt;bmissile_cu -->
+<g id="edge5" class="edge &#45;red">
+<title>bcore_d&#45;&gt;bmissile_cu</title>
+<path fill="none" stroke="black" d="M174.07,-570.86C173.04,-519.1 177.42,-369.26 256.58,-288 263.1,-281.31 271.21,-276.26 279.87,-272.45"/>
+<polygon fill="black" stroke="black" points="281.35,-275.63 289.44,-268.79 278.85,-269.1 281.35,-275.63"/>
+</g>
+<!-- bexit_cr -->
+<g id="node12" class="node">
+<title>bexit_cr</title>
+<ellipse fill="none" stroke="black" cx="547.58" cy="-506" rx="48.19" ry="18"/>
+<text text-anchor="middle" x="547.58" y="-502.3" font-family="Times,serif" font-size="14.00">bexit_cr</text>
+</g>
+<!-- bcore_l&#45;&gt;bexit_cr -->
+<g id="edge6" class="edge &#45;blue">
+<title>bcore_l&#45;&gt;bexit_cr</title>
+<path fill="none" stroke="black" d="M383.6,-578.53C400.42,-573.2 420.75,-566.31 438.58,-559 462.88,-549.04 489.37,-536.08 510.03,-525.47"/>
+<polygon fill="black" stroke="black" points="511.81,-528.48 519.08,-520.77 508.59,-522.27 511.81,-528.48"/>
+</g>
+<!-- missile_topright -->
+<g id="node10" class="node">
+<title>missile_topright</title>
+<polygon fill="#ff8888" stroke="black" points="413.58,-225 281.58,-225 281.58,-189 413.58,-189 413.58,-225"/>
+<text text-anchor="middle" x="347.58" y="-203.3" font-family="Times,serif" font-size="14.00">missile_topright</text>
+</g>
+<!-- bexit_l -->
+<g id="node11" class="node">
+<title>bexit_l</title>
+<ellipse fill="none" stroke="black" cx="347.58" cy="-506" rx="41.69" ry="18"/>
+<text text-anchor="middle" x="347.58" y="-502.3" font-family="Times,serif" font-size="14.00">bexit_l</text>
+</g>
+<!-- bexit_l&#45;&gt;bexit_cr -->
+<g id="edge11" class="edge">
+<title>bexit_l&#45;&gt;bexit_cr</title>
+<path fill="none" stroke="black" d="M389.61,-506C418.43,-506 457.38,-506 489.26,-506"/>
+<polygon fill="black" stroke="black" points="489.35,-509.5 499.35,-506 489.35,-502.5 489.35,-509.5"/>
+</g>
+<!-- bchozo_l -->
+<g id="node15" class="node">
+<title>bchozo_l</title>
+<ellipse fill="none" stroke="black" cx="719.07" cy="-512" rx="50.09" ry="18"/>
+<text text-anchor="middle" x="719.07" y="-508.3" font-family="Times,serif" font-size="14.00">bchozo_l</text>
+</g>
+<!-- bexit_cr&#45;&gt;bchozo_l -->
+<g id="edge12" class="edge &#45;red">
+<title>bexit_cr&#45;&gt;bchozo_l</title>
+<path fill="none" stroke="black" d="M595.79,-507.67C615.32,-508.36 638.17,-509.17 658.81,-509.9"/>
+<polygon fill="black" stroke="black" points="658.93,-513.41 669.05,-510.26 659.18,-506.41 658.93,-513.41"/>
+</g>
+<!-- bexit_cl -->
+<g id="node13" class="node">
+<title>bexit_cl</title>
+<ellipse fill="none" stroke="black" cx="347.58" cy="-452" rx="46.29" ry="18"/>
+<text text-anchor="middle" x="347.58" y="-448.3" font-family="Times,serif" font-size="14.00">bexit_cl</text>
+</g>
+<!-- bchozo_r -->
+<g id="node17" class="node">
+<title>bchozo_r</title>
+<ellipse fill="none" stroke="black" cx="547.58" cy="-315" rx="51.99" ry="18"/>
+<text text-anchor="middle" x="547.58" y="-311.3" font-family="Times,serif" font-size="14.00">bchozo_r</text>
+</g>
+<!-- bexit_cl&#45;&gt;bchozo_r -->
+<g id="edge13" class="edge">
+<title>bexit_cl&#45;&gt;bchozo_r</title>
+<path fill="none" stroke="black" d="M391.34,-445.71C407.35,-441.76 424.94,-435.36 438.58,-425 462.45,-406.88 454.16,-389.93 474.58,-368 485.58,-356.19 499.53,-345.22 512.21,-336.37"/>
+<polygon fill="black" stroke="black" points="514.42,-339.1 520.74,-330.6 510.49,-333.31 514.42,-339.1"/>
+</g>
+<!-- bexit_d -->
+<g id="node14" class="node">
+<title>bexit_d</title>
+<ellipse fill="none" stroke="black" cx="347.58" cy="-398" rx="44.39" ry="18"/>
+<text text-anchor="middle" x="347.58" y="-394.3" font-family="Times,serif" font-size="14.00">bexit_d</text>
+</g>
+<!-- bexit_d&#45;&gt;barea -->
+<g id="edge14" class="edge &#45;blue">
+<title>bexit_d&#45;&gt;barea</title>
+<path fill="none" stroke="black" d="M390.74,-393.63C408.04,-389.66 426.75,-382.15 438.58,-368 510.04,-282.57 429.11,-221.67 474.58,-120 485.38,-95.86 504.98,-73.14 521,-57.12"/>
+<polygon fill="black" stroke="black" points="523.79,-59.29 528.53,-49.81 518.91,-54.27 523.79,-59.29"/>
+</g>
+<!-- bbal_r -->
+<g id="node18" class="node">
+<title>bbal_r</title>
+<ellipse fill="none" stroke="black" cx="871.22" cy="-547" rx="39.79" ry="18"/>
+<text text-anchor="middle" x="871.22" y="-543.3" font-family="Times,serif" font-size="14.00">bbal_r</text>
+</g>
+<!-- bchozo_l&#45;&gt;bbal_r -->
+<g id="edge8" class="edge">
+<title>bchozo_l&#45;&gt;bbal_r</title>
+<path fill="none" stroke="black" d="M761.5,-521.66C781.4,-526.3 805.28,-531.86 825.58,-536.59"/>
+<polygon fill="black" stroke="black" points="825,-540.05 835.53,-538.91 826.59,-533.23 825,-540.05"/>
+</g>
+<!-- missile_bchozo -->
+<g id="node16" class="node">
+<title>missile_bchozo</title>
+<polygon fill="#ff8888" stroke="black" points="780.57,-476 657.57,-476 657.57,-440 780.57,-440 780.57,-476"/>
+<text text-anchor="middle" x="719.07" y="-454.3" font-family="Times,serif" font-size="14.00">missile_bchozo</text>
+</g>
+<!-- bchozo_r&#45;&gt;bexit_l -->
+<g id="edge9" class="edge">
+<title>bchozo_r&#45;&gt;bexit_l</title>
+<path fill="none" stroke="black" d="M518.23,-330.07C503.36,-339.26 485.93,-352.27 474.58,-368 444.24,-410.06 475.66,-442.74 438.58,-479 427.78,-489.57 413.01,-496.02 398.57,-499.96"/>
+<polygon fill="black" stroke="black" points="397.59,-496.59 388.67,-502.3 399.2,-503.4 397.59,-496.59"/>
+</g>
+<!-- bbal_r&#45;&gt;bcore_l -->
+<g id="edge10" class="edge">
+<title>bbal_r&#45;&gt;bcore_l</title>
+<path fill="none" stroke="black" d="M836.28,-555.78C821.69,-559.21 804.39,-562.84 788.57,-565 650.1,-583.91 485.2,-588.05 402.1,-588.88"/>
+<polygon fill="black" stroke="black" points="401.87,-585.38 391.9,-588.96 401.93,-592.38 401.87,-585.38"/>
+</g>
+</g>
+</svg>

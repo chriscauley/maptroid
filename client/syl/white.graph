@@ -1,0 +1,75 @@
+digraph G {
+  rankdir="LR";
+
+  start_cd -> wcore_u [class="-white"];
+  warea -> start_cr;
+
+  wchozo_l -> start_cr;
+  wmissile_d -> start_cu;
+
+  subgraph cluster_300 {
+    label = "White Snow";
+    subgraph cluster_301 {
+      label = "White Core (no bottom)";
+      wcore_u;
+      wcore_l;
+      wcore_r;
+    }
+
+    subgraph cluster_302 {
+      label = "White Balcony";
+      wbal_r;
+    }
+
+    subgraph cluster_303 {
+      label = "White Missile";
+      wmissile_d;
+      wmissile_cl;
+      missile_botleft [shape="rectangle" style="filled" fillcolor="#ff8888"];
+    }
+
+    subgraph cluster_304 {
+      label = "White El";
+      wel_d;
+      wel_l;
+      wel_cr;
+    }
+
+    subgraph cluster_305 {
+      label = "White Exit";
+      wexit_u;
+      wexit_cl
+      wexit_r;
+    }
+
+    subgraph cluster_306 {
+      label = "White Chozo";
+      wchozo_l;
+      wchozo_r;
+      missile_whitechozo [shape="rectangle" style="filled" fillcolor="#ff8888"];
+    }
+
+    subgraph cluster_503 {
+      label = "White Area";
+      warea;
+    }
+
+    wcore_u -> wmissile_d [class="-red"];
+    wcore_l -> wbal_r [class="-white"];
+    wcore_r -> wmissile_cl;
+
+    wmissile_cl -> wcore_r [class="-red"];
+
+    wbal_r -> wel_l [class="-white"];
+
+    wel_d -> wexit_u [class="-white"];
+    wel_l -> wcore_r;
+    wel_cr -> wchozo_l;
+
+    wexit_u -> wel_d;
+    wexit_cl -> wchozo_r [class="-red"];
+    wexit_r -> warea [class="-white"];
+
+    wchozo_r -> wcore_l [class="-red"];
+  }
+}

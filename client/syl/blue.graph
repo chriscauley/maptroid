@@ -1,0 +1,69 @@
+digraph G {
+  rankdir="LR";
+
+  start_cl -> bcore_r [class="-blue"];
+  bmissile_cd -> start_cu;
+  bmissile_cu -> start_cd;
+  barea -> start_cd;
+
+  subgraph cluster_400 {
+    orientation=90;
+    subgraph cluster_401 {
+      label = "Blue Core (no up)";
+      bcore_d;
+      bcore_l;
+      bcore_r;
+    }
+
+    subgraph cluster_402 {
+      label = "Blue Missile (top right)";
+      missile_topright [shape="rectangle" style="filled" fillcolor="#ff8888"];
+      bmissile_cd;
+      bmissile_cu;
+    }
+
+    subgraph cluster_403 {
+      label = "Blue Exit";
+      bexit_l;
+      bexit_cr;
+      bexit_cl;
+      bexit_d;
+    }
+
+    subgraph cluster_404 {
+      label = "Blue Chozo (left)";
+      bchozo_l;
+      missile_bchozo [shape="rectangle" style="filled" fillcolor="#ff8888"];
+    }
+
+    subgraph cluster_405 {
+      label = "Blue Chozo (right)";
+      bchozo_r;
+    }
+
+    subgraph cluster_406 {
+      label = "Blue Balcony";
+      bbal_r;
+    }
+
+    bcore_d -> bmissile_cu [class="-red"];
+    bcore_l -> bexit_cr [class="-blue"];
+    bcore_r -> bcore_l;
+
+    bchozo_l -> bbal_r;
+    bchozo_r -> bexit_l;
+
+    bbal_r -> bcore_l;
+
+    bexit_l -> bexit_cr;
+    bexit_cr -> bchozo_l [class="-red"];
+    bexit_cl -> bchozo_r;
+  }
+
+  subgraph cluster_504 {
+    label = "Blue Area";
+    barea;
+  }
+
+  bexit_d -> barea [class="-blue"];
+}

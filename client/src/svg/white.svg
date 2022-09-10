@@ -1,0 +1,263 @@
+<svg width="781pt" height="592pt"
+ viewBox="0.00 0.00 780.96 592.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 588)">
+<title>G</title>
+<polygon fill="white" stroke="transparent" points="-4,4 -4,-588 776.96,-588 776.96,4 -4,4"/>
+<g id="clust1" class="cluster">
+<title>cluster_300</title>
+<polygon fill="none" stroke="black" points="0,-44 0,-540 656.77,-540 656.77,-44 0,-44"/>
+<text text-anchor="middle" x="328.39" y="-524.8" font-family="Times,serif" font-size="14.00">White Snow</text>
+</g>
+<g id="clust2" class="cluster">
+<title>cluster_301</title>
+<polygon fill="none" stroke="black" points="293.64,-326 293.64,-509 478.13,-509 478.13,-326 293.64,-326"/>
+<text text-anchor="middle" x="385.88" y="-493.8" font-family="Times,serif" font-size="14.00">White Core (no bottom)</text>
+</g>
+<g id="clust3" class="cluster">
+<title>cluster_302</title>
+<polygon fill="none" stroke="black" points="8,-353 8,-428 126.19,-428 126.19,-353 8,-353"/>
+<text text-anchor="middle" x="67.1" y="-412.8" font-family="Times,serif" font-size="14.00">White Balcony</text>
+</g>
+<g id="clust4" class="cluster">
+<title>cluster_303</title>
+<polygon fill="none" stroke="black" points="505.38,-299 505.38,-482 648.77,-482 648.77,-299 505.38,-299"/>
+<text text-anchor="middle" x="577.08" y="-466.8" font-family="Times,serif" font-size="14.00">White Missile</text>
+</g>
+<g id="clust5" class="cluster">
+<title>cluster_304</title>
+<polygon fill="none" stroke="black" points="161.99,-243 161.99,-426 258.58,-426 258.58,-243 161.99,-243"/>
+<text text-anchor="middle" x="210.29" y="-410.8" font-family="Times,serif" font-size="14.00">White El</text>
+</g>
+<g id="clust6" class="cluster">
+<title>cluster_305</title>
+<polygon fill="none" stroke="black" points="154.19,-52 154.19,-235 266.38,-235 266.38,-52 154.19,-52"/>
+<text text-anchor="middle" x="210.29" y="-219.8" font-family="Times,serif" font-size="14.00">White Exit</text>
+</g>
+<g id="clust7" class="cluster">
+<title>cluster_306</title>
+<polygon fill="none" stroke="black" points="300.38,-135 300.38,-318 470.38,-318 470.38,-135 300.38,-135"/>
+<text text-anchor="middle" x="385.38" y="-302.8" font-family="Times,serif" font-size="14.00">White Chozo</text>
+</g>
+<g id="clust8" class="cluster">
+<title>cluster_503</title>
+<polygon fill="none" stroke="black" points="337.39,-52 337.39,-127 433.38,-127 433.38,-52 337.39,-52"/>
+<text text-anchor="middle" x="385.38" y="-111.8" font-family="Times,serif" font-size="14.00">White Area</text>
+</g>
+<!-- start_cd -->
+<g id="node1" class="node">
+<title>start_cd</title>
+<ellipse fill="none" stroke="black" cx="210.29" cy="-566" rx="48.19" ry="18"/>
+<text text-anchor="middle" x="210.29" y="-562.3" font-family="Times,serif" font-size="14.00">start_cd</text>
+</g>
+<!-- wcore_u -->
+<g id="node2" class="node">
+<title>wcore_u</title>
+<ellipse fill="none" stroke="black" cx="385.38" cy="-460" rx="48.99" ry="18"/>
+<text text-anchor="middle" x="385.38" y="-456.3" font-family="Times,serif" font-size="14.00">wcore_u</text>
+</g>
+<!-- start_cd&#45;&gt;wcore_u -->
+<g id="edge1" class="edge &#45;white">
+<title>start_cd&#45;&gt;wcore_u</title>
+<path fill="none" stroke="black" d="M236.46,-550.59C266.67,-532.09 317.44,-501 350.93,-480.49"/>
+<polygon fill="black" stroke="black" points="352.76,-483.47 359.46,-475.26 349.11,-477.5 352.76,-483.47"/>
+</g>
+<!-- wmissile_d -->
+<g id="node6" class="node">
+<title>wmissile_d</title>
+<ellipse fill="none" stroke="black" cx="577.08" cy="-433" rx="61.99" ry="18"/>
+<text text-anchor="middle" x="577.08" y="-429.3" font-family="Times,serif" font-size="14.00">wmissile_d</text>
+</g>
+<!-- wcore_u&#45;&gt;wmissile_d -->
+<g id="edge5" class="edge &#45;red">
+<title>wcore_u&#45;&gt;wmissile_d</title>
+<path fill="none" stroke="black" d="M431.34,-453.6C455.24,-450.2 485.04,-445.96 511.39,-442.21"/>
+<polygon fill="black" stroke="black" points="511.89,-445.67 521.29,-440.8 510.9,-438.74 511.89,-445.67"/>
+</g>
+<!-- warea -->
+<g id="node3" class="node">
+<title>warea</title>
+<ellipse fill="none" stroke="black" cx="385.38" cy="-78" rx="38.99" ry="18"/>
+<text text-anchor="middle" x="385.38" y="-74.3" font-family="Times,serif" font-size="14.00">warea</text>
+</g>
+<!-- start_cr -->
+<g id="node4" class="node">
+<title>start_cr</title>
+<ellipse fill="none" stroke="black" cx="577.08" cy="-18" rx="46.59" ry="18"/>
+<text text-anchor="middle" x="577.08" y="-14.3" font-family="Times,serif" font-size="14.00">start_cr</text>
+</g>
+<!-- warea&#45;&gt;start_cr -->
+<g id="edge2" class="edge">
+<title>warea&#45;&gt;start_cr</title>
+<path fill="none" stroke="black" d="M418.13,-67.96C448.85,-58.24 495.73,-43.41 530.45,-32.43"/>
+<polygon fill="black" stroke="black" points="531.86,-35.66 540.34,-29.3 529.75,-28.98 531.86,-35.66"/>
+</g>
+<!-- wchozo_l -->
+<g id="node5" class="node">
+<title>wchozo_l</title>
+<ellipse fill="none" stroke="black" cx="385.38" cy="-269" rx="51.99" ry="18"/>
+<text text-anchor="middle" x="385.38" y="-265.3" font-family="Times,serif" font-size="14.00">wchozo_l</text>
+</g>
+<!-- wchozo_l&#45;&gt;start_cr -->
+<g id="edge3" class="edge">
+<title>wchozo_l&#45;&gt;start_cr</title>
+<path fill="none" stroke="black" d="M434.61,-263.01C449.95,-259.1 466.05,-252.65 478.13,-242 537.93,-189.3 562.7,-93.37 571.66,-46"/>
+<polygon fill="black" stroke="black" points="575.11,-46.59 573.43,-36.13 568.22,-45.35 575.11,-46.59"/>
+</g>
+<!-- start_cu -->
+<g id="node7" class="node">
+<title>start_cu</title>
+<ellipse fill="none" stroke="black" cx="724.87" cy="-433" rx="48.19" ry="18"/>
+<text text-anchor="middle" x="724.87" y="-429.3" font-family="Times,serif" font-size="14.00">start_cu</text>
+</g>
+<!-- wmissile_d&#45;&gt;start_cu -->
+<g id="edge4" class="edge">
+<title>wmissile_d&#45;&gt;start_cu</title>
+<path fill="none" stroke="black" d="M639.06,-433C648.04,-433 657.26,-433 666.16,-433"/>
+<polygon fill="black" stroke="black" points="666.43,-436.5 676.43,-433 666.43,-429.5 666.43,-436.5"/>
+</g>
+<!-- wcore_l -->
+<g id="node8" class="node">
+<title>wcore_l</title>
+<ellipse fill="none" stroke="black" cx="385.38" cy="-406" rx="46.29" ry="18"/>
+<text text-anchor="middle" x="385.38" y="-402.3" font-family="Times,serif" font-size="14.00">wcore_l</text>
+</g>
+<!-- wbal_r -->
+<g id="node10" class="node">
+<title>wbal_r</title>
+<ellipse fill="none" stroke="black" cx="66.6" cy="-379" rx="41.69" ry="18"/>
+<text text-anchor="middle" x="66.6" y="-375.3" font-family="Times,serif" font-size="14.00">wbal_r</text>
+</g>
+<!-- wcore_l&#45;&gt;wbal_r -->
+<g id="edge6" class="edge &#45;white">
+<title>wcore_l&#45;&gt;wbal_r</title>
+<path fill="none" stroke="black" d="M349.42,-417.47C303.75,-430.69 221.65,-448.39 154.19,-430 133.03,-424.23 111.77,-411.83 95.61,-400.7"/>
+<polygon fill="black" stroke="black" points="97.36,-397.65 87.19,-394.7 93.3,-403.35 97.36,-397.65"/>
+</g>
+<!-- wcore_r -->
+<g id="node9" class="node">
+<title>wcore_r</title>
+<ellipse fill="none" stroke="black" cx="385.38" cy="-352" rx="47.39" ry="18"/>
+<text text-anchor="middle" x="385.38" y="-348.3" font-family="Times,serif" font-size="14.00">wcore_r</text>
+</g>
+<!-- wmissile_cl -->
+<g id="node11" class="node">
+<title>wmissile_cl</title>
+<ellipse fill="none" stroke="black" cx="577.08" cy="-379" rx="63.89" ry="18"/>
+<text text-anchor="middle" x="577.08" y="-375.3" font-family="Times,serif" font-size="14.00">wmissile_cl</text>
+</g>
+<!-- wcore_r&#45;&gt;wmissile_cl -->
+<g id="edge7" class="edge">
+<title>wcore_r&#45;&gt;wmissile_cl</title>
+<path fill="none" stroke="black" d="M423.86,-362.84C446.55,-367.2 476.26,-371.79 503.4,-375.24"/>
+<polygon fill="black" stroke="black" points="503.31,-378.75 513.66,-376.5 504.16,-371.81 503.31,-378.75"/>
+</g>
+<!-- wel_l -->
+<g id="node14" class="node">
+<title>wel_l</title>
+<ellipse fill="none" stroke="black" cx="210.29" cy="-323" rx="34.39" ry="18"/>
+<text text-anchor="middle" x="210.29" y="-319.3" font-family="Times,serif" font-size="14.00">wel_l</text>
+</g>
+<!-- wbal_r&#45;&gt;wel_l -->
+<g id="edge9" class="edge &#45;white">
+<title>wbal_r&#45;&gt;wel_l</title>
+<path fill="none" stroke="black" d="M97.99,-366.99C119.91,-358.33 149.59,-346.6 172.79,-337.43"/>
+<polygon fill="black" stroke="black" points="174.28,-340.6 182.29,-333.67 171.7,-334.09 174.28,-340.6"/>
+</g>
+<!-- wmissile_cl&#45;&gt;wcore_r -->
+<g id="edge8" class="edge &#45;red">
+<title>wmissile_cl&#45;&gt;wcore_r</title>
+<path fill="none" stroke="black" d="M530.38,-366.63C504.2,-361.87 471.13,-357.04 443.28,-353.85"/>
+<polygon fill="black" stroke="black" points="443.6,-350.37 433.27,-352.76 442.83,-357.33 443.6,-350.37"/>
+</g>
+<!-- missile_botleft -->
+<g id="node12" class="node">
+<title>missile_botleft</title>
+<polygon fill="#ff8888" stroke="black" points="637.58,-343 516.58,-343 516.58,-307 637.58,-307 637.58,-343"/>
+<text text-anchor="middle" x="577.08" y="-321.3" font-family="Times,serif" font-size="14.00">missile_botleft</text>
+</g>
+<!-- wel_d -->
+<g id="node13" class="node">
+<title>wel_d</title>
+<ellipse fill="none" stroke="black" cx="210.29" cy="-377" rx="37.09" ry="18"/>
+<text text-anchor="middle" x="210.29" y="-373.3" font-family="Times,serif" font-size="14.00">wel_d</text>
+</g>
+<!-- wexit_u -->
+<g id="node16" class="node">
+<title>wexit_u</title>
+<ellipse fill="none" stroke="black" cx="210.29" cy="-186" rx="46.29" ry="18"/>
+<text text-anchor="middle" x="210.29" y="-182.3" font-family="Times,serif" font-size="14.00">wexit_u</text>
+</g>
+<!-- wel_d&#45;&gt;wexit_u -->
+<g id="edge10" class="edge &#45;white">
+<title>wel_d&#45;&gt;wexit_u</title>
+<path fill="none" stroke="black" d="M176.78,-368.83C162.64,-363.48 147.73,-354.81 140.19,-341 120.39,-304.72 123.21,-285.69 140.19,-248 147.65,-231.44 161.97,-217.52 175.72,-207.09"/>
+<polygon fill="black" stroke="black" points="178.06,-209.72 184.15,-201.06 173.98,-204.03 178.06,-209.72"/>
+</g>
+<!-- wel_l&#45;&gt;wcore_r -->
+<g id="edge11" class="edge">
+<title>wel_l&#45;&gt;wcore_r</title>
+<path fill="none" stroke="black" d="M243.44,-328.39C268.19,-332.53 302.92,-338.35 331.71,-343.18"/>
+<polygon fill="black" stroke="black" points="331.18,-346.64 341.63,-344.84 332.34,-339.73 331.18,-346.64"/>
+</g>
+<!-- wel_cr -->
+<g id="node15" class="node">
+<title>wel_cr</title>
+<ellipse fill="none" stroke="black" cx="210.29" cy="-269" rx="40.09" ry="18"/>
+<text text-anchor="middle" x="210.29" y="-265.3" font-family="Times,serif" font-size="14.00">wel_cr</text>
+</g>
+<!-- wel_cr&#45;&gt;wchozo_l -->
+<g id="edge12" class="edge">
+<title>wel_cr&#45;&gt;wchozo_l</title>
+<path fill="none" stroke="black" d="M251,-269C272.4,-269 299.26,-269 323.26,-269"/>
+<polygon fill="black" stroke="black" points="323.35,-272.5 333.35,-269 323.35,-265.5 323.35,-272.5"/>
+</g>
+<!-- wexit_u&#45;&gt;wel_d -->
+<g id="edge13" class="edge">
+<title>wexit_u&#45;&gt;wel_d</title>
+<path fill="none" stroke="black" d="M184.15,-201.06C168.2,-211.85 149.2,-228 140.19,-248 123.21,-285.69 120.39,-304.72 140.19,-341 146.08,-351.79 156.47,-359.44 167.48,-364.82"/>
+<polygon fill="black" stroke="black" points="166.21,-368.09 176.78,-368.83 168.98,-361.66 166.21,-368.09"/>
+</g>
+<!-- wexit_cl -->
+<g id="node17" class="node">
+<title>wexit_cl</title>
+<ellipse fill="none" stroke="black" cx="210.29" cy="-132" rx="48.19" ry="18"/>
+<text text-anchor="middle" x="210.29" y="-128.3" font-family="Times,serif" font-size="14.00">wexit_cl</text>
+</g>
+<!-- wchozo_r -->
+<g id="node19" class="node">
+<title>wchozo_r</title>
+<ellipse fill="none" stroke="black" cx="385.38" cy="-215" rx="53.89" ry="18"/>
+<text text-anchor="middle" x="385.38" y="-211.3" font-family="Times,serif" font-size="14.00">wchozo_r</text>
+</g>
+<!-- wexit_cl&#45;&gt;wchozo_r -->
+<g id="edge14" class="edge &#45;red">
+<title>wexit_cl&#45;&gt;wchozo_r</title>
+<path fill="none" stroke="black" d="M243.31,-145.27C251.18,-149.18 259.36,-153.81 266.38,-159 280.61,-169.51 278.59,-178.71 293.64,-188 304.13,-194.47 316.26,-199.47 328.17,-203.3"/>
+<polygon fill="black" stroke="black" points="327.51,-206.75 338.09,-206.25 329.5,-200.05 327.51,-206.75"/>
+</g>
+<!-- wexit_r -->
+<g id="node18" class="node">
+<title>wexit_r</title>
+<ellipse fill="none" stroke="black" cx="210.29" cy="-78" rx="44.69" ry="18"/>
+<text text-anchor="middle" x="210.29" y="-74.3" font-family="Times,serif" font-size="14.00">wexit_r</text>
+</g>
+<!-- wexit_r&#45;&gt;warea -->
+<g id="edge15" class="edge &#45;white">
+<title>wexit_r&#45;&gt;warea</title>
+<path fill="none" stroke="black" d="M255.42,-78C280.07,-78 310.81,-78 336.1,-78"/>
+<polygon fill="black" stroke="black" points="336.22,-81.5 346.22,-78 336.22,-74.5 336.22,-81.5"/>
+</g>
+<!-- wchozo_r&#45;&gt;wcore_l -->
+<g id="edge16" class="edge &#45;red">
+<title>wchozo_r&#45;&gt;wcore_l</title>
+<path fill="none" stroke="black" d="M332.33,-218.32C311.53,-222.74 290.22,-232.02 280.01,-251 267.48,-274.29 267.48,-346.71 280.01,-370 289.73,-388.06 309.48,-397.33 329.29,-402"/>
+<polygon fill="black" stroke="black" points="328.8,-405.47 339.29,-403.99 330.16,-398.61 328.8,-405.47"/>
+</g>
+<!-- missile_whitechozo -->
+<g id="node20" class="node">
+<title>missile_whitechozo</title>
+<polygon fill="#ff8888" stroke="black" points="462.38,-179 308.38,-179 308.38,-143 462.38,-143 462.38,-179"/>
+<text text-anchor="middle" x="385.38" y="-157.3" font-family="Times,serif" font-size="14.00">missile_whitechozo</text>
+</g>
+</g>
+</svg>

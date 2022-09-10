@@ -1,0 +1,274 @@
+<svg width="794pt" height="848pt"
+ viewBox="0.00 0.00 794.07 848.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 844)">
+<title>G</title>
+<polygon fill="white" stroke="transparent" points="-4,4 -4,-844 790.07,-844 790.07,4 -4,4"/>
+<g id="clust1" class="cluster">
+<title>cluster_100</title>
+<polygon fill="none" stroke="black" points="116.19,-91 116.19,-832 674.78,-832 674.78,-91 116.19,-91"/>
+<text text-anchor="middle" x="395.48" y="-816.8" font-family="Times,serif" font-size="14.00">Purple snow</text>
+</g>
+<g id="clust2" class="cluster">
+<title>cluster_101</title>
+<polygon fill="none" stroke="black" points="279.28,-481 279.28,-610 446.28,-610 446.28,-481 279.28,-481"/>
+<text text-anchor="middle" x="362.78" y="-594.8" font-family="Times,serif" font-size="14.00">Purple Core (missile)</text>
+</g>
+<g id="clust3" class="cluster">
+<title>cluster_102</title>
+<polygon fill="none" stroke="black" points="124.19,-564 124.19,-693 233.78,-693 233.78,-564 124.19,-564"/>
+<text text-anchor="middle" x="178.99" y="-677.8" font-family="Times,serif" font-size="14.00">Purple core</text>
+</g>
+<g id="clust4" class="cluster">
+<title>cluster_103</title>
+<polygon fill="none" stroke="black" points="269.19,-618 269.19,-801 456.38,-801 456.38,-618 269.19,-618"/>
+<text text-anchor="middle" x="362.78" y="-785.8" font-family="Times,serif" font-size="14.00">Purple wheel (top right)</text>
+</g>
+<g id="clust5" class="cluster">
+<title>cluster_104</title>
+<polygon fill="none" stroke="black" points="532.78,-364 532.78,-493 642.07,-493 642.07,-364 532.78,-364"/>
+<text text-anchor="middle" x="587.43" y="-477.8" font-family="Times,serif" font-size="14.00">Vertical Core</text>
+</g>
+<g id="clust6" class="cluster">
+<title>cluster_1040</title>
+<polygon fill="none" stroke="black" points="507.08,-613 507.08,-688 666.78,-688 666.78,-613 507.08,-613"/>
+<text text-anchor="middle" x="586.93" y="-672.8" font-family="Times,serif" font-size="14.00">Vertical Core (right)</text>
+</g>
+<g id="clust7" class="cluster">
+<title>cluster_105</title>
+<polygon fill="none" stroke="black" points="126.14,-290 126.14,-473 415.13,-473 415.13,-290 126.14,-290"/>
+<text text-anchor="middle" x="270.64" y="-457.8" font-family="Times,serif" font-size="14.00">Tall Core</text>
+</g>
+<g id="clust8" class="cluster">
+<title>cluster_106</title>
+<polygon fill="none" stroke="black" points="293.78,-99 293.78,-282 430.78,-282 430.78,-99 293.78,-99"/>
+<text text-anchor="middle" x="362.28" y="-266.8" font-family="Times,serif" font-size="14.00">Purple Exit</text>
+</g>
+<g id="clust9" class="cluster">
+<title>cluster_501</title>
+<polygon fill="none" stroke="black" points="536.88,-8 536.88,-83 636.98,-83 636.98,-8 536.88,-8"/>
+<text text-anchor="middle" x="586.93" y="-67.8" font-family="Times,serif" font-size="14.00">Purple Area</text>
+</g>
+<!-- start_cu -->
+<g id="node1" class="node">
+<title>start_cu</title>
+<ellipse fill="none" stroke="black" cx="48.1" cy="-644" rx="48.19" ry="18"/>
+<text text-anchor="middle" x="48.1" y="-640.3" font-family="Times,serif" font-size="14.00">start_cu</text>
+</g>
+<!-- pcore_d -->
+<g id="node2" class="node">
+<title>pcore_d</title>
+<ellipse fill="none" stroke="black" cx="178.99" cy="-644" rx="46.59" ry="18"/>
+<text text-anchor="middle" x="178.99" y="-640.3" font-family="Times,serif" font-size="14.00">pcore_d</text>
+</g>
+<!-- start_cu&#45;&gt;pcore_d -->
+<g id="edge1" class="edge &#45;purple">
+<title>start_cu&#45;&gt;pcore_d</title>
+<path fill="none" stroke="black" d="M96.36,-644C104.63,-644 113.32,-644 121.8,-644"/>
+<polygon fill="black" stroke="black" points="122.02,-647.5 132.02,-644 122.02,-640.5 122.02,-647.5"/>
+</g>
+<!-- pwtr_u -->
+<g id="node8" class="node">
+<title>pwtr_u</title>
+<ellipse fill="none" stroke="black" cx="362.28" cy="-644" rx="42.79" ry="18"/>
+<text text-anchor="middle" x="362.28" y="-640.3" font-family="Times,serif" font-size="14.00">pwtr_u</text>
+</g>
+<!-- pcore_d&#45;&gt;pwtr_u -->
+<g id="edge15" class="edge &#45;purple">
+<title>pcore_d&#45;&gt;pwtr_u</title>
+<path fill="none" stroke="black" d="M226.2,-644C251.49,-644 282.9,-644 309.07,-644"/>
+<polygon fill="black" stroke="black" points="309.18,-647.5 319.18,-644 309.18,-640.5 309.18,-647.5"/>
+</g>
+<!-- parea -->
+<g id="node3" class="node">
+<title>parea</title>
+<ellipse fill="none" stroke="black" cx="586.93" cy="-34" rx="37.09" ry="18"/>
+<text text-anchor="middle" x="586.93" y="-30.3" font-family="Times,serif" font-size="14.00">parea</text>
+</g>
+<!-- start_cl -->
+<g id="node4" class="node">
+<title>start_cl</title>
+<ellipse fill="none" stroke="black" cx="740.57" cy="-336" rx="45.49" ry="18"/>
+<text text-anchor="middle" x="740.57" y="-332.3" font-family="Times,serif" font-size="14.00">start_cl</text>
+</g>
+<!-- parea&#45;&gt;start_cl -->
+<g id="edge2" class="edge &#45;purple">
+<title>parea&#45;&gt;start_cl</title>
+<path fill="none" stroke="black" d="M596.74,-51.54C622.18,-102.21 695.88,-248.99 726.25,-309.47"/>
+<polygon fill="black" stroke="black" points="723.12,-311.04 730.74,-318.41 729.38,-307.9 723.12,-311.04"/>
+</g>
+<!-- pcore_l -->
+<g id="node5" class="node">
+<title>pcore_l</title>
+<ellipse fill="none" stroke="black" cx="362.28" cy="-561" rx="44.39" ry="18"/>
+<text text-anchor="middle" x="362.28" y="-557.3" font-family="Times,serif" font-size="14.00">pcore_l</text>
+</g>
+<!-- pcore_r -->
+<g id="node7" class="node">
+<title>pcore_r</title>
+<ellipse fill="none" stroke="black" cx="178.99" cy="-590" rx="45.49" ry="18"/>
+<text text-anchor="middle" x="178.99" y="-586.3" font-family="Times,serif" font-size="14.00">pcore_r</text>
+</g>
+<!-- pcore_l&#45;&gt;pcore_r -->
+<g id="edge14" class="edge">
+<title>pcore_l&#45;&gt;pcore_r</title>
+<path fill="none" stroke="black" d="M320.82,-567.47C294.52,-571.68 259.98,-577.2 231.69,-581.73"/>
+<polygon fill="black" stroke="black" points="230.9,-578.31 221.58,-583.35 232.01,-585.22 230.9,-578.31"/>
+</g>
+<!-- missile_core -->
+<g id="node6" class="node">
+<title>missile_core</title>
+<polygon fill="#ff8888" stroke="black" points="414.28,-525 310.28,-525 310.28,-489 414.28,-489 414.28,-525"/>
+<text text-anchor="middle" x="362.28" y="-503.3" font-family="Times,serif" font-size="14.00">missile_core</text>
+</g>
+<!-- pwtr_cl -->
+<g id="node9" class="node">
+<title>pwtr_cl</title>
+<ellipse fill="none" stroke="black" cx="362.28" cy="-752" rx="44.69" ry="18"/>
+<text text-anchor="middle" x="362.28" y="-748.3" font-family="Times,serif" font-size="14.00">pwtr_cl</text>
+</g>
+<!-- pcore_r&#45;&gt;pwtr_cl -->
+<g id="edge13" class="edge">
+<title>pcore_r&#45;&gt;pwtr_cl</title>
+<path fill="none" stroke="black" d="M213.57,-601.76C221.03,-605.66 228.33,-610.67 233.78,-617 266.76,-655.27 232.91,-689.85 269.19,-725 279.88,-735.36 294.33,-741.78 308.62,-745.74"/>
+<polygon fill="black" stroke="black" points="307.89,-749.17 318.43,-748.12 309.53,-742.36 307.89,-749.17"/>
+</g>
+<!-- vcore_d -->
+<g id="node12" class="node">
+<title>vcore_d</title>
+<ellipse fill="none" stroke="black" cx="586.93" cy="-390" rx="46.29" ry="18"/>
+<text text-anchor="middle" x="586.93" y="-386.3" font-family="Times,serif" font-size="14.00">vcore_d</text>
+</g>
+<!-- pwtr_u&#45;&gt;vcore_d -->
+<g id="edge8" class="edge">
+<title>pwtr_u&#45;&gt;vcore_d</title>
+<path fill="none" stroke="black" d="M404.24,-639.76C422.49,-635.84 442.87,-628.34 456.38,-614 518.37,-548.19 445.7,-483.37 507.08,-417 514.3,-409.19 523.88,-403.64 533.86,-399.7"/>
+<polygon fill="black" stroke="black" points="535.17,-402.95 543.49,-396.38 532.9,-396.33 535.17,-402.95"/>
+</g>
+<!-- vcore_r -->
+<g id="node13" class="node">
+<title>vcore_r</title>
+<ellipse fill="none" stroke="black" cx="586.93" cy="-639" rx="44.69" ry="18"/>
+<text text-anchor="middle" x="586.93" y="-635.3" font-family="Times,serif" font-size="14.00">vcore_r</text>
+</g>
+<!-- pwtr_cl&#45;&gt;vcore_r -->
+<g id="edge9" class="edge">
+<title>pwtr_cl&#45;&gt;vcore_r</title>
+<path fill="none" stroke="black" d="M402.28,-743.51C419.32,-739.09 439.28,-732.93 456.38,-725 493.79,-707.66 532.67,-680.4 557.96,-661.22"/>
+<polygon fill="black" stroke="black" points="560.19,-663.93 565.99,-655.06 555.92,-658.37 560.19,-663.93"/>
+</g>
+<!-- pwtr_cd -->
+<g id="node10" class="node">
+<title>pwtr_cd</title>
+<ellipse fill="none" stroke="black" cx="362.28" cy="-698" rx="48.19" ry="18"/>
+<text text-anchor="middle" x="362.28" y="-694.3" font-family="Times,serif" font-size="14.00">pwtr_cd</text>
+</g>
+<!-- vcore_u -->
+<g id="node11" class="node">
+<title>vcore_u</title>
+<ellipse fill="none" stroke="black" cx="586.93" cy="-444" rx="46.29" ry="18"/>
+<text text-anchor="middle" x="586.93" y="-440.3" font-family="Times,serif" font-size="14.00">vcore_u</text>
+</g>
+<!-- pwtr_cd&#45;&gt;vcore_u -->
+<g id="edge10" class="edge &#45;purple">
+<title>pwtr_cd&#45;&gt;vcore_u</title>
+<path fill="none" stroke="black" d="M408.23,-692.2C424.69,-688.32 442.63,-681.83 456.38,-671 491.28,-643.51 548.58,-525.26 573.6,-471.18"/>
+<polygon fill="black" stroke="black" points="576.89,-472.42 577.88,-461.87 570.53,-469.49 576.89,-472.42"/>
+</g>
+<!-- tcore_u -->
+<g id="node14" class="node">
+<title>tcore_u</title>
+<ellipse fill="none" stroke="black" cx="178.99" cy="-370" rx="44.69" ry="18"/>
+<text text-anchor="middle" x="178.99" y="-366.3" font-family="Times,serif" font-size="14.00">tcore_u</text>
+</g>
+<!-- vcore_u&#45;&gt;tcore_u -->
+<g id="edge11" class="edge">
+<title>vcore_u&#45;&gt;tcore_u</title>
+<path fill="none" stroke="black" d="M545.53,-452.07C483.15,-462.53 361.01,-474.95 269.19,-434 248.4,-424.73 252.09,-410.52 233.78,-397 229.32,-393.7 224.39,-390.61 219.38,-387.78"/>
+<polygon fill="black" stroke="black" points="220.84,-384.59 210.37,-382.98 217.55,-390.77 220.84,-384.59"/>
+</g>
+<!-- vcore_d&#45;&gt;tcore_u -->
+<g id="edge12" class="edge &#45;purple">
+<title>vcore_d&#45;&gt;tcore_u</title>
+<path fill="none" stroke="black" d="M541.59,-386.13C516.58,-384.06 484.76,-381.61 456.38,-380 379.21,-375.63 289.8,-372.8 234.06,-371.3"/>
+<polygon fill="black" stroke="black" points="234.14,-367.8 224.05,-371.04 233.96,-374.8 234.14,-367.8"/>
+</g>
+<!-- vcore_r&#45;&gt;start_cl -->
+<g id="edge17" class="edge">
+<title>vcore_r&#45;&gt;start_cl</title>
+<path fill="none" stroke="black" d="M599.88,-621.61C617.6,-595.37 651.28,-543.73 674.78,-497 697.61,-451.57 718.49,-396.08 730.08,-363.53"/>
+<polygon fill="black" stroke="black" points="733.48,-364.41 733.5,-353.81 726.88,-362.08 733.48,-364.41"/>
+</g>
+<!-- tcore_d -->
+<g id="node15" class="node">
+<title>tcore_d</title>
+<ellipse fill="none" stroke="black" cx="362.28" cy="-407" rx="44.69" ry="18"/>
+<text text-anchor="middle" x="362.28" y="-403.3" font-family="Times,serif" font-size="14.00">tcore_d</text>
+</g>
+<!-- tcore_u&#45;&gt;tcore_d -->
+<g id="edge4" class="edge">
+<title>tcore_u&#45;&gt;tcore_d</title>
+<path fill="none" stroke="black" d="M219.33,-378.03C246.53,-383.58 282.92,-391.01 312.05,-396.95"/>
+<polygon fill="black" stroke="black" points="311.52,-400.42 322.02,-398.99 312.92,-393.56 311.52,-400.42"/>
+</g>
+<!-- tcore_d&#45;&gt;vcore_u -->
+<g id="edge5" class="edge">
+<title>tcore_d&#45;&gt;vcore_u</title>
+<path fill="none" stroke="black" d="M404.12,-413.79C440.73,-419.87 494.61,-428.83 534.22,-435.41"/>
+<polygon fill="black" stroke="black" points="533.78,-438.88 544.22,-437.07 534.93,-431.98 533.78,-438.88"/>
+</g>
+<!-- tcore_l -->
+<g id="node16" class="node">
+<title>tcore_l</title>
+<ellipse fill="none" stroke="black" cx="178.99" cy="-316" rx="42.49" ry="18"/>
+<text text-anchor="middle" x="178.99" y="-312.3" font-family="Times,serif" font-size="14.00">tcore_l</text>
+</g>
+<!-- pexit_cr -->
+<g id="node19" class="node">
+<title>pexit_cr</title>
+<ellipse fill="none" stroke="black" cx="362.28" cy="-179" rx="48.19" ry="18"/>
+<text text-anchor="middle" x="362.28" y="-175.3" font-family="Times,serif" font-size="14.00">pexit_cr</text>
+</g>
+<!-- tcore_l&#45;&gt;pexit_cr -->
+<g id="edge6" class="edge &#45;purple">
+<title>tcore_l&#45;&gt;pexit_cr</title>
+<path fill="none" stroke="black" d="M189.64,-298.34C203.86,-273.96 232.76,-230.25 269.19,-206 280.68,-198.35 294.39,-192.82 307.66,-188.85"/>
+<polygon fill="black" stroke="black" points="308.97,-192.12 317.69,-186.1 307.12,-185.36 308.97,-192.12"/>
+</g>
+<!-- tcore_r -->
+<g id="node17" class="node">
+<title>tcore_r</title>
+<ellipse fill="none" stroke="black" cx="178.99" cy="-424" rx="43.59" ry="18"/>
+<text text-anchor="middle" x="178.99" y="-420.3" font-family="Times,serif" font-size="14.00">tcore_r</text>
+</g>
+<!-- tcore_r&#45;&gt;pcore_l -->
+<g id="edge7" class="edge &#45;red">
+<title>tcore_r&#45;&gt;pcore_l</title>
+<path fill="none" stroke="black" d="M189.64,-441.66C203.86,-466.04 232.76,-509.75 269.19,-534 281.58,-542.25 296.55,-548.03 310.78,-552.06"/>
+<polygon fill="black" stroke="black" points="309.91,-555.45 320.47,-554.58 311.67,-548.68 309.91,-555.45"/>
+</g>
+<!-- pexit_l -->
+<g id="node18" class="node">
+<title>pexit_l</title>
+<ellipse fill="none" stroke="black" cx="362.28" cy="-233" rx="41.69" ry="18"/>
+<text text-anchor="middle" x="362.28" y="-229.3" font-family="Times,serif" font-size="14.00">pexit_l</text>
+</g>
+<!-- pexit_l&#45;&gt;parea -->
+<g id="edge16" class="edge &#45;purple">
+<title>pexit_l&#45;&gt;parea</title>
+<path fill="none" stroke="black" d="M401.94,-227.55C419.69,-223.67 440.31,-217.08 456.38,-206 511.7,-167.85 553.21,-98.46 573.02,-60.52"/>
+<polygon fill="black" stroke="black" points="576.15,-62.09 577.59,-51.59 569.92,-58.9 576.15,-62.09"/>
+</g>
+<!-- pexit_cr&#45;&gt;pcore_l -->
+<g id="edge3" class="edge">
+<title>pexit_cr&#45;&gt;pcore_l</title>
+<path fill="none" stroke="black" d="M314.17,-180.88C290.58,-184.66 264.49,-193.79 251.49,-215 233.48,-244.36 233.48,-495.64 251.49,-525 263.41,-544.44 286.32,-553.74 308.22,-558.06"/>
+<polygon fill="black" stroke="black" points="307.74,-561.52 318.17,-559.71 308.88,-554.62 307.74,-561.52"/>
+</g>
+<!-- missile_topleft -->
+<g id="node20" class="node">
+<title>missile_topleft</title>
+<polygon fill="#ff8888" stroke="black" points="422.78,-143 301.78,-143 301.78,-107 422.78,-107 422.78,-143"/>
+<text text-anchor="middle" x="362.28" y="-121.3" font-family="Times,serif" font-size="14.00">missile_topleft</text>
+</g>
+</g>
+</svg>

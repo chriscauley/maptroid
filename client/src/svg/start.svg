@@ -1,0 +1,84 @@
+<svg width="254pt" height="261pt"
+ viewBox="0.00 0.00 253.68 261.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 257)">
+<title>G</title>
+<polygon fill="white" stroke="transparent" points="-4,4 -4,-257 249.68,-257 249.68,4 -4,4"/>
+<g id="clust1" class="cluster">
+<title>cluster_0</title>
+<polygon fill="none" stroke="black" points="8,-8 8,-245 120.19,-245 120.19,-8 8,-8"/>
+<text text-anchor="middle" x="64.1" y="-229.8" font-family="Times,serif" font-size="14.00">Start Area</text>
+</g>
+<!-- start_cu -->
+<g id="node1" class="node">
+<title>start_cu</title>
+<ellipse fill="none" stroke="black" cx="64.1" cy="-196" rx="48.19" ry="18"/>
+<text text-anchor="middle" x="64.1" y="-192.3" font-family="Times,serif" font-size="14.00">start_cu</text>
+</g>
+<!-- pcore_d -->
+<g id="node5" class="node">
+<title>pcore_d</title>
+<ellipse fill="none" stroke="black" cx="196.94" cy="-196" rx="46.59" ry="18"/>
+<text text-anchor="middle" x="196.94" y="-192.3" font-family="Times,serif" font-size="14.00">pcore_d</text>
+</g>
+<!-- start_cu&#45;&gt;pcore_d -->
+<g id="edge1" class="edge &#45;purple">
+<title>start_cu&#45;&gt;pcore_d</title>
+<path fill="none" stroke="black" d="M112.33,-196C121.27,-196 130.69,-196 139.87,-196"/>
+<polygon fill="black" stroke="black" points="140.08,-199.5 150.08,-196 140.08,-192.5 140.08,-199.5"/>
+</g>
+<!-- start_cd -->
+<g id="node2" class="node">
+<title>start_cd</title>
+<ellipse fill="none" stroke="black" cx="64.1" cy="-142" rx="48.19" ry="18"/>
+<text text-anchor="middle" x="64.1" y="-138.3" font-family="Times,serif" font-size="14.00">start_cd</text>
+</g>
+<!-- wcore_u -->
+<g id="node7" class="node">
+<title>wcore_u</title>
+<ellipse fill="none" stroke="black" cx="196.94" cy="-142" rx="48.99" ry="18"/>
+<text text-anchor="middle" x="196.94" y="-138.3" font-family="Times,serif" font-size="14.00">wcore_u</text>
+</g>
+<!-- start_cd&#45;&gt;wcore_u -->
+<g id="edge3" class="edge &#45;white">
+<title>start_cd&#45;&gt;wcore_u</title>
+<path fill="none" stroke="black" d="M112.33,-142C120.55,-142 129.19,-142 137.67,-142"/>
+<polygon fill="black" stroke="black" points="137.89,-145.5 147.89,-142 137.89,-138.5 137.89,-145.5"/>
+</g>
+<!-- start_cl -->
+<g id="node3" class="node">
+<title>start_cl</title>
+<ellipse fill="none" stroke="black" cx="64.1" cy="-88" rx="45.49" ry="18"/>
+<text text-anchor="middle" x="64.1" y="-84.3" font-family="Times,serif" font-size="14.00">start_cl</text>
+</g>
+<!-- bcore_r -->
+<g id="node8" class="node">
+<title>bcore_r</title>
+<ellipse fill="none" stroke="black" cx="196.94" cy="-88" rx="45.49" ry="18"/>
+<text text-anchor="middle" x="196.94" y="-84.3" font-family="Times,serif" font-size="14.00">bcore_r</text>
+</g>
+<!-- start_cl&#45;&gt;bcore_r -->
+<g id="edge4" class="edge &#45;blue">
+<title>start_cl&#45;&gt;bcore_r</title>
+<path fill="none" stroke="black" d="M109.76,-88C119.75,-88 130.47,-88 140.83,-88"/>
+<polygon fill="black" stroke="black" points="141.03,-91.5 151.03,-88 141.03,-84.5 141.03,-91.5"/>
+</g>
+<!-- start_cr -->
+<g id="node4" class="node">
+<title>start_cr</title>
+<ellipse fill="none" stroke="black" cx="64.1" cy="-34" rx="46.59" ry="18"/>
+<text text-anchor="middle" x="64.1" y="-30.3" font-family="Times,serif" font-size="14.00">start_cr</text>
+</g>
+<!-- lcore_l -->
+<g id="node6" class="node">
+<title>lcore_l</title>
+<ellipse fill="none" stroke="black" cx="196.94" cy="-34" rx="40.89" ry="18"/>
+<text text-anchor="middle" x="196.94" y="-30.3" font-family="Times,serif" font-size="14.00">lcore_l</text>
+</g>
+<!-- start_cr&#45;&gt;lcore_l -->
+<g id="edge2" class="edge &#45;green">
+<title>start_cr&#45;&gt;lcore_l</title>
+<path fill="none" stroke="black" d="M111.23,-34C122.38,-34 134.35,-34 145.69,-34"/>
+<polygon fill="black" stroke="black" points="145.87,-37.5 155.87,-34 145.87,-30.5 145.87,-37.5"/>
+</g>
+</g>
+</svg>
