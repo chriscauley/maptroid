@@ -93,12 +93,6 @@ const packs = Item.packs.slice()
 const beams = Item.beams.slice()
 const abilities = Item.abilities.slice()
 
-packs.push('weapons-tank')
-packs.push('shinespark')
-abilities.push('boost-ball')
-beams.push('beam-combo')
-abilities.push('gaea-armor')
-
 const tools = [
   { slug: 'item', variants: packs, icon: (_, v) => `sm-item -${v}` },
   { slug: 'item', variants: beams, icon: (_, v) => `sm-item -${v}` },

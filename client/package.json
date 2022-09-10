@@ -9,6 +9,7 @@
     "watch": "vue-cli-service build --watch --dest ../server/dist"
   },
   "dependencies": {
+    "@babel/helper-string-parser": "^7.18.10",
     "@popperjs/core": "^2.9.3",
     "@unrest/css": "0.0.8",
     "@unrest/geo": "0.0.5",
