@@ -73,6 +73,8 @@ def make_map_icon(world, force=False):
         draw.line(xys, 'white', scale // 4, 'curve')
 
     for zone in world.zone_set.all():
+        if zone.data.get('map_skip'):
+            continue
         if zone.slug.startswith('unknown') or zone.slug.startswith('ztrash') or zone.data.get('hidden'):
             continue
         zx, zy, _, _ = zone.data['world']['bounds']
