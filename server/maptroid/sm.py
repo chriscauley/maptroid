@@ -49,7 +49,7 @@ def to_media_url(path, *args):
 
 @functools.lru_cache
 def get_vitality_layer_1(zone_slug):
-    hires_dir = os.path.join(settings.SINK_DIR, '_hires-vitality')
+    hires_dir = os.path.join(settings.SINK_DIR, '_hires-vitality/processed/')
     path = os.path.join(hires_dir, f'{zone_slug}.png')
     return urcv.force_alpha(cv2.imread(path))
 

@@ -156,7 +156,7 @@ def main():
             continue
         try:
             room = Room.objects.get(world__slug=world.slug, key=key)
-        except Exception as e:
+        except Room.DoesNotExist as e:
             print("missing key: ",key)
             raise e
         if not room in rooms:

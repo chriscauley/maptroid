@@ -133,5 +133,5 @@ for zone in world.zone_set.all():
         if not value:
             with_alpha[y*256:(y+1)*256,x*256:(x+1)*256] = 0
 
-    cv2.imwrite(SOURCE_DIR + f'/{zone.slug}.png', with_alpha)
+    cv2.imwrite(SOURCE_DIR + f'/processed/{zone.slug}.png', with_alpha)
 
