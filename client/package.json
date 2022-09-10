@@ -44,7 +44,8 @@
     "raw-loader": "^4.0.2",
     "sass": "^1.32.8",
     "sass-loader": "^10.1.1",
-    "tailwindcss": "npm:@tailwindcss/postcss7-compat"
+    "tailwindcss": "npm:@tailwindcss/postcss7-compat",
+    "vue-cli-plugin-svg": "~0.2.1"
   },
   "browserslist": [
     "> 1%",

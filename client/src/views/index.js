@@ -13,6 +13,7 @@ import play from './play'
 import SplitRoom from './SplitRoom'
 import SpriteSheet from './SpriteSheet'
 import ProcessDread from './ProcessDread.vue'
+import SylSvg from './SylSvg'
 import Trainer from './Trainer'
 import ScreenshotAnalyzer from './ScreenshotAnalyzer/index.vue'
 import ScreenshotUpload from './ScreenshotUpload.vue'
@@ -44,6 +45,7 @@ export default {
   Labbook,
   MapView,
   ProcessDread,
+  SylSvg,
   Trainer,
   ScreenshotAnalyzer,
   ScreenshotUpload,

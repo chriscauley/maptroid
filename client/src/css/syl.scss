@@ -1,0 +1,34 @@
+$syl-colors: purple, green, blue, red;
+
+@each $color in $syl-colors {
+  .view-syl .-#{""+$color} {
+    path {
+      stroke: $color;
+    }
+    polygon {
+      fill: $color;
+      stroke: $color;
+    }
+  }
+}
+
+.view-syl {
+  .-purple, .-green, .-white, .-blue, .-red {
+    path {
+      stroke-width: 4px;
+    }
+    polygon {
+      stroke-width: 4px;
+    }
+  }
+}
+
+.view-syl .-white {
+  path {
+    stroke: #888;
+  }
+  polygon {
+    fill: #888;
+    stroke: #888;
+  }
+}
