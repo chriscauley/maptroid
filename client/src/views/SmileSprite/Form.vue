@@ -19,13 +19,6 @@
         :success="success"
         :ui="ui"
       />
-      <div class="admin-smile-sprite__room-list list-group">
-        <template v-for="room in rooms" :key="room.id">
-          <a :href="`/room/${room.id}/`" target="_blank" class="list-group-item">
-            #{{ room.id }}{{ room.name }}
-          </a>
-        </template>
-      </div>
     </div>
     <template #actions>
       <i class="fa fa-chevron-left" @click="$emit('select-dindex', -1)" />
@@ -45,13 +38,6 @@ export default {
   computed: {
     ui() {
       return { type: { tagName: GeoBox } }
-    },
-    rooms() {
-      const rooms = this.$store.room.getPage({ query: { per_page: 5000 } })?.items || []
-      if (this.sprite.layer === 'bts') {
-        return rooms.filter((r) => r.data.bts?.sprites.find((s) => s === this.sprite.id))
-      }
-      return rooms.filter((r) => r.data.plm_sprites?.find((s) => s[0] === this.sprite.id))
     },
     svg_path() {
       if (!this.sprite.type.startsWith('b_')) {
