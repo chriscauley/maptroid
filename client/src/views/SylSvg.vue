@@ -22,27 +22,41 @@
         this hack so I mapped it out.
       </p>
       <p>
-        You start in a large gray room (refered to as "start" in the graphs) with four gray doors in the center.
-        After activating the mapping device in the top right corner, you can enter the four doors. Each takes you to
-        a region with different colored snow (purple, green, blue or white). The 4 mazes are only
-        connected through the start hub. If you notice the snow change back to gray, that means
-        you've exited to the start hub again.
+        You start in a large gray room (refered to as "start" in the graphs) with four gray doors in
+        the center. After activating the mapping device in the top right corner, you can enter the
+        four doors. Each takes you to a region with different colored snow (purple, green, blue or
+        white). The 4 mazes are only connected through the start hub. If you notice the snow change
+        back to gray, that means you've exited to the start hub again.
       </p>
       <p>
-        It's a bit confusing describing where to go since the top door on the center hub is entered by going down. I call the top door a "down door" because it's facing the same direction as all other doors you enter by going down. I label doors on the center with "c". For example, to get to the white region you start by entering the door on top of the center, refered to as <code>start_cd</code> becuse it's in the [start] room, [c]enter chunk, and you enter it by going [d]own. The door is on the top of the center, but it is labeled as a "cd" or "c-down" door because the direction samus moves while entereing the door.
+        It's a bit confusing describing where to go since the top door on the center hub is entered
+        by going down. I call the top door a "down door" because it's facing the same direction as
+        all other doors you enter by going down. I label doors on the center with "c". For example,
+        to get to the white region you start by entering the door on top of the center, refered to
+        as <code>start_cd</code> becuse it's in the [start] room, [c]enter chunk, and you enter it
+        by going [d]own. The door is on the top of the center, but it is labeled as a "cd" or
+        "c-down" door because the direction samus moves while entereing the door.
       </p>
       <p>
-        If you click on any of the four buttons above, I list the shortest path through the maze (Any%) and the shortest route that includes all the missiles
-        (100%). If the direction starts with "c" (like c-left, c-right, c-down, or c-up) that means
-        you should go to the opposite side and enter the center from that direction.
+        If you click on any of the four buttons above, I list the shortest path through the maze
+        (Any%) and the shortest route that includes all the missiles (100%). If the direction starts
+        with "c" (like c-left, c-right, c-down, or c-up) that means you should go to the opposite
+        side and enter the center from that direction.
       </p>
       <p>
-        The graphs may be a bit confusing (which is why I wrote out the instructions). If doors are grouped in a rectangle that means you can access them. I didn't add arrows to show connections inside of these because it would get messy. I also didn't add arrows or connections between start doors because it warped the graph too much. On missile runs, if a red arrow dumps you back into start it is implied that you need to go back to the first door to enter the maze area.
+        The graphs may be a bit confusing (which is why I wrote out the instructions). If doors are
+        grouped in a rectangle that means you can access them. I didn't add arrows to show
+        connections inside of these because it would get messy. I also didn't add arrows or
+        connections between start doors because it warped the graph too much. On missile runs, if a
+        red arrow dumps you back into start it is implied that you need to go back to the first door
+        to enter the maze area.
       </p>
       <p>
-        Below is the schematic map for the central hub. Odds are you don't need to look at the graph at all, they are just there in case anyone wants to check my work. For simplicity, each of the mazes have
-        separate pages. These maps highlight the fastest route to get to the item as well as showing
-        the path to get the optional missiles (red). 100% routes use a mixture of red and colored paths.
+        Below is the schematic map for the central hub. Odds are you don't need to look at the graph
+        at all, they are just there in case anyone wants to check my work. For simplicity, each of
+        the mazes have separate pages. These maps highlight the fastest route to get to the item as
+        well as showing the path to get the optional missiles (red). 100% routes use a mixture of
+        red and colored paths.
       </p>
       <start-svg />
     </div>

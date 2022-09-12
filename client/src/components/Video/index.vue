@@ -10,6 +10,9 @@
         <div class="btn -danger" @click="skip">
           Skip
         </div>
+        <div class="btn -danger" @click="pop">
+          Pop
+        </div>
       </div>
     </div>
     <div v-else>
@@ -129,6 +132,18 @@ export default {
       if (new_time !== this.$store.local.state.current_time) {
         this.$store.local.save({ current_time: new_time })
       }
+    },
+    pop(e) {
+      if (!e.shiftKey && !e.ctrlKey) {
+        this.$ui.toast.error('You must hold ctrl and shift')
+        return
+      }
+      const { video } = this
+      video.data.items.pop()
+      this.$store.video.save(video).then(() => {
+        this.$store.video.api.markStale()
+        this.$store.video.getCurrentVideo()
+      })
     },
     skip(e) {
       if (!e.shiftKey && !e.ctrlKey) {
