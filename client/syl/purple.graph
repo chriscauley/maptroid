@@ -68,7 +68,7 @@ digraph G {
     vcore_d -> tcore_u [class="-purple"];
 
     pcore_r -> pwtr_cl;
-    pcore_l -> pcore_r;
+    pcore_l -> pcore_r [class="-red"];
 
     // loops
     pcore_d -> pwtr_u [class="-purple"];

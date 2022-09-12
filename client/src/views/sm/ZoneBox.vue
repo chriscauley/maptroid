@@ -3,6 +3,14 @@
     <unrest-draggable @drag="drag" v-if="move_zones" class="sm-zone-box__move" />
     <room-box v-for="room in rooms" :key="room.id" :room="room" />
   </div>
+  <router-link
+    v-if="zone.slug === 'syl__maze'"
+    class="syl-maze-link"
+    to="/app/syl/"
+    :style="jackie_style"
+  >
+    <img src="/static/jackie-chan-wtf.png" />
+  </router-link>
 </template>
 
 <script>
@@ -31,6 +39,17 @@ export default {
         left: `${x * 100}%`,
         top: `${y * 100}%`,
         width: `${100}%`,
+      }
+    },
+    jackie_style() {
+      const [x, y] = this.zone.data.world.bounds
+      return {
+        height: '100%',
+        left: `${x * 100}%`,
+        position: 'absolute',
+        top: `${y * 100}%`,
+        width: '100%',
+        'z-index': 120,
       }
     },
     rooms() {

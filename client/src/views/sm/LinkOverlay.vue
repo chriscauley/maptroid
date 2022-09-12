@@ -77,7 +77,9 @@ export default {
           'hyper-metroid': ['1', '4', '7', '10', '13'],
           'super-zero-mission': ['↓', '↓↓', '←'],
         }
-        if (!room_id) {
+        if (this.$route.params.zone_slug) {
+          // don't check on zone maps because links can be between zones
+        } else if (!room_id) {
           if (!skip[world_slug]?.includes(link.text)) {
             console.warn('Unable to find matching link', link)
           }

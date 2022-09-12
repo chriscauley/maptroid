@@ -109,7 +109,7 @@
 <text text-anchor="middle" x="178.99" y="-586.3" font-family="Times,serif" font-size="14.00">pcore_r</text>
 </g>
 <!-- pcore_l&#45;&gt;pcore_r -->
-<g id="edge14" class="edge">
+<g id="edge14" class="edge &#45;red">
 <title>pcore_l&#45;&gt;pcore_r</title>
 <path fill="none" stroke="black" d="M320.82,-567.47C294.52,-571.68 259.98,-577.2 231.69,-581.73"/>
 <polygon fill="black" stroke="black" points="230.9,-578.31 221.58,-583.35 232.01,-585.22 230.9,-578.31"/>

@@ -5,7 +5,7 @@ digraph G {
   garea -> start_cu;
 
   gexit_cr -> start_cl;
-  gmissilel_cu -> start_cu;
+  gmissile_cu -> start_cu;
 
   subgraph cluster_200 {
     subgraph cluster_201 {
@@ -16,9 +16,9 @@ digraph G {
 
     subgraph cluster_202 {
       label = "Green Missile (bottom left)";
-      gmissilel_cu;
-      gmissilel_cl;
-      gmissilel_r;
+      gmissile_cu;
+      gmissile_cl;
+      gmissile_r;
       missile_botright [shape="rectangle" style="filled" fillcolor="#ff8888"];
     }
 
@@ -54,14 +54,14 @@ digraph G {
     gexit_cd -> gchozo_u [class="-red"];
     gexit_l -> gexit_cr;
 
-    gchozo_u -> gchozo_d;
-    gchozo_d -> gmissilel_cu;
+    gchozo_u -> gchozo_d  [class="-red"];
+    gchozo_d -> gmissile_cu  [class="-red"];
 
-    gmissilel_cl -> gchozo_r [dir="both"];
-    gmissilel_r -> gchozo_l [class="-green"];
+    gmissile_cl -> gchozo_r [dir="both"];
+    gmissile_r -> gchozo_l [class="-green"];
     gchozo_l -> gexit_cr [class="-green"];
 
-    lcore_r -> gmissilel_cl [class="-green"];
+    lcore_r -> gmissile_cl [class="-green"];
 
     // loops
     lcore_l -> lcore_r;

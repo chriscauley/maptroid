@@ -3,11 +3,11 @@ digraph G {
 
   start_cl -> bcore_r [class="-blue"];
   bmissile_cd -> start_cu;
-  bmissile_cu -> start_cd;
+  bmissile_cu -> start_cd [class="-red"];
   barea -> start_cd;
+  // start_cd -> start_cl [class="-red"];
 
   subgraph cluster_400 {
-    orientation=90;
     subgraph cluster_401 {
       label = "Blue Core (no up)";
       bcore_d;
@@ -50,10 +50,10 @@ digraph G {
     bcore_l -> bexit_cr [class="-blue"];
     bcore_r -> bcore_l;
 
-    bchozo_l -> bbal_r;
+    bchozo_l -> bbal_r [class="-red"];
     bchozo_r -> bexit_l;
 
-    bbal_r -> bcore_l;
+    bbal_r -> bcore_l [class="-red"];
 
     bexit_l -> bexit_cr;
     bexit_cr -> bchozo_l [class="-red"];
