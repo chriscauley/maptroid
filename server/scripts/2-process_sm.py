@@ -27,7 +27,7 @@ for zone in zones:
         if room.data.get('hidden'):
             continue
         if 'doors' not in room.data or '--doors' in sys.argv:
-            if 'doors' not in room.data:
+            if 'doors' in room.data:
                 print(f'redoing doors for room #{room.id} - {room.key}')
             populate_room_doors(room)
             populate_room_elevators(room)

@@ -23,7 +23,7 @@ export default {
     text() {
       const { tool, variant } = this.storage.state.selected
       if (tool === 'rezone') {
-        return this.$store.route.all_zones.find((z) => z.id === variant).name
+        return this.$store.route.all_zones.find((z) => z.id === variant)?.name|| ''
       }
       return ''
     },

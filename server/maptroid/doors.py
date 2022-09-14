@@ -114,11 +114,15 @@ def find_doors(image, world, room_id):
 
     # more weird doors by TROM!
     override_doors = []
-    if world == 'new-wet-dream' or world == 'hydellius':
+    if world in ['new-wet-dream', 'hydellius', 'angry-remnants']:
         override_doors = get_override_doors(world)
     for doorset in override_doors:
-        for blue_gray, red_gray, blue in doorset:
-            for x, y, _x2, _y2 in urcv.template.match(gray, red_gray, threshold=0.8):
+        for i, (blue_gray, red_gray, blue) in enumerate(doorset):
+            for x, y, _x2, _y2 in urcv.template.match(gray, red_gray, threshold=0.95):
+                if i == 2: # right facing door
+                    x -= 16
+                if i == 3: # down facing door
+                    y -= 16
                 urcv.draw.paste(image, blue, x, y)
                 gray = cv2.cvtColor(image, cv2.COLOR_BGRA2GRAY)
     for key, template in gray_icons.items():

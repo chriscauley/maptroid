@@ -8,11 +8,14 @@ import os
 
 def main():
     world, _, _ = get_wzr()
-    zone = world.zone_set.get(slug=f'ztrash-{world.slug}')
-    bad_smile_ids = {
-        r.key.split('_')[-1].replace('.png', ''): True
-        for r in zone.room_set.all()
-    }
+    bad_smile_ids = {}
+    zones = [
+        world.zone_set.get(slug=f'ztrash-{world.slug}'),
+        world.zone_set.get(slug=f'unknown-{world.slug}'),
+    ]
+    for zone in zones:
+        for r in zone.room_set.all():
+            bad_smile_ids[r.key.split('_')[-1].replace('.png', '')] = True
 
     # load mdbs
     mdb_path = os.path.join(settings.SINK_DIR, world.slug, 'mdb.txt')
