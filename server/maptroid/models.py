@@ -24,6 +24,8 @@ def default_world_data():
 DEV_ROOT = 'http://maptroid.uberfordogs.com:8943'
 
 class World(models.Model):
+  class Meta:
+    ordering = ('slug',)
   name = models.CharField(max_length=128)
   slug = models.CharField(max_length=128)
   hidden = models.BooleanField(default=False)

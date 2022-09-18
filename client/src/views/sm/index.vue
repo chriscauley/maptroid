@@ -109,6 +109,9 @@ export default {
       return ['move_room', 'edit_room', 'rezone'].includes(tool)
     },
     show_player() {
+      if (!this.$auth.user) {
+        return
+      }
       const { tool } = this.tool_storage.state.selected
       return tool === 'video_path' || !tool
     },
