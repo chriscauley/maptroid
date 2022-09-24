@@ -1,0 +1,20 @@
+.ps2 {
+  @apply flex overflow-hidden;
+  &__img {
+    @apply overflow-y-scroll relative;
+    ._blockout {
+      @apply border-white border-2 absolute flex items-center px-2;
+      background: rgba(0,0,0,0.75);
+      &:hover {
+        opacity: 0;
+      }
+    }
+  }
+  canvas {
+    border: 1px solid #ddd;
+    background: #ddd;
+    &:hover {
+      background: #00007f;
+    }
+  }
+}

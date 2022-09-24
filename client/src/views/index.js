@@ -12,6 +12,7 @@ import MapView from './MapView.vue'
 import play from './play'
 import SplitRoom from './SplitRoom'
 import SpriteSheet from './SpriteSheet'
+import PowerSuit from './PowerSuit.vue'
 import ProcessDread from './ProcessDread.vue'
 import SylSvg from './SylSvg'
 import Trainer from './Trainer'
@@ -44,6 +45,7 @@ export default {
   Home,
   Labbook,
   MapView,
+  PowerSuit,
   ProcessDread,
   SylSvg,
   Trainer,

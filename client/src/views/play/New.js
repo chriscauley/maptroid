@@ -5,8 +5,8 @@ export default {
   render: () => 'Loading...',
   async mounted() {
     let room_id = parseInt(this.$route.params.room_id)
+    await this.$store.route.fetchReady()
     if (!room_id) {
-      await this.$store.route.fetchReady()
       const room = this.$store.route.world_rooms.find((r) => {
         return Object.values(r.data.plm_overrides || {}).find((v) => v === 'ship')
       })
