@@ -173,6 +173,7 @@ def main(world_slug, layer):
     print(f"finished scraping {image_count} images")
 
 def capture_room(screen):
+    pyautogui.press('enter')
     smile_id = screen.get_smile_id()
     event_name = screen.get_event_name()
     result_path = screen.get_dest_path(smile_id, event_name)
