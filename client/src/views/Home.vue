@@ -20,8 +20,8 @@
         <div class="world-card__details">
           <div>
             <div class="world-card__title">{{ world.name }}</div>
-            <div v-if="author" class="world-card__author">
-              by {{ author }}
+            <div v-if="getAuthor(world)" class="world-card__author">
+              by {{ getAuthor(world) }}
             </div>
           </div>
           <mc-data :world="world" />
@@ -93,9 +93,6 @@ export default {
     }
   },
   computed: {
-    author() {
-      return this.world.data.mc_data?.author
-    },
     worlds() {
       let { worlds } = this.$store.route
       const { search, difficulty, sort_by } = this.state
@@ -131,6 +128,9 @@ export default {
   methods: {
     bg(world) {
       return `background-image: url(/media/world_maps/${world.slug}.png)`
+    },
+    getAuthor(world) {
+      return world.data.mc_data?.author
     },
   },
 }
