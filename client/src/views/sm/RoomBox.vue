@@ -1,5 +1,5 @@
 <template>
-  <div :style="style" :class="css" :title="`${room.id} - ${room.key}`" @click="click">
+  <div :style="style" :class="css" :title="title" @click="click">
     <template v-if="mode">
       <div v-for="(hole, i) in holes" :key="i" :style="hole" />
       <unrest-draggable @drag="drag" :style="`background-image: url(${src})`" />
@@ -70,6 +70,10 @@ export default {
     return { drag_bounds: null, ctrl_down: false }
   },
   computed: {
+    title() {
+      const { id, name, key } = this.room
+      return `#${id} - ${name || key}`
+    },
     bts_extra() {
       const { world } = this.$store.route
       return `/media/sm_cache/${world.slug}/bts-extra/${this.room.key}`

@@ -402,6 +402,16 @@ $ascent-items: weapons-tank shinespark boost-ball;
   }
 }
 
+.bg-zone {
+  color: white;
+  text-shadow: 0 0 3px black;
+  @each $name, $color in $zone-colors {
+    &.-#{$name} {
+      background: $color;
+    }
+  }
+}
+
 .app-body.-zoom--3, .app-body.-zoom--4 {
   .sm-room-svg path.-outer {
     @each $name, $color in $zone-colors {

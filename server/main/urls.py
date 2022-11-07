@@ -11,6 +11,7 @@ import maptroid.forms
 import sprite.forms
 import unrest.user.forms
 import contact.forms
+import skill.forms
 
 from contact.views import simple_upload
 

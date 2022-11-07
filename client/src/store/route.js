@@ -14,7 +14,11 @@ export default ({ store }) => {
     world: computed(() => {
       return route.worlds.find((w) => w.slug === route.params.world_slug)
     }),
-    zones: computed(() => route.all_zones.filter((z) => !z.data.hidden)),
+    zones: computed(() =>
+      route.all_zones.filter((z) => {
+        return !z.data.hidden && !z.name.match(/^(ztrash|unknown)/)
+      }),
+    ),
     all_zones: computed(() => store.zone.getPage(route.world_query)?.items || []),
     zone: computed(() => {
       const { zone_slug } = route.params
@@ -47,6 +51,12 @@ export default ({ store }) => {
       const visible_zones = {}
       route.zones.forEach((z) => (visible_zones[z.id] = true))
       return (page?.items || []).filter((r) => !r.data.hidden && visible_zones[r.zone])
+    }),
+
+    world_rooms_by_id: computed(() => {
+      const out = {}
+      store.route.world_rooms?.forEach((r) => (out[r.id] = r))
+      return out
     }),
 
     zone_items: computed(() => {
@@ -92,6 +102,10 @@ export default ({ store }) => {
 
     get world_rooms() {
       return _computed.world_rooms.value
+    },
+
+    get world_rooms_by_id() {
+      return _computed.world_rooms_by_id.value
     },
 
     get zone_rooms() {

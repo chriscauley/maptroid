@@ -295,17 +295,15 @@ class Channel(models.Model):
   __str__ = lambda self: self.name
 
 
-
-
 class Video(models.Model):
   class Meta:
     ordering = ('order',)
   SOURCES = _choices(['youtube', 'twitch'])
   source = models.CharField(max_length=16, choices=SOURCES, default="youtube")
-  thumbnail = models.ImageField(upload_to="video_thumbnails")
+  thumbnail = models.ImageField(upload_to="video_thumbnails", null=True, blank=True)
   external_id = models.CharField(max_length=24)
   title = models.CharField(max_length=255)
-  label = models.CharField(max_length=64)
+  label = models.CharField(max_length=64, null=True, blank=True)
   channel = models.ForeignKey(Channel, models.CASCADE)
   def default_data():
     return {
@@ -315,6 +313,11 @@ class Video(models.Model):
   data = models.JSONField(default=default_data, blank=True)
   world = models.ForeignKey(World, models.CASCADE)
   order = models.IntegerField(default=0)
+  is_full_playthrough = models.BooleanField(
+      # TODO move video.data playthrough info to Run.data
+      # TODO then use run to determine if a video can be displayed on the map
+      help_text="temporary field to separate playthrough videos and skill videos"
+  )
   __str__ = lambda self: self.title
 
   @property

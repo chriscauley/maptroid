@@ -24,6 +24,7 @@ INSTALLED_APPS = [
     'maptroid',
     'sprite',
     'contact',
+    'skill',
 ]
 
 MIDDLEWARE = [

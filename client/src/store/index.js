@@ -10,6 +10,7 @@ import plmsprite from './plmsprite'
 import room from './room'
 import route from './route'
 import run from './run'
+import skill from './skill'
 import smile from './smile'
 import smilesprite from './smilesprite'
 import screenshot from './screenshot'
@@ -30,6 +31,7 @@ const modules = {
   plmsprite,
   room,
   run,
+  skill,
   smile,
   smilesprite,
   screenshot,

@@ -20,9 +20,7 @@
         <div class="world-card__details">
           <div>
             <div class="world-card__title">{{ world.name }}</div>
-            <div v-if="getAuthor(world)" class="world-card__author">
-              by {{ getAuthor(world) }}
-            </div>
+            <div v-if="getAuthor(world)" class="world-card__author">by {{ getAuthor(world) }}</div>
           </div>
           <mc-data :world="world" />
         </div>
