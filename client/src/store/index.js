@@ -14,6 +14,7 @@ import skill from './skill'
 import smile from './smile'
 import smilesprite from './smilesprite'
 import screenshot from './screenshot'
+import userskill from './user-skill'
 import video from './video'
 import world from './world'
 import zone from './zone'
@@ -35,6 +36,7 @@ const modules = {
   smile,
   smilesprite,
   screenshot,
+  userskill,
   video,
   world,
   zone,

@@ -5,6 +5,13 @@ from skill.models import Skill, SkillVideo, SkillResource, UserSkill
 
 @unrest_schema.register
 class SkillForm(forms.ModelForm):
+    class Meta:
+        model = Skill
+        fields = ('name', 'description', 'difficulty')
+
+    user_can_LIST = 'any'
+    readonly_fields = ['video_ids', 'room_ids']
+
     def prep_schema(self, schema):
         schema['properties']['rooms'] = {
             'type': 'array',
@@ -14,11 +21,6 @@ class SkillForm(forms.ModelForm):
         if instance and instance.id:
             ids = list(instance.rooms.all().values_list('id', flat=True))
             schema['properties']['rooms']['default'] = ids
-    user_can_LIST = 'any'
-    readonly_fields = ['video_ids', 'room_ids']
-    class Meta:
-        model = Skill
-        fields = ('name', 'description', 'difficulty')
 
     def get_queryset(self, request):
         return Skill.objects.all().prefetch_related('rooms')
@@ -30,6 +32,19 @@ class SkillForm(forms.ModelForm):
             instance.rooms.add(_id)
         instance.save()
         return instance
+
+
+@unrest_schema.register
+class UserSkillForm(forms.ModelForm):
+    user_can_GET = 'own'
+    user_can_POST = 'own'
+    user_can_PUT = 'own'
+    user_can_DELETE = 'own'
+    user_can_LIST = 'own'
+
+    class Meta:
+        model = UserSkill
+        fields = ['skill', 'score']
 
 
 # @unrest_schema.register

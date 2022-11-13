@@ -1,3 +1,7 @@
 from django.contrib import admin
 
-# Register your models here.
+from skill.models import UserSkill
+
+@admin.register(UserSkill)
+class UserSkill(admin.ModelAdmin):
+    pass

@@ -12,6 +12,9 @@ class Skill(models.Model):
     videos = models.ManyToManyField('maptroid.Video', through='SkillVideo')
     data = models.JSONField(default=dict, blank=True)
 
+    def __str__(self):
+        return self.name
+
     @property
     def video_ids(self):
         return []
@@ -40,4 +43,8 @@ class SkillResource(models.Model):
 class UserSkill(models.Model):
     skill = models.ForeignKey(Skill, on_delete=models.CASCADE)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    data = models.JSONField(default=dict, blank=True)
+    score = models.IntegerField()
+    note = models.CharField(max_length=256, blank=True, default='')
+    history = models.JSONField(default=list, blank=True)
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)

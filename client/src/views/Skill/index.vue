@@ -20,6 +20,9 @@
             {{ skill.name }}
           </td>
           <td>
+            <skill-rating :skill="skill" :score="user_score_by_skill_id[skill.id]" />
+          </td>
+          <td>
             <span :class="css.pill(skill)">{{ skill.difficulty }}</span>
           </td>
         </tr>
@@ -39,6 +42,7 @@
 import { markRaw } from 'vue'
 import { sortBy } from 'lodash'
 
+import SkillRating from '@/components/SkillRating'
 import RoomSearchWidget from '@/components/RoomSearchWidget'
 
 const difficulty_colors = {
@@ -55,8 +59,9 @@ export default {
   __route: {
     path: '/app/skill/:world_slug/',
   },
+  components: { SkillRating },
   data() {
-    const columns = ['Name', 'Difficulty']
+    const columns = ['Name', 'User Level', 'Difficulty']
     return {
       css: {
         edit: (skill) => `btn -${skill.room_ids?.length ? 'primary' : 'warning'}`,
@@ -101,6 +106,12 @@ export default {
         skills.reverse()
       }
       return skills
+    },
+    user_score_by_skill_id() {
+      const query = { per_page: 0 }
+      const items = this.$store.userskill.getPage({query})?.items || []
+      console.log(Object.fromEntries(items.map(us => [us.skill, us.score])))
+      return Object.fromEntries(items.map(us => [us.skill, us.score]))
     },
   },
   methods: {

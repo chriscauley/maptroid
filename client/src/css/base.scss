@@ -429,3 +429,53 @@ body.theme-dark_mode {
 .pill.-master {
   outline: #9b2c2c 2px solid;
 }
+
+.skill-rating {
+  @apply flex gap-1 items-center;
+  ._bar {
+    @apply bg-gray-500 cursor-pointer h-6 w-4;
+  }
+  ._frown {
+    @apply cursor-pointer opacity-0;
+    &:hover {
+      opacity: 1;
+    }
+  }
+  ._score {
+    @apply w-3;
+    text-align: right;
+  }
+  &.-score-0 {
+    ._frown {
+      opacity: 1;
+    }
+    .-s1, .-s2, .-s3, .-s4, .-s5 {
+      @apply bg-red-600;
+    }
+  }
+  &.-score-1 {
+    .-s1 {
+      @apply bg-green-500;
+    }
+  }
+  &.-score-2 {
+    .-s1, .-s2 {
+      @apply bg-green-500;
+    }
+  }
+  &.-score-3 {
+    .-s1, .-s2, .-s3 {
+      @apply bg-green-500;
+    }
+  }
+  &.-score-4 {
+    .-s1, .-s2, .-s3, .-s4 {
+      @apply bg-green-500;
+    }
+  }
+  &.-score-5 {
+    .-s1, .-s2, .-s3, .-s4, .-s5 {
+      @apply bg-green-500;
+    }
+  }
+}

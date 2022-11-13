@@ -1,20 +1,22 @@
+from django.shortcuts import get_object_or_404
 from django.http import JsonResponse
+import json
 
-from maptroid.models import Room, Zone
+from skill.models import Skill, UserSkill
 
 
-def room_search(request):
-    if not request.GET.get('q'):
-        return JsonResponse(dict(extra=0, rooms=[]))
-    zones = { z.id: z.slug for z in Zone.objects.filter(world_id=1) }
-    rooms = Room.objects.filter(world_id=1,name__icontains=request.GET['q'])
-    def serialize(room):
-        return {
-            'name': room.name,
-            'id': room.id,
-            'zone': zones.get(room.zone_id),
-        }
-    return JsonResponse(dict(
-        extra = max(0, rooms.count() - 10),
-        rooms = [serialize(r) for r in rooms[:10]],
-    ))
+def save_user_skill(request):
+    data = json.loads(request.body.decode('utf-8') or "{}")
+    skill = get_object_or_404(Skill, id=data.get('skill_id'))
+    userskill = UserSkill.objects.filter(user=request.user, skill=skill).first()
+    if userskill:
+        userskill.history.append([userskill.score, str(userskill.updated)])
+        userskill.score = data.get('score')
+        userskill.save()
+    else:
+        userskill = UserSkill.objects.create(
+            user=request.user,
+            skill=skill,
+            score=data.get('score'),
+        )
+    return JsonResponse({})
