@@ -3,7 +3,10 @@
     <h2>Super Metroid Skills</h2>
     <table class="table">
       <thead>
-        <td />
+        <td v-if="$auth.user?.is_superuser" />
+        <td class="link" @click="showRoomSort">
+          Rooms
+        </td>
         <td v-for="column in columns" :key="column" @click="setSorter(column)" class="link">
           {{ column }}
           <i :class="css.sort(column)" />
@@ -14,6 +17,13 @@
           <td v-if="$auth.user?.is_superuser">
             <div :class="css.edit(skill)" @click="form_name = `schema/skill/${skill.id}`">
               <i class="fa fa-edit" />
+            </div>
+          </td>
+          <td>
+            <div v-for="room_id in skill.room_ids" :key="room_id">
+              <div :class="room_by_id[room_id].class" @click="filter_room = room_id">
+                {{ room_by_id[room_id].name }}
+              </div>
             </div>
           </td>
           <td>
@@ -28,10 +38,12 @@
         </tr>
       </tbody>
     </table>
-    <button class="btn -primary" @click="form_name = 'schema/skill'">
-      <i class="fa fa-plus" />
-      Add New Skill
-    </button>
+    <div v-if="$auth.user?.is_superuser">
+      <button class="btn -primary" @click="form_name = 'schema/skill'" >
+        <i class="fa fa-plus" />
+        Add New Skill
+      </button>
+    </div>
     <unrest-modal v-if="form_name" :hide_actions="true" @close="form_name = null">
       <unrest-schema-form :form_name="form_name" @success="success" :ui="ui" />
     </unrest-modal>
@@ -78,6 +90,7 @@ export default {
       form_name: null,
       sorter: 'name',
       reversed: false,
+      filter_room: null,
       ui: {
         rooms: { tagName: markRaw(RoomSearchWidget) },
       },
@@ -90,6 +103,20 @@ export default {
     rooms() {
       return this.$store.route.world_rooms
     },
+    room_by_id() {
+      const out = {}
+      const zone_by_id = {}
+      this.$store.route.zones.forEach(z => {
+        zone_by_id[z.id] = `pill bg-zone -${z.slug} cursor-pointer`
+      })
+      this.rooms.forEach(r => {
+        out[r.id] = {
+          name: r.name,
+          class: zone_by_id[r.zone]
+        }
+      })
+      return out
+    },
     ready() {
       const { world, rooms } = this
       return world && rooms.length
@@ -98,10 +125,15 @@ export default {
       const sorter = (item) => {
         if (this.sorter === 'difficulty') {
           return difficulties.indexOf(item.difficulty)
+        } else if (this.sorter === 'user level') {
+          return this.user_score_by_skill_id[item.id] ?? -1
         }
         return item[this.sorter]
       }
-      const skills = sortBy(this.getSkills(), sorter)
+      let skills = sortBy(this.getSkills(), sorter)
+      if (this.filter_room) {
+        skills = skills.filter(s => s.room_ids.includes(this.filter_room))
+      }
       if (this.reversed) {
         skills.reverse()
       }
@@ -110,11 +142,13 @@ export default {
     user_score_by_skill_id() {
       const query = { per_page: 0 }
       const items = this.$store.userskill.getPage({query})?.items || []
-      console.log(Object.fromEntries(items.map(us => [us.skill, us.score])))
       return Object.fromEntries(items.map(us => [us.skill, us.score]))
     },
   },
   methods: {
+    showRoomSort() {
+      this.$ui.alert("To filter by room, click on a room name or use the room search.")
+    },
     getSkills() {
       const query = {
         per_page: 0,

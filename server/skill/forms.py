@@ -9,7 +9,7 @@ class SkillForm(forms.ModelForm):
         model = Skill
         fields = ('name', 'description', 'difficulty')
 
-    user_can_LIST = 'any'
+    user_can_LIST = 'ANY'
     readonly_fields = ['video_ids', 'room_ids']
 
     def prep_schema(self, schema):
@@ -36,11 +36,11 @@ class SkillForm(forms.ModelForm):
 
 @unrest_schema.register
 class UserSkillForm(forms.ModelForm):
-    user_can_GET = 'own'
-    user_can_POST = 'own'
-    user_can_PUT = 'own'
-    user_can_DELETE = 'own'
-    user_can_LIST = 'own'
+    user_can_GET = 'OWN'
+    user_can_POST = 'OWN'
+    user_can_PUT = 'OWN'
+    user_can_DELETE = 'OWN'
+    user_can_LIST = 'OWN'
 
     class Meta:
         model = UserSkill
