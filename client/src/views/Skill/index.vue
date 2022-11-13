@@ -39,7 +39,7 @@
       </tbody>
     </table>
     <div v-if="$auth.user?.is_superuser">
-      <button class="btn -primary" @click="form_name = 'schema/skill'" >
+      <button class="btn -primary" @click="form_name = 'schema/skill'">
         <i class="fa fa-plus" />
         Add New Skill
       </button>
@@ -106,13 +106,13 @@ export default {
     room_by_id() {
       const out = {}
       const zone_by_id = {}
-      this.$store.route.zones.forEach(z => {
+      this.$store.route.zones.forEach((z) => {
         zone_by_id[z.id] = `pill bg-zone -${z.slug} cursor-pointer`
       })
-      this.rooms.forEach(r => {
+      this.rooms.forEach((r) => {
         out[r.id] = {
           name: r.name,
-          class: zone_by_id[r.zone]
+          class: zone_by_id[r.zone],
         }
       })
       return out
@@ -132,7 +132,7 @@ export default {
       }
       let skills = sortBy(this.getSkills(), sorter)
       if (this.filter_room) {
-        skills = skills.filter(s => s.room_ids.includes(this.filter_room))
+        skills = skills.filter((s) => s.room_ids.includes(this.filter_room))
       }
       if (this.reversed) {
         skills.reverse()
@@ -141,13 +141,13 @@ export default {
     },
     user_score_by_skill_id() {
       const query = { per_page: 0 }
-      const items = this.$store.userskill.getPage({query})?.items || []
-      return Object.fromEntries(items.map(us => [us.skill, us.score]))
+      const items = this.$store.userskill.getPage({ query })?.items || []
+      return Object.fromEntries(items.map((us) => [us.skill, us.score]))
     },
   },
   methods: {
     showRoomSort() {
-      this.$ui.alert("To filter by room, click on a room name or use the room search.")
+      this.$ui.alert('To filter by room, click on a room name or use the room search.')
     },
     getSkills() {
       const query = {

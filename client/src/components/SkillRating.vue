@@ -1,21 +1,21 @@
 <template>
-  <div :class="`skill-rating -score-${now_score}`" @mouseleave="hover_score=null">
-    <span class="_frown" @mouseenter="hover_score=0" @click="setScore(0)">
+  <div :class="`skill-rating -score-${now_score}`" @mouseleave="hover_score = null">
+    <span class="_frown" @mouseenter="hover_score = 0" @click="setScore(0)">
       ☹️
     </span>
     <div
       v-for="i_bar in bars"
       :key="i_bar"
       :class="`_bar -s${i_bar}`"
-      @mouseenter="hover_score=i_bar"
+      @mouseenter="hover_score = i_bar"
       @click="setScore(i_bar)"
     />
-    <div class="_score">{{ now_score ?? "?" }}</div> / 5
+    <div class="_score">{{ now_score ?? '?' }}</div>
+    / 5
   </div>
 </template>
 
 <script>
-import { range } from 'lodash'
 import { getClient } from '@unrest/vue-storage'
 
 export default {
@@ -32,7 +32,7 @@ export default {
       return hover_score ?? temp_score ?? score
     },
     bars() {
-      return [1,2,3,4,5]
+      return [1, 2, 3, 4, 5]
     },
   },
   methods: {
@@ -40,12 +40,14 @@ export default {
       const skill_id = this.skill.id
       const data = { skill_id, score }
       const url = 'save-user-skill/'
-      getClient().post(url, data).then(this.refetch)
+      getClient()
+        .post(url, data)
+        .then(this.refetch)
     },
     refetch() {
       this.$store.userskill.api.markStale()
-      this.$store.userskill.getPage({query: { per_page: 0 }})
-    }
-  }
+      this.$store.userskill.getPage({ query: { per_page: 0 } })
+    },
+  },
 }
 </script>
