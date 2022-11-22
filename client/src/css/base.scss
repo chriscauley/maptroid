@@ -479,3 +479,14 @@ body.theme-dark_mode {
     }
   }
 }
+
+.skill-search {
+  @apply flex items-center gap-4 mb-4;
+  .form-group {
+    @apply flex items-center gap-2 mb-0;
+    .form-control {
+      @apply mb-0;
+      width: 200px;
+    }
+  }
+}

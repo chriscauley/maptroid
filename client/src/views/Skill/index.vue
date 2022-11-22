@@ -1,6 +1,7 @@
 <template>
   <div v-if="ready">
     <h2>Super Metroid Skills</h2>
+    <search-bar :filtered_room="filtered_room" />
     <table class="table">
       <thead>
         <td v-if="$auth.user?.is_superuser" />
@@ -54,8 +55,10 @@
 import { markRaw } from 'vue'
 import { sortBy } from 'lodash'
 
+import SearchBar from './SearchBar'
 import SkillRating from '@/components/SkillRating'
 import RoomSearchWidget from '@/components/RoomSearchWidget'
+import { bindLocal } from '@/store/local'
 
 const difficulty_colors = {
   noob: 'primary',
@@ -71,7 +74,7 @@ export default {
   __route: {
     path: '/app/skill/:world_slug/',
   },
-  components: { SkillRating },
+  components: { SkillRating, SearchBar },
   data() {
     const columns = ['Name', 'User Level', 'Difficulty']
     return {
@@ -87,21 +90,21 @@ export default {
         },
       },
       columns,
-      form_name: null,
-      sorter: 'name',
-      reversed: false,
-      filter_room: null,
       ui: {
         rooms: { tagName: markRaw(RoomSearchWidget) },
       },
     }
   },
   computed: {
+    ...bindLocal('skill', ['form_name', 'reversed', 'sorter', 'filter_room', 'search']),
     world() {
       return this.$store.route.world
     },
     rooms() {
       return this.$store.route.world_rooms
+    },
+    filtered_room() {
+      return this.room_by_id[this.filter_room]
     },
     room_by_id() {
       const out = {}
@@ -122,20 +125,25 @@ export default {
       return world && rooms.length
     },
     skills() {
-      const sorter = (item) => {
-        if (this.sorter === 'difficulty') {
+      const { sorter, reversed, filter_room, search } = this
+      const _sorter = (item) => {
+        if (sorter === 'difficulty') {
           return difficulties.indexOf(item.difficulty)
-        } else if (this.sorter === 'user level') {
+        } else if (sorter === 'user level') {
           return this.user_score_by_skill_id[item.id] ?? -1
         }
-        return item[this.sorter]
+        return item[sorter]
       }
-      let skills = sortBy(this.getSkills(), sorter)
-      if (this.filter_room) {
-        skills = skills.filter((s) => s.room_ids.includes(this.filter_room))
+      let skills = sortBy(this.getSkills(), _sorter)
+      if (filter_room) {
+        skills = skills.filter((s) => s.room_ids.includes(filter_room))
       }
-      if (this.reversed) {
+      if (reversed) {
         skills.reverse()
+      }
+      if (search) {
+        const _s = search.toLowerCase().trim()
+        skills = skills.filter((s) => this.skill_text_by_id[s.id]?.includes(_s))
       }
       return skills
     },
@@ -143,6 +151,14 @@ export default {
       const query = { per_page: 0 }
       const items = this.$store.userskill.getPage({ query })?.items || []
       return Object.fromEntries(items.map((us) => [us.skill, us.score]))
+    },
+    skill_text_by_id() {
+      const out = {}
+      this.getSkills().forEach((s) => {
+        const rooms_text = s.room_ids.map((r) => this.room_by_id[r]?.name || '').join(' ')
+        out[s.id] = `${s.name} ${s.description} ${rooms_text}`.toLowerCase()
+      })
+      return out
     },
   },
   methods: {

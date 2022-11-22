@@ -8,3 +8,21 @@ export default () =>
       current_video_id: null,
     },
   })
+
+export const bindLocal = (namespace, names) =>
+  Object.fromEntries(
+    names.map((name) => {
+      const key = `${namespace}__${name}`
+      return [
+        name,
+        {
+          get() {
+            return this.$store.local.state[key]
+          },
+          set(value) {
+            this.$store.local.save({ [key]: value })
+          },
+        },
+      ]
+    }),
+  )
