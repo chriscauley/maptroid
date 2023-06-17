@@ -8,7 +8,9 @@
     </div>
     <template v-for="item in filtered_items" :key="item.id">
       <div class="list-group-item" @click="selectItem(item)">
-        <i :class="item.attrs.class" />
+        <div>
+          <i :class="item.attrs.class" />
+        </div>
         <div class="flex-grow truncate">
           {{ item.attrs.title }}
           <div v-if="item.data.reward">Reward: {{ item.data.reward }}</div>

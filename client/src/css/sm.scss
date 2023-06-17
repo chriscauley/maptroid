@@ -97,6 +97,11 @@
   @include item-zoom(0, 4);
   @include item-zoom(1, 2);
   @include item-zoom(2, 1);
+  .-tool-rando_edit & {
+    &.-has-location:before {
+      outline: 8px solid green;
+    }
+  }
 }
 
 .sm-zone-box {

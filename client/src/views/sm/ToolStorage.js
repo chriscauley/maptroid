@@ -30,6 +30,10 @@ export default (component) => {
           slug: 'run_path',
           icon: 'fa fa-gamepad',
         },
+        {
+          slug: 'rando_edit',
+          icon: 'sm-item -speed-booster',
+        },
       ]
     }
     return tools

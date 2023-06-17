@@ -18,13 +18,19 @@
         >
           {{ item.data[status] ? 'Is' : 'Not' }} {{ status }}
         </div>
+        <div v-if="location_choices">
+          <select :value="item.data.location_name" @change="changeLocation">
+            <option value="">NONE</option>
+            <option v-for="c in location_choices" :key="c" :value="c">{{ c }}</option>
+          </select>
+        </div>
       </div>
     </div>
   </unrest-popper>
 </template>
 
 <script>
-import { debounce } from 'lodash'
+import { debounce, cloneDeep } from 'lodash'
 
 export default {
   inject: ['osd_store'],
@@ -33,6 +39,22 @@ export default {
   },
   data() {
     return { statuses: ['duplicate', 'hidden'], duplicate_of: this.item.data.duplicate_of }
+  },
+  computed: {
+    location_choices() {
+      const { location_names } = this.$store.route.world.data
+      if (!location_names) {
+        return
+      }
+      const used = {}
+      this.$store.route.world_items.forEach((i) => {
+        used[i.data.location_name] = true
+      })
+      if (this.item.data.location_name) {
+        delete used[this.item.data.location_name]
+      }
+      return location_names.filter((i) => !used[i])
+    },
   },
   methods: {
     updateDuplicate() {
@@ -60,6 +82,11 @@ export default {
         item.data[status] = true
       }
 
+      this.$store.item.save(item)
+    },
+    changeLocation(event) {
+      const item = cloneDeep(this.item)
+      item.data.location_name = event.target.value
       this.$store.item.save(item)
     },
   },

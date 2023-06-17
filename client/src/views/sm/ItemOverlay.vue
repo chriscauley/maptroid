@@ -53,9 +53,13 @@ export default {
     getAttrs(item) {
       const [room_x, room_y] = this.map_props.room_bounds[item.room]
       const [x, y] = item.data.room_xy
-      const _class = [...item.attrs.class]
-      _class.push(this.matched[item.id] ? '-matched' : '-not-matched')
-      _class.push(this.video_items[item.id] ? '-video-matched' : '-not-video-matched')
+      const _class = [
+        ...item.attrs.class,
+        item.id === this.selected_item_id && '-target',
+        this.matched[item.id] ? '-matched' : '-not-matched',
+        this.video_items[item.id] ? '-video-matched' : '-not-video-matched',
+        item.data.location_name ? '-has-location' : '-no-location',
+      ]
 
       return {
         ...item.attrs,

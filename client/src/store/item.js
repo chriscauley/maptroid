@@ -13,11 +13,11 @@ const fromServer = (item) => {
     }
   } else {
     item.attrs = {
-      title: startCase(item.data.type),
+      title: item.data.location_name || startCase(item.data.type),
       class: [`sm-item -${item.data.type}`, item.data.hidden && '-hidden'],
     }
     if (auth.user?.is_superuser) {
-      item.attrs.title += ' ' + item.id
+      item.attrs.title += ' #' + item.id
     }
     if (item.data.duplicate) {
       /* DEPRECATED */

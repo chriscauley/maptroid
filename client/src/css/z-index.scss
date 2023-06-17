@@ -57,6 +57,9 @@
   }
   .sm-item {
     z-index: 121;
+    &.-target {
+      z-index: 122;
+    }
   }
 }
 
