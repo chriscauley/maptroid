@@ -17,28 +17,29 @@ import skill.forms
 from contact.views import simple_upload
 
 def dread_redirect(request, *args, **kwargs):
-  path = request.get_full_path().split('dread/')[-1]
-  return HttpResponseRedirect('/maps/metroid-dread/'+path)
+    path = request.get_full_path().split('dread/')[-1]
+    return HttpResponseRedirect('/maps/metroid-dread/'+path)
 
 app_urls = [
-  "app",
-  "about",
-  "admin",
-  "auth",
-  "contact",
-  "downloads",
-  "editor",
-  "file-browser",
-  "gamepad",
-  "maps",
-  "play",
-  "screenshot",
-  "staff",
-  "sm",
-  "sprite",
-  "trainer",
-  "viewer",
-  "world-tiles",
+    "app",
+    "about",
+    "admin",
+    "auth",
+    "contact",
+    "downloads",
+    "editor",
+    "file-browser",
+    "gamepad",
+    "maps",
+    "play",
+    "screenshot",
+    "staff",
+    "sm",
+    "sprite",
+    "trainer",
+    "varia",
+    "viewer",
+    "world-tiles",
 ]
 
 urlpatterns = [

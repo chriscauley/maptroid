@@ -424,10 +424,10 @@ $ascent-items: weapons-tank shinespark boost-ball;
 }
 
 .app-body.-zoom--3, .app-body.-zoom--4 {
-    &.-world-grand-prix, &.-world-grand-prix-2,
-    .sm-room-svg path.-outer {
-	fill: none !important;
-    }
+  &.-world-grand-prix, &.-world-grand-prix-2,
+  .sm-room-svg path.-outer {
+    fill: none !important;
+  }
 }
 
 
