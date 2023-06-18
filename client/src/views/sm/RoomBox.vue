@@ -215,7 +215,7 @@ export default {
           xy,
           text: entity.text,
           attrs: {
-            class: `sm-link -${entity.color}`,
+            class: `maptroid-link -${entity.color}`,
             style: this._style(xy[0], xy[1], 2, 2),
           },
         }

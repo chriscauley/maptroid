@@ -66,7 +66,7 @@
 }
 
 .osd-html__overlay .sm-item,
-.osd-html__overlay .sm-link {
+.osd-html__overlay .maptroid-link {
   @apply absolute;
   &:before {
     @apply bg-black;
@@ -137,7 +137,7 @@
   }
 }
 
-.sm-elevator, .sm-item, .sm-block, .sm-cre-hex, .sm-ui, .sm-link {
+.sm-elevator, .sm-item, .sm-block, .sm-cre-hex, .sm-ui, .maptroid-link {
   @apply relative inline-block;
   height: 1em;
   width: 1em;
@@ -242,64 +242,7 @@ $cre-hex: respawn block exit;
   }
 }
 
-.sm-item {
-  &:before {
-    background-image: url("/static/sm/items.png");
-  }
-  @for $i from 0 to length($items) {
-    $name: nth($items, $i + 1);
-    &.-#{"" + $name}:before {
-      background-position: 0 $i * -100%;
-    }
-    &.-alt:before {
-      background-image: url("/static/sm/items-alt.png");
-    }
-  }
-  &.-confused:before {
-    background-image: url("/static/sm/confused.png");
-    background-position: unset;
-  }
-  &.-duplicate_of:before {
-    filter: grayscale(1) brightness(0.75);
-  }
-  .-tool-video_path &.-duplicate_of:before {
-    border: gray 10px solid;
-    filter: unset;
-  }
-  &.-duplicate:before {
-    /* DEPRECATED */
-    outline: red 10px solid;
-  }
-  &.-hidden:before {
-    outline: yellow 10px solid;
-  }
-}
-
-.sm-item {
-  @for $i from 0 to length($custom-items) {
-    $name: nth($custom-items, $i + 1);
-    &.-#{"" + $name}:before {
-      background-image: url("/static/sm/custom-items.png");
-      background-position: 0 $i * -100%;
-    }
-    &.-alt:before {
-      background-image: url("/static/sm/custom-items-alt.png");
-    }
-  }
-}
-
-$ascent-items: weapons-tank shinespark boost-ball;
-.sm-item {
-  @for $i from 0 to length($ascent-items) {
-    $name: nth($ascent-items, $i + 1);
-    &.-#{"" + $name}:before {
-      background-image: url("/static/sm/ascent-items.png");
-      background-position: 0 $i * -100%;
-    }
-  }
-}
-
-.sm-link {
+.maptroid-link {
   @apply flex items-center justify-center;
   &:before {
     display: none;
@@ -326,7 +269,7 @@ $ascent-items: weapons-tank shinespark boost-ball;
 }
 
 .osd-html__overlay {
-  .sm-link {
+  .maptroid-link {
     /* text is displayed using background image */
     @apply absolute;
     color: transparent;
@@ -447,22 +390,6 @@ $ascent-items: weapons-tank shinespark boost-ball;
 
 .sm-chozo {
   background-image: url("/static/sm/chozo.png");
-}
-
-.sm-map {
-  $icons: save map energy missile boss elevator;
-  background-image: url("/static/sm/map_icons.png");
-  background-size: auto 100%;
-  @for $i from 0 to length($icons) {
-    $name: nth($icons, $i + 1);
-    &.-#{"" + $name} {
-      background-position: $i * -100% 0;
-    }
-  }
-  &.-ship {
-    background-position: right 0;
-    width: 2em;
-  }
 }
 
 .sm-door {

@@ -54,7 +54,7 @@ export default {
             color: link.color,
             text: link.text,
             attrs: {
-              class: `sm-link -${link.color}`,
+              class: `maptroid-link -${link.color}`,
               style: {
                 left: `${100 * (xy[0] / 16 + room_x)}%`,
                 top: `${100 * (xy[1] / 16 + room_y)}%`,

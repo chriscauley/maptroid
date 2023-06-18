@@ -101,7 +101,7 @@ const tools = [
   { slug: 'block', variants: Block.misc, icon: (_, v) => `sm-block -${v}` },
   { slug: 'block', variants: Block.directional, icon: (_, v) => `sm-block -${v}` },
   { slug: 'plm', variants: Object.keys(plms), icon: (_, v) => `sm-block -${v}` },
-  { slug: 'link', variants: Object.keys(link_colors), icon: (_, v) => `sm-link -${v}` },
+  { slug: 'link', variants: Object.keys(link_colors), icon: (_, v) => `maptroid-link -${v}` },
   { slug: 'overlap', icon: 'fa fa-th-large' },
   { slug: 'geometry', icon: 'fa fa-object-group' },
   { slug: 'split', variants: Object.keys(link_colors), icon: (_, v) => `fa fa-chain -${v}` },
