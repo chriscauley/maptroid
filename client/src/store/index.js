@@ -14,6 +14,7 @@ import skill from './skill'
 import smile from './smile'
 import smilesprite from './smilesprite'
 import screenshot from './screenshot'
+import tracker from './tracker'
 import userskill from './user-skill'
 import video from './video'
 import world from './world'
@@ -36,6 +37,7 @@ const modules = {
   smile,
   smilesprite,
   screenshot,
+  tracker,
   userskill,
   video,
   world,

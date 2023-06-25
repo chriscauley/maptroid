@@ -9,11 +9,19 @@ export default (component) => {
         icon: 'fa fa-cogs',
         select: ToolStorage.TOGGLE,
       },
+      { slug: 'select', icon: 'fa fa-mouse-pointer' },
+      {
+        icon: ' sm-item -missile',
+        slug: 'vanilla',
+      },
+      {
+        icon: ' sm-map -egg',
+        slug: 'randomizer',
+      },
     ]
     if (component.$auth.user?.is_superuser) {
       return [
         ...tools,
-        { slug: 'select', icon: 'fa fa-mouse-pointer' },
         { slug: 'move_zone', icon: 'fa fa-object-group' },
         { slug: 'move_room', icon: 'fa fa-th' },
         { slug: 'edit_room', icon: 'fa fa-edit' },

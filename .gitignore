@@ -14,3 +14,5 @@ server/main/settings/local.py
 
 _backups
 _cache
+
+server/smur/natureRando

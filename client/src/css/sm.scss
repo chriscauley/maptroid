@@ -66,11 +66,15 @@
 }
 
 .osd-html__overlay .sm-item,
+.osd-html__overlay .sm-map,
 .osd-html__overlay .maptroid-link {
   @apply absolute;
   &:before {
     @apply bg-black;
-    outline: 2px solid white;
+    outline: 1px solid #888;
+  }
+  &.-completed:before {
+    filter: grayscale(1) brightness(0.8);
   }
   &.-video-matched:before {
     outline: 8px solid green;
@@ -80,13 +84,31 @@
     @apply absolute;
     transition: inset 0.25s;
   }
+  .-tool-rando_edit & {
+    &.-has-location:before {
+      outline: 8px solid green;
+    }
+  }
+}
+
+.osd-html__overlay {
   @mixin item-zoom($zoom, $ratio) {
     .-zoom-#{$zoom} & {
-      .ur-popper {
-        padding-top: $ratio * 100%;
-      }
-      &:before, ._before {
-        inset: $ratio * -100%;
+      .sm-item,
+      .sm-map,
+      .maptroid-link {
+        .ur-popper {
+          padding-top: $ratio * 100%;
+        }
+        &:before, ._before {
+          inset: $ratio * -100%;
+        }
+        &.-completed:before {
+          inset: $ratio * -70%;
+        }
+        &.smva-difficulty:after {
+          inset: $ratio * -100%;
+        }
       }
     }
   }
@@ -97,12 +119,21 @@
   @include item-zoom(0, 4);
   @include item-zoom(1, 2);
   @include item-zoom(2, 1);
-  .-tool-rando_edit & {
-    &.-has-location:before {
-      outline: 8px solid green;
-    }
+}
+
+.osd-html__overlay .smva-difficulty {
+  &:before {
+    display:none;
   }
 }
+
+.osd-html__overlay .sm-map {
+  &:before {
+    background-color: transparent;
+    outline: 0;
+  }
+}
+
 
 .sm-zone-box {
   &__move:before {
@@ -111,15 +142,15 @@
     inset: 0;
     outline: 1px solid gray;
     position: absolute;
-  @mixin zone-zoom($zoom, $ratio) {
-    .-zoom-#{$zoom} & {
-      inset: $ratio * -5%;
+    @mixin zone-zoom($zoom, $ratio) {
+      .-zoom-#{$zoom} & {
+        inset: $ratio * -5%;
+      }
     }
-  }
-  @include zone-zoom(-4, 16);
-  @include zone-zoom(-3, 12);
-  @include zone-zoom(-2, 8);
-  @include zone-zoom(-1, 6);
+    @include zone-zoom(-4, 16);
+    @include zone-zoom(-3, 12);
+    @include zone-zoom(-2, 8);
+    @include zone-zoom(-1, 6);
   }
 }
 
@@ -137,7 +168,7 @@
   }
 }
 
-.sm-elevator, .sm-item, .sm-block, .sm-cre-hex, .sm-ui, .maptroid-link {
+.sm-elevator, .maptroid-link {
   @apply relative inline-block;
   height: 1em;
   width: 1em;
@@ -168,30 +199,7 @@
   background: linear-gradient(to left, transparent 25%, #ccc 25%, #ccc 75%, transparent 75%);
 }
 
-$cre-hex: respawn block exit;
-
-.sm-cre-hex {
-  &:before {
-    background-image: url("/static/sm/cre-hex.png");
-  }
-  @for $i from 0 to length($cre-hex) {
-    $name: nth($cre-hex, $i + 1);
-    &.-#{"" + $name}:before {
-      background-position: 0 $i * -100%;
-    }
-  }
-}
-
-.sm-block {
-  @for $i from 0 to length($block) {
-    $name: nth($block, $i + 1);
-    &.-#{"" + $name}:before {
-      background-image: url("/static/sm/block.png");
-      background-position: 0 $i * -100%;
-    }
-  }
-}
-
+/* nb: base sm-block class is coming from cdn */
 @each $template-name, $sprites in $template_sprites {
   $y_offset: 0;
   @each $tuple in $sprites {
@@ -213,31 +221,6 @@ $cre-hex: respawn block exit;
         position: relative;
         padding-top: math.div($height, $width) * 100%;
       }
-    }
-  }
-}
-
-.sm-block {
-  @for $i from 0 to length($block-alt) {
-    $name: nth($block-alt, $i + 1);
-    &.-#{"" + $name}:before {
-      background-image: url("/static/sm/block-alt.png");
-      background-position: 0 $i * -100%;
-    }
-  }
-}
-
-.sm-ui {
-  &:before {
-    background-image: url("/static/sm/ui.png");
-  }
-  &.-active:before {
-    background-image: url("/static/sm/ui-active.png");
-  }
-  @for $i from 0 to length($ui_items) {
-    $name: nth($ui_items, $i + 1);
-    &.-#{"" + $name}:before {
-      background-position: 0 $i * -100%;
     }
   }
 }

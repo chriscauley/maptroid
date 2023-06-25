@@ -1,5 +1,6 @@
 <template>
-  <router-link
+  <div
+    v-is="tagName"
     v-for="item in items"
     :key="item.id"
     v-bind="getAttrs(item)"
@@ -7,7 +8,7 @@
     :to="`?item=${item.id}`"
   >
     <item-popper v-if="item.id === selected_item_id" :item="item" />
-  </router-link>
+  </div>
 </template>
 
 <script>
@@ -48,13 +49,22 @@ export default {
       })
       return matched
     },
+    tagName() {
+      const { tool } = this.tool_storage.state.selected
+      return tool === 'randomizer' ? 'div' : 'router-link'
+    },
   },
   methods: {
     getAttrs(item) {
+      const { tool } = this.tool_storage.state.selected
       const [room_x, room_y] = this.map_props.room_bounds[item.room]
       const [x, y] = item.data.room_xy
+      let cls = item.attrs.class
+      if (tool === 'randomizer') {
+        cls = this.$store.tracker.getIcon(item)
+      }
       const _class = [
-        ...item.attrs.class,
+        ...cls,
         item.id === this.selected_item_id && '-target',
         this.matched[item.id] ? '-matched' : '-not-matched',
         this.video_items[item.id] ? '-video-matched' : '-not-video-matched',
@@ -74,7 +84,10 @@ export default {
     },
     click(event, item) {
       const { tool } = this.tool_storage.state.selected
-      if (tool === 'video_path') {
+
+      if (tool === 'randomizer') {
+        this.$store.tracker.toggleLocation(item.id)
+      } else if (tool === 'video_path') {
         const video = this.$store.video.getCurrentVideo()
         const unknown_item = this.$store.video.getNextUnknownItem()
         if (unknown_item) {

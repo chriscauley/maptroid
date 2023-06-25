@@ -14,6 +14,7 @@
       </div>
       <inventory />
       <run-list v-if="tool === 'run_path'" />
+      <location-list v-else-if="tool === 'randomizer'" :items="items" />
       <item-list v-else :items="items" />
     </div>
   </div>
@@ -24,10 +25,11 @@ import { startCase } from 'lodash'
 
 import ItemList from './ItemList.vue'
 import Inventory from '../Inventory'
+import LocationList from './LocationList.vue'
 import RunList from './RunList.vue'
 
 export default {
-  components: { ItemList, Inventory, RunList },
+  components: { ItemList, Inventory, LocationList, RunList },
   inject: ['osd_store'],
   props: {
     items: Object,

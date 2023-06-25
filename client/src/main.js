@@ -11,6 +11,7 @@ import unrest from '@unrest/vue'
 import auth from '@unrest/vue-auth'
 import form from '@unrest/vue-form'
 import '@unrest/tailwind/dist.css'
+import sm from 'sm-vue'
 
 import store from '@/store'
 import '@/css/base.scss'
@@ -41,6 +42,7 @@ const app = createApp(App)
   .component('UnrestToolbar', UnrestToolbar)
   .component('UnrestAdminPopup', UnrestAdminPopup)
   .component('VideoPlayer', VideoPlayer)
+  .use(sm)
   .use(gamepad, gamepad_options)
   .use(form)
   .use(store)

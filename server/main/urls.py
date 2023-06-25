@@ -14,6 +14,7 @@ import unrest.user.forms
 import contact.forms
 import skill.forms
 
+from smur.views import solve
 from contact.views import simple_upload
 
 def dread_redirect(request, *args, **kwargs):
@@ -47,6 +48,7 @@ urlpatterns = [
     re_path('^dread', dread_redirect),
     re_path('^maps/dread', dread_redirect),
     re_path(f'^({"|".join(app_urls)})', index),
+    path('api/solve/', solve),
     path('api/list-dir/', list_dir),
     path('api/delete-file/', delete_file),
     path('api/replace-svg-color/', replace_svg_color),

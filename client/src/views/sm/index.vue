@@ -1,5 +1,5 @@
 <template>
-  <div :class="wrapper_class" v-if="$store.route.ready && ready">
+  <div :class="wrapper_class" v-if="$store.route.ready && ready" :style="style">
     <base-viewer :osd_store="osd_store" @viewer-bound="loadImages" />
     <template v-if="osd_store.viewer">
       <unrest-toolbar :storage="tool_storage" class="-topleft">
@@ -188,6 +188,12 @@ export default {
         `-zoom-${zoom} -tool-${tool} -variant-${variant} -world-${world_slug}`,
         layers.map((l) => `-layer-${l}`),
       ]
+    },
+    style() {
+      const image_zoom = this.osd_store.viewer?.world
+        .getItemAt(0)
+        ?.viewportToImageZoom(this.osd_store.state.zoom)
+      return { '--image-zoom': image_zoom || 1 }
     },
   },
   watch: {

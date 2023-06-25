@@ -217,6 +217,27 @@ body.theme-dark_mode {
   @apply gap-2;
 }
 
+.location-list {
+  &__group {
+    @apply border-b p-2;
+  }
+  &__group-item {
+    @apply flex gap-2;
+    ._cb {
+      .fa {
+        display:block;
+        font-size: 24px;
+        margin-top: 5px;
+        overflow-x: visible;
+        width: 24px;
+      }
+    }
+    .fa {
+      cursor: pointer;
+    }
+  }
+}
+
 .sprite-gallery {
   font-size: 3rem;
   .modal-content {
