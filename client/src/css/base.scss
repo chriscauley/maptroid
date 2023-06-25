@@ -241,6 +241,9 @@ body.theme-dark_mode {
       cursor: pointer;
     }
   }
+  &__actions .fa {
+    line-height: 1;
+  }
 }
 
 .sprite-gallery {

@@ -1,10 +1,16 @@
 <template>
   <div class="list-group location-list">
-    <div class="list-group-item item-list__filter">
-      <unrest-form v-if="schema" :schema="schema" :state="osd_store.state.filters">
-        <template #actions>{{ ' ' }}</template>
-      </unrest-form>
-      <button class="btn -danger" @click="reset">Reset</button>
+    <div class="list-group-item location-list__actions">
+      <div class="btn-group">
+        <button class="btn -secondary" @click="show_completed = !show_completed">
+          <i :class="`fa fa-eye${show_completed ? '' : '-slash'}`" />
+          {{ show_completed ? 'Show All' : 'Hide Done' }}
+        </button>
+        <button class="btn -danger" @click="reset">
+          <i class="fa fa-trash" />
+          Reset
+        </button>
+      </div>
     </div>
     <div v-for="group in groups" :key="group.name" class="location-list__group">
       <div class="location-list__group-name">
@@ -36,6 +42,9 @@ export default {
   props: {
     items: Object,
   },
+  data() {
+    return { show_completed: false }
+  },
   computed: {
     filtered_items() {
       const { item_type } = this.osd_store.state.filters
@@ -54,6 +63,9 @@ export default {
       this.$store.tracker.listLocationNames().forEach((name) => {
         const item = this.item_by_location_name[name]
         if (!item) {
+          return
+        }
+        if (!this.show_completed && this.$store.tracker.isLocationCompleted(item)) {
           return
         }
         const key_used = this.$store.tracker.getKeyUsed(item)
