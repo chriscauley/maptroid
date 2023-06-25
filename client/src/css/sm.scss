@@ -68,7 +68,7 @@
 .osd-html__overlay .sm-item,
 .osd-html__overlay .sm-map,
 .osd-html__overlay .maptroid-link {
-  @apply absolute;
+  @apply absolute cursor-pointer;
   &:before {
     @apply bg-black;
     outline: 1px solid #888;

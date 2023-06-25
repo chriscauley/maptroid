@@ -100,7 +100,7 @@ export default {
     },
   },
   mounted() {
-    this.$store.tracker.update()
+    this.$store.tracker.init(this)
   },
   methods: {
     selectItem(item) {

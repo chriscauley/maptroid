@@ -11,6 +11,7 @@ export default ({ store }) => {
     location_completed_by_id: {},
     location_open_by_name: {},
     add_order: [],
+    item_lookup: {},
   })
 
   const getActionKey = () => {
@@ -37,10 +38,6 @@ export default ({ store }) => {
     const logic = 'expert'
     const { inventory } = _state
     const data = { world, logic, inventory }
-    const items_by_location_name = {}
-    store._app.config.globalProperties.$store.route.world_items.forEach((item) => {
-      items_by_location_name[item.data.location_name] = item
-    })
     client.post('solve/', data).then(({ locations }) => {
       _state.location_open_by_name = locations
       _recalculate()
@@ -80,6 +77,10 @@ export default ({ store }) => {
     _state.add_order = add_order
     Object.entries(_state.location_open_by_name).forEach(([name, open]) => {
       const key_used = key_useds[name]
+      if (key_used === 'sequence-break') {
+        // this is handled when they click the item
+        return
+      }
       if (key_used) {
         if (key_used !== 'egg' && !inventory[key_useds[name]]) {
           // item which unlocked location has been taken out of inventory
@@ -102,7 +103,23 @@ export default ({ store }) => {
     getActions,
     addItem: (slug, delta) => saveAction([ADD_ITEM, slug, delta]),
     toggleItem: (slug) => saveAction([TOGGLE_ITEM, slug]),
-    toggleLocation: (slug) => saveAction([TOGGLE_LOCATION, slug]),
+    toggleLocation: (id) => {
+      const item = _state.item_lookup[id]
+      if (item) {
+        const slug = item.data.location_name
+        const key_useds = getKeyUseds()
+        const key_used = key_useds[slug]
+        const was_completed = storage.isLocationCompleted(item)
+        if (was_completed && key_used === 'sequence-break') {
+          delete key_useds[slug]
+          storage.save({ [getUnlockKey()]: key_useds })
+        } else if (!was_completed && !key_used) {
+          key_useds[slug] = 'sequence-break'
+          storage.save({ [getUnlockKey()]: key_useds })
+        }
+      }
+      saveAction([TOGGLE_LOCATION, id])
+    },
     getInventory: () => _state.inventory,
     listLocationNames: () => Object.keys(_state.location_open_by_name),
     getKeyOrder: (key) => {
@@ -115,13 +132,10 @@ export default ({ store }) => {
       if (key === 'egg') {
         return 'sm-map -egg'
       }
-      if (!key) {
-        return 'fa fa-ban'
-      }
       if (key === 'sequence-break') {
-        return 'thumbs-up'
+        return 'sm-item -empty -is-major smva-difficulty -difficulty-mania'
       }
-      return `sm-item -${key}`
+      return `sm-item -${key || 'empty smva-difficulty -difficulty-break'}`
     },
     getKeyName(key) {
       if (key === 'egg') {
@@ -159,6 +173,16 @@ export default ({ store }) => {
         location_completed_by_id: {},
         location_open_by_name: {},
         add_order: [],
+        item_lookup: {},
+      })
+      update()
+    },
+    init(component) {
+      const items = component.$store.route.world_items
+      _state.item_lookup = {}
+      items.forEach((item) => {
+        _state.item_lookup[item.data.location_name] = item
+        _state.item_lookup[item.id] = item
       })
       update()
     },

@@ -165,8 +165,8 @@ export default {
       return { map_bounds, zones, rooms, zone_offsets, room_bounds, items, svg }
     },
     ready() {
-      const { world, world_rooms } = this.$store.route
-      return world && this.zones.length && world_rooms.length
+      const { world, world_rooms, world_items } = this.$store.route
+      return world && this.zones.length && world_rooms.length && world_items.length
     },
     visible_items() {
       const { zone, zone_items, world_items } = this.$store.route
