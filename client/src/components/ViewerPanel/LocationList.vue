@@ -7,7 +7,7 @@
       <button class="btn -danger" @click="reset">Reset</button>
     </div>
     <div v-for="group in groups" :key="group.name" class="location-list__group">
-      <div>
+      <div class="location-list__group-name">
         <i :class="group.icon" />
         {{ group.name }}
       </div>
@@ -29,7 +29,7 @@
 </template>
 
 <script>
-import { startCase, uniq } from 'lodash'
+import { startCase, uniq, sortBy } from 'lodash'
 
 export default {
   inject: ['map_props', 'osd_store'],
@@ -50,24 +50,35 @@ export default {
       return out
     },
     groups() {
-      const groups = {}
+      const group_by_slug = {}
       this.$store.tracker.listLocationNames().forEach((name) => {
         const item = this.item_by_location_name[name]
         if (!item) {
           return
         }
         const key_used = this.$store.tracker.getKeyUsed(item)
-        if (!groups[key_used]) {
-          groups[key_used] = {
+        if (!group_by_slug[key_used]) {
+          group_by_slug[key_used] = {
+            slug: key_used,
             name: this.$store.tracker.getKeyName(key_used),
             icon: this.$store.tracker.getKeyIcon(key_used),
             items: [],
           }
         }
-        const group = groups[key_used]
-        group.items.push(item)
+        group_by_slug[key_used].items.push(item)
       })
-      return Object.values(groups)
+
+      const groups = Object.values(group_by_slug)
+      const _sort = (group) => {
+        if (!group.slug) {
+          return Infinity
+        }
+        if (group.slug === 'sequence-break') {
+          return -1
+        }
+        return groups.indexOf(group)
+      }
+      return sortBy(groups, _sort)
     },
     schema() {
       if (!this.items.length) {

@@ -10,6 +10,7 @@ export default ({ store }) => {
     inventory: {},
     location_completed_by_id: {},
     location_open_by_name: {},
+    add_order: [],
   })
 
   const getActionKey = () => {
@@ -52,21 +53,21 @@ export default ({ store }) => {
   const _recalculate = () => {
     const inventory = {}
     const location_completed_by_id = {}
-    const add_order = { egg: true }
+    let add_order = ['egg']
     storage.getActions().forEach(([action, slug, delta]) => {
       if (action === ADD_ITEM) {
         inventory[slug] = (inventory[slug] || 0) + delta
         if (inventory[slug] > 0) {
-          add_order[slug] = true
+          !add_order.includes(slug) && add_order.push(slug)
         } else {
-          delete add_order[slug]
+          add_order = add_order.filter((i) => i !== slug)
         }
       } else if (action === TOGGLE_ITEM) {
         inventory[slug] = !inventory[slug]
         if (inventory[slug]) {
-          add_order[slug] = true
+          !add_order.includes(slug) && add_order.push(slug)
         } else {
-          delete add_order[slug]
+          add_order = add_order.filter((i) => i !== slug)
         }
       } else if (action === TOGGLE_LOCATION) {
         location_completed_by_id[slug] = !location_completed_by_id[slug]
@@ -75,7 +76,8 @@ export default ({ store }) => {
     _state.location_completed_by_id = location_completed_by_id
     _state.inventory = inventory
     const key_useds = getKeyUseds()
-    const last_item = Object.keys(add_order).pop()
+    const last_item = add_order[add_order.length - 1]
+    _state.add_order = add_order
     Object.entries(_state.location_open_by_name).forEach(([name, open]) => {
       const key_used = key_useds[name]
       if (key_used) {
@@ -103,12 +105,21 @@ export default ({ store }) => {
     toggleLocation: (slug) => saveAction([TOGGLE_LOCATION, slug]),
     getInventory: () => _state.inventory,
     listLocationNames: () => Object.keys(_state.location_open_by_name),
+    getKeyOrder: (key) => {
+      if (key === 'sequence-break') {
+        return Infinity
+      }
+      return _state.add_order.indexOf(key)
+    },
     getKeyIcon(key) {
       if (key === 'egg') {
         return 'sm-map -egg'
       }
       if (!key) {
-        // TODO
+        return 'fa fa-ban'
+      }
+      if (key === 'sequence-break') {
+        return 'thumbs-up'
       }
       return `sm-item -${key}`
     },
@@ -117,7 +128,7 @@ export default ({ store }) => {
         return 'Free'
       }
       if (!key) {
-        return 'Sequence break'
+        return 'Unavailable'
       }
       return startCase(key)
     },
@@ -147,6 +158,7 @@ export default ({ store }) => {
         inventory: {},
         location_completed_by_id: {},
         location_open_by_name: {},
+        add_order: [],
       })
       update()
     },

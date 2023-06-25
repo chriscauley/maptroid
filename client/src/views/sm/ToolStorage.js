@@ -10,15 +10,20 @@ export default (component) => {
         select: ToolStorage.TOGGLE,
       },
       { slug: 'select', icon: 'fa fa-mouse-pointer' },
-      {
-        icon: ' sm-item -missile',
-        slug: 'vanilla',
-      },
-      {
+      // {
+      //   icon: ' sm-item -missile',
+      //   slug: 'vanilla',
+      // },
+    ]
+    const { world } = component.$store.route
+    if (world.data.mc_data?.randomizer) {
+      tools.push({
         icon: ' sm-map -egg',
         slug: 'randomizer',
-      },
-    ]
+      })
+    } else if (storage.state.selected.tool === 'randomizer') {
+      storage.state.selected = { tool: 'select' }
+    }
     if (component.$auth.user?.is_superuser) {
       return [
         ...tools,

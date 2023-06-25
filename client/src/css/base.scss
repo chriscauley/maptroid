@@ -221,15 +221,20 @@ body.theme-dark_mode {
   &__group {
     @apply border-b p-2;
   }
+  &__group-name {
+    @apply flex items-center gap-2 font-bold;
+    font-size: 24px;
+  }
   &__group-item {
     @apply flex gap-2;
     ._cb {
       .fa {
         display:block;
         font-size: 24px;
-        margin-top: 5px;
+        line-height: 1;
+        max-height: 24px;
         overflow-x: visible;
-        width: 24px;
+        width: 20px;
       }
     }
     .fa {

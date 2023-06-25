@@ -40,8 +40,5 @@ export default {
       return Item.groupItems(world, world_items, actions)
     },
   },
-  mounted() {
-    this.$store.tracker.update()
-  },
 }
 </script>
