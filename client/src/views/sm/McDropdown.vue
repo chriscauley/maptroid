@@ -20,7 +20,7 @@ export default {
         'Average Runtime: ' + mc_data['runtime'],
       ]
       const href = 'https://metroidconstruction.com/hack.php?id=' + this.$store.route.world.mc_id
-      return [
+      const items = [
         () => (
           <a href={href} target="_blank">
             View on Metroid Construction
@@ -28,6 +28,14 @@ export default {
         ),
         { text: text.join('\n'), class: '-text' },
       ]
+      if (mc_data.randomizer) {
+        items.push({
+          icon: 'github',
+          text: 'randoRandy/natureRando',
+          href: mc_data.randomizer,
+        })
+      }
+      return items
     },
   },
 }
