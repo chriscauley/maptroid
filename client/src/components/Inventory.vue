@@ -10,7 +10,7 @@
     <sm-item-tracker
       :inventory="$store.tracker.getInventory()"
       format="grid"
-      :width="273.5"
+      :width="270"
       @add-item="$store.tracker.addItem"
       @toggle-item="$store.tracker.toggleItem"
       :world="$route.params.world_slug"

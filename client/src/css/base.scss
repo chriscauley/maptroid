@@ -39,7 +39,8 @@ body {
 }
 
 .osd-panel {
-  @apply relative w-96;
+  @apply flex-shrink-0 relative;
+  width: 280px;
   &__inner {
     @apply absolute flex flex-col inset-0;
     overflow: auto;
@@ -241,8 +242,10 @@ body.theme-dark_mode {
       cursor: pointer;
     }
   }
-  &__actions .fa {
-    line-height: 1;
+  &__actions {
+    .fa, .btn {
+      line-height: 1;
+    }
   }
 }
 

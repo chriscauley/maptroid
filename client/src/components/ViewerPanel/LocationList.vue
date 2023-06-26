@@ -1,14 +1,23 @@
 <template>
   <div class="list-group location-list">
-    <div class="list-group-item location-list__actions">
+    <div class="location-list__actions">
       <div class="btn-group">
-        <button class="btn -secondary" @click="show_completed = !show_completed">
+        <button
+          class="btn -secondary"
+          @click="show_completed = !show_completed"
+          :title="`Show ${show_completed ? 'All' : 'Availaible Only'}`"
+          >
           <i :class="`fa fa-eye${show_completed ? '' : '-slash'}`" />
-          {{ show_completed ? 'Show All' : 'Hide Done' }}
         </button>
-        <button class="btn -danger" @click="reset">
+        <button
+          class="btn -secondary"
+          @click="last_first = !last_first"
+          :title="`${last_first ? 'New' : 'Old'}est First`"
+          >
+          <i :class="`fa fa-sort-numeric-${last_first ? 'desc' : 'asc'}`" />
+        </button>
+        <button class="btn -danger" @click="reset" title="Reset Tracker">
           <i class="fa fa-trash" />
-          Reset
         </button>
       </div>
     </div>
@@ -43,7 +52,7 @@ export default {
     items: Object,
   },
   data() {
-    return { show_completed: false }
+    return { show_completed: false, last_first: true }
   },
   computed: {
     filtered_items() {
@@ -81,14 +90,15 @@ export default {
       })
 
       const groups = Object.values(group_by_slug)
+      const order = this.last_first ? -1 : 1
       const _sort = (group) => {
         if (!group.slug) {
           return Infinity
         }
         if (group.slug === 'sequence-break') {
-          return -1
+          return -Infinity
         }
-        return groups.indexOf(group)
+        return groups.indexOf(group) * order
       }
       return sortBy(groups, _sort)
     },
