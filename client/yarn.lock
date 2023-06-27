@@ -9841,6 +9841,11 @@ slice-ansi@^4.0.0:
     astral-regex "^2.0.0"
     is-fullwidth-code-point "^3.0.0"
 
+sm-vue@^0.0.3:
+  version "0.0.3"
+  resolved "https://registry.yarnpkg.com/sm-vue/-/sm-vue-0.0.3.tgz#56dd169aa7afda59b2b05ece186656ca5f91b783"
+  integrity sha512-ECUZtpIGMnSEkhcS7TvgqUi/3iHsywkZj9HbHZ1e6DN5CWhSOeICWZHwa6GpADI96o9kzTw3rRYHnGz/riU3iA==
+
 snapdragon-node@^2.0.1:
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/snapdragon-node/-/snapdragon-node-2.1.1.tgz#6c175f86ff14bdb0724563e8f3c1b021a286853b"
