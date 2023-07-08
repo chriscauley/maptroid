@@ -1,10 +1,8 @@
-.app__home {
-  h1 {
-    @apply mt-32 text-center;
-    a {
-      @apply block text-base;
-    }
-  }
+body.theme-dark_mode .modal.-modal-dark .modal-content {
+  background: #111;
+}
+
+.world-select {
   form {
     @apply m-auto;
     width: 450px;

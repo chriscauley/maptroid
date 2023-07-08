@@ -5,9 +5,10 @@
     </unrest-dropdown>
     <template v-if="world">
       <span>/</span>
-      <unrest-dropdown :items="world_links">
-        <div class="link">{{ world.name }}</div>
-      </unrest-dropdown>
+      <div class="link" @click="open=true">{{ world.name }}</div>
+      <unrest-modal v-if="open" @close="open=false" class="-modal-dark">
+        <world-select />
+      </unrest-modal>
       <template v-if="zone_links">
         <span>/</span>
         <unrest-dropdown :items="zone_links">
@@ -39,6 +40,14 @@ import KofiButton from './vue-kofi'
 
 export default {
   components: { KofiButton },
+  data() {
+    return { open: false }
+  },
+  watch: {
+    '$route'(to, from) {
+      this.open = false
+    }
+  },
   computed: {
     home_links() {
       const links = [

@@ -4,6 +4,7 @@ import OpenSeadragon from './OpenSeadragon.vue'
 import UnrestMouseTracker from '@/components/unrest/MouseTracker.vue'
 import UnrestToolbar from '@/components/unrest/Toolbar.vue'
 import UnrestAdminPopup from '@/components/unrest/AdminPopup.vue'
+import WorldSelect from '@/components/WorldSelect.vue'
 import VideoPlayer from '@/components/Video/index.vue'
 
 import gamepad from '@/unrest/gamepad'
@@ -42,6 +43,7 @@ const app = createApp(App)
   .component('UnrestToolbar', UnrestToolbar)
   .component('UnrestAdminPopup', UnrestAdminPopup)
   .component('VideoPlayer', VideoPlayer)
+  .component('WorldSelect', WorldSelect)
   .use(sm)
   .use(gamepad, gamepad_options)
   .use(form)
