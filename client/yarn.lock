@@ -1841,12 +1841,13 @@
   resolved "https://registry.yarnpkg.com/@unrest/vue-auth/-/vue-auth-0.0.12.tgz#9c724ebf456e2ef60de6ecdc7d84149de9f608b2"
   integrity sha512-/bkfn5Hi2JWRSn+Y8MkZwu0qLRfZAOciD2dDuNvgngDGLAcHzb08eEtHFvx9EZqmAWoX1VdlD28oCh8BMR9FLg==
 
-"@unrest/vue-form@0.0.17":
-  version "0.0.17"
-  resolved "https://registry.yarnpkg.com/@unrest/vue-form/-/vue-form-0.0.17.tgz#1834f3f02e4812344e6befee92c56f2a3f531027"
-  integrity sha512-Q8JTTbDZDRC8QYRvK5lNx2eczrhhHfoy46qKhm3EH9AewOCHVsEBvtK7qFDLP03CUjYFLOSMnowteEfOAKFsnQ==
+"@unrest/vue-form@0.0.19":
+  version "0.0.19"
+  resolved "https://registry.yarnpkg.com/@unrest/vue-form/-/vue-form-0.0.19.tgz#1f6ea2129b929f29b8bb561c354f3cc072b55b07"
+  integrity sha512-D51/MZ340a2vnxe7+55NIuEBpxtELNxCZeX4orJC3j4LvKzh2RoO1cLx4gI/s8/ayAMv8BzrWRjk9XxKBLNPHg==
   dependencies:
     jsonschema "^1.4.0"
+    lodash.clonedeep "^4.5.0"
     lodash.pick "^4.4.0"
 
 "@unrest/vue-mousetrap@0.0.10":
