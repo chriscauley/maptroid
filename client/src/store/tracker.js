@@ -37,14 +37,14 @@ export default ({ store }) => {
   }
 
   const getSchema = () => {
-    const { world_slug } = store._app.config.globalProperties.$route.params
+    const { $route } = store._app.config.globalProperties
+    const { world_slug } = $route.params
     const key = `${world_slug}__schema`
     return _state[key]
   }
 
   const _getClient = () => {
-    // const domain = storage.state.local_dev ? 'https://localhost:8732' : ''
-    const domain = 'http://localhost:8732'
+    const domain = storage.state.local_dev ? 'https:localhost:8732' : ''
     const baseURL = `${domain}/api`
     if (_state.baseURL !== baseURL) {
       _state.baseURL = baseURL
@@ -69,6 +69,8 @@ export default ({ store }) => {
       })
       .catch(() => {
         storage.state.api_status = 'error'
+        const msg = 'An unknown error occurred with the randomizer'
+        store._app.config.globalProperties.$ui.toast.error(msg)
       })
   }
   const update = () => {

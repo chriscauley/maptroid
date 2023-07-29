@@ -10,17 +10,27 @@
 </template>
 
 <script>
+const BASE_SCHEMA = {
+  type: 'object',
+  properties: {},
+}
+
 export default {
   data() {
     return { open: false }
   },
   computed: {
     schema() {
-      return this.$store.tracker.getSchema()
+      const schema = this.$store.tracker.getSchema() || BASE_SCHEMA
+      if (this.$auth.user) {
+        schema.properties.local_dev = { type: 'boolean' }
+      }
+      return schema
     },
   },
   methods: {
-    change(formData) {
+    change({ ...formData }) {
+      delete formData.local_dev
       this.$store.tracker.save(formData)
     },
     close() {
