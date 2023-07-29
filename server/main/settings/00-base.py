@@ -119,3 +119,4 @@ EMAIL_HOST_USER = 'SMTP_Injection'
 EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL = SERVER_EMAIL = 'noreply@unrest.io'
 EMAIL_BACKEND = "mailer.backend.DbBackend"
+ROMS_DIR = BASE_DIR

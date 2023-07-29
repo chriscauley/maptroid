@@ -3,6 +3,7 @@ from django.urls import include, path, re_path
 from django.http import HttpResponseRedirect
 from unrest.views import index
 
+from main.smur import explore
 from main.views import list_dir, delete_file, swap_room_event, save_default_event, winderz, event_action
 from maptroid.views import replace_svg_color, smile_ocr, save_sprite, sprite_distances, goto_room
 from skill.views import save_user_skill
@@ -47,6 +48,7 @@ urlpatterns = [
     re_path('^dread', dread_redirect),
     re_path('^maps/dread', dread_redirect),
     re_path(f'^({"|".join(app_urls)})', index),
+    path('api/explore/', explore),
     path('api/list-dir/', list_dir),
     path('api/delete-file/', delete_file),
     path('api/replace-svg-color/', replace_svg_color),
