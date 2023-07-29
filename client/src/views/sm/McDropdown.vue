@@ -28,11 +28,12 @@ export default {
         ),
         { text: text.join('\n'), class: '-text' },
       ]
-      if (mc_data.randomizer) {
+      const { randomizer } = mc_data
+      if (randomizer) {
         items.push({
           icon: 'github',
-          text: 'randoRandy/natureRando',
-          href: mc_data.randomizer,
+          text: 'Randomizer by ironrusty',
+          href: randomizer,
         })
       }
       return items
