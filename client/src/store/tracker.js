@@ -2,10 +2,12 @@ import { reactive } from 'vue'
 import { startCase } from 'lodash'
 import { ReactiveLocalStorage, getClient } from '@unrest/vue-storage'
 
-const client = getClient()
-
 export default ({ store }) => {
-  const storage = ReactiveLocalStorage({ LS_KEY: 'tracker_local' })
+  const storage = ReactiveLocalStorage({
+    LS_KEY: 'tracker_local',
+    local_dev: true,
+    api_status: 'off',
+  })
   const _state = reactive({
     inventory: {},
     location_completed_by_id: {},
@@ -33,15 +35,41 @@ export default ({ store }) => {
     })
     update()
   }
+
+  const getSchema = () => {
+    const { world_slug } = store._app.config.globalProperties.$route.params
+    const key = `${world_slug}__schema`
+    return _state[key]
+  }
+
+  const _getClient = () => {
+    // const domain = storage.state.local_dev ? 'https://localhost:8732' : ''
+    const domain = 'http://localhost:8732'
+    const baseURL = `${domain}/api`
+    if (_state.baseURL !== baseURL) {
+      _state.baseURL = baseURL
+      _state.client = getClient({ baseURL })
+    }
+    return _state.client
+  }
   const _refetch = () => {
     const world = store._app.config.globalProperties.$route.params.world_slug
-    const logic = 'expert'
     const { inventory } = _state
-    const data = { world, logic, inventory }
-    client.post('solve/', data).then(({ locations }) => {
-      _state.location_open_by_name = locations
-      _recalculate()
-    })
+    const { can, logic } = storage.state
+    const data = { world, logic, inventory, can }
+    storage.state.api_status = 'loading'
+
+    _getClient()
+      .post('explore/', data)
+      .then(({ locations, schema }) => {
+        _state.location_open_by_name = locations
+        _state[`${world}__schema`] = schema
+        _recalculate()
+        storage.state.api_status = 'ok'
+      })
+      .catch(() => {
+        storage.state.api_status = 'error'
+      })
   }
   const update = () => {
     _recalculate()
@@ -101,6 +129,7 @@ export default ({ store }) => {
     update,
     getActionKey,
     getActions,
+    getSchema,
     addItem: (slug, delta) => saveAction([ADD_ITEM, slug, delta]),
     toggleItem: (slug) => saveAction([TOGGLE_ITEM, slug]),
     toggleLocation: (id) => {
@@ -147,6 +176,9 @@ export default ({ store }) => {
       return startCase(key)
     },
     getIcon(item) {
+      if (item.data.hidden) {
+        return 'sm-item -hidden'
+      }
       const key_used = storage.getKeyUsed(item)
       const completed = _state.location_completed_by_id[item.id]
       if (!key_used) {

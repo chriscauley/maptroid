@@ -6,14 +6,16 @@
           class="btn -secondary"
           @click="show_completed = !show_completed"
           :title="`Show ${show_completed ? 'All' : 'Availaible Only'}`"
-          >
+        >
           <i :class="`fa fa-eye${show_completed ? '' : '-slash'}`" />
         </button>
+        <rando-settings />
+        <api-status />
         <button
           class="btn -secondary"
           @click="last_first = !last_first"
           :title="`${last_first ? 'New' : 'Old'}est First`"
-          >
+        >
           <i :class="`fa fa-sort-numeric-${last_first ? 'desc' : 'asc'}`" />
         </button>
         <button class="btn -danger" @click="reset" title="Reset Tracker">
@@ -46,7 +48,11 @@
 <script>
 import { startCase, uniq, sortBy } from 'lodash'
 
+import ApiStatus from './ApiStatus.vue'
+import RandoSettings from './RandoSettings.vue'
+
 export default {
+  components: { ApiStatus, RandoSettings },
   inject: ['map_props', 'osd_store'],
   props: {
     items: Object,

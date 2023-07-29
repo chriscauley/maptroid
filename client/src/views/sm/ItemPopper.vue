@@ -46,6 +46,7 @@ export default {
       if (!location_names) {
         return
       }
+      location_names.sort()
       const used = {}
       this.$store.route.world_items.forEach((i) => {
         used[i.data.location_name] = true
