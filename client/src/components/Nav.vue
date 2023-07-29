@@ -5,8 +5,8 @@
     </unrest-dropdown>
     <template v-if="world">
       <span>/</span>
-      <div class="link" @click="open=true">{{ world.name }}</div>
-      <unrest-modal v-if="open" @close="open=false" class="-modal-dark">
+      <div class="link" @click="open = true">{{ world.name }}</div>
+      <unrest-modal v-if="open" @close="open = false" class="-modal-dark">
         <world-select />
       </unrest-modal>
       <template v-if="zone_links">
@@ -42,11 +42,6 @@ export default {
   components: { KofiButton },
   data() {
     return { open: false }
-  },
-  watch: {
-    '$route'(to, from) {
-      this.open = false
-    }
   },
   computed: {
     home_links() {
@@ -115,6 +110,11 @@ export default {
         { href: `/djadmin/maptroid/zone/${zone?.id || ''}`, text: 'Admin Zone' },
       ]
       return links
+    },
+  },
+  watch: {
+    $route() {
+      this.open = false
     },
   },
 }

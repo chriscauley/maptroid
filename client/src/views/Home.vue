@@ -12,9 +12,9 @@
 
 <script>
 export default {
-__route: {
-  path: '/',
-},
+  __route: {
+    path: '/',
+  },
   name: 'HomeView',
 }
 </script>
