@@ -16,6 +16,7 @@ def explore(request):
         return JsonResponse({'error': 'GET not allowed'}, status=405)
     dirs = {
         'nature': 'natureRando',
+        'ascent': 'AscentRando',
         'vitality': 'VitalityRando',
     }
     inventory = []

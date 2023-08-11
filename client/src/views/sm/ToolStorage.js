@@ -16,15 +16,15 @@ export default (component) => {
       // },
     ]
     const { world } = component.$store.route
+    const is_rando = storage.state.selected.tool === 'randomizer'
     if (world.data.mc_data?.randomizer) {
       tools.push({
         icon: ' sm-map -egg',
         slug: 'randomizer',
       })
-    } else if (storage.state.selected.tool === 'randomizer') {
-      storage.state.selected = { tool: 'select' }
     }
-    if (component.$auth.user?.is_superuser) {
+
+    if (!is_rando && component.$auth.user?.is_superuser) {
       return [
         ...tools,
         { slug: 'move_zone', icon: 'fa fa-object-group' },

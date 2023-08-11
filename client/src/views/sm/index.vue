@@ -97,6 +97,7 @@ export default {
     }
   },
   data() {
+    window.$sm = this
     return {
       osd_store: OsdStore(this),
       tool_storage: ToolStorage(this),
@@ -166,6 +167,10 @@ export default {
     },
     ready() {
       const { world, world_rooms, world_items } = this.$store.route
+      const { tool } = this.tool_storage.state.selected
+      if (world && !world.data.mc_data?.randomizer && tool === 'randomizer') {
+        this.tool_storage.save({ selected: { tool: 'select' } })
+      }
       return world && this.zones.length && world_rooms.length && world_items.length
     },
     visible_items() {
