@@ -2,7 +2,6 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import OpenSeadragon from './OpenSeadragon.vue'
 import UnrestMouseTracker from '@/components/unrest/MouseTracker.vue'
-import UnrestToolbar from '@/components/unrest/Toolbar.vue'
 import UnrestAdminPopup from '@/components/unrest/AdminPopup.vue'
 import WorldSelect from '@/components/WorldSelect.vue'
 import VideoPlayer from '@/components/Video/index.vue'
@@ -11,6 +10,7 @@ import gamepad from '@/unrest/gamepad'
 import unrest from '@unrest/vue'
 import auth from '@unrest/vue-auth'
 import form from '@unrest/vue-form'
+import toolbar from '@unrest/vue-toolbar'
 import '@unrest/tailwind/dist.css'
 import sm from 'sm-vue'
 
@@ -40,7 +40,6 @@ const gamepad_options = {
 const app = createApp(App)
   .component('OpenSeadragon', OpenSeadragon)
   .component('UnrestMouseTracker', UnrestMouseTracker)
-  .component('UnrestToolbar', UnrestToolbar)
   .component('UnrestAdminPopup', UnrestAdminPopup)
   .component('VideoPlayer', VideoPlayer)
   .component('WorldSelect', WorldSelect)
@@ -48,6 +47,7 @@ const app = createApp(App)
   .use(gamepad, gamepad_options)
   .use(form)
   .use(store)
+  .use(toolbar)
   .use(unrest.plugin)
   .use(unrest.ui)
   .use(router)

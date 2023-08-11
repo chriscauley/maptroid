@@ -370,7 +370,7 @@ body.theme-dark_mode {
     @apply absolute left-0 top-0;
   }
   &__row {
-    @apply flex;
+    @apply flex gap-2;
     .btn > .fa, .btn {
       line-height: 1rem;
     }
