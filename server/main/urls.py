@@ -6,6 +6,7 @@ from unrest.views import index
 from main.smur import explore
 from main.views import list_dir, delete_file, swap_room_event, save_default_event, winderz, event_action
 from maptroid.views import replace_svg_color, smile_ocr, save_sprite, sprite_distances, goto_room
+from tracker.views import tracker_view
 from skill.views import save_user_skill
 
 # these views are registered using unrest_schema.register
@@ -60,6 +61,7 @@ urlpatterns = [
     path('api/save-default-event/', save_default_event),
     path('api/room/event/', event_action),
     path('api/save-user-skill/', save_user_skill),
+    path('api/multi-tracker/<slug>/', tracker_view),
     path('room/<room_id>/', goto_room),
     path('upload_file/<world_slug>/', simple_upload),
     path('', include('social_django.urls', namespace='social')),

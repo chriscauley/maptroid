@@ -16,6 +16,7 @@ import ProcessDread from './ProcessDread.vue'
 import Skill from './Skill/index.vue'
 import SylSvg from './SylSvg'
 import Trainer from './Trainer'
+import MultiTracker from './MultiTracker'
 import ScreenshotAnalyzer from './ScreenshotAnalyzer/index.vue'
 import ScreenshotUpload from './ScreenshotUpload.vue'
 import ScreenshotViewer from './ScreenshotViewer.vue'
@@ -45,6 +46,7 @@ export default {
   Home,
   Labbook,
   MapView,
+  MultiTracker,
   ProcessDread,
   Skill,
   SylSvg,

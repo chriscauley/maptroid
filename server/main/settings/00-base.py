@@ -25,6 +25,7 @@ INSTALLED_APPS = [
     'sprite',
     'contact',
     'skill',
+    'tracker',
 ]
 
 MIDDLEWARE = [
