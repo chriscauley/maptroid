@@ -7,13 +7,12 @@
     </div>
   </div>
   <div class="inventory -sm" v-else>
-    <sm-item-tracker
+    <sm-grid-tracker
       :inventory="$store.tracker.getInventory()"
-      format="grid"
       :width="270"
       @add-item="$store.tracker.addItem"
       @toggle-item="$store.tracker.toggleItem"
-      :world="$route.params.world_slug"
+      mode="grid"
     />
   </div>
 </template>
