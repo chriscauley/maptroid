@@ -117,6 +117,9 @@
         &.smva-difficulty:after {
           inset: $ratio * -100%;
         }
+        &.-empty, &.-nothing {
+          scale: $ratio
+        }
       }
     }
   }

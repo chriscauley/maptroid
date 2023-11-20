@@ -18,7 +18,7 @@ def tracker_view(request, slug):
         if data.get('password') != tracker.password:
             return JsonResponse({'error': 'BAD_PASSWORD'}, status=403)
         action = data.get('action')
-        if action == 'password': # just checking!
+        if action == 'check-password':
             pass
         elif action == 'reest':
             tracker.active = False
@@ -30,6 +30,9 @@ def tracker_view(request, slug):
         elif action == 'add-action':
             tracker.data['actions'] = tracker.data.get('actions') or []
             tracker.data['actions'].append(data['value'])
+            tracker.save()
+        elif action == 'set-objectives':
+            tracker.data['objectives'] = data['value']
             tracker.save()
         else:
             error = f'Unknown action: {action}'

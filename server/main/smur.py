@@ -28,6 +28,9 @@ def explore(request):
         args += ['--inventory', inventory]
     if options.get('can'):
         args += ['--can', ','.join(options['can'])]
+
+    if options.get('fill_choice'):
+        args.append('-'+options['fill_choice'].lower())
     try:
         cwd = os.path.join(ROMS_DIR, dirs[options['world']])
         run = subprocess.run(

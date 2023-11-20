@@ -53,17 +53,26 @@ export default ({ store }) => {
     return _state.client
   }
   const _refetch = () => {
-    const world = store._app.config.globalProperties.$route.params.world_slug
+    const { world } = store._app.config.globalProperties.$store.route
+    if (!world.data.mc_data?.randomizer) {
+      return
+    }
+
     const { inventory } = _state
-    const { can, logic } = storage.state
-    const data = { world, logic, inventory, can }
+    const { can, fill_choice } = storage.state
+    const data = { world: world.slug, fill_choice, inventory, can }
     storage.state.api_status = 'loading'
 
     _getClient()
       .post('explore/', data)
-      .then(({ locations, schema }) => {
+      .then(({ locations, schema, major_locations }) => {
         _state.location_open_by_name = locations
-        _state[`${world}__schema`] = schema
+        _state.major_locations = major_locations
+        if (major_locations) {
+          _state.major_locations = {}
+          major_locations.forEach((name) => (_state.major_locations[name] = true))
+        }
+        _state[`${world.slug}__schema`] = schema
         _recalculate()
         storage.state.api_status = 'ok'
       })
@@ -164,7 +173,7 @@ export default ({ store }) => {
         return 'sm-map -egg'
       }
       if (key === 'sequence-break') {
-        return 'sm-item -empty -is-major smva-difficulty -difficulty-mania'
+        return 'sm-item -nothing -is-major smva-difficulty -difficulty-break'
       }
       return `sm-item -${key || 'empty smva-difficulty -difficulty-break'}`
     },
@@ -181,15 +190,21 @@ export default ({ store }) => {
       if (item.data.hidden) {
         return 'sm-item -hidden'
       }
+      const { major_locations } = _state
+      const is_major = !major_locations || major_locations[item.data.location_name]
+      const major = is_major && '-rando-major'
       const key_used = storage.getKeyUsed(item)
       const completed = _state.location_completed_by_id[item.id]
       if (!key_used) {
-        return completed
-          ? ['sm-item -nothing smva-difficulty -difficulty-mania']
-          : ['sm-item -empty smva-difficulty -difficulty-break']
+        return ['sm-item smva-difficulty -difficulty-break', completed ? '-nothing' : '-empty']
+        // return [
+        //   'sm-item smva-difficulty',
+        //   completed ? '-nothing -difficulty-mania' : '-empty -difficulty-break',
+        //   major,
+        // ]
       }
       const icon = storage.getKeyIcon(key_used)
-      return [icon, completed && '-completed']
+      return [icon, completed && '-completed', major]
     },
     getKeyUsed(item) {
       return getKeyUseds()[item.data.location_name]

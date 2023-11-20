@@ -1,24 +1,31 @@
 <template>
   <div class="multi-tracker">
-    <unrest-modal v-if="show_password" :hide_actions="true">
-      <form @submit.prevent="savePassword">
+    <unrest-modal v-if="modal" :hide_actions="true" @close="modal = null">
+      <form @submit.prevent="savePassword" v-if="modal === 'password'">
         Enter password:
         <div class="form-group">
           <input type="text" class="form-control" ref="password" />
         </div>
         <div class="multi-tracker__buttons">
-          <button class="btn -secondary" type="button" @click="show_password=false" tabIndex="-1">Cancel</button>
+          <button class="btn -secondary" type="button" @click="modal = null" tabIndex="-1">
+            Cancel
+          </button>
           <button class="btn -primary">Set Password</button>
         </div>
       </form>
+      <objective-selector
+        v-if="modal === 'objectives'"
+        :controller="controller"
+        @close="modal = null"
+      />
     </unrest-modal>
     <div class="multi-tracker__grids">
       <div v-for="player in players" :key="player.index">
         <sm-grid-tracker
-          class="-no-grid"
+          class="-no-chrome"
           mode="cwisp"
           :inventory="player.inventory"
-          :objectives="player.objectives.length && player.objectives"
+          :objectives="getPlayerObjectives(player)"
           :objective_order="player.objective_order"
           @add-item="(item, amount) => addItem(player, item, amount)"
           @toggle-item="(item) => toggleItem(player, item)"
@@ -26,19 +33,84 @@
         />
       </div>
     </div>
-</div>
+    <div class="unrest-floating-actions">
+      <button v-for="button in buttons" :key="button.attrs.id" v-bind="button.attrs">
+        <i :class="button.icon" />
+      </button>
+    </div>
+  </div>
 </template>
 
 <script>
 import MultiTracker from '@/store/MultiTracker'
+import ObjectiveSelector from './ObjectiveSelector.vue'
 
 export default {
   __route: {
     name: 'multi-tracker',
     path: '/app/multi-tracker/:slug/',
   },
+  components: { ObjectiveSelector },
+  data() {
+    return {
+      modal: null,
+      poll_timeout: null,
+      controller: MultiTracker(this.$route.params.slug, this),
+      action_index: 0,
+      players: [0, 1, 2, 3].map((index) => ({
+        index,
+        inventory: {},
+        objectives: {},
+        objective_order: [],
+      })),
+    }
+  },
+  computed: {
+    actions() {
+      return this.controller.get()?.data.actions
+    },
+    buttons() {
+      const { controller } = this
+      const buttons = []
+      if (this.poll_timeout) {
+        buttons.push({
+          icon: 'fa fa-play',
+        })
+      }
+      if (!controller.hasPassword()) {
+        return [
+          {
+            icon: 'fa fa-lock',
+            attrs: {
+              class: 'btn -danger',
+              title: 'Locked',
+              onClick: () => (this.modal = 'password'),
+            },
+          },
+        ]
+      }
+      return [
+        {
+          icon: 'fa fa-list-ol',
+          attrs: {
+            class: 'btn -primary',
+            title: 'Edit Objectives',
+            onClick: () => (this.modal = 'objectives'),
+          },
+        },
+        {
+          icon: 'fa fa-unlock',
+          attrs: {
+            class: 'btn -success',
+            title: 'Unlocked',
+            onClick: () => (this.modal = 'password'),
+          },
+        },
+      ]
+    },
+  },
   watch: {
-    'actions.length': function () {
+    actions: function() {
       this.actions?.slice(this.action_index).forEach(([type, index, key, value]) => {
         const player = this.players[index]
         if (type === 'objectives' || type === 'inventory') {
@@ -47,7 +119,7 @@ export default {
         if (type === 'objectives') {
           // objective order has to be manually controlled because page needs to be refreshable
           if (!value) {
-            player.objective_order = player.objective_order.filter(o => o !== key)
+            player.objective_order = player.objective_order.filter((o) => o !== key)
           } else if (!player.objective_order.includes(key)) {
             player.objective_order.push(key)
           }
@@ -56,36 +128,23 @@ export default {
       })
     },
   },
-  data() {
-    return {
-      show_password: false,
-      controller: MultiTracker(this.$route.params.slug, this),
-      action_index: 0,
-      players: [0, 1, 2, 3].map((index) => ({
-        index,
-        inventory: {},
-        objectives: {},
-        objective_order: [],
-      }))
-    }
+  mounted() {
+    this.tick()
   },
-  computed: {
-    actions() {
-      return this.controller.get()?.actions
-    },
+  unmounted() {
+    clearTimeout(this.poll_timeout)
   },
   methods: {
-    // toggleItem(player, item) {
-    //   this.actions.push(['inventory', player.index, item, !player.inventory[item]])
-    // },
-    // addItem(player, item, amount) {
-    //   const value = player.inventory[item] || 0
-    //   this.actions.push(['inventory', player.index, item, value + amount])
-    // },
-    // toggleObjective(player, objective) {
-    //   const value = player.objectives[objective]
-    //   this.actions.push(['objectives', player.index, objective, !value])
-    // },
+    stop() {
+      clearTimeout(this.poll_timeout)
+      this.poll_timeout = null
+    },
+    tick() {
+      this.poll_timeout = setTimeout(() => {
+        this.controller.markStale()
+        this.tick()
+      }, 5000)
+    },
     toggleItem(player, item) {
       const value = !player.inventory[item]
       this.controller.addAction(['inventory', player.index, item, value])
@@ -98,9 +157,16 @@ export default {
       const value = player.objectives[objective]
       this.controller.addAction(['objectives', player.index, objective, !value])
     },
-    savePassword(e) {
-      console.log(this.$refs.password.value)
+    savePassword() {
+      this.controller.setPassword(this.$refs.password.value)
     },
-  }
+    getPlayerObjectives(player) {
+      const { objectives } = this.controller.get()?.data || {}
+      if (!objectives) {
+        return null
+      }
+      return Object.fromEntries(objectives.map((o) => [o, !!player.objectives[o]]))
+    },
+  },
 }
 </script>
