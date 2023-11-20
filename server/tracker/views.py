@@ -37,4 +37,6 @@ def tracker_view(request, slug):
         else:
             error = f'Unknown action: {action}'
             return JsonResponse({ 'error': error }, status=400)
+    elif tracker.password != request.GET.get('password'):
+        return JsonResponse({'error': 'BAD_PASSWORD'}, status=403)
     return JsonResponse(serialize(tracker))

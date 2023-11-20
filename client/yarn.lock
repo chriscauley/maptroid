@@ -1841,36 +1841,36 @@
   dependencies:
     xorshift "^1.2.0"
 
-"@unrest/tailwind@0.1.20":
-  version "0.1.20"
-  resolved "https://registry.yarnpkg.com/@unrest/tailwind/-/tailwind-0.1.20.tgz#edd750d1611579aee2c85a0f57be696f54558b60"
-  integrity sha512-WxRD3zYU0IKTxSI/HBgMYUwI8+O+wTl/m/6wbIYnTOMa9CjVJRm8b/uKl7Nh8Kgsbun57v/yHTKs/TDGnaSvcA==
+"@unrest/tailwind@0.1.25":
+  version "0.1.25"
+  resolved "https://registry.yarnpkg.com/@unrest/tailwind/-/tailwind-0.1.25.tgz#50943973cf031177980240e60974ad80f3a089d9"
+  integrity sha512-N6yif38JjVNp/bqFBdpwHV7cF26zbenVoo0C6EetJD+vjupX/KGWM76rQyvD0NRewYbwmQNAMDF7CnsCsnAFAw==
 
-"@unrest/vue-auth@0.0.12":
-  version "0.0.12"
-  resolved "https://registry.yarnpkg.com/@unrest/vue-auth/-/vue-auth-0.0.12.tgz#9c724ebf456e2ef60de6ecdc7d84149de9f608b2"
-  integrity sha512-/bkfn5Hi2JWRSn+Y8MkZwu0qLRfZAOciD2dDuNvgngDGLAcHzb08eEtHFvx9EZqmAWoX1VdlD28oCh8BMR9FLg==
+"@unrest/vue-auth@0.0.13":
+  version "0.0.13"
+  resolved "https://registry.yarnpkg.com/@unrest/vue-auth/-/vue-auth-0.0.13.tgz#5d93fdb2b9bc8e5e8451c052842c5fc16363aeba"
+  integrity sha512-2EDGPzu6mjbFzl8pWy7V6l+55xpR205IcA0ZUWxrL35WX6XXZc8Dp8F9HISPfCnXYdWHLqWWU49sUQkGVjKViQ==
 
-"@unrest/vue-form@0.0.19":
-  version "0.0.19"
-  resolved "https://registry.yarnpkg.com/@unrest/vue-form/-/vue-form-0.0.19.tgz#1f6ea2129b929f29b8bb561c354f3cc072b55b07"
-  integrity sha512-D51/MZ340a2vnxe7+55NIuEBpxtELNxCZeX4orJC3j4LvKzh2RoO1cLx4gI/s8/ayAMv8BzrWRjk9XxKBLNPHg==
+"@unrest/vue-form@0.0.20":
+  version "0.0.20"
+  resolved "https://registry.yarnpkg.com/@unrest/vue-form/-/vue-form-0.0.20.tgz#02e3fe1faea645b8fbc2b1ffcbecc8f25ee3e32d"
+  integrity sha512-pi+qx5g24UBANlxcZiH0xbV3qiNIyppE1HV+rRaaWISgOYD8voPQij0iJqiwIcurDQ8lAiYX/xxrWCYvjQ/0KQ==
   dependencies:
     jsonschema "^1.4.0"
     lodash.clonedeep "^4.5.0"
     lodash.pick "^4.4.0"
 
-"@unrest/vue-mousetrap@0.0.10":
-  version "0.0.10"
-  resolved "https://registry.yarnpkg.com/@unrest/vue-mousetrap/-/vue-mousetrap-0.0.10.tgz#698d1743ebb2ae202686bcb5578c9bf7a3edc2bd"
-  integrity sha512-T8mZOOKwiSJkF0RW7af5nrWDUnH2cp/JMTSN8O7RYSXM5O1v8FbNa5yAVcbSmz8yjv0U2vBsilvL2UfMPfGgKg==
+"@unrest/vue-mousetrap@0.0.12":
+  version "0.0.12"
+  resolved "https://registry.yarnpkg.com/@unrest/vue-mousetrap/-/vue-mousetrap-0.0.12.tgz#a038757c1b87173a8d5938ee01e298acac654c83"
+  integrity sha512-exhfoIBaio4o4veLUn/EXZtnod6jr0fCXyazHtRVQUyyPooBYOcNp/05IiLq88WEYIlvfiUGAsRziiYyKq9aRA==
   dependencies:
     mousetrap "^1.6.5"
 
-"@unrest/vue-storage@0.0.18":
-  version "0.0.18"
-  resolved "https://registry.yarnpkg.com/@unrest/vue-storage/-/vue-storage-0.0.18.tgz#3929a6a5754d50eab7482934f49fe4fb8321ee6b"
-  integrity sha512-BVSmkWxCoPcLp+NFYRLWg2htkpwzApkxLsE3MnoTCADMs7b+N4npkmXTj9T5lb8yrRcE3YR/tNYT0ZONMwqk7g==
+"@unrest/vue-storage@0.0.20":
+  version "0.0.20"
+  resolved "https://registry.yarnpkg.com/@unrest/vue-storage/-/vue-storage-0.0.20.tgz#00500428087a735204f9893f9bb550a5f535142f"
+  integrity sha512-mVaoiC9Lj+9EfK6Rz5iTwqBpO8lj9VEt6xXlslAxmadNsg8lVExYzMK59nwm8m8EuNZQuzbvRqB+gH5US7y2OQ==
   dependencies:
     axios "^0.27.2"
     core-js "^3.23.1"
@@ -1889,24 +1889,24 @@
     lodash.debounce "^4.0.8"
     querystring "^0.2.1"
 
-"@unrest/vue-toolbar@^0.0.5":
-  version "0.0.5"
-  resolved "https://registry.yarnpkg.com/@unrest/vue-toolbar/-/vue-toolbar-0.0.5.tgz#410d591b95ec6638f0598e3c84359f1ea758b8df"
-  integrity sha512-EWG8RGEJ8BU406KCD62i1bX8rGn/FOgdrXDfSLtgjeNkbzs6daHDJsTI26w786JR6Ca/9Qekzwg0pzp2deXxiw==
+"@unrest/vue-toolbar@0.0.6":
+  version "0.0.6"
+  resolved "https://registry.yarnpkg.com/@unrest/vue-toolbar/-/vue-toolbar-0.0.6.tgz#821d3d28ad0f1ad44bfd2f395d993004aae9fb3a"
+  integrity sha512-u5Fsn0jmZh+5txsf76qCJvVUU0XW7fO3lvjEMOnh5k9XkEPSEWhjBlB2QeO3r1feYxyC89RKHlrX5eVa+pvauA==
   dependencies:
     "@unrest/vue-storage" "^0.0.19"
     lodash.startcase "^4.4.0"
     vue "^3.2.41"
 
-"@unrest/vue@0.2.12":
-  version "0.2.12"
-  resolved "https://registry.yarnpkg.com/@unrest/vue/-/vue-0.2.12.tgz#22f1829453d1089b8e793c312b0892fecb764d88"
-  integrity sha512-3eTbLfI9x3JgIDhsSPFsg07uwKTqRxhkh1VdmV50fZeMekNAFFO09dFFY9UgkW8iV1+9Nj+LnyZOjvQ371u7sg==
+"@unrest/vue@0.2.20":
+  version "0.2.20"
+  resolved "https://registry.yarnpkg.com/@unrest/vue/-/vue-0.2.20.tgz#cf5630248b1b5106e8c076aa8a7cd86f0de6e26d"
+  integrity sha512-AkjQH/DXgKrSgL+kyfC2GbAeyJ1RwKD+OSjM6EqOcspK1SlTZChcq0fmPxKASFZAGEv1/n6oEDtCNWN7QC4qLA==
   dependencies:
     dedent "^0.7.0"
     lodash.clonedeep "^4.5.0"
     lodash.startcase "^4.4.0"
-    marked "^4.0.17"
+    marked "^4.2.4"
 
 "@vue/babel-helper-vue-jsx-merge-props@^1.2.1":
   version "1.2.1"
@@ -7539,10 +7539,10 @@ map-visit@^1.0.0:
   dependencies:
     object-visit "^1.0.0"
 
-marked@^4.0.17:
-  version "4.0.18"
-  resolved "https://registry.yarnpkg.com/marked/-/marked-4.0.18.tgz#cd0ac54b2e5610cfb90e8fd46ccaa8292c9ed569"
-  integrity sha512-wbLDJ7Zh0sqA0Vdg6aqlbT+yPxqLblpAZh1mK2+AO2twQkPywvvqQNfEPVwSSRjZ7dZcdeVBIAgiO7MMp3Dszw==
+marked@^4.2.4:
+  version "4.3.0"
+  resolved "https://registry.yarnpkg.com/marked/-/marked-4.3.0.tgz#796362821b019f734054582038b116481b456cf3"
+  integrity sha512-PRsaiG84bK+AMvxziE/lCFss8juXjNaWzVbN5tXAm4XjeaS9NAHhop+PjQxz2A9h8Q4M/xGmzP8vqNwy6JeK0A==
 
 md5.js@^1.3.4:
   version "1.3.5"
@@ -9974,15 +9974,15 @@ slice-ansi@^4.0.0:
     astral-regex "^2.0.0"
     is-fullwidth-code-point "^3.0.0"
 
-sm-data@^0.0.1:
-  version "0.0.1"
-  resolved "https://registry.yarnpkg.com/sm-data/-/sm-data-0.0.1.tgz#fd38863bd4225a8641ccbde55a27995706224fef"
-  integrity sha512-4dDEctZ45mnAW1C2UWlpIcOK3wv2IfPvFpSOofHRORWfp70EOoAgFEBGwNFW4dh/Z9u6vPcSiWX6bpEXb4JGhw==
+sm-data@0.0.5:
+  version "0.0.5"
+  resolved "https://registry.yarnpkg.com/sm-data/-/sm-data-0.0.5.tgz#ac896cb2bfcd2ebd13fc6b03c139067c7fad0edb"
+  integrity sha512-mBsKwLWl9vA4ocSBBxjPp05ZAE2+54r0AmE5++XSZM/yHXDI+DzZWT9byMtu1hP2XIrHuSPiZ5IYvmMvUZVSBQ==
 
-sm-vue@0.0.13:
-  version "0.0.13"
-  resolved "https://registry.yarnpkg.com/sm-vue/-/sm-vue-0.0.13.tgz#df947a1124b7af72124082b5ac9d8ceb560668d5"
-  integrity sha512-zH9CsgSqFa59X0ZtrHb0cwezkY6QMeJchnPAUym1zVds1x8OxQVCFuAjFvZanAZ8wMF20g/aWFi99MuBMRYNzg==
+sm-vue@0.0.15:
+  version "0.0.15"
+  resolved "https://registry.yarnpkg.com/sm-vue/-/sm-vue-0.0.15.tgz#08d728c7010153f685fdc026c2d69c31eb718987"
+  integrity sha512-5OqALOYmYAbu3Vn6gl5fYa4g1J2+gr5aK54K/NSaOTJC/LHcVlApd2xc/G2SN6yx2DurOK/VCm7KwH1fOioR1w==
   dependencies:
     lodash.kebabcase "^4.1.1"
 

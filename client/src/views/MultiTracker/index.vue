@@ -1,23 +1,7 @@
 <template>
   <div class="multi-tracker">
     <unrest-modal v-if="modal" :hide_actions="true" @close="modal = null">
-      <form @submit.prevent="savePassword" v-if="modal === 'password'">
-        Enter password:
-        <div class="form-group">
-          <input type="text" class="form-control" ref="password" />
-        </div>
-        <div class="multi-tracker__buttons">
-          <button class="btn -secondary" type="button" @click="modal = null" tabIndex="-1">
-            Cancel
-          </button>
-          <button class="btn -primary">Set Password</button>
-        </div>
-      </form>
-      <objective-selector
-        v-if="modal === 'objectives'"
-        :controller="controller"
-        @close="modal = null"
-      />
+      <component :is="modal" :controller="controller" @close="modal = null" />
     </unrest-modal>
     <div class="multi-tracker__grids">
       <div v-for="player in players" :key="player.index">
@@ -42,20 +26,22 @@
 </template>
 
 <script>
-import MultiTracker from '@/store/MultiTracker'
+import Controller from './Controller'
 import ObjectiveSelector from './ObjectiveSelector.vue'
+import PasswordForm from './PasswordForm.vue'
+import SettingsForm from './SettingsForm.vue'
 
 export default {
   __route: {
     name: 'multi-tracker',
     path: '/app/multi-tracker/:slug/',
   },
-  components: { ObjectiveSelector },
+  components: { ObjectiveSelector, PasswordForm, SettingsForm },
   data() {
     return {
       modal: null,
       poll_timeout: null,
-      controller: MultiTracker(this.$route.params.slug, this),
+      controller: Controller(this.$route.params.slug, this),
       action_index: 0,
       players: [0, 1, 2, 3].map((index) => ({
         index,
@@ -84,7 +70,7 @@ export default {
             attrs: {
               class: 'btn -danger',
               title: 'Locked',
-              onClick: () => (this.modal = 'password'),
+              onClick: () => (this.modal = 'password-form'),
             },
           },
         ]
@@ -95,15 +81,15 @@ export default {
           attrs: {
             class: 'btn -primary',
             title: 'Edit Objectives',
-            onClick: () => (this.modal = 'objectives'),
+            onClick: () => (this.modal = 'objective-selector'),
           },
         },
         {
-          icon: 'fa fa-unlock',
+          icon: 'fa fa-gear',
           attrs: {
-            class: 'btn -success',
+            class: 'btn -primary',
             title: 'Unlocked',
-            onClick: () => (this.modal = 'password'),
+            onClick: () => (this.modal = 'settings-form'),
           },
         },
       ]
@@ -129,6 +115,14 @@ export default {
     },
   },
   mounted() {
+    console.log(this.$router)
+    if (this.$route.query.password) {
+      this.controller.setPassword(this.$route.query.password)
+      const query = {...this.$route.query }
+      delete query.password
+      const path = this.$route.path
+      this.$router.replace({ path, query})
+    }
     this.tick()
   },
   unmounted() {
@@ -156,9 +150,6 @@ export default {
     toggleObjective(player, objective) {
       const value = player.objectives[objective]
       this.controller.addAction(['objectives', player.index, objective, !value])
-    },
-    savePassword() {
-      this.controller.setPassword(this.$refs.password.value)
     },
     getPlayerObjectives(player) {
       const { objectives } = this.controller.get()?.data || {}

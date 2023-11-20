@@ -1,0 +1,16 @@
+* No password
+  Prompted with set password modal. Can only enter master password
+* password in url
+  Password saved and removed from url
+  if password is good, continue
+  if password is bad, show form
+* admin password
+  User can see 4 screens
+  User can edit 4 screens
+  User can update objectives
+  TODO user can reset
+  TODO user can set other users
+  TODO user can copy urls for other users (password in url)
+* TODO user password
+  user can only see own screen
+  user can click to modify own data

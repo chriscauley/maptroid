@@ -7,24 +7,24 @@ const passwords = ReactiveLocalStorage({
 const api = ReactiveRestApi({ live_api: true })
 
 export default (slug, component) => {
-  const url = `multi-tracker/${slug}/`
+  const url = () => `multi-tracker/${slug}/?password=${passwords.state[slug]}`
   const put = (data) =>
-    api.put(url, { ...data, password: passwords.state[slug] }).catch((error) => {
+    api.put(url(), { password: passwords.state[slug], ...data }).catch((error) => {
       if (error.response?.data?.error === 'BAD_PASSWORD') {
-        component.modal = 'passsword'
+        component.modal = 'passsword-form'
       }
+      return { error }
     })
 
   const controller = {
-    get: () => api.get(url),
-
+    get: () => api.get(url()),
     markStale: api.markStale,
     hasPassword: () => !!passwords.state[slug],
-    setPassword: (value) => {
-      passwords.save({ [slug]: value })
-      controller.checkPassword()
-    },
-    checkPassword: () => put({ action: 'check-password' }),
+    setPassword: (password) => put({ password, action: 'check-password' }).then(response => {
+      if (!response.error) {
+        passwords.save({ [slug]: password })
+      }
+    }),
     addAction: (value) => put({ action: 'add-action', value }),
     setObjectives: (value) => put({ action: 'set-objectives', value }),
   }
