@@ -19,7 +19,7 @@
     "@unrest/vue-form": "0.0.20",
     "@unrest/vue-mousetrap": "0.0.13",
     "@unrest/vue-storage": "0.0.21",
-    "@unrest/vue-toolbar": "0.0.6",
+    "@unrest/vue-toolbar": "0.0.7",
     "babel-jest": "^27.5.1",
     "core-js": "^3.6.5",
     "file-saver": "^2.0.5",
