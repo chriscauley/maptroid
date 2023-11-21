@@ -1,8 +1,9 @@
 .multi-tracker {
   &__grids {
-    @apply flex flex-wrap justify-center m-auto;
+    @apply flex flex-wrap justify-center m-auto mt-16;
     font-size: 4rem;
-    width: 2 * 6 * 4rem;
+    gap: 4rem;
+    width: 2 * 8 * 4rem + 2rem;
   }
   &__buttons {
     @apply flex justify-between;
