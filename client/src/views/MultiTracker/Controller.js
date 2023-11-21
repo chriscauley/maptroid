@@ -1,13 +1,10 @@
-import { ReactiveRestApi, ReactiveLocalStorage } from '@unrest/vue-storage'
-
-const passwords = ReactiveLocalStorage({
-  LS_KEY: 'multitracker_passwords',
-})
+import { ReactiveRestApi } from '@unrest/vue-storage'
 
 const api = ReactiveRestApi({ live_api: true })
 
 export default (slug, component) => {
-  const url = () => `multi-tracker/${slug}/?password=${passwords.state[slug]}`
+  const password = () => component.$route.query.password
+  const url = () => `multi-tracker/${slug}/?password=${password()}`
   const put = (data) =>
     api.put(url(), data).catch((error) => {
       if (error.response?.data?.error === 'BAD_PASSWORD') {
@@ -19,13 +16,8 @@ export default (slug, component) => {
   const controller = {
     get: () => api.get(url()),
     markStale: api.markStale,
-    hasPassword: () => !!passwords.state[slug],
-    setPassword: (password) =>
-      put({ password, action: 'check-password' }).then((response) => {
-        if (!response.error) {
-          passwords.save({ [slug]: password })
-        }
-      }),
+    hasPassword: () => !!password(),
+    setPassword: (password) => put({ password, action: 'check-password' }),
     addAction: (value) => put({ action: 'add-action', value }),
     setObjectives: (value) => put({ action: 'set-objectives', value }),
     reset: () => put({ action: 'reset-room' }),

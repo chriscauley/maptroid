@@ -146,13 +146,6 @@ export default {
     },
   },
   mounted() {
-    if (this.$route.query.password) {
-      this.controller.setPassword(this.$route.query.password)
-      const query = { ...this.$route.query }
-      delete query.password
-      const path = this.$route.path
-      this.$router.replace({ path, query })
-    }
     this.tick()
   },
   unmounted() {
