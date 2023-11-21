@@ -9,7 +9,7 @@ const api = ReactiveRestApi({ live_api: true })
 export default (slug, component) => {
   const url = () => `multi-tracker/${slug}/?password=${passwords.state[slug]}`
   const put = (data) =>
-    api.put(url(), { password: passwords.state[slug], ...data }).catch((error) => {
+    api.put(url(), data).catch((error) => {
       if (error.response?.data?.error === 'BAD_PASSWORD') {
         component.modal = 'passsword-form'
       }
@@ -20,13 +20,15 @@ export default (slug, component) => {
     get: () => api.get(url()),
     markStale: api.markStale,
     hasPassword: () => !!passwords.state[slug],
-    setPassword: (password) => put({ password, action: 'check-password' }).then(response => {
-      if (!response.error) {
-        passwords.save({ [slug]: password })
-      }
-    }),
+    setPassword: (password) =>
+      put({ password, action: 'check-password' }).then((response) => {
+        if (!response.error) {
+          passwords.save({ [slug]: password })
+        }
+      }),
     addAction: (value) => put({ action: 'add-action', value }),
     setObjectives: (value) => put({ action: 'set-objectives', value }),
+    reset: () => put({ action: 'reset-room' }),
   }
   return controller
 }

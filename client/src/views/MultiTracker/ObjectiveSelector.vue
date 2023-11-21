@@ -5,8 +5,10 @@
       @toggle-objective="toggleObjective"
       short_names
     />
-    <button @click="$emit('close')" class="btn -danger">Close</button>
-    <button @click="save" class="btn -primary">Save</button>
+    <div class="modal-footer">
+      <button @click="$emit('close')" class="btn -danger">Cancel</button>
+      <button @click="save" class="btn -primary">Save</button>
+    </div>
   </div>
 </template>
 

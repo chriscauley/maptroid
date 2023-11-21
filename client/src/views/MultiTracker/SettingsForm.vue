@@ -1,5 +1,7 @@
 <template>
-  <unrest-form :schema="schema" @submit="submit" onChange="onChange" :state="state" />
+  <div>
+    <unrest-form :schema="schema" @submit="onSubmit" :onChange="onChange" :state="state" />
+  </div>
 </template>
 
 <script>
@@ -17,16 +19,16 @@ export default {
       return {
         type: 'object',
         properties: {
+          players: {
+            type: 'number',
+          },
         },
       }
     },
   },
   methods: {
-    onSubmit() {
-      console.log(this.state)
-    },
-    onChange(...args) {
-      console.log(args)
+    onChange(state) {
+      this.state = state
     },
   },
 }

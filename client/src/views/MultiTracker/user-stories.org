@@ -8,9 +8,9 @@
   User can see 4 screens
   User can edit 4 screens
   User can update objectives
-  TODO user can reset
+  MVP user can reset
+  MVP user can copy urls for each index (password in url)
   TODO user can set other users
-  TODO user can copy urls for other users (password in url)
 * TODO user password
   user can only see own screen
   user can click to modify own data
