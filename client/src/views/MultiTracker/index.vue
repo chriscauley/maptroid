@@ -14,6 +14,7 @@
           @add-item="(item, amount) => addItem(player, item, amount)"
           @toggle-item="(item) => toggleItem(player, item)"
           @toggle-objective="(objective) => toggleObjective(player, objective)"
+          :width="375"
         />
       </div>
     </div>
