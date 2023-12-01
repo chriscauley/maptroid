@@ -1836,15 +1836,15 @@
   resolved "https://registry.yarnpkg.com/@unrest/tailwind/-/tailwind-0.1.25.tgz#50943973cf031177980240e60974ad80f3a089d9"
   integrity sha512-N6yif38JjVNp/bqFBdpwHV7cF26zbenVoo0C6EetJD+vjupX/KGWM76rQyvD0NRewYbwmQNAMDF7CnsCsnAFAw==
 
-"@unrest/vue-auth@0.0.13":
+"@unrest/vue-auth@^0.0.13":
   version "0.0.13"
   resolved "https://registry.yarnpkg.com/@unrest/vue-auth/-/vue-auth-0.0.13.tgz#5d93fdb2b9bc8e5e8451c052842c5fc16363aeba"
   integrity sha512-2EDGPzu6mjbFzl8pWy7V6l+55xpR205IcA0ZUWxrL35WX6XXZc8Dp8F9HISPfCnXYdWHLqWWU49sUQkGVjKViQ==
 
-"@unrest/vue-form@0.0.20":
-  version "0.0.20"
-  resolved "https://registry.yarnpkg.com/@unrest/vue-form/-/vue-form-0.0.20.tgz#02e3fe1faea645b8fbc2b1ffcbecc8f25ee3e32d"
-  integrity sha512-pi+qx5g24UBANlxcZiH0xbV3qiNIyppE1HV+rRaaWISgOYD8voPQij0iJqiwIcurDQ8lAiYX/xxrWCYvjQ/0KQ==
+"@unrest/vue-form@0.0.21":
+  version "0.0.21"
+  resolved "https://registry.yarnpkg.com/@unrest/vue-form/-/vue-form-0.0.21.tgz#1675fb8cdfaee37fa0db697d71919b5a125b6eee"
+  integrity sha512-UdAAADOFhFrHiHZnTh466c6X5DrcvXSiNQ3MuWcP4Dw5+HXzLv6Mce5qwDlTbtmvk2599t4XDzZj38NkN/hKPg==
   dependencies:
     jsonschema "^1.4.0"
     lodash.clonedeep "^4.5.0"
@@ -9854,15 +9854,15 @@ sm-data@0.0.6:
   resolved "https://registry.yarnpkg.com/sm-data/-/sm-data-0.0.6.tgz#1ae68dd05caf8906039943aefb0d94c51352262c"
   integrity sha512-ZJ2aJTqtPVMWZ3X12Vk/F0S0PgY29mxbME3xc7a+RmKi6YyMSLQWLBmrTzYxmYMB3ej286xWCFh1ERS/YaX6qg==
 
-sm-data@0.0.7:
-  version "0.0.7"
-  resolved "https://registry.yarnpkg.com/sm-data/-/sm-data-0.0.7.tgz#95e3c7955a14b836edb507cee86541ae047c6c13"
-  integrity sha512-2XpA9SGE6AOduCpgcmb8440WmdA3UjgoCyInvx3JQwEh7Bd0FXkdarA/VtKbryPybCv9eGOC+JSCq5ft4IUlIQ==
+sm-data@0.0.9:
+  version "0.0.9"
+  resolved "https://registry.yarnpkg.com/sm-data/-/sm-data-0.0.9.tgz#05278df6c708a1807a28499a755cfacbd4871c79"
+  integrity sha512-2WViLgi83NvdQM2lxG8y77O5TNjaGWtrdT198c+VP1EGcIRQd2bax8SreDtNbz9LO/Hse4SdlbY1kE5lrXmWqQ==
 
-sm-vue@0.0.17:
-  version "0.0.17"
-  resolved "https://registry.yarnpkg.com/sm-vue/-/sm-vue-0.0.17.tgz#cdc9a70a433d878f9926f41b685b12c9dec5d671"
-  integrity sha512-SM+QNEBTQOxLfi8u0dnIXIooQrzMmaAHK4MDbDifS3kBmUrKvhiKnpGHr48qrGwKmkOat2XfiQXM81jk5rKTbg==
+sm-vue@0.0.18:
+  version "0.0.18"
+  resolved "https://registry.yarnpkg.com/sm-vue/-/sm-vue-0.0.18.tgz#a87aebe9ef563b86ab5f2ddc21aaded54f6f9af2"
+  integrity sha512-zVKKe4GIt72HKw/ilNq/VMSyk02eMAX7lkto7Y8XbH19dAe7o8dGB2QM7sCNxohmyspSNXp6H9+aFL1oV9SJ8w==
   dependencies:
     lodash.kebabcase "^4.1.1"
     sm-data "0.0.6"

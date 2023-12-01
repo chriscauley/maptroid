@@ -144,6 +144,14 @@ export default {
         }
         this.action_index += 1
       })
+
+      // need to remove objectives that were removed from the list
+      const { objectives } = this.controller.get()?.data
+      if (objectives) {
+        this.players.forEach((player) => {
+          player.objective_order = player.objective_order.filter(o => objectives.includes(o))
+        })
+      }
     },
   },
   mounted() {
