@@ -23,7 +23,6 @@ import ScreenshotViewer from './ScreenshotViewer.vue'
 import SmileCompare from './SmileCompare.vue'
 import SmileOcr from './SmileOcr.vue'
 import SmileSprite from './SmileSprite/index.vue'
-import SpriteGallery from './SpriteGallery.vue'
 import SmAssignRoomEvent from './sm/AssignRoomEvent.vue'
 import SmAssignZone from './sm/AssignZone.vue'
 import SmPlmAlign from './sm/PlmAlign.vue'
@@ -62,5 +61,4 @@ export default {
   SmPlmAlign,
   SplitRoom,
   SpriteSheet,
-  SpriteGallery,
 }
