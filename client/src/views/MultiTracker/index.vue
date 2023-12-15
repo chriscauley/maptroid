@@ -7,7 +7,7 @@
       <div v-for="player in visible_players" :key="player.index">
         <sm-grid-tracker
           class="-no-chrome"
-          mode="cwisp"
+          :mode="mode"
           :inventory="player.inventory"
           :objectives="getPlayerObjectives(player)"
           :objective_order="player.objective_order"
@@ -59,6 +59,10 @@ export default {
     }
   },
   computed: {
+    mode() {
+      const { objectives = [] } = this.controller.get()?.data || {}
+      return objectives.length > 7 ? 'cwisp' : 'compact'
+    },
     hash() {
       // triggers a reload of the players state when the id changes
       return this.controller.get()?.id
@@ -149,7 +153,7 @@ export default {
       const { objectives } = this.controller.get()?.data
       if (objectives) {
         this.players.forEach((player) => {
-          player.objective_order = player.objective_order.filter(o => objectives.includes(o))
+          player.objective_order = player.objective_order.filter((o) => objectives.includes(o))
         })
       }
     },
@@ -184,10 +188,7 @@ export default {
       this.controller.addAction(['objectives', player.index, objective, !value])
     },
     getPlayerObjectives(player) {
-      const { objectives } = this.controller.get()?.data || {}
-      if (!objectives) {
-        return {}
-      }
+      const { objectives = [] } = this.controller.get()?.data || {}
       return Object.fromEntries(objectives.map((o) => [o, !!player.objectives[o]]))
     },
   },
