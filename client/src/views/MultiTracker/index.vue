@@ -8,6 +8,7 @@
         <sm-grid-tracker
           class="-no-chrome"
           :mode="mode"
+          :rows="rows"
           :inventory="player.inventory"
           :objectives="getPlayerObjectives(player)"
           :objective_order="player.objective_order"
@@ -61,7 +62,16 @@ export default {
   computed: {
     mode() {
       const { objectives = [] } = this.controller.get()?.data || {}
-      return objectives.length > 7 ? 'cwisp' : 'compact'
+      return objectives.length > 6 ? 'cwisp' : 'compact'
+    },
+    rows() {
+      const { objectives = [] } = this.controller.get()?.data || {}
+      return objectives.length > 0 ? undefined : [
+        ['charge-beam', 'ice-beam', 'wave-beam', 'spazer-beam', 'plasma-beam'],
+        ['morph-ball', 'varia-suit', 'spring-ball', 'hi-jump-boots', 'space-jump'],
+        ['bomb', 'gravity-suit', 'ridley', 'speed-booster', 'screw-attack'],
+        ['crocomire', 'kraid', 'phantoon', 'draygon', 'botwoon'],
+      ];
     },
     hash() {
       // triggers a reload of the players state when the id changes
