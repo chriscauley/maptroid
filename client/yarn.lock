@@ -9859,10 +9859,10 @@ sm-data@0.0.9:
   resolved "https://registry.yarnpkg.com/sm-data/-/sm-data-0.0.9.tgz#05278df6c708a1807a28499a755cfacbd4871c79"
   integrity sha512-2WViLgi83NvdQM2lxG8y77O5TNjaGWtrdT198c+VP1EGcIRQd2bax8SreDtNbz9LO/Hse4SdlbY1kE5lrXmWqQ==
 
-sm-vue@0.0.18:
-  version "0.0.18"
-  resolved "https://registry.yarnpkg.com/sm-vue/-/sm-vue-0.0.18.tgz#a87aebe9ef563b86ab5f2ddc21aaded54f6f9af2"
-  integrity sha512-zVKKe4GIt72HKw/ilNq/VMSyk02eMAX7lkto7Y8XbH19dAe7o8dGB2QM7sCNxohmyspSNXp6H9+aFL1oV9SJ8w==
+sm-vue@0.0.19:
+  version "0.0.19"
+  resolved "https://registry.yarnpkg.com/sm-vue/-/sm-vue-0.0.19.tgz#2fdf076ddd379958023bf941a0ec85c775b1c1ee"
+  integrity sha512-rSikkDhhzPE6+alQUXmch06T4dwl3cJ8Hl+jZimjl2q9poxHlepB+RPcxE1Bo/c6yRcRV/MwWrVoaHDY21d+Iw==
   dependencies:
     lodash.kebabcase "^4.1.1"
     sm-data "0.0.6"
