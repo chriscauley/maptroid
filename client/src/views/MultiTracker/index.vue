@@ -70,7 +70,7 @@ export default {
         ['charge-beam', 'ice-beam', 'wave-beam', 'spazer-beam', 'plasma-beam'],
         ['morph-ball', 'varia-suit', 'spring-ball', 'hi-jump-boots', 'space-jump'],
         ['bomb', 'gravity-suit', 'ridley', 'speed-booster', 'screw-attack'],
-        ['crocomire', 'kraid', 'phantoon', 'draygon', 'botwoon'],
+        ['crocomire', 'kraid', 'phantoon', 'draygon', 'shaktool'],
       ];
     },
     hash() {
