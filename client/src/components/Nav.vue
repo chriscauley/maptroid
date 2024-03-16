@@ -20,17 +20,9 @@
     <unrest-dropdown v-if="superuser_links" :items="superuser_links">
       <div class="btn -link">Admin</div>
     </unrest-dropdown>
-    <div class="app-nav__right">
-      <router-link to="/contact/" class="btn -secondary">
-        <i class="fa fa-envelope" />
-        Contact
-      </router-link>
-      <a href="https://github.com/chriscauley/maptroid/" _target="blank" class="btn -secondary">
-        <i class="fa fa-github" />
-        Code
-      </a>
-      <kofi-button uid="E1E81MER9" text="Donate" title="Support Me on Ko-fi" />
-    </div>
+    <template v-if="$auth.ready">
+      <unrest-auth-menu />
+    </template>
   </div>
 </template>
 
