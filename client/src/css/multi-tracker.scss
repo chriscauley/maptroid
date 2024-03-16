@@ -1,4 +1,5 @@
 .multi-tracker {
+  overflow: auto;
   &__grids {
     @apply flex flex-wrap justify-center items-center m-auto mt-16;
     font-size: 4rem;
